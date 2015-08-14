@@ -1,0 +1,19 @@
+{
+  "name": "progress-bubble-hummingbird",
+  "version": "1.0.0",
+  "homepage": "https://github.com/vaadin/hummingbird-demo",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "license": "Apache2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "progress-bubble": "~1.1.0"
+  }
+}
