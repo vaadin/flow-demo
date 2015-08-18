@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="v-progressbar">
+    <style>
+        :host {
+            display: block;
+            width: 100px;
+        }
+        #wrapper {
+            border-radius: 4px;
+            height: 9px;
+            background-color: #d4d4d4;
+            background-image: linear-gradient(to top,#d7d7d7 2%, #c7c7c7 98%);
+            box-sizing: border-box;
+            min-width: 74px;
+        }
+        #indicator {
+            border-radius: 4px;
+            background-color: #197de1;
+            background-image: linear-gradient(to bottom,#1b87e3 2%, #166ed5 98%);
+            border: 1px solid #1362b1;
+            height: inherit;
+            box-sizing: border-box;
+            max-width: 100%;
+            min-width: 8px;
+            transition: width 160ms;
+        }
+    </style>
+    <template>
+        <div id="wrapper">
+            <div id="indicator" style$="{{progress}}">
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'v-progressbar',
+
+        properties: {
+            value: {
+                type: Number,
+                value: 0,
+            },
+            max: {
+                type: Number,
+                value: 100,
+            },
+            min: {
+                type: Number,
+                value: 0,
+            },
+            progress: {
+            	type: Number,
+            	value: 0,
+            	computed: '_getProgress(min,max,value)'
+            },
+        },
+        _getProgress: function(min,max,value) {
+            if (value > max) value = max;
+            if (value < min) value = min;
+            
+            var progress = (value-min) / (max-min);
+            return "width: "+(progress*100)+"%";
+        }
+    });
+</script>

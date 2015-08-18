@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>demo-progress-bubble-addon</module>
+		<module>demo-unpublished-web-component</module>
 	</modules>
 
 	<properties>
