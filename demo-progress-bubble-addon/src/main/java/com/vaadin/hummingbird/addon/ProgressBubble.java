@@ -2,17 +2,13 @@ package com.vaadin.hummingbird.addon;
 
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.Tag;
-import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.AbstractComponent;
 
 @HTML("vaadin://bower_components/progress-bubble/progress-bubble.html")
 @Tag("progress-bubble")
 public class ProgressBubble extends AbstractComponent {
 
-    private Element textElement = new Element("span");
-
     public ProgressBubble() {
-        getElement().appendChild(textElement);
     }
 
     public void setValue(int value) {
@@ -20,7 +16,7 @@ public class ProgressBubble extends AbstractComponent {
             value = getMax();
         }
         getElement().setAttribute("value", value);
-        textElement.setTextContent(value + " %");
+        getElement().setTextContent(value + " %");
     }
 
     public int getValue() {
