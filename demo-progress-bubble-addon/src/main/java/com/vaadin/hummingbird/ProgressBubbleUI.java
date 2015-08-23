@@ -13,7 +13,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Viewport("user-scalable=no,initial-scale=1.0")
-public class MyUI extends UI {
+public class ProgressBubbleUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -45,7 +45,7 @@ public class MyUI extends UI {
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = ProgressBubbleUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }

@@ -12,7 +12,7 @@ import com.vaadin.ui.PaperButton;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class MyUI extends UI {
+public class UnpublishedWebComponentUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -92,7 +92,7 @@ public class MyUI extends UI {
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = UnpublishedWebComponentUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }

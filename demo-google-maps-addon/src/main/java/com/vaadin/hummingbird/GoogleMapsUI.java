@@ -15,7 +15,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Viewport("user-scalable=no,initial-scale=1.0")
-public class MyUI extends UI {
+public class GoogleMapsUI extends UI {
 
     private VerticalLayout log;
 
@@ -56,7 +56,7 @@ public class MyUI extends UI {
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = GoogleMapsUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }

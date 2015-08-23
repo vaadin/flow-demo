@@ -2,16 +2,16 @@ package com.vaadin.hummingbird.addon.googlemaps;
 
 import java.util.EventObject;
 
+import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.EventParameter;
 import com.vaadin.annotations.EventType;
-import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.Tag;
 import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 
-@HTML("vaadin://bower_components/google-map/google-map.html")
+@Bower("google-map")
 @Tag("google-map")
 public class GoogleMap extends AbstractComponent {
 
@@ -123,6 +123,7 @@ public class GoogleMap extends AbstractComponent {
         }
 
         public void addClickListener(EventListener<ClickEvent> listener) {
+            // google-map requires clickEvents="true" to send any click event
             getElement().setAttribute("clickEvents", true);
             getElement().addEventListener(ClickEvent.class, listener, this);
         }
@@ -134,6 +135,7 @@ public class GoogleMap extends AbstractComponent {
 
     public void addDoubleClickListener(
             EventListener<DoubleClickEvent> listener) {
+        // google-map requires clickEvents="true" to send any click event
         getElement().setAttribute("clickEvents", true);
         getElement().addEventListener(DoubleClickEvent.class, listener, this);
     }

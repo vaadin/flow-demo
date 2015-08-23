@@ -11,9 +11,9 @@ import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
 @Theme("todomvc")
-public class TodoUI extends UI {
+public class TodoNoTemplateUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = TodoUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = TodoNoTemplateUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 

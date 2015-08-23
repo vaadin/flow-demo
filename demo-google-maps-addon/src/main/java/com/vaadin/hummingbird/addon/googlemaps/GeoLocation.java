@@ -1,20 +1,25 @@
 package com.vaadin.hummingbird.addon.googlemaps;
 
-import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.EventParameter;
+import com.vaadin.annotations.EventType;
 import com.vaadin.annotations.Tag;
-import com.vaadin.event.ComponentEventListener;
+import com.vaadin.event.EventListener;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 
-@HTML("vaadin://bower_components/geo-location/geo-location.html")
+@Bower("geo-location")
 @Tag("geo-location")
 public class GeoLocation extends AbstractComponent {
 
     public GeoLocation() {
     }
 
+    @EventType("geo-response")
     public static class GeoResponseEvent extends Component.Event {
+        @EventParameter
         private double longitude;
+        @EventParameter
         private double latitude;
 
         public GeoResponseEvent(Component source, double latitude,
@@ -33,20 +38,8 @@ public class GeoLocation extends AbstractComponent {
         }
     }
 
-    public interface GeoResponseListener extends ComponentEventListener {
-        public void locationUpdate(GeoResponseEvent event);
-    }
-
-    public void addGeoResponseListener(GeoResponseListener listener) {
-        if (!hasListeners(GeoResponseListener.class)) {
-            getElement().addEventData("geo-response", "element.latitude",
-                    "element.longitude");
-            getElement().addEventListener("geo-response", e -> {
-                fireEvent(new GeoResponseEvent(this,
-                        e.getNumber("element.latitude"),
-                        e.getNumber("element.longitude")));
-            });
-        }
-        super.addListener(GeoResponseListener.class, listener);
+    public void addGeoResponseListener(
+            EventListener<GeoResponseEvent> listener) {
+        getElement().addEventListener(GeoResponseEvent.class, listener, this);
     }
 }

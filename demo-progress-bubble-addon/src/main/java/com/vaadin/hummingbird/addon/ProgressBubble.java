@@ -1,10 +1,10 @@
 package com.vaadin.hummingbird.addon;
 
-import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.Tag;
 import com.vaadin.ui.AbstractComponent;
 
-@HTML("vaadin://bower_components/progress-bubble/progress-bubble.html")
+@Bower("progress-bubble")
 @Tag("progress-bubble")
 public class ProgressBubble extends AbstractComponent {
 
