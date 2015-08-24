@@ -68,10 +68,10 @@ public class TodoPresenter {
     }
 
     public void markAllCompleted(boolean completed) {
-        for (Todo t : model.todos.toArray(new Todo[model.todos.size()])) {
+        for (Todo t : model.todos) {
             t.setCompleted(completed);
+            view.refresh(t);
         }
-        view.refresh(model.todos);
     }
 
 }
