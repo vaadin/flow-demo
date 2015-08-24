@@ -159,7 +159,7 @@ public class TodoList extends Template {
         completeCount = 0;
     }
 
-    private void setAllCompleted(boolean completed) {
+    public void setAllCompleted(boolean completed) {
         List<Object> todos = getNode().getMultiValued("todos");
         for (Object object : todos) {
             updateBoolean((StateNode) object, completed, "completed");
