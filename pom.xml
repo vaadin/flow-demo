@@ -23,7 +23,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-        <repositories>
+	<repositories>
 		<repository>
 			<id>hummingbird-internal-snapshots</id>
 			<url>http://vaadin.com/download/internal/hummingbird/hummingbird-ef6448/</url>
@@ -31,7 +31,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-        </repositories>
+	</repositories>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -83,6 +83,19 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.6.1</version>
+			</plugin>
+
+			<!-- The Jetty plugin allows us to easily test the development build by 
+				running jetty:run on the command line. -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>-1</scanIntervalSeconds>
+					<stopPort>8081</stopPort>
+					<stopKey>foo</stopKey>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
