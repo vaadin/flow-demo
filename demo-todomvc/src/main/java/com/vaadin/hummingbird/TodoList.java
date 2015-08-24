@@ -18,15 +18,13 @@ package com.vaadin.hummingbird;
 import java.util.Iterator;
 import java.util.List;
 
+import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.hummingbird.kernel.NodeChangeListener;
 import com.vaadin.hummingbird.kernel.StateNode;
 import com.vaadin.hummingbird.kernel.change.NodeChange;
 import com.vaadin.hummingbird.kernel.change.PutChange;
 import com.vaadin.ui.Template;
-
-import elemental.json.JsonString;
-import elemental.json.JsonValue;
 
 public class TodoList extends Template {
     private static class NeedsRecountToken {
@@ -75,10 +73,11 @@ public class TodoList extends Template {
 
     public void setCompleted(int todoIndex, boolean completed) {
         StateNode todoNode = (StateNode) getTodos().get(todoIndex);
-        setCompleted(todoNode, completed);
+        setTodoCompleted(todoNode, completed);
     }
 
-    private void setCompleted(StateNode todoNode, boolean completed) {
+    @TemplateEventHandler
+    protected void setTodoCompleted(StateNode todoNode, boolean completed) {
         if (completed && !todoNode.containsKey("completed")) {
             completeCount++;
             todoNode.put("completed", Boolean.TRUE);
@@ -120,64 +119,41 @@ public class TodoList extends Template {
         return todoNode.containsKey("completed");
     }
 
-    @Override
-    protected void onBrowserEvent(StateNode node, Element element,
-            String methodName, Object[] params) {
-        switch (methodName) {
-        case "setAllCompleted": {
-            boolean checked = ((JsonValue) params[0]).asBoolean();
-            setAllCompleted(checked);
-            break;
-        }
-        case "setTodoCompleted": {
-            boolean checked = ((JsonValue) params[0]).asBoolean();
-            setCompleted(element.getNode(), checked);
-            break;
-        }
-        case "addNewTodo": {
-            String text = ((JsonString) params[0]).getString();
-            addTodo(text);
-            element.setAttribute("value", "");
-            break;
-        }
-        case "removeTodo": {
-            StateNode todoNode = element.getNode();
-            if (todoNode.containsKey("completed")) {
-                completeCount--;
-            }
-            getNode().getMultiValued("todos").remove(todoNode);
-            break;
-        }
-        case "clearCompleted": {
-            clearCompleted();
-            break;
-        }
-        case "labelDoubleClick": {
-            updateBoolean(node, true, "editing");
-            Element todoView = element.getParent();
-            Element todoLi = todoView.getParent();
-            for (int i = 0; i < todoLi.getChildCount(); i++) {
-                Element child = todoLi.getChild(i);
-                if ("input".equals(child.getTag())) {
-                    child.focus();
-                    break;
-                }
-            }
-            break;
-        }
-        case "handleEditBlur": {
-            String text = ((JsonString) params[0]).getString();
+    @TemplateEventHandler
+    private void handleEditBlur(StateNode node, String text) {
+        node.put("title", text);
+        updateBoolean(node, false, "editing");
+    }
 
-            node.put("title", text);
-            updateBoolean(node, false, "editing");
-            break;
-        }
-        default:
-            throw new RuntimeException(
-                    "Unexpected event method name: " + methodName);
+    @TemplateEventHandler
+    private void labelDoubleClick(StateNode node, Element element) {
+        updateBoolean(node, true, "editing");
+        Element todoView = element.getParent();
+        Element todoLi = todoView.getParent();
+        for (int i = 0; i < todoLi.getChildCount(); i++) {
+            Element child = todoLi.getChild(i);
+            if ("input".equals(child.getTag())) {
+                child.focus();
+                return;
+            }
         }
     }
 
+    @TemplateEventHandler
+    protected void removeTodo(StateNode todoNode) {
+        if (todoNode.containsKey("completed")) {
+            completeCount--;
+        }
+        getNode().getMultiValued("todos").remove(todoNode);
+    }
+
+    @TemplateEventHandler
+    protected void addNewTodo(Element element, String text) {
+        addTodo(text);
+        element.setAttribute("value", "");
+    }
+
+    @TemplateEventHandler
     public void clearCompleted() {
         List<Object> todos = getNode().getMultiValued("todos");
         Iterator<Object> iterator = todos.iterator();
@@ -191,6 +167,7 @@ public class TodoList extends Template {
         setNeedsRecount();
     }
 
+    @TemplateEventHandler
     public void setAllCompleted(boolean completed) {
         List<Object> todos = getNode().getMultiValued("todos");
         for (Object object : todos) {
