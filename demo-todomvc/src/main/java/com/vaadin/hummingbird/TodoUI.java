@@ -23,7 +23,6 @@ public class TodoUI extends UI {
         VerticalLayout layout = new VerticalLayout();
         TodoList todoList = new TodoList();
         todoList.addTodo("Make hummingbird work");
-        todoList.updateStuff();
 
         layout.addComponent(todoList);
 

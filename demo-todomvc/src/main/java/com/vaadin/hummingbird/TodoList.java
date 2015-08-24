@@ -19,26 +19,54 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.vaadin.hummingbird.kernel.Element;
+import com.vaadin.hummingbird.kernel.NodeChangeListener;
 import com.vaadin.hummingbird.kernel.StateNode;
+import com.vaadin.hummingbird.kernel.change.NodeChange;
+import com.vaadin.hummingbird.kernel.change.PutChange;
 import com.vaadin.ui.Template;
 
 import elemental.json.JsonString;
 import elemental.json.JsonValue;
 
 public class TodoList extends Template {
+    private static class NeedsRecountToken {
+        // Empty marker class (ugh)
+    }
+
     private int completeCount = 0;
 
     public TodoList() {
         getNode().put("remainingCount", Integer.valueOf(0));
+        getNode().addChangeListener(new NodeChangeListener() {
+            @Override
+            public void onChange(StateNode stateNode,
+                    List<NodeChange> changes) {
+                for (NodeChange nodeChange : changes) {
+                    if (nodeChange instanceof PutChange) {
+                        if (((PutChange) nodeChange)
+                                .getKey() == NeedsRecountToken.class) {
+                            updateCounters();
+                            getNode().remove(NeedsRecountToken.class);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void setNeedsRecount() {
+        // haxx
+        if (!getNode().containsKey(NeedsRecountToken.class)) {
+            // Use a class as a key so it isn't sent to the server
+            getNode().put(NeedsRecountToken.class, Boolean.TRUE);
+        }
     }
 
     public void addTodo(String todo) {
         StateNode todoNode = StateNode.create();
         todoNode.put("title", todo);
         getTodos().add(todoNode);
-        if (todoNode.containsKey("hasTodos")) {
-            todoNode.put("hasTodos", Boolean.TRUE);
-        }
+        setNeedsRecount();
     }
 
     private List<Object> getTodos() {
@@ -58,16 +86,20 @@ public class TodoList extends Template {
             completeCount--;
             todoNode.remove("completed");
         }
+        setNeedsRecount();
     }
 
-    public void updateStuff() {
+    private void updateCounters() {
         StateNode node = getNode();
 
         updateBoolean(node, completeCount == 0, "hasNoCompleted");
 
-        int remainingCount = getTodos().size() - completeCount;
+        int todoCount = getTodos().size();
+
+        int remainingCount = todoCount - completeCount;
         updateBoolean(node, remainingCount == 0, "isAllCompleted");
         updateBoolean(node, (remainingCount != 0), "hasRemaining");
+        updateBoolean(node, todoCount != 0, "hasTodos");
 
         Integer remainingObj = Integer.valueOf(remainingCount);
         if (!remainingObj.equals(node.get("remainingCount"))) {
@@ -144,7 +176,6 @@ public class TodoList extends Template {
             throw new RuntimeException(
                     "Unexpected event method name: " + methodName);
         }
-        updateStuff();
     }
 
     public void clearCompleted() {
@@ -157,6 +188,7 @@ public class TodoList extends Template {
             }
         }
         completeCount = 0;
+        setNeedsRecount();
     }
 
     public void setAllCompleted(boolean completed) {
@@ -169,5 +201,6 @@ public class TodoList extends Template {
         } else {
             completeCount = 0;
         }
+        setNeedsRecount();
     }
 }
