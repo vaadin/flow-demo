@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import com.vaadin.testbench.By;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
@@ -24,8 +24,7 @@ public class TodoListTest extends TestBenchTestCase {
 
     @Before
     public void setupDriver() throws Exception {
-        // Something's broken with PhantomJSDriver, use Firefox for now
-        setDriver(new FirefoxDriver());
+        setDriver(new PhantomJSDriver());
         getDriver().get("http://localhost:8080/?restartApplication");
     }
 
