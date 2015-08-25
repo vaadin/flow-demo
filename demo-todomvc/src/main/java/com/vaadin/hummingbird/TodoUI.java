@@ -8,7 +8,6 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 @Theme("todomvc")
 @Title("TodoMVC")
@@ -20,13 +19,10 @@ public class TodoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        VerticalLayout layout = new VerticalLayout();
         TodoList todoList = new TodoList();
         todoList.addTodo("Make hummingbird work");
 
-        layout.addComponent(todoList);
-
-        setContent(layout);
+        setContent(todoList);
     }
 
 }
