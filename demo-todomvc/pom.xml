@@ -36,6 +36,13 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird-themes</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-testbench</artifactId>
+			<version>4.0.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
