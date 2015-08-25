@@ -24,7 +24,7 @@ public class TodoListTest extends TestBenchTestCase {
 
     @Before
     public void setupDriver() throws Exception {
-        // Something's broken with SeleniumDriver, use Firefox for now
+        // Something's broken with PhantomJSDriver, use Firefox for now
         setDriver(new FirefoxDriver());
         getDriver().get("http://localhost:8080/?restartApplication");
     }
