@@ -145,6 +145,7 @@ public class TodoList extends Template {
             completeCount--;
         }
         getNode().getMultiValued("todos").remove(todoNode);
+        setNeedsRecount();
     }
 
     @TemplateEventHandler
