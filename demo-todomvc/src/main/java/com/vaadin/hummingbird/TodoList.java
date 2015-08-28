@@ -60,6 +60,7 @@ public class TodoList extends Template {
         }
     }
 
+    @TemplateEventHandler
     public void addTodo(String todo) {
         StateNode todoNode = StateNode.create();
         todoNode.put("title", todo);
@@ -77,7 +78,11 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    protected void setTodoCompleted(StateNode todoNode, boolean completed) {
+    protected void setTodoCompleted(Element element, boolean completed) {
+        setTodoCompleted(element.getNode(), completed);
+    }
+
+    private void setTodoCompleted(StateNode todoNode, boolean completed) {
         if (completed && !todoNode.containsKey("completed")) {
             completeCount++;
             todoNode.put("completed", Boolean.TRUE);
@@ -120,13 +125,15 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    private void handleEditBlur(StateNode node, String text) {
+    private void handleEditBlur(Element element, String text) {
+        StateNode node = element.getNode();
         node.put("title", text);
         updateBoolean(node, false, "editing");
     }
 
     @TemplateEventHandler
-    private void labelDoubleClick(StateNode node, Element element) {
+    private void labelDoubleClick(Element element) {
+        StateNode node = element.getNode();
         updateBoolean(node, true, "editing");
         Element todoView = element.getParent();
         Element todoLi = todoView.getParent();
@@ -140,18 +147,16 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    protected void removeTodo(StateNode todoNode) {
+    protected void removeTodo(Element element) {
+        removeTodo(element.getNode());
+    }
+
+    private void removeTodo(StateNode todoNode) {
         if (todoNode.containsKey("completed")) {
             completeCount--;
         }
         getNode().getMultiValued("todos").remove(todoNode);
         setNeedsRecount();
-    }
-
-    @TemplateEventHandler
-    protected void addNewTodo(Element element, String text) {
-        addTodo(text);
-        element.setAttribute("value", "");
     }
 
     @TemplateEventHandler
