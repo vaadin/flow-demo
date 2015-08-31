@@ -15,6 +15,7 @@
 		<module>demo-todomvc-notemplate</module>
 		<module>demo-todomvc</module>
 		<module>demo-google-maps-addon</module>
+		<module>demo-bootstrap</module>
 	</modules>
 
 	<properties>
