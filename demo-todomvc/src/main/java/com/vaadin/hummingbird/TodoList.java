@@ -20,44 +20,20 @@ import java.util.List;
 
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
-import com.vaadin.hummingbird.kernel.NodeChangeListener;
 import com.vaadin.hummingbird.kernel.StateNode;
-import com.vaadin.hummingbird.kernel.change.NodeChange;
-import com.vaadin.hummingbird.kernel.change.PutChange;
 import com.vaadin.ui.Template;
 
 public class TodoList extends Template {
-    private static class NeedsRecountToken {
-        // Empty marker class (ugh)
-    }
+    private Runnable recalculateRunnable = this::updateCounters;
 
     private int completeCount = 0;
 
     public TodoList() {
         getNode().put("remainingCount", Integer.valueOf(0));
-        getNode().addChangeListener(new NodeChangeListener() {
-            @Override
-            public void onChange(StateNode stateNode,
-                    List<NodeChange> changes) {
-                for (NodeChange nodeChange : changes) {
-                    if (nodeChange instanceof PutChange) {
-                        if (((PutChange) nodeChange)
-                                .getKey() == NeedsRecountToken.class) {
-                            updateCounters();
-                            getNode().remove(NeedsRecountToken.class);
-                        }
-                    }
-                }
-            }
-        });
     }
 
     private void setNeedsRecount() {
-        // haxx
-        if (!getNode().containsKey(NeedsRecountToken.class)) {
-            // Use a class as a key so it isn't sent to the server
-            getNode().put(NeedsRecountToken.class, Boolean.TRUE);
-        }
+        getElement().runBeforeNextClientResponse(recalculateRunnable);
     }
 
     @TemplateEventHandler
