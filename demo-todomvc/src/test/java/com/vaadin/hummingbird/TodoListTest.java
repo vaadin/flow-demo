@@ -168,7 +168,16 @@ public class TodoListTest extends TestBenchTestCase {
     private int getItemsLeft() {
         WebElement todoCount = findElement(
                 By.cssSelector(".todo-count > strong"));
-        return Integer.parseInt(todoCount.getText());
+        String text = todoCount.getText();
+        if (text.isEmpty()) {
+            return 0;
+        }
+
+        int itemsLeft = Integer.parseInt(text);
+        Assert.assertNotEquals(
+                "x items left should not be shown at all for x = 0", 0,
+                itemsLeft);
+        return itemsLeft;
     }
 
     @After
