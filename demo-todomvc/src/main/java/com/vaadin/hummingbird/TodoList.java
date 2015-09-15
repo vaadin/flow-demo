@@ -101,25 +101,9 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    private void handleEditBlur(Element element, String text) {
+    private void handleEditBlur(Element element) {
         StateNode node = element.getNode();
-        node.put("title", text);
-        updateBoolean(node, false, "editing");
-    }
-
-    @TemplateEventHandler
-    private void labelDoubleClick(Element element) {
-        StateNode node = element.getNode();
-        updateBoolean(node, true, "editing");
-        Element todoView = element.getParent();
-        Element todoLi = todoView.getParent();
-        for (int i = 0; i < todoLi.getChildCount(); i++) {
-            Element child = todoLi.getChild(i);
-            if ("input".equals(child.getTag())) {
-                child.focus();
-                return;
-            }
-        }
+        System.out.println("Title changed to: " + node.get("title"));
     }
 
     @TemplateEventHandler

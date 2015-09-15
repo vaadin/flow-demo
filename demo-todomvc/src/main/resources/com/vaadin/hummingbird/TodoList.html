@@ -22,11 +22,12 @@
 					<!-- todo.complete=this.checked; -->
 					<input (click)="server.setTodoCompleted(element, element.checked)"
 						class="toggle" type="checkbox" [checked]="todo.completed">
-					<label (dblclick)="server.labelDoubleClick(element)">{{todo.title}}</label>
+					<label
+						(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
 					<button class="destroy" (click)="server.removeTodo(element)"></button>
 				</div> <input #edit class="edit" [value]="todo.title"
-				(blur)="server.handleEditBlur(element, element.value)"
-				(change)="server.handleEditBlur(element, element.value)">
+				(blur)="todo.editing = false; todo.title = element.value; server.handleEditBlur(element)"
+				(change)="todo.editing = false; todo.title = element.value; server.handleEditBlur(element)">
 			</li>
 		</ul>
 	</section>
