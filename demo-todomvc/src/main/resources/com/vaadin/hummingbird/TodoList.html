@@ -26,8 +26,8 @@
 						(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
 					<button class="destroy" (click)="server.removeTodo(element)"></button>
 				</div> <input #edit class="edit" [value]="todo.title"
-				(blur)="todo.editing = false; todo.title = element.value; server.handleEditBlur(element)"
-				(change)="todo.editing = false; todo.title = element.value; server.handleEditBlur(element)">
+				(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}"
+				(change)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}">
 			</li>
 		</ul>
 	</section>
