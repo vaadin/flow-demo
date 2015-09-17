@@ -16,6 +16,7 @@
 		<module>demo-todomvc</module>
 		<module>demo-google-maps-addon</module>
 		<module>demo-bootstrap</module>
+		<module>demo-addressbook</module>
 	</modules>
 
 	<properties>
