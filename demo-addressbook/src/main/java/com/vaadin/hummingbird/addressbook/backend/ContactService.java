@@ -40,7 +40,7 @@ public class ContactService {
 
             Random r = new Random(0);
             Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 200; i++) {
                 Contact contact = new Contact();
                 contact.setFirstName(fnames[r.nextInt(fnames.length)]);
                 contact.setLastName(lnames[r.nextInt(fnames.length)]);
