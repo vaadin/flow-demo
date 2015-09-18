@@ -102,6 +102,7 @@
 				<configuration>
 					<scanIntervalSeconds>-1</scanIntervalSeconds>
 					<stopPort>8081</stopPort>
+					<stopWait>5</stopWait>
 					<stopKey>foo</stopKey>
 				</configuration>
 			</plugin>
