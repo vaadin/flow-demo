@@ -19,12 +19,6 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-/**
- * Features temporarily disabled to make things boot in Hummingbird:
- *
- * - AddressbookUI: addTextChangeListener
- *
- */
 @Title("Addressbook")
 @Theme("valo")
 public class AddressbookUI extends UI {
