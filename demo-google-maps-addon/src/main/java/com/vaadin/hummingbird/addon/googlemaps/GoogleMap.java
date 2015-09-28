@@ -6,9 +6,10 @@ import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.EventParameter;
 import com.vaadin.annotations.EventType;
 import com.vaadin.annotations.Tag;
+import com.vaadin.event.ElementEvents;
 import com.vaadin.event.EventListener;
-import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.AbstractComponent;
+import com.vaadin.ui.AbstractHasElement;
 import com.vaadin.ui.Component;
 
 @Bower("google-map")
@@ -95,7 +96,8 @@ public class GoogleMap extends AbstractComponent {
         }
     }
 
-    public static class GoogleMapMarker {
+    @Tag("google-map-marker")
+    public static class GoogleMapMarker extends AbstractHasElement {
 
         @EventType("google-map-marker-click")
         public static class ClickEvent extends EventObject {
@@ -109,12 +111,6 @@ public class GoogleMap extends AbstractComponent {
             }
         }
 
-        private final Element element = new Element("google-map-marker");
-
-        public Element getElement() {
-            return element;
-        }
-
         public GoogleMapMarker(double latitude, double longitude,
                 String title) {
             getElement().setAttribute("latitude", latitude);
@@ -125,11 +121,12 @@ public class GoogleMap extends AbstractComponent {
         public void addClickListener(EventListener<ClickEvent> listener) {
             // google-map requires clickEvents="true" to send any click event
             getElement().setAttribute("clickEvents", true);
-            getElement().addEventListener(ClickEvent.class, listener, this);
+            ElementEvents.addElementListener(this, ClickEvent.class, listener);
         }
 
         public void removeClickListener(EventListener<ClickEvent> listener) {
-            getElement().removeEventListener(ClickEvent.class, listener, this);
+            ElementEvents.removeElementListener(this, ClickEvent.class,
+                    listener);
         }
     }
 
@@ -137,13 +134,13 @@ public class GoogleMap extends AbstractComponent {
             EventListener<DoubleClickEvent> listener) {
         // google-map requires clickEvents="true" to send any click event
         getElement().setAttribute("clickEvents", true);
-        getElement().addEventListener(DoubleClickEvent.class, listener, this);
+        ElementEvents.addElementListener(this, DoubleClickEvent.class,
+                listener);
     }
 
     public void removeDoubleClickListener(
             EventListener<DoubleClickEvent> listener) {
-        getElement().removeEventListener(DoubleClickEvent.class, listener,
-                this);
-
+        ElementEvents.removeElementListener(this, DoubleClickEvent.class,
+                listener);
     }
 }

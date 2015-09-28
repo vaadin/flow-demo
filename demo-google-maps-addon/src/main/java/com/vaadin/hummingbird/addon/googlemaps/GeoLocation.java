@@ -4,6 +4,7 @@ import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.EventParameter;
 import com.vaadin.annotations.EventType;
 import com.vaadin.annotations.Tag;
+import com.vaadin.event.ElementEvents;
 import com.vaadin.event.EventListener;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
@@ -40,6 +41,7 @@ public class GeoLocation extends AbstractComponent {
 
     public void addGeoResponseListener(
             EventListener<GeoResponseEvent> listener) {
-        getElement().addEventListener(GeoResponseEvent.class, listener, this);
+        ElementEvents.addElementListener(this, GeoResponseEvent.class,
+                listener);
     }
 }
