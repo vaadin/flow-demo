@@ -12,8 +12,8 @@
 	<section class="main" [class.hidden]="hasNoTodos">
 		<input id="toggle-all" class="toggle-all" type="checkbox"
 			[checked]="isAllCompleted"
-			(click)="server.setAllCompleted(element.checked)"> <label
-			for="toggle-all">Mark all as complete</label>
+			(click)="model.todos.forEach(function(todo) {todo.completed = element.value}); server.setAllCompleted(element.checked)">
+		<label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
 
 			<li *ng-for="#todo of todos" [class.completed]="todo.completed"
