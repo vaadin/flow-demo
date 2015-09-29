@@ -77,8 +77,7 @@ public class TodoList extends Template {
         int todoCount = getTodos().size();
 
         int remainingCount = todoCount - completeCount;
-        updateBoolean(node, remainingCount == 0, "isAllCompleted");
-        updateBoolean(node, (remainingCount == 0), "hasNoRemaining");
+        updateBoolean(node, remainingCount == 0, "hasNoRemaining");
         updateBoolean(node, todoCount == 0, "hasNoTodos");
 
         Integer remainingObj = Integer.valueOf(remainingCount);
