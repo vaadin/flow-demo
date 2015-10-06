@@ -73,7 +73,7 @@ public class TodoList extends Template {
 
     @TemplateEventHandler
     public void addTodo(String title) {
-        Todo todo = getModel().create(Todo.class);
+        Todo todo = Model.create(Todo.class);
         todo.setTitle(title);
         getTodos().add(todo);
         setNeedsRecount();
@@ -93,7 +93,7 @@ public class TodoList extends Template {
     }
 
     private Todo getTodoForElement(Element element) {
-        return getModel().wrap(element.getNode(), Todo.class);
+        return Model.wrap(element.getNode(), Todo.class);
     }
 
     private void setTodoCompleted(Todo todo, boolean completed) {
