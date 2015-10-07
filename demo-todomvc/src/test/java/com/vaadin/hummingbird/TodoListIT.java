@@ -1,6 +1,7 @@
 package com.vaadin.hummingbird;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import org.junit.After;
@@ -8,9 +9,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.vaadin.testbench.By;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
@@ -24,8 +30,26 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Before
     public void setupDriver() throws Exception {
-        setDriver(new PhantomJSDriver());
-        getDriver().get("http://localhost:8080/?restartApplication");
+
+        String deploymentUrl = System
+                .getProperty("com.vaadin.testbench.deployment.url");
+        // deploymentUrl = "http://192.168.2.161:8080/";
+
+        if (deploymentUrl != null && !deploymentUrl.isEmpty()) {
+            String hubUrl = "http://tb3-hub.intra.itmill.com:4444/wd/hub";
+
+            // Works on my local phantomjs 2, but didn't seem to work with the
+            // phantomjs 2 on the hub?
+            Capabilities capabilities = new DesiredCapabilities(
+                    BrowserType.CHROME, "40", Platform.WINDOWS);
+
+            setDriver(new RemoteWebDriver(new URL(hubUrl), capabilities));
+            getDriver().get(deploymentUrl + "?restartApplication");
+
+        } else {
+            setDriver(new PhantomJSDriver());
+            getDriver().get("http://localhost:8080/?restartApplication");
+        }
     }
 
     @Test
