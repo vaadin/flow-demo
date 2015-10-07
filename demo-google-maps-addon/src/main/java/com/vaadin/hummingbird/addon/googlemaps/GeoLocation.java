@@ -23,11 +23,8 @@ public class GeoLocation extends AbstractComponent {
         @EventParameter
         private double latitude;
 
-        public GeoResponseEvent(Component source, double latitude,
-                double longitude) {
+        public GeoResponseEvent(Component source) {
             super(source);
-            this.latitude = latitude;
-            this.longitude = longitude;
         }
 
         public double getLatitude() {
