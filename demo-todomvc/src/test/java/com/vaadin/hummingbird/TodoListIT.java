@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,10 +37,10 @@ public class TodoListIT extends TestBenchTestCase {
         if (deploymentUrl != null && !deploymentUrl.isEmpty()) {
             String hubUrl = "http://tb3-hub.intra.itmill.com:4444/wd/hub";
 
-            // Works on my local phantomjs 2, but didn't seem to work with the
-            // phantomjs 2 on the hub?
-            Capabilities capabilities = new DesiredCapabilities(
-                    BrowserType.CHROME, "40", Platform.WINDOWS);
+            DesiredCapabilities capabilities = new DesiredCapabilities(
+                    BrowserType.PHANTOMJS, "2", Platform.LINUX);
+            capabilities.setCapability("phantomjs.binary.path",
+                    "/usr/bin/phantomjs2");
 
             // com.vaadin.testbench.deployment.url is based on framework dev
             // server settings, use jetty:run port instead
