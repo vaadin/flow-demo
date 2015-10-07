@@ -16,7 +16,7 @@ import com.vaadin.testbench.By;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBenchTestCase;
 
-public class TodoListTest extends TestBenchTestCase {
+public class TodoListIT extends TestBenchTestCase {
 
     @Rule
     public ScreenshotOnFailureRule screenshotOnFailure = new ScreenshotOnFailureRule(
