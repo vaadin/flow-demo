@@ -33,7 +33,7 @@ public class TodoListIT extends TestBenchTestCase {
 
         String deploymentUrl = System
                 .getProperty("com.vaadin.testbench.deployment.url");
-        // deploymentUrl = "http://192.168.2.161:8080/";
+        // deploymentUrl = "http://192.168.2.161:8888/";
 
         if (deploymentUrl != null && !deploymentUrl.isEmpty()) {
             String hubUrl = "http://tb3-hub.intra.itmill.com:4444/wd/hub";
@@ -42,6 +42,10 @@ public class TodoListIT extends TestBenchTestCase {
             // phantomjs 2 on the hub?
             Capabilities capabilities = new DesiredCapabilities(
                     BrowserType.CHROME, "40", Platform.WINDOWS);
+
+            // com.vaadin.testbench.deployment.url is based on framework dev
+            // server settings, use jetty:run port instead
+            deploymentUrl = deploymentUrl.replaceAll(":8888", ":8080");
 
             setDriver(new RemoteWebDriver(new URL(hubUrl), capabilities));
             getDriver().get(deploymentUrl + "?restartApplication");
