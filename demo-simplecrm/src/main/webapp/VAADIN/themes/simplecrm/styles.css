@@ -1,0 +1,28 @@
+.v-loading-indicator {
+	height: 20px;
+}
+
+.v-app > .v-scrollable:focus{
+    outline: 0;
+}
+
+div#wrapper {
+	height:100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+div.navbar {
+	background-color:#999;
+	width:200px;
+	height:100%;
+	float:left;
+	margin: 0;
+	padding: 0;
+}
+div.content {
+	background-color:#868;
+	width:100%-200px;
+	height:100%;
+	clear: right;
+}

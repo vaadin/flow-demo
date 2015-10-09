@@ -1,0 +1,20 @@
+<div id="wrapper">
+<div class="navbar">
+	<ul>
+	<li><label><a href="./Customers">Customers</a></label></li>
+	<li><label><a href="./Analyze">Analyze</a></label></li>
+	<li><label><a href="./Map">Map</a></label></li>
+	<li><label><a href="./About">About</a></label></li>
+	</ul>
+</div>
+<div class="content">
+
+		<h1>About</h1>
+		<!-- Event handler script must be run in context where everything "exported" by TodoList.js is defined -->
+		<input id="new-todo" #newtodo class="new-todo"
+			placeholder="What needs to be done?"
+			autofocus
+			(keyup)="if (event.keyCode != 13 || element.value==='') return; server.addTodo(element.value); element.value = '';" />
+
+</div>
+</div>
