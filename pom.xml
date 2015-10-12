@@ -17,6 +17,8 @@
 		<module>demo-google-maps-addon</module>
 		<module>demo-bootstrap</module>
 		<module>demo-addressbook</module>
+		<module>demo-simplecrm</module>
+		<module>demo-simplecrm-notemplate</module>
 	</modules>
 
 	<properties>
