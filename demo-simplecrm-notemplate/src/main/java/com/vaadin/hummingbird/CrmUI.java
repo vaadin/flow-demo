@@ -11,9 +11,8 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.UI;
 
-@HTML("vaadin://bower_components/google-map/google-map.html")
 @Theme("simplecrm")
-@Title("Simple CRM v1")
+@Title("Simple CRM no template")
 public class CrmUI extends UI {
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 	@VaadinServletConfiguration(ui = CrmUI.class, productionMode = false)
