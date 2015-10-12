@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "google-map": "~1.0.5",
-    "geo-location": "~1.0.0"
+    "geo-location": "~1.0.0",
+    "vaadin-components": "~0.3.0-beta9"
   }
 }

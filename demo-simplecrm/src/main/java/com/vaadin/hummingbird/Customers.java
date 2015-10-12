@@ -17,10 +17,14 @@ package com.vaadin.hummingbird;
 
 import java.util.List;
 
+import com.vaadin.annotations.JavaScript;
+import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
+@HTML("vaadin://bower_components/vaadin-components/vaadin-components.html")
+@JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.min.js")
 public class Customers extends Template {
     public interface Todo {
         public String getTitle();

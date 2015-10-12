@@ -10,11 +10,9 @@
 <div class="content">
 	<header class="header">
 		<h1>Map</h1>
-		<!-- Event handler script must be run in context where everything "exported" by TodoList.js is defined -->
-		<input id="new-todo" #newtodo class="new-todo"
-			placeholder="What needs to be done?"
-			autofocus
-			(keyup)="if (event.keyCode != 13 || element.value==='') return; server.addTodo(element.value); element.value = '';" />
+		<p>map:</p>
+		<google-map latitude="37.77493" longitude="-122.41942"></google-map>
+		<p>end map</p>
 	</header>
 </div>
 </div>
