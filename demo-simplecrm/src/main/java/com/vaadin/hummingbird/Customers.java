@@ -16,6 +16,8 @@
 package com.vaadin.hummingbird;
 
 import com.vaadin.ui.Template;
+import com.vaadin.annotations.Bower;
 
+@Bower("vaadin-grid")
 public class Customers extends Template {
 }
