@@ -17,10 +17,15 @@ package com.vaadin.hummingbird;
 
 import java.util.List;
 
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.Tag;
+import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
+
+@Tag("google-map")
 public class Map extends Template {
     public interface Todo {
         public String getTitle();

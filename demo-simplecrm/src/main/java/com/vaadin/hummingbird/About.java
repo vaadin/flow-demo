@@ -18,9 +18,11 @@ package com.vaadin.hummingbird;
 import java.util.List;
 
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
+@Tag("about-page")
 public class About extends Template {
     public interface Todo {
         public String getTitle();
