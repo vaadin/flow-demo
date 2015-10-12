@@ -25,4 +25,12 @@ div.content {
 	width:100%-200px;
 	height:100%;
 	clear: right;
+
+}
+
+.mapp {
+	width: 800px;
+	height:600px;
+	float: left;
+    margin: 0px 0px 0px 10px;
 }

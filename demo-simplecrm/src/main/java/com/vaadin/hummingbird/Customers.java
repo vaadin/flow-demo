@@ -15,12 +15,6 @@
  */
 package com.vaadin.hummingbird;
 
-import java.util.List;
-
-import com.vaadin.annotations.JavaScript;
-import com.vaadin.annotations.HTML;
-import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
 public class Customers extends Template {
