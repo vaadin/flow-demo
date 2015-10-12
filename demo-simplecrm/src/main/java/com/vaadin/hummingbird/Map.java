@@ -23,6 +23,6 @@ import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
-@Tag("google-map")
+@Bower("google-map")
 public class Map extends Template {
 }
