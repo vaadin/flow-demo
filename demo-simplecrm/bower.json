@@ -16,6 +16,11 @@
   "dependencies": {
     "google-map": "~1.0.5",
     "geo-location": "~1.0.0",
-    "vaadin-components": "~0.3.0-beta9"
+    "vaadin-components": "~0.3.0-beta9",
+    "polymer": "Polymer/polymer#^1.1.0",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#~1.0.3",
+    "paper-menu": "PolymerElements/paper-menu#~1.1.1",
+    "iron-icon": "PolymerElements/iron-icon#~1.0.5",
+    "iron-icons": "PolymerElements/iron-icons#~1.0.4"
   }
 }

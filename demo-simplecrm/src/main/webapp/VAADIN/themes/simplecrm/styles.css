@@ -34,3 +34,29 @@ div.content {
 	float: left;
     margin: 0px 0px 0px 10px;
 }
+
+paper-menu {
+    background: transparent;
+}
+paper-menu a {
+    opacity: 0.8;
+    height: 30px;
+    line-height: 25px;
+    padding: 10px;
+    color: #faf;
+    text-decoration: none;
+    @apply(--layout-horizontal)
+    @apply(--layout-center)
+}
+paper-menu iron-icon {
+    margin-right: 10px;
+}
+paper-menu a span,
+paper-menu a iron-icon {
+    pointer-events: none;
+}
+.selectable-content.paper-menu > .iron-selected {
+    font-weight: normal;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.12);
+}

@@ -10,7 +10,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
-@HTML("vaadin://bower_components/google-map/google-map.html")
+
 @Theme("simplecrm")
 @Title("Simple CRM v1")
 public class CrmUI extends UI {

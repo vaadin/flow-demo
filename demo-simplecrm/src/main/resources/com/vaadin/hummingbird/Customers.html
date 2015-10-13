@@ -1,17 +1,27 @@
 <div id="wrapper">
 	<div class="navbar">
-		<ul>
-			<li><label><a href="./Customers">Customers</a></label></li>
-			<li><label><a href="./Analyze">Analyze</a></label></li>
-			<li><label><a href="./Map">Map</a></label></li>
-			<li><label><a href="./About">About</a></label></li>
-		</ul>
+		<paper-menu on-iron-select="onMenuSelect" selected="0"> 
+			<a data-route="Customers" href="Customers"> 
+				<iron-icon icon="social:people"></iron-icon> <span>Customers</span> <br />
+			</a> 
+			<a data-route="Analyze" href="Analyze"> 
+				<iron-icon icon="icons:assessment"></iron-icon> <span>Analyze</span> <br />
+			</a> 
+			<a data-route="Map" href="Map">
+				<iron-icon icon="maps:place"></iron-icon> <span>Map</span> <br />
+			</a> 
+			<a data-route="About" href="About"> 
+				<iron-icon icon="home"></iron-icon> <span>About</span> <br />
+			</a>  
+		</paper-menu>
 	</div>
 	<div class="content">
 		<header class="header">
 			<h1>Customers</h1>
 		</header>
 		<vaadin-grid id="customersGrid"></vaadin-grid>
-
+		<div id="formWrapper" style="display: none">
+			<customer-form id="customerForm"></customer-form>
+		</div>
 	</div>
 </div>

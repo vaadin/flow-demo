@@ -17,9 +17,11 @@ package com.vaadin.hummingbird;
 
 import com.vaadin.ui.Template;
 import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
 
 @JavaScript({"customers-snapshot.json","customers.js"})
-@Bower("vaadin-grid")
+@HTML({"/VAADIN/bower_components/iron-icons/social-icons.html","/VAADIN/bower_components/iron-icons/maps-icons.html"})
+@Bower({"iron-icons","iron-icon","paper-menu","vaadin-grid"})
 public class Customers extends Template {
 }
