@@ -17,9 +17,12 @@ package com.vaadin.hummingbird;
 
 import java.util.List;
 
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
-
+@HTML({"/VAADIN/bower_components/iron-icons/social-icons.html","/VAADIN/bower_components/iron-icons/maps-icons.html"})
+@Bower({"iron-icons","iron-icon","paper-menu"})
 public class Analyze extends Template {
   }
