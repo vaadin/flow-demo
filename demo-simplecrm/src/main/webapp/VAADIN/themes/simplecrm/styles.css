@@ -13,7 +13,7 @@ div#wrapper {
 }
 
 div.navbar {
-	background-color:#999;
+	//background-color:#999;
 	width:200px;
 	height:100%;
 	float:left;
@@ -35,6 +35,21 @@ div.content {
     margin: 0px 0px 0px 10px;
 }
 
+:root {
+    --default-primary-color: #00b4f0;
+    --progress-bubble-stroke-color: var(--default-primary-color);
+    --progress-bubble-bg-stroke-color: rgba(0, 0, 0, 0.1);
+    --progress-bubble-background: transparent;
+    --progress-bubble-reflection-display: none;
+}
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+paper-toolbar {
+    background: var(--default-primary-color);
+    color: #fff;
+}
+
 paper-menu {
     background: transparent;
 }
@@ -43,7 +58,7 @@ paper-menu a {
     height: 30px;
     line-height: 25px;
     padding: 10px;
-    color: #faf;
+    color: #000;
     text-decoration: none;
     @apply(--layout-horizontal)
     @apply(--layout-center)
