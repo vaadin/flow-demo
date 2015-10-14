@@ -19,6 +19,7 @@
 		<module>demo-addressbook</module>
 		<module>demo-simplecrm</module>
 		<module>demo-simplecrm-notemplate</module>
+		<module>demo-vaadinconnector</module>
 	</modules>
 
 	<properties>

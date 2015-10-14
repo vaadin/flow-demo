@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>&lt;vaadin-connector&gt;</title>
+<script
+	src="VAADIN/widgetsets/com.vaadin.hummingbird.vaadinconnector.VaadinConnectorWidgetset/com.vaadin.hummingbird.vaadinconnector.VaadinConnectorWidgetset.nocache.js"></script>
+<link rel="stylesheet" href="VAADIN/themes/valo/styles.css">
+</head>
+<body class="valo">
+	<vaadin-connector connector="com.vaadin.ui.Button" caption="Click me!"></vaadin-connector>
+	<script type="text/javascript">
+		document.querySelector('vaadin-connector').addEventListener("rpc",
+				function(event) {
+					console.log("Got event from connector: ", event);
+					window.alert("Thank you for clicking!");
+				});
+	</script>
+</body>
+</html>
