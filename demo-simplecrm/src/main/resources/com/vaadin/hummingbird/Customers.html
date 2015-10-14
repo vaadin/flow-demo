@@ -20,8 +20,32 @@
 			<h1>Customers</h1>
 		</header>
 		<vaadin-grid id="customersGrid"></vaadin-grid>
-		<div id="formWrapper" style="display: none">
-			<customer-form id="customerForm"></customer-form>
+		<div id="formWrapper" style="float:right">
+			<form is="iron-form" id="customerForm">
+            <paper-input label="First name" value="kissa"></paper-input>
+            <paper-input label="Last name" value="koira"></paper-input>
+            <paper-input label="Email" value="email"></paper-input>
+            <paper-input label="Birthday" type="date" value="01/10/1980"></paper-input>
+            <paper-radio-group selected="Male">
+                <paper-radio-button name="Female">Female</paper-radio-button>
+                <paper-radio-button name="Male">Male</paper-radio-button>
+            </paper-radio-group>
+
+            <paper-dropdown-menu label="Status">
+                <paper-menu class="dropdown-content" attr-for-selected="value" selected="a">
+                   <paper-item value="a"></paper-item>
+                   <paper-item value="b"></paper-item>
+                </paper-menu>
+            </paper-dropdown-menu>
+
+            <div class="buttons">
+                <paper-button id="save" (click)="server.save('kissa');">Save</paper-button>
+                <paper-button id="cancel" (click)="alert('cancel');">Cancel</paper-button>
+                <paper-button id="delete" (click)="server.delete('karhu');">Delete</paper-button>
+            </div>
+        </form>
+			
 		</div>
+
 	</div>
 </div>
