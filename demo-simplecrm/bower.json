@@ -21,6 +21,13 @@
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#~1.0.3",
     "paper-menu": "PolymerElements/paper-menu#~1.1.1",
     "iron-icon": "PolymerElements/iron-icon#~1.0.5",
-    "iron-icons": "PolymerElements/iron-icons#~1.0.4"
+    "iron-icons": "PolymerElements/iron-icons#~1.0.4",
+    "iron-form": "PolymerElements/iron-form#~1.0.9",
+    "paper-input": "PolymerElements/paper-input#~1.0.15",
+    "paper-radio-group": "PolymerElements/paper-radio-group#~1.0.5",
+    "paper-radio-button": "PolymerElements/paper-radio-button#~1.0.9",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#~1.0.4",
+    "paper-button": "PolymerElements/paper-button#~1.0.8",
+    "paper-item": "PolymerElements/paper-item#~1.0.3"
   }
 }
