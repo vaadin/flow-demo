@@ -8,6 +8,8 @@ import elemental.json.JsonValue;
 public class VaadinConnectorExporter implements EntryPoint {
 
     @SuppressWarnings("unused")
+    // GWT didn't allow calling JSO methods straight from JSNI, so using these
+    // bridge methods
     private static class JsniBridge {
         public static void createdCallback(VaadinConnector connector) {
             connector.createdCallback();
@@ -39,15 +41,15 @@ public class VaadinConnectorExporter implements EntryPoint {
     private static native void registerWebComponent()
     /*-{
         var proto = Object.create(HTMLElement.prototype);
-    
+
         proto.createdCallback = $entry(function() {@JsniBridge::createdCallback(*)(this)});
-    
+
         proto.attachedCallback = $entry(function() {@JsniBridge::attachedCallback(*)(this)});
-    
+
         proto.detachedCallback = $entry(function() {@JsniBridge::detachedCallback(*)(this)});
-    
+
         proto.attributeChangedCallback = $entry(function(attrName, oldVal, newVal) {@JsniBridge::attributeChangedCallback(*)(this, attrName, oldVal, newVal)});
-    
+
         $doc.registerElement('vaadin-connector', {
             prototype: proto,
         });
