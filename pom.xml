@@ -18,6 +18,7 @@
 		<module>demo-bootstrap</module>
 		<module>demo-addressbook</module>
 		<module>demo-vaadinconnector</module>
+		<module>demo-simplecrm</module>
 	</modules>
 
 	<properties>
