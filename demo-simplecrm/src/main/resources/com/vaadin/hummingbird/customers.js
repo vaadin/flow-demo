@@ -18,6 +18,28 @@ populate = function() {
         sortCustomers(property, asc);
 	});
 	
+	grid.addEventListener('select', function() {
+		var grid = document.querySelector("vaadin-grid");
+		var selected = grid.selection.selected();
+        if (selected.length > 0) {
+            var selectedCustomer = grid.data.source[selected[0]];
+            //customerForm.selectedCustomer = this._cloneCustomer(selectedCustomer);
+            displayEditor();
+        } else {
+            closeEditor();
+        }
+    });
+	
+};
+
+displayEditor = function() {
+	document.getElementById('formWrapper').style.display = 'block';
+	document.getElementById('customerForm').classList.add('visible');
+};
+
+closeEditor = function() {
+	document.getElementById('customerForm').classList.remove('visible');
+	document.getElementById('formWrapper').style.display = 'none';
 };
 
 sortCustomers = function(sortProperty, ascending) {

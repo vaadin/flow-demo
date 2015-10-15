@@ -19,27 +19,28 @@ import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.JavaScriptModule;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Page;
 import com.vaadin.ui.Template;
-import com.vaadin.ui.Grid.JS;
 
-import elemental.json.JsonArray;
-
-@JavaScript({"customers-snapshot.json","customers.js"})
-@HTML({"vaadin://bower_components/iron-icons/social-icons.html","vaadin://bower_components/iron-icons/maps-icons.html"})
-@Bower({"paper-button","paper-item","paper-dropdown-menu","paper-radio-button","paper-radio-group","paper-input","iron-form","iron-icons","iron-icon","paper-menu","vaadin-grid"})
+@JavaScript({ "customers-snapshot.json", "customers.js" })
+@StyleSheet("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700")
+@HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
+		"vaadin://bower_components/iron-icons/maps-icons.html" })
+@Bower({ "paper-button", "paper-dropdown-menu", "paper-drawer-panel", "paper-header-panel", "paper-input",
+		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",
+		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon", "vaadin-grid" })
 public class Customers extends Template {
-	
-    @JavaScriptModule("customers.js")
-    public interface JS {
-        public void populate(String dataJson);
-    }
-	
+
+	@JavaScriptModule("customers.js")
+	public interface JS {
+		public void populate(String dataJson);
+	}
+
 	private Grid customersGrid = new Grid();
-	
+
 	@Override
 	public void attach() {
 		super.attach();
@@ -48,22 +49,22 @@ public class Customers extends Template {
 	}
 
 	@TemplateEventHandler
-    public void getTestData() {
+	public void getTestData() {
 		String res = "[{\"id\": 1,\"firstName\": \"Gabrielle\",\"lastName\": \"Patel\",\"birthDate\": \"1943-07-17\",\"status\": \"ImportedLead\",\"gender\": \"Female\",\"email\": \"gabrielle@patel.com\",\"location\": {\"lat\": 42.38090140840465,\"lon\": -71.10852736243358},\"persisted\": true}]";
 		// doesn't work
-		Page.getCurrent().getJavaScript().execute("console.log('here');alert('hello');populate("+res+");");
+		Page.getCurrent().getJavaScript().execute("console.log('here');alert('hello');populate(" + res + ");");
 		// doesn't work
 		getJS(JS.class).populate(res);
 	}
-	
+
 	@TemplateEventHandler
 	public void save(String input) {
 		System.out.println("Save: " + input);
 	}
-	
+
 	@TemplateEventHandler
 	public void delete(String input) {
 		System.out.println("Delete: " + input);
 	}
-	
+
 }
