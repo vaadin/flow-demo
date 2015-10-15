@@ -15,14 +15,16 @@
  */
 package com.vaadin.hummingbird;
 
-import java.util.List;
-
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
-import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.kernel.Element;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.Template;
-@HTML({"/VAADIN/bower_components/iron-icons/social-icons.html","/VAADIN/bower_components/iron-icons/maps-icons.html"})
-@Bower({"iron-icons","iron-icon","paper-menu"})
+
+@HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
+		"vaadin://bower_components/iron-icons/maps-icons.html" })
+@StyleSheet("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700")
+@Bower({ "paper-button", "paper-dropdown-menu", "paper-drawer-panel", "paper-header-panel", "paper-input",
+		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",
+		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon" })
 public class Analyze extends Template {
-  }
+}

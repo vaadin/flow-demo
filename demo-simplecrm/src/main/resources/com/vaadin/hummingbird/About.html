@@ -1,22 +1,40 @@
 <div id="wrapper">
-	<div class="navbar">
-		<paper-menu on-iron-select="onMenuSelect" selected="3"> 
-			<a data-route="Customers" href="Customers"> 
-				<iron-icon icon="social:people"></iron-icon> <span>Customers</span> <br />
-			</a> 
-			<a data-route="Analyze" href="Analyze"> 
-				<iron-icon icon="icons:assessment"></iron-icon> <span>Analyze</span> <br />
-			</a> 
-			<a data-route="Map" href="Map">
-				<iron-icon icon="maps:place"></iron-icon> <span>Map</span> <br />
-			</a> 
-			<a data-route="About" href="About"> 
-				<iron-icon icon="home"></iron-icon> <span>About</span> <br />
-			</a>   
-		</paper-menu>
+	<paper-drawer-panel>
+	<paper-header-panel drawer>
+       <paper-toolbar>
+           <span>SimpleCRM</span>
+       </paper-toolbar>
+	
+	<paper-menu on-iron-select="onMenuSelect" selected="3" style="background-color:#4b4b4b;"> 
+		<a data-route="Customers" href="Customers"> 
+			<iron-icon icon="social:people"></iron-icon>
+			<span>Customers</span>
+		</a> <br />
+		<a data-route="Analyze" href="Analyze"> 
+			<iron-icon icon="icons:assessment"></iron-icon>
+			<span>Analyze</span>
+		</a> <br />
+		<a data-route="Map" href="Map"> 
+			<iron-icon icon="maps:place"></iron-icon>
+			<span>Map</span>
+		</a> <br />
+		<a data-route="About" href="About">
+			<iron-icon icon="home"></iron-icon>
+			<span>About</span>
+		</a> <br />
+	</paper-menu>
+	</paper-header-panel>
+	<div id="main" main>
+		<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+		<div id="main-content">
+			<div class="header">
+				<h2>About</h2>
+			</div>
+			<div class="content">
+				<p>This is a SimpleCRM demo application made with Hummingbird.</p>
+			</div>
+		</div>
 	</div>
-<div class="content">
-
-		<h1>About</h1>
+	</paper-drawer-panel>
 </div>
-</div>
+			
