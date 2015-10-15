@@ -31,5 +31,8 @@
     "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#~1.0.8",
     "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.4",
     "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.5"
+  },
+  "resolutions": {
+    "polymer": "^1.1.5"
   }
 }
