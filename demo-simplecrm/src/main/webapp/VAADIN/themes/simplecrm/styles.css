@@ -25,14 +25,14 @@ h2 {
 	display: block;
 }
 #save {
-	background: var(--default-primary-color);
+	background-color:#00b4f0;
 	color: #fff;
 }
 #cancel {
-    background: #d9d9d9;
+    background-color: #d9d9d9;
 }
 #delete {
-    background: #f00;
+    background-color: #f00;
     color: #fff;
 }
 .buttons {
@@ -74,7 +74,7 @@ paper-button {
 	box-sizing: border-box;
 	box-shadow: 0px 0 20px rgba(0, 0, 0, 0.6);
 	z-index: 10;
-	background: #fff;
+	background-color: #fff;
 	padding: 20px;
 	opacity: 0;
 	-webkit-transform: translateX(300px);
@@ -109,14 +109,14 @@ body {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 paper-toolbar {
-    /*background: var(--default-primary-color);*/
+    background-color: #00b4f0;
     color: #fff;
 }
 paper-button {
-    background: red;
+    background-color: red;
 }
 paper-header-panel {
-    background: #4b4b4b;
+    background-color: #4b4b4b;
 }
 
 paper-menu a {
