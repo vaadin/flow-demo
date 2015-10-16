@@ -128,10 +128,7 @@ public class VaadinConnector extends Element {
                 method.invoke(target, arguments);
             }
         } catch (NoDataException e) {
-<<<<<<< HEAD
-=======
             log(iface + "." + methodName);
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
             log(e);
         }
     }
@@ -173,12 +170,8 @@ public class VaadinConnector extends Element {
             JsonValue value;
             String name = property.getName();
 
-<<<<<<< HEAD
-            if (hasAttribute(name) || hasProperty(this, name)) {
-=======
             if (hasAttribute(propertyToAttribute(name))
                     || hasProperty(this, name)) {
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
                 value = getAttributeOrProperty(name);
             } else {
                 continue;
@@ -190,28 +183,17 @@ public class VaadinConnector extends Element {
         }
     }
 
-<<<<<<< HEAD
-    private JsonValue getAttributeOrProperty(String name) {
-        if (hasAttribute(name)) {
-            String attributeValue = getAttribute(name);
-=======
     private JsonValue getAttributeOrProperty(String propertyName) {
         String attributeName = propertyToAttribute(propertyName);
         if (hasAttribute(attributeName)) {
             String attributeValue = getAttribute(attributeName);
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
             try {
                 return Json.parse(attributeValue);
             } catch (JsonException e) {
                 return Json.create(attributeValue);
             }
-<<<<<<< HEAD
-        } else if (hasProperty(this, name)) {
-            return Util.jso2json(getPropertyJSO(name));
-=======
         } else if (hasProperty(this, propertyName)) {
             return Util.jso2json(getPropertyJSO(propertyName));
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
         } else {
             return null;
         }
@@ -254,16 +236,6 @@ public class VaadinConnector extends Element {
         log(oldVal);
         log(newVal);
 
-<<<<<<< HEAD
-        updateState(attrName, newVal);
-    }
-
-    private void updateState(String name, JsonValue value) {
-        try {
-            ComponentConnector connector = getConnector();
-            Property property = getStateType(connector).getProperty(name);
-            Type propertyType = property.getType();
-=======
         if (getConnector() == null) {
             // Connector not yet created
             return;
@@ -313,28 +285,20 @@ public class VaadinConnector extends Element {
                 log("Property not found in connector: " + propertyName);
                 return;
             }
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
 
             Object decodedValue = JsonDecoder.decodeValue(propertyType, value,
                     null, connector.getConnection());
             property.setValue(connector.getState(), decodedValue);
 
             JsonObject stateChangeJson = Json.createObject();
-<<<<<<< HEAD
-            stateChangeJson.put(name, value);
-=======
             stateChangeJson.put(propertyName, value);
 
             log("Property " + propertyName + " changed to " + value.toJson());
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
 
             connector.fireEvent(
                     new StateChangeEvent(connector, stateChangeJson, false));
         } catch (NoDataException e) {
-<<<<<<< HEAD
-=======
             log(propertyName);
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
             log(e);
         }
     }
@@ -351,10 +315,7 @@ public class VaadinConnector extends Element {
                     connector.getConnection());
 
         } catch (NoDataException e) {
-<<<<<<< HEAD
-=======
             log(name);
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
             log(e);
             return null;
         }

@@ -133,10 +133,7 @@
 				<executions>
 					<execution>
 						<goals>
-<<<<<<< HEAD
 							<goal>update-widgetset</goal>
-=======
->>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
 							<goal>compile</goal>
 						</goals>
 					</execution>
