@@ -21,39 +21,8 @@ public class CrmUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		// Create a template of each of the pages
-		Customers customers = new Customers();
-		Map map = new Map();
-		Analyze analyze = new Analyze();
-		About about = new About();
-
-		// Redirect to correct template based on the request URL
-		String pathInfo = request.getPathInfo();
-		if (pathInfo != null) {
-			switch (pathInfo) {
-			case "/Customers": {
-				setContent(customers);
-				break;
-			}
-			case "/Map": {
-				setContent(map);
-				break;
-
-			}
-			case "/Analyze": {
-				setContent(analyze);
-				break;
-			}
-			case "/About": {
-				setContent(about);
-				break;
-			}
-			default: {
-				setContent(customers);
-				break;
-			}
-			}
-		}
+		SimpleCrmMain main = new SimpleCrmMain();
+		setContent(main);
 	}
 
 }

@@ -1,19 +1,14 @@
 <div id="wrapper">
-	<paper-drawer-panel>
-	<paper-header-panel id="simplecrm-menu" drawer></paper-header-panel>
-	<div id="main" main>
-		<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-		<div id="main-content">
-			<div class="header">
-				<input id="customerFilter" type="text"
-					placeholder="Filter customers..." value="">
-				<h2>Customers</h2>
-			</div>
-			<div class="content">
-				<vaadin-grid id="customersGrid"></vaadin-grid>
-			</div>
-			<div id="form-wrapper" style="display: none"></div>
+	<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+	<div id="main-content">
+		<div class="header">
+			<input id="customerFilter" type="text"
+				placeholder="Filter customers..." value="">
+			<h2>Customers</h2>
 		</div>
+		<div class="content">
+			<vaadin-grid id="customersGrid"></vaadin-grid>
+		</div>
+		<div id="form-wrapper" style="display: none"></div>
 	</div>
-	</paper-drawer-panel>
 </div>

@@ -15,8 +15,13 @@
  */
 package com.vaadin.hummingbird;
 
+import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.ui.Template;
 
 public class SimpleCrmMenu extends Template {
 	
+	@TemplateEventHandler
+	public void menuClick(String templateName) {
+		((SimpleCrmMain) getParent()).changeMainTemplate(templateName);
+	}
 }

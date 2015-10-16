@@ -27,12 +27,7 @@ import com.vaadin.ui.Page;
 import com.vaadin.ui.Template;
 
 @JavaScript({ "customers-snapshot.json", "customers.js" })
-@StyleSheet("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700")
-@HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
-		"vaadin://bower_components/iron-icons/maps-icons.html" })
-@Bower({ "paper-button", "paper-dropdown-menu", "paper-drawer-panel", "paper-header-panel", "paper-input",
-		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",
-		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon", "vaadin-grid" })
+@Bower({ "vaadin-grid" })
 public class Customers extends Template {
 
 	@JavaScriptModule("customers.js")
@@ -43,9 +38,7 @@ public class Customers extends Template {
 	@Override
 	public void attach() {
 		super.attach();
-		Element e = this.getElementById("simplecrm-menu");
-		e.appendChild(new SimpleCrmMenu().getElement());
-		e = this.getElementById("form-wrapper");
+		Element e = this.getElementById("form-wrapper");
 		e.appendChild(new CustomerForm().getElement());
 	}
 
