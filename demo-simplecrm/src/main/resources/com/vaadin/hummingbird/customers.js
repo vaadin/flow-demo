@@ -33,13 +33,13 @@ populate = function() {
 };
 
 displayEditor = function() {
-	document.getElementById('formWrapper').style.display = 'block';
+	document.getElementById('form-wrapper').style.display = 'block';
 	document.getElementById('customerForm').classList.add('visible');
 };
 
 closeEditor = function() {
 	document.getElementById('customerForm').classList.remove('visible');
-	document.getElementById('formWrapper').style.display = 'none';
+	document.getElementById('form-wrapper').style.display = 'none';
 };
 
 sortCustomers = function(sortProperty, ascending) {
