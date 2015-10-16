@@ -15,6 +15,19 @@
  */
 package com.vaadin.hummingbird;
 
+import java.util.List;
+
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.StyleSheet;
+import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.hummingbird.Customers.JS;
+import com.vaadin.hummingbird.kernel.Element;
+import com.vaadin.hummingbird.kernel.StateNode;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Page;
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.StyleSheet;
@@ -27,4 +40,11 @@ import com.vaadin.ui.Template;
 		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",
 		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon" })
 public class About extends Template {
+	
+	@Override
+	public void attach() {
+		super.attach();
+		Element e = this.getElementById("simplecrm-menu");
+		e.appendChild(new SimpleCrmMenu().getElement());
+	}
 }

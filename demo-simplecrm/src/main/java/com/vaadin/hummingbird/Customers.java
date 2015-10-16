@@ -21,6 +21,7 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.JavaScriptModule;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Page;
 import com.vaadin.ui.Template;
@@ -39,13 +40,13 @@ public class Customers extends Template {
 		public void populate(String dataJson);
 	}
 
-	private Grid customersGrid = new Grid();
-
 	@Override
 	public void attach() {
 		super.attach();
-		customersGrid.addColumn("foo");
-		customersGrid.addRow("bar");
+		Element e = this.getElementById("simplecrm-menu");
+		e.appendChild(new SimpleCrmMenu().getElement());
+		e = this.getElementById("form-wrapper");
+		e.appendChild(new CustomerForm().getElement());
 	}
 
 	@TemplateEventHandler

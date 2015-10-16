@@ -18,6 +18,7 @@ package com.vaadin.hummingbird;
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.StyleSheet;
+import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
 @HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
@@ -27,4 +28,11 @@ import com.vaadin.ui.Template;
 		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",
 		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon" })
 public class Analyze extends Template {
+
+	@Override
+	public void attach() {
+		super.attach();
+		Element e = this.getElementById("simplecrm-menu");
+		e.appendChild(new SimpleCrmMenu().getElement());
+	}
 }

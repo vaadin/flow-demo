@@ -1,29 +1,6 @@
 <div id="wrapper">
 	<paper-drawer-panel>
-	<paper-header-panel drawer>
-       <paper-toolbar>
-           <span>SimpleCRM</span>
-       </paper-toolbar>
-	
-	<paper-menu on-iron-select="onMenuSelect" selected="0" style="background-color:#4b4b4b;"> 
-		<a data-route="Customers" href="Customers"> 
-			<iron-icon icon="social:people"></iron-icon>
-			<span>Customers</span>
-		</a> <br />
-		<a data-route="Analyze" href="Analyze"> 
-			<iron-icon icon="icons:assessment"></iron-icon>
-			<span>Analyze</span>
-		</a> <br />
-		<a data-route="Map" href="Map"> 
-			<iron-icon icon="maps:place"></iron-icon>
-			<span>Map</span>
-		</a> <br />
-		<a data-route="About" href="About">
-			<iron-icon icon="home"></iron-icon>
-			<span>About</span>
-		</a> <br />
-	</paper-menu>
-	</paper-header-panel>
+	<paper-header-panel id="simplecrm-menu" drawer></paper-header-panel>
 	<div id="main" main>
 		<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
 		<div id="main-content">
@@ -35,30 +12,7 @@
 			<div class="content">
 				<vaadin-grid id="customersGrid"></vaadin-grid>
 			</div>
-			<div id="formWrapper" style="display: none">
-				<style>
-		        </style>
-				<form is="iron-form" id="customerForm" class="visible">
-					<paper-input label="First name" value="kissa"></paper-input>
-					<paper-input label="Last name" value="koira"></paper-input>
-					<paper-input label="Email" value="email"></paper-input>
-					<paper-input label="Birthday" type="date" value="01/10/1980"></paper-input>
-					<paper-radio-group selected="Male"> <paper-radio-button
-						name="Female">Female</paper-radio-button> <paper-radio-button
-						name="Male">Male</paper-radio-button> </paper-radio-group>
-		
-					<paper-dropdown-menu label="Status"> <paper-menu
-						class="dropdown-content" attr-for-selected="value" selected="a">
-					<paper-item value="a"></paper-item> <paper-item value="b"></paper-item>
-					</paper-menu> </paper-dropdown-menu>
-		
-					<div class="buttons">
-						<paper-button id="save" (click)="server.save('kissa');">Save</paper-button>
-						<paper-button id="cancel" (click)="document.getElementById('formWrapper').style.display = 'none';">Cancel</paper-button>
-						<paper-button id="delete" (click)="server.delete('karhu');">Delete</paper-button>
-					</div>
-				</form>
-			</div>
+			<div id="form-wrapper" style="display: none"></div>
 		</div>
 	</div>
 	</paper-drawer-panel>
