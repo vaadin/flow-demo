@@ -28,6 +28,9 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Page;
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.Template;
 
 @HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
