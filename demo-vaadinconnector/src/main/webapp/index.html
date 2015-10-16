@@ -5,6 +5,7 @@
 <script
 	src="VAADIN/widgetsets/com.vaadin.hummingbird.vaadinconnector.VaadinConnectorWidgetset/com.vaadin.hummingbird.vaadinconnector.VaadinConnectorWidgetset.nocache.js"></script>
 <link rel="stylesheet" href="VAADIN/themes/valo/styles.css">
+<<<<<<< HEAD
 </head>
 <body class="valo">
 	<p>See the HTML of this page to understand what this is about.</p>
@@ -16,6 +17,29 @@
 				function(event) {
 					console.log("Got rpc event from connector: ", event);
 					window.alert("Thank you for clicking!");
+=======
+<style type="text/css">
+vaadin-connector {
+	display: block;
+	margin: 10px 0;
+}
+</style>
+</head>
+<body class="valo">
+	<vaadin-connector connector="com.vaadin.ui.Label" content-mode="HTML" text="<i>See the HTML of this page to understand what this is about.</i>"></vaadin-connector>
+	 
+    <vaadin-connector id="myButton" connector="com.vaadin.ui.Button" caption="Click me!"></vaadin-connector>
+	
+	<script type="text/javascript">
+		document.getElementById('myButton').addEventListener("rpc",
+				function(event) {
+					console.log("Got rpc event from connector: ", event);
+					
+					var newLabel = document.createElement("vaadin-connector");
+					newLabel.setAttribute("connector", "com.vaadin.ui.Label");
+					newLabel.setAttribute("text", "Thank you for clicking!");
+					document.body.appendChild(newLabel);
+>>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
 				});
 	</script>
 </body>

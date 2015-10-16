@@ -45,6 +45,8 @@ public class Customers extends Template {
 		super.attach();
 		Element e = this.getElementById("simplecrm-menu");
 		e.appendChild(new SimpleCrmMenu().getElement());
+		e = this.getElementById("form-wrapper");
+		e.appendChild(new CustomerForm().getElement());
 	}
 
 	@TemplateEventHandler

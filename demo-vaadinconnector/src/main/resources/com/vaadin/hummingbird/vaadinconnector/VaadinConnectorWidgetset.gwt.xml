@@ -29,6 +29,9 @@
 
 	<entry-point
 		class="com.vaadin.hummingbird.vaadinconnector.client.VaadinConnectorExporter" />
+<<<<<<< HEAD
 
     <inherits name="com.vaadin.DefaultWidgetSet" />
+=======
+>>>>>>> 77f0b27a0d2efb3cf4d5e301c36c497a655ca6cd
 </module>
