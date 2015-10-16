@@ -4,19 +4,19 @@
 </paper-toolbar>
 	
 <paper-menu on-iron-select="onMenuSelect" style="background-color:#4b4b4b;"> 
-	<a data-route="Customers" href="Customers"> 
+	<a (click)="server.menuClick('CUSTOMERS');"> 
 		<iron-icon icon="social:people"></iron-icon>
 		<span>Customers</span>
 	</a> <br />
-	<a data-route="Analyze" href="Analyze"> 
+	<a (click)="server.menuClick('ANALYZE');"> 
 		<iron-icon icon="icons:assessment"></iron-icon>
 		<span>Analyze</span>
 	</a> <br />
-	<a data-route="Map" href="Map"> 
+	<a (click)="server.menuClick('MAP');"> 
 		<iron-icon icon="maps:place"></iron-icon>
 		<span>Map</span>
 	</a> <br />
-	<a data-route="About" href="About">
+	<a (click)="server.menuClick('ABOUT');">
 		<iron-icon icon="home"></iron-icon>
 		<span>About</span>
 	</a> <br />
