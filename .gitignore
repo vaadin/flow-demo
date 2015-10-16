@@ -1,6 +1,8 @@
 .classpath
 .settings
 .project
+/.recommenders/
+/.metadata/
 /target/
 /node/
 /node_tmp/
