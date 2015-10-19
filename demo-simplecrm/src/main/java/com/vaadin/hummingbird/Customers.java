@@ -15,50 +15,44 @@
  */
 package com.vaadin.hummingbird;
 
+import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
+import org.vaadin.teemu.jsoncontainer.JsonContainer;
+
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.JavaScriptModule;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.data.Container;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Page;
 import com.vaadin.ui.Template;
 
-@JavaScript({ "customers-snapshot.json", "customers.js" })
+@JavaScript({ "customers.js" })
 @Bower({ "vaadin-grid" })
 public class Customers extends Template {
 
-	@JavaScriptModule("customers.js")
-	public interface JS {
-		public void populate(String dataJson);
-	}
+	protected Grid customersGrid;
 
 	@Override
 	public void attach() {
 		super.attach();
+		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
+		try {
+			String json = IOUtils.toString(is, "UTF-8");
+			JsonContainer dataSource = JsonContainer.Factory.newInstance(json);
+			customersGrid.setContainerDataSource(dataSource);
+			//customersGrid.addItemClickListener( event -> { this.getElementById("form-wrapper").setStyle("display", "block");});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		Element e = this.getElementById("form-wrapper");
 		e.appendChild(new CustomerForm().getElement());
-	}
-
-	@TemplateEventHandler
-	public void getTestData() {
-		String res = "[{\"id\": 1,\"firstName\": \"Gabrielle\",\"lastName\": \"Patel\",\"birthDate\": \"1943-07-17\",\"status\": \"ImportedLead\",\"gender\": \"Female\",\"email\": \"gabrielle@patel.com\",\"location\": {\"lat\": 42.38090140840465,\"lon\": -71.10852736243358},\"persisted\": true}]";
-		// doesn't work
-		Page.getCurrent().getJavaScript().execute("console.log('here');alert('hello');populate(" + res + ");");
-		// doesn't work
-		getJS(JS.class).populate(res);
-	}
-
-	@TemplateEventHandler
-	public void save(String input) {
-		System.out.println("Save: " + input);
-	}
-
-	@TemplateEventHandler
-	public void delete(String input) {
-		System.out.println("Delete: " + input);
 	}
 
 }

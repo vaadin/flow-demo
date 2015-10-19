@@ -15,13 +15,48 @@
  */
 package com.vaadin.hummingbird;
 
+import java.util.HashMap;
+
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.ui.Template;
 
 public class SimpleCrmMenu extends Template {
+
+	private HashMap<String,Template> mainTemplatesByName = new HashMap<String,Template>();
+	
+	private Template createTemplateByName(String templateName) {
+		switch (templateName) {
+			case "ABOUT": {
+				return new About();
+			}
+			case "MAP": {
+				return new Map();
+			}
+			case "ANALYZE": {
+				return new Analyze();
+			}
+			case "CUSTOMERS": {
+				return new Customers();
+			}
+		}
+		throw new IllegalArgumentException("Template with name " + templateName + " doesn't exist!");
+	}
+	
+	public Template getOrCreateTemplate(String templateName) {
+		Template t;
+		if (mainTemplatesByName.containsKey(templateName)) {
+			t = mainTemplatesByName.get(templateName);
+			
+		} else {
+			t = createTemplateByName(templateName);
+			mainTemplatesByName.put(templateName, t);
+		}
+		return t;
+	}
 	
 	@TemplateEventHandler
 	public void menuClick(String templateName) {
-		((SimpleCrmMain) getParent()).changeMainTemplate(templateName);
+		Template t = getOrCreateTemplate(templateName);
+		((SimpleCrmMain) getParent()).showTemplate(t);
 	}
 }
