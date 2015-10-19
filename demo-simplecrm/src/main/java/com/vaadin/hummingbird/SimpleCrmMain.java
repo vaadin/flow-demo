@@ -41,54 +41,21 @@ import com.vaadin.ui.Template;
 		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon" })
 public class SimpleCrmMain extends Template {
 	
-	private HashMap<String,Template> mainTemplatesByName = new HashMap<String,Template>();
-	
 	@Override
 	public void attach() {
 		super.attach();
 		Element menuElement = this.getElementById("simplecrm-menu");
-		menuElement.appendChild(new SimpleCrmMenu().getElement());
+		SimpleCrmMenu menuTemplate = new SimpleCrmMenu();
+		menuElement.appendChild(menuTemplate.getElement());
 		Element mainElement = this.getElementById("main");
 		// default main template: Customers
-		Template customers = new Customers();
+		Template customers = menuTemplate.getOrCreateTemplate("CUSTOMERS");
 		mainElement.appendChild(customers.getElement());
-		mainTemplatesByName.put("CUSTOMERS", customers);
 		
 	}
-
-	private Template createTemplateByName(String templateName) {
-		switch (templateName) {
-			case "ABOUT": {
-				return new About();
-			}
-			case "MAP": {
-				return new Map();
-			}
-			case "ANALYZE": {
-				return new Analyze();
-			}
-			case "CUSTOMERS": {
-				return new Customers();
-			}
-		}
-		throw new IllegalArgumentException("Template with name " + templateName + " doesn't exist!");
-	}
 	
-	private Template getOrCreateTemplate(String templateName) {
-		Template t;
-		if (mainTemplatesByName.containsKey(templateName)) {
-			t = mainTemplatesByName.get(templateName);
-			
-		} else {
-			t = createTemplateByName(templateName);
-			mainTemplatesByName.put(templateName, t);
-		}
-		return t;
-	}
-	
-	protected void changeMainTemplate(String templateName) {
+	protected void showTemplate(Template t) {
 		Element mainElement = this.getElementById("main");
-		Template t = getOrCreateTemplate(templateName);
 		mainElement.removeAllChildren();
 		mainElement.appendChild(t.getElement());
 	}
