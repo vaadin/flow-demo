@@ -34,7 +34,8 @@ import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.Template;
 
 @HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
-		"vaadin://bower_components/iron-icons/maps-icons.html" })
+		"vaadin://bower_components/iron-icons/maps-icons.html",
+		"vaadin://bower_components/progress-bubble/progress-bubble.html"})
 @StyleSheet("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700")
 @Bower({ "paper-button", "paper-dropdown-menu", "paper-drawer-panel", "paper-header-panel", "paper-input",
 		"paper-icon-button", "paper-item", "paper-menu", "paper-radio-button", "paper-radio-group", "paper-toolbar",

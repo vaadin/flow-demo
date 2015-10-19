@@ -95,7 +95,7 @@ paper-button {
 	font-size: 14px;
 }
 
-#customersGrid ::content progress-bubble {
+#customersGrid progress-bubble {
 	width: 35px;
 	height: 35px;
 	font-size: 11px;

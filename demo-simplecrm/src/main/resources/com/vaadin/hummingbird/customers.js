@@ -1,7 +1,18 @@
 amendGrid = function() {
 	var grid = grid || document.querySelector("vaadin-grid");
 	grid.columns[0].hidden = true;
+	grid.columns[4].hidden = true;
+	grid.columns[5].hidden = true;
 	grid.columns[7].hidden = true;
+	grid.columns[8].renderer = function(cell) {
+	    var element = cell.element.querySelector('progress-bubble');
+	    if (!element || element.value !== cell.data) {
+	        cell.element.innerHTML = '<progress-bubble max="100" value="' + cell.data + '">' + cell.data + '%</progress-bubble>';
+	    }
+	};
+	grid.columns[2].renderer = function(cell) {
+        cell.element.innerHTML = '<demo-sparkline width="60" height="20" points="' + cell.data + '"></demo-sparkline>';
+    };
 	
 	grid.addEventListener('select', function() {
 		var grid = document.querySelector("vaadin-grid");
