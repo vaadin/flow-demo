@@ -1,57 +1,59 @@
-<section class="todoapp">
-	<header class="header">
-		<h1>todos</h1>
-		<!-- Event handler script must be run in context where everything "exported" by TodoList.js is defined -->
-		<input id="new-todo" #newtodo class="new-todo"
-			placeholder="What needs to be done?"
-			autofocus
+<div>
+	<section class="todoapp">
+		<header class="header">
+			<h1>todos</h1>
+			<!-- Event handler script must be run in context where everything "exported" by TodoList.js is defined -->
+			<input id="new-todo" #newtodo class="new-todo"
+				placeholder="What needs to be done?"
+				autofocus
 			(keyup)="if (event.keyCode != 13 || element.value==='') return; server.addTodo(element.value); element.value = '';" />
-	</header>
-	<!-- Content comes here -->
-	<!-- This section should be hidden by default and shown when there are todos -->
-	<section class="main" [class.hidden]="hasNoTodos">
-		<input id="toggle-all" class="toggle-all" type="checkbox"
-			[checked]="hasNoRemaining"
-			(click)="model.todos.forEach(function(todo) {todo.completed = element.value}); server.setAllCompleted(element.checked)">
-		<label for="toggle-all">Mark all as complete</label>
-		<ul class="todo-list">
+		</header>
+		<!-- Content comes here -->
+		<!-- This section should be hidden by default and shown when there are todos -->
+		<section class="main" [class.hidden]="hasNoTodos">
+			<input id="toggle-all" class="toggle-all" type="checkbox"
+				[checked]="hasNoRemaining"
+				(click)="model.todos.forEach(function(todo) {todo.completed = element.value}); server.setAllCompleted(element.checked)">
+			<label for="toggle-all">Mark all as complete</label>
+			<ul class="todo-list">
 
-			<li *ng-for="#todo of todos" [class.completed]="todo.completed"
-				[class.editing]="todo.editing">
-				<div class="view" [class.hidden]="todo.editing">
-					<!-- todo.complete=this.checked; -->
-					<input (click)="server.setTodoCompleted(element, element.checked)"
-						class="toggle" type="checkbox" [checked]="todo.completed">
-					<label
-						(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
-					<button class="destroy" (click)="server.removeTodo(element)"></button>
-				</div> <input #edit class="edit" [value]="todo.title"
-				(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}"
-				(change)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}">
-			</li>
-		</ul>
+				<li *ng-for="#todo of todos" [class.completed]="todo.completed"
+					[class.editing]="todo.editing">
+					<div class="view" [class.hidden]="todo.editing">
+						<!-- todo.complete=this.checked; -->
+						<input (click)="server.setTodoCompleted(element, element.checked)"
+							class="toggle" type="checkbox" [checked]="todo.completed">
+						<label
+							(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
+						<button class="destroy" (click)="server.removeTodo(element)"></button>
+					</div> <input #edit class="edit" [value]="todo.title"
+					(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}"
+					(change)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}">
+				</li>
+			</ul>
+		</section>
+		<!-- This footer should hidden by default and shown when there are todos -->
+		<footer class="footer" [class.hidden]="hasNoTodos">
+			<!-- This should be `0 items left` by default -->
+			<span class="todo-count" [class.hidden]="hasNoRemaining"
+				id="itemsLeft"><strong>{{remainingCount}}</strong> items left</span>
+			<!-- Remove this if you don't implement routing -->
+			<ul class="filters">
+				<li><a [class.selected]="allFilter" href="#">All</a></li>
+				<li><a [class.selected]="activeFitler" href="#active">Active</a>
+				</li>
+				<li><a [class.selected]="completedFilter" href="#completed">Completed</a></li>
+			</ul>
+			<!-- Hidden if no completed items are left ↓ -->
+			<button #clearCompleted [class.hidden]="hasNoCompleted"
+				class="clear-completed" (click)="server.clearCompleted()">Clear
+				completed</button>
+		</footer>
 	</section>
-	<!-- This footer should hidden by default and shown when there are todos -->
-	<footer class="footer" [class.hidden]="hasNoTodos">
-		<!-- This should be `0 items left` by default -->
-		<span class="todo-count" [class.hidden]="hasNoRemaining"
-			id="itemsLeft"><strong>{{remainingCount}}</strong> items left</span>
-		<!-- Remove this if you don't implement routing -->
-		<ul class="filters">
-			<li><a [class.selected]="allFilter" href="#">All</a></li>
-			<li><a [class.selected]="activeFitler" href="#active">Active</a>
-			</li>
-			<li><a [class.selected]="completedFilter" href="#completed">Completed</a></li>
-		</ul>
-		<!-- Hidden if no completed items are left ↓ -->
-		<button #clearCompleted [class.hidden]="hasNoCompleted"
-			class="clear-completed" (click)="server.clearCompleted()">Clear
-			completed</button>
+	<footer class="info">
+		<p>Double-click to edit a todo</p>
+		<p>
+			Part of <a href="http://todomvc.com">TodoMVC</a>
+		</p>
 	</footer>
-</section>
-<footer class="info">
-	<p>Double-click to edit a todo</p>
-	<p>
-		Part of <a href="http://todomvc.com">TodoMVC</a>
-	</p>
-</footer>
+</div>
