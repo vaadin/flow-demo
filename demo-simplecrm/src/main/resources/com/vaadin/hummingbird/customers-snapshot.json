@@ -1,4 +1,4 @@
-data = [{
+[{
     "id": 1,
     "firstName": "Gabrielle",
     "lastName": "Patel",
@@ -6,10 +6,6 @@ data = [{
     "status": "ImportedLead",
     "gender": "Female",
     "email": "gabrielle@patel.com",
-    "location": {
-        "lat": 42.38090140840465,
-        "lon": -71.10852736243358
-    },
     "persisted": true
 }, {
     "id": 2,
@@ -19,10 +15,6 @@ data = [{
     "status": "Customer",
     "gender": "Male",
     "email": "brian@robinson.com",
-    "location": {
-        "lat": 42.377920466767804,
-        "lon": -71.11089276369675
-    },
     "persisted": true
 }, {
     "id": 3,
@@ -32,10 +24,6 @@ data = [{
     "status": "Contacted",
     "gender": "Female",
     "email": "eduardo@haugen.com",
-    "location": {
-        "lat": 42.370806857930425,
-        "lon": -71.12422701354429
-    },
     "persisted": true
 }, {
     "id": 4,
@@ -45,10 +33,6 @@ data = [{
     "status": "ImportedLead",
     "gender": "Male",
     "email": "koen@johansen.com",
-    "location": {
-        "lat": 42.38923159877369,
-        "lon": -71.11355211329746
-    },
     "persisted": true
 }, {
     "id": 5,
@@ -58,10 +42,6 @@ data = [{
     "status": "Contacted",
     "gender": "Male",
     "email": "alejandro@macdonald.com",
-    "location": {
-        "lat": 42.371709088459866,
-        "lon": -71.11279635115275
-    },
     "persisted": true
 }, {
     "id": 6,
@@ -71,10 +51,6 @@ data = [{
     "status": "Contacted",
     "gender": "Male",
     "email": "angel@karlsson.com",
-    "location": {
-        "lat": 42.390598012571,
-        "lon": -71.10464445567521
-    },
     "persisted": true
 }, {
     "id": 7,
@@ -84,10 +60,6 @@ data = [{
     "status": "Contacted",
     "gender": "Female",
     "email": "yahir@gustavsson.com",
-    "location": {
-        "lat": 42.368750062043624,
-        "lon": -71.11169787782724
-    },
     "persisted": true
 }, {
     "id": 8,
@@ -97,10 +69,6 @@ data = [{
     "status": "ImportedLead",
     "gender": "Female",
     "email": "haiden@svensson.com",
-    "location": {
-        "lat": 42.36642346490334,
-        "lon": -71.12746629019303
-    },
     "persisted": true
 }, {
     "id": 9,
@@ -110,10 +78,6 @@ data = [{
     "status": "Contacted",
     "gender": "Male",
     "email": "emily@stewart.com",
-    "location": {
-        "lat": 42.367724657703256,
-        "lon": -71.09519196232287
-    },
     "persisted": true
 }, {
     "id": 10,
@@ -123,10 +87,6 @@ data = [{
     "status": "Customer",
     "gender": "Male",
     "email": "corinne@davis.com",
-    "location": {
-        "lat": 42.37501320991617,
-        "lon": -71.09955764248531
-    },
     "persisted": true
 }, {
     "id": 11,
@@ -136,10 +96,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Male",
     "email": "ryann@davis.com",
-    "location": {
-        "lat": 42.3766209748805,
-        "lon": -71.1142271243322
-    },
     "persisted": true
 }, {
     "id": 12,
@@ -149,10 +105,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Female",
     "email": "yurem@jackson.com",
-    "location": {
-        "lat": 42.3796152614094,
-        "lon": -71.10769709594034
-    },
     "persisted": true
 }, {
     "id": 13,
@@ -162,10 +114,6 @@ data = [{
     "status": "Contacted",
     "gender": "Female",
     "email": "kelly@gustavsson.com",
-    "location": {
-        "lat": 42.369396201383026,
-        "lon": -71.10938039904528
-    },
     "persisted": true
 }, {
     "id": 14,
@@ -175,10 +123,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Female",
     "email": "eileen@walker.com",
-    "location": {
-        "lat": 42.36837935373951,
-        "lon": -71.11297571832723
-    },
     "persisted": true
 }, {
     "id": 15,
@@ -188,10 +132,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Female",
     "email": "katelyn@martin.com",
-    "location": {
-        "lat": 42.39609449225817,
-        "lon": -71.1182882077723
-    },
     "persisted": true
 }, {
     "id": 16,
@@ -201,10 +141,6 @@ data = [{
     "status": "Contacted",
     "gender": "Female",
     "email": "israel@carlsson.com",
-    "location": {
-        "lat": 42.38444941393541,
-        "lon": -71.09653092820919
-    },
     "persisted": true
 }, {
     "id": 17,
@@ -214,10 +150,6 @@ data = [{
     "status": "Customer",
     "gender": "Female",
     "email": "quinn@hansson.com",
-    "location": {
-        "lat": 42.378882055521196,
-        "lon": -71.11603942334486
-    },
     "persisted": true
 }, {
     "id": 18,
@@ -227,10 +159,6 @@ data = [{
     "status": "Customer",
     "gender": "Female",
     "email": "makena@smith.com",
-    "location": {
-        "lat": 42.36537411800188,
-        "lon": -71.11105260776341
-    },
     "persisted": true
 }, {
     "id": 19,
@@ -240,10 +168,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Female",
     "email": "danielle@watson.com",
-    "location": {
-        "lat": 42.394043385465174,
-        "lon": -71.1190335459367
-    },
     "persisted": true
 }, {
     "id": 20,
@@ -253,10 +177,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Female",
     "email": "leland@harris.com",
-    "location": {
-        "lat": 42.37398885682291,
-        "lon": -71.11270502129484
-    },
     "persisted": true
 }, {
     "id": 21,
@@ -266,10 +186,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Male",
     "email": "gunner@karlsen.com",
-    "location": {
-        "lat": 42.38545134882475,
-        "lon": -71.10983818513971
-    },
     "persisted": true
 }, {
     "id": 22,
@@ -279,10 +195,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Male",
     "email": "jamar@olsson.com",
-    "location": {
-        "lat": 42.39089117081316,
-        "lon": -71.1126393352283
-    },
     "persisted": true
 }, {
     "id": 23,
@@ -292,10 +204,6 @@ data = [{
     "status": "Customer",
     "gender": "Male",
     "email": "lara@martin.com",
-    "location": {
-        "lat": 42.38549255464446,
-        "lon": -71.10261126196627
-    },
     "persisted": true
 }, {
     "id": 24,
@@ -305,10 +213,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Male",
     "email": "ann@andersson.com",
-    "location": {
-        "lat": 42.39160048710686,
-        "lon": -71.10680280337812
-    },
     "persisted": true
 }, {
     "id": 25,
@@ -318,10 +222,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Female",
     "email": "remington@andersson.com",
-    "location": {
-        "lat": 42.37489821978719,
-        "lon": -71.10568462538944
-    },
     "persisted": true
 }, {
     "id": 26,
@@ -331,10 +231,6 @@ data = [{
     "status": "ImportedLead",
     "gender": "Female",
     "email": "rene@carlsson.com",
-    "location": {
-        "lat": 42.36946171623015,
-        "lon": -71.1172819164512
-    },
     "persisted": true
 }, {
     "id": 27,
@@ -344,10 +240,6 @@ data = [{
     "status": "ClosedLost",
     "gender": "Female",
     "email": "elvis@olsen.com",
-    "location": {
-        "lat": 42.393399457017466,
-        "lon": -71.12993700257245
-    },
     "persisted": true
 }, {
     "id": 28,
@@ -357,10 +249,6 @@ data = [{
     "status": "NotContacted",
     "gender": "Female",
     "email": "solomon@olsen.com",
-    "location": {
-        "lat": 42.38832103969439,
-        "lon": -71.12794807455808
-    },
     "persisted": true
 }, {
     "id": 29,
@@ -370,10 +258,6 @@ data = [{
     "status": "Contacted",
     "gender": "Male",
     "email": "jaydan@jackson.com",
-    "location": {
-        "lat": 42.37859470157643,
-        "lon": -71.11861546425344
-    },
     "persisted": true
 }, {
     "id": 30,
@@ -383,9 +267,5 @@ data = [{
     "status": "ClosedLost",
     "gender": "Female",
     "email": "bernard@nilsen.com",
-    "location": {
-        "lat": 42.3969709524926,
-        "lon": -71.12170558217674
-    },
     "persisted": true
 }]

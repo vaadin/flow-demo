@@ -15,8 +15,37 @@
  */
 package com.vaadin.hummingbird;
 
+import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
+import org.vaadin.teemu.jsoncontainer.JsonContainer;
+
+import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.data.Container;
+import com.vaadin.ui.Grid;
 import com.vaadin.ui.Template;
 
 public class CustomerForm extends Template {
-	
+
+	@TemplateEventHandler
+	public void save(String input) {
+		System.out.println("Save: " + input);
+	}
+
+	@TemplateEventHandler
+	public void delete(String input) {
+		// TODO: Fix this to edit grid's datasource instead of creating a new one
+		// after that feature works
+		Container.Indexed dataSource;
+		Grid customersGrid = ((Customers) getParent()).customersGrid;
+		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
+		try {
+			String json = IOUtils.toString(is, "UTF-8");
+			dataSource = JsonContainer.Factory.newInstance(json);
+			dataSource.removeItem(dataSource.getIdByIndex((Integer.parseInt(input))));
+			customersGrid.setContainerDataSource(dataSource);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

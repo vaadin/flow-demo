@@ -22,7 +22,6 @@ import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.Customers.JS;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.hummingbird.kernel.StateNode;
 import com.vaadin.ui.Button;
