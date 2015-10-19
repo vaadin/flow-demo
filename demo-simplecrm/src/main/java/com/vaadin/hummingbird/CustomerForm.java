@@ -44,6 +44,7 @@ public class CustomerForm extends Template {
 			dataSource = JsonContainer.Factory.newInstance(json);
 			dataSource.removeItem(dataSource.getIdByIndex((Integer.parseInt(input))));
 			customersGrid.setContainerDataSource(dataSource);
+			customersGrid.getColumns().get(2).setHidden(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

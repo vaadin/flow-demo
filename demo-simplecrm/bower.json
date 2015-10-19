@@ -29,7 +29,8 @@
     "paper-item": "PolymerElements/paper-item#~1.0.3",
     "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#~1.0.8",
     "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.4",
-    "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.5"
+    "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.5",
+    "progress-bubble": "~1.1.0"
   },
   "resolutions": {
     "polymer": "^1.1.5"
