@@ -2,8 +2,23 @@
 	<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
 	<div id="main-content">
 		<div class="header">
-			<h2>Analyze</h2>
+			<h2>Customer analysis</h2>
 		</div>
+		<div class="content">
+			<div class="ageWrapper">
+				<vaadin-column-chart id="ageChart"></vaadin-column-chart>
+            </div>
+            
+            <div class="statusWrapper">
+                <vaadin-funnel-chart id="statusChart"></vaadin-funnel-chart>
+            </div>
+
+            <div class="genderWrapper">
+                <vaadin-pie-chart id="genderChart"></vaadin-pie-chart>
+            </div>
+            
+            
+        </div>
 	</div>
 </div>
 			
