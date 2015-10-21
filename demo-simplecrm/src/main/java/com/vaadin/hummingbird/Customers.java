@@ -37,22 +37,33 @@ import com.vaadin.ui.Template;
 public class Customers extends Template {
 
 	protected Grid customersGrid;
-
-	@Override
-	public void attach() {
-		super.attach();
+	
+	protected JsonContainer dataSource = null;
+	
+	private void initDataSource() {
+		if (dataSource != null) {
+			return;
+		}
 		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
 		try {
 			String json = IOUtils.toString(is, "UTF-8");
-			JsonContainer dataSource = JsonContainer.Factory.newInstance(json);
-			customersGrid.setContainerDataSource(dataSource);
+			dataSource = JsonContainer.Factory.newInstance(json);
 			is.close();
-			//customersGrid.addItemClickListener( event -> { this.getElementById("form-wrapper").setStyle("display", "block");});
 		} catch (Exception e) {
-			System.out.println("Customers.java attach exception: " + e.getMessage());
+			System.out.println("Customers.java initDataSource exception: " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public Customers() {
+		initDataSource();
+	}
+	
+	@Override
+	public void attach() {
+		super.attach();
+		initDataSource();
+		customersGrid.setContainerDataSource(dataSource);
 		Element e = this.getElementById("form-wrapper");
 		e.appendChild(new CustomerForm().getElement());
 	}

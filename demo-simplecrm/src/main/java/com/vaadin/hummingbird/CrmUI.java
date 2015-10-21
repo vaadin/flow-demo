@@ -12,7 +12,7 @@ import com.vaadin.ui.UI;
 
 
 @Theme("simplecrm")
-@Title("Simple CRM v1")
+@Title("Hummingbird Simple CRM")
 public class CrmUI extends UI {
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 	@VaadinServletConfiguration(ui = CrmUI.class, productionMode = false)
