@@ -46,8 +46,10 @@ public class Customers extends Template {
 			String json = IOUtils.toString(is, "UTF-8");
 			JsonContainer dataSource = JsonContainer.Factory.newInstance(json);
 			customersGrid.setContainerDataSource(dataSource);
+			is.close();
 			//customersGrid.addItemClickListener( event -> { this.getElementById("form-wrapper").setStyle("display", "block");});
 		} catch (Exception e) {
+			System.out.println("Customers.java attach exception: " + e.getMessage());
 			e.printStackTrace();
 		}
 		

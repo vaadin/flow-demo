@@ -170,3 +170,30 @@ paper-menu a iron-icon {
 	float: left;
 	margin: 0px 0px 0px 10px;
 }
+
+/* Analyze */
+
+.ageWrapper {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 80px;
+}
+.statusWrapper {
+    height: 300px;
+    width: 50%;
+    margin-bottom: 80px;
+    float: left;
+    clear: left;
+}
+.genderWrapper {
+    height: 300px;
+    width: 50%;
+    margin-bottom: 80px;
+    float: left;
+}
+@media (max-width: 700px) {
+    .statusWrapper,
+    .genderWrapper {
+        width: 100%;
+    }
+}

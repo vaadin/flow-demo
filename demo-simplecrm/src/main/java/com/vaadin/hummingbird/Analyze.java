@@ -15,8 +15,18 @@
  */
 package com.vaadin.hummingbird;
 
+import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.Template;
 
+@HTML({"vaadin://bower_components/vaadin-charts/vaadin-column-chart.html",
+	"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
+	"vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html"})
+@JavaScript({"analyze.js","customers-snapshot.json"})
 public class Analyze extends Template {
 
+	@Override
+	public void attach() {
+		super.attach();
+	}
 }
