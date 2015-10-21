@@ -28,5 +28,6 @@ public class Analyze extends Template {
 	@Override
 	public void attach() {
 		super.attach();
+		this.getElement().getNode().enqueueRpc("createCharts();", this.getElement());
 	}
 }
