@@ -15,23 +15,29 @@
  */
 package com.vaadin.hummingbird;
 
+import java.util.HashMap;
+
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.hummingbird.addon.charts.ColumnChart;
 import com.vaadin.ui.Template;
 
-@HTML({"vaadin://bower_components/vaadin-charts/vaadin-column-chart.html",
-	"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
+@HTML({"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
 	"vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html"})
 @JavaScript({"analyze.js"})
 public class Analyze extends Template {
 
+	private ColumnChart ageChart;
+	
 	public boolean initialized = false;
 	@Override
 	public void attach() {
 		super.attach();
 		if (!initialized) {
-			this.getElement().getNode().enqueueRpc("createCharts($0,$1,$2);", getAgesJSON(), getGenderJSON(), getStatusJSON());
+			this.getElement().getNode().enqueueRpc("createCharts($0,$1);", getGenderJSON(), getStatusJSON());
 			initialized = true;
+			ageChart.setTitle("Age");
+			ageChart.createSeries(getAgesData(), "Ages");
 		}
 	}
 	
@@ -45,5 +51,14 @@ public class Analyze extends Template {
 
 	private String getAgesJSON() {
 		return "{\"0-15\":4,\"15-30\":3,\"30-60\":16,\"60-100\":7}";
+	}
+	// Or get from a database or whatever
+	private HashMap getAgesData() {
+		HashMap map = new HashMap();
+		map.put("0-15", 4);
+		map.put("15-30", 3);
+		map.put("30-60", 16);
+		map.put("60-100", 7);
+		return map;
 	}
 }
