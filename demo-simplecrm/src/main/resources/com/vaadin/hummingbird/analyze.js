@@ -1,7 +1,7 @@
-createCharts = function() { // called from Analyze.java attach()
-	var agesData = {'0-15':4,'15-30':3,'30-60':16,'60-100':7};
-	var genderData = {'Men':40,'Women':60};
-	var statusData = {'Imported lead': 4, 'Not contacted': 6, 'Contacted': 8, 'Customer': 5};
+createCharts = function(agesJSON, genderJSON, statusJSON) {
+	var agesData = JSON.parse(agesJSON);
+	var genderData = JSON.parse(genderJSON);
+	var statusData = JSON.parse(statusJSON);
 	
 	var ageChart = document.getElementById("ageChart");
 	ageChart.chart.setTitle({text: "Age"});
