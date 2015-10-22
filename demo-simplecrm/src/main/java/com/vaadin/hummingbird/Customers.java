@@ -66,6 +66,7 @@ public class Customers extends Template {
 		customersGrid.setContainerDataSource(dataSource);
 		Element e = this.getElementById("form-wrapper");
 		e.appendChild(new CustomerForm().getElement());
+		this.getElement().getNode().enqueueRpc("amendGrid($0);", customersGrid.getElement());
 	}
 
 }

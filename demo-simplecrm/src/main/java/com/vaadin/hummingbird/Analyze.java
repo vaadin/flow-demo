@@ -22,12 +22,28 @@ import com.vaadin.ui.Template;
 @HTML({"vaadin://bower_components/vaadin-charts/vaadin-column-chart.html",
 	"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
 	"vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html"})
-@JavaScript({"analyze.js","customers-snapshot.json"})
+@JavaScript({"analyze.js"})
 public class Analyze extends Template {
 
+	public boolean initialized = false;
 	@Override
 	public void attach() {
 		super.attach();
-		this.getElement().getNode().enqueueRpc("createCharts();", this.getElement());
+		if (!initialized) {
+			this.getElement().getNode().enqueueRpc("createCharts($0,$1,$2);", getAgesJSON(), getGenderJSON(), getStatusJSON());
+			initialized = true;
+		}
+	}
+	
+	private Object getGenderJSON() {
+		return "{\"Men\":40,\"Women\":60}";
+	}
+
+	private Object getStatusJSON() {
+		return "{\"Imported lead\": 4, \"Not contacted\": 6, \"Contacted\": 8, \"Customer\": 5}";
+	}
+
+	private String getAgesJSON() {
+		return "{\"0-15\":4,\"15-30\":3,\"30-60\":16,\"60-100\":7}";
 	}
 }
