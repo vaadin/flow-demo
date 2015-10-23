@@ -19,6 +19,7 @@
 		<module>demo-addressbook</module>
 		<module>demo-simplecrm</module>
 		<module>demo-vaadinconnector</module>
+		<module>demo-trix-editor</module>
 	</modules>
 
 	<properties>
