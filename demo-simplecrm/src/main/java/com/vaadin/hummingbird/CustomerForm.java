@@ -15,38 +15,79 @@
  */
 package com.vaadin.hummingbird;
 
-import java.io.InputStream;
-
-import org.apache.commons.io.IOUtils;
-import org.vaadin.teemu.jsoncontainer.JsonContainer;
+import java.text.ParseException;
+import java.util.Date;
 
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.data.Container;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Template;
 
 public class CustomerForm extends Template {
 
+	private Object itemId;
+	
+	public CustomerForm(Object itemId) {
+		setItemId(itemId);
+	}
+	
 	@TemplateEventHandler
-	public void save(String input) {
-		System.out.println("Save: " + input);
+	public void save() {
+		CustomerModel m = getModel();
+		((Customers) getParent()).saveCustomer(getItemId(), m);
 	}
 
 	@TemplateEventHandler
-	public void delete(String input) {
-		// TODO: Fix this to edit grid's datasource instead of creating a new one
-		// after that feature works
-		Container.Indexed dataSource;
-		Grid customersGrid = ((Customers) getParent()).customersGrid;
-		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
-		try {
-			String json = IOUtils.toString(is, "UTF-8");
-			dataSource = JsonContainer.Factory.newInstance(json);
-			dataSource.removeItem(dataSource.getIdByIndex((Integer.parseInt(input))));
-			customersGrid.setContainerDataSource(dataSource);
-			customersGrid.getColumns().get(2).setHidden(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void delete() {
+		((Customers) getParent()).deleteCustomer(getItemId());
 	}
+	
+	@Override
+	protected CustomerModel getModel() {
+		return (CustomerModel) super.getModel();
+	}
+	
+	@TemplateEventHandler
+	public void setFirstName(String input) {
+		CustomerModel m = getModel();
+		m.setFirstName(input);
+	}
+	
+	@TemplateEventHandler
+	public void setLastName(String input) {
+		CustomerModel m = getModel();
+		m.setLastName(input);
+	}
+	
+	@TemplateEventHandler
+	public void setEmail(String input) {
+		CustomerModel m = getModel();
+		m.setEmail(input);
+	}
+	
+	@TemplateEventHandler
+	public void setBirthday(String input) {
+		CustomerModel m = getModel();
+		m.setBirthDate(input);
+	}
+	
+	@TemplateEventHandler
+	public void setStatus(String input) {
+		CustomerModel m = getModel();
+		m.setStatus(input);
+	}
+	
+	@TemplateEventHandler
+	public void setGender(String input) {
+		CustomerModel m = getModel();
+		m.setGender(input);
+	}
+	
+	public Object getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Object itemId) {
+		this.itemId = itemId;
+	}
+	
 }

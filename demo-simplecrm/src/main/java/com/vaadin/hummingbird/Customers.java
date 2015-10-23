@@ -16,20 +16,22 @@
 package com.vaadin.hummingbird;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.vaadin.teemu.jsoncontainer.JsonContainer;
 
 import com.vaadin.annotations.Bower;
-import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
-import com.vaadin.annotations.JavaScriptModule;
-import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.data.Container;
+import com.vaadin.data.Item;
+import com.vaadin.event.SelectionEvent;
+import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Page;
 import com.vaadin.ui.Template;
 
 @JavaScript({ "customers.js" })
@@ -39,6 +41,16 @@ public class Customers extends Template {
 	protected Grid customersGrid;
 	
 	protected JsonContainer dataSource = null;
+	
+	protected void deleteCustomer(Object itemId) throws IllegalArgumentException {
+		dataSource.removeItem(itemId);
+		this.getElement().getNode().enqueueRpc("closeEditor()");
+	}
+	
+	protected void saveCustomer(Object itemId, CustomerModel customer) {
+		// TODO: update datasource
+		System.out.println("Save customer: ");
+	}
 	
 	private void initDataSource() {
 		if (dataSource != null) {
@@ -64,9 +76,44 @@ public class Customers extends Template {
 		super.attach();
 		initDataSource();
 		customersGrid.setContainerDataSource(dataSource);
-		Element e = this.getElementById("form-wrapper");
-		e.appendChild(new CustomerForm().getElement());
 		this.getElement().getNode().enqueueRpc("amendGrid($0);", customersGrid.getElement());
+		customersGrid.addSelectionListener(new SelectionListener() {
+			public void onEvent(SelectionEvent event) {
+				Set<Object> selected = event.getSelected();
+				if (selected.size() == 1) {
+					Object itemId = selected.iterator().next();
+					showForm(itemId);
+				}
+			}
+		});
+	}
+	
+	private void mapItemToModel(Item item, CustomerModel cm) {
+		cm.setEmail((String) item.getItemProperty("email").getValue());
+		cm.setFirstName((String) item.getItemProperty("firstName").getValue());
+		cm.setLastName((String) item.getItemProperty("lastName").getValue());
+		cm.setBirthDate((String) item.getItemProperty("birthDate").getValue());
+		cm.setGender((String) item.getItemProperty("gender").getValue());
+		cm.setStatus((String) item.getItemProperty("status").getValue());
+	}
+	
+	@TemplateEventHandler
+	public void showForm(Object itemId) {
+		if (itemId != null) {
+			// TODO: use existing form if one was already created
+			CustomerForm customerForm = new CustomerForm(itemId);
+			CustomerModel cm = customerForm.getModel();
+			Item item = dataSource.getItem(itemId);
+			mapItemToModel(item, cm);
+			Element e = this.getElementById("form-wrapper");
+			e.removeAllChildren();
+			e.appendChild(customerForm.getElement());
+			this.getElement().getNode().enqueueRpc("displayEditor()");
+		}
 	}
 
+	@TemplateEventHandler
+	public void filterCustomers(String filterText) {
+		
+	}
 }
