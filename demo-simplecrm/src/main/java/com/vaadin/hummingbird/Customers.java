@@ -24,7 +24,10 @@ import org.vaadin.teemu.jsoncontainer.JsonContainer;
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.data.Container.Filter;
 import com.vaadin.data.Item;
+import com.vaadin.data.util.filter.Or;
+import com.vaadin.data.util.filter.SimpleStringFilter;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.hummingbird.kernel.Element;
@@ -39,7 +42,7 @@ public class Customers extends Template {
 	
 	protected JsonContainer dataSource = null;
 	
-	protected void deleteCustomer(Object itemId) throws IllegalArgumentException {
+	protected void deleteCustomer(Object itemId) {
 		dataSource.removeItem(itemId);
 		this.getElement().getNode().enqueueRpc("closeEditor()");
 	}
@@ -121,6 +124,16 @@ public class Customers extends Template {
 
 	@TemplateEventHandler
 	public void filterCustomers(String filterText) {
-		
+		dataSource.removeAllContainerFilters();
+		if (filterText == null || ("".equals(filterText))) {
+			return;
+		}
+		Filter filter1 = new SimpleStringFilter("lastName", filterText, true, false);
+		Filter filter2 = new SimpleStringFilter("firstName", filterText, true, false);
+		Filter filter3 = new SimpleStringFilter("email", filterText, true, false);
+		Filter filter4 = new SimpleStringFilter("status", filterText, true, true);
+		Or orFilters = new Or(filter1,filter2,filter3,filter4);
+		dataSource.addContainerFilter(orFilters);
+
 	}
 }
