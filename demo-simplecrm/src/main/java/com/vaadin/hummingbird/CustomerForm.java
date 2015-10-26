@@ -33,7 +33,7 @@ public class CustomerForm extends Template {
 	@TemplateEventHandler
 	public void save() {
 		CustomerModel m = getModel();
-		((Customers) getParent()).saveCustomer(getItemId(), m);
+		((Customers) getParent()).updateCustomer(getItemId(), m);
 	}
 
 	@TemplateEventHandler

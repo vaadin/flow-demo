@@ -47,9 +47,10 @@ public class Customers extends Template {
 		this.getElement().getNode().enqueueRpc("closeEditor()");
 	}
 	
-	protected void saveCustomer(Object itemId, CustomerModel customer) {
-		// TODO: update datasource
-		System.out.println("Save customer: ");
+	protected void updateCustomer(Object itemId, CustomerModel customer) {
+		Item item = dataSource.getItem(itemId);
+		mapModelToItem(customer, item);
+		this.getElement().getNode().enqueueRpc("closeEditor()");
 	}
 	
 	private void initDataSource() {
@@ -95,6 +96,15 @@ public class Customers extends Template {
 		cm.setBirthDate((String) item.getItemProperty("birthDate").getValue());
 		cm.setGender((String) item.getItemProperty("gender").getValue());
 		cm.setStatus((String) item.getItemProperty("status").getValue());
+	}
+	
+	private void mapModelToItem(CustomerModel cm, Item item) {
+		item.getItemProperty("email").setValue(cm.getEmail());
+		item.getItemProperty("firstName").setValue(cm.getFirstName());
+		item.getItemProperty("lastName").setValue(cm.getLastName());
+		item.getItemProperty("birthDate").setValue(cm.getBirthDate());
+		item.getItemProperty("gender").setValue(cm.getGender());
+		item.getItemProperty("status").setValue(cm.getStatus());
 	}
 	
 	@TemplateEventHandler
