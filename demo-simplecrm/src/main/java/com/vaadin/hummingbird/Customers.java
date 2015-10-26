@@ -16,9 +16,6 @@
 package com.vaadin.hummingbird;
 
 import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -102,7 +99,7 @@ public class Customers extends Template {
 		item.getItemProperty("email").setValue(cm.getEmail());
 		item.getItemProperty("firstName").setValue(cm.getFirstName());
 		item.getItemProperty("lastName").setValue(cm.getLastName());
-		item.getItemProperty("birthDate").setValue(cm.getBirthDate());
+		item.getItemProperty("birthDate").setValue(cm.getBirthDate());	
 		item.getItemProperty("gender").setValue(cm.getGender());
 		item.getItemProperty("status").setValue(cm.getStatus());
 	}

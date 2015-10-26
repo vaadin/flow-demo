@@ -15,11 +15,7 @@
  */
 package com.vaadin.hummingbird;
 
-import java.text.ParseException;
-import java.util.Date;
-
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.ui.Grid;
 import com.vaadin.ui.Template;
 
 public class CustomerForm extends Template {
@@ -81,6 +77,12 @@ public class CustomerForm extends Template {
 		CustomerModel m = getModel();
 		m.setGender(input);
 	}
+	
+	 @TemplateEventHandler
+	 public void setBirthDate(String input) {
+		 CustomerModel m = getModel();
+		 m.setBirthDate(input);
+	 }
 	
 	public Object getItemId() {
 		return itemId;
