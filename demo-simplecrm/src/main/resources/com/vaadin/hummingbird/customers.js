@@ -13,18 +13,6 @@ amendGrid = function(grid) {
 		grid.columns[2].renderer = function(cell) {
 	        cell.element.innerHTML = '<demo-sparkline width="60" height="20" points="' + cell.data + '"></demo-sparkline>';
 	    };
-		
-		grid.addEventListener('select', function() {
-			var grid = document.querySelector("vaadin-grid");
-			var selected = grid.selection.selected();
-	        if (selected.length > 0) {
-	            var selectedCustomer = grid.datasource[selected[0]];
-	            //customerForm.selectedCustomer = this._cloneCustomer(selectedCustomer);
-	            displayEditor();
-	        } else {
-	            closeEditor();
-	        }
-	    });
 
 	});
 		
