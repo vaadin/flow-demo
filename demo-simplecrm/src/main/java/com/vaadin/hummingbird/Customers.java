@@ -38,45 +38,21 @@ import com.vaadin.ui.Template;
 @Bower({ "vaadin-grid" })
 public class Customers extends Template {
 
-	protected Grid customersGrid;
-	
-	protected JsonContainer dataSource = null;
-	
+	protected Grid customersGrid;	
 	protected void deleteCustomer(Object itemId) {
-		dataSource.removeItem(itemId);
+		getCustomerData().deleteCustomer(itemId);
 		this.getElement().getNode().enqueueRpc("closeEditor()");
 	}
 	
 	protected void updateCustomer(Object itemId, CustomerModel customer) {
-		Item item = dataSource.getItem(itemId);
-		mapModelToItem(customer, item);
+		getCustomerData().updateCustomer(itemId, customer);		
 		this.getElement().getNode().enqueueRpc("closeEditor()");
-	}
-	
-	private void initDataSource() {
-		if (dataSource != null) {
-			return;
-		}
-		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
-		try {
-			String json = IOUtils.toString(is, "UTF-8");
-			dataSource = JsonContainer.Factory.newInstance(json);
-			is.close();
-		} catch (Exception e) {
-			System.out.println("Customers.java initDataSource exception: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	public Customers() {
-		initDataSource();
-	}
+	}	
 	
 	@Override
 	public void attach() {
 		super.attach();
-		initDataSource();
-		customersGrid.setContainerDataSource(dataSource);
+		customersGrid.setContainerDataSource(getCustomerData().getDataSource());
 		this.getElement().getNode().enqueueRpc("amendGrid($0);", customersGrid.getElement());
 		customersGrid.addSelectionListener(new SelectionListener() {
 			public void onEvent(SelectionEvent event) {
@@ -89,32 +65,13 @@ public class Customers extends Template {
 		});
 	}
 	
-	private void mapItemToModel(Item item, CustomerModel cm) {
-		cm.setEmail((String) item.getItemProperty("email").getValue());
-		cm.setFirstName((String) item.getItemProperty("firstName").getValue());
-		cm.setLastName((String) item.getItemProperty("lastName").getValue());
-		cm.setBirthDate((String) item.getItemProperty("birthDate").getValue());
-		cm.setGender((String) item.getItemProperty("gender").getValue());
-		cm.setStatus((String) item.getItemProperty("status").getValue());
-	}
-	
-	private void mapModelToItem(CustomerModel cm, Item item) {
-		item.getItemProperty("email").setValue(cm.getEmail());
-		item.getItemProperty("firstName").setValue(cm.getFirstName());
-		item.getItemProperty("lastName").setValue(cm.getLastName());
-		item.getItemProperty("birthDate").setValue(cm.getBirthDate());	
-		item.getItemProperty("gender").setValue(cm.getGender());
-		item.getItemProperty("status").setValue(cm.getStatus());
-	}
-	
 	@TemplateEventHandler
 	public void showForm(Object itemId) {
 		if (itemId != null) {
 			// TODO: use existing form if one was already created
 			CustomerForm customerForm = new CustomerForm(itemId);
 			CustomerModel cm = customerForm.getModel();
-			Item item = dataSource.getItem(itemId);
-			mapItemToModel(item, cm);
+			getCustomerData().modelFromItemId(itemId, cm);
 			Element e = this.getElementById("form-wrapper");
 			e.removeAllChildren();
 			e.appendChild(customerForm.getElement());
@@ -124,16 +81,12 @@ public class Customers extends Template {
 
 	@TemplateEventHandler
 	public void filterCustomers(String filterText) {
-		dataSource.removeAllContainerFilters();
-		if (filterText == null || ("".equals(filterText))) {
-			return;
-		}
-		Filter filter1 = new SimpleStringFilter("lastName", filterText, true, false);
-		Filter filter2 = new SimpleStringFilter("firstName", filterText, true, false);
-		Filter filter3 = new SimpleStringFilter("email", filterText, true, false);
-		Filter filter4 = new SimpleStringFilter("status", filterText, true, true);
-		Or orFilters = new Or(filter1,filter2,filter3,filter4);
-		dataSource.addContainerFilter(orFilters);
-
+		getCustomerData().filterCustomers(filterText);
+	}
+	
+	
+	private CustomerData getCustomerData() {
+		SimpleCrmMain main = ((SimpleCrmMain) getParent());
+		return main.getCustomerData();
 	}
 }

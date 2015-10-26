@@ -21,7 +21,8 @@ public class CrmUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		SimpleCrmMain main = new SimpleCrmMain();
+		CustomerData customerData = new CustomerData();
+		SimpleCrmMain main = new SimpleCrmMain(customerData);
 		setContent(main);
 	}
 
