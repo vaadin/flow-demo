@@ -33,6 +33,7 @@ public class VoiceChat extends Template {
             messageInput.setValue("");
         });
         myAccent = Accent.getRandom();
+        Broadcaster.sendMessage("Hello, I am here now!", myAccent, getUI());
     }
 
     private void onMessage(Accent accent, String msg, UI source) {
