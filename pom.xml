@@ -20,6 +20,7 @@
 		<module>demo-simplecrm</module>
 		<module>demo-vaadinconnector</module>
 		<module>demo-trix-editor</module>
+		<module>demo-voice-chat</module>
 	</modules>
 
 	<properties>
