@@ -24,7 +24,11 @@ public class ColumnChart extends AbstractComponent {
 		this.getElement().getNode().enqueueRpc("$0.chart.addSeries({name:$1, data:$2})", this.getElement(), name, seriesData.toArray());
 	}
 	
-	public void createSeries(HashMap<String, Object> data, String seriesName) {
+	public void removeAllSeries() {
+		this.getElement().getNode().enqueueRpc("for (var i = 0; i < $0.chart.series.length; i++){ $0.chart.series[i].remove(); }" , this.getElement());
+	}
+	
+	public void createSeries(HashMap<String, Integer> data, String seriesName) {
 		List<String> categories = new ArrayList<String>();
 		List<Object[]> dataList = new ArrayList<Object[]>();
 		for (String key : data.keySet()) {
