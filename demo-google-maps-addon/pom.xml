@@ -7,7 +7,7 @@
 		<artifactId>hummingbird-demo</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<name>Google Maps Add-on Demo</name>
+	<name>Google Maps Web Component</name>
 	<artifactId>demo-google-maps-addon</artifactId>
 	<packaging>war</packaging>
 
@@ -73,6 +73,11 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>

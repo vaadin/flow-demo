@@ -7,7 +7,7 @@
 		<artifactId>hummingbird-demo</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<name>Progress Bar Add-on Demo</name>
+	<name>Progress Bar Web Component</name>
 	<artifactId>demo-unpublished-web-component</artifactId>
 	<packaging>war</packaging>
 
@@ -76,6 +76,11 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>

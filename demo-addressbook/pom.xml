@@ -7,7 +7,7 @@
 		<artifactId>hummingbird-demo</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<name>Addressbook</name>
+	<name>Address Book</name>
 	<artifactId>demo-addressbook</artifactId>
 	<packaging>war</packaging>
 
@@ -78,6 +78,11 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>

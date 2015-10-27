@@ -76,6 +76,11 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
