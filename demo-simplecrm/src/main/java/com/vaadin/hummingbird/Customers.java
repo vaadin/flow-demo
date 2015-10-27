@@ -24,7 +24,10 @@ import org.vaadin.teemu.jsoncontainer.JsonContainer;
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.data.Container.Filter;
 import com.vaadin.data.Item;
+import com.vaadin.data.util.filter.Or;
+import com.vaadin.data.util.filter.SimpleStringFilter;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.hummingbird.kernel.Element;
@@ -35,45 +38,21 @@ import com.vaadin.ui.Template;
 @Bower({ "vaadin-grid" })
 public class Customers extends Template {
 
-	protected Grid customersGrid;
-	
-	protected JsonContainer dataSource = null;
-	
-	protected void deleteCustomer(Object itemId) throws IllegalArgumentException {
-		dataSource.removeItem(itemId);
+	protected Grid customersGrid;	
+	protected void deleteCustomer(Object itemId) {
+		getCustomerData().deleteCustomer(itemId);
 		this.getElement().getNode().enqueueRpc("closeEditor()");
 	}
 	
 	protected void updateCustomer(Object itemId, CustomerModel customer) {
-		Item item = dataSource.getItem(itemId);
-		mapModelToItem(customer, item);
+		getCustomerData().updateCustomer(itemId, customer);		
 		this.getElement().getNode().enqueueRpc("closeEditor()");
-	}
-	
-	private void initDataSource() {
-		if (dataSource != null) {
-			return;
-		}
-		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
-		try {
-			String json = IOUtils.toString(is, "UTF-8");
-			dataSource = JsonContainer.Factory.newInstance(json);
-			is.close();
-		} catch (Exception e) {
-			System.out.println("Customers.java initDataSource exception: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	public Customers() {
-		initDataSource();
-	}
+	}	
 	
 	@Override
 	public void attach() {
 		super.attach();
-		initDataSource();
-		customersGrid.setContainerDataSource(dataSource);
+		customersGrid.setContainerDataSource(getCustomerData().getDataSource());
 		this.getElement().getNode().enqueueRpc("amendGrid($0);", customersGrid.getElement());
 		customersGrid.addSelectionListener(new SelectionListener() {
 			public void onEvent(SelectionEvent event) {
@@ -86,32 +65,13 @@ public class Customers extends Template {
 		});
 	}
 	
-	private void mapItemToModel(Item item, CustomerModel cm) {
-		cm.setEmail((String) item.getItemProperty("email").getValue());
-		cm.setFirstName((String) item.getItemProperty("firstName").getValue());
-		cm.setLastName((String) item.getItemProperty("lastName").getValue());
-		cm.setBirthDate((String) item.getItemProperty("birthDate").getValue());
-		cm.setGender((String) item.getItemProperty("gender").getValue());
-		cm.setStatus((String) item.getItemProperty("status").getValue());
-	}
-	
-	private void mapModelToItem(CustomerModel cm, Item item) {
-		item.getItemProperty("email").setValue(cm.getEmail());
-		item.getItemProperty("firstName").setValue(cm.getFirstName());
-		item.getItemProperty("lastName").setValue(cm.getLastName());
-		item.getItemProperty("birthDate").setValue(cm.getBirthDate());	
-		item.getItemProperty("gender").setValue(cm.getGender());
-		item.getItemProperty("status").setValue(cm.getStatus());
-	}
-	
 	@TemplateEventHandler
 	public void showForm(Object itemId) {
 		if (itemId != null) {
 			// TODO: use existing form if one was already created
 			CustomerForm customerForm = new CustomerForm(itemId);
 			CustomerModel cm = customerForm.getModel();
-			Item item = dataSource.getItem(itemId);
-			mapItemToModel(item, cm);
+			getCustomerData().modelFromItemId(itemId, cm);
 			Element e = this.getElementById("form-wrapper");
 			e.removeAllChildren();
 			e.appendChild(customerForm.getElement());
@@ -121,6 +81,12 @@ public class Customers extends Template {
 
 	@TemplateEventHandler
 	public void filterCustomers(String filterText) {
-		
+		getCustomerData().filterCustomers(filterText);
+	}
+	
+	
+	private CustomerData getCustomerData() {
+		SimpleCrmMain main = ((SimpleCrmMain) getParent());
+		return main.getCustomerData();
 	}
 }

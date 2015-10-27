@@ -42,6 +42,12 @@ import com.vaadin.ui.Template;
 		"iron-flex-layout", "iron-form", "iron-icons", "iron-icon" })
 public class SimpleCrmMain extends Template {
 	
+	private CustomerData customerData;
+	
+	public SimpleCrmMain(CustomerData customerData) {
+		this.customerData = customerData; 
+	}
+	
 	@Override
 	public void attach() {
 		super.attach();
@@ -59,6 +65,10 @@ public class SimpleCrmMain extends Template {
 		Element mainElement = this.getElementById("main");
 		mainElement.removeAllChildren();
 		mainElement.appendChild(t.getElement());
+	}
+	
+	protected CustomerData getCustomerData() {
+		return customerData;
 	}
 
 }

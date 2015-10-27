@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
@@ -29,36 +30,39 @@ public class Analyze extends Template {
 
 	private ColumnChart ageChart;
 	
-	public boolean initialized = false;
 	@Override
 	public void attach() {
 		super.attach();
-		if (!initialized) {
-			this.getElement().getNode().enqueueRpc("createCharts($0,$1);", getGenderJSON(), getStatusJSON());
-			initialized = true;
-			ageChart.setTitle("Age");
-			ageChart.createSeries(getAgesData(), "Ages");
-		}
+		this.getElement().getNode().enqueueRpc("createCharts($0,$1);", getGenderJSON(), getStatusJSON());
+		ageChart.setTitle("Age");
+		ageChart.removeAllSeries();
+		ageChart.createSeries(getCustomerData().getAgesCounts(), "Ages");
 	}
 	
 	private Object getGenderJSON() {
-		return "{\"Men\":40,\"Women\":60}";
+		return toJson(getCustomerData().getGenderCounts());
 	}
 
 	private Object getStatusJSON() {
-		return "{\"Imported lead\": 4, \"Not contacted\": 6, \"Contacted\": 8, \"Customer\": 5}";
+		return toJson(getCustomerData().getStatusCounts()); 
+	}
+	
+	private String toJson(HashMap<String, Integer> values) {
+		StringBuffer json = new StringBuffer("{");
+		Iterator<String> iter = values.keySet().iterator();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			json.append('"').append(key).append("\":").append(values.get(key));
+			if  (iter.hasNext()) {
+				json.append(',');
+			}
+		}
+		json.append("}");
+		return json.toString();
 	}
 
-	private String getAgesJSON() {
-		return "{\"0-15\":4,\"15-30\":3,\"30-60\":16,\"60-100\":7}";
-	}
-	// Or get from a database or whatever
-	private HashMap getAgesData() {
-		HashMap map = new HashMap();
-		map.put("0-15", 4);
-		map.put("15-30", 3);
-		map.put("30-60", 16);
-		map.put("60-100", 7);
-		return map;
+	private CustomerData getCustomerData() {
+		SimpleCrmMain main = ((SimpleCrmMain) getParent());
+		return main.getCustomerData();
 	}
 }

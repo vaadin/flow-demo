@@ -58,7 +58,7 @@
 	<div id="main-content">
 		<div class="header">
 			<input id="customerFilter" type="text"
-				placeholder="Filter customers..." value="">
+				placeholder="Filter customers..." value="" (keyup)="server.filterCustomers(element.value);">
 			<h2>Customers</h2>
 		</div>
 		<div class="content">
