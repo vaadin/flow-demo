@@ -1,7 +1,7 @@
 package com.vaadin.hummingbird.addon.charts;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.vaadin.annotations.HTML;
@@ -28,7 +28,7 @@ public class ColumnChart extends AbstractComponent {
 		this.getElement().getNode().enqueueRpc("for (var i = 0; i < $0.chart.series.length; i++){ $0.chart.series[i].remove(); }" , this.getElement());
 	}
 	
-	public void createSeries(HashMap<String, Integer> data, String seriesName) {
+	public void createSeries(LinkedHashMap<String, Integer> data, String seriesName) {
 		List<String> categories = new ArrayList<String>();
 		List<Object[]> dataList = new ArrayList<Object[]>();
 		for (String key : data.keySet()) {

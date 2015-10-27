@@ -3,7 +3,7 @@
 	<paper-input label="Last name" [value]="lastName" (blur)="server.setLastName(element.value);"></paper-input>
 	<paper-input label="Email" [value]="email" (blur)="server.setEmail(element.value);"></paper-input>
 	<paper-input label="Birthday" type="date" [value]="birthDate" (blur)="server.setBirthDate(element.value);"></paper-input>
-	<paper-radio-group [selected]="gender" (blur)="server.setGender(element.value);">
+	<paper-radio-group [selected]="gender" attr-for-selected="name" (iron-select)="server.setGender(element.selected);">
 		<paper-radio-button name="Female">Female</paper-radio-button>
 		<paper-radio-button name="Male">Male</paper-radio-button> 
 	</paper-radio-group>

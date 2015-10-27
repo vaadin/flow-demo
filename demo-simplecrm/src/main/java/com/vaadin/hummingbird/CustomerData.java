@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -85,8 +86,8 @@ public class CustomerData {
 		return categories;
 	}
 	
-	public HashMap<String, Integer> getAgesCounts() {
-		HashMap<String, Integer> result = new HashMap<String, Integer>();
+	public LinkedHashMap<String, Integer> getAgesCounts() {
+		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
 		List<HashMap<String, Object>> categories = getAgeCategories();
 		Collection ids = getDataSource().getItemIds();
 		Iterator iter = ids.iterator();
@@ -111,7 +112,15 @@ public class CustomerData {
 			
 			
 		}
-		return result;
+		LinkedHashMap<String, Integer> sorted = new LinkedHashMap<String, Integer>();
+		for (Iterator<HashMap<String,Object>> categoryIter = categories.iterator(); categoryIter.hasNext();) {
+			HashMap<String, Object> category = categoryIter.next();
+			if (result.containsKey(category.get("label"))) {
+				Integer value = result.get(category.get("label"));
+				sorted.put((String)category.get("label"), value);
+			}
+		}
+		return sorted;
 	}
 	
 	private HashMap<String, Integer> getKeyCounts(String key) {
