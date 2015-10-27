@@ -1,7 +1,17 @@
 <div>
-	<div id="chatLog"></div>
+<style>
+.down {
+	background-color: green;
+	color: white;
+}
+</style>
+	<div id="chat-log"></div>
 	<input type="text" style="width: 100%" placeholder="Enter chat message"
-		id="messageInput" />
-	<voice-player #player />
-	<voice-recognition #recognition />
+		id="message-input" />
+	<button [class.down]="voiceEnabled"
+		(click)="model.voiceEnabled = !model.voiceEnabled; r=element.nextElementSibling; if (model.voiceEnabled) r.start(); else r.stop();">Use
+		microphone</button>
+	<voice-recognition id="recognition" continuous="true" (result)="element.stop();element.start();"/>
+	<voice-player id="player" />
+
 </div>

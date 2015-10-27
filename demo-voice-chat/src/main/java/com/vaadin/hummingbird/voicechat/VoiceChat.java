@@ -8,8 +8,14 @@ import com.vaadin.ui.UI;
 
 public class VoiceChat extends Template {
 
+    public interface Model extends Template.Model {
+        public boolean isVoiceEnabled();
+
+        public void setVoiceEnabled(boolean voiceEnabled);
+    }
+
+    private VoiceRecognition recognition;
     private VoicePlayer player;
-    // private VoiceRecognition recognition;
     private TextField messageInput;
     private ChatLog chatLog;
 
@@ -34,18 +40,18 @@ public class VoiceChat extends Template {
         });
         myAccent = Accent.getRandom();
         Broadcaster.sendMessage("Hello, I am here now!", myAccent, getUI());
+        recognition.addResultListener(e -> {
+            Broadcaster.sendMessage(e.getText(), myAccent, getUI());
+        });
     }
 
     private void onMessage(Accent accent, String msg, UI source) {
         try {
             getUI().access(() -> {
                 chatLog.addMessage(accent.getName() + ": " + msg);
-                if (source != getUI()) {
-                    // Don't speak own messages
-                    player.setAccent(accent);
-                    player.setText(msg);
-                    player.speak();
-                }
+                player.setAccent(accent);
+                player.setText(msg);
+                player.speak();
 
             });
         } catch (Exception e) {
