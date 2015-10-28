@@ -37,8 +37,6 @@
 	                var y = this.points[i];
 	                var nextX = i * xIncrement;
 	                var nextY = this.points[i + 1];
-	
-	                // See http://stackoverflow.com/a/7058606
 	                var xc = (x + nextX) / 2;
 	                var yc = (y + nextY) / 2;
 	                this.ctx.quadraticCurveTo(x, y, xc, yc);

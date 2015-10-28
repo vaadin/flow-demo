@@ -157,18 +157,23 @@ public class CustomerData {
 		mapItemToModel(item, cm);
 	}
 
-	public List<HashMap<String, Double>> getLocations() {
-		List<HashMap<String, Double>> locations = new ArrayList<HashMap<String, Double>>();
+	public List<HashMap<String, Object>> getLocations() {
+		List<HashMap<String, Object>> locations = new ArrayList<HashMap<String, Object>>();
 		
 		Collection ids = getDataSource().getItemIds();
 		Iterator iter = ids.iterator();
 		while (iter.hasNext()) {
 			Object id = iter.next();
-			Double lat = Double.parseDouble((String) getDataSource().getItem(id).getItemProperty("lat").getValue());
-			Double lon = Double.parseDouble((String) getDataSource().getItem(id).getItemProperty("lon").getValue());
-			HashMap<String, Double> loc = new HashMap<String, Double>();
+			Item item = getDataSource().getItem(id);
+			Double lat = Double.parseDouble((String) item.getItemProperty("lat").getValue());
+			Double lon = Double.parseDouble((String) item.getItemProperty("lon").getValue());
+			String firstName = (String) item.getItemProperty("firstName").getValue();
+			String lastName = (String) item.getItemProperty("lastName").getValue();
+			String fullName = lastName + ", " + firstName;
+			HashMap<String, Object> loc = new HashMap<String, Object>();
 			loc.put("lat", lat);
 			loc.put("lon", lon);
+			loc.put("name", fullName);
 			locations.add(loc);
 		}
 		
