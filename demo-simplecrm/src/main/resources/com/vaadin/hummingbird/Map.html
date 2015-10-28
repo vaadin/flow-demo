@@ -6,6 +6,9 @@
 		</div>
 		<div class="content">
 			<google-map fit-to-markers class="mapp" id="customer-map">
+				<google-map-marker *ng-for="#loc of locations" [latitude]="loc.lat" [longitude]="loc.lon">
+				<span>{{loc.name}}</span>
+				</google-map-marker>
 			</google-map>
 		</div>
 	</div>

@@ -24,7 +24,6 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
-@JavaScript({"map.js","https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initialize"})
 @Bower({"google-map"})
 public class Map extends Template {
 
@@ -36,6 +35,10 @@ public class Map extends Template {
         public double getLon();
         
         public void setLon(double lon);
+        
+        public String getName();
+        
+        public void setName(String name);
     }
 
     public interface MapModel extends Model {
@@ -44,23 +47,13 @@ public class Map extends Template {
         public void setLocations(List<MapLocation> locations);
     }
     
-    public Map() {
-    	getNode().getMultiValued("locations");
-    }
-    
     @Override
     public void attach() {
        	super.attach();
-       	List<HashMap<String, Double>> locations = ((SimpleCrmMain) getParent()).getCustomerData().getLocations();
-       	ArrayList<Double> lats = new ArrayList<Double>();
-       	ArrayList<Double> lons = new ArrayList<Double>();
-       	for (HashMap<String, Double> loc : locations) {
-       		addLocation(loc.get("lat"), loc.get("lon"));
-       		lats.add(loc.get("lat"));
-       		lons.add(loc.get("lon"));
+       	List<HashMap<String, Object>> locationData = ((SimpleCrmMain) getParent()).getCustomerData().getLocations();
+       	for (HashMap<String, Object> loc : locationData) {
+       		addLocation((Double) loc.get("lat"),(Double) loc.get("lon"), (String) loc.get("name"));
        	}
-       	Element mapElem = this.getElementById("customer-map");
-       	this.getElement().getNode().enqueueRpc("createMarkers($0,$1,$2)",lats.toArray(),lons.toArray(),mapElem);
     }
     
     @Override
@@ -69,17 +62,15 @@ public class Map extends Template {
     }
     
     private List<MapLocation> getLocations() {
-    	List<MapLocation> locations = getModel().getLocations();
-    	if (locations == null) {
-    		locations = new ArrayList<MapLocation>();
-    	}
-    	return locations;
+    	return getModel().getLocations();
+    	
     }
     
-    private MapLocation addLocation(Double lat,Double lon) {
+    private MapLocation addLocation(Double lat,Double lon, String name) {
     	MapLocation loc = Model.create(MapLocation.class);
     	loc.setLat(lat);
     	loc.setLon(lon);
+    	loc.setName(name);
     	List<MapLocation> locations = getLocations();
     	locations.add(loc);
     	return loc;
