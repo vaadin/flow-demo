@@ -90,12 +90,12 @@ paper-button {
 	transform: none;
 }
 
-#customersGrid {
+#customers-grid {
 	height: 100%;
 	font-size: 14px;
 }
 
-#customersGrid progress-bubble {
+#customers-grid progress-bubble {
 	width: 35px;
 	height: 35px;
 	font-size: 11px;
