@@ -21,13 +21,13 @@ import com.vaadin.data.util.filter.SimpleStringFilter;
 
 public class CustomerData {
 	
-	private JsonContainer dataSource = null;
+	private JsonContainer customerDataSource = null;
 	
 	public CustomerData() {
 		InputStream is = this.getClass().getResourceAsStream("customers-snapshot.json");
 		try {
 			String json = IOUtils.toString(is, "UTF-8");
-			dataSource = JsonContainer.Factory.newInstance(json);
+			customerDataSource = JsonContainer.Factory.newInstance(json);
 			is.close();
 		} catch (Exception e) {
 			System.out.println("Creating DataSource exception: " + e.getMessage());
@@ -36,11 +36,11 @@ public class CustomerData {
 	}
 	
 	public void deleteCustomer(Object itemId) {
-		dataSource.removeItem(itemId);
+		customerDataSource.removeItem(itemId);
 	}
 	
 	public void filterCustomers(String filterText) {
-		dataSource.removeAllContainerFilters();
+		customerDataSource.removeAllContainerFilters();
 		if (filterText == null || ("".equals(filterText))) {
 			return;
 		}
@@ -49,7 +49,7 @@ public class CustomerData {
 		Filter filter3 = new SimpleStringFilter("email", filterText, true, false);
 		Filter filter4 = new SimpleStringFilter("status", filterText, true, true);
 		Or orFilters = new Or(filter1,filter2,filter3,filter4);
-		dataSource.addContainerFilter(orFilters);
+		customerDataSource.addContainerFilter(orFilters);
 
 	}
 	
@@ -145,20 +145,38 @@ public class CustomerData {
 	} 
 	
 	public Container.Indexed getDataSource() {
-		return dataSource;
+		return customerDataSource;
 	}
 	
 	public Item getItem(Object itemId) {
-		return dataSource.getItem(itemId);
+		return customerDataSource.getItem(itemId);
 	}
 	
 	public void modelFromItemId(Object itemId, CustomerModel cm) {
-		Item item = dataSource.getItem(itemId);
+		Item item = customerDataSource.getItem(itemId);
 		mapItemToModel(item, cm);
+	}
+
+	public List<HashMap<String, Double>> getLocations() {
+		List<HashMap<String, Double>> locations = new ArrayList<HashMap<String, Double>>();
+		
+		Collection ids = getDataSource().getItemIds();
+		Iterator iter = ids.iterator();
+		while (iter.hasNext()) {
+			Object id = iter.next();
+			Double lat = Double.parseDouble((String) getDataSource().getItem(id).getItemProperty("lat").getValue());
+			Double lon = Double.parseDouble((String) getDataSource().getItem(id).getItemProperty("lon").getValue());
+			HashMap<String, Double> loc = new HashMap<String, Double>();
+			loc.put("lat", lat);
+			loc.put("lon", lon);
+			locations.add(loc);
+		}
+		
+		return locations;
 	}
 	
 	protected void updateCustomer(Object itemId, CustomerModel customer) {
-		Item item = dataSource.getItem(itemId);
+		Item item = customerDataSource.getItem(itemId);
 		mapModelToItem(customer, item);
 	}
 	
