@@ -21,6 +21,7 @@
 		<module>demo-vaadinconnector</module>
 		<module>demo-trix-editor</module>
 		<module>demo-voice-chat</module>
+		<module>demo-twitter</module>
 	</modules>
 
 	<properties>

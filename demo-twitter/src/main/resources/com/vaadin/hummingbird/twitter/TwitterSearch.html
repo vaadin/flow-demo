@@ -1,0 +1,1207 @@
+<div id="doc" class="" (created)="init(server);">
+<!--  Copied from https://twitter.com/search/vaadin -->
+	<div class="topbar js-topbar">
+		<div class="ProfilePage-editingOverlay"></div>
+		<div class="global-nav" data-section-term="top_nav">
+			<div class="global-nav-inner">
+				<div class="container">
+
+					<h1 class="Icon Icon--bird bird-topbar-etched"
+						style="display: inline-block; width: 24px; height: 21px;">
+						<span class="visuallyhidden">Twitter</span>
+					</h1>
+					<div class="pushstate-spinner"></div>
+
+
+					<div role="navigation" style="display: inline-block;">
+						<ul class="nav js-global-actions" id="global-actions">
+							<li id="global-nav-home" class="home" data-global-action="home">
+								<a class="js-nav js-tooltip js-dynamic-tooltip"
+								data-placement="bottom" href="/"
+								data-component-context="home_nav" data-nav="home"
+								data-original-title=""> <span
+									class="Icon Icon--home Icon--large"></span> <span class="text">Home</span>
+							</a>
+							</li>
+							<li class="people notifications" data-global-action="connect">
+								<a class="js-nav js-tooltip js-dynamic-tooltip"
+								data-placement="bottom" href="/i/notifications"
+								data-component-context="connect_nav" data-nav="connect"
+								data-original-title=""> <span
+									class="Icon Icon--notifications Icon--large"></span> <span
+									class="text">Notifications</span> <span class="count"> <span
+										class="count-inner">0</span>
+								</span>
+							</a>
+							</li>
+							<li class="dm-nav"><a role="button" href="#"
+								class="js-tooltip js-dynamic-tooltip global-dm-nav"
+								data-placement="bottom"> <span
+									class="Icon Icon--dm Icon--large"></span> <span class="text">Messages</span>
+									<span class="dm-new"><span class="count-inner"></span></span>
+							</a></li>
+						</ul>
+					</div>
+
+
+					<div class="pull-right" style="display: inline-block;">
+						<div role="search">
+							<form class="t1-form form-search js-search-form" action="/search"
+								id="global-nav-search">
+								<label class="visuallyhidden" for="search-query">Search
+									query</label> <input class="search-input" type="text" id="search-query"
+									placeholder="Search Twitter" name="q" autocomplete="off"
+									spellcheck="false" aria-autocomplete="list"
+									aria-expanded="false" aria-owns="typeahead-dropdown-1"
+									dir="ltr" style="direction: ltr; text-align: left;"> <span
+									class="search-icon js-search-action">
+									<button type="submit" class="Icon Icon--search nav-search"
+										tabindex="-1">
+										<span class="visuallyhidden">Search Twitter</span>
+									</button>
+								</span>
+								<div role="listbox" class="dropdown-menu typeahead"
+									id="typeahead-dropdown-1">
+									<div aria-hidden="true" class="dropdown-caret">
+										<div class="caret-outer"></div>
+										<div class="caret-inner"></div>
+									</div>
+									<div role="presentation"
+										class="dropdown-inner js-typeahead-results">
+										<div role="presentation"
+											class="typeahead-recent-searches block0">
+											<h3 id="recent-searches-heading"
+												class="typeahead-category-title recent-searches-title">Recent
+												searches</h3>
+											<button type="button" tabindex="-1"
+												class="btn-link clear-recent-searches">Clear All</button>
+											<ul role="presentation"
+												class="typeahead-items recent-searches-list">
+
+												<li role="presentation"
+													class="typeahead-item typeahead-recent-search-item"><span
+													class="Icon Icon--close" aria-hidden="true"><span
+														class="visuallyhidden">Remove</span></span> <a role="option"
+													aria-describedby="recent-searches-heading" class="js-nav"
+													href="" data-search-query="" data-query-source=""
+													data-ds="recent_search" tabindex="-1"></a></li>
+											</ul>
+										</div>
+										<div role="presentation"
+											class="typeahead-saved-searches block1">
+											<h3 id="saved-searches-heading"
+												class="typeahead-category-title saved-searches-title">Saved
+												searches</h3>
+											<ul role="presentation"
+												class="typeahead-items saved-searches-list">
+
+												<li role="presentation"
+													class="typeahead-item typeahead-saved-search-item"><span
+													class="Icon Icon--close" aria-hidden="true"><span
+														class="visuallyhidden">Remove</span></span> <a role="option"
+													aria-describedby="saved-searches-heading" class="js-nav"
+													href="" data-search-query="" data-query-source=""
+													data-ds="saved_search" tabindex="-1"></a></li>
+											</ul>
+										</div>
+										<ul role="presentation"
+											class="typeahead-items typeahead-topics block2"
+											style="display: none;">
+
+											<li role="presentation"
+												class="typeahead-item typeahead-topic-item"><a
+												role="option" class="js-nav" href="" data-search-query=""
+												data-query-source="typeahead_click" data-ds="topics"
+												tabindex="-1"> </a></li>
+										</ul>
+										<ul role="presentation"
+											class="typeahead-items typeahead-accounts social-context js-typeahead-accounts block3"
+											style="display: none;">
+
+											<li role="presentation" data-user-id=""
+												data-user-screenname="" data-remote="true" data-score=""
+												class="typeahead-item typeahead-account-item js-selectable">
+
+												<a role="option" class="js-nav"
+												data-query-source="typeahead_click" data-search-query=""
+												data-ds="account"> <img class="avatar size32" alt="">
+													<span class="typeahead-user-item-info"> <span
+														class="fullname"></span> <span class="js-verified hidden"><span
+															class="Icon Icon--verified Icon--small"> <span
+																class="u-hiddenVisually">Verified account</span>
+														</span></span> <span class="username"><s>@</s><b></b></span>
+												</span> <span class="typeahead-social-context"></span>
+											</a>
+											</li>
+											<li role="presentation"
+												class="js-selectable typeahead-accounts-shortcut js-shortcut"><a
+												role="option" class="js-nav" href="" data-search-query=""
+												data-query-source="typeahead_click" data-shortcut="true"
+												data-ds="account_search"></a></li>
+										</ul>
+									</div>
+								</div>
+
+							</form>
+						</div>
+						<ul class="nav right-actions">
+							<li class="me dropdown session js-session"
+								data-global-action="t1me" id="user-dropdown"><a
+								href="/settings/account"
+								class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle"
+								id="user-dropdown-toggle" title="Profile and settings"
+								data-placement="bottom" role="button" aria-haspopup="true"><img
+									class="avatar size32"
+									src="https://pbs.twimg.com/profile_images/3206779245/f4be6b73559efbad4a35e5704dad7f9f_normal.jpeg"
+									alt="Profile and settings" data-user-id="52683352"></a>
+								<div class="dropdown-menu">
+									<div class="dropdown-caret">
+										<span class="caret-outer"></span> <span class="caret-inner"></span>
+									</div>
+									<ul>
+
+										<li class="current-user" data-name="profile"><a
+											href="/artursignell"
+											class="account-summary account-summary-small js-nav"
+											data-nav="view_profile"><div class="content">
+													<div class="account-group js-mini-current-user"
+														data-user-id="52683352" data-screen-name="artursignell">
+														<b class="fullname">Artur Signell</b><span
+															class="screen-name hidden" dir="ltr">@artursignell</span><small
+															class="metadata">View profile</small>
+													</div>
+												</div></a></li>
+
+										<li class="dropdown-divider"></li>
+
+										<li data-name="lists"><a href="/artursignell/lists"
+											data-nav="all_lists">Lists</a></li>
+										<li class="dropdown-divider"></li>
+
+
+
+
+										<li><a href="//support.twitter.com"
+											data-nav="help_center">Help</a></li>
+
+
+										<li class="js-keyboard-shortcut-trigger" data-nav="shortcuts">
+											<button type="button" class="dropdown-link">Keyboard
+												shortcuts</button>
+										</li>
+
+
+
+
+
+
+
+
+
+
+										<li class="dropdown-divider"></li>
+
+
+										<li><a href="/settings/account" data-nav="settings"
+											class="js-nav">Settings</a></li>
+
+
+										<li class="js-signout-button" id="signout-button"
+											data-nav="logout">
+											<button type="button" class="dropdown-link">Log out</button>
+											<form class="t1-form dropdown-link-form signout-form"
+												id="signout-form" action="/logout" method="POST">
+												<input type="hidden"
+													value="11eb27f07d9c378c3234f08f0c96b670a3c59e90"
+													name="authenticity_token" class="authenticity_token">
+												<input type="hidden" name="reliability_event"
+													class="js-reliability-event"> <input type="hidden"
+													name="scribe_log">
+											</form>
+										</li>
+
+									</ul>
+								</div></li>
+							<li role="complementary"
+								aria-labelledby="global-new-tweet-button"
+								class="topbar-tweet-btn">
+								<button id="global-new-tweet-button" type="button"
+									class="js-global-new-tweet js-tooltip btn primary-btn tweet-btn js-dynamic-tooltip"
+									data-placement="bottom"
+									data-component-context="new_tweet_button">
+									<span class="Icon Icon--tweet Icon--large"></span> <span
+										class="text">Tweet</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="page-outer">
+		<div id="page-container" class="AppContent  wrapper-search">
+
+
+
+
+
+
+
+
+			<div class="AdaptiveSearchTitle u-bgUserColor">
+				<h1 class="AdaptiveSearchTitle-title" dir="ltr">vaadin</h1>
+				<div class="AdaptiveSpellingSuggestion">
+					Showing results for <a href="/search?q=vadin&amp;src=corr"
+						rel="nofollow" data-query="vadin"
+						class="AdaptiveSpellingSuggestion-query AdaptiveSpellingSuggestion-correctedQuery js-nav"><em>vadin</em></a>.
+					Search for <a href="/search?q=vaadin&amp;src=sprv" rel="nofollow"
+						data-query="vaadin"
+						class="AdaptiveSpellingSuggestion-query AdaptiveSpellingSuggestion-originalQuery js-nav">vaadin</a>
+					instead.
+				</div>
+
+			</div>
+
+
+			<div class="AppContainer">
+				<div class="AdaptiveFiltersBar">
+					<ul class="AdaptiveFiltersBar-nav">
+						<li class="AdaptiveFiltersBar-item u-borderUserColor is-selected">
+							<a
+							class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--link u-textUserColor js-nav"
+							href="/search?vertical=default&amp;q=vaadin" title="Top"
+							data-nav="search_filter_top"> <span
+								class="AdaptiveFiltersBar-label">Top</span>
+						</a>
+						</li>
+						<li class="AdaptiveFiltersBar-item u-borderUserColor "><a
+							class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--link u-textUserColor js-nav"
+							href="/search?f=tweets&amp;vertical=default&amp;q=vaadin"
+							title="Live" data-nav="search_filter_tweets"> <span
+								class="AdaptiveFiltersBar-label">Live</span>
+						</a></li>
+						<li class="AdaptiveFiltersBar-item u-borderUserColor "><a
+							class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--link u-textUserColor js-nav"
+							href="/search?f=users&amp;vertical=default&amp;q=vaadin"
+							title="Accounts" data-nav="search_filter_users"> <span
+								class="AdaptiveFiltersBar-label">Accounts</span>
+						</a></li>
+						<li class="AdaptiveFiltersBar-item u-borderUserColor "><a
+							class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--link u-textUserColor js-nav"
+							href="/search?f=images&amp;vertical=default&amp;q=vaadin"
+							title="Photos" data-nav="search_filter_images"> <span
+								class="AdaptiveFiltersBar-label">Photos</span>
+						</a></li>
+						<li class="AdaptiveFiltersBar-item u-borderUserColor "><a
+							class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--link u-textUserColor js-nav"
+							href="/search?f=videos&amp;vertical=default&amp;q=vaadin"
+							title="Videos" data-nav="search_filter_videos"> <span
+								class="AdaptiveFiltersBar-label">Videos</span>
+						</a></li>
+						<li
+							class="AdaptiveFiltersBar-item AdaptiveFiltersBar-item--more u-borderUserColor ">
+							<div class="dropdown">
+								<button type="button"
+									class="AdaptiveFiltersBar-target AdaptiveFiltersBar-target--more u-textUserColor js-dropdown-toggle">
+									More options <span
+										class="AdaptiveFiltersBar-moreCaretIcon Icon Icon--caretDown"></span>
+								</button>
+								<div class="AdaptiveFiltersDropdown dropdown-menu">
+									<ul>
+										<li><a href="/search?vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav" title="All"
+											data-nav="reset_result"> <span
+												class="AdaptiveFiltersDropdown-checkIcon Icon Icon--check Icon--smallest"></span><span
+												class="AdaptiveFiltersDropdown-label is-selected">All</span>
+										</a></li>
+										<li><a
+											href="/search?f=tweets&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav" title="Tweets"
+											data-nav="search_filter_tweets"> <span
+												class="AdaptiveFiltersDropdown-label ">Tweets</span>
+										</a></li>
+										<li><a
+											href="/search?f=users&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav"
+											title="Accounts" data-nav="search_filter_users"> <span
+												class="AdaptiveFiltersDropdown-label ">Accounts</span>
+										</a></li>
+										<li><a
+											href="/search?f=images&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav" title="Photos"
+											data-nav="search_filter_images"> <span
+												class="AdaptiveFiltersDropdown-label ">Photos</span>
+										</a></li>
+										<li><a
+											href="/search?f=videos&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav" title="Videos"
+											data-nav="search_filter_videos"> <span
+												class="AdaptiveFiltersDropdown-label ">Videos</span>
+										</a></li>
+										<li><a
+											href="/search?f=news&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav" title="News"
+											data-nav="search_filter_news"> <span
+												class="AdaptiveFiltersDropdown-label ">News</span>
+										</a></li>
+										<li class="dropdown-divider"></li>
+										<li><a href="/search?vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav"
+											title="From everyone" data-nav="reset_social"> <span
+												class="AdaptiveFiltersDropdown-checkIcon Icon Icon--check Icon--smallest"></span><span
+												class="AdaptiveFiltersDropdown-label is-selected">From
+													everyone</span>
+										</a></li>
+										<li><a
+											href="/search?s=follows&amp;vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav"
+											title="From people you follow"
+											data-nav="search_filter_follows"> <span
+												class="AdaptiveFiltersDropdown-label ">From people
+													you follow</span>
+										</a></li>
+										<li class="dropdown-divider"></li>
+										<li><a href="/search?vertical=default&amp;q=vaadin"
+											class="AdaptiveFiltersDropdown-target js-nav"
+											title="From everywhere" data-nav="reset_location"> <span
+												class="AdaptiveFiltersDropdown-checkIcon Icon Icon--check Icon--smallest"></span><span
+												class="AdaptiveFiltersDropdown-label is-selected">From
+													everywhere</span>
+										</a></li>
+										<li><a
+											href="/search?vertical=default&amp;q=vaadin&amp;near=me"
+											class="AdaptiveFiltersDropdown-target js-nav"
+											title="Near you" data-nav="search_filter_near_me"> <span
+												class="AdaptiveFiltersDropdown-label ">Near you</span>
+										</a></li>
+										<li class="dropdown-divider"></li>
+
+
+										<li class="AdaptiveFiltersDropdown-savedSearch"><a
+											class="AdaptiveFiltersDropdown-target js-add-search js-toggle-saved-search-link"
+											title="Save this search"> <span
+												class="AdaptiveFiltersDropdown-label">Save this
+													search</span>
+										</a></li>
+										<li><a href="/settings/widgets/new/search?query=vaadin"
+											class="AdaptiveFiltersDropdown-target AdaptiveFiltersDropdown-target--embed js-nav"
+											data-nav="embedded_search"> <span
+												class="AdaptiveFiltersDropdown-label">Embed this
+													search</span>
+										</a></li>
+										<li class="dropdown-divider"></li>
+
+
+										<li><a href="/search-advanced"
+											class="AdaptiveFiltersDropdown-target AdaptiveFiltersDropdown-target--advanced js-nav"
+											data-nav="advanced_search"> <span
+												class="AdaptiveFiltersDropdown-label">Advanced search</span>
+										</a></li>
+									</ul>
+								</div>
+
+							</div>
+						</li>
+					</ul>
+				</div>
+
+
+				<div class="AppContent-main u-cf">
+					<div class="Grid Grid--withGutter">
+						<!-- Column 1 -->
+						<div class="Grid-cell u-size1of3 u-lg-size1of4">
+							<div class="AdaptiveRelatedSearches">
+								<div class="AdaptiveSearchPage-moduleHeader">
+									<h3 class="AdaptiveSearchPage-moduleTitle">Related
+										searches</h3>
+								</div>
+								<ul class="AdaptiveRelatedSearches-items">
+									<li class="AdaptiveRelatedSearches-item" dir="ltr"><a
+										class="AdaptiveRelatedSearches-itemAnchor"
+										href="/hashtag/vaadinchallenge?src=rela"> #vaadinchallenge
+									</a></li>
+									<li class="AdaptiveRelatedSearches-item" dir="ltr"><a
+										class="AdaptiveRelatedSearches-itemAnchor"
+										href="/hashtag/java?src=rela"> #java </a></li>
+								</ul>
+							</div>
+
+
+
+							<div class="SidebarCommonModules">
+
+
+
+
+
+								<div class="WhoToFollow WhoToFollow--blankBackground is-visible">
+									<div class="WhoToFollow-header">
+										<h3 class="WhoToFollow-title">Who to follow</h3>
+										·
+										<button class="btn-link js-refresh-suggestions" type="button">Refresh</button>
+										· <a class="js-view-all-link"
+											href="/who_to_follow/suggestions"
+											data-element-term="view_all_link"> View all </a>
+									</div>
+
+									<div class="WhoToFollow-users js-recommended-followers"
+										data-section-id="wtf" style="opacity: 1;">
+										<div
+											class="js-account-summary account-summary js-actionable-user "
+											data-user-id="460159130" data-feedback-token="109"
+											data-impression-id="">
+											<div class="dismiss js-action-dismiss">
+												<span class="Icon Icon--close"></span>
+											</div>
+											<div class="content">
+												<a
+													class="account-group js-recommend-link js-user-profile-link user-thumb"
+													href="/YleAnn" data-user-id="460159130"> <img
+													class="avatar js-action-profile-avatar "
+													src="https://pbs.twimg.com/profile_images/589051459423076352/ifxtwRuT_normal.jpg"
+													alt=""> <span
+													class="account-group-inner js-action-profile-name"
+													data-user-id="460159130"> <b class="fullname">Ann-Cha
+															Åkerholm</b> <span class="username"><s>@</s><span
+															class="js-username">YleAnn</span></span>
+												</span>
+												</a> <small class="metadata social-context"> </small>
+
+												<div class="user-actions not-following not-muting"
+													data-user-id="460159130">
+													<button type="button"
+														class="small-follow-btn follow-btn btn small follow-button js-recommended-item">
+														<div class="js-action-follow follow-text action-text">
+															<span class="Icon Icon--follow"></span> Follow
+														</div>
+														<div class="js-action-unfollow following-text action-text">Following</div>
+														<div class="js-action-unfollow unfollow-text action-text">Unfollow</div>
+														<div class="block-text action-text">Blocked</div>
+														<div class="js-action-unblock unblock-text action-text">Unblock</div>
+														<div class="js-action-unfollow pending-text action-text">Pending</div>
+														<div
+															class="js-action-unfollow cancel-req-text action-text">Cancel</div>
+													</button>
+												</div>
+
+											</div>
+										</div>
+
+
+										<div
+											class="js-account-summary account-summary js-actionable-user "
+											data-user-id="31387020" data-feedback-token="109"
+											data-impression-id="">
+											<div class="dismiss js-action-dismiss">
+												<span class="Icon Icon--close"></span>
+											</div>
+											<div class="content">
+												<a
+													class="account-group js-recommend-link js-user-profile-link user-thumb"
+													href="/puva" data-user-id="31387020"> <img
+													class="avatar js-action-profile-avatar "
+													src="https://pbs.twimg.com/profile_images/1259829313/puva_redhead_normal.jpg"
+													alt=""> <span
+													class="account-group-inner js-action-profile-name"
+													data-user-id="31387020"> <b class="fullname">Eva
+															Pursiainen</b> <span class="username"><s>@</s><span
+															class="js-username">puva</span></span>
+												</span>
+												</a> <small class="metadata social-context"> </small>
+
+												<div class="user-actions not-following not-muting"
+													data-user-id="31387020">
+													<button type="button"
+														class="small-follow-btn follow-btn btn small follow-button js-recommended-item">
+														<div class="js-action-follow follow-text action-text">
+															<span class="Icon Icon--follow"></span> Follow
+														</div>
+														<div class="js-action-unfollow following-text action-text">Following</div>
+														<div class="js-action-unfollow unfollow-text action-text">Unfollow</div>
+														<div class="block-text action-text">Blocked</div>
+														<div class="js-action-unblock unblock-text action-text">Unblock</div>
+														<div class="js-action-unfollow pending-text action-text">Pending</div>
+														<div
+															class="js-action-unfollow cancel-req-text action-text">Cancel</div>
+													</button>
+												</div>
+
+											</div>
+										</div>
+
+
+										<div
+											class="js-account-summary account-summary js-actionable-user "
+											data-user-id="611004027" data-feedback-token="109"
+											data-impression-id="">
+											<div class="dismiss js-action-dismiss">
+												<span class="Icon Icon--close"></span>
+											</div>
+											<div class="content">
+												<a
+													class="account-group js-recommend-link js-user-profile-link user-thumb"
+													href="/svuorikoski" data-user-id="611004027"> <img
+													class="avatar js-action-profile-avatar "
+													src="https://pbs.twimg.com/profile_images/632226589317722112/DYTiSvO9_normal.jpg"
+													alt=""> <span
+													class="account-group-inner js-action-profile-name"
+													data-user-id="611004027"> <b class="fullname">Salla
+															Vuorikoski</b> <span class="username"><s>@</s><span
+															class="js-username">svuorikoski</span></span>
+												</span>
+												</a> <small class="metadata social-context"> </small>
+
+												<div class="user-actions not-following not-muting"
+													data-user-id="611004027">
+													<button type="button"
+														class="small-follow-btn follow-btn btn small follow-button js-recommended-item">
+														<div class="js-action-follow follow-text action-text">
+															<span class="Icon Icon--follow"></span> Follow
+														</div>
+														<div class="js-action-unfollow following-text action-text">Following</div>
+														<div class="js-action-unfollow unfollow-text action-text">Unfollow</div>
+														<div class="block-text action-text">Blocked</div>
+														<div class="js-action-unblock unblock-text action-text">Unblock</div>
+														<div class="js-action-unfollow pending-text action-text">Pending</div>
+														<div
+															class="js-action-unfollow cancel-req-text action-text">Cancel</div>
+													</button>
+												</div>
+
+											</div>
+										</div>
+
+
+									</div>
+
+									<div class="WhoToFollow-footer">
+										<a href="/who_to_follow/import" class="js-find-friends-link"
+											data-element-term="import_link">Find friends</a>
+									</div>
+								</div>
+
+
+
+								<div
+									class="Trends module trends                          Trends--blankBackground">
+									<div class="trends-inner">
+										<div class="flex-module trends-container ">
+											<div class="flex-module-header">
+
+												<h3>
+													<span class="trend-location js-trend-location">Trends</span>
+												</h3>
+												<span class="middot">·</span> <a role="button" href="#"
+													data-modal="change-trends"
+													class="change-trends js-trend-toggle">Change</a>
+											</div>
+											<div class="flex-module-inner">
+												<ul class="trend-items js-trends">
+													<li class="trend-item js-trend-item  "
+														data-trend-name="#FocusTonight"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/hashtag/FocusTonight?src=tren"
+														data-query-source="trend_click">#FocusTonight</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="#NationalCatDay"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/hashtag/NationalCatDay?src=tren"
+														data-query-source="trend_click">#NationalCatDay</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="Jacob Wetterling"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/search?q=%22Jacob%20Wetterling%22&amp;src=tren"
+														data-query-source="trend_click">Jacob Wetterling</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="#DemiOnAMAs"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/hashtag/DemiOnAMAs?src=tren"
+														data-query-source="trend_click">#DemiOnAMAs</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="Andy Green"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/search?q=%22Andy%20Green%22&amp;src=tren"
+														data-query-source="trend_click">Andy Green</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="#Promise"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/hashtag/Promise?src=tren"
+														data-query-source="trend_click">#Promise</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="Fort Lauderdale"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/search?q=%22Fort%20Lauderdale%22&amp;src=tren"
+														data-query-source="trend_click">Fort Lauderdale</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="#النصر_الوحده"><a
+														class="js-nav trend-name" dir="rtl"
+														href="/hashtag/%D8%A7%D9%84%D9%86%D8%B5%D8%B1_%D8%A7%D9%84%D9%88%D8%AD%D8%AF%D9%87?src=tren"
+														data-query-source="trend_click">#النصر_الوحده</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="Gold Glove"><a
+														class="js-nav trend-name" dir="ltr"
+														href="/search?q=%22Gold%20Glove%22&amp;src=tren"
+														data-query-source="trend_click">Gold Glove</a></li>
+
+													<li class="trend-item js-trend-item  "
+														data-trend-name="Cocca"><a class="js-nav trend-name"
+														dir="ltr" href="/search?q=Cocca&amp;src=tren"
+														data-query-source="trend_click">Cocca</a></li>
+
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div
+									class="Footer module roaming-module
+            Footer--slim
+            Footer--blankBackground">
+									<div class="flex-module">
+										<div class="flex-module-inner js-items-container">
+											<ul class="u-cf">
+												<li class="Footer-item Footer-copyright copyright">©
+													2015 Twitter</li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="/about">About</a></li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="//support.twitter.com">Help</a></li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="/tos">Terms</a></li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="/privacy">Privacy</a></li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="//support.twitter.com/articles/20170514">Cookies</a></li>
+												<li class="Footer-item"><a class="Footer-link"
+													href="//support.twitter.com/articles/20170451">Ads info</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- Column 1 -->
+
+						<!-- Column 2, 3, 4 -->
+						<div class="Grid-cell u-size2of3 u-lg-size3of4">
+							<div class="Grid Grid--withGutter">
+
+								<div class="Grid-cell u-size2of2 u-lg-size2of3">
+									<div id="timeline" class="content-main AdaptiveSearchTimeline"
+										role="main" aria-labelledby="content-main-heading"
+										data-processed-rows="3">
+										<span class="visuallyhidden" id="content-main-heading">Search
+											results</span>
+										<div class="stream-container  "
+											data-max-position="TWEET-656485061433389056-659777437002301440-BD1UO2FFu9QAAAAAAAAETAAAAAcAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAIAAIAAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE"
+											data-min-position="TWEET-656485061433389056-659777437002301440-BD1UO2FFu9QAAAAAAAAETAAAAAcAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAIAAIAAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE">
+
+											<div class="stream-item js-new-items-bar-container"></div>
+
+											<div class="stream search-stream">
+												<ol class="stream-items js-navigable-stream"
+													id="stream-items-id">
+													<li *ng-for="#tweet of tweets"
+														class="js-stream-item stream-item stream-item expanding-stream-item  AdaptiveSearchTimeline-beforeModule"
+														[data-item-id]="tweet.id"
+														id="stream-item-tweet-659602009557856256"
+														data-item-type="tweet">
+														<ol role="presentation"
+															class="expanded-conversation expansion-container js-expansion-container js-navigable-stream">
+															<li role="presentation" class="original-tweet-container">
+																<div
+																	class="tweet original-tweet js-original-tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable retweeted has-cards has-native-media with-media-forward media-forward cards-forward"
+																	[data-tweet-id]="tweet.id"
+																	data-disclosure-type=""
+																	[data-item-id]="tweet.id"
+																	data-permalink-path="/joonaslehtinen/status/659602009557856256"
+																	[data-my-retweet-id]="tweet.id"
+																	data-screen-name="joonaslehtinen"
+																	data-name="Joonas Lehtinen" data-user-id="20055220"
+																	data-has-native-media="true" data-has-cards="true"
+																	data-card-type="photo" data-relevance-type="popular"
+																	data-component-context="tweet" data-you-follow="true"
+																	data-follows-you="true" data-you-block="false">
+																	<div class="context" [class.visible]="tweet.retweets > 0">
+																		<div class="tweet-context with-icn with-icn">
+																			<span class="Icon Icon--small Icon--top"></span>
+																			Retweeted <span>{{tweet.retweets}}</span> times
+																		</div>
+																	</div>
+
+																	<div class="content">
+
+
+
+																		<div class="stream-item-header">
+																			<a
+																				class="account-group js-account-group js-action-profile js-user-profile-link js-nav"
+																				href="/joonaslehtinen" data-user-id="20055220">
+																				<img class="avatar js-action-profile-avatar"
+																				[src]="tweet.avatarUrl"
+																				alt=""> <strong
+																				class="fullname js-action-profile-name show-popup-with-id"
+																				data-aria-label-part="">{{tweet.author}}</strong> <span></span><span
+																				class="username js-action-profile-name"
+																				data-aria-label-part=""><s>@</s><b>joonaslehtinen</b></span>
+
+																			</a> <small class="time"> <a
+																				href="/joonaslehtinen/status/659602009557856256"
+																				class="tweet-timestamp js-permalink js-nav js-tooltip"
+																				title="7:25 AM - 29 Oct 2015"><span
+																					class="_timestamp js-short-timestamp js-relative-timestamp"
+																					data-time="1446096348" data-time-ms="1446096348000"
+																					data-long-form="true" aria-hidden="true">14h</span><span
+																					class="u-hiddenVisually"
+																					data-aria-label-part="last">14 hours ago</span></a>
+																			</small>
+
+
+
+																		</div>
+
+
+																		<p class="TweetTextSize  js-tweet-text tweet-text"
+																			lang="en" data-aria-label-part="0">
+																			
+																			<span>{{tweet.text}}</span>
+																		</p>
+
+
+
+
+
+
+																		<div class="OldMedia
+    
+    
+    
+    
+  ">
+																			<div
+																				class="OldMedia-container
+      js-old-media-container
+      
+    "><!-- 
+																				<div class="OldMedia-singlePhoto">
+																					<div class="OldMedia-photoContainer js-old-photo"
+																						data-image-url="https://pbs.twimg.com/media/CSdgiFHUcAAzUW9.png"
+																						data-element-context="platform_photo_card">
+
+																						<img
+																							src="https://pbs.twimg.com/media/CSdgiFHUcAAzUW9.png"
+																							alt="Embedded image permalink"
+																							style="width: 100%; top: -42px;">
+																					</div>
+																				</div>
+ -->
+
+																			</div>
+																		</div>
+
+
+
+
+
+<!-- 																		<div -->
+<!-- 																			class="expanded-content js-tweet-details-dropdown"> -->
+<!-- 																			<div -->
+<!-- 																				class="js-tweet-details-fixer tweet-details-fixer"> -->
+
+<!-- 																				<div class="js-machine-translated-tweet-container"></div> -->
+<!-- 																				<div -->
+<!-- 																					class="js-tweet-stats-container tweet-stats-container "> -->
+<!-- 																				</div> -->
+
+<!-- 																				<div class="client-and-actions"> -->
+<!-- 																					<span class="metadata"> <span>7:25 AM -->
+<!-- 																							- 29 Oct 2015</span> · <a -->
+<!-- 																						class="permalink-link js-permalink js-nav" -->
+<!-- 																						href="/joonaslehtinen/status/659602009557856256" -->
+<!-- 																						tabindex="-1">Details</a> -->
+
+
+
+
+
+
+<!-- 																					</span> -->
+<!-- 																				</div> -->
+
+
+<!-- 																			</div> -->
+
+<!-- 																		</div> -->
+
+
+
+																		<div class="stream-item-footer">
+
+
+<!-- 
+																			<div class="ProfileTweet-actionList js-actions "
+																				role="group" aria-label="Tweet actions">
+																				<div
+																					class="ProfileTweet-action ProfileTweet-action--reply">
+																					<button
+																						class="ProfileTweet-actionButton u-textUserColorHover js-actionButton js-actionReply"
+																						data-modal="ProfileTweet-reply" type="button">
+																						<div class="IconContainer js-tooltip"
+																							title="Reply">
+																							<span class="Icon Icon--reply"></span> <span
+																								class="u-hiddenVisually">Reply</span>
+																						</div>
+																					</button>
+																				</div>
+																				<div
+																					class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
+																					<button
+																						class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
+																						data-modal="ProfileTweet-retweet" type="button">
+																						<div class="IconContainer js-tooltip"
+																							title="Retweet">
+																							<span class="Icon Icon--retweet"></span> <span
+																								class="u-hiddenVisually">Retweet</span>
+																						</div>
+																						<div class="IconTextContainer">
+																							<span class="ProfileTweet-actionCount"> <span
+																								class="ProfileTweet-actionCountForPresentation"
+																								aria-hidden="true">16</span>
+																							</span>
+																						</div>
+																					</button>
+																					<button
+																						class="ProfileTweet-actionButtonUndo js-actionButton js-actionRetweet"
+																						data-modal="ProfileTweet-retweet" type="button">
+																						<div class="IconContainer js-tooltip"
+																							title="Undo retweet">
+																							<span class="Icon Icon--retweet"></span> <span
+																								class="u-hiddenVisually">Retweeted</span>
+																						</div>
+																						<div class="IconTextContainer">
+																							<span class="ProfileTweet-actionCount"> <span
+																								class="ProfileTweet-actionCountForPresentation"
+																								aria-hidden="true">16</span>
+																							</span>
+																						</div>
+																					</button>
+																				</div>
+																				<div
+																					class="ProfileTweet-action ProfileTweet-action--favorite js-toggleState ">
+																					<button
+																						class="ProfileTweet-actionButton js-actionButton js-actionFavorite"
+																						type="button">
+																						<div class="IconContainer js-tooltip"
+																							title="Favorite">
+																							<span class="Icon  Icon--favorite"></span> <span
+																								class="u-hiddenVisually">Favorite</span>
+																						</div>
+																						<div class="IconTextContainer">
+																							<span class="ProfileTweet-actionCount"> <span
+																								class="ProfileTweet-actionCountForPresentation"
+																								aria-hidden="true">7</span>
+																							</span>
+																						</div>
+																					</button>
+																					<button
+																						class="ProfileTweet-actionButtonUndo u-linkClean js-actionButton js-actionFavorite"
+																						type="button">
+																						<div class="IconContainer js-tooltip"
+																							title="Undo favorite">
+																							<span class="Icon  Icon--favorite"></span> <span
+																								class="u-hiddenVisually">Favorited</span>
+																						</div>
+																						<div class="IconTextContainer">
+																							<span class="ProfileTweet-actionCount"> <span
+																								class="ProfileTweet-actionCountForPresentation"
+																								aria-hidden="true">7</span>
+																							</span>
+																						</div>
+																					</button>
+																				</div>
+
+
+																				<div
+																					class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
+																					<div class="dropdown">
+																						<button
+																							class="ProfileTweet-actionButton u-textUserColorHover dropdown-toggle js-dropdown-toggle"
+																							type="button" aria-haspopup="true">
+																							<div class="IconContainer js-tooltip"
+																								title="More">
+																								<span class="Icon Icon--dots"></span> <span
+																									class="u-hiddenVisually">More</span>
+																							</div>
+																						</button>
+																						<div class="dropdown-menu">
+																							<div class="dropdown-caret">
+																								<div class="caret-outer"></div>
+																								<div class="caret-inner"></div>
+																							</div>
+																							<ul>
+																								<li class="share-via-dm js-actionShareViaDM"
+																									data-nav="share_tweet_dm">
+																									<button type="button" class="dropdown-link">Share
+																										via Direct Message</button>
+																								</li>
+
+																								<li
+																									class="copy-link-to-tweet js-actionCopyLinkToTweet">
+																									<button type="button" class="dropdown-link">Copy
+																										link to Tweet</button>
+																								</li>
+																								<li class="embed-link js-actionEmbedTweet"
+																									data-nav="embed_tweet">
+																									<button type="button" class="dropdown-link">Embed
+																										Tweet</button>
+																								</li>
+																								<li class="mute-user-item pretty-link"><button
+																										type="button" class="dropdown-link">Mute</button></li>
+																								<li class="unmute-user-item pretty-link"><button
+																										type="button" class="dropdown-link">Unmute</button></li>
+
+																								<li class="block-link js-actionBlock"
+																									data-nav="block">
+																									<button type="button" class="dropdown-link">Block</button>
+																								</li>
+																								<li class="unblock-link js-actionUnblock"
+																									data-nav="unblock">
+																									<button type="button" class="dropdown-link">Unblock</button>
+																								</li>
+																								<li class="report-link js-actionReport"
+																									data-nav="report">
+																									<button type="button" class="dropdown-link">
+
+																										Report</button>
+																								</li>
+																							</ul>
+																						</div>
+
+																					</div>
+
+																				</div>
+
+																			</div>
+
+ -->
+ 																		</div>
+
+
+
+
+
+
+
+																	</div>
+																</div>
+
+
+															</li>
+														</ol>
+
+													</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+												</ol>
+												<div class="stream-footer ">
+													<div class="timeline-end has-items has-more-items">
+														<div class="stream-end">
+															<div class="stream-end-inner">
+																<span class="Icon Icon--large Icon--logo"></span>
+
+																<p class="empty-text">No results.</p>
+
+																<p>
+																	<button type="button"
+																		class="btn-link back-to-top hidden"
+																		style="display: inline-block;">Back to top ↑</button>
+																</p>
+
+															</div>
+														</div>
+
+														<div class="stream-loading">
+															<div class="stream-end-inner">
+																<span id="spinner" class="spinner" title="Loading..."></span>
+															</div>
+														</div>
+
+													</div>
+												</div>
+												<div class="stream-fail-container">
+													<div
+														class="js-stream-whale-end stream-whale-end stream-placeholder centered-placeholder">
+														<div class="stream-end-inner">
+															<h2 class="title">Loading seems to be taking a
+																while.</h2>
+															<p>
+																Twitter may be over capacity or experiencing a momentary
+																hiccup. <a role="button" href="#"
+																	class="try-again-after-whale">Try again</a> or visit <a
+																	target="_blank" href="http://status.twitter.com">Twitter
+																	Status</a> for more information.
+															</p>
+														</div>
+													</div>
+												</div>
+
+												<ol class="hidden-replies-container"></ol>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+
+
+
+
+							</div>
+						</div>
+						<!-- Column 2, 3, 4 -->
+					</div>
+				</div>
+			</div>
+
+			<div id="trends_dialog" class="trends-dialog modal-container">
+				<div class="close-modal-background-target"></div>
+				<div class="modal draggable">
+					<div class="modal-content">
+						<button type="button" class="modal-btn modal-close js-close">
+							<span class="Icon Icon--close Icon--medium"> <span
+								class="visuallyhidden">Close</span>
+							</span>
+						</button>
+
+						<div class="modal-header">
+							<h3 class="modal-title">Trends</h3>
+						</div>
+
+						<div class="modal-body">
+
+							<div class="trends-personalized content-placeholder"
+								style="display: none;">
+								<h2 class="title">Trends tailored just for you.</h2>
+								<p>Trends offer a unique way to get closer to what you care
+									about. They are tailored for you based on your location and who
+									you follow.</p>
+								<p class="placeholder-actions">
+									<button type="button" class="btn customize-by-location">Change</button>
+									<button type="button" class="btn primary-btn done">Keep
+										tailored Trends</button>
+								</p>
+							</div>
+
+							<div class="trends-dialog-error">
+								<p></p>
+							</div>
+
+							<div class="trends-wrapper" id="trends_dialog_content">
+
+								<div class="loading">
+									<span class="spinner-bigger"></span>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer trends-by-location"
+							style="display: none;">
+							<button type="button" class="btn select-default"
+								data-personalized="true">Get tailored Trends</button>
+							<button type="button" class="btn primary-btn done">Done</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+<script>
+var init = function(server) {
+	var doc = document;
+	var ui = doc.querySelector(".ui");
+	var list = doc.getElementById("stream-items-id");
+	var spinner = doc.getElementById("spinner");
+	var lastCheckedCount = 0;
+	var loadTriggered = 0;
+	
+	ui.addEventListener("scroll", function(e) {
+		var childCount = list.childElementCount;
+		if (childCount <= loadTriggered)
+			return;
+
+		var lastVisiblePixel = ui.offsetHeight+ui.scrollTop;
+		if (spinner.offsetTop < lastVisiblePixel) {
+			// Spinner visible
+			server.extend();
+			loadTriggered = childCount;
+		}
+	});
+}
+</script>
+</div>
