@@ -20,13 +20,15 @@ import java.util.Iterator;
 
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.hummingbird.addon.charts.ColumnChart;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
 @HTML({"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
 	"vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html"})
 @JavaScript({"analyze.js"})
-public class Analyze extends Template {
+public class Analyze extends Template implements MyView {
 
 	private ColumnChart ageChart;
 	
@@ -64,5 +66,15 @@ public class Analyze extends Template {
 	private CustomerData getCustomerData() {
 		SimpleCrmMain main = ((SimpleCrmMain) getParent());
 		return main.getCustomerData();
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
+	}
+
+	@Override
+	public Template getTemplate() {
+		return this;
 	}
 }
