@@ -15,28 +15,22 @@
  */
 package com.vaadin.hummingbird;
 
-import java.io.InputStream;
 import java.util.Set;
-
-import org.apache.commons.io.IOUtils;
-import org.vaadin.teemu.jsoncontainer.JsonContainer;
 
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.data.Container.Filter;
-import com.vaadin.data.Item;
-import com.vaadin.data.util.filter.Or;
-import com.vaadin.data.util.filter.SimpleStringFilter;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
+import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.hummingbird.kernel.Element;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Template;
 
 @JavaScript({ "customers.js" })
 @Bower({ "vaadin-grid" })
-public class Customers extends Template {
+public class Customers extends Template implements MyView {
 
 	protected Grid customersGrid;	
 	protected void deleteCustomer(Object itemId) {
@@ -88,5 +82,15 @@ public class Customers extends Template {
 	private CustomerData getCustomerData() {
 		SimpleCrmMain main = ((SimpleCrmMain) getParent());
 		return main.getCustomerData();
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
+	}
+
+	@Override
+	public Template getTemplate() {
+		return this;
 	}
 }

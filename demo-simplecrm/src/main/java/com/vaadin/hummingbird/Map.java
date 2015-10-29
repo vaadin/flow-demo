@@ -15,17 +15,16 @@
  */
 package com.vaadin.hummingbird;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.vaadin.annotations.Bower;
-import com.vaadin.annotations.JavaScript;
-import com.vaadin.hummingbird.kernel.Element;
+import com.vaadin.hummingbird.CrmUI.MyView;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
 @Bower({"google-map"})
-public class Map extends Template {
+public class Map extends Template implements MyView {
 
 	public interface MapLocation {
         public double getLat();
@@ -75,4 +74,14 @@ public class Map extends Template {
     	locations.add(loc);
     	return loc;
     }
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
+	}
+
+	@Override
+	public Template getTemplate() {
+		return this;
+	}
 }

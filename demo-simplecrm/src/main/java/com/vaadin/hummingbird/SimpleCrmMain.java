@@ -15,22 +15,11 @@
  */
 package com.vaadin.hummingbird;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.hummingbird.kernel.Element;
-import com.vaadin.hummingbird.kernel.StateNode;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Page;
-import com.vaadin.annotations.Bower;
-import com.vaadin.annotations.HTML;
-import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.Template;
 
 @HTML({ "vaadin://bower_components/iron-icons/social-icons.html",
@@ -45,7 +34,7 @@ public class SimpleCrmMain extends Template {
 	private CustomerData customerData;
 	
 	public SimpleCrmMain(CustomerData customerData) {
-		this.customerData = customerData; 
+		this.customerData = customerData;
 	}
 	
 	@Override
@@ -56,8 +45,7 @@ public class SimpleCrmMain extends Template {
 		menuElement.appendChild(menuTemplate.getElement());
 		Element mainElement = this.getElementById("main");
 		// default main template: Customers
-		Template customers = menuTemplate.getOrCreateTemplate("CUSTOMERS");
-		mainElement.appendChild(customers.getElement());
+		//getUI().getNavigator().navigateTo("Customers");
 		
 	}
 	
