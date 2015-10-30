@@ -1,8 +1,5 @@
-createCharts = function(genderJSON, statusJSON) {
+updateGenterChart = function(genderJSON, genderChart) {
 	var genderData = JSON.parse(genderJSON);
-	var statusData = JSON.parse(statusJSON);
-	
-	var genderChart = document.getElementById("gender-chart");
 	genderChart.chart.setTitle({text: "Gender"});
 	var genders = [];
 	for (var key in genderData) {
@@ -10,8 +7,10 @@ createCharts = function(genderJSON, statusJSON) {
 	}
 	removeSeries(genderChart.chart);
 	genderChart.chart.addSeries({name: 'Gender', data: genders});
-	
-	var statusChart = document.getElementById("status-chart");
+};
+
+updateStatusChart = function(statusJSON, statusChart) {
+	var statusData = JSON.parse(statusJSON);
 	statusChart.chart.setTitle({text: "Sales funnel"});
 	var statuses = [];
 	for (var key in statusData) {

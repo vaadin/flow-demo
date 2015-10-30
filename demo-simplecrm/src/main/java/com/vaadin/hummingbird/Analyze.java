@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.hummingbird.addon.charts.ColumnChart;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -35,10 +36,23 @@ public class Analyze extends Template implements MyView {
 	@Override
 	public void attach() {
 		super.attach();
-		this.getElement().getNode().enqueueRpc("createCharts($0,$1);", getGenderJSON(), getStatusJSON());
+	}
+	
+	@TemplateEventHandler
+	public void updateAgeChart() {
 		ageChart.setTitle("Age");
 		ageChart.removeAllSeries();
 		ageChart.createSeries(getCustomerData().getAgesCounts(), "Ages");
+	}
+	
+	@TemplateEventHandler
+	public void updateGenderChart() {
+		this.getElement().getNode().enqueueRpc("updateGenterChart($0,$1);",getGenderJSON(), getElementById("gender-chart"));
+	}
+	
+	@TemplateEventHandler
+	public void updateStatusChart() {
+		this.getElement().getNode().enqueueRpc("updateStatusChart($0,$1);",getStatusJSON(), getElementById("status-chart"));
 	}
 	
 	private Object getGenderJSON() {
