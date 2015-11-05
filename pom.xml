@@ -23,6 +23,7 @@
 		<module>demo-voice-chat</module>
 		<module>demo-twitter</module>
 		<module>demo-xtag-flipbox</module>
+		<module>demo-bootstrap4</module>
 	</modules>
 
 	<properties>
