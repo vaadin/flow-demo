@@ -23,20 +23,20 @@ import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
-@Bower({"google-map"})
+@Bower({ "google-map" })
 public class Map extends Template implements MyView {
 
-	public interface MapLocation {
+    public interface MapLocation {
         public double getLat();
-        
+
         public void setLat(double lat);
-        
+
         public double getLon();
-        
+
         public void setLon(double lon);
-        
+
         public String getName();
-        
+
         public void setName(String name);
     }
 
@@ -45,43 +45,45 @@ public class Map extends Template implements MyView {
 
         public void setLocations(List<MapLocation> locations);
     }
-    
+
     @Override
     public void attach() {
-       	super.attach();
-       	List<HashMap<String, Object>> locationData = ((SimpleCrmMain) getParent()).getCustomerData().getLocations();
-       	for (HashMap<String, Object> loc : locationData) {
-       		addLocation((Double) loc.get("lat"),(Double) loc.get("lon"), (String) loc.get("name"));
-       	}
+        super.attach();
+        List<HashMap<String, Object>> locationData = ((SimpleCrmMain) getParent())
+                .getCustomerData().getLocations();
+        for (HashMap<String, Object> loc : locationData) {
+            addLocation((Double) loc.get("lat"), (Double) loc.get("lon"),
+                    (String) loc.get("name"));
+        }
     }
-    
+
     @Override
     protected MapModel getModel() {
-    	return (MapModel) super.getModel();
+        return (MapModel) super.getModel();
     }
-    
+
     private List<MapLocation> getLocations() {
-    	return getModel().getLocations();
-    	
-    }
-    
-    private MapLocation addLocation(Double lat,Double lon, String name) {
-    	MapLocation loc = Model.create(MapLocation.class);
-    	loc.setLat(lat);
-    	loc.setLon(lon);
-    	loc.setName(name);
-    	List<MapLocation> locations = getLocations();
-    	locations.add(loc);
-    	return loc;
+        return getModel().getLocations();
+
     }
 
-	@Override
-	public void enter(ViewChangeEvent event) {
-		
-	}
+    private MapLocation addLocation(Double lat, Double lon, String name) {
+        MapLocation loc = Model.create(MapLocation.class);
+        loc.setLat(lat);
+        loc.setLon(lon);
+        loc.setName(name);
+        List<MapLocation> locations = getLocations();
+        locations.add(loc);
+        return loc;
+    }
 
-	@Override
-	public Template getTemplate() {
-		return this;
-	}
+    @Override
+    public void enter(ViewChangeEvent event) {
+
+    }
+
+    @Override
+    public Template getTemplate() {
+        return this;
+    }
 }

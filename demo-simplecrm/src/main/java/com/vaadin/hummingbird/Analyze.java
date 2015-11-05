@@ -26,69 +26,71 @@ import com.vaadin.hummingbird.addon.charts.ColumnChart;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
-@HTML({"vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
-	"vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html"})
-@JavaScript({"analyze.js"})
+@HTML({ "vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
+        "vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html" })
+@JavaScript({ "analyze.js" })
 public class Analyze extends Template implements MyView {
 
-	private ColumnChart ageChart;
-	
-	@Override
-	public void attach() {
-		super.attach();
-	}
-	
-	@TemplateEventHandler
-	public void updateAgeChart() {
-		ageChart.setTitle("Age");
-		ageChart.removeAllSeries();
-		ageChart.createSeries(getCustomerData().getAgesCounts(), "Ages");
-	}
-	
-	@TemplateEventHandler
-	public void updateGenderChart() {
-		this.getElement().getNode().enqueueRpc("updateGenterChart($0,$1);",getGenderJSON(), getElementById("gender-chart"));
-	}
-	
-	@TemplateEventHandler
-	public void updateStatusChart() {
-		this.getElement().getNode().enqueueRpc("updateStatusChart($0,$1);",getStatusJSON(), getElementById("status-chart"));
-	}
-	
-	private Object getGenderJSON() {
-		return toJson(getCustomerData().getGenderCounts());
-	}
+    private ColumnChart ageChart;
 
-	private Object getStatusJSON() {
-		return toJson(getCustomerData().getStatusCounts()); 
-	}
-	
-	private String toJson(HashMap<String, Integer> values) {
-		StringBuffer json = new StringBuffer("{");
-		Iterator<String> iter = values.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			json.append('"').append(key).append("\":").append(values.get(key));
-			if  (iter.hasNext()) {
-				json.append(',');
-			}
-		}
-		json.append("}");
-		return json.toString();
-	}
+    @Override
+    public void attach() {
+        super.attach();
+    }
 
-	private CustomerData getCustomerData() {
-		SimpleCrmMain main = ((SimpleCrmMain) getParent());
-		return main.getCustomerData();
-	}
+    @TemplateEventHandler
+    public void updateAgeChart() {
+        ageChart.setTitle("Age");
+        ageChart.removeAllSeries();
+        ageChart.createSeries(getCustomerData().getAgesCounts(), "Ages");
+    }
 
-	@Override
-	public void enter(ViewChangeEvent event) {
-		
-	}
+    @TemplateEventHandler
+    public void updateGenderChart() {
+        this.getElement().getNode().enqueueRpc("updateGenterChart($0,$1);",
+                getGenderJSON(), getElementById("gender-chart"));
+    }
 
-	@Override
-	public Template getTemplate() {
-		return this;
-	}
+    @TemplateEventHandler
+    public void updateStatusChart() {
+        this.getElement().getNode().enqueueRpc("updateStatusChart($0,$1);",
+                getStatusJSON(), getElementById("status-chart"));
+    }
+
+    private Object getGenderJSON() {
+        return toJson(getCustomerData().getGenderCounts());
+    }
+
+    private Object getStatusJSON() {
+        return toJson(getCustomerData().getStatusCounts());
+    }
+
+    private String toJson(HashMap<String, Integer> values) {
+        StringBuffer json = new StringBuffer("{");
+        Iterator<String> iter = values.keySet().iterator();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            json.append('"').append(key).append("\":").append(values.get(key));
+            if (iter.hasNext()) {
+                json.append(',');
+            }
+        }
+        json.append("}");
+        return json.toString();
+    }
+
+    private CustomerData getCustomerData() {
+        SimpleCrmMain main = ((SimpleCrmMain) getParent());
+        return main.getCustomerData();
+    }
+
+    @Override
+    public void enter(ViewChangeEvent event) {
+
+    }
+
+    @Override
+    public Template getTemplate() {
+        return this;
+    }
 }

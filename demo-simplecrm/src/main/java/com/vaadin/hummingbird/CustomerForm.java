@@ -20,76 +20,76 @@ import com.vaadin.ui.Template;
 
 public class CustomerForm extends Template {
 
-	private Object itemId;
-	
-	public CustomerForm(Object itemId) {
-		setItemId(itemId);
-	}
-	
-	@TemplateEventHandler
-	public void save() {
-		CustomerModel m = getModel();
-		((Customers) getParent()).updateCustomer(getItemId(), m);
-	}
+    private Object itemId;
 
-	@TemplateEventHandler
-	public void delete() {
-		((Customers) getParent()).deleteCustomer(getItemId());
-	}
-	
-	@Override
-	protected CustomerModel getModel() {
-		return (CustomerModel) super.getModel();
-	}
-	
-	@TemplateEventHandler
-	public void setFirstName(String input) {
-		CustomerModel m = getModel();
-		m.setFirstName(input);
-	}
-	
-	@TemplateEventHandler
-	public void setLastName(String input) {
-		CustomerModel m = getModel();
-		m.setLastName(input);
-	}
-	
-	@TemplateEventHandler
-	public void setEmail(String input) {
-		CustomerModel m = getModel();
-		m.setEmail(input);
-	}
-	
-	@TemplateEventHandler
-	public void setBirthday(String input) {
-		CustomerModel m = getModel();
-		m.setBirthDate(input);
-	}
-	
-	@TemplateEventHandler
-	public void setStatus(String input) {
-		CustomerModel m = getModel();
-		m.setStatus(input);
-	}
-	
-	@TemplateEventHandler
-	public void setGender(String input) {
-		CustomerModel m = getModel();
-		m.setGender(input);
-	}
-	
-	 @TemplateEventHandler
-	 public void setBirthDate(String input) {
-		 CustomerModel m = getModel();
-		 m.setBirthDate(input);
-	 }
-	
-	public Object getItemId() {
-		return itemId;
-	}
+    public CustomerForm(Object itemId) {
+        setItemId(itemId);
+    }
 
-	public void setItemId(Object itemId) {
-		this.itemId = itemId;
-	}
-	
+    @TemplateEventHandler
+    public void save() {
+        CustomerModel m = getModel();
+        ((Customers) getParent()).updateCustomer(getItemId(), m);
+    }
+
+    @TemplateEventHandler
+    public void delete() {
+        ((Customers) getParent()).deleteCustomer(getItemId());
+    }
+
+    @Override
+    protected CustomerModel getModel() {
+        return (CustomerModel) super.getModel();
+    }
+
+    @TemplateEventHandler
+    public void setFirstName(String input) {
+        CustomerModel m = getModel();
+        m.setFirstName(input);
+    }
+
+    @TemplateEventHandler
+    public void setLastName(String input) {
+        CustomerModel m = getModel();
+        m.setLastName(input);
+    }
+
+    @TemplateEventHandler
+    public void setEmail(String input) {
+        CustomerModel m = getModel();
+        m.setEmail(input);
+    }
+
+    @TemplateEventHandler
+    public void setBirthday(String input) {
+        CustomerModel m = getModel();
+        m.setBirthDate(input);
+    }
+
+    @TemplateEventHandler
+    public void setStatus(String input) {
+        CustomerModel m = getModel();
+        m.setStatus(input);
+    }
+
+    @TemplateEventHandler
+    public void setGender(String input) {
+        CustomerModel m = getModel();
+        m.setGender(input);
+    }
+
+    @TemplateEventHandler
+    public void setBirthDate(String input) {
+        CustomerModel m = getModel();
+        m.setBirthDate(input);
+    }
+
+    public Object getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Object itemId) {
+        this.itemId = itemId;
+    }
+
 }

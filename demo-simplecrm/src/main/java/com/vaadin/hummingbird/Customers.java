@@ -32,65 +32,66 @@ import com.vaadin.ui.Template;
 @Bower({ "vaadin-grid" })
 public class Customers extends Template implements MyView {
 
-	protected Grid customersGrid;	
-	protected void deleteCustomer(Object itemId) {
-		getCustomerData().deleteCustomer(itemId);
-		this.getElement().getNode().enqueueRpc("closeEditor()");
-	}
-	
-	protected void updateCustomer(Object itemId, CustomerModel customer) {
-		getCustomerData().updateCustomer(itemId, customer);		
-		this.getElement().getNode().enqueueRpc("closeEditor()");
-	}	
-	
-	@Override
-	public void attach() {
-		super.attach();
-		customersGrid.setContainerDataSource(getCustomerData().getDataSource());
-		this.getElement().getNode().enqueueRpc("amendGrid($0);", customersGrid.getElement());
-		customersGrid.addSelectionListener(new SelectionListener() {
-			public void onEvent(SelectionEvent event) {
-				Set<Object> selected = event.getSelected();
-				if (selected.size() == 1) {
-					Object itemId = selected.iterator().next();
-					showForm(itemId);
-				}
-			}
-		});
-	}
-	
-	@TemplateEventHandler
-	public void showForm(Object itemId) {
-		if (itemId != null) {
-			// TODO: use existing form if one was already created
-			CustomerForm customerForm = new CustomerForm(itemId);
-			CustomerModel cm = customerForm.getModel();
-			getCustomerData().modelFromItemId(itemId, cm);
-			Element e = this.getElementById("form-wrapper");
-			e.removeAllChildren();
-			e.appendChild(customerForm.getElement());
-			this.getElement().getNode().enqueueRpc("displayEditor()");
-		}
-	}
+    protected Grid customersGrid;
 
-	@TemplateEventHandler
-	public void filterCustomers(String filterText) {
-		getCustomerData().filterCustomers(filterText);
-	}
-	
-	
-	private CustomerData getCustomerData() {
-		SimpleCrmMain main = ((SimpleCrmMain) getParent());
-		return main.getCustomerData();
-	}
+    protected void deleteCustomer(Object itemId) {
+        getCustomerData().deleteCustomer(itemId);
+        this.getElement().getNode().enqueueRpc("closeEditor()");
+    }
 
-	@Override
-	public void enter(ViewChangeEvent event) {
-		
-	}
+    protected void updateCustomer(Object itemId, CustomerModel customer) {
+        getCustomerData().updateCustomer(itemId, customer);
+        this.getElement().getNode().enqueueRpc("closeEditor()");
+    }
 
-	@Override
-	public Template getTemplate() {
-		return this;
-	}
+    @Override
+    public void attach() {
+        super.attach();
+        customersGrid.setContainerDataSource(getCustomerData().getDataSource());
+        this.getElement().getNode().enqueueRpc("amendGrid($0);",
+                customersGrid.getElement());
+        customersGrid.addSelectionListener(new SelectionListener() {
+            public void onEvent(SelectionEvent event) {
+                Set<Object> selected = event.getSelected();
+                if (selected.size() == 1) {
+                    Object itemId = selected.iterator().next();
+                    showForm(itemId);
+                }
+            }
+        });
+    }
+
+    @TemplateEventHandler
+    public void showForm(Object itemId) {
+        if (itemId != null) {
+            // TODO: use existing form if one was already created
+            CustomerForm customerForm = new CustomerForm(itemId);
+            CustomerModel cm = customerForm.getModel();
+            getCustomerData().modelFromItemId(itemId, cm);
+            Element e = this.getElementById("form-wrapper");
+            e.removeAllChildren();
+            e.appendChild(customerForm.getElement());
+            this.getElement().getNode().enqueueRpc("displayEditor()");
+        }
+    }
+
+    @TemplateEventHandler
+    public void filterCustomers(String filterText) {
+        getCustomerData().filterCustomers(filterText);
+    }
+
+    private CustomerData getCustomerData() {
+        SimpleCrmMain main = ((SimpleCrmMain) getParent());
+        return main.getCustomerData();
+    }
+
+    @Override
+    public void enter(ViewChangeEvent event) {
+
+    }
+
+    @Override
+    public Template getTemplate() {
+        return this;
+    }
 }

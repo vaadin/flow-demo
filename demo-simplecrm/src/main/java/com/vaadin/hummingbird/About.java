@@ -21,14 +21,14 @@ import com.vaadin.ui.Template;
 
 public class About extends Template implements MyView {
 
-	@Override
-	public void enter(ViewChangeEvent event) {
-		
-	}
+    @Override
+    public void enter(ViewChangeEvent event) {
 
-	@Override
-	public Template getTemplate() {
-		return this;
-	}
+    }
+
+    @Override
+    public Template getTemplate() {
+        return this;
+    }
 
 }
