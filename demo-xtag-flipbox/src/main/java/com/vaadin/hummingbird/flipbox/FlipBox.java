@@ -40,15 +40,15 @@ public class FlipBox extends AbstractComponent {
     }
 
     public void toggle() {
-        getElement().getNode().enqueueRpc("toggle()");
+        getElement().invoke("toggle");
     }
 
     public void showFront() {
-        getElement().getNode().enqueueRpc("$0.showFront()", getElement());
+        getElement().invoke("showFront");
     }
 
     public void showBack() {
-        getElement().getNode().enqueueRpc("showBack()");
+        getElement().invoke("showBack");
     }
 
     @EventType("flipend")

@@ -69,6 +69,6 @@ public class VoicePlayer extends AbstractComponent {
     }
 
     public void speak() {
-        getElement().getNode().enqueueRpc("$0.speak()", getElement());
+        getElement().invoke("speak");
     }
 }
