@@ -22,6 +22,7 @@
 		<module>demo-trix-editor</module>
 		<module>demo-voice-chat</module>
 		<module>demo-twitter</module>
+		<module>demo-xtag-flipbox</module>
 	</modules>
 
 	<properties>
