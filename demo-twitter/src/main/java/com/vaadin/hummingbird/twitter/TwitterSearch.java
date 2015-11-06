@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.kernel.StateNode.DataProvider;
-import com.vaadin.hummingbird.kernel.StateNode.LazyList;
+import com.vaadin.hummingbird.kernel.LazyList;
+import com.vaadin.hummingbird.kernel.LazyList.DataProvider;
 import com.vaadin.ui.Template;
 
 @StyleSheet({
