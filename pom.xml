@@ -24,6 +24,7 @@
 		<module>demo-twitter</module>
 		<module>demo-xtag-flipbox</module>
 		<module>demo-bootstrap4</module>
+		<module>demo-minesweeper</module>
 	</modules>
 
 	<properties>

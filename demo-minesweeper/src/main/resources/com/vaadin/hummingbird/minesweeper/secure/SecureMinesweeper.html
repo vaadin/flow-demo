@@ -1,0 +1,28 @@
+<div class="secure">
+	<table>
+		<tr *ng-for="#row of rows" class="row">
+			<td *ng-for="#cell of row.cells" class="cell" (contextmenu)="cell.marked=!cell.marked;event.preventDefault();" (click)="if (!cell.marked) server.cellClick(element)" [class.mine]="cell.mine" [class.marked]="cell.marked" [class.revealed]="cell.revealed">{{cell.nearby}}</td>
+		</tr>
+	</table>
+	
+	<style>
+	.secure .cell {
+		background: grey;
+		border: 1px solid black;
+		width:20px;
+		height:20px;
+	}
+	.secure .cell.revealed {
+		background: white;
+	}
+	.secure .cell.mine {
+		background: red;
+	}
+	.secure .cell.marked {
+		background: yellow;
+	}
+	.secure td {
+		text-align: center;
+	}
+	</style>
+</div>
