@@ -21,7 +21,7 @@ public class SimpleMinesweeper extends Template {
     protected void init() {
         super.init();
 
-        Random r = new Random(123);
+        Random r = new Random(System.currentTimeMillis());
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 

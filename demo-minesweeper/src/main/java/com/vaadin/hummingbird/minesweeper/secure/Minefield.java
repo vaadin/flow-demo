@@ -12,7 +12,7 @@ public class Minefield {
     private Set<Point> mines;
     private int rows;
     private int cols;
-    Random random = new Random(123);
+    Random random = new Random(System.currentTimeMillis());
 
     public void init(int rows, int cols) {
         this.rows = rows;
