@@ -1,10 +1,8 @@
-package com.vaadin.hummingbird.minesweeper.secure;
+package com.vaadin.hummingbird.minesweeper.mvc;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
-import com.vaadin.hummingbird.minesweeper.Point;
 
 public class Minefield {
 
@@ -63,20 +61,20 @@ public class Minefield {
         return count;
     }
 
-    public int getRows() {
-        return rows;
-    }
-
-    public int getCols() {
-        return cols;
-    }
-
     public boolean isMine(int row, int col) {
         return isMine(new Point(row, col));
     }
 
     public boolean isMine(Point p) {
         return mines.contains(p);
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.vaadin.hummingbird.minesweeper;
+package com.vaadin.hummingbird.minesweeper.mvc;
 
 public class Point {
     int row, col;
