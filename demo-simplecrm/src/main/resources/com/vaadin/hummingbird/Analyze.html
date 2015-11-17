@@ -10,8 +10,15 @@
             </div>
             
             <div class="statusWrapper">
-                <vaadin-funnel-chart id="status-chart" (chart-loaded)="server.updateStatusChart();"></vaadin-funnel-chart>
-            </div>
+				<vaadin-funnel-chart>
+					<title>Sales funnel</title>
+					<plot-options> <series width="60%" neck-width="25%"
+						neck-height="25%"></series></plot-options>
+					<data-series name="Status">
+						<data>{{statusData}}</data>
+					</data-series>
+				</vaadin-funnel-chart>
+			</div>
 
             <div class="genderWrapper">
                 <vaadin-pie-chart id="gender-chart" (chart-loaded)="server.updateGenderChart();"></vaadin-pie-chart>
