@@ -17,7 +17,6 @@ package com.vaadin.hummingbird;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
 import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.JavaScript;
@@ -27,12 +26,15 @@ import com.vaadin.hummingbird.addon.charts.ColumnChart;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
+import elemental.json.Json;
+import elemental.json.JsonArray;
+
 @HTML({ "vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
         "vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html" })
 @JavaScript({ "analyze.js" })
 public class Analyze extends Template implements MyView {
     public interface AnalyzeModel extends Model {
-        public void setStatusData(String statusData);
+        public void setStatusData(JsonArray statusData);
     }
 
     private ColumnChart ageChart;
@@ -59,10 +61,16 @@ public class Analyze extends Template implements MyView {
         return toJson(getCustomerData().getGenderCounts());
     }
 
-    private String getStatusJSONish() {
-        return getCustomerData().getStatusCounts().entrySet().stream()
-                .map(e -> ("[\"" + e.getKey() + "\", " + e.getValue() + "]"))
-                .collect(Collectors.joining(","));
+    private JsonArray getStatusJSON() {
+        JsonArray json = Json.createArray();
+        getCustomerData().getStatusCounts().forEach((key, count) -> {
+            JsonArray row = Json.createArray();
+            row.set(0, key);
+            row.set(1, count.intValue());
+            json.set(json.length(), row);
+        });
+
+        return json;
     }
 
     private String toJson(HashMap<String, Integer> values) {
@@ -86,7 +94,7 @@ public class Analyze extends Template implements MyView {
 
     @Override
     public void enter(ViewChangeEvent event) {
-        getModel().setStatusData(getStatusJSONish());
+        getModel().setStatusData(getStatusJSON());
     }
 
     @Override

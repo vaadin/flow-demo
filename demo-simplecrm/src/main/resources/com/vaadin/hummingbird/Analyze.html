@@ -14,8 +14,7 @@
 					<title>Sales funnel</title>
 					<plot-options> <series width="60%" neck-width="25%"
 						neck-height="25%"></series></plot-options>
-					<data-series name="Status">
-						<data>{{statusData}}</data>
+					<data-series name="Status" [data]="statusData">
 					</data-series>
 				</vaadin-funnel-chart>
 			</div>
