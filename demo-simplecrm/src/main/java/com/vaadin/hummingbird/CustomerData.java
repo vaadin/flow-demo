@@ -59,8 +59,23 @@ public class CustomerData {
 
     }
 
-    public HashMap<String, Integer> getStatusCounts() {
-        return getKeyCounts("status");
+    public LinkedHashMap<String, Integer> getStatusCounts() {
+        HashMap<String, Integer> keyCounts = getKeyCounts("status");
+
+        return orderMapKeys(keyCounts, "ImportedLead", "NotContacted",
+                "Contacted", "ClosedLost", "Customer");
+    }
+
+    private static <T> LinkedHashMap<String, T> orderMapKeys(
+            HashMap<String, T> map, String... keyOrder) {
+        LinkedHashMap<String, T> orderedCounts = new LinkedHashMap<>();
+        for (String key : keyOrder) {
+            if (map.containsKey(key)) {
+                orderedCounts.put(key, map.remove(key));
+            }
+        }
+        orderedCounts.putAll(map);
+        return orderedCounts;
     }
 
     private List<HashMap<String, Object>> getAgeCategories() {
