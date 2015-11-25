@@ -1,0 +1,47 @@
+<%= disclaimer() %>
+package <%= ns %>.event;
+
+<% if (hasParams()) { %>
+import com.vaadin.annotations.EventParameter;
+<% } %>
+import com.vaadin.annotations.EventType;
+import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
+import com.vaadin.ui.Component;
+
+/**
+ * <%= getDescription(' ') %>
+ */
+@SuppressWarnings("serial")
+@EventType("<%= computeName(name) %>")
+public class <%= camelCase(name) %>Event extends Component.Event {
+<% if (hasParams()) {
+	_.forEach(params, function(param){ 
+		if (param.name !== 'detail') { %>	
+    @EventParameter
+    private <%= computeType(param.type) %> <%= computeMethodName(param.name) %>;
+	<% }
+	});
+} %>
+    public <%= camelCase(name) %>Event(AbstractSimpleDOMComponentContainer source) {
+        super(source);
+    }
+<% if (hasParams()) { 
+	_.forEach(params, function(param){
+		if (param.name !== 'detail') { %>	
+    /**
+     * <%= getDescription('         ', param) %>
+     */
+    public <%= computeType(param.type) %> <%= computeGetterWithPrefix(param) %>() {
+        return <%= computeMethodName(param.name) %>;
+    }
+
+    /**
+     * <%= getDescription('         ', param) %>
+     */
+    public void <%= computeSetterWithPrefix(param) %>(<%= computeType(param.type) %> <%= computeMethodName(param.name) %>) {
+        this.<%= computeMethodName(param.name) %> = <%= computeMethodName(param.name) %>;
+    }
+	<% }
+	});
+} %>
+}

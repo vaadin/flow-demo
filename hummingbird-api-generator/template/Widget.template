@@ -1,0 +1,103 @@
+<%= disclaimer() %>
+package <%= ns %>;
+
+import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.Tag;
+
+import com.vaadin.hummingbird.polymer.PolymerComponent;
+<% if (hasEvents()) { %>
+import com.vaadin.event.ElementEvents;
+import com.vaadin.event.EventListener;
+<% _.forEach(events, function(event) { %>
+import <%= event.ns %>.event.<%= camelCase(event.name) %>Event;<% }); } %>
+
+/**
+ * <%= getDescription(' ') %>
+ */
+ @SuppressWarnings("serial")
+ @Bower("<%= computeName(name) %>")
+ @Tag("<%= computeName(name) %>")
+public class <%= className() %> extends PolymerComponent {
+<% _.forEach(getGettersAndSetters(properties), function(item) {
+	if (isSupportedProperty(item)) { 
+	var unSupportedType = isUnSupportedType(item);%>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * This is value is not <code>null</code> only if it has been set from the server.
+     * It is not updated from client side.
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    public <%= computeType(item.type) %> <%= item.getter %>() {<%
+    if (unSupportedType === '') {
+        if (item.type !== 'Boolean') { %>
+        return (<%= computeType(item.type) %>) getElement().getTemplate()
+            .getAttribute("<%= item.name %>", getElement().getNode());<% } else { %>
+        return getBooleanAttribute("<%= item.name %>");<% } } else { %>
+    	// TODO <%= unSupportedType %> type properties not supported yet
+    	return null;<% } %>
+    }
+    
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    public <%= className() %> <%= item.setter %> {<%
+     if (unSupportedType === '') { %>
+        <%= item.type !== 'Boolean' ? 'getElement().setAttribute' : 'setBooleanAttribute'
+        %>("<%= item.name %>", value);<% } else { %>
+    	// TODO <%= unSupportedType %> type properties not supported yet<% } %>
+        return this;
+    }
+<% } }); %>
+<% _.forEach(getStringSetters(properties), function(item) { %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @attribute <%= hyphenize(item.name) %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    public <%= className() %> <%= computeSetterWithPrefix(item) %>(String value) {
+        getElement().setAttribute("<%= hyphenize(item.name) %>", value);
+        return this;
+    }
+<% }); %>
+<% _.forEach(getMethods(properties), function(item) { var retType = returnString(item); %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
+     * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     * <%= item.return && item.return.type ? '@return {' + returnString(item) + '}' : ''%>
+     */
+    public <%= retType != 'void' ? retType : className() %> <%= item.method %> {
+        // TODO support <%= retType != 'void' ? 'return ' : ''%>getPolymerElement().<%= item.name %>(<%= paramsString(item) %>);
+        <% if (retType === 'void') { %>return this;<% } else { 
+        %>return <%= retType === 'boolean' ? 'false' : 'null'%>;<% } %>
+    }
+<% }); %>
+<% if (hasEvents()) _.forEach(events, function(event){ %>
+    /**
+     * <%= getDescription('     ', event) %>
+     *
+     * JavaScript Info:
+     * @event <%= event.name %>
+     */
+    public <%= className() %> add<%= camelCase(event.name) %>Listener(EventListener<<%= camelCase(event.name) %>Event> listener) {
+        ElementEvents.addElementListener(this, <%= camelCase(event.name) %>Event.class,
+            listener);
+        return this;
+    }
+<% }); %>
+}

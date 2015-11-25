@@ -25,6 +25,10 @@
 		<module>demo-xtag-flipbox</module>
 		<module>demo-bootstrap4</module>
 		<module>demo-minesweeper</module>
+		<module>hummingbird-api-generator</module>
+		<!--
+		<module>demo-polymer-elements</module>
+		-->
 	</modules>
 
 	<properties>
