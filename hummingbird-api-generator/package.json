@@ -22,6 +22,9 @@
     "run-sequence": "latest",
     "stream-from-array": "latest"
   },
+  "scripts": {
+    "polymer-hummingbird-api-generator": "bin/hummingbird-api-generator.js --package=PolymerElements/paper-elements"
+  },
   "bin": {
     "hummingbird-api-generator": "./bin/hummingbird-api-generator.js"
   },
