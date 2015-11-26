@@ -78,7 +78,8 @@
 						</goals>
 						<phase>initialize</phase>
 						<configuration>
-							<argument>link</argument>
+							<argument>install</argument>
+							<argument>-g</argument>
 							<nodeVersion>v5.0.0</nodeVersion>
 							<npmVersion>3.3.6</npmVersion>
 						</configuration>
