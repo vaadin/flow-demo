@@ -27,8 +27,7 @@ require('require-dir')(tplDir + 'tasks');
 global.parsed = []; // we store all parsed objects so as we can iterate or find behaviors
 
 gulp.task('clean:target', function() {
-  fs.removeSync(globalVar.clientDir + 'element');
-  fs.removeSync(globalVar.clientDir + 'widget');
+  fs.removeSync(globalVar.clientDir);
 });
 
 gulp.task('clean:resources', function() {
@@ -191,18 +190,18 @@ gulp.task('generate:events', ['parse'], function() {
    })
 });
 
-gulp.task('generate:widgets', ['parse'], function() {
+gulp.task('generate:components', ['parse'], function() {
   return StreamFromArray(global.parsed,{objectMode: true})
    .on('data', function(item) {
       if (!helpers.isBehavior(item)) {
-        parseTemplate('Widget', item, item.is, '', '');
+        parseTemplate('Component', item, item.is, '', '');
       }
    })
 });
 
-gulp.task('generate:widgets-all', ['generate:behaviors','generate:events','generate:widgets']);
+gulp.task('generate:components-all', ['generate:behaviors','generate:events','generate:components']);
 
-gulp.task('generate', ['generate:widgets-all'], function() {
+gulp.task('generate', ['generate:components-all'], function() {
   gutil.log('Done.');
 });
 
