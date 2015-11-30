@@ -34,13 +34,6 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<repository>
-			<id>internal-snapshot</id>
-			<url>scpexe://vaadin.com/home/vaadin/download/internal/hummingbird/hummingbird-ef6448</url>
-		</repository>
-	</distributionManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -50,22 +43,6 @@
 	</dependencies>
 
 	<build>
-		<extensions>
-			<!-- Enabling the use of SSH for deployment -->
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
-				<version>2.9</version>
-			</extension>
-		</extensions>
-		<resources>
-			<resource>
-				<directory>target/generated/src/main/java</directory>
-			</resource>
-			<resource>
-				<directory>target/generated/src/main/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -143,12 +120,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.6.1</version>
+				<version>3.0.0</version>
 				<!-- Clean up generated sources -->
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>pom/</directory>
+							<directory>../${hummingbird.polymer.elements.path}/src/</directory>
+						</fileset>
+						<fileset>
 							<directory>node_modules</directory>
 						</fileset>
 					</filesets>

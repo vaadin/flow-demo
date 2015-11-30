@@ -42,13 +42,6 @@
 			<artifactId>hummingbird-polymer-elements</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>com.vaadin.polymer</groupId>
-			<artifactId>vaadin-gwt-polymer-elements</artifactId>
-			<version>1.2.1.0</version>
-		</dependency>
-		 -->
 	</dependencies>
 
 	<build>
