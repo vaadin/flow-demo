@@ -13,12 +13,13 @@ public abstract class PolymerComponent extends AbstractSimpleDOMComponentContain
         return this;
     }
 
-    public void setBooleanAttribute(String name, boolean value) {
+    public PolymerComponent setBooleanAttribute(String name, boolean value) {
         if (value) {
             getElement().setAttribute(name, "");
         } else {
             getElement().removeAttribute(name);
         }
+        return this;
     }
 
     public boolean getBooleanAttribute(String value) {
@@ -47,7 +48,7 @@ public abstract class PolymerComponent extends AbstractSimpleDOMComponentContain
      *          setAttributes("foo bar")
      *          setAttributes("foo:bar ; hello:bye")
      */
-    public void setAttributes(String attributes) {
+    public PolymerComponent setAttributes(String attributes) {
         for (String attr : attributes.trim().replace(" *([;:]) *", "$1")
              .split("[; ]+")) {
             MatchResult e = Pattern.compile(" *([\\w-]+)( *: *)?(.*)? *")
@@ -59,5 +60,6 @@ public abstract class PolymerComponent extends AbstractSimpleDOMComponentContain
                 setBooleanAttribute(e.group(1), true);
             }
         }
+        return this;
     }
 }
