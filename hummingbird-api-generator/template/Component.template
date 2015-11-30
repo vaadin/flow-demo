@@ -2,6 +2,7 @@
 package <%= ns %>;
 
 import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.NotYetImplemented;
 import com.vaadin.annotations.Tag;
 
 import com.vaadin.hummingbird.polymer.PolymerComponent;
@@ -31,7 +32,8 @@ public class <%= className() %> extends PolymerComponent {
      * @property <%= item.name %>
      * @type <%= item.type %>
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
-     */
+     */<%= unSupportedType === '' ? '' :
+'\n    @NotYetImplemented'%>
     public <%= computeType(item.type) %> <%= item.getter %>() {<%
     if (unSupportedType === '') {
         if (item.type !== 'Boolean') { %>
@@ -49,7 +51,8 @@ public class <%= className() %> extends PolymerComponent {
      * @property <%= item.name %>
      * @type <%= item.type %>
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
-     */
+     */<%= unSupportedType === '' ? '' :
+'\n    @NotYetImplemented'%>
     public <%= className() %> <%= item.setter %> {<%
      if (unSupportedType === '') { %>
         <%= item.type !== 'Boolean' ? 'getElement().setAttribute' : 'setBooleanAttribute'
@@ -81,6 +84,7 @@ public class <%= className() %> extends PolymerComponent {
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
      * <%= item.return && item.return.type ? '@return {' + returnString(item) + '}' : ''%>
      */
+    @NotYetImplemented
     public <%= retType != 'void' ? retType : className() %> <%= item.method %> {
         // TODO support <%= retType != 'void' ? 'return ' : ''%>getPolymerElement().<%= item.name %>(<%= paramsString(item) %>);
         <% if (retType === 'void') { %>return this;<% } else { 
