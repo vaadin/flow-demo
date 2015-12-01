@@ -55,14 +55,14 @@ public class GoogleMap extends AbstractComponent {
             super(source);
         }
 
-        @EventParameter("detail.latLng.G")
+        @EventParameter("event.detail.latLng.lat()")
         private double latitude;
-        @EventParameter("detail.latLng.G")
+        @EventParameter("event.detail.latLng.lng()")
         private double longitude;
 
-        @EventParameter("detail.pixel.x")
+        @EventParameter("event.detail.pixel.x")
         private int pixelX;
-        @EventParameter("detail.pixel.y")
+        @EventParameter("event.detail.pixel.y")
         private int pixelY;
 
         public double getLatitude() {
@@ -101,9 +101,9 @@ public class GoogleMap extends AbstractComponent {
 
         @EventType("google-map-marker-click")
         public static class ClickEvent extends EventObject {
-            @EventParameter("detail.latLng.G")
+            @EventParameter("event.detail.latLng.lat()")
             private double latitude;
-            @EventParameter("detail.latLng.G")
+            @EventParameter("event.detail.latLng.lng()")
             private double longitude;
 
             public ClickEvent(GoogleMapMarker source) {
