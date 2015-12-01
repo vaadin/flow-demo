@@ -18,7 +18,9 @@ import <%= event.ns %>.event.<%= camelCase(event.name) %>Event;<% }); } %>
  @SuppressWarnings("serial")
  @Bower("<%= computeName(name) %>")
  @Tag("<%= computeName(name) %>")
-public class <%= className() %> extends PolymerComponent {
+public class <%= className() %> extends PolymerComponent<<%= className() %>> {
+
+    protected <%= className() %> getThis() { return this; }
 <% _.forEach(getGettersAndSetters(properties), function(item) {
 	if (isSupportedProperty(item)) { 
 	var unSupportedType = isUnSupportedType(item);%>
