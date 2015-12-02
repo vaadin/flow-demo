@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.vaadin.annotations.Bower;
 import com.vaadin.hummingbird.CrmUI.MyView;
+import com.vaadin.hummingbird.kernel.ListNode;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Template;
 
@@ -65,6 +66,11 @@ public class Map extends Template implements MyView {
     private List<MapLocation> getLocations() {
         return getModel().getLocations();
 
+    }
+
+    @Override
+    protected void init() {
+        getNode().put("locations", new ListNode());
     }
 
     private MapLocation addLocation(Double lat, Double lon, String name) {
