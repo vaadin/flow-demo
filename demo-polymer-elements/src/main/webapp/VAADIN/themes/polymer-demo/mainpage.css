@@ -1,0 +1,203 @@
+.toolbar {
+	background: #00796b !important;
+}
+
+.toolbar>div {
+	justify-content: center;
+	padding: 0 !important;
+	bottom: -4px !important;
+}
+
+.toolbar paper-fab {
+	margin: 5px;
+}
+
+[drawer] {
+	background-color: #fff !important;
+}
+
+.category {
+	background: #009688;
+	font-size: large;
+	color: #f1f1f1;
+}
+
+.item {
+	padding-left: 50px;
+	font-size: 15px;
+	min-height: 37px !important;
+	color: #009688;
+}
+
+.list {
+	background-color: #f5f4f4;
+}
+
+.list .iron-selected {
+	background-color: #cde5e3;
+}
+
+.list paper-item {
+	border-top: solid 1px rgba(245, 245, 245, 0.6);
+}
+
+.buttons paper-material {
+	font-size: 13 !important;
+	margin: 0;
+	text-transform: none !important;
+}
+
+.current {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 150%;
+	margin-left: 20px;
+	margin-right: 15px;
+}
+
+paper-header-panel {
+	z-index: auto !important;
+}
+
+.paper-toast-open {
+	z-index: 10;
+}
+
+.panel {
+	padding: 20px;
+}
+
+paper-item {
+	cursor: pointer;
+	oveflow: hidden;
+	position: relative;
+}
+
+.title {
+	font-size: 135%;
+	text-align: center;
+	padding: 5px;
+}
+
+.toolbar.tall {
+	height: 108px !important;
+	padding: 0 !important;
+}
+
+.toolbar.tall #bottomBar {
+	height: 50px !important;
+}
+
+.source pre {
+	font-size: 12px;
+	line-height: 13px;
+	background-color: #cde5e3;
+	padding: 10px;
+}
+
+.source-buttons {
+	background-color: #cde5e3;
+	height: 45px;
+	padding: 0 0 0 30px;
+	color: #009688;
+}
+
+.source-buttons iron-icon {
+	margin: 0 0 4px 4px;
+	width: 14px;
+}
+
+paper-header-panel[mode="waterfall-tall"] #mainContainer {
+	overflow: auto;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	color: #000;
+	background: #fff;
+	-webkit-text-size-adjust: none;
+	font-size: 14px;
+}
+
+.hljs-subst, .hljs-title, .json .hljs-value {
+	font-weight: normal;
+	color: #000;
+}
+
+.hljs-comment, .diff .hljs-header {
+	color: #808080;
+	font-style: italic;
+}
+
+.hljs-built_in, .hljs-annotation, .hljs-decorator, .hljs-preprocessor,
+	.hljs-pragma, .hljs-doctype, .hljs-pi, .hljs-chunk, .hljs-shebang,
+	.hljs-prompt, .http .hljs-title {
+	color: #808000;
+}
+
+.hljs-tag .hljs-title, .hljs-id, .hljs-attr_selector, .hljs-pseudo,
+	.hljs-literal, .hljs-keyword, .hljs-hexcolor, .css .hljs-function, .ini .hljs-title,
+	.css .hljs-class, .hljs-list .hljs-keyword, .hljs-request, .hljs-status
+	{
+	font-weight: bold;
+	color: #000080;
+}
+
+.hljs-attribute, .hljs-rule .hljs-keyword, .hljs-number, .hljs-date,
+	.hljs-regexp, .hljs-number, .hljs-regexp {
+	font-weight: normal;
+}
+
+.hljs-string, .hljs-value, .hljs-filter .hljs-argument, .css .hljs-function .hljs-params
+	{
+	color: #008000;
+	font-weight: bold;
+}
+
+.hljs-symbol, .hljs-char {
+	color: #000;
+	background: #d0eded;
+	font-style: italic;
+}
+
+.hljs-doctag {
+	text-decoration: underline;
+}
+
+.hljs-variable, .hljs-envvar, .hljs-name {
+	color: #660e7a;
+}
+
+.hljs-addition {
+	background: #baeeba;
+}
+
+.hljs-deletion {
+	background: #ffc8bd;
+}
+
+.diff .hljs-change {
+	background: #bccff9;
+}
+
+paper-fab.iconpolymer {
+	background-color: #9c27b0;
+	--paper-fab-background: var(--paper-purple-500);
+}
+
+paper-fab.icongwt {
+	background-color: #f44336;
+	--paper-fab-background: var(--paper-red-500);
+}
+
+paper-fab.iconvaadin {
+	background-color: #03a9f4;
+	--paper-fab-background: var(--paper-light-blue-500);
+}
+/* Fix for https://github.com/PolymerElements/paper-menu/issues/31 */
+paper-item iron-icon, paper-item span {
+	pointer-events: none;
+}

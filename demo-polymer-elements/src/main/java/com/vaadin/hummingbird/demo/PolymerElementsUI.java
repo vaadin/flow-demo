@@ -2,61 +2,286 @@ package com.vaadin.hummingbird.demo;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
+import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
-import com.vaadin.hummingbird.paper.PaperCard;
-import com.vaadin.hummingbird.paper.PaperDropdownMenu;
+import com.vaadin.hummingbird.iron.IronIcon;
+import com.vaadin.hummingbird.iron.IronIcons;
+import com.vaadin.hummingbird.iron.IronSelector;
+import com.vaadin.hummingbird.paper.PaperButton;
+import com.vaadin.hummingbird.paper.PaperDialog;
+import com.vaadin.hummingbird.paper.PaperDialogScrollable;
+import com.vaadin.hummingbird.paper.PaperDrawerPanel;
+import com.vaadin.hummingbird.paper.PaperFab;
+import com.vaadin.hummingbird.paper.PaperHeaderPanel;
+import com.vaadin.hummingbird.paper.PaperIconButton;
 import com.vaadin.hummingbird.paper.PaperItem;
-import com.vaadin.hummingbird.paper.PaperMenu;
+import com.vaadin.hummingbird.paper.PaperRipple;
+import com.vaadin.hummingbird.paper.PaperStyles;
+import com.vaadin.hummingbird.paper.PaperToolbar;
+import com.vaadin.hummingbird.polymer.PolymerComponent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.HTML;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
+@Theme("polymer-demo")
 @Viewport("user-scalable=no,initial-scale=1.0")
 public class PolymerElementsUI extends UI {
 
+    private CssLayout sidebarListPanel;
+    private Label mainHeaderLabel;
+    private PaperButton helpButton;
+    private PaperButton javaButton;
+    private CssLayout contentLayout;
+    private PaperDialog aboutDialog;
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final IronFlexLayout ironFlexLayout = new IronFlexLayout();
+        CssLayout drawer = new CssLayout();
+        drawer.getElement().setAttribute("attr.drawer", true);
+        drawer.addComponent(initSidebar());
 
-        final PaperMenu paperMenu = new PaperMenu();
-        paperMenu.getElement().addClass("dropdown-content");
-        for (int i = 0; i < 10; i++) {
-            PaperItem paperItem = new PaperItem();
-            paperItem.getElement().setTextContent("Item " + i);
-            paperMenu.addComponent(paperItem);
+        CssLayout main = new CssLayout();
+        main.getElement().setAttribute("attr.main", true);
+        main.addComponent(initMainView());
+
+        final PaperDrawerPanel paperDrawerPanel = new PaperDrawerPanel()
+                .setDrawerWidth("250px").with(drawer, main);
+
+        CssLayout cssLayout = new CssLayout();
+        cssLayout.addComponents(createPolymerElementDependantComponents());
+        cssLayout.addComponents(paperDrawerPanel, createMainDialog());
+        setContent(cssLayout);
+
+        addSamples();
+    }
+
+    private void addSamples() {
+        final IronCollapse paperCollapse = addCategory("paper",
+                "Paper Elements");
+        paperCollapse.with(addSample("Button", "ButtonSample"),
+                addSample("CheckBox", "CheckboxSample"),
+                addSample("Dialog", "DialogSample"),
+                addSample("DropdownMenu", "DropdownMenuSample"),
+                // not suitable for current showcase. In original showcase it
+                // works
+                // inside iframe
+                // addSample("DrawerPanel", "paper", "DrawerPanelSample");
+                addSample("Floating Button", "FabSample"),
+                addSample("Header Panel", "HeaderPanelSample"),
+                addSample("Icon Button", "IconButtonSample"),
+                addSample("Item", "ItemSample"),
+                addSample("Input", "InputSample"),
+                addSample("Material", "MaterialSample"),
+                addSample("Menu", "MenuSample"),
+                addSample("Progress", "ProgressSample"),
+                addSample("Radio Button", "RadioButtonSample"),
+                addSample("Radio Group", "RadioGroupSample"),
+                addSample("Ripple", "RippleSample"),
+                addSample("Spinner", "SpinnerSample"),
+                addSample("Slider", "SliderSample"),
+                addSample("Tabs", "TabsSample"),
+                addSample("Toast", "ToastSample"),
+                addSample("Toggle Button", "ToggleButtonSample"),
+                addSample("Toolbar", "ToolbarSample"));
+
+        addCategory("iron", "Iron Elements").with(
+                addSample("Collapse", "IronCollapseSample"),
+                addSample("Image", "IronImageSample"),
+                addSample("List", "IronListSample"),
+                addSample("Selector", "IronSelectorSample"));
+
+        addCategory("vaadin", "Vaadin Elements")
+                .with(addSample("Grid", "VaadinGridSample"));
+
+        addCategory("gwt", "GWT Integration").with(
+                addSample("Widget Java API", "JavaApiWidget"),
+                addSample("Element Java API", "JavaApiElement"),
+                addSample("UiBinder Widgets", "UiBinderWidget"),
+                addSample("UiBinder Elements", "UiBinderElement"));
+    }
+
+    private IronCollapse addCategory(String path, String name) {
+        final IronCollapse collapse = new IronCollapse();
+
+        PaperItem item = new PaperItem().withClassName("category")
+                .with(new IronIcon().setIconPolymer("expand-more"),
+                        createSpanElement(name), new PaperRipple())
+                .withClickListener(
+                        event -> collapse.setOpened(!collapse.isOpened()));
+
+        IronSelector selector = new IronSelector();
+        collapse.with(selector);
+
+        sidebarListPanel.addComponents(item, collapse);
+
+        return collapse;
+    }
+
+    private PaperItem addSample(String name, String sampleName) {
+        return new PaperItem().with(createSpanElement(name))
+                .withClickListener(event -> openSample(sampleName));
+    }
+
+    private void openSample(String sampleName) {
+        contentLayout.removeAllComponents();
+        contentLayout.addComponent(createSample(sampleName));
+        mainHeaderLabel.setValue(sampleName);
+    }
+
+    private Component createSample(String sampleName) {
+        switch (sampleName) {
+        // case "JavaApiWidget": return new JavaApiWidget();
+        // case "JavaApiElement": return new JavaApiElement();
+        // case "UiBinderWidget": return new UiBinderWidget();
+        // case "UiBinderElement": return new UiBinderElement();
+        // case "ButtonSample": return new ButtonSample();
+        // case "CheckboxSample": return new CheckboxSample();
+        // case "DialogSample": return new DialogSample();
+        // case "DropdownMenuSample": return new DropdownMenuSample();
+        // case "FabSample": return new FabSample();
+        // case "HeaderPanelSample": return new HeaderPanelSample();
+        // case "IconButtonSample": return new IconButtonSample();
+        // case "ItemSample": return new ItemSample();
+        // case "InputSample": return new InputSample();
+        // case "MaterialSample": return new MaterialSample();
+        // case "MenuSample": return new MenuSample();
+        // case "ProgressSample": return new ProgressSample();
+        // case "RadioButtonSample": return new RadioButtonSample();
+        // case "RadioGroupSample": return new RadioGroupSample();
+        // case "RippleSample": return new RippleSample();
+        // case "SpinnerSample": return new SpinnerSample();
+        // case "SliderSample": return new SliderSample();
+        // case "TabsSample": return new TabsSample();
+        // case "ToastSample": return new ToastSample();
+        // case "ToggleButtonSample": return new ToggleButtonSample();
+        // case "ToolbarSample": return new ToolbarSample();
+        // case "IronCollapseSample": return new IronCollapseSample();
+        // case "IronImageSample": return new IronImageSample();
+        // case "IronListSample": return new IronListSample();
+        // case "IronSelectorSample": return new IronSelectorSample();
+        // case "VaadinGridSample": return new VaadinGridSample();
+        default:
+            return new Label("Sample " + sampleName + " not yet implemented");
         }
-        paperMenu.setWidth("200px");
+    }
 
-        PaperCard paperCard = new PaperCard().setHeading("Events");
+    private PolymerComponent<?>[] createPolymerElementDependantComponents() {
+        return new PolymerComponent[] { new PaperStyles(), new IronIcons(),
+                new IronFlexLayout() };
+    }
 
-        paperMenu.addIronSelectListener(event -> {
-            PaperItem paperItem = new PaperItem();
-            paperItem.getElement()
-                    .setTextContent("Item Selected: " + event.getItem());
-            paperCard.addComponent(paperItem);
-        });
+    private Component initSidebar() {
+        PaperHeaderPanel header = new PaperHeaderPanel().setMode("seamed");
+        sidebarListPanel = new CssLayout();
+        sidebarListPanel.addStyleName("list");
 
-        PaperDropdownMenu paperDropdownMenu = new PaperDropdownMenu()
-                .setLabel("Paper Dropdown Menu");
-        paperDropdownMenu.setWidth("400px");
-        paperDropdownMenu.addComponent(paperMenu);
-        paperDropdownMenu.addPaperDropdownOpenListener(event -> {
-            PaperItem paperItem = new PaperItem();
-            paperItem.getElement().setTextContent("DropDown opened");
-            paperCard.addComponent(paperItem);
-        });
-        paperDropdownMenu.addPaperDropdownCloseListener(event -> {
-            PaperItem paperItem = new PaperItem();
-            paperItem.getElement().setTextContent("DropDown closed");
-            paperCard.addComponent(paperItem);
-        });
+        header.addComponents(
+                new PaperToolbar().setJustify("justified")
+                        .withClassName(
+                                "toolbar onlytop")
+                        .with(createHorizontalFlexLaoyut(new PaperFab()
+                                .setIconPolymer("polymer").setMini(true)
+                                .withClassName("iconpolymer").setElevation("1")
+                                .setAttribute("onclick",
+                                        "javascript:window.open('https://www.polymer-project.org/','_blank');"),
+                                new PaperFab()
+                                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/gwt.png")
+                                        .setMini(true).withClassName("icongwt")
+                                        .setElevation("1")
+                                        .setAttribute("onclick",
+                                                "javascript:window.open('http://gwtproject.org','_blank');"),
+                                new PaperFab()
+                                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/vaadin.png")
+                                        .setMini(true)
+                                        .withClassName("iconvaadin")
+                                        .setElevation("1")
+                                        .setAttribute("onclick",
+                                                "javascript:window.open('https://vaadin.com','_blank');"))),
+                sidebarListPanel);
 
-        ironFlexLayout.addComponent(paperDropdownMenu);
-        ironFlexLayout.addComponent(paperCard);
+        return header;
+    }
 
-        setContent(ironFlexLayout);
+    protected Component initMainView() {
+        mainHeaderLabel = new Label();
+        mainHeaderLabel.addStyleName("current");
+
+        helpButton = new PaperButton().withClassName("buttons")
+                .with(new IronIcon().setIconPolymer("help")
+                        .setTextContent("About"))
+                .withClickListener(event -> onAboutClick());
+
+        CssLayout buttonsLayout = new CssLayout();
+        buttonsLayout.addStyleName("source-buttons bottom flex");
+        javaButton = new PaperButton().withClassName("buttons")
+                .setTextContent(".JAVA")
+                .with(new IronIcon().setIconPolymer("launch"));
+        buttonsLayout.getElement().setTextContent("VIEW SOURCE: ");
+        buttonsLayout.addComponents(javaButton);
+
+        contentLayout = new CssLayout();
+        contentLayout.addStyleName("panel fit");
+
+        PaperHeaderPanel headerPanel = new PaperHeaderPanel()
+                .setMode("waterfall-tall").with(
+
+                        new PaperToolbar().setJustify("justified")
+                                .withClassName("toolbar tall")
+                                .with(createHorizontalFlexLaoyut(
+
+                                        new PaperIconButton()
+                                                .setIconPolymer("menu")
+                                                .setBooleanAttribute(
+                                                        "paper-drawer-toggle",
+                                                        true),
+                                        mainHeaderLabel,
+                                        createFlexElement(null), helpButton),
+                                        buttonsLayout),
+                        contentLayout);
+        return headerPanel;
+    }
+
+    private Component createMainDialog() {
+        CssLayout buttons = new CssLayout();
+        buttons.addStyleName("buttons");
+        buttons.addComponent(
+                new PaperButton().setBooleanAttribute("dialog-dismiss", true)
+                        .setRaised(true).setTextContent("OK"));
+
+        aboutDialog = new PaperDialog().setModal(true)
+                .with(new PaperDialogScrollable()
+                        .with(new HTML("<h2>PLACEHOLDER</h2>"), buttons));
+        return aboutDialog;
+    }
+
+    private CssLayout createHorizontalFlexLaoyut(Component... components) {
+        CssLayout layout = new CssLayout();
+        layout.addStyleName("layout horizontal center center-justified");
+        layout.addComponents(components);
+        return layout;
+    }
+
+    private Component createFlexElement(String innerText) {
+        HTML l = new HTML("<span class=\"flex\">"
+                + (innerText == null ? "" : innerText) + "</span>");
+        return l;
+    }
+
+    private Component createSpanElement(String innerText) {
+        HTML l = new HTML(
+                "<span>" + (innerText == null ? "" : innerText) + "</span>");
+        return l;
+    }
+
+    private void onAboutClick() {
+        aboutDialog.setOpened(true);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

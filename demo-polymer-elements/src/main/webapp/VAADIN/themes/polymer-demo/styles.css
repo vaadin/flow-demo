@@ -1,0 +1,9 @@
+@import 'mainpage.css';
+
+body:not([style-scope]):not(.style-scope) {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 24px;
+    background-color: #fafafa;
+}
