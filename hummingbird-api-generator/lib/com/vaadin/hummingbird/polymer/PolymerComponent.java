@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.vaadin.hummingbird.kernel.DomEventListener;
+import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
 import com.vaadin.ui.Component;
@@ -25,6 +26,11 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
     }
 
     protected abstract T getThis();
+
+    public T appendTextContent(String text) {
+        getElement().appendChild(Element.createText(text));
+        return getThis();
+    }
 
     public T setTextContent(String text) {
         getElement().setTextContent(text);
