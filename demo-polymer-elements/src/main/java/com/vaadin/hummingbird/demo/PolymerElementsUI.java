@@ -6,6 +6,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.hummingbird.demo.paper.ButtonSample;
+import com.vaadin.hummingbird.demo.paper.CheckboxSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -67,11 +68,12 @@ public class PolymerElementsUI extends UI {
     private void addSamples() {
         final IronCollapse paperCollapse = addCategory("paper",
                 "Paper Elements");
-        paperCollapse.with(addSample("Button"), addSample("CheckBox"),
-                addSample("Dialog"), addSample("DropdownMenu"),
-                addSample("Floating Button"), addSample("Header Panel"),
-                addSample("Icon Button"), addSample("Item"), addSample("Input"),
-                addSample("Material"), addSample("Menu"), addSample("Progress"),
+        paperCollapse.with(addSample("Button", false),
+                addSample("CheckBox", false), addSample("Dialog"),
+                addSample("DropdownMenu"), addSample("Floating Button"),
+                addSample("Header Panel"), addSample("Icon Button"),
+                addSample("Item"), addSample("Input"), addSample("Material"),
+                addSample("Menu"), addSample("Progress"),
                 addSample("Radio Button"), addSample("Radio Group"),
                 addSample("Ripple"), addSample("Spinner"), addSample("Slider"),
                 addSample("Tabs"), addSample("Toast"),
@@ -103,7 +105,12 @@ public class PolymerElementsUI extends UI {
     }
 
     private PaperItem addSample(String name) {
-        return new PaperItem().with(createSpanElement(name))
+        return addSample(name, true);
+    }
+
+    private PaperItem addSample(String name, boolean disabled) {
+        return new PaperItem().setDisabled(disabled)
+                .with(createSpanElement(name))
                 .withClickListener(event -> openSample(name));
     }
 
@@ -117,7 +124,8 @@ public class PolymerElementsUI extends UI {
         switch (sampleName) {
         case "Button":
             return new ButtonSample();
-        // case "CheckboxSample": return new CheckboxSample();
+        case "CheckBox":
+            return new CheckboxSample();
         // case "DialogSample": return new DialogSample();
         // case "DropdownMenuSample": return new DropdownMenuSample();
         // case "FabSample": return new FabSample();
@@ -226,9 +234,11 @@ public class PolymerElementsUI extends UI {
     private Component createAboutDialog() {
         CssLayout buttons = new CssLayout();
         buttons.addStyleName("buttons");
-        buttons.addComponent(
-                new PaperButton().setBooleanAttribute("dialog-dismiss", true)
-                        .setRaised(true).setTextContent("OK"));
+        buttons.addComponent(new PaperButton()
+                .setBooleanAttribute("dialog-dismiss", true).setRaised(true)
+                .setTextContent("OK")
+                // need to update the open property, or next open won't work
+                .withClickListener(event -> aboutDialog.setOpened(false)));
 
         aboutDialog = new PaperDialog().setModal(true)
                 .with(new PaperDialogScrollable()

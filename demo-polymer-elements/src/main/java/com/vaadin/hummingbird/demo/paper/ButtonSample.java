@@ -1,17 +1,16 @@
 package com.vaadin.hummingbird.demo.paper;
 
+import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.iron.IronIcon;
 import com.vaadin.hummingbird.paper.PaperButton;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.HTML;
 
-public class ButtonSample extends CssLayout {
+public class ButtonSample extends SampleBase {
 
     public ButtonSample() {
         addStyleName("button-sample");
 
-        CssLayout root = layout(
-                "horizontal-section-container center-justified layout");
+        CssLayout root = root();
         addComponent(root);
 
         createFlatButtons(root);
@@ -107,43 +106,5 @@ public class ButtonSample extends CssLayout {
                         .with(new IronIcon().setIconPolymer("clear"))
                         .appendTextContent("cancel"));
 
-    }
-
-    protected CssLayout createSection(CssLayout root, String name) {
-        CssLayout sectionRoot = layout(null);
-        HTML header = element("h4", name, false);
-        CssLayout sectionContent = layout("horizontal-section");
-        sectionRoot.addComponents(header, sectionContent);
-        root.addComponent(sectionRoot);
-        return sectionContent;
-    }
-
-    protected CssLayout layout(String classNames) {
-        CssLayout cssLayout = new CssLayout();
-        cssLayout.addStyleName(classNames);
-        return cssLayout;
-    }
-
-    protected HTML element(String tag) {
-        return new HTML(new StringBuilder("<").append(tag).append("\"></")
-                .append(tag).append(">").toString());
-    }
-
-    protected HTML element(String tag, String classNames) {
-        return new HTML(new StringBuilder("<").append(tag).append(" class=\"")
-                .append(classNames).append("\"></").append(tag).append(">")
-                .toString());
-    }
-
-    protected HTML element(String tag, String classNames, String innerText) {
-        return new HTML(new StringBuilder("<").append(tag).append(" class=\"")
-                .append(classNames).append("\">").append(innerText).append("</")
-                .append(tag).append(">").toString());
-    }
-
-    protected HTML element(String tag, String innerText, boolean b) {
-        return new HTML(
-                new StringBuilder("<").append(tag).append(">").append(innerText)
-                        .append("</").append(tag).append(">").toString());
     }
 }
