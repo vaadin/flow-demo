@@ -1,6 +1,8 @@
 @import 'mainpage.css';
 @import 'button.css';
 
+body { overflow: hidden; }
+
 body:not([style-scope]):not(.style-scope) {
     font-family: 'Roboto', 'Noto', sans-serif;
     font-size: 14px;

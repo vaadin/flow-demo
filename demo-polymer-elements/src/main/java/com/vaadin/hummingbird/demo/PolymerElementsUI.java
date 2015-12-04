@@ -33,7 +33,7 @@ import com.vaadin.ui.UI;
 
 @com.vaadin.annotations.HTML("vaadin://bower_components/paper-styles/demo-pages.html")
 @Theme("polymer-demo")
-@Viewport("user-scalable=no,initial-scale=1.0")
+@Viewport("user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1")
 public class PolymerElementsUI extends UI {
 
     private CssLayout sidebarListPanel;
@@ -208,7 +208,7 @@ public class PolymerElementsUI extends UI {
                 .setMode("waterfall-tall").with(
 
                         new PaperToolbar().setJustify("justified")
-                                .withClassName("toolbar tall")
+                                .withClassName("toolbar tall animate")
                                 .with(createHorizontalFlexLaoyut(
 
                                         new PaperIconButton()
