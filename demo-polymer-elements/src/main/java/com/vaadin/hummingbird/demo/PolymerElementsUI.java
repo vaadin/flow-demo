@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
+import com.vaadin.hummingbird.demo.paper.ButtonSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -30,6 +31,7 @@ import com.vaadin.ui.HTML;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
+@com.vaadin.annotations.HTML("vaadin://bower_components/paper-styles/demo-pages.html")
 @Theme("polymer-demo")
 @Viewport("user-scalable=no,initial-scale=1.0")
 public class PolymerElementsUI extends UI {
@@ -56,7 +58,7 @@ public class PolymerElementsUI extends UI {
 
         CssLayout cssLayout = new CssLayout();
         cssLayout.addComponents(createPolymerElementDependantComponents());
-        cssLayout.addComponents(paperDrawerPanel, createMainDialog());
+        cssLayout.addComponents(paperDrawerPanel, createAboutDialog());
         setContent(cssLayout);
 
         addSamples();
@@ -65,46 +67,22 @@ public class PolymerElementsUI extends UI {
     private void addSamples() {
         final IronCollapse paperCollapse = addCategory("paper",
                 "Paper Elements");
-        paperCollapse.with(addSample("Button", "ButtonSample"),
-                addSample("CheckBox", "CheckboxSample"),
-                addSample("Dialog", "DialogSample"),
-                addSample("DropdownMenu", "DropdownMenuSample"),
-                // not suitable for current showcase. In original showcase it
-                // works
-                // inside iframe
-                // addSample("DrawerPanel", "paper", "DrawerPanelSample");
-                addSample("Floating Button", "FabSample"),
-                addSample("Header Panel", "HeaderPanelSample"),
-                addSample("Icon Button", "IconButtonSample"),
-                addSample("Item", "ItemSample"),
-                addSample("Input", "InputSample"),
-                addSample("Material", "MaterialSample"),
-                addSample("Menu", "MenuSample"),
-                addSample("Progress", "ProgressSample"),
-                addSample("Radio Button", "RadioButtonSample"),
-                addSample("Radio Group", "RadioGroupSample"),
-                addSample("Ripple", "RippleSample"),
-                addSample("Spinner", "SpinnerSample"),
-                addSample("Slider", "SliderSample"),
-                addSample("Tabs", "TabsSample"),
-                addSample("Toast", "ToastSample"),
-                addSample("Toggle Button", "ToggleButtonSample"),
-                addSample("Toolbar", "ToolbarSample"));
+        paperCollapse.with(addSample("Button"), addSample("CheckBox"),
+                addSample("Dialog"), addSample("DropdownMenu"),
+                addSample("Floating Button"), addSample("Header Panel"),
+                addSample("Icon Button"), addSample("Item"), addSample("Input"),
+                addSample("Material"), addSample("Menu"), addSample("Progress"),
+                addSample("Radio Button"), addSample("Radio Group"),
+                addSample("Ripple"), addSample("Spinner"), addSample("Slider"),
+                addSample("Tabs"), addSample("Toast"),
+                addSample("Toggle Button"), addSample("Toolbar"));
 
-        addCategory("iron", "Iron Elements").with(
-                addSample("Collapse", "IronCollapseSample"),
-                addSample("Image", "IronImageSample"),
-                addSample("List", "IronListSample"),
-                addSample("Selector", "IronSelectorSample"));
+        addCategory("iron", "Iron Elements").with(addSample("Collapse"),
+                addSample("Image"), addSample("List"), addSample("Selector"));
 
-        addCategory("vaadin", "Vaadin Elements")
-                .with(addSample("Grid", "VaadinGridSample"));
+        // addCategory("vaadin", "Vaadin Elements")
+        // .with(addSample("Grid", "VaadinGridSample"));
 
-        addCategory("gwt", "GWT Integration").with(
-                addSample("Widget Java API", "JavaApiWidget"),
-                addSample("Element Java API", "JavaApiElement"),
-                addSample("UiBinder Widgets", "UiBinderWidget"),
-                addSample("UiBinder Elements", "UiBinderElement"));
     }
 
     private IronCollapse addCategory(String path, String name) {
@@ -124,9 +102,9 @@ public class PolymerElementsUI extends UI {
         return collapse;
     }
 
-    private PaperItem addSample(String name, String sampleName) {
+    private PaperItem addSample(String name) {
         return new PaperItem().with(createSpanElement(name))
-                .withClickListener(event -> openSample(sampleName));
+                .withClickListener(event -> openSample(name));
     }
 
     private void openSample(String sampleName) {
@@ -137,11 +115,8 @@ public class PolymerElementsUI extends UI {
 
     private Component createSample(String sampleName) {
         switch (sampleName) {
-        // case "JavaApiWidget": return new JavaApiWidget();
-        // case "JavaApiElement": return new JavaApiElement();
-        // case "UiBinderWidget": return new UiBinderWidget();
-        // case "UiBinderElement": return new UiBinderElement();
-        // case "ButtonSample": return new ButtonSample();
+        case "Button":
+            return new ButtonSample();
         // case "CheckboxSample": return new CheckboxSample();
         // case "DialogSample": return new DialogSample();
         // case "DropdownMenuSample": return new DropdownMenuSample();
@@ -214,9 +189,9 @@ public class PolymerElementsUI extends UI {
         mainHeaderLabel.addStyleName("current");
 
         helpButton = new PaperButton().withClassName("buttons")
-                .with(new IronIcon().setIconPolymer("help")
-                        .setTextContent("About"))
-                .withClickListener(event -> onAboutClick());
+                .with(new IronIcon().setIconPolymer("help"))
+                .withClickListener(event -> onAboutClick())
+                .appendTextContent("ABOUT");
 
         CssLayout buttonsLayout = new CssLayout();
         buttonsLayout.addStyleName("source-buttons bottom flex");
@@ -248,7 +223,7 @@ public class PolymerElementsUI extends UI {
         return headerPanel;
     }
 
-    private Component createMainDialog() {
+    private Component createAboutDialog() {
         CssLayout buttons = new CssLayout();
         buttons.addStyleName("buttons");
         buttons.addComponent(

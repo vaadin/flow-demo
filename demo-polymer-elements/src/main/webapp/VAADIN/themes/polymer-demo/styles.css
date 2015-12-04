@@ -1,4 +1,5 @@
 @import 'mainpage.css';
+@import 'button.css';
 
 body:not([style-scope]):not(.style-scope) {
     font-family: 'Roboto', 'Noto', sans-serif;
