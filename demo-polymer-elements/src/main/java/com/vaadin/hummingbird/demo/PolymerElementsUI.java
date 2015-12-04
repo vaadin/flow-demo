@@ -32,7 +32,9 @@ import com.vaadin.ui.HTML;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
-@com.vaadin.annotations.HTML("vaadin://bower_components/paper-styles/demo-pages.html")
+@com.vaadin.annotations.HTML({
+        "vaadin://bower_components/paper-styles/demo-pages.html",
+        "vaadin://bower_components/paper-behaviors/paper-ripple-behavior.html" })
 @Theme("polymer-demo")
 @Viewport("user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1")
 public class PolymerElementsUI extends UI {
