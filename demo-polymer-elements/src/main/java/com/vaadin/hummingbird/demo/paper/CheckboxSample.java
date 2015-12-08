@@ -1,10 +1,15 @@
 package com.vaadin.hummingbird.demo.paper;
 
+import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.paper.PaperCheckbox;
+import com.vaadin.hummingbird.paper.event.ChangeEvent;
 import com.vaadin.ui.CssLayout;
 
 public class CheckboxSample extends SampleBase {
+
+    private final EventListener<ChangeEvent> changeListener = event -> onEvent(
+            event);
 
     public CheckboxSample() {
         addStyleName("checkbox-sample");
@@ -21,45 +26,55 @@ public class CheckboxSample extends SampleBase {
     private void createEnabled(CssLayout root) {
         CssLayout sectionContent = createSection(root, "Enabled");
 
-        sectionContent
-                .addComponent(new PaperCheckbox().setTextContent("Oxygen"));
-        sectionContent
-                .addComponent(new PaperCheckbox().setTextContent("Carbon"));
+        sectionContent.addComponent(new PaperCheckbox().setTextContent("Oxygen")
+                .addChangeListener(changeListener));
+        sectionContent.addComponent(new PaperCheckbox().setTextContent("Carbon")
+                .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().setChecked(true)
-                .setTextContent("Hydrogen"));
+                .setTextContent("Hydrogen").addChangeListener(changeListener));
+
         sectionContent.addComponent(new PaperCheckbox().setChecked(true)
-                .setTextContent("Nitrogen"));
-        sectionContent.addComponent(
-                new PaperCheckbox().setChecked(true).setTextContent("Calcium"));
+                .setTextContent("Nitrogen").addChangeListener(changeListener));
+
+        sectionContent.addComponent(new PaperCheckbox().setChecked(true)
+                .setTextContent("Calcium").addChangeListener(changeListener));
+
     }
 
     private void createDisabled(CssLayout root) {
         CssLayout sectionContent = createSection(root, "Disabled");
 
-        sectionContent.addComponent(
-                new PaperCheckbox().setDisabled(true).setTextContent("Oxygen"));
-        sectionContent.addComponent(
-                new PaperCheckbox().setDisabled(true).setTextContent("Carbon"));
+        sectionContent.addComponent(new PaperCheckbox().setDisabled(true)
+                .setTextContent("Oxygen").addChangeListener(changeListener));
+        sectionContent.addComponent(new PaperCheckbox().setDisabled(true)
+                .setTextContent("Carbon").addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().setChecked(true)
-                .setDisabled(true).setTextContent("Hydrogen"));
+                .setDisabled(true).setTextContent("Hydrogen")
+                .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().setChecked(true)
-                .setDisabled(true).setTextContent("Nitrogen"));
+                .setDisabled(true).setTextContent("Nitrogen")
+                .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().setChecked(true)
-                .setDisabled(true).setTextContent("Calcium"));
+                .setDisabled(true).setTextContent("Calcium")
+                .addChangeListener(changeListener));
     }
 
     private void createColor(CssLayout root) {
         CssLayout sectionContent = createSection(root, "Color");
 
         sectionContent.addComponent(new PaperCheckbox().withClassName("blue")
-                .setTextContent("Oxygen"));
+                .setTextContent("Oxygen").addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().withClassName("red")
-                .setTextContent("Carbon"));
+                .setTextContent("Carbon").addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().withClassName("orange")
-                .setChecked(true).setTextContent("Hydrogen"));
+                .setChecked(true).setTextContent("Hydrogen")
+                .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().withClassName("green")
-                .setChecked(true).setTextContent("Nitrogen"));
+                .setChecked(true).setTextContent("Nitrogen")
+                .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().withClassName("blue")
-                .setChecked(true).setTextContent("Calcium"));
+                .setChecked(true).setTextContent("Calcium")
+                .addChangeListener(changeListener));
     }
+
 }

@@ -37,6 +37,15 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         return getThis();
     }
 
+    public String getTextContent() {
+        for (int i = 0; i < getElement().getChildCount(); i++) {
+            if (Element.isTextNode(getElement().getChild(i))) {
+                return getElement().getTextContent();
+            }
+        }
+        return null;
+    }
+
     public T setDisabled(boolean disabled) {
         setBooleanAttribute("disabled", disabled);
         return getThis();

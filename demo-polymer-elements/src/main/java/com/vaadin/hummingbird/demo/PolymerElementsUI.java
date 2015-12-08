@@ -34,7 +34,7 @@ import com.vaadin.ui.UI;
 
 @com.vaadin.annotations.HTML({
         "vaadin://bower_components/paper-styles/demo-pages.html",
-        "vaadin://bower_components/paper-behaviors/paper-ripple-behavior.html" })
+        "vaadin://bower_components/neon-animation/neon-animation.html" })
 @Theme("polymer-demo")
 @Viewport("user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1")
 public class PolymerElementsUI extends UI {
@@ -168,27 +168,21 @@ public class PolymerElementsUI extends UI {
         sidebarListPanel.addStyleName("list");
 
         header.addComponents(
-                new PaperToolbar().setJustify("justified")
-                        .withClassName(
-                                "toolbar onlytop")
-                        .with(createHorizontalFlexLaoyut(new PaperFab()
-                                .setIconPolymer("polymer").setMini(true)
-                                .withClassName("iconpolymer").setElevation("1")
-                                .setAttribute("onclick",
+                new PaperToolbar().withClassName("toolbar")
+                        .with(new PaperFab().setIconPolymer("polymer")
+                                .setMini(true).withClassName("iconpolymer")
+                                .setElevation("1").setAttribute("onclick",
                                         "javascript:window.open('https://www.polymer-project.org/','_blank');"),
-                                new PaperFab()
-                                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/gwt.png")
-                                        .setMini(true).withClassName("icongwt")
-                                        .setElevation("1")
-                                        .setAttribute("onclick",
-                                                "javascript:window.open('http://gwtproject.org','_blank');"),
-                                new PaperFab()
-                                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/vaadin.png")
-                                        .setMini(true)
-                                        .withClassName("iconvaadin")
-                                        .setElevation("1")
-                                        .setAttribute("onclick",
-                                                "javascript:window.open('https://vaadin.com','_blank');"))),
+                new PaperFab()
+                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/gwt.png")
+                        .setMini(true).withClassName("icongwt")
+                        .setElevation("1").setAttribute("onclick",
+                                "javascript:window.open('http://gwtproject.org','_blank');"),
+                new PaperFab()
+                        .setSrc("http://vaadin.github.io/gwt-polymer-elements/demo/img/vaadin.png")
+                        .setMini(true).withClassName("iconvaadin")
+                        .setElevation("1").setAttribute("onclick",
+                                "javascript:window.open('https://vaadin.com','_blank');")),
                 sidebarListPanel);
 
         return header;
@@ -217,17 +211,13 @@ public class PolymerElementsUI extends UI {
         PaperHeaderPanel headerPanel = new PaperHeaderPanel()
                 .setMode("waterfall-tall").with(
 
-                        new PaperToolbar().setJustify("justified")
-                                .withClassName("toolbar tall animate")
-                                .with(createHorizontalFlexLaoyut(
-
-                                        new PaperIconButton()
-                                                .setIconPolymer("menu")
-                                                .setBooleanAttribute(
-                                                        "paper-drawer-toggle",
-                                                        true),
+                        new PaperToolbar().withClassName("toolbar tall animate")
+                                .with(new PaperIconButton()
+                                        .setIconPolymer("menu")
+                                        .setBooleanAttribute(
+                                                "paper-drawer-toggle", true),
                                         mainHeaderLabel,
-                                        createFlexElement(null), helpButton),
+                                        createFlexElement(null), helpButton,
                                         buttonsLayout),
                         contentLayout);
         return headerPanel;
