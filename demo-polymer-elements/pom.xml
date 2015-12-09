@@ -27,15 +27,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>hummingbird-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>hummingbird-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>hummingbird-themes</artifactId>
+			<artifactId>hummingbird-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
