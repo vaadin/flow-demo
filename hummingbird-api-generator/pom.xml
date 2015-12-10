@@ -90,7 +90,7 @@
 						<goals>
 							<goal>npm</goal>
 						</goals>
-						<phase>initialize</phase>
+						<phase>generate-sources</phase>
 						<configuration>
 							<arguments>run-script polymer-hummingbird-api-generator</arguments>
 							<nodeVersion>v5.0.0</nodeVersion>

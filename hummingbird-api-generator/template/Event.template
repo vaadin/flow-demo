@@ -18,7 +18,7 @@ public class <%= camelCase(name) %>Event extends Component.Event {
 	_.forEach(params, function(param){ 
 		if (param.name !== 'detail') { %>	
     @EventParameter
-    private <%= computeType(param.type) %> <%= computeMethodName(param.name) %>;
+    private <%= computeEventPropertyType(param.type) %> <%= computeMethodName(param.name) %>;
 	<% }
 	});
 } %>
@@ -31,14 +31,14 @@ public class <%= camelCase(name) %>Event extends Component.Event {
     /**
      * <%= getDescription('         ', param) %>
      */
-    public <%= computeType(param.type) %> <%= computeGetterWithPrefix(param) %>() {
+    public <%= computeEventPropertyType(param.type) %> <%= computeGetterWithPrefix(param) %>() {
         return <%= computeMethodName(param.name) %>;
     }
 
     /**
      * <%= getDescription('         ', param) %>
      */
-    public void <%= computeSetterWithPrefix(param) %>(<%= computeType(param.type) %> <%= computeMethodName(param.name) %>) {
+    public void <%= computeSetterWithPrefix(param) %>(<%= computeEventPropertyType(param.type) %> <%= computeMethodName(param.name) %>) {
         this.<%= computeMethodName(param.name) %> = <%= computeMethodName(param.name) %>;
     }
 	<% }

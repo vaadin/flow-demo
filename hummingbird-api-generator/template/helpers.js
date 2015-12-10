@@ -119,8 +119,29 @@ module.exports = {
     if (this.findElement(t)) {
       return this.camelCase(t) + 'Element';
 	}
+	if (/^object/i.test(t)) return 'Object';
+    console.log("UNKNOWN TYPE <" + t  + ">,using Object." );
     return "Object";
   },
+    computeEventPropertyType: function(t) {
+    if (!t) return 'Object';
+    if (/^string/i.test(t)) return 'String';
+    if (/^boolean/i.test(t)) return 'boolean';
+    if (/^array/i.test(t)) return 'elemental.json.JsonArray'; // JsArray
+    //if (/^element/i.test(t)) return 'Object'; // Element is NOOP for events
+    if (/^number/i.test(t)) return 'double';
+    //if (/^function/i.test(t)) return 'Object'; // Function is NOOP for events
+    if (this.findBehavior(t)) {
+      return this.camelCase(t);
+    }
+    if (this.findElement(t)) {
+      return this.camelCase(t) + 'Element';
+	}
+	if (/^object/i.test(t)) return 'elemental.json.JsonObject';
+    console.log("UNKNOWN EVENT PROPERTY TYPE <" + t  + ">,using JsonObject." );
+    return "elemental.json.JsonObject";
+  },
+
   isSupportedProperty: function(item) {
   	if (item.name === 'observers') return false;
 	if (item.name === 'keyBindings') return false;
