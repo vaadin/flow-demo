@@ -36,7 +36,7 @@
   <dependencies>
 	<dependency>
 	  <groupId>com.vaadin</groupId>
-	  <artifactId>hummingbird-server</artifactId>
+	  <artifactId>hummingbird-core</artifactId>
 	</dependency>
   </dependencies>
   
