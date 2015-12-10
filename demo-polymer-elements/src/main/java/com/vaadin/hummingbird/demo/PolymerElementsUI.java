@@ -7,6 +7,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.hummingbird.demo.paper.ButtonSample;
 import com.vaadin.hummingbird.demo.paper.CheckboxSample;
+import com.vaadin.hummingbird.demo.paper.DialogSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -32,7 +33,8 @@ import com.vaadin.ui.HTML;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
-@com.vaadin.annotations.HTML({
+@com.vaadin.annotations.HTML({ "vaadin://themes/polymer/dialog-styles.html",
+        "vaadin://themes/polymer/checkbox-styles.html",
         "vaadin://bower_components/paper-styles/demo-pages.html",
         "vaadin://bower_components/neon-animation/neon-animation.html" })
 @Theme("polymer-demo")
@@ -71,7 +73,7 @@ public class PolymerElementsUI extends UI {
         final IronCollapse paperCollapse = addCategory("paper",
                 "Paper Elements");
         paperCollapse.with(addSample("Button", false),
-                addSample("CheckBox", false), addSample("Dialog"),
+                addSample("CheckBox", false), addSample("Dialog", false),
                 addSample("DropdownMenu"), addSample("Floating Button"),
                 addSample("Header Panel"), addSample("Icon Button"),
                 addSample("Item"), addSample("Input"), addSample("Material"),
@@ -128,7 +130,8 @@ public class PolymerElementsUI extends UI {
             return new ButtonSample();
         case "CheckBox":
             return new CheckboxSample();
-        // case "DialogSample": return new DialogSample();
+        case "Dialog":
+            return new DialogSample();
         // case "DropdownMenuSample": return new DropdownMenuSample();
         // case "FabSample": return new FabSample();
         // case "HeaderPanelSample": return new HeaderPanelSample();

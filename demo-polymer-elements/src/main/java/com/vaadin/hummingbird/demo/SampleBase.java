@@ -27,7 +27,7 @@ public class SampleBase extends CssLayout {
         addComponent(dialog);
     }
 
-    protected CssLayout createSection(CssLayout root, String name) {
+    protected CssLayout createHorizontalSection(CssLayout root, String name) {
         CssLayout sectionRoot = layout(null);
         HTML header = element("h4", name, false);
         CssLayout sectionContent = layout("horizontal-section");
@@ -49,6 +49,13 @@ public class SampleBase extends CssLayout {
     protected CssLayout layout(String classNames) {
         CssLayout cssLayout = new CssLayout();
         cssLayout.addStyleName(classNames);
+        return cssLayout;
+    }
+
+    protected CssLayout layout(String classNames, Component... components) {
+        CssLayout cssLayout = new CssLayout();
+        cssLayout.addStyleName(classNames);
+        cssLayout.addComponents(components);
         return cssLayout;
     }
 

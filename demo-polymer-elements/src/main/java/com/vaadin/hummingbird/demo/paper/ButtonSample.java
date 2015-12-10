@@ -25,7 +25,7 @@ public class ButtonSample extends SampleBase {
     }
 
     private void createFlatButtons(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Flat");
+        CssLayout sectionContent = createHorizontalSection(root, "Flat");
 
         sectionContent.addComponent(new PaperButton().setTextContent("button")
                 .addTransitionendListener(transitionListener));
@@ -56,7 +56,7 @@ public class ButtonSample extends SampleBase {
     }
 
     private void createRaisedButtons(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Raised");
+        CssLayout sectionContent = createHorizontalSection(root, "Raised");
 
         sectionContent.addComponent(
                 new PaperButton().setRaised(true).setTextContent("button")
@@ -89,7 +89,7 @@ public class ButtonSample extends SampleBase {
     }
 
     private void createTogglableButtons(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Togglable");
+        CssLayout sectionContent = createHorizontalSection(root, "Togglable");
 
         sectionContent.addComponent(
                 new PaperButton().setToggles(true).setTextContent("button")
@@ -124,7 +124,7 @@ public class ButtonSample extends SampleBase {
     }
 
     private void createColorButtons(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Color");
+        CssLayout sectionContent = createHorizontalSection(root, "Color");
 
         sectionContent.addComponent(new PaperButton()
                 .withClassName("blue ripple").setTextContent("button")

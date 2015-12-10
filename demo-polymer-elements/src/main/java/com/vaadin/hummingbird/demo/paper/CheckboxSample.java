@@ -1,11 +1,13 @@
 package com.vaadin.hummingbird.demo.paper;
 
+import com.vaadin.annotations.PolymerStyle;
 import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.paper.PaperCheckbox;
 import com.vaadin.hummingbird.paper.event.ChangeEvent;
 import com.vaadin.ui.CssLayout;
 
+@PolymerStyle("checkbox-styles")
 public class CheckboxSample extends SampleBase {
 
     private final EventListener<ChangeEvent> changeListener = event -> onEvent(
@@ -24,7 +26,7 @@ public class CheckboxSample extends SampleBase {
     }
 
     private void createEnabled(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Enabled");
+        CssLayout sectionContent = createHorizontalSection(root, "Enabled");
 
         sectionContent.addComponent(new PaperCheckbox().setTextContent("Oxygen")
                 .addChangeListener(changeListener));
@@ -42,7 +44,7 @@ public class CheckboxSample extends SampleBase {
     }
 
     private void createDisabled(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Disabled");
+        CssLayout sectionContent = createHorizontalSection(root, "Disabled");
 
         sectionContent.addComponent(new PaperCheckbox().setDisabled(true)
                 .setTextContent("Oxygen").addChangeListener(changeListener));
@@ -60,7 +62,7 @@ public class CheckboxSample extends SampleBase {
     }
 
     private void createColor(CssLayout root) {
-        CssLayout sectionContent = createSection(root, "Color");
+        CssLayout sectionContent = createHorizontalSection(root, "Color");
 
         sectionContent.addComponent(new PaperCheckbox().withClassName("blue")
                 .setTextContent("Oxygen").addChangeListener(changeListener));
