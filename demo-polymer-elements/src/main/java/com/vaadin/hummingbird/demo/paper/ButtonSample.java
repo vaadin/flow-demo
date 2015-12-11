@@ -1,5 +1,6 @@
 package com.vaadin.hummingbird.demo.paper;
 
+import com.vaadin.annotations.PolymerStyle;
 import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -7,6 +8,7 @@ import com.vaadin.hummingbird.paper.PaperButton;
 import com.vaadin.hummingbird.paper.event.TransitionendEvent;
 import com.vaadin.ui.CssLayout;
 
+@PolymerStyle("button-styles")
 public class ButtonSample extends SampleBase {
 
     private final EventListener<TransitionendEvent> transitionListener = event -> onEvent(

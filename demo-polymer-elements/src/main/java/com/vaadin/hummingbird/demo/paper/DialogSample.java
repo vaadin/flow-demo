@@ -21,7 +21,7 @@ public class DialogSample extends SampleBase {
             + " officia deserunt mollit anim id est laborum.";
 
     public DialogSample() {
-        addStyleName("checkbox-sample");
+        addStyleName("dialog-sample");
 
         addDialogLayouts();
 
