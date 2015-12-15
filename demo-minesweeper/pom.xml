@@ -28,6 +28,12 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird-core</artifactId>
 		</dependency>
+		
+		<!--  Currently only for Notification... -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core-elements</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.vaadin</groupId>

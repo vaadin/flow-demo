@@ -31,6 +31,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core-elements</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird-polymer-elements</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

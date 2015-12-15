@@ -28,6 +28,10 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core-elements</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

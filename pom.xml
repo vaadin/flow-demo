@@ -31,6 +31,7 @@
 	</modules>
 
 	<properties>
+		<hummingbird.version>1.0-SNAPSHOT</hummingbird.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -57,7 +58,17 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>hummingbird-core</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>${hummingbird.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>hummingbird-core-elements</artifactId>
+				<version>${hummingbird.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>hummingbird-server</artifactId>
+				<version>${hummingbird.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

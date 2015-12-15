@@ -36,6 +36,10 @@
 			<artifactId>hummingbird-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core-elements</artifactId>
+		</dependency>
+		<dependency>
 		   <groupId>org.vaadin.teemu.jsoncontainer</groupId>
 		   <artifactId>JsonContainer</artifactId>
 		   <version>0.1</version>
