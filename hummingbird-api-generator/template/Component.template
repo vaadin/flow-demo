@@ -76,7 +76,9 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
         return this;
     }
 <% }); %>
-<% _.forEach(getMethods(properties), function(item) { var retType = returnString(item); %>
+<% _.forEach(getMethods(properties), function(item) { var retType = returnString(item);
+	var unSupportedType = isUnSupportedType(item);
+	var params = paramsString(item);%>
     /**
      * <%= getDescription('     ', item) %>
      *
@@ -86,9 +88,8 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
      * <%= item.return && item.return.type ? '@return {' + returnString(item) + '}' : ''%>
      */
-    @NotYetImplemented
     public <%= retType != 'void' ? retType : className() %> <%= item.method %> {
-        // TODO support <%= retType != 'void' ? 'return ' : ''%>getPolymerElement().<%= item.name %>(<%= paramsString(item) %>);
+        elementFunctionCall("<%= item.name %>"<%= (params === '' ? '' : ', ') + params %>);
         <% if (retType === 'void') { %>return this;<% } else { 
         %>return <%= retType === 'boolean' ? 'false' : 'null'%>;<% } %>
     }

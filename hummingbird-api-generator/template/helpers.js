@@ -101,7 +101,7 @@ module.exports = {
   computeName: function(s) {
     return (s || '').replace(/[^\w\-\.:]/g, '');
   },
-  computeType: function(t) {
+  computeType: function(t, name) {
     if (!t) return 'Object';
     // TODO: Sometimes type have a syntax like: (number|string)
     // We should be able to overload those methods instead of using
@@ -120,10 +120,10 @@ module.exports = {
       return this.camelCase(t) + 'Element';
 	}
 	if (/^object/i.test(t)) return 'Object';
-    console.log("UNKNOWN TYPE <" + t  + ">,using Object." );
+    console.log(name+": UNKNOWN TYPE <" + t  + ">,using Object." );
     return "Object";
   },
-    computeEventPropertyType: function(t) {
+    computeEventPropertyType: function(t, name) {
     if (!t) return 'Object';
     if (/^string/i.test(t)) return 'String';
     if (/^boolean/i.test(t)) return 'boolean';
@@ -138,7 +138,7 @@ module.exports = {
       return this.camelCase(t) + 'Element';
 	}
 	if (/^object/i.test(t)) return 'elemental.json.JsonObject';
-    console.log("UNKNOWN EVENT PROPERTY TYPE <" + t  + ">,using JsonObject." );
+    console.log(name +": UNKNOWN EVENT PROPERTY TYPE <" + t  + ">,using JsonObject." );
     return "elemental.json.JsonObject";
   },
 
@@ -163,8 +163,8 @@ module.exports = {
   getGettersAndSetters: function(properties) {
     // Sorting properties so no-typed and String methods are at end
     properties.sort(function(a, b) {
-      var t1 = this.computeType(a.type);
-      var t2 = this.computeType(b.type);
+      var t1 = this.computeType(a.type, a.name);
+      var t2 = this.computeType(b.type, a.name);
       return t1 == t2 ? 0: !a.type && b.type ? 1 : a.type && !b.type ? -1: t1 == 'String' ? 1 : -1;
     }.bind(this));
     var ret = [];
@@ -191,7 +191,7 @@ module.exports = {
         item = cache[item.name] ? cache[item.name] : item;
 
         item.getter = item.getter || this.computeGetterWithPrefix(item);
-        item.setter = item.setter || (this.computeSetterWithPrefix(item) + '(' + this.computeType(item.type) + ' value)');
+        item.setter = item.setter || (this.computeSetterWithPrefix(item) + '(' + this.computeType(item.type, item.name) + ' value)');
 
         // JsInterop does not support a property with two signatures
         if (!done[item.getter]) {
@@ -208,7 +208,7 @@ module.exports = {
     var ret = [];
     var arr = this.getGettersAndSetters(properties);
     _.forEach(arr, function(item) {
-      var itType = this.computeType(item.type) ;
+      var itType = this.computeType(item.type, item.name) ;
       if (!/(Function|String|boolean)/.test(itType)) {
         for (var j = 0; j< arr.length; j++) {
           if (arr[j].name == item.name && arr[j].type == 'String') {
@@ -309,7 +309,7 @@ module.exports = {
     var result = [];
     if (method.params) {
       method.params.forEach(function(param) {
-        var type = this.computeType(param.type);
+        var type = this.computeType(param.type, param.name);
         result.push(type);
       }, this);
     }
@@ -319,7 +319,7 @@ module.exports = {
     var result = [];
     if (method.params) {
       method.params.forEach(function(param) {
-        var type = this.computeType(param.type);
+        var type = this.computeType(param.type, param.name);
         result.push(type + ' ' + this.computeMethodName(param.name));
       }, this);
     }

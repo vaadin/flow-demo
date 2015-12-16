@@ -41,17 +41,18 @@ public class DialogSample extends SampleBase {
         scrollingDlg.with(element("h4", "", "Scrolling"),
                 new PaperDialogScrollable().with(loremIpsum(), loremIpsum(),
                         loremIpsum(), loremIpsum(), loremIpsum(), loremIpsum(),
-                        loremIpsum(), loremIpsum(), loremIpsum()),
+                        loremIpsum(), loremIpsum(),
+                        loremIpsum()),
                 layout("buttons",
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
-                                .setTextContent("Cancel").withClickListener(
-                                        e -> scrollingDlg.setOpened(false)),
+                                .setTextContent("Cancel")
+                                .withClickListener(e -> scrollingDlg.close()),
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setBooleanAttribute("autofocus", true)
-                                .setTextContent("OK").withClickListener(
-                                        e -> scrollingDlg.setOpened(false))));
+                                .setTextContent("OK")
+                                .withClickListener(e -> scrollingDlg.close())));
 
         PaperDialog actionsDialog = new PaperDialog();
         actionsDialog.with(element("h2", "", "Dialog Title"), loremIpsum(),
@@ -59,39 +60,34 @@ public class DialogSample extends SampleBase {
                         new PaperButton().setTextContent("More Info..."),
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
-                                .setTextContent("DECLINE").withClickListener(
-                                        e -> actionsDialog.setOpened(false)),
+                                .setTextContent("DECLINE")
+                                .withClickListener(e -> actionsDialog.close()),
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setBooleanAttribute("autofocus", true)
                                 .setTextContent("ACCEPT").withClickListener(
-                                        e -> actionsDialog.setOpened(false))));
+                                        e -> actionsDialog.close())));
 
         PaperDialog modalDialog = new PaperDialog();
-        modalDialog.setModal(true)
-                .with(loremIpsum(),
-                        layout("buttons",
-                                new PaperButton()
-                                        .setBooleanAttribute("dialog-dismiss",
-                                                true)
-                                        .setBooleanAttribute("autofocus", true)
-                                        .setTextContent(
-                                                "Tap me to close")
-                        .withClickListener(e -> modalDialog.setOpened(false))));
+        modalDialog.setModal(true).with(loremIpsum(), layout("buttons",
+                new PaperButton().setBooleanAttribute("dialog-dismiss", true)
+                        .setBooleanAttribute("autofocus", true)
+                        .setTextContent("Tap me to close")
+                        .withClickListener(e -> modalDialog.close())));
 
         section.addComponents(
                 new PaperButton().setTextContent("Plain Dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> plainDialog.setOpened(true)),
+                        .withClickListener(e -> plainDialog.open()),
                 new PaperButton().setTextContent("Scrolling Dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> scrollingDlg.setOpened(true)),
+                        .withClickListener(e -> scrollingDlg.open()),
                 new PaperButton().setTextContent("Dialog with actions")
                         .withClassName("emphasised")
-                        .withClickListener(e -> actionsDialog.setOpened(true)),
+                        .withClickListener(e -> actionsDialog.open()),
                 new PaperButton().setTextContent("Modal dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> modalDialog.setOpened(true)),
+                        .withClickListener(e -> modalDialog.open()),
                 plainDialog, scrollingDlg, actionsDialog, modalDialog);
 
         addComponents(header, section);
@@ -103,21 +99,19 @@ public class DialogSample extends SampleBase {
 
         PaperDialog colorsDialog = new PaperDialog();
         colorsDialog.withClassName("colored").with(loremIpsum())
-                .addIronOverlayClosedListener(
-                        e -> colorsDialog.setOpened(false));
+                .addIronOverlayClosedListener(e -> colorsDialog.close());
 
         PaperDialog positionDialog = new PaperDialog();
         positionDialog.withClassName("size-position").with(loremIpsum())
-                .addIronOverlayClosedListener(
-                        e -> positionDialog.setOpened(false));
+                .addIronOverlayClosedListener(e -> positionDialog.close());
 
         section.addComponents(
                 new PaperButton().withClassName("emphasised")
                         .setTextContent("colors")
-                        .withClickListener(e -> colorsDialog.setOpened(true)),
+                        .withClickListener(e -> colorsDialog.open()),
                 new PaperButton().withClassName("emphasised")
                         .setTextContent("size & position")
-                        .withClickListener(e -> positionDialog.setOpened(true)),
+                        .withClickListener(e -> positionDialog.open()),
                 colorsDialog, positionDialog);
 
         addComponents(header, section);
@@ -132,13 +126,11 @@ public class DialogSample extends SampleBase {
                 .setEntryAnimation("scale-up-animation")
                 .setExitAnimation("fade-out-animation")
                 .with(element("h2", "Dialog Title", false), loremIpsum())
-                .addIronOverlayClosedListener(
-                        e -> paperDialog.setOpened(false));
+                .addIronOverlayClosedListener(e -> paperDialog.close());
 
         section.addComponents(new PaperButton().withClassName("emphasised")
-                .setTextContent("Transitions").withClickListener(
-                        e -> paperDialog.setOpened(true)),
-                paperDialog);
+                .setTextContent("Transitions")
+                .withClickListener(e -> paperDialog.open()), paperDialog);
 
         addComponents(header, section);
     }

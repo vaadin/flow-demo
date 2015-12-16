@@ -127,4 +127,24 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         addComponents(components);
         return getThis();
     }
+
+    protected void elementFunctionCall(String functionName, Object... params) {
+        StringBuilder jsBuilder = new StringBuilder("$0.");
+        jsBuilder.append(functionName);
+        if (params.length > 0) {
+            jsBuilder.append("(");
+            for (int i = 0; i < params.length; i++) {
+                if (i > 0) {
+                    jsBuilder.append(",");
+                }
+                jsBuilder.append("$");
+                jsBuilder.append(i + 1);
+            }
+            jsBuilder.append(")");
+        } else {
+            jsBuilder.append("()");
+        }
+        getElement().getNode().enqueueRpc(jsBuilder.toString(), getElement(),
+                params);
+    }
 }
