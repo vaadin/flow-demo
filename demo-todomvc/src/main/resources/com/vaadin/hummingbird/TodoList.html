@@ -39,10 +39,10 @@
 				id="itemsLeft"><strong>{{remainingCount}}</strong> items left</span>
 			<!-- Remove this if you don't implement routing -->
 			<ul class="filters">
-				<li><a [class.selected]="allFilter" href="#">All</a></li>
-				<li><a [class.selected]="activeFitler" href="#active">Active</a>
+				<li><a class.selected="allFilter" href="#">All</a></li>
+				<li><a class.selected="activeFitler" href="#active">Active</a>
 				</li>
-				<li><a [class.selected]="completedFilter" href="#completed">Completed</a></li>
+				<li><a class.selected="completedFilter" href="#completed">Completed</a></li>
 			</ul>
 			<!-- Hidden if no completed items are left ↓ -->
 			<button #clearCompleted [class.hidden]="hasNoCompleted"
