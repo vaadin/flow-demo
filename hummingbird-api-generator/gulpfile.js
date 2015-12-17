@@ -171,9 +171,7 @@ gulp.task('generate:behaviors', ['parse'], function() {
   return StreamFromArray(global.parsed,{objectMode: true})
    .on('data', function(item) {
      if (helpers.isBehavior(item)) {
-//       parseTemplate('Behavior', item, item.is, '', '');
-//     } else {
-//       parseTemplate('Element', item, item.is, '', 'Element');
+       parseTemplate('Behavior', item, item.is, '', '');
      }
    })
 });
@@ -199,7 +197,7 @@ gulp.task('generate:components', ['parse'], function() {
    })
 });
 
-gulp.task('generate:components-all', ['generate:behaviors','generate:events','generate:components']);
+gulp.task('generate:components-all', ['generate:events','generate:components']);
 
 gulp.task('generate', ['generate:components-all'], function() {
   gutil.log('Done.');
