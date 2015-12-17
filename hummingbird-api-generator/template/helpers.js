@@ -243,9 +243,7 @@ module.exports = {
     _.forEach(properties, function(item) {
       if (!gsetters[item.name] && !item.getter && !item.private && !item.published && /function/i.test(item.type)) {
         item.method = item.method || item.name + '(' + this.typedParamsString(item) + ')';
-        // JsInterop + SDM do not support method overloading if one signature is object
-        var other = item.method.replace(/String/, 'Object');
-        if (!gsetters[item.method] && !done[other] && !done[item.method]) {
+        if (!gsetters[item.method] && !done[item.method]) {
           ret.push(item);
           done[item.method] = true;
         }
