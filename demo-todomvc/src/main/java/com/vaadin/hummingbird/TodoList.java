@@ -17,6 +17,7 @@ package com.vaadin.hummingbird;
 
 import java.util.List;
 
+import com.vaadin.annotations.JS;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
@@ -41,21 +42,16 @@ public class TodoList extends Template {
 
         public void setTodos(List<Todo> todods);
 
+        public void setTodoCount(int todoCount);
+
+        public int getTodoCount();
+
+        public void setCompleteCount(int completeCount);
+
+        public int getCompleteCount();
+
+        @JS("model.todoCount - model.completeCount")
         public int getRemainingCount();
-
-        public void setRemainingCount(int remainingCount);
-
-        public boolean isHasNoCompleted();
-
-        public void setHasNoCompleted(boolean hasNoCompleted);
-
-        public boolean isHasNoRemaining();
-
-        public void setHasNoRemaining(boolean hasNoRemaining);
-
-        public boolean isHasNoTodos();
-
-        public void setHasNoTodos(boolean hasNoTodos);
     }
 
     private Runnable recalculateRunnable = this::updateCounters;
@@ -65,6 +61,7 @@ public class TodoList extends Template {
     public TodoList() {
         // Can't currently do this using the model api
         getNode().getMultiValued("todos");
+        updateCounters();
     }
 
     private void setNeedsRecount() {
@@ -112,15 +109,10 @@ public class TodoList extends Template {
     private void updateCounters() {
         TodoListModel model = getModel();
 
-        model.setHasNoCompleted(completeCount == 0);
+        model.setCompleteCount(completeCount);
 
         int todoCount = getTodos().size();
-
-        int remainingCount = todoCount - completeCount;
-        model.setHasNoRemaining(remainingCount == 0);
-        model.setHasNoTodos(todoCount == 0);
-
-        model.setRemainingCount(remainingCount);
+        model.setTodoCount(todoCount);
     }
 
     public boolean isCompleted(int todoIndex) {
