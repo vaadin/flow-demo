@@ -8,6 +8,7 @@ import com.vaadin.annotations.Viewport;
 import com.vaadin.hummingbird.demo.paper.ButtonSample;
 import com.vaadin.hummingbird.demo.paper.CheckboxSample;
 import com.vaadin.hummingbird.demo.paper.DialogSample;
+import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -75,7 +76,7 @@ public class PolymerElementsUI extends UI {
                 "Paper Elements");
         paperCollapse.with(addSample("Button", false),
                 addSample("CheckBox", false), addSample("Dialog", false),
-                addSample("DropdownMenu"), addSample("Floating Button"),
+                addSample("DropdownMenu", false), addSample("Floating Button"),
                 addSample("Header Panel"), addSample("Icon Button"),
                 addSample("Item"), addSample("Input"), addSample("Material"),
                 addSample("Menu"), addSample("Progress"),
@@ -133,7 +134,8 @@ public class PolymerElementsUI extends UI {
             return new CheckboxSample();
         case "Dialog":
             return new DialogSample();
-        // case "DropdownMenuSample": return new DropdownMenuSample();
+        case "DropdownMenu":
+            return new DropdownMenuSample();
         // case "FabSample": return new FabSample();
         // case "HeaderPanelSample": return new HeaderPanelSample();
         // case "IconButtonSample": return new IconButtonSample();
