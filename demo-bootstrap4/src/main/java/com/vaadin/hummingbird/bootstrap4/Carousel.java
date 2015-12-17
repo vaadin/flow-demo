@@ -6,9 +6,9 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.Template;
 
-@StyleSheet("vaadin://bower_components/bootstrap/dist/css/bootstrap.min.css")
-@JavaScript({ "vaadin://bower_components/jquery/dist/jquery.min.js",
-        "vaadin://bower_components/bootstrap/dist/js/bootstrap.min.js" })
+@StyleSheet("context://bower_components/bootstrap/dist/css/bootstrap.min.css")
+@JavaScript({ "context://bower_components/jquery/dist/jquery.min.js",
+        "context://bower_components/bootstrap/dist/js/bootstrap.min.js" })
 public class Carousel extends Template {
 
     @Override

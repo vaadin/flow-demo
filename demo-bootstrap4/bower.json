@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~v4.0.0-alpha"
+    "bootstrap": "~v4.0.0-alpha",
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
   }
 }

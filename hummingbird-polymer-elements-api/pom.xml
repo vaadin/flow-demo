@@ -12,7 +12,7 @@
   <artifactId>hummingbird-polymer-elements</artifactId>
   <name>Hummingbird Polymer elements</name>
   <description>Generated Hummingbird API for Polymer elements</description>
- 
+
   <licenses>
     <license>
       <name>Apache License 2.0</name>
@@ -39,7 +39,7 @@
 	  <artifactId>hummingbird-core</artifactId>
 	</dependency>
   </dependencies>
-  
+
   <repositories>
 	<repository>
 	  <id>hummingbird-internal-snapshots</id>

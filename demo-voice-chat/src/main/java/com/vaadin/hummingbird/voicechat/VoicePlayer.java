@@ -6,7 +6,7 @@ import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.Tag;
 import com.vaadin.ui.AbstractComponent;
 
-@HTML({ "vaadin://bower_components/voice-elements/dist/voice-player.html" })
+@HTML({ "context://bower_components/voice-elements/dist/voice-player.html" })
 @Tag("voice-player")
 public class VoicePlayer extends AbstractComponent {
 

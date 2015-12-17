@@ -37,13 +37,13 @@ import com.vaadin.ui.HTML;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
-@com.vaadin.annotations.HTML({ "vaadin://themes/polymer/dialog-styles.html",
-        "vaadin://themes/polymer/checkbox-styles.html",
-        "vaadin://themes/polymer/button-styles.html",
-        "vaadin://themes/polymer/fab-styles.html",
-        "vaadin://themes/polymer/header-panel-styles.html",
-        "vaadin://bower_components/paper-styles/demo-pages.html",
-        "vaadin://bower_components/neon-animation/neon-animation.html" })
+@com.vaadin.annotations.HTML({ "context://themes/polymer/dialog-styles.html",
+        "context://themes/polymer/checkbox-styles.html",
+        "context://themes/polymer/button-styles.html",
+        "context://themes/polymer/fab-styles.html",
+        "context://themes/polymer/header-panel-styles.html",
+        "context://bower_components/paper-styles/demo-pages.html",
+        "context://bower_components/neon-animation/neon-animation.html" })
 @Theme("polymer-demo")
 @Viewport("user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1")
 public class PolymerElementsUI extends UI {

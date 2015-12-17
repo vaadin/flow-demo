@@ -37,6 +37,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hummingbird.polymer.elements.path>hummingbird-polymer-elements-api</hummingbird.polymer.elements.path>
+		<node.version>v5.3.0</node.version>
+		<npm.version>2.11.0</npm.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -74,6 +76,20 @@
 	</dependencyManagement>
 
 	<build>
+        <pluginManagement>
+                <plugins>
+                        <plugin>
+                               <groupId>com.github.eirslett</groupId>
+                               <artifactId>frontend-maven-plugin</artifactId>
+                               <version>0.0.26</version>
+                                <configuration>
+                                    <installDirectory>..</installDirectory>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <npmVersion>${npm.version}</npmVersion>
+                                </configuration>
+                        </plugin>
+                </plugins>
+        </pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -106,7 +122,7 @@
 				<version>2.6.1</version>
 			</plugin>
 
-			<!-- The Jetty plugin allows us to easily test the development build by 
+			<!-- The Jetty plugin allows us to easily test the development build by
 				running jetty:run on the command line. -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>

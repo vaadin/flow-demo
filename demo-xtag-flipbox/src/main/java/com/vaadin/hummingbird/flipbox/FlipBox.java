@@ -13,9 +13,9 @@ import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HTML;
 
-@JavaScript({ "vaadin://bower_components/x-tag-core/dist/x-tag-core.min.js",
-        "vaadin://bower_components/Flipbox/src/flipbox.js" })
-@StyleSheet("vaadin://bower_components/Flipbox/src/flipbox.css")
+@JavaScript({ "context://bower_components/x-tag-core/dist/x-tag-core.min.js",
+        "context://bower_components/Flipbox/src/flipbox.js" })
+@StyleSheet("context://bower_components/Flipbox/src/flipbox.css")
 @Tag("x-flipbox")
 public class FlipBox extends AbstractComponent {
 

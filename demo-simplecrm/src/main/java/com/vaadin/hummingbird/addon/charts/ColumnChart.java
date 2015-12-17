@@ -8,7 +8,7 @@ import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.Tag;
 import com.vaadin.ui.AbstractComponent;
 
-@HTML("vaadin://bower_components/vaadin-charts/vaadin-column-chart.html")
+@HTML("context://bower_components/vaadin-charts/vaadin-column-chart.html")
 @Tag("vaadin-column-chart")
 public class ColumnChart extends AbstractComponent {
 

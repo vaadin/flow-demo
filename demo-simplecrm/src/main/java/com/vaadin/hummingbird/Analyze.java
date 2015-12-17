@@ -29,8 +29,8 @@ import com.vaadin.ui.Template;
 import elemental.json.Json;
 import elemental.json.JsonArray;
 
-@HTML({ "vaadin://bower_components/vaadin-charts/vaadin-funnel-chart.html",
-        "vaadin://bower_components/vaadin-charts/vaadin-pie-chart.html" })
+@HTML({ "context://bower_components/vaadin-charts/vaadin-funnel-chart.html",
+        "context://bower_components/vaadin-charts/vaadin-pie-chart.html" })
 @JavaScript({ "analyze.js" })
 public class Analyze extends Template implements MyView {
     public interface AnalyzeModel extends Model {

@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "progress-bubble": "~1.1.0"
+    "progress-bubble": "~1.1.0",
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
   }
 }

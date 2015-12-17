@@ -4,7 +4,7 @@ import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.Tag;
 import com.vaadin.ui.ProgressBar;
 
-@HTML("vaadin://bower_components/vaadin-progressbar/vaadin-progressbar.html")
+@HTML("context://bower_components/vaadin-progressbar/vaadin-progressbar.html")
 @Tag("v-progressbar")
 public class MyProgressBar extends ProgressBar {
 

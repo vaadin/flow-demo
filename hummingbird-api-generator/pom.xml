@@ -57,7 +57,6 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>0.0.24</version>
 				<configuration>
 					<installDirectory>..</installDirectory>
 				</configuration>
@@ -68,10 +67,6 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<phase>initialize</phase>
-						<configuration>
-							<nodeVersion>v5.0.0</nodeVersion>
-							<npmVersion>3.3.6</npmVersion>
-						</configuration>
 					</execution>
 					<execution>
 						<id>install hummingbird api</id>
@@ -81,8 +76,6 @@
 						<phase>initialize</phase>
 						<configuration>
 							<arguments>install</arguments>
-							<nodeVersion>v5.0.0</nodeVersion>
-							<npmVersion>3.3.6</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
@@ -93,8 +86,6 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<arguments>run-script polymer-vaadin-elements</arguments>
-							<nodeVersion>v5.0.0</nodeVersion>
-							<npmVersion>3.3.6</npmVersion>
 						</configuration>
 					</execution>
 				</executions>

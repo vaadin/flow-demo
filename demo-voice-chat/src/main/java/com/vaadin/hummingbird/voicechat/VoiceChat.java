@@ -21,6 +21,11 @@ public class VoiceChat extends Template {
 
     private Accent myAccent = Accent.EN_US;
 
+    @Override
+    protected Model getModel() {
+        return (Model) super.getModel();
+    }
+
     public VoiceChat() {
     }
 

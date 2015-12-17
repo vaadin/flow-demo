@@ -7,3 +7,8 @@
 /node/
 /node_tmp/
 /node_modules/
+/*/bower_components
+/*/node_modules
+/*/src/main/generated-bower/bower_components/
+/*/target
+

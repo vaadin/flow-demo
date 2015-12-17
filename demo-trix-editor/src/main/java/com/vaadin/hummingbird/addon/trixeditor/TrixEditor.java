@@ -12,8 +12,8 @@ import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.AbstractField;
 
-@JavaScript("vaadin://bower_components/trix/dist/trix.js")
-@StyleSheet("vaadin://bower_components/trix/dist/trix.css")
+@JavaScript("context://bower_components/trix/dist/trix.js")
+@StyleSheet("context://bower_components/trix/dist/trix.css")
 @Tag("div")
 public class TrixEditor extends AbstractField<String> {
 

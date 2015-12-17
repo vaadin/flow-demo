@@ -10,7 +10,7 @@ import com.vaadin.event.ElementEvents;
 import com.vaadin.event.EventListener;
 import com.vaadin.ui.AbstractComponent;
 
-@HTML({ "vaadin://bower_components/voice-elements/dist/voice-recognition.html" })
+@HTML({ "context://bower_components/voice-elements/dist/voice-recognition.html" })
 @Tag("voice-recognition")
 public class VoiceRecognition extends AbstractComponent {
 

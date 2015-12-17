@@ -1,0 +1,22 @@
+{
+  "name": "demo-todomvc",
+  "homepage": "",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
+  }
+}

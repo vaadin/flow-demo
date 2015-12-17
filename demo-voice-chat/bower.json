@@ -14,8 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "geo-location": "~1.0.0",
-    "google-map": "~1.0.5",
-    "voice-elements": "~1.0.0"
+    "voice-elements": "~1.0.0",
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
   }
 }
