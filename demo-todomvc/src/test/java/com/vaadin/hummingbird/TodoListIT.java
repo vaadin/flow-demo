@@ -2,7 +2,9 @@ package com.vaadin.hummingbird;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -47,16 +49,38 @@ public class TodoListIT extends TestBenchTestCase {
             deploymentUrl = deploymentUrl.replaceAll(":8888", ":8080");
 
             setDriver(new RemoteWebDriver(new URL(hubUrl), capabilities));
-            getDriver().get(deploymentUrl + "?restartApplication");
+            baseUrl = deploymentUrl + "?restartApplication";
 
         } else {
             setDriver(new PhantomJSDriver());
-            getDriver().get("http://localhost:8080/?restartApplication");
+            baseUrl = "http://localhost:8080/?restartApplication";
         }
+    }
+
+    private String baseUrl;
+
+    private void openUrl(String... parameters) {
+        String url = baseUrl;
+        if (parameters != null && parameters.length != 0) {
+            url += "&" + Arrays.stream(parameters)
+                    .collect(Collectors.joining("&"));
+        }
+        getDriver().get(url);
     }
 
     @Test
     public void testInitialScreen() {
+        openUrl();
+        verifyInitialScreenContents();
+    }
+
+    @Test
+    public void testPrerenderScreen() {
+        openUrl("pre-only");
+        verifyInitialScreenContents();
+    }
+
+    private void verifyInitialScreenContents() {
         List<WebElement> todos = getTodos();
 
         Assert.assertEquals(1, getItemsLeft());
@@ -71,6 +95,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void testEditTodo() {
+        openUrl();
         WebElement todo = getTodos().get(0);
 
         new Actions(getDriver())
@@ -90,6 +115,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void testRemoveTodo() {
+        openUrl();
         WebElement todo = getTodos().get(0);
 
         // Hover input to reveal destroy button
@@ -104,6 +130,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void testCompleteTodo() {
+        openUrl();
         WebElement todo = getTodos().get(0);
         todo.findElement(By.cssSelector("input.toggle")).click();
 
@@ -119,6 +146,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void testAddTodo() throws InterruptedException, IOException {
+        openUrl();
         WebElement newTodoField = findElement(By.id("new-todo"));
 
         newTodoField.sendKeys("New todo\n");
@@ -135,6 +163,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void completeAll() {
+        openUrl();
         // Add another todo
         findElement(By.id("new-todo")).sendKeys("New todo\n");
 
@@ -155,6 +184,7 @@ public class TodoListIT extends TestBenchTestCase {
 
     @Test
     public void clearCompleted() {
+        openUrl();
         // Add another todo
         findElement(By.id("new-todo")).sendKeys("New todo\n");
 
