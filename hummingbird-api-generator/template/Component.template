@@ -1,7 +1,7 @@
 <%= disclaimer() %>
 package <%= ns %>;
 
-import com.vaadin.annotations.Bower;
+import com.vaadin.annotations.HTML;
 import com.vaadin.annotations.NotYetImplemented;
 import com.vaadin.annotations.Tag;
 
@@ -16,7 +16,7 @@ import <%= event.ns %>.event.<%= camelCase(event.name) %>Event;<% }); } %>
  * <%= getDescription(' ') %>
  */
  @SuppressWarnings("serial")
- @Bower("<%= computeName(name) %>")
+ @HTML("vaadin://bower_components/<%= path %>")
  @Tag("<%= computeName(name) %>")
 public class <%= className() %> extends PolymerComponent<<%= className() %>> {
 
@@ -40,8 +40,8 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
     if (unSupportedType === '') {
         if (item.type !== 'Boolean') { %>
         return (<%= computeType(item.type) %>) getElement().getTemplate()
-            .getAttribute("<%= item.name %>", getElement().getNode());<% } else { %>
-        return getBooleanAttribute("<%= item.name %>");<% } } else { %>
+            .getAttribute("<%= hyphenize(item.name) %>", getElement().getNode());<% } else { %>
+        return getBooleanAttribute("<%= hyphenize(item.name) %>");<% } } else { %>
     	// TODO <%= unSupportedType %> type properties not supported yet
     	return null;<% } %>
     }
@@ -58,7 +58,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
     public <%= className() %> <%= item.setter %> {<%
      if (unSupportedType === '') { %>
         <%= item.type !== 'Boolean' ? 'getElement().setAttribute("' : 'setBooleanAttribute("'
-        %><%= item.name %>", value);<% } else { %>
+        %><%= hyphenize(item.name) %>", value);<% } else { %>
     	// TODO <%= unSupportedType %> type properties not supported yet<% } %>
         return this;
     }
