@@ -241,7 +241,8 @@ module.exports = {
     var ret = [];
     var done = {};
     _.forEach(properties, function(item) {
-      if (!gsetters[item.name] && !item.getter && !item.private && !item.published && /function/i.test(item.type)) {
+      var retType = this.returnString(item);
+      if (retType == 'void' && !gsetters[item.name] && !item.getter && !item.private && !item.published && /function/i.test(item.type)) {
         item.method = item.method || item.name + '(' + this.typedParamsString(item) + ')';
         if (!gsetters[item.method] && !done[item.method]) {
           ret.push(item);

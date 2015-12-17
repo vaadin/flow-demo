@@ -76,8 +76,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
         return this;
     }
 <% }); %>
-<% _.forEach(getMethods(properties), function(item) { var retType = returnString(item);
-	var params = paramsString(item); %>
+<% _.forEach(getMethods(properties), function(item) { var params = paramsString(item); %>
     /**
      * <%= getDescription('     ', item) %>
      *
@@ -85,12 +84,10 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
      * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
      * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
-     * <%= item.return && item.return.type ? '@return {' + returnString(item) + '}' : ''%>
      */
-    public <%= retType != 'void' ? retType : className() %> <%= item.method %> {
+    public <%= className() %> <%= item.method %> {
         elementFunctionCall("<%= item.name %>"<%= (params === '' ? '' : ', ') + params %>);
-        <% if (retType === 'void') { %>return this;<% } else { 
-        %>return <%= retType === 'boolean' ? 'false' : 'null'%>;<% } %>
+       return this;
     }
 <% }); %>
 <% if (hasEvents()) _.forEach(events, function(event){ %>
