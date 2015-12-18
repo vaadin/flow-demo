@@ -52,7 +52,7 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
     }
 
     public String getTitle() {
-        return getElement().getAttribute("title");
+        return getElement().getAttribute("title", null);
     }
 
     public T setDisabled(boolean disabled) {

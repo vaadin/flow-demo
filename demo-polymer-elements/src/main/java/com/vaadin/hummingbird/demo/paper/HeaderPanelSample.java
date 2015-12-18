@@ -41,6 +41,7 @@ public class HeaderPanelSample extends SampleBase {
                         element("div", "content")));
 
         CssLayout header = layout("paper-header");
+        header.getElement().appendChild(Element.createText("waterfall-tall"));
         header.addComponent(new HTML("</br>"));
         header.getElement()
                 .appendChild(Element.createText("tall-class: medium-tall"));
