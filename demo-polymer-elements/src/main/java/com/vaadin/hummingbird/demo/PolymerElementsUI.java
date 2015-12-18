@@ -11,6 +11,7 @@ import com.vaadin.hummingbird.demo.paper.DialogSample;
 import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.demo.paper.FabSample;
 import com.vaadin.hummingbird.demo.paper.HeaderPanelSample;
+import com.vaadin.hummingbird.demo.vaadin.ComboBoxSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -96,8 +97,8 @@ public class PolymerElementsUI extends UI {
         addCategory("iron", "Iron Elements").with(addSample("Collapse"),
                 addSample("Image"), addSample("List"), addSample("Selector"));
 
-        // addCategory("vaadin", "Vaadin Elements")
-        // .with(addSample("Grid", "VaadinGridSample"));
+        addCategory("vaadin", "Vaadin Elements")
+                .with(addSample("ComboBox", false));
 
     }
 
@@ -167,7 +168,8 @@ public class PolymerElementsUI extends UI {
         // case "IronImageSample": return new IronImageSample();
         // case "IronListSample": return new IronListSample();
         // case "IronSelectorSample": return new IronSelectorSample();
-        // case "VaadinGridSample": return new VaadinGridSample();
+        case "ComboBox":
+            return new ComboBoxSample();
         default:
             return new Label("Sample " + sampleName + " not yet implemented");
         }
