@@ -7,7 +7,7 @@ var currentDir = process.cwd();
 
 var clientDirBase;
 var publicDirBase;
-if (args.polymer) {
+if (args.all || args.polymer || args.vaadin) {
   var parentDir = currentDir.split('/');
   parentDir.pop();
   parentDir = parentDir.join('/');
@@ -20,6 +20,19 @@ if (args.polymer) {
 
 var clientDir = clientDirBase + '/' + nspath + "/";
 var publicDir = publicDirBase + "/VAADIN/";
+gutil.log('Using clientDir: ' + clientDir + ', publicDir: ' + publicDir);
+
+var bowerPackages;
+if (args.all) {
+	bowerPackages = ('vaadin/vaadin-combo-box,PolymerElements/paper-elements'.split(/[, ]+/));
+} else if (args.polymer) {
+	bowerPackages = ('PolymerElements/paper-elements'.split(/[, ]+/));
+} else if (args.vaadin) {
+	bowerPackages = ('vaadin/vaadin-combo-box'.split(/[, ]+/));
+} else { // DEFAULT
+	bowerPackages = (args.package ? args.package.split(/[, ]+/) : null);
+}
+gutil.log('Bower Packages: '+bowerPackages);
 
 module.exports = {
   ns: ns,
@@ -31,5 +44,5 @@ module.exports = {
   clientDir: clientDir,
   publicDir: publicDir,
   bowerDir: publicDir + "bower_components/",
-  bowerPackages: args.polymer ? ('PolymerElements/paper-elements'.split(/[, ]+/)) : (args.package ? args.package.split(/[, ]+/) : null)
+  bowerPackages: bowerPackages
 };

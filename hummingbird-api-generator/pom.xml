@@ -86,13 +86,13 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>run hummingbird api generator</id>
+						<id>generate polymer hummingbird api</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<phase>generate-sources</phase>
 						<configuration>
-							<arguments>run-script polymer-hummingbird-api-generator</arguments>
+							<arguments>run-script polymer-vaadin-elements</arguments>
 							<nodeVersion>v5.0.0</nodeVersion>
 							<npmVersion>3.3.6</npmVersion>
 						</configuration>

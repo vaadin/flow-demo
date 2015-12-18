@@ -205,6 +205,7 @@ gulp.task('generate', ['generate:components-all'], function() {
 
 gulp.task('copy:lib', function() {
   if (!args.excludeLib) {
+    gutil.log('Exporting lib');
     return gulp.src(libDir + '**')
       .pipe(gulp.dest(globalVar.clientDirBase));
   }

@@ -113,6 +113,8 @@ module.exports = {
     if (/^element/i.test(t)) return 'Object'; // Element
     if (/^number/i.test(t)) return 'double';
     if (/^function/i.test(t)) return 'Object'; // Function
+    if (/^xmlhttprequest/i.test(t)) return 'Object'; // XMLHttpRequest
+    if (/^promise/i.test(t)) return 'Object'; // Promise
     if (this.findBehavior(t)) {
       return this.camelCase(t);
     }
@@ -146,6 +148,7 @@ module.exports = {
   	if (item.name === 'observers') return false;
 	if (item.name === 'keyBindings') return false;
 	if (item.name === 'keyEventTarget') return false;
+	if (item.name === 'response') return false; // IronRequest, badly documented type (*)
 	return true;
   },
   isUnSupportedType: function(item) {
@@ -155,6 +158,8 @@ module.exports = {
 	if (/^function/i.test(item.type)) return 'Function';
 	if (/element/i.test(item.type)) return 'Element';
 	if (/node/i.test(item.type)) return 'Node';
+	if (/^xmlhttprequest/i.test(item.type)) return 'XMLHttpRequest';
+	if (/^promise/i.test(item.type)) return 'Promise';
 	if (/^.*\|.*/i.test(item.type)) return item.type;
 	return '';
   },
@@ -278,6 +283,7 @@ module.exports = {
     if ((/^width/i.test(name))
     	|| (/^height/i.test(name))
     	|| (/^icon/i.test(name))
+    	|| (/^visible/i.test(name))
     	|| (/^errorMessage/i.test(name))) {
       return name + 'Polymer';
     } else {

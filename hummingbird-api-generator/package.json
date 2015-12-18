@@ -23,7 +23,9 @@
     "stream-from-array": "latest"
   },
   "scripts": {
-    "polymer-hummingbird-api-generator": "bin/hummingbird-api-generator.js --polymer"
+    "polymer-elements": "bin/hummingbird-api-generator.js --polymer",
+    "vaadin-elements": "bin/hummingbird-api-generator.js --vaadin",
+    "polymer-vaadin-elements": "bin/hummingbird-api-generator.js --all"
   },
   "bin": {
     "hummingbird-api-generator": "./bin/hummingbird-api-generator.js"
