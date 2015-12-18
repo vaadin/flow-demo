@@ -50,7 +50,7 @@ public class TodoList extends Template {
 
         public int getCompleteCount();
 
-        @JS("model.todoCount - model.completeCount")
+        @JS("todoCount - completeCount")
         public int getRemainingCount();
     }
 
