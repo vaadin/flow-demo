@@ -86,7 +86,7 @@ public class SampleBase extends CssLayout {
     }
 
     protected HTML element(String tag) {
-        return new HTML(new StringBuilder("<").append(tag).append("\"></")
+        return new HTML(new StringBuilder("<").append(tag).append("></")
                 .append(tag).append(">").toString());
     }
 

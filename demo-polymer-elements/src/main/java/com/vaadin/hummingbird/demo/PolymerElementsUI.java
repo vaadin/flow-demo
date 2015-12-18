@@ -10,6 +10,7 @@ import com.vaadin.hummingbird.demo.paper.CheckboxSample;
 import com.vaadin.hummingbird.demo.paper.DialogSample;
 import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.demo.paper.FabSample;
+import com.vaadin.hummingbird.demo.paper.HeaderPanelSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
@@ -39,6 +40,7 @@ import com.vaadin.ui.UI;
         "vaadin://themes/polymer/checkbox-styles.html",
         "vaadin://themes/polymer/button-styles.html",
         "vaadin://themes/polymer/fab-styles.html",
+        "vaadin://themes/polymer/header-panel-styles.html",
         "vaadin://bower_components/paper-styles/demo-pages.html",
         "vaadin://bower_components/neon-animation/neon-animation.html" })
 @Theme("polymer-demo")
@@ -76,16 +78,20 @@ public class PolymerElementsUI extends UI {
     private void addSamples() {
         final IronCollapse paperCollapse = addCategory("paper",
                 "Paper Elements");
-        paperCollapse.with(addSample("Button", false),
-                addSample("CheckBox", false), addSample("Dialog", false),
-                addSample("DropdownMenu", false),
-                addSample("Floating Button", false), addSample("Header Panel"),
-                addSample("Icon Button"), addSample("Item"), addSample("Input"),
-                addSample("Material"), addSample("Menu"), addSample("Progress"),
-                addSample("Radio Button"), addSample("Radio Group"),
-                addSample("Ripple"), addSample("Spinner"), addSample("Slider"),
-                addSample("Tabs"), addSample("Toast"),
-                addSample("Toggle Button"), addSample("Toolbar"));
+        paperCollapse
+                .with(addSample("Button", false), addSample("CheckBox", false),
+                        addSample("Dialog", false), addSample("DropdownMenu",
+                                false),
+                        addSample("Floating Button", false),
+                        addSample("Header Panel", false),
+                        addSample("Icon Button"), addSample("Item"),
+                        addSample("Input"), addSample("Material"),
+                        addSample("Menu"), addSample("Progress"),
+                        addSample("Radio Button"), addSample("Radio Group"),
+                        addSample("Ripple"), addSample("Spinner"),
+                        addSample("Slider"), addSample("Tabs"),
+                        addSample("Toast"), addSample("Toggle Button"),
+                        addSample("Toolbar"));
 
         addCategory("iron", "Iron Elements").with(addSample("Collapse"),
                 addSample("Image"), addSample("List"), addSample("Selector"));
@@ -140,7 +146,8 @@ public class PolymerElementsUI extends UI {
             return new DropdownMenuSample();
         case "Floating Button":
             return new FabSample();
-        // case "HeaderPanelSample": return new HeaderPanelSample();
+        case "Header Panel":
+            return new HeaderPanelSample();
         // case "IconButtonSample": return new IconButtonSample();
         // case "ItemSample": return new ItemSample();
         // case "InputSample": return new InputSample();
