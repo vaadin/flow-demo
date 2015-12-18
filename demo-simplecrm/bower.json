@@ -32,7 +32,8 @@
     "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.5",
     "progress-bubble": "~1.1.0",
     "vaadin-charts": "vaadin/charts-component#2e3dab0",
-    "paper-toolbar": "PolymerElements/paper-toolbar#~1.1.2"
+    "paper-toolbar": "PolymerElements/paper-toolbar#~1.1.2",
+    "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.4"
   },
   "resolutions": {
     "polymer": "^1.1.5"
