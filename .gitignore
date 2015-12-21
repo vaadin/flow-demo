@@ -11,4 +11,5 @@
 /*/node_modules
 /*/src/main/generated-bower/bower_components/
 /*/target
-
+npm-debug.log
+npm.tar.gz
