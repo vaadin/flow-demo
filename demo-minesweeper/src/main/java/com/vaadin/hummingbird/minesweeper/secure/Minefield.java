@@ -8,20 +8,19 @@ import com.vaadin.hummingbird.minesweeper.Point;
 
 public class Minefield {
 
-    private static final double MINE_DENSITY = 0.2;
     private Set<Point> mines;
     private int rows;
     private int cols;
-    Random random = new Random(System.currentTimeMillis());
 
-    public void init(int rows, int cols) {
+    public void init(int rows, int cols, long seed, double mineDensity) {
+        Random random = new Random(seed);
         this.rows = rows;
         this.cols = cols;
 
         mines = new HashSet<>();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-                if (random.nextDouble() > (1 - MINE_DENSITY)) {
+                if (random.nextDouble() > (1 - mineDensity)) {
                     mines.add(new Point(r, c));
                 }
             }

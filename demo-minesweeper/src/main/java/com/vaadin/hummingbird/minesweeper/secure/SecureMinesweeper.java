@@ -12,16 +12,19 @@ import com.vaadin.ui.Template;
 public class SecureMinesweeper extends Template {
 
     private Minefield minefield = new Minefield();
+    private double mineDensity;
+    private long seed;
 
-    public SecureMinesweeper() {
-
+    public SecureMinesweeper(long seed, double mineDensity) {
+        this.mineDensity = mineDensity;
+        this.seed = seed;
     }
 
     @Override
     protected void init() {
         super.init();
 
-        minefield.init(10, 10);
+        minefield.init(10, 10, seed, mineDensity);
 
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();

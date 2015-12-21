@@ -1,72 +1,17 @@
 package com.vaadin.hummingbird;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.vaadin.testbench.By;
-import com.vaadin.testbench.ScreenshotOnFailureRule;
-import com.vaadin.testbench.TestBenchTestCase;
 
-public class TodoListIT extends TestBenchTestCase {
+import org.junit.Assert;
+import org.junit.Test;
 
-    @Rule
-    public ScreenshotOnFailureRule screenshotOnFailure = new ScreenshotOnFailureRule(
-            this, true);
-
-    @Before
-    public void setupDriver() throws Exception {
-
-        String deploymentUrl = System
-                .getProperty("com.vaadin.testbench.deployment.url");
-        // deploymentUrl = "http://192.168.2.161:8888/";
-
-        if (deploymentUrl != null && !deploymentUrl.isEmpty()) {
-            String hubUrl = "http://tb3-hub.intra.itmill.com:4444/wd/hub";
-
-            DesiredCapabilities capabilities = new DesiredCapabilities(
-                    BrowserType.PHANTOMJS, "2", Platform.LINUX);
-            capabilities.setCapability("phantomjs.binary.path",
-                    "/usr/bin/phantomjs2");
-
-            // com.vaadin.testbench.deployment.url is based on framework dev
-            // server settings, use jetty:run port instead
-            deploymentUrl = deploymentUrl.replaceAll(":8888", ":8080");
-
-            setDriver(new RemoteWebDriver(new URL(hubUrl), capabilities));
-            baseUrl = deploymentUrl + "?restartApplication";
-
-        } else {
-            setDriver(new PhantomJSDriver());
-            baseUrl = "http://localhost:8080/?restartApplication";
-        }
-    }
-
-    private String baseUrl;
-
-    private void openUrl(String... parameters) {
-        String url = baseUrl;
-        if (parameters != null && parameters.length != 0) {
-            url += "&" + Arrays.stream(parameters)
-                    .collect(Collectors.joining("&"));
-        }
-        getDriver().get(url);
-    }
+public class TodoListIT extends AbstractTestBenchTest {
 
     @Test
     public void testInitialScreen() {
@@ -235,11 +180,6 @@ public class TodoListIT extends TestBenchTestCase {
                 "x items left should not be shown at all for x = 0", 0,
                 itemsLeft);
         return itemsLeft;
-    }
-
-    @After
-    public void cleanup() {
-        getDriver().close();
     }
 
 }

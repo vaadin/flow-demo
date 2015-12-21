@@ -19,12 +19,25 @@ public class MinesweeperUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        long seed = System.currentTimeMillis();
+        double mineDensity = 0.2;
+
+        String seedParam = request.getParameter("seed");
+        if (seedParam != null) {
+            seed = Long.parseLong(seedParam);
+        }
+
+        String mineDensityParam = request.getParameter("mineDensity");
+        if (mineDensityParam != null) {
+            mineDensity = Double.parseDouble(mineDensityParam);
+        }
+
         addComponent(
                 new HTML("<p>Simple version, cheat by looking at the DOM</p>"));
-        addComponent(new SimpleMinesweeper());
+        addComponent(new SimpleMinesweeper(seed, mineDensity));
         addComponent(new HTML(
                 "<p>Secure version, mine information on the server</p>"));
-        addComponent(new SecureMinesweeper());
+        addComponent(new SecureMinesweeper(seed, mineDensity));
     }
 
 }

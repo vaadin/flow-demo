@@ -16,12 +16,18 @@ public class SimpleMinesweeper extends Template {
 
     int rows = 10;
     int cols = 10;
+    private Random random;
+    private double mineDensity;
+
+    public SimpleMinesweeper(long seed, double mineDensity) {
+        this.mineDensity = mineDensity;
+        random = new Random(seed);
+    }
 
     @Override
     protected void init() {
         super.init();
 
-        Random r = new Random(System.currentTimeMillis());
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 
@@ -33,7 +39,7 @@ public class SimpleMinesweeper extends Template {
             List<Cell> cells = row.getCells();
             for (int colIndex = 0; colIndex < cols; colIndex++) {
                 Cell cell = Model.create(Cell.class);
-                cell.setMine(r.nextDouble() > 0.8);
+                cell.setMine(random.nextDouble() > (1 - mineDensity));
                 cells.add(cell);
             }
         }
@@ -88,8 +94,24 @@ public class SimpleMinesweeper extends Template {
             Notification.show("BOOM");
         } else {
             reveal(row, column);
+            if (allRevealed()) {
+                revealAll();
+                Notification.show("Success!");
+            }
         }
 
+    }
+
+    private boolean allRevealed() {
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                Cell cell = getCell(r, c);
+                if (!cell.isRevealed() && !cell.isMine()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void revealAll() {
