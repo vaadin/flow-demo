@@ -12,9 +12,6 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<project.source.version>1.8</project.source.version>
-		<project.target.version>1.8</project.target.version>
-		<project.encoding>UTF-8</project.encoding>
 	</properties>
 
 	<dependencies>

@@ -15,9 +15,6 @@
 	<properties>
 		<vaadin.version>7.6.0.alpha7</vaadin.version>
 		<vaadin.plugin.version>7.5.7</vaadin.plugin.version>
-		<project.source.version>1.8</project.source.version>
-		<project.target.version>1.8</project.target.version>
-		<project.encoding>UTF-8</project.encoding>
 	</properties>
 
 	<repositories>
@@ -87,12 +84,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<encoding>${project.encoding}</encoding>
-					<source>${project.source.version}</source>
-					<target>${project.target.version}</target>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
