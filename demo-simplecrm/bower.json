@@ -35,5 +35,8 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#~1.1.2",
     "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.4",
     "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
+  },
+  "resolutions": {
+    "promise-polyfill": "2.1.0"
   }
 }
