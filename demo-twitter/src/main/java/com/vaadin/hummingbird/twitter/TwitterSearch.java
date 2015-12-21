@@ -15,7 +15,12 @@ import com.vaadin.ui.Template;
         "https://abs.twimg.com/a/1446020141/css/t1/twitter_more_2.bundle.css" })
 public class TwitterSearch extends Template {
 
-    public TwitterSearch() {
+    private int initial;
+    private int loadSize;
+
+    public TwitterSearch(int initial, int loadSize) {
+        this.initial = initial;
+        this.loadSize = loadSize;
     }
 
     public interface TwitterModel extends Model {
@@ -26,7 +31,7 @@ public class TwitterSearch extends Template {
 
     @TemplateEventHandler
     public void extend() {
-        getModel().getTweets().increaseActiveRangeEnd(10);
+        getModel().getTweets().increaseActiveRangeEnd(loadSize);
     }
 
     @Override
@@ -38,7 +43,7 @@ public class TwitterSearch extends Template {
     protected void init() {
         super.init();
         getModel().setTweets(LazyList.create(tweetProvider));
-        getModel().getTweets().setActiveRangeEnd(10);
+        getModel().getTweets().setActiveRangeEnd(initial);
     }
 
     private DataProvider<Tweet> tweetProvider = new DataProvider<Tweet>() {

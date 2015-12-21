@@ -14,7 +14,15 @@ public class TwitterUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        addComponent(new TwitterSearch());
+        int initial = 100;
+        int loadSize = 10;
+        if (vaadinRequest.getParameter("initial") != null) {
+            initial = Integer.parseInt(vaadinRequest.getParameter("initial"));
+        }
+        if (vaadinRequest.getParameter("loadSize") != null) {
+            loadSize = Integer.parseInt(vaadinRequest.getParameter("loadSize"));
+        }
+        addComponent(new TwitterSearch(initial, loadSize));
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
