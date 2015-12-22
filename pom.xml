@@ -40,6 +40,9 @@
 		<hummingbird.polymer.elements.path>hummingbird-polymer-elements-api</hummingbird.polymer.elements.path>
 		<node.version>v5.3.0</node.version>
 		<npm.version>2.11.0</npm.version>
+		<!-- force is needed for bower to update local dependencies
+		"Imported-Maven-Bower-dependencies" -->
+		<frontend.bower.arguments>install --force</frontend.bower.arguments>
 	</properties>
 	<repositories>
 		<repository>
