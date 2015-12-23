@@ -20,12 +20,12 @@ import java.util.Set;
 import com.vaadin.annotations.Bower;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.TemplateEventHandler;
+import com.vaadin.elements.core.grid.Grid;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.hummingbird.CrmUI.MyView;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Grid;
 import com.vaadin.ui.Template;
 
 @JavaScript({ "customers.js" })
@@ -51,6 +51,7 @@ public class Customers extends Template implements MyView {
         this.getElement().getNode().enqueueRpc("amendGrid($0);",
                 customersGrid.getElement());
         customersGrid.addSelectionListener(new SelectionListener() {
+            @Override
             public void onEvent(SelectionEvent event) {
                 Set<Object> selected = event.getSelected();
                 if (selected.size() == 1) {

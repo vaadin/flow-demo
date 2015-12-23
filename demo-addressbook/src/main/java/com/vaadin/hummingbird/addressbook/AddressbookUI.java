@@ -6,6 +6,8 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.elements.core.grid.Grid;
+import com.vaadin.elements.core.grid.selection.SelectionMode;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.hummingbird.addressbook.backend.Contact;
@@ -13,7 +15,6 @@ import com.vaadin.hummingbird.addressbook.backend.ContactService;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -50,7 +51,7 @@ public class AddressbookUI extends UI {
         contactList.removeColumn("id");
         contactList.removeColumn("birthDate");
         contactList.removeColumn("phone");
-        contactList.setSelectionMode(Grid.SelectionMode.SINGLE);
+        contactList.setSelectionMode(SelectionMode.SINGLE);
         contactList.addSelectionListener(new SelectionListener() {
             @Override
             public void onEvent(SelectionEvent e) {
