@@ -231,6 +231,26 @@ gulp.task('copy:pom', function() {
   fs.writeFileSync(pom, new Buffer(tpl(_.merge({}, null, globalVar, helpers))));
 });
 
+gulp.task('copy:bowerjson', function() {
+	  var tpl = _.template(fs.readFileSync(tplDir + "bower.template"));
+	  var bowerjson = globalVar.generatedDirBase + "/bower.json";
+	  var dependencies = '';
+	  globalVar.bowerPackages.forEach( function(bowerDep) {
+		  if (dependencies.length > 0) dependencies += ",\n    ";
+		  dependencies += "\"";
+		  dependencies += bowerDep;
+		  dependencies += "\": \"";
+		  dependencies += bowerDep;
+		  dependencies += "\"";
+	  });
+	  gutil.log("Writing dependencies for bower.json: " + dependencies);
+
+	  globalVar.bowerjsondeps = dependencies;
+
+	  fs.ensureFileSync(bowerjson);
+	  fs.writeFileSync(bowerjson, new Buffer(tpl(_.merge({}, null, globalVar, helpers))));
+});
+
 gulp.task('default', function(){
   if(args.pom) {
     runSequence('clean', 'bower:install', 'generate', 'copy:lib', 'copy:pom');

@@ -5,17 +5,20 @@ var ns = args.groupId || "com.vaadin.hummingbird";
 var nspath = ns.replace(/\./g,'/');
 var currentDir = process.cwd();
 
+var generatedDirBase;
 var clientDirBase;
 var publicDirBase;
 if (args.all || args.polymer || args.vaadin) {
   var parentDir = currentDir.split('/');
   parentDir.pop();
   parentDir = parentDir.join('/');
-  clientDirBase = parentDir + '/hummingbird-polymer-elements-api/src/main/java' 
-  publicDirBase = parentDir + '/hummingbird-polymer-elements-api/src/main/resources' 
+  generatedDirBase = parentDir + '/hummingbird-polymer-elements-api';
+  clientDirBase = generatedDirBase + '/src/main/java';
+  publicDirBase = generatedDirBase + '/src/main/resources';
 } else {
-  clientDirBase = currentDir + (args.pom ? '/pom/' : '/target/generated/') + (args.javaDir || 'src/main/java/').replace(/,+$/, "");
-  publicDirBase = currentDir + (args.pom ? '/pom/' : '/target/generated/') + (args.resourcesDir || 'src/main/resources/').replace(/,+$/, "");
+  generatedDirBase = currentDir + (args.pom ? '/pom/' : '/target/generated/');
+  clientDirBase = generatedDirBase + (args.javaDir || 'src/main/java/').replace(/,+$/, "");
+  publicDirBase = generatedDirBase + (args.resourcesDir || 'src/main/resources/').replace(/,+$/, "");
 }
 
 var clientDir = clientDirBase + '/' + nspath + "/";
@@ -41,6 +44,7 @@ module.exports = {
   currentDir: currentDir,
   clientDirBase: clientDirBase,
   publicDirBase: publicDirBase,
+  generatedDirBase: generatedDirBase,
   clientDir: clientDir,
   publicDir: publicDir,
   bowerDir: publicDir + "bower_components/",
