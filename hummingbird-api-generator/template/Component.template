@@ -16,7 +16,7 @@ import <%= event.ns %>.event.<%= camelCase(event.name) %>Event;<% }); } %>
  * <%= getDescription(' ') %>
  */
  @SuppressWarnings("serial")
- @HTML("vaadin://bower_components/<%= path %>")
+ @HTML("context://bower_components/<%= path %>")
  @Tag("<%= computeName(name) %>")
 public class <%= className() %> extends PolymerComponent<<%= className() %>> {
 
