@@ -73,8 +73,10 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    protected void setTodoCompleted(Element element, boolean completed) {
-        getTodoForElement(element).setCompleted(completed);
+    protected void logTodoCompleted(Element element) {
+        Todo todo = getTodoForElement(element);
+        System.out.println("Todo \"" + todo.getTitle() + "\".completed: "
+                + todo.isCompleted());
     }
 
     private Todo getTodoForElement(Element element) {

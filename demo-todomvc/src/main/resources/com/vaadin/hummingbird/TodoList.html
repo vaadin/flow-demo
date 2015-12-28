@@ -21,7 +21,7 @@
 					[class.editing]="todo.editing">
 					<div class="view" [class.hidden]="todo.editing">
 						<!-- todo.complete=this.checked; -->
-						<input (click)="server.setTodoCompleted(element, element.checked)"
+						<input (click)="todo.completed = element.checked; server.logTodoCompleted(element)"
 							class="toggle" type="checkbox" [checked]="todo.completed">
 						<label
 							(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
