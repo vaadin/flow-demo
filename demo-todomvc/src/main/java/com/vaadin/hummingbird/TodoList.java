@@ -45,26 +45,16 @@ public class TodoList extends Template {
         @JS("todos.length")
         public int getTodoCount();
 
-        public void setCompleteCount(int completeCount);
-
+        @JS("(function() {var count=0; for(var i=0;i<todos.length;i++) if (todos[i].completed) count++; return count;})();")
         public int getCompleteCount();
 
         @JS("todoCount - completeCount")
         public int getRemainingCount();
     }
 
-    private Runnable recalculateRunnable = this::updateCounters;
-
-    private int completeCount = 0;
-
     public TodoList() {
         // Can't currently do this using the model api
         getNode().getMultiValued("todos");
-        updateCounters();
-    }
-
-    private void setNeedsRecount() {
-        getElement().runBeforeNextClientResponse(recalculateRunnable);
     }
 
     @TemplateEventHandler
@@ -72,7 +62,6 @@ public class TodoList extends Template {
         Todo todo = Model.create(Todo.class);
         todo.setTitle(title);
         getTodos().add(todo);
-        setNeedsRecount();
     }
 
     private List<Todo> getTodos() {
@@ -80,35 +69,16 @@ public class TodoList extends Template {
     }
 
     public void setCompleted(int todoIndex, boolean completed) {
-        setTodoCompleted(getTodos().get(todoIndex), completed);
+        getTodos().get(todoIndex).setCompleted(completed);
     }
 
     @TemplateEventHandler
     protected void setTodoCompleted(Element element, boolean completed) {
-        setTodoCompleted(getTodoForElement(element), completed);
+        getTodoForElement(element).setCompleted(completed);
     }
 
     private Todo getTodoForElement(Element element) {
         return Model.wrap(element.getNode(), Todo.class);
-    }
-
-    private void setTodoCompleted(Todo todo, boolean completed) {
-        if (completed == todo.isCompleted()) {
-            return;
-        }
-        if (completed) {
-            completeCount++;
-        } else {
-            completeCount--;
-        }
-        todo.setCompleted(completed);
-        setNeedsRecount();
-    }
-
-    private void updateCounters() {
-        TodoListModel model = getModel();
-
-        model.setCompleteCount(completeCount);
     }
 
     public boolean isCompleted(int todoIndex) {
@@ -127,32 +97,19 @@ public class TodoList extends Template {
     }
 
     private void removeTodo(Todo todo) {
-        if (todo.isCompleted()) {
-            completeCount--;
-        }
         getTodos().remove(todo);
-        setNeedsRecount();
     }
 
     @TemplateEventHandler
     public void clearCompleted() {
         List<Todo> todos = getTodos();
         todos.removeIf(Todo::isCompleted);
-        completeCount = 0;
-        setNeedsRecount();
     }
 
     @TemplateEventHandler
     public void setAllCompleted(boolean completed) {
         List<Todo> todos = getTodos();
         todos.forEach(todo -> todo.setCompleted(completed));
-
-        if (completed) {
-            completeCount = todos.size();
-        } else {
-            completeCount = 0;
-        }
-        setNeedsRecount();
     }
 
     @Override
