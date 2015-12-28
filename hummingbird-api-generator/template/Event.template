@@ -5,15 +5,16 @@ package <%= ns %>.event;
 import com.vaadin.annotations.EventParameter;
 <% } %>
 import com.vaadin.annotations.EventType;
-import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
-import com.vaadin.ui.Component;
+import com.vaadin.hummingbird.polymer.PolymerComponent;
+import com.vaadin.hummingbird.polymer.PolymerComponentEvent;
 
 /**
  * <%= getDescription(' ') %>
  */
 @SuppressWarnings("serial")
 @EventType("<%= computeName(name) %>")
-public class <%= camelCase(name) %>Event extends Component.Event {
+public class <%= camelCase(name) %>Event<T extends PolymerComponent<T>>
+		extends PolymerComponentEvent {
 <% if (hasParams()) {
 	_.forEach(params, function(param){ 
 		if (param.name !== 'detail') { %>	
@@ -22,7 +23,7 @@ public class <%= camelCase(name) %>Event extends Component.Event {
 	<% }
 	});
 } %>
-    public <%= camelCase(name) %>Event(AbstractSimpleDOMComponentContainer source) {
+    public <%= camelCase(name) %>Event(PolymerComponent<T> source) {
         super(source);
     }
 <% if (hasParams()) { 
@@ -44,4 +45,9 @@ public class <%= camelCase(name) %>Event extends Component.Event {
 	<% }
 	});
 } %>
+    @SuppressWarnings("unchecked")
+    @Override
+    public T getPolymerComponent() {
+        return (T) super.getPolymerComponent();
+    }
 }

@@ -351,6 +351,12 @@ module.exports = {
     desc = this.marked(desc);
     return (desc).trim().split('\n').join('\n' + spaces + '* ').replace(/\*\//g, "* /");
   },
+  getEventName: function(eventName, eventPackage) {
+  	var name = this.camelCase(eventName) + 'Event';
+  	// check for potential clashes with Vaadin component events
+  	if (/^ErrorEvent/.test(name)) return eventPackage + '.event.ErrorEvent';
+  	return name;
+  },
   disclaimer: function() {
     var projectName = this.bowerData.name || "unknown";
     var projectLicense = this.bowerData.license || "unknown";

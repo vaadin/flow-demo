@@ -11,7 +11,7 @@ import com.vaadin.ui.CssLayout;
 @PolymerStyle("button-styles")
 public class ButtonSample extends SampleBase {
 
-    private final EventListener<TransitionendEvent> transitionListener = event -> onEvent(
+    private final EventListener<TransitionendEvent<PaperButton>> transitionListener = event -> onEvent(
             event);
 
     public ButtonSample() {

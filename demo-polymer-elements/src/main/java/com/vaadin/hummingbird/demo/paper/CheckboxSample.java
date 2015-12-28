@@ -10,7 +10,7 @@ import com.vaadin.ui.CssLayout;
 @PolymerStyle("checkbox-styles")
 public class CheckboxSample extends SampleBase {
 
-    private final EventListener<ChangeEvent> changeListener = event -> onEvent(
+    private final EventListener<ChangeEvent<PaperCheckbox>> changeListener = event -> onEvent(
             event);
 
     public CheckboxSample() {

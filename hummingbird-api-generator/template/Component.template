@@ -90,15 +90,16 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
        return this;
     }
 <% }); %>
-<% if (hasEvents()) _.forEach(events, function(event){ %>
+<% if (hasEvents()) _.forEach(events, function(event){
+	var eventClassName = getEventName(event.name, event.ns);%>
     /**
      * <%= getDescription('     ', event) %>
      *
      * JavaScript Info:
      * @event <%= event.name %>
      */
-    public <%= className() %> add<%= camelCase(event.name) %>Listener(EventListener<<%= camelCase(event.name) %>Event> listener) {
-        ElementEvents.addElementListener(this, <%= camelCase(event.name) %>Event.class,
+    public <%= className() %> add<%= camelCase(event.name) %>Listener(EventListener<<%= eventClassName %><<%= className() %>>> listener) {
+        ElementEvents.addElementListener(this, <%= eventClassName %>.class,
             listener);
         return this;
     }

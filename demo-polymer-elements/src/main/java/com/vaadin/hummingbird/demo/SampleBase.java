@@ -9,6 +9,7 @@ import com.vaadin.hummingbird.paper.PaperDialog;
 import com.vaadin.hummingbird.paper.PaperItem;
 import com.vaadin.hummingbird.paper.PaperTab;
 import com.vaadin.hummingbird.polymer.PolymerComponent;
+import com.vaadin.hummingbird.polymer.PolymerComponentEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HTML;
@@ -29,13 +30,14 @@ public class SampleBase extends CssLayout {
 
     private int eventCounter;
 
-    protected void onEvent(Component.Event event) {
+    protected void onEvent(PolymerComponentEvent event) {
         StringBuilder stringBuilder = new StringBuilder(
                 "Event " + eventCounter++ + ": ")
                         .append(event.getClass().getSimpleName())
-                        .append(", Source Text Content: ")
-                        .append(((PolymerComponent<?>) event.getComponent())
-                                .getTextContent());
+                        .append(", Source: ")
+                        .append(event.getSource().getClass().getSimpleName())
+                        .append(", Text Content: ")
+                        .append(event.getPolymerComponent().getTextContent());
         final PaperDialog dialog = new PaperDialog();
         dialog.setEntryAnimation("scale-up-animation")
                 .setExitAnimation("fade-out-animation")
