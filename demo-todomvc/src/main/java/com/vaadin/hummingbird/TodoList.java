@@ -42,8 +42,7 @@ public class TodoList extends Template {
 
         public void setTodos(List<Todo> todods);
 
-        public void setTodoCount(int todoCount);
-
+        @JS("todos.length")
         public int getTodoCount();
 
         public void setCompleteCount(int completeCount);
@@ -110,9 +109,6 @@ public class TodoList extends Template {
         TodoListModel model = getModel();
 
         model.setCompleteCount(completeCount);
-
-        int todoCount = getTodos().size();
-        model.setTodoCount(todoCount);
     }
 
     public boolean isCompleted(int todoIndex) {
