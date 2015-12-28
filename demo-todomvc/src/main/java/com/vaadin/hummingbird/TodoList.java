@@ -98,6 +98,11 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
+    public void logAllCompleted() {
+        long completed = getTodos().stream().filter(Todo::isCompleted).count();
+        System.out.println("Toggle all completed: " + completed);
+    }
+
     public void setAllCompleted(boolean completed) {
         List<Todo> todos = getTodos();
         todos.forEach(todo -> todo.setCompleted(completed));
