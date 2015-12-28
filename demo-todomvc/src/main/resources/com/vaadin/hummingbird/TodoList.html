@@ -21,14 +21,14 @@
 					[class.editing]="todo.editing">
 					<div class="view" [class.hidden]="todo.editing">
 						<!-- todo.complete=this.checked; -->
-						<input (click)="todo.completed = element.checked; server.logTodoCompleted(element)"
+						<input (click)="todo.completed = element.checked; server.logTodoCompleted(todo)"
 							class="toggle" type="checkbox" [checked]="todo.completed">
 						<label
 							(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
-						<button class="destroy" (click)="server.removeTodo(element)"></button>
+						<button class="destroy" (click)="server.removeTodo(todo)"></button>
 					</div> <input #edit class="edit" [value]="todo.title"
-					(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}"
-					(change)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(element)}">
+					(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(todo)}"
+					(change)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(todo)}">
 				</li>
 			</ul>
 		</section>

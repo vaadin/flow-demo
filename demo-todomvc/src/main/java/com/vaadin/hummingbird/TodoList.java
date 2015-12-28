@@ -19,7 +19,6 @@ import java.util.List;
 
 import com.vaadin.annotations.JS;
 import com.vaadin.annotations.TemplateEventHandler;
-import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.ui.Template;
 
 public class TodoList extends Template {
@@ -73,14 +72,9 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    protected void logTodoCompleted(Element element) {
-        Todo todo = getTodoForElement(element);
+    protected void logTodoCompleted(Todo todo) {
         System.out.println("Todo \"" + todo.getTitle() + "\".completed: "
                 + todo.isCompleted());
-    }
-
-    private Todo getTodoForElement(Element element) {
-        return Model.wrap(element.getNode(), Todo.class);
     }
 
     public boolean isCompleted(int todoIndex) {
@@ -88,16 +82,11 @@ public class TodoList extends Template {
     }
 
     @TemplateEventHandler
-    private void handleEditBlur(Element element) {
-        Todo todo = getTodoForElement(element);
+    private void handleEditBlur(Todo todo) {
         System.out.println("Title changed to: " + todo.getTitle());
     }
 
     @TemplateEventHandler
-    protected void removeTodo(Element element) {
-        removeTodo(getTodoForElement(element));
-    }
-
     private void removeTodo(Todo todo) {
         getTodos().remove(todo);
     }
