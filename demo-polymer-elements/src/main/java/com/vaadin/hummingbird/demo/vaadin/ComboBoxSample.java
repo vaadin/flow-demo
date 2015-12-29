@@ -11,14 +11,18 @@ public class ComboBoxSample extends SampleBase {
     private static final String[] OPTIONS = { "foo", "bar", "baz" };
 
     public ComboBoxSample() {
-        addBasic();
-        addPreselected();
-        addDisabled();
-        addValueChangeListener();
+        CssLayout root = root();
+        addComponent(root);
+
+        addBasic(root);
+        addPreselected(root);
+        addDisabled(root);
+        addValueChangeListener(root);
     }
 
-    private void addBasic() {
-        CssLayout section = createHorizontalSection(this, "Basic");
+    private void addBasic(CssLayout root) {
+        CssLayout section = createHorizontalSection(root, "Basic");
+        section.setWidth("250px");
 
         VaadinComboBox comboBox = new VaadinComboBox()
                 .setLabel("Foo, bar or baz");
@@ -26,12 +30,11 @@ public class ComboBoxSample extends SampleBase {
         addOptions(comboBox);
 
         section.addComponent(comboBox);
-
-        addComponent(section);
     }
 
-    private void addPreselected() {
-        CssLayout section = createHorizontalSection(this, "Preselected Value");
+    private void addPreselected(CssLayout root) {
+        CssLayout section = createHorizontalSection(root, "Preselected Value");
+        section.setWidth("250px");
 
         VaadinComboBox comboBox = new VaadinComboBox()
                 .setLabel("Foo, bar or baz").setValue("baz");
@@ -39,13 +42,12 @@ public class ComboBoxSample extends SampleBase {
         addOptions(comboBox);
 
         section.addComponent(comboBox);
-
-        addComponent(section);
     }
 
-    private void addDisabled() {
-        CssLayout section = createHorizontalSection(this,
+    private void addDisabled(CssLayout root) {
+        CssLayout section = createHorizontalSection(root,
                 "Disabled (missing from element)");
+        section.setWidth("250px");
 
         VaadinComboBox comboBox = new VaadinComboBox()
                 .setLabel("Foo, bar or baz").setDisabled(true);
@@ -53,13 +55,12 @@ public class ComboBoxSample extends SampleBase {
         addOptions(comboBox);
 
         section.addComponent(comboBox);
-
-        addComponent(section);
     }
 
-    private void addValueChangeListener() {
-        CssLayout section = createHorizontalSection(this,
+    private void addValueChangeListener(CssLayout root) {
+        CssLayout section = createHorizontalSection(root,
                 "With ValueChangeListener");
+        section.setWidth("250px");
 
         VaadinComboBox comboBox = new VaadinComboBox()
                 .setLabel("Foo, bar or baz");
@@ -74,8 +75,6 @@ public class ComboBoxSample extends SampleBase {
                         .open()));
 
         section.addComponent(comboBox);
-
-        addComponent(section);
     }
 
     private void addOptions(VaadinComboBox comboBox) {
