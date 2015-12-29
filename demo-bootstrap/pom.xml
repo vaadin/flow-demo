@@ -28,13 +28,23 @@
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-testbench</artifactId>
-			<version>4.0.3</version>
+			<artifactId>demo-test-util</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
+                <resources>
+                        <resource>
+                                <directory>src/main/resources</directory>
+                        </resource>
+                        <resource>
+                                <directory>.</directory>
+                                <includes>
+                                        <include>bower_components/**</include>
+                                </includes>
+                        </resource>
+                </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -58,6 +68,28 @@
                                                         <goal>install-node-and-npm</goal>
                                                         <goal>npm</goal>
                                                         <goal>bower</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                        <plugin>
+                                <groupId>org.eclipse.jetty</groupId>
+                                <artifactId>jetty-maven-plugin</artifactId>
+                                <executions>
+                                        <!-- start and stop jetty (running our app) when running integration 
+                                                tests -->
+                                        <execution>
+                                                <id>start-jetty</id>
+                                                <phase>pre-integration-test</phase>
+                                                <goals>
+                                                        <goal>start</goal>
+                                                </goals>
+                                        </execution>
+                                        <execution>
+                                                <id>stop-jetty</id>
+                                                <phase>post-integration-test</phase>
+                                                <goals>
+                                                        <goal>stop</goal>
                                                 </goals>
                                         </execution>
                                 </executions>

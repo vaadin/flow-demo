@@ -41,26 +41,25 @@
 		   <artifactId>JsonContainer</artifactId>
 		   <version>0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-testbench</artifactId>
-			<version>4.0.3</version>
-			<scope>test</scope>
-		</dependency>
+                <dependency>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>demo-test-util</artifactId>
+                        <scope>test</scope>
+                </dependency>
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>.</directory>
-				<includes>
-					<include>bower_components/**</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
+                <resources>
+                        <resource>
+                                <directory>src/main/resources</directory>
+                        </resource>
+                        <resource>
+                                <directory>.</directory>
+                                <includes>
+                                        <include>bower_components/**</include>
+                                </includes>
+                        </resource>
+                </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

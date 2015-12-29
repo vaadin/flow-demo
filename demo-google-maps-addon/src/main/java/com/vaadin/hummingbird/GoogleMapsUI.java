@@ -40,14 +40,22 @@ public class GoogleMapsUI extends UI {
         });
         maps.addMarker(vaadinHqMarker);
 
-        GeoLocation loc = new GeoLocation();
-        loc.addGeoResponseListener(e -> {
-            log("Geo response: " + e.getLatitude() + "," + e.getLongitude());
-            maps.setLatitude(e.getLatitude());
-            maps.setLongitude(e.getLongitude());
-        });
+        l.addComponent(maps);
+        if (!getPage().getWebBrowser().getBrowserApplication()
+                .contains("PhantomJS")) {
+            // PhantomJS does not support geolocation and the component can't
+            // handle browsers which do not support it
+            GeoLocation loc = new GeoLocation();
+            loc.addGeoResponseListener(e -> {
+                log("Geo response: " + e.getLatitude() + ","
+                        + e.getLongitude());
+                maps.setLatitude(e.getLatitude());
+                maps.setLongitude(e.getLongitude());
+            });
+            l.addComponent(loc);
+        }
 
-        l.addComponents(maps, loc, log);
+        l.addComponent(log);
         setContent(l);
     }
 

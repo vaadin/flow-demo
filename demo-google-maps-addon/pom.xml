@@ -29,7 +29,7 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird-core-elements</artifactId>
 		</dependency>
-	</dependencies>
+	<dependency><groupId>com.vaadin</groupId><artifactId>demo-test-util</artifactId><scope>test</scope></dependency></dependencies>
 
 	<build>
 		<resources>
@@ -63,6 +63,28 @@
                                                         <goal>install-node-and-npm</goal>
                                                         <goal>npm</goal>
                                                         <goal>bower</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+			<plugin>
+                                <groupId>org.eclipse.jetty</groupId>
+                                <artifactId>jetty-maven-plugin</artifactId>
+                                <executions>
+                                        <!-- start and stop jetty (running our app) when running integration 
+                                                tests -->
+                                        <execution>
+                                                <id>start-jetty</id>
+                                                <phase>pre-integration-test</phase>
+                                                <goals>
+                                                        <goal>start</goal>
+                                                </goals>
+                                        </execution>
+                                        <execution>
+                                                <id>stop-jetty</id>
+                                                <phase>post-integration-test</phase>
+                                                <goals>
+                                                        <goal>stop</goal>
                                                 </goals>
                                         </execution>
                                 </executions>
