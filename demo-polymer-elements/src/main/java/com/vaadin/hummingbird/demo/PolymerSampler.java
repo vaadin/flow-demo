@@ -7,6 +7,7 @@ import com.vaadin.hummingbird.demo.paper.DialogSample;
 import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.demo.paper.FabSample;
 import com.vaadin.hummingbird.demo.paper.HeaderPanelSample;
+import com.vaadin.hummingbird.demo.paper.IconButtonSample;
 import com.vaadin.hummingbird.demo.vaadin.ComboBoxSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
@@ -62,20 +63,18 @@ public class PolymerSampler extends CssLayout {
     private void addSamples() {
         final IronSelector paperCollapse = addCategory("paper",
                 "Paper Elements");
-        paperCollapse
-                .with(addSample("Button", false), addSample("CheckBox", false),
-                        addSample("Dialog", false), addSample("DropdownMenu",
-                                false),
-                        addSample("Floating Button", false),
-                        addSample("Header Panel", false),
-                        addSample("Icon Button"), addSample("Item"),
-                        addSample("Input"), addSample("Material"),
-                        addSample("Menu"), addSample("Progress"),
-                        addSample("Radio Button"), addSample("Radio Group"),
-                        addSample("Ripple"), addSample("Spinner"),
-                        addSample("Slider"), addSample("Tabs"),
-                        addSample("Toast"), addSample("Toggle Button"),
-                        addSample("Toolbar"));
+        paperCollapse.with(addSample("Button", false),
+                addSample("CheckBox", false), addSample("Dialog", false),
+                addSample("DropdownMenu", false),
+                addSample("Floating Button", false),
+                addSample("Header Panel", false),
+                addSample("Icon Button", false), addSample("Item"),
+                addSample("Input"), addSample("Material"), addSample("Menu"),
+                addSample("Progress"), addSample("Radio Button"),
+                addSample("Radio Group"), addSample("Ripple"),
+                addSample("Spinner"), addSample("Slider"), addSample("Tabs"),
+                addSample("Toast"), addSample("Toggle Button"),
+                addSample("Toolbar"));
 
         addCategory("iron", "Iron Elements").with(addSample("Collapse"),
                 addSample("Image"), addSample("List"), addSample("Selector"));
@@ -132,7 +131,8 @@ public class PolymerSampler extends CssLayout {
             return new FabSample();
         case "Header Panel":
             return new HeaderPanelSample();
-        // case "IconButtonSample": return new IconButtonSample();
+        case "Icon Button":
+            return new IconButtonSample();
         // case "ItemSample": return new ItemSample();
         // case "InputSample": return new InputSample();
         // case "MaterialSample": return new MaterialSample();
