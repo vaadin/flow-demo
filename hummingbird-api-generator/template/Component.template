@@ -56,9 +56,10 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
      */<%= unSupportedType === '' ? '' :
 '\n    @NotYetImplemented'%>
     public <%= className() %> <%= item.setter %> {<%
-     if (unSupportedType === '') { %>
-        <%= item.type !== 'Boolean' ? 'getElement().setAttribute("' : 'setBooleanAttribute("'
-        %><%= hyphenize(item.name) %>", value);<% } else { %>
+     if (unSupportedType === '') {
+     	if (item.type !== 'Boolean') { %>
+        getElement().getTemplate().setAttribute("<%= hyphenize(item.name) %>", value, getElement().getNode());<% } else { %>
+     	setBooleanAttribute("<%= hyphenize(item.name) %>", value);<% } } else { %>
     	// TODO <%= unSupportedType %> type properties not supported yet<% } %>
         return this;
     }
@@ -75,8 +76,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
         getElement().setAttribute("attr.<%= hyphenize(item.name) %>", value);
         return this;
     }
-<% }); %>
-<% _.forEach(getMethods(properties), function(item) { var params = paramsString(item); %>
+<% }); _.forEach(getMethods(properties), function(item) { var params = paramsString(item); %>
     /**
      * <%= getDescription('     ', item) %>
      *
@@ -87,7 +87,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
      */
     public <%= className() %> <%= item.method %> {
         elementFunctionCall("<%= item.name %>"<%= (params === '' ? '' : ', ') + params %>);
-       return this;
+        return this;
     }
 <% }); %>
 <% if (hasEvents()) _.forEach(events, function(event){
@@ -98,7 +98,8 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
      * JavaScript Info:
      * @event <%= event.name %>
      */
-    public <%= className() %> add<%= camelCase(event.name) %>Listener(EventListener<<%= eventClassName %><<%= className() %>>> listener) {
+    public <%= className() %> add<%= camelCase(event.name) %>Listener(
+    		EventListener<<%= eventClassName %><<%= className() %>>> listener) {
         ElementEvents.addElementListener(this, <%= eventClassName %>.class,
             listener);
         return this;

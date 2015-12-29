@@ -154,7 +154,7 @@ module.exports = {
   isUnSupportedType: function(item) {
   	if (!item) return 'Object';
 	if (/object/i.test(item.type)) return 'Object';
-	if (/^array/i.test(item.type)) return 'Array';
+//	if (/^array/i.test(item.type)) return 'Array';
 	if (/^function/i.test(item.type)) return 'Function';
 	if (/element/i.test(item.type)) return 'Element';
 	if (/node/i.test(item.type)) return 'Node';
