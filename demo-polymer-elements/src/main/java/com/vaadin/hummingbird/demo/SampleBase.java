@@ -64,6 +64,21 @@ public class SampleBase extends CssLayout {
         return sectionContent;
     }
 
+    protected CssLayout createList(CssLayout sectionParent, String name) {
+        CssLayout sectionRoot = layout(null);
+        HTML header = element("h4", name, false);
+        CssLayout sectionContent = layout("list");
+        sectionRoot.addComponents(header, sectionContent);
+        sectionParent.addComponent(sectionRoot);
+        return sectionContent;
+    }
+
+    protected CssLayout createListShort(CssLayout sectionParent, String name) {
+        CssLayout list = createList(sectionParent, name);
+        list.addStyleName("short");
+        return list;
+    }
+
     protected HTML style(String styling) {
         HTML style = new HTML("<style></style>");
         style.setInnerHtml(styling);

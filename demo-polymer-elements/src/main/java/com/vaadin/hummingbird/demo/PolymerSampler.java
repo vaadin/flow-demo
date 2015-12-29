@@ -8,6 +8,7 @@ import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.demo.paper.FabSample;
 import com.vaadin.hummingbird.demo.paper.HeaderPanelSample;
 import com.vaadin.hummingbird.demo.paper.IconButtonSample;
+import com.vaadin.hummingbird.demo.paper.ItemSample;
 import com.vaadin.hummingbird.demo.vaadin.ComboBoxSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
 import com.vaadin.hummingbird.iron.IronFlexLayout;
@@ -68,7 +69,7 @@ public class PolymerSampler extends CssLayout {
                 addSample("DropdownMenu", false),
                 addSample("Floating Button", false),
                 addSample("Header Panel", false),
-                addSample("Icon Button", false), addSample("Item"),
+                addSample("Icon Button", false), addSample("Item", false),
                 addSample("Input"), addSample("Material"), addSample("Menu"),
                 addSample("Progress"), addSample("Radio Button"),
                 addSample("Radio Group"), addSample("Ripple"),
@@ -133,7 +134,8 @@ public class PolymerSampler extends CssLayout {
             return new HeaderPanelSample();
         case "Icon Button":
             return new IconButtonSample();
-        // case "ItemSample": return new ItemSample();
+        case "Item":
+            return new ItemSample();
         // case "InputSample": return new InputSample();
         // case "MaterialSample": return new MaterialSample();
         // case "MenuSample": return new MenuSample();
