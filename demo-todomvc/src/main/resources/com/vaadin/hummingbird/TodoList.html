@@ -2,14 +2,11 @@
 	<section class="todoapp">
 		<header class="header">
 			<h1>todos</h1>
-			<!-- Event handler script must be run in context where everything "exported" by TodoList.js is defined -->
 			<input id="new-todo" #newtodo class="new-todo"
 				placeholder="What needs to be done?"
 				autofocus
 			(keyup)="if (event.keyCode != 13 || element.value==='') return; server.addTodo(element.value); element.value = '';" />
 		</header>
-		<!-- Content comes here -->
-		<!-- This section should be hidden by default and shown when there are todos -->
 		<section class="main" [class.hidden]="todoCount == 0">
 			<input id="toggle-all" class="toggle-all" type="checkbox"
 				[checked]="remainingCount == 0"
@@ -20,11 +17,10 @@
 				<li *ng-for="#todo of todos" [class.completed]="todo.completed"
 					[class.editing]="todo.editing">
 					<div class="view" [class.hidden]="todo.editing">
-						<!-- todo.complete=this.checked; -->
 						<input (click)="todo.completed = element.checked; server.logTodoCompleted(todo)"
 							class="toggle" type="checkbox" [checked]="todo.completed">
 						<label
-							(dblclick)="todo.editing = true; setTimeout(function() {element.parentElement.parentElement.querySelector('input.edit').focus();}, 0)">{{todo.title}}</label>
+							(dblclick)="todo.editing = true; setTimeout(function() {edit.focus();}, 0)">{{todo.title}}</label>
 						<button class="destroy" (click)="server.removeTodo(todo)"></button>
 					</div> <input #edit class="edit" [value]="todo.title"
 					(blur)="todo.editing = false; if (todo.title != element.value) {todo.title = element.value; server.handleEditBlur(todo)}"
@@ -32,9 +28,7 @@
 				</li>
 			</ul>
 		</section>
-		<!-- This footer should hidden by default and shown when there are todos -->
 		<footer class="footer" [class.hidden]="todoCount == 0">
-			<!-- This should be `0 items left` by default -->
 			<span class="todo-count" [class.hidden]="remainingCount == 0"
 				id="itemsLeft"><strong>{{remainingCount}}</strong> items left</span>
 			<!-- Remove this if you don't implement routing -->
@@ -44,7 +38,6 @@
 				</li>
 				<li><a class.selected="completedFilter" href="#completed">Completed</a></li>
 			</ul>
-			<!-- Hidden if no completed items are left ↓ -->
 			<button #clearCompleted [class.hidden]="completeCount == 0"
 				class="clear-completed" (click)="server.clearCompleted()">Clear
 				completed</button>
