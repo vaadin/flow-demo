@@ -154,7 +154,6 @@ module.exports = {
   isUnSupportedType: function(item) {
   	if (!item) return 'Object';
 	if (/object/i.test(item.type)) return 'Object';
-//	if (/^array/i.test(item.type)) return 'Array';
 	if (/^function/i.test(item.type)) return 'Function';
 	if (/element/i.test(item.type)) return 'Element';
 	if (/node/i.test(item.type)) return 'Node';
@@ -246,8 +245,7 @@ module.exports = {
     var ret = [];
     var done = {};
     _.forEach(properties, function(item) {
-      var retType = this.returnString(item);
-      if (retType == 'void' && !gsetters[item.name] && !item.getter && !item.private && !item.published && /function/i.test(item.type)) {
+      if (!gsetters[item.name] && !item.getter && !item.private && !item.published && /function/i.test(item.type)) {
         item.method = item.method || item.name + '(' + this.typedParamsString(item) + ')';
         if (!gsetters[item.method] && !done[item.method]) {
           ret.push(item);
