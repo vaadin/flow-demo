@@ -3,27 +3,15 @@ package com.vaadin.hummingbird.polymer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.vaadin.hummingbird.kernel.DomEventListener;
+import com.vaadin.event.ElementEvents;
+import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.kernel.Element;
-import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
 import com.vaadin.ui.Component;
-
-import elemental.json.JsonObject;
 
 @SuppressWarnings("serial")
 public abstract class PolymerComponent<T extends PolymerComponent<T>>
         extends AbstractSimpleDOMComponentContainer {
-
-    public interface PolymerComponentClickListener extends DomEventListener {
-
-        void handleClickEvent(MouseEventDetails mouseEventDetails);
-
-        @Override
-        default void handleEvent(JsonObject eventData) {
-            handleClickEvent(new MouseEventDetails(eventData));
-        }
-    }
 
     protected abstract T getThis();
 
@@ -101,13 +89,8 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         return getThis();
     }
 
-    public T withClickListener(PolymerComponentClickListener listener) {
-        if (!getElement().hasEventListeners("click")) {
-            getElement().addEventData("click",
-                    MouseEventDetails.getEventProperties());
-        }
-        getElement().addEventListener("click", listener);
-
+    public T withClickListener(EventListener<ClickEvent<T>> listener) {
+        ElementEvents.addElementListener(this, ClickEvent.class, listener);
         return getThis();
     }
 
