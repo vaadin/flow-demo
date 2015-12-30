@@ -8,6 +8,7 @@ import com.vaadin.hummingbird.demo.paper.DropdownMenuSample;
 import com.vaadin.hummingbird.demo.paper.FabSample;
 import com.vaadin.hummingbird.demo.paper.HeaderPanelSample;
 import com.vaadin.hummingbird.demo.paper.IconButtonSample;
+import com.vaadin.hummingbird.demo.paper.InputSample;
 import com.vaadin.hummingbird.demo.paper.ItemSample;
 import com.vaadin.hummingbird.demo.vaadin.ComboBoxSample;
 import com.vaadin.hummingbird.iron.IronCollapse;
@@ -69,13 +70,13 @@ public class PolymerSampler extends CssLayout {
                 addSample("DropdownMenu", false),
                 addSample("Floating Button", false),
                 addSample("Header Panel", false),
-                addSample("Icon Button", false), addSample("Item", false),
-                addSample("Input"), addSample("Material"), addSample("Menu"),
-                addSample("Progress"), addSample("Radio Button"),
-                addSample("Radio Group"), addSample("Ripple"),
-                addSample("Spinner"), addSample("Slider"), addSample("Tabs"),
-                addSample("Toast"), addSample("Toggle Button"),
-                addSample("Toolbar"));
+                addSample("Icon Button", false), addSample("Input", false),
+                addSample("Item", false), addSample("Material"),
+                addSample("Menu"), addSample("Progress"),
+                addSample("Radio Button"), addSample("Radio Group"),
+                addSample("Ripple"), addSample("Spinner"), addSample("Slider"),
+                addSample("Tabs"), addSample("Toast"),
+                addSample("Toggle Button"), addSample("Toolbar"));
 
         addCategory("iron", "Iron Elements").with(addSample("Collapse"),
                 addSample("Image"), addSample("List"), addSample("Selector"));
@@ -136,7 +137,8 @@ public class PolymerSampler extends CssLayout {
             return new IconButtonSample();
         case "Item":
             return new ItemSample();
-        // case "InputSample": return new InputSample();
+        case "Input":
+            return new InputSample();
         // case "MaterialSample": return new MaterialSample();
         // case "MenuSample": return new MenuSample();
         // case "ProgressSample": return new ProgressSample();

@@ -64,6 +64,16 @@ public class SampleBase extends CssLayout {
         return sectionContent;
     }
 
+    protected CssLayout createVerticalSection(CssLayout sectionParent,
+            String name) {
+        CssLayout sectionRoot = layout(null);
+        HTML header = element("h4", name, false);
+        CssLayout sectionContent = layout("vertical-section");
+        sectionRoot.addComponents(header, sectionContent);
+        sectionParent.addComponent(sectionRoot);
+        return sectionContent;
+    }
+
     protected CssLayout createList(CssLayout sectionParent, String name) {
         CssLayout sectionRoot = layout(null);
         HTML header = element("h4", name, false);
