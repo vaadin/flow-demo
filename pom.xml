@@ -37,6 +37,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<hummingbird.polymer.elements.path>hummingbird-polymer-elements-api</hummingbird.polymer.elements.path>
 		<node.version>v5.3.0</node.version>
 		<npm.version>2.11.0</npm.version>
