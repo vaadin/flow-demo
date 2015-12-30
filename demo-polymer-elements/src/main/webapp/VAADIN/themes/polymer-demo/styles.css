@@ -11,3 +11,7 @@ body:not([style-scope]):not(.style-scope) {
     padding: 24px;
     background-color: #fafafa;
 }
+
+.menu-sample .horizontal-section {
+	padding: 0 !important;
+}
