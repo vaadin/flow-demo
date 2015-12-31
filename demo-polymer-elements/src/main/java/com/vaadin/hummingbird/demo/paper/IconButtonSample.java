@@ -2,7 +2,9 @@ package com.vaadin.hummingbird.demo.paper;
 
 import com.vaadin.annotations.PolymerStyle;
 import com.vaadin.hummingbird.demo.SampleBase;
+import com.vaadin.hummingbird.paper.PaperDialog;
 import com.vaadin.hummingbird.paper.PaperIconButton;
+import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HTML;
 
@@ -24,7 +26,16 @@ public class IconButtonSample extends SampleBase {
         CssLayout section = createHorizontalSection(root, "Enabled");
 
         section.addComponents(
-                new PaperIconButton().setIconPolymer("menu").setTitle("menu"),
+                new PaperIconButton().setIconPolymer("menu")
+                        .setTitle(
+                                "menu")
+                .withClassName("with-click-listener")
+                .withClickListener(e -> ((AbstractSimpleDOMComponentContainer) e
+                        .getPolymerComponent().getParent()).addComponent(
+                                new PaperDialog().withClassName("event-dialog")
+                                        .setTextContent(
+                                                "EVENT: " + e.toString())
+                                        .open())),
                 new PaperIconButton().setIconPolymer("favorite")
                         .setTitle("heart"),
                 new PaperIconButton().setIconPolymer("arrow-back")
@@ -90,6 +101,7 @@ public class IconButtonSample extends SampleBase {
                         .setTitle("heart").withClassName("huge"),
                 new HTML("<br>"), new HTML("<br>"), new HTML("<br>"),
                 new PaperIconButton().setIconPolymer("polymer")
+                        .withClassName(LAST_COMPONENT_CLASS_NAME)
                         .setTitle("polymer").withClassName("huge"));
     }
 }

@@ -108,7 +108,7 @@ public class ButtonSample extends SampleBase {
 
         sectionContent.addComponent(new PaperButton().setToggles(true)
                 .setActive(true).setRaised(true).withClassName("colorful")
-                .setTextContent("colorful")
+                .setTextContent("colorful").withClassName("testing-button")
                 .addTransitionendListener(transitionListener));
 
         sectionContent.addComponent(new PaperButton().setToggles(true)
@@ -152,6 +152,7 @@ public class ButtonSample extends SampleBase {
 
         sectionContent.addComponent(
                 new PaperButton().setNoink(false).withClassName("blue ripple")
+                        .withClassName(LAST_COMPONENT_CLASS_NAME)
                         .with(new IronIcon().setIconPolymer("clear"))
                         .appendTextContent("cancel")
                         .addTransitionendListener(transitionListener));

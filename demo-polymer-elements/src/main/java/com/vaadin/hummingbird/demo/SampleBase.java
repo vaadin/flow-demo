@@ -16,6 +16,8 @@ import com.vaadin.ui.HTML;
 
 public class SampleBase extends CssLayout {
 
+    public static final String LAST_COMPONENT_CLASS_NAME = "last";
+
     private static String[] letters = { "alpha", "beta", "gamma", "delta",
             "epsilon" };
 
@@ -41,6 +43,7 @@ public class SampleBase extends CssLayout {
         final PaperDialog dialog = new PaperDialog();
         dialog.setEntryAnimation("scale-up-animation")
                 .setExitAnimation("fade-out-animation")
+                .withClassName("event-dialog")
                 .with(new PaperButton().setTextContent(stringBuilder.toString())
                         .withClickListener(e -> dialog.setOpened(false)))
                 .setOpened(true);

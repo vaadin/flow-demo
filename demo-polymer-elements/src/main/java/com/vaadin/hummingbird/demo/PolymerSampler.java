@@ -91,7 +91,9 @@ public class PolymerSampler extends CssLayout {
     private IronSelector addCategory(String path, String name) {
         final IronCollapse collapse = new IronCollapse();
 
-        PaperItem item = new PaperItem().withClassName("category")
+        PaperItem item = new PaperItem()
+                .withClassName("category "
+                        + name.toLowerCase().replace(" ", "-") + "-category")
                 .with(new IronIcon().setIconPolymer("expand-more"),
                         createSpanElement(name), new PaperRipple())
                 .withClickListener(
@@ -111,7 +113,8 @@ public class PolymerSampler extends CssLayout {
 
     private PaperItem addSample(String name, boolean disabled) {
         return new PaperItem().setDisabled(disabled)
-                .with(createSpanElement(name)).withClassName("item")
+                .with(createSpanElement(name))
+                .withClassName("item " + name.toLowerCase() + "-sample")
                 .withClickListener(event -> openSample(name));
     }
 

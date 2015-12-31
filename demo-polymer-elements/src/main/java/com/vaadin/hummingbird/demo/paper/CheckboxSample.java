@@ -75,8 +75,8 @@ public class CheckboxSample extends SampleBase {
                 .setChecked(true).setTextContent("Nitrogen")
                 .addChangeListener(changeListener));
         sectionContent.addComponent(new PaperCheckbox().withClassName("blue")
-                .setChecked(true).setTextContent("Calcium")
-                .addChangeListener(changeListener));
+                .withClassName(LAST_COMPONENT_CLASS_NAME).setChecked(true)
+                .setTextContent("Calcium").addChangeListener(changeListener));
     }
 
 }
