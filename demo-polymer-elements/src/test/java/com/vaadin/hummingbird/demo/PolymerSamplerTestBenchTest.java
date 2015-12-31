@@ -29,9 +29,9 @@ public abstract class PolymerSamplerTestBenchTest extends DemoTestBenchTest {
             String hubUrl = "http://tb3-hub.intra.itmill.com:4444/wd/hub";
 
             DesiredCapabilities capabilities = new DesiredCapabilities(
-                    BrowserType.CHROME, "", Platform.LINUX);
-                    // capabilities.setCapability("binary",
-                    // "/usr/bin/google-chrome");
+                    BrowserType.PHANTOMJS, "2", Platform.LINUX);
+            capabilities.setCapability("phantomjs.binary.path",
+                    "/usr/bin/phantomjs2");
 
             // com.vaadin.testbench.deployment.url is based on framework dev
             // server settings, use jetty:run port instead
