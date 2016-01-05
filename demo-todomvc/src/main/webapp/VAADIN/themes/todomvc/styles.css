@@ -1,7 +1,3 @@
-.v-loading-indicator {
-	height: 20px;
-}
-
 .v-app > .v-scrollable:focus{
     outline: 0;
 }
