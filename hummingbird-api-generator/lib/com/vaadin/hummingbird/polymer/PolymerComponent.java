@@ -3,6 +3,7 @@ package com.vaadin.hummingbird.polymer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.vaadin.annotations.EventType;
 import com.vaadin.event.ElementEvents;
 import com.vaadin.event.EventListener;
 import com.vaadin.hummingbird.kernel.Element;
@@ -117,6 +118,27 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
 
     public T with(Component... components) {
         addComponents(components);
+        return getThis();
+    }
+
+    public T addEventData(String eventType, String... data) {
+        getElement().addEventData(eventType, data);
+        return getThis();
+    }
+
+    public T addEventData(Class<? extends PolymerComponentEvent> eventType,
+            String... data) {
+        EventType ann = eventType.getAnnotation(EventType.class);
+        if (ann == null) {
+            throw new IllegalArgumentException(
+                    "Event type " + eventType.getName() + " should have an @"
+                            + EventType.class.getSimpleName() + " annotation");
+        }
+        return addEventData(ann.value(), data);
+    }
+
+    public T removeEventData(String eventType, String... data) {
+        getElement().removeEventData(eventType, data);
         return getThis();
     }
 
