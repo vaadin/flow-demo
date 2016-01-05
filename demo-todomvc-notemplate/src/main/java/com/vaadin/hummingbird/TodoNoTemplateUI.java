@@ -2,7 +2,7 @@ package com.vaadin.hummingbird;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -10,7 +10,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
-@Theme("todomvc")
+@StyleSheet("vaadin://themes/todomvc/styles.css")
 public class TodoNoTemplateUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = TodoNoTemplateUI.class, productionMode = false)

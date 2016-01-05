@@ -2,7 +2,7 @@ package com.vaadin.hummingbird;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.NavigationStateManager;
@@ -15,7 +15,7 @@ import com.vaadin.server.VaadinServletRequest;
 import com.vaadin.ui.Template;
 import com.vaadin.ui.UI;
 
-@Theme("simplecrm")
+@StyleSheet("vaadin://themes/simplecrm/styles.css")
 @Title("Hummingbird Simple CRM")
 public class CrmUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

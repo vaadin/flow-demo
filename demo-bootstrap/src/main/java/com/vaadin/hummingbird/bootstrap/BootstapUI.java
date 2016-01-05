@@ -4,15 +4,14 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.bootstrap.components.Button;
+import com.vaadin.hummingbird.bootstrap.components.Button.Size;
 import com.vaadin.hummingbird.bootstrap.components.Container;
 import com.vaadin.hummingbird.bootstrap.components.Heading;
 import com.vaadin.hummingbird.bootstrap.components.Jumbotron;
 import com.vaadin.hummingbird.bootstrap.components.PageHeader;
 import com.vaadin.hummingbird.bootstrap.components.Paragraph;
-import com.vaadin.hummingbird.bootstrap.components.Button.Size;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.CssLayout;
@@ -23,8 +22,6 @@ import com.vaadin.ui.UI;
         "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" })
 @JavaScript({ "https://code.jquery.com/jquery-1.9.1.min.js",
         "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" })
-// Mainly to avoid waiting for the loading indicator styles
-@Theme("valo")
 public class BootstapUI extends UI {
     @Override
     protected void init(VaadinRequest request) {

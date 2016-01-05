@@ -2,7 +2,7 @@ package com.vaadin.hummingbird.addressbook;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.util.BeanItemContainer;
@@ -21,7 +21,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Title("Addressbook")
-@Theme("valo")
+@StyleSheet("vaadin://themes/valo/styles.css")
 public class AddressbookUI extends UI {
 
     TextField filter = new TextField();
