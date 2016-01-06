@@ -2,6 +2,7 @@ package com.vaadin.hummingbird.demo;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
@@ -10,6 +11,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.UI;
 
+@Push
 @com.vaadin.annotations.HTML({ "vaadin://themes/polymer/polymer-styles.html",
         "context://bower_components/paper-styles/demo-pages.html",
         "context://bower_components/neon-animation/neon-animation.html" })

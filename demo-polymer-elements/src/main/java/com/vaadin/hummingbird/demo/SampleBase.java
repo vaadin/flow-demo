@@ -115,6 +115,10 @@ public class SampleBase extends CssLayout {
         return cssLayout;
     }
 
+    protected HTML br() {
+        return new HTML("</br>");
+    }
+
     protected HTML element(String tag) {
         return new HTML(new StringBuilder("<").append(tag).append("></")
                 .append(tag).append(">").toString());
