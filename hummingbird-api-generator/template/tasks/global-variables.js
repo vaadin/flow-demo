@@ -1,5 +1,6 @@
 var args = require('minimist')(process.argv.slice(2));
 var gutil = require('gulp-util');
+var path = require('path');
 
 var ns = args.groupId || "com.vaadin.hummingbird";
 var nspath = ns.replace(/\./g,'/');
@@ -9,9 +10,7 @@ var generatedDirBase;
 var clientDirBase;
 var publicDirBase;
 if (args.all || args.polymer || args.vaadin) {
-  var parentDir = currentDir.split('/');
-  parentDir.pop();
-  parentDir = parentDir.join('/');
+  var parentDir = path.join(currentDir, "..");
   generatedDirBase = parentDir + '/hummingbird-polymer-elements-api';
   clientDirBase = generatedDirBase + '/src/main/java';
   publicDirBase = generatedDirBase + '/src/main/resources';

@@ -27,7 +27,7 @@
 		<module>demo-bootstrap4</module>
 		<module>demo-minesweeper</module>
 		<module>hummingbird-api-generator</module>
-		<module>${hummingbird.polymer.elements.path}</module>
+		<module>hummingbird-polymer-elements-api</module>
 		<module>demo-polymer-elements</module>
 	</modules>
 
