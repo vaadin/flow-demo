@@ -26,7 +26,10 @@ gutil.log('Using clientDir: ' + clientDir + ', publicDir: ' + publicDir);
 
 var bowerPackages;
 if (args.all) {
-	bowerPackages = ('vaadin/vaadin-combo-box,PolymerElements/paper-elements'.split(/[, ]+/));
+	bowerPackages = ['vaadin/vaadin-combo-box',
+			'PolymerElements/paper-elements',
+			'bendavis78/paper-date-picker',
+			'bendavis78/paper-time-picker'];
 } else if (args.polymer) {
 	bowerPackages = ('PolymerElements/paper-elements'.split(/[, ]+/));
 } else if (args.vaadin) {

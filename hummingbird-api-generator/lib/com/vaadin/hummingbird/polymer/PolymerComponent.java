@@ -142,6 +142,17 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         return getThis();
     }
 
+    public T removeEventData(Class<? extends PolymerComponentEvent> eventType,
+            String... data) {
+        EventType ann = eventType.getAnnotation(EventType.class);
+        if (ann == null) {
+            throw new IllegalArgumentException(
+                    "Event type " + eventType.getName() + " should have an @"
+                            + EventType.class.getSimpleName() + " annotation");
+        }
+        return removeEventData(ann.value(), data);
+    }
+
     protected void elementFunctionCall(String functionName, Object... params) {
         StringBuilder jsBuilder = new StringBuilder("$0.");
         jsBuilder.append(functionName);

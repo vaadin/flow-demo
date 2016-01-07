@@ -282,7 +282,8 @@ module.exports = {
     	|| (/^height/i.test(name))
     	|| (/^icon/i.test(name))
     	|| (/^visible/i.test(name))
-    	|| (/^errorMessage/i.test(name))) {
+    	|| (/^errorMessage/i.test(name)
+    	|| (/^locale/i.test(name)))) {
       return name + 'Polymer';
     } else {
   	  return name;
