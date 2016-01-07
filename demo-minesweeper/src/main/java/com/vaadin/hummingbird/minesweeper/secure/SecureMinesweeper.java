@@ -95,6 +95,10 @@ public class SecureMinesweeper extends Template {
             Notification.show("BOOM");
         } else {
             reveal(row, column);
+            if (allNonMineCellsRevealed()) {
+                revealAll();
+                Notification.show("Success!");
+            }
         }
 
     }
@@ -132,6 +136,19 @@ public class SecureMinesweeper extends Template {
 
     private Cell getCell(int row, int column) {
         return getModel().getRows().get(row).getCells().get(column);
+    }
+
+    private boolean allNonMineCellsRevealed() {
+        for (int r = 0; r < minefield.getRows(); r++) {
+            for (int c = 0; c < minefield.getCols(); c++) {
+                Cell cell = getCell(r, c);
+                if (!cell.isRevealed() && !minefield.isMine(r, c)) {
+                    // System.out.println(r + "," + c + " still not revealed");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
