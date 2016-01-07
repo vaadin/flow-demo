@@ -40,9 +40,6 @@ public class PolymerSamplerIT extends PolymerSamplerPageObject {
 
     @Test
     public void testElement_attributesAndTextContent() {
-        if (isRemote) {
-            return;
-        }
         openUrl("");
         waitForApplicationToStart();
         openCategory("Paper Elements");
@@ -66,9 +63,6 @@ public class PolymerSamplerIT extends PolymerSamplerPageObject {
 
     @Test
     public void testPolymerStyles_checkboxWithCustomStyleModule_correctPolymerScopedClasses() {
-        if (isRemote) {
-            return;
-        }
         openUrl("");
         openCategory("Paper Elements");
         openSample("CheckBox");
@@ -96,9 +90,6 @@ public class PolymerSamplerIT extends PolymerSamplerPageObject {
 
     @Test
     public void testDomEvents_iconButtonWithClickListener_eventTriggeredServerSide() {
-        if (isRemote) {
-            return;
-        }
         openUrl("");
         openCategory("Paper Elements");
         openSample("Icon Button");
@@ -111,9 +102,6 @@ public class PolymerSamplerIT extends PolymerSamplerPageObject {
 
     @Test
     public void testPolymerEvents_checkboxChangeEvent_eventTriggeredServerSide() {
-        if (isRemote) {
-            return;
-        }
         openUrl("");
         openCategory("Paper Elements");
         openSample("CheckBox");
