@@ -55,6 +55,10 @@ public class SecureMinesweeper extends Template {
 
         public void setMine(boolean mine);
 
+        public boolean isMarked();
+
+        public void setMarked(boolean marked);
+
     }
 
     public interface Row {
