@@ -1184,18 +1184,19 @@
 <script>
 var init = function(server) {
 	var doc = document;
-	var ui = doc.querySelector(".ui");
+	var body = doc.body;
 	var list = doc.getElementById("stream-items-id");
 	var spinner = doc.getElementById("spinner");
 	var lastCheckedCount = 0;
 	var loadTriggered = 0;
 	
-	ui.addEventListener("scroll", function(e) {
+	debugger;
+	doc.addEventListener("scroll", function(e) {
 		var childCount = list.childElementCount;
 		if (childCount <= loadTriggered)
 			return;
 
-		var lastVisiblePixel = ui.offsetHeight+ui.scrollTop;
+		var lastVisiblePixel = body.offsetHeight+body.scrollTop;
 		if (spinner.offsetTop < lastVisiblePixel) {
 			// Spinner visible
 			server.extend();
