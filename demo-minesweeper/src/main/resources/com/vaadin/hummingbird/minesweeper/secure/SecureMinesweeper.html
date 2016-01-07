@@ -1,9 +1,12 @@
 <div class="secure">
+	Right click to mark as mine
 	<table>
 		<tr *ng-for="#row of rows" class="row">
 			<td *ng-for="#cell of row.cells" class="cell" (contextmenu)="cell.marked=!cell.marked;event.preventDefault();" (click)="if (!cell.marked) server.cellClick(element)" [class.mine]="cell.mine" [class.marked]="cell.marked" [class.revealed]="cell.revealed">{{cell.nearby}}</td>
 		</tr>
 	</table>
+	Mines: <span>{{numberOfMines}}</span>
+	Remaining: <span>{{numberOfUnmarkedMines}}</span>
 	
 	<style>
 	.secure .cell {

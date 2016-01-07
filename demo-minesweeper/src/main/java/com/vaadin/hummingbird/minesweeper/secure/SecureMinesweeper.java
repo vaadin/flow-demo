@@ -2,6 +2,7 @@ package com.vaadin.hummingbird.minesweeper.secure;
 
 import java.util.List;
 
+import com.vaadin.annotations.JS;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
 import com.vaadin.hummingbird.kernel.StateNode;
@@ -25,7 +26,7 @@ public class SecureMinesweeper extends Template {
         super.init();
 
         minefield.init(10, 10, seed, mineDensity);
-
+        getModel().setNumberOfMines(minefield.getNumberOfMines());
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 
@@ -71,6 +72,18 @@ public class SecureMinesweeper extends Template {
         public List<Row> getRows();
 
         public void setRows(List<Row> rows);
+
+        public int getNumberOfMines();
+
+        public void setNumberOfMines(int numberOfMines);
+
+        // FIXME WTF OMG LOL BBQ
+        @JS("(function() {" + "var unmarked = numberOfMines; "
+                + "for (var r=0; r < rows.length; r++) {"
+                + "for (var c=0; c < rows[r].cells.length; c++) {"
+                + "if (rows[r].cells[c].marked) unmarked--;" + "}" + "}"
+                + "return unmarked;" + "})();")
+        public int getNumberOfUnmarkedMines();
     }
 
     @Override

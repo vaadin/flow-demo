@@ -11,17 +11,20 @@ public class Minefield {
     private Set<Point> mines;
     private int rows;
     private int cols;
+    private int numberOfMines;
 
     public void init(int rows, int cols, long seed, double mineDensity) {
         Random random = new Random(seed);
         this.rows = rows;
         this.cols = cols;
+        numberOfMines = 0;
 
         mines = new HashSet<>();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 if (random.nextDouble() > (1 - mineDensity)) {
                     mines.add(new Point(r, c));
+                    numberOfMines++;
                 }
             }
         }
@@ -76,6 +79,10 @@ public class Minefield {
 
     public boolean isMine(Point p) {
         return mines.contains(p);
+    }
+
+    public int getNumberOfMines() {
+        return numberOfMines;
     }
 
 }
