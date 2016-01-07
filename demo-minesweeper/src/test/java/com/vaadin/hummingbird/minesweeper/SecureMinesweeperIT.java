@@ -1,9 +1,11 @@
 package com.vaadin.hummingbird.minesweeper;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.hummingbird.minesweeper.secure.Minefield;
 
@@ -44,6 +46,29 @@ public class SecureMinesweeperIT extends MinesweeperPageObject {
             }
         }
         waitForSuccessNotification();
+    }
+
+    // Not run automatically as PJS2 does not support context click
+    // @Test
+    public void markMine() {
+        openUrl("seed=1");
+
+        // Mark
+        WebElement cell = getCell(0, 0);
+        new Actions(getDriver()).contextClick(cell).perform();
+        Assert.assertTrue(hasCssClass(cell, "marked"));
+
+        // Check that mark prevents click
+        Assert.assertFalse(hasCssClass(cell, "revealed"));
+        cell.click();
+        Assert.assertFalse(hasCssClass(cell, "revealed"));
+
+        // Unmark
+        new Actions(getDriver()).contextClick(cell).perform();
+
+        // Check that unmark does not prevent click
+        cell.click();
+        Assert.assertTrue(hasCssClass(cell, "revealed"));
     }
 
     private Minefield minefieldSeed1 = new Minefield();
