@@ -16,8 +16,8 @@ public class SecureMinesweeper extends Template {
     private double mineDensity;
     private long seed;
 
-	private boolean revealed = false;
-	private boolean fresh = true;
+    private boolean revealed = false;
+    private boolean fresh = true;
 
     public SecureMinesweeper(long seed, double mineDensity) {
         this.mineDensity = mineDensity;
@@ -28,7 +28,7 @@ public class SecureMinesweeper extends Template {
     protected void init() {
         super.init();
 
-		minefield.init(10, 10);
+        minefield.init(10, 10);
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 
@@ -102,73 +102,73 @@ public class SecureMinesweeper extends Template {
         int column = tr.getChildIndex(td) - 1;
         int row = table.getChildIndex(tr);
 
-		if (fresh) {
-			// For fresh board, make sure that first click is always not a mine.
-			minefield.initMines(row, column, seed, mineDensity);
-			getModel().setNumberOfMines(minefield.getNumberOfMines());
-			fresh = false;
-		}
+        if (fresh) {
+            // For fresh board, make sure that first click is always not a mine.
+            minefield.initMines(row, column, seed, mineDensity);
+            getModel().setNumberOfMines(minefield.getNumberOfMines());
+            fresh = false;
+        }
 
         if (minefield.isMine(row, column)) {
             // Clicked on a mine
-			boom(true);
+            boom(true);
         } else {
             reveal(row, column);
             if (allNonMineCellsRevealed()) {
-				boom(false);
+                boom(false);
             }
         }
 
     }
 
-	private void boom(boolean fail) {
-		if (revealed) {
-			return;
-		}
+    private void boom(boolean fail) {
+        if (revealed) {
+            return;
+        }
 
-		revealAll();
-		if (fail) {
-			Notification.show("BOOM");
-		} else {
-			Notification.show("Success!");
-		}
-	}
+        revealAll();
+        if (fail) {
+            Notification.show("BOOM");
+        } else {
+            Notification.show("Success!");
+        }
+    }
 
     private void revealAll() {
-		revealed = true;
+        revealed = true;
         for (int r = 0; r < minefield.getRows(); r++) {
             for (int c = 0; c < minefield.getCols(); c++) {
-				reveal(r, c, false);
+                reveal(r, c, false);
             }
         }
     }
 
     private void reveal(int row, int col) {
-		reveal(row, col, true);
-	}
+        reveal(row, col, true);
+    }
 
-	private void reveal(int row, int col, boolean traverse) {
+    private void reveal(int row, int col, boolean traverse) {
         Cell cell = getCell(row, col);
-		int nearby = minefield.getNearbyCount(row, col);
+        int nearby = minefield.getNearbyCount(row, col);
 
         if (cell.isRevealed()) {
-			// Attempt to reveal all nearby cells:
-			// Must be traverse (user click).
-			// Cell must not be zero.
-			// Number of markers surrounding the cell must be equal to the cell.
-			if (traverse && nearby > 0
-					&& nearby == getNearbyMarkedCount(row, col)) {
+            // Attempt to reveal all nearby cells:
+            // Must be traverse (user click).
+            // Cell must not be zero.
+            // Number of markers surrounding the cell must be equal to the cell.
+            if (traverse && nearby > 0
+                    && nearby == getNearbyMarkedCount(row, col)) {
 
-				for (Point p : minefield.getNearbyPoints(row, col)) {
-					if (!getCell(p).isMarked()) {
-						if (minefield.isMine(p.getRow(), p.getCol())) {
-							boom(true);
-							return;
-						}
-						reveal(p.getRow(), p.getCol(), false);
-					}
-				}
-			}
+                for (Point p : minefield.getNearbyPoints(row, col)) {
+                    if (!getCell(p).isMarked()) {
+                        if (minefield.isMine(p.getRow(), p.getCol())) {
+                            boom(true);
+                            return;
+                        }
+                        reveal(p.getRow(), p.getCol(), false);
+                    }
+                }
+            }
             return;
         }
 
@@ -183,28 +183,28 @@ public class SecureMinesweeper extends Template {
         } else {
             // Autoreveal
             for (Point p : minefield.getNearbyPoints(row, col)) {
-				reveal(p.getRow(), p.getCol(), false);
+                reveal(p.getRow(), p.getCol(), false);
             }
         }
     }
 
-	private Cell getCell(Point p) {
-		return getCell(p.getRow(), p.getCol());
-	}
+    private Cell getCell(Point p) {
+        return getCell(p.getRow(), p.getCol());
+    }
 
     private Cell getCell(int row, int column) {
         return getModel().getRows().get(row).getCells().get(column);
     }
 
-	public int getNearbyMarkedCount(int row, int col) {
-		int count = 0;
-		for (Point p : minefield.getNearbyPoints(row, col)) {
-			if (getCell(p).isMarked()) {
-				count++;
-			}
-		}
-		return count;
-	}
+    public int getNearbyMarkedCount(int row, int col) {
+        int count = 0;
+        for (Point p : minefield.getNearbyPoints(row, col)) {
+            if (getCell(p).isMarked()) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     private boolean allNonMineCellsRevealed() {
         for (int r = 0; r < minefield.getRows(); r++) {
