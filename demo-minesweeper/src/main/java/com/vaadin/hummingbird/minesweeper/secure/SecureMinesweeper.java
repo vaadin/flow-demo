@@ -145,6 +145,10 @@ public class SecureMinesweeper extends Template {
 		int nearby = minefield.getNearbyCount(row, col);
 
         if (cell.isRevealed()) {
+			// Attempt to reveal all nearby cells:
+			// Must be traverse (user click).
+			// Cell must not be zero.
+			// Number of markers surrounding the cell must be equal to the cell.
 			if (traverse && nearby > 0
 					&& nearby == getNearbyMarkedCount(row, col)) {
 
