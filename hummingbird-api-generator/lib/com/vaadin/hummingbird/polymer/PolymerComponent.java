@@ -16,6 +16,11 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
 
     protected abstract T getThis();
 
+    public T withId(String id) {
+        super.setId(id);
+        return getThis();
+    }
+
     public T appendTextContent(String text) {
         getElement().appendChild(Element.createText(text));
         return getThis();
