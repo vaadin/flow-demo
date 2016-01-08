@@ -74,7 +74,8 @@ public class SecureMinesweeperIT extends MinesweeperPageObject {
     private Minefield minefieldSeed1 = new Minefield();
 
     {
-        minefieldSeed1.init(10, 10, 1, 0.2);
+		minefieldSeed1.init(10, 10);
+		minefieldSeed1.initMines(0, 0, 1, 0.2);
     }
 
     private boolean isMineSeed1(int row, int col) {
