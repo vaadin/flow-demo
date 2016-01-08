@@ -102,10 +102,7 @@ public class SecureMinesweeper extends Template {
 
         if (minefield.isMine(row, column)) {
             // Clicked on a mine
-            getCell(row, column).setMine(true);
-            getCell(row, column).setRevealed(true);
-            revealAll();
-            Notification.show("BOOM");
+			boom();
         } else {
             reveal(row, column);
             if (allNonMineCellsRevealed()) {
@@ -116,17 +113,41 @@ public class SecureMinesweeper extends Template {
 
     }
 
+	private void boom() {
+		revealAll();
+		Notification.show("BOOM");
+	}
+
     private void revealAll() {
         for (int r = 0; r < minefield.getRows(); r++) {
             for (int c = 0; c < minefield.getCols(); c++) {
-                reveal(r, c);
+				reveal(r, c, false);
             }
         }
     }
 
     private void reveal(int row, int col) {
+		reveal(row, col, true);
+	}
+
+	private void reveal(int row, int col, boolean traverse) {
         Cell cell = getCell(row, col);
+		int nearby = minefield.getNearbyCount(row, col);
+
         if (cell.isRevealed()) {
+			if (traverse && nearby > 0
+					&& nearby == getNearbyMarkedCount(row, col)) {
+
+				for (Point p : minefield.getNearbyPoints(row, col)) {
+					if (!getCell(p).isMarked()) {
+						if (minefield.isMine(p.getRow(), p.getCol())) {
+							boom();
+							return;
+						}
+						reveal(p.getRow(), p.getCol(), false);
+					}
+				}
+			}
             return;
         }
 
@@ -136,20 +157,33 @@ public class SecureMinesweeper extends Template {
             cell.setMine(true);
         }
 
-        int nearby = minefield.getNearbyCount(row, col);
         if (nearby > 0) {
             cell.setNearby(nearby);
         } else {
             // Autoreveal
             for (Point p : minefield.getNearbyPoints(row, col)) {
-                reveal(p.getRow(), p.getCol());
+				reveal(p.getRow(), p.getCol(), false);
             }
         }
     }
 
+	private Cell getCell(Point p) {
+		return getCell(p.getRow(), p.getCol());
+	}
+
     private Cell getCell(int row, int column) {
         return getModel().getRows().get(row).getCells().get(column);
     }
+
+	public int getNearbyMarkedCount(int row, int col) {
+		int count = 0;
+		for (Point p : minefield.getNearbyPoints(row, col)) {
+			if (getCell(p).isMarked()) {
+				count++;
+			}
+		}
+		return count;
+	}
 
     private boolean allNonMineCellsRevealed() {
         for (int r = 0; r < minefield.getRows(); r++) {
