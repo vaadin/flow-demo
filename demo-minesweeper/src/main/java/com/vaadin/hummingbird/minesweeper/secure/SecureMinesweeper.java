@@ -16,6 +16,8 @@ public class SecureMinesweeper extends Template {
     private double mineDensity;
     private long seed;
 
+	private boolean revealed = false;
+
     public SecureMinesweeper(long seed, double mineDensity) {
         this.mineDensity = mineDensity;
         this.seed = seed;
@@ -102,23 +104,31 @@ public class SecureMinesweeper extends Template {
 
         if (minefield.isMine(row, column)) {
             // Clicked on a mine
-			boom();
+			boom(true);
         } else {
             reveal(row, column);
             if (allNonMineCellsRevealed()) {
-                revealAll();
-                Notification.show("Success!");
+				boom(false);
             }
         }
 
     }
 
-	private void boom() {
+	private void boom(boolean fail) {
+		if (revealed) {
+			return;
+		}
+
 		revealAll();
-		Notification.show("BOOM");
+		if (fail) {
+			Notification.show("BOOM");
+		} else {
+			Notification.show("Success!");
+		}
 	}
 
     private void revealAll() {
+		revealed = true;
         for (int r = 0; r < minefield.getRows(); r++) {
             for (int c = 0; c < minefield.getCols(); c++) {
 				reveal(r, c, false);
@@ -141,7 +151,7 @@ public class SecureMinesweeper extends Template {
 				for (Point p : minefield.getNearbyPoints(row, col)) {
 					if (!getCell(p).isMarked()) {
 						if (minefield.isMine(p.getRow(), p.getCol())) {
-							boom();
+							boom(true);
 							return;
 						}
 						reveal(p.getRow(), p.getCol(), false);
