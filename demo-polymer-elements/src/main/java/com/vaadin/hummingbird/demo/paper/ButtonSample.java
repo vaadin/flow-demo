@@ -24,6 +24,8 @@ public class ButtonSample extends SampleBase {
         createRaisedButtons(root);
         createTogglableButtons(root);
         createColorButtons(root);
+        createTemplateButtons(root);
+        createRaisedTemplateButtons(root);
     }
 
     private void createFlatButtons(CssLayout root) {
@@ -156,5 +158,43 @@ public class ButtonSample extends SampleBase {
                         .with(new IronIcon().setIconPolymer("clear"))
                         .appendTextContent("cancel")
                         .addTransitionendListener(transitionListener));
+    }
+
+    private void createTemplateButtons(CssLayout root) {
+        CssLayout section = createHorizontalSection(root, "Template");
+
+        section.addComponents(
+                new PaperButton().setTextContent("Primary")
+                        .withClassName("primary"),
+                new PaperButton().setTextContent("Secondary")
+                        .withClassName("secondary"),
+                new PaperButton().setTextContent("Success")
+                        .withClassName("success"),
+                new PaperButton().setTextContent("Info").withClassName("info"),
+                new PaperButton().setTextContent("Warning")
+                        .withClassName("warning"),
+                new PaperButton().setTextContent("Error")
+                        .withClassName("error"),
+                new PaperButton().setTextContent("Link").withClassName("link"));
+    }
+
+    private void createRaisedTemplateButtons(CssLayout root) {
+        CssLayout section = createHorizontalSection(root, "Raised Template");
+
+        section.addComponents(
+                new PaperButton().setRaised(true).setTextContent("Primary")
+                        .withClassName("primary"),
+                new PaperButton().setRaised(true).setTextContent("Secondary")
+                        .withClassName("secondary"),
+                new PaperButton().setRaised(true).setTextContent("Success")
+                        .withClassName("success"),
+                new PaperButton().setRaised(true).setTextContent("Info")
+                        .withClassName("info"),
+                new PaperButton().setRaised(true).setTextContent("Warning")
+                        .withClassName("warning"),
+                new PaperButton().setRaised(true).setTextContent("Error")
+                        .withClassName("error"),
+                new PaperButton().setRaised(true).setTextContent("Link")
+                        .withClassName("link"));
     }
 }
