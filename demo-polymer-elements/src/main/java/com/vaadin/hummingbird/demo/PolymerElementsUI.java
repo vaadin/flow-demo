@@ -1,5 +1,8 @@
 package com.vaadin.hummingbird.demo;
 
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Push;
@@ -21,10 +24,25 @@ public class PolymerElementsUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+        String currentTheme = resolveThemeFromURL(vaadinRequest);
+
         PolymerSampler polymerSampler = new PolymerSampler();
         CssLayout cssLayout = new CssLayout();
         cssLayout.addComponent(polymerSampler);
         setContent(cssLayout);
+
+        polymerSampler.setCurrentTheme(currentTheme);
+    }
+
+    private String resolveThemeFromURL(VaadinRequest vaadinRequest) {
+        String parameter = vaadinRequest.getParameter("theme");
+        String themeName = Stream.of(PolymerThemes.themes)
+                .filter(str -> str.equals(parameter)).findFirst()
+                .orElse("sampler");
+        Logger.getLogger(getClass().getName())
+                .info("USING THEME: " + themeName);
+        addDynamicDependency(PolymerThemes.getDependency(themeName));
+        return themeName;
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

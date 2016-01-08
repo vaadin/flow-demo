@@ -9,7 +9,6 @@ body:not([style-scope]):not(.style-scope) {
     font-size: 14px;
     margin: 0;
     padding: 24px;
-    background-color: #fafafa;
 }
 
 .menu-sample .horizontal-section {

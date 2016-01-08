@@ -1,5 +1,8 @@
 package com.vaadin.hummingbird.demo;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import com.vaadin.annotations.PolymerStyle;
 import com.vaadin.hummingbird.demo.integration.CustomerFormDemo;
 import com.vaadin.hummingbird.demo.paper.ButtonSample;
@@ -22,14 +25,17 @@ import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
 import com.vaadin.hummingbird.iron.IronIcons;
 import com.vaadin.hummingbird.iron.IronSelector;
+import com.vaadin.hummingbird.iron.event.IronSelectEvent;
 import com.vaadin.hummingbird.paper.PaperButton;
 import com.vaadin.hummingbird.paper.PaperDialog;
 import com.vaadin.hummingbird.paper.PaperDialogScrollable;
 import com.vaadin.hummingbird.paper.PaperDrawerPanel;
+import com.vaadin.hummingbird.paper.PaperDropdownMenu;
 import com.vaadin.hummingbird.paper.PaperFab;
 import com.vaadin.hummingbird.paper.PaperHeaderPanel;
 import com.vaadin.hummingbird.paper.PaperIconButton;
 import com.vaadin.hummingbird.paper.PaperItem;
+import com.vaadin.hummingbird.paper.PaperMenu;
 import com.vaadin.hummingbird.paper.PaperRipple;
 import com.vaadin.hummingbird.paper.PaperStyles;
 import com.vaadin.hummingbird.paper.PaperToolbar;
@@ -48,15 +54,17 @@ public class PolymerSampler extends CssLayout {
     private PaperButton javaButton;
     private CssLayout contentLayout;
     private PaperDialog aboutDialog;
+    private PaperMenu styleSelector;
+    private IronCollapse currentCollapse;
 
     public PolymerSampler() {
         CssLayout drawer = new CssLayout();
         drawer.getElement().setAttribute("attr.drawer", true);
-        drawer.addComponent(initSidebar());
+        drawer.addComponent(initHeaderSidebar());
 
         CssLayout main = new CssLayout();
         main.getElement().setAttribute("attr.main", true);
-        main.addComponent(initMainView());
+        main.addComponent(initMainHeader());
 
         final PaperDrawerPanel paperDrawerPanel = new PaperDrawerPanel()
                 .setDrawerWidth("250px").with(drawer, main);
@@ -66,6 +74,11 @@ public class PolymerSampler extends CssLayout {
         // , createAboutDialog());
 
         addSamples();
+    }
+
+    public void setCurrentTheme(String currentTheme) {
+        styleSelector.setSelected(Integer.toString(
+                Arrays.asList(PolymerThemes.themes).indexOf(currentTheme)));
     }
 
     private void addSamples() {
@@ -103,8 +116,13 @@ public class PolymerSampler extends CssLayout {
                         + name.toLowerCase().replace(" ", "-") + "-category")
                 .with(new IronIcon().setIconPolymer("expand-more"),
                         createSpanElement(name), new PaperRipple())
-                .withClickListener(
-                        event -> collapse.setOpened(!collapse.isOpened()));
+                .withClickListener(event -> {
+                    collapse.setOpened(!collapse.isOpened());
+                    if (currentCollapse != null) {
+                        currentCollapse.setOpened(false);
+                    }
+                    currentCollapse = collapse;
+                });
 
         IronSelector selector = new IronSelector();
         collapse.with(selector);
@@ -186,7 +204,7 @@ public class PolymerSampler extends CssLayout {
                 new IronFlexLayout() };
     }
 
-    private Component initSidebar() {
+    private Component initHeaderSidebar() {
         PaperHeaderPanel header = new PaperHeaderPanel().setMode("seamed");
         sidebarListPanel = new CssLayout();
         sidebarListPanel.addStyleName("list");
@@ -212,7 +230,7 @@ public class PolymerSampler extends CssLayout {
         return header;
     }
 
-    protected Component initMainView() {
+    protected Component initMainHeader() {
         mainHeaderLabel = new Label();
         mainHeaderLabel.addStyleName("current");
 
@@ -220,6 +238,14 @@ public class PolymerSampler extends CssLayout {
                 .with(new IronIcon().setIconPolymer("help"))
                 .withClickListener(event -> onAboutClick())
                 .appendTextContent("ABOUT");
+
+        PaperDropdownMenu themeDropDown = new PaperDropdownMenu()
+                .setLabel("Theme").withClassName("theme-select")
+                .with(styleSelector = new PaperMenu()
+                        .withClassName("dropdown-content")
+                        .addEventData(IronSelectEvent.class,
+                                "event.target.selected")
+                        .with(createThemeItems()));
 
         CssLayout buttonsLayout = new CssLayout();
         buttonsLayout.addStyleName("source-buttons bottom flex");
@@ -241,8 +267,8 @@ public class PolymerSampler extends CssLayout {
                                         .setBooleanAttribute(
                                                 "paper-drawer-toggle", true),
                                         mainHeaderLabel,
-                                        createFlexElement(null), helpButton,
-                                        buttonsLayout),
+                                        createFlexElement(null), themeDropDown,
+                                        helpButton, buttonsLayout),
                         contentLayout);
         return headerPanel;
     }
@@ -262,11 +288,11 @@ public class PolymerSampler extends CssLayout {
         return aboutDialog;
     }
 
-    private CssLayout createHorizontalFlexLaoyut(Component... components) {
-        CssLayout layout = new CssLayout();
-        layout.addStyleName("layout horizontal center center-justified");
-        layout.addComponents(components);
-        return layout;
+    private Component[] createThemeItems() {
+        return Stream.of(PolymerThemes.themes).map(str -> {
+            return new PaperItem().setTextContent(str).setAttribute("onclick",
+                    "javascript:window.open('?theme=" + str + "','_self');");
+        }).toArray(PaperItem[]::new);
     }
 
     private Component createFlexElement(String innerText) {
@@ -284,4 +310,5 @@ public class PolymerSampler extends CssLayout {
     private void onAboutClick() {
         aboutDialog.setOpened(true);
     }
+
 }
