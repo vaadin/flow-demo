@@ -58,16 +58,9 @@ public class PolymerSampler extends CssLayout {
     private IronCollapse currentCollapse;
 
     public PolymerSampler() {
-        CssLayout drawer = new CssLayout();
-        drawer.getElement().setAttribute("attr.drawer", true);
-        drawer.addComponent(initHeaderSidebar());
-
-        CssLayout main = new CssLayout();
-        main.getElement().setAttribute("attr.main", true);
-        main.addComponent(initMainHeader());
 
         final PaperDrawerPanel paperDrawerPanel = new PaperDrawerPanel()
-                .setDrawerWidth("250px").with(drawer, main);
+                .setDrawerWidth("250px").with(initDrawer(), initMainHeader());
 
         addComponents(createPolymerElementDependantComponents());
         addComponents(paperDrawerPanel);
@@ -204,8 +197,9 @@ public class PolymerSampler extends CssLayout {
                 new IronFlexLayout() };
     }
 
-    private Component initHeaderSidebar() {
-        PaperHeaderPanel header = new PaperHeaderPanel().setMode("seamed");
+    private Component initDrawer() {
+        PaperHeaderPanel header = new PaperHeaderPanel().setMode("seamed")
+                .setBooleanAttribute("drawer", true);
         sidebarListPanel = new CssLayout();
         sidebarListPanel.addStyleName("list");
 
@@ -259,7 +253,8 @@ public class PolymerSampler extends CssLayout {
         contentLayout.addStyleName("panel fit");
 
         PaperHeaderPanel headerPanel = new PaperHeaderPanel()
-                .setMode("waterfall-tall").with(
+                .setBooleanAttribute("main", true).setMode("waterfall-tall")
+                .with(
 
                         new PaperToolbar().withClassName("toolbar tall animate")
                                 .with(new PaperIconButton()
