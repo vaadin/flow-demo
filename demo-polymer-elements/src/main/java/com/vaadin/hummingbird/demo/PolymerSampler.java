@@ -1,6 +1,7 @@
 package com.vaadin.hummingbird.demo;
 
 import com.vaadin.annotations.PolymerStyle;
+import com.vaadin.hummingbird.demo.integration.CustomerFormDemo;
 import com.vaadin.hummingbird.demo.paper.ButtonSample;
 import com.vaadin.hummingbird.demo.paper.CheckboxSample;
 import com.vaadin.hummingbird.demo.paper.DialogSample;
@@ -89,6 +90,8 @@ public class PolymerSampler extends CssLayout {
 
         addCategory("vaadin", "Vaadin Elements")
                 .with(addSample("ComboBox", false));
+        addCategory("hummingbird", "Hummingbird Integration")
+                .with(addSample("Customer Form Demo", false));
 
     }
 
@@ -171,6 +174,8 @@ public class PolymerSampler extends CssLayout {
         // case "IronSelectorSample": return new IronSelectorSample();
         case "ComboBox":
             return new ComboBoxSample();
+        case "Customer Form Demo":
+            return new CustomerFormDemo();
         default:
             return new Label("Sample " + sampleName + " not yet implemented");
         }

@@ -10,6 +10,7 @@ import com.vaadin.hummingbird.paper.PaperItem;
 import com.vaadin.hummingbird.paper.PaperTab;
 import com.vaadin.hummingbird.polymer.PolymerComponent;
 import com.vaadin.hummingbird.polymer.PolymerComponentEvent;
+import com.vaadin.ui.AbstractSimpleDOMComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HTML;
@@ -57,8 +58,8 @@ public class SampleBase extends CssLayout {
         return createHorizontalSection(layout, name);
     }
 
-    protected CssLayout createHorizontalSection(CssLayout sectionParent,
-            String name) {
+    protected CssLayout createHorizontalSection(
+            AbstractSimpleDOMComponentContainer sectionParent, String name) {
         CssLayout sectionRoot = layout(null);
         HTML header = element("h4", name, false);
         CssLayout sectionContent = layout("horizontal-section");
