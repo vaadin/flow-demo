@@ -17,6 +17,7 @@ public class SecureMinesweeper extends Template {
     private long seed;
 
 	private boolean revealed = false;
+	private boolean fresh = true;
 
     public SecureMinesweeper(long seed, double mineDensity) {
         this.mineDensity = mineDensity;
@@ -27,8 +28,7 @@ public class SecureMinesweeper extends Template {
     protected void init() {
         super.init();
 
-        minefield.init(10, 10, seed, mineDensity);
-        getModel().setNumberOfMines(minefield.getNumberOfMines());
+		minefield.init(10, 10);
         getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 
@@ -101,6 +101,13 @@ public class SecureMinesweeper extends Template {
         // First is a text node...
         int column = tr.getChildIndex(td) - 1;
         int row = table.getChildIndex(tr);
+
+		if (fresh) {
+			// For fresh board, make sure that first click is always not a mine.
+			minefield.initMines(row, column, seed, mineDensity);
+			getModel().setNumberOfMines(minefield.getNumberOfMines());
+			fresh = false;
+		}
 
         if (minefield.isMine(row, column)) {
             // Clicked on a mine
