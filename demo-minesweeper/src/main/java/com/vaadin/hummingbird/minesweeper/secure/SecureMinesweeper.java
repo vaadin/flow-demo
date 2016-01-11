@@ -5,7 +5,6 @@ import java.util.List;
 import com.vaadin.annotations.JS;
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
-import com.vaadin.hummingbird.kernel.StateNode;
 import com.vaadin.hummingbird.minesweeper.Point;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Template;
@@ -27,18 +26,14 @@ public class SecureMinesweeper extends Template {
 
         minefield.init(10, 10, seed, mineDensity);
         getModel().setNumberOfMines(minefield.getNumberOfMines());
-        getNode().getMultiValued("rows");
-        List<Row> data = getModel().getRows();
-
+        List<Row> rows = getModel().getRows();
         for (int rowIndex = 0; rowIndex < minefield.getRows(); rowIndex++) {
             Row row = Model.create(Row.class);
-            data.add(row);
-            ((StateNode) getNode().getMultiValued("rows").get(rowIndex))
-                    .getMultiValued("cells");
-            List<Cell> cells = row.getCells();
+            rows.add(row);
+
             for (int colIndex = 0; colIndex < minefield.getCols(); colIndex++) {
                 Cell cell = Model.create(Cell.class);
-                cells.add(cell);
+                row.getCells().add(cell);
             }
         }
     }
