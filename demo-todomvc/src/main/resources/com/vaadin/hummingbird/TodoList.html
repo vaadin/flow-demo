@@ -5,7 +5,7 @@
 			<input id="new-todo" #newtodo class="new-todo"
 				placeholder="What needs to be done?"
 				autofocus
-			(keyup)="if (event.keyCode != 13 || element.value==='') return; server.addTodo(element.value); element.value = '';" />
+			(keyup)="if (event.keyCode != 13 || element.value==='') return; model.todos.push({title: element.value}); server.logNewTodo(element.value); element.value = '';" />
 		</header>
 		<section class="main" [class.hidden]="todoCount == 0">
 			<input id="toggle-all" class="toggle-all" type="checkbox"

@@ -101,6 +101,11 @@ public class TodoList extends Template {
         System.out.println("Toggle all completed: " + completed);
     }
 
+    @TemplateEventHandler
+    public void logNewTodo(String title) {
+        System.out.println("Added new todo with title " + title);
+    }
+
     public void setAllCompleted(boolean completed) {
         List<Todo> todos = getTodos();
         todos.forEach(todo -> todo.setCompleted(completed));
