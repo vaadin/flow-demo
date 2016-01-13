@@ -1,0 +1,4 @@
+/target
+/bower_components
+/node_modules
+src/main/generated-bower/bower_components/

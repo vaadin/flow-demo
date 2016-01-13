@@ -1,0 +1,20 @@
+{
+  "name": "progress-bubble-hummingbird",
+  "version": "1.0.0",
+  "homepage": "https://github.com/vaadin/hummingbird-demo",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "license": "Apache2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Flipbox": "x-tag/flipbox#~0.2.9",
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
+  }
+}

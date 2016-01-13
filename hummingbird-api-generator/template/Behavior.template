@@ -1,0 +1,51 @@
+<%= disclaimer() %>
+package <%= ns %>;
+
+import com.vaadin.polymer.elemental.*;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.js.JsProperty;
+import com.google.gwt.core.client.js.JsType;
+
+/**
+ * <%= getDescription(' ') %>
+ */
+@JsType
+public interface <%= className() %> {
+
+    public static final String TAG = "<%= name %>";
+    public static final String SRC = "<%= path %>";
+
+<% _.forEach(getGettersAndSetters(properties), function(item) { %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    @JsProperty <%= computeType(item.type) %> <%= item.getter %>();
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    @JsProperty void <%= item.setter %>;
+<% }); %>
+<% _.forEach(getMethods(properties), function(item) { %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
+     * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     * <%= item.return && item.return.type ? '@return {' + returnString(item) + '}' : ''%>
+     */
+    <%= returnString(item) %> <%= item.method %>;
+<% }); %>
+}

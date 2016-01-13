@@ -1,0 +1,27 @@
+{
+  "name": "demo-polymer-elements",
+  "homepage": "",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
+  },
+  "resolutions": {
+    "paper-slider": "1.0.8",
+    "paper-button": "~1.0.6",
+    "promise-polyfill": "2.1.0"
+  }
+}

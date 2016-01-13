@@ -1,0 +1,16 @@
+{
+  "name": "Imported-Maven-Bower-dependencies",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "promise-polyfill": "2.1.0",
+    "es6-collections": "0.5.5",
+    "webcomponentsjs": "~0.7.19"
+  }
+}

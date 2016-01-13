@@ -1,0 +1,67 @@
+<div id="wrapper">
+	<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+	<dom-module id="demo-sparkline">
+	    <template>
+	        <style>
+	            :host {
+	                display: block;
+	            }
+	        </style>
+	        <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
+	    </template>
+	</dom-module>
+	<script>
+	    Polymer({
+	        is: "demo-sparkline",
+	
+	        properties: {
+	            width: Number,
+	            height: Number,
+	            points: Array
+	        },
+	
+	        ready: function() {
+	            this.ctx = this.$.canvas.getContext('2d');
+	            this.draw();
+	        },
+	
+	        draw: function() {
+	            this.ctx.strokeStyle = '#00b4f0';
+	            this.ctx.moveTo(0, 0);
+	
+	            var i = 1;
+	            var canvasWidth = this.$.canvas.width;
+	            var xIncrement = canvasWidth / (this.points.length - 2);
+	            for (i = 1; i < this.points.length - 2; i++) {
+	                var x = (i - 1) * xIncrement;
+	                var y = this.points[i];
+	                var nextX = i * xIncrement;
+	                var nextY = this.points[i + 1];
+	                var xc = (x + nextX) / 2;
+	                var yc = (y + nextY) / 2;
+	                this.ctx.quadraticCurveTo(x, y, xc, yc);
+	            }
+	            this.ctx.quadraticCurveTo(
+	                (i - 1) * xIncrement, this.points[i],
+	                i * xIncrement, this.points[i + 1]);
+	            this.ctx.stroke();
+	        },
+	
+	        clear: function() {
+	            this.ctx.clearRect(0, 0, this.$.canvas.width, this.$.canvas.height)
+	        }
+	    });
+	</script>
+	
+	<div id="main-content">
+		<div class="header">
+			<input id="customerFilter" type="text"
+				placeholder="Filter customers..." value="" (keyup)="server.filterCustomers(element.value);">
+			<h2>Customers</h2>
+		</div>
+		<div class="content">
+			<vaadin-grid id="customers-grid"></vaadin-grid>
+		</div>
+		<div id="form-wrapper" style="display: none"></div>
+	</div>
+</div>

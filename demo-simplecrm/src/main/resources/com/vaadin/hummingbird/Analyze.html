@@ -1,0 +1,30 @@
+<div id="wrapper">
+	<paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+	<div id="main-content">
+		<div class="header">
+			<h2>Customer analysis</h2>
+		</div>
+		<div class="content">
+			<div class="ageWrapper">
+				<vaadin-column-chart id="age-chart" (chart-loaded)="server.updateAgeChart();"></vaadin-column-chart>
+            </div>
+            
+            <div class="statusWrapper">
+				<vaadin-funnel-chart>
+					<title>Sales funnel</title>
+					<plot-options> <series width="60%" neck-width="25%"
+						neck-height="25%"></series></plot-options>
+					<data-series name="Status" [data]="statusData">
+					</data-series>
+				</vaadin-funnel-chart>
+			</div>
+
+            <div class="genderWrapper">
+                <vaadin-pie-chart id="gender-chart" (chart-loaded)="server.updateGenderChart();"></vaadin-pie-chart>
+            </div>
+            
+            
+        </div>
+	</div>
+</div>
+			

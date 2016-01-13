@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>4</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId><%= ns %></groupId>
+  <version><%= pkg.pom.version %>-SNAPSHOT</version>
+  <artifactId><%= artifactId %></artifactId>
+  <name><%= pkg.name || artifactId %></name>
+  <description><%= pkg.description || artifactId %></description>
+ <% if (pkg.license) { %>
+  <licenses>
+    <license>
+      <name><%= pkg.license %></name>
+    </license>
+  </licenses>
+ <% } %>
+ <% if (pkg.pom.organization) { %>
+  <organization>
+    <name><%= pkg.pom.organization.name %></name>
+    <url><%= pkg.pom.organization.url %></url>
+  </organization>
+  <url><%= pkg.pom.organization.url %></url>
+ <% } %>
+ <% if (pkg.pom.scm) { %>
+  <scm>
+    <connection><%= pkg.pom.scm.connection %></connection>
+    <developerConnection><%= pkg.pom.scm.developerConnection %></developerConnection>
+    <url><%= pkg.pom.scm.url %></url>
+  </scm>
+ <% } %>
+  <developers>
+    <developer>
+      <id><%= pkg.author %></id>
+      <name><%= pkg.author %></name>
+    </developer>
+  </developers>
+
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <additionalparam>-Xdoclint:none</additionalparam>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencies>
+	<dependency>
+	  <groupId>com.vaadin</groupId>
+	  <artifactId>hummingbird-server</artifactId>
+	  <version>1.0-SNAPSHOT</version>
+	</dependency>
+  </dependencies>
+  
+  <repositories>
+	<repository>
+	  <id>hummingbird-internal-snapshots</id>
+	  <url>http://vaadin.com/download/internal/hummingbird/hummingbird-ef6448/</url>
+	  <snapshots>
+	  <enabled>true</enabled>
+	  </snapshots>
+	</repository>
+  </repositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>attach-sources</id>
+                <goals>
+                    <goal>jar-no-fork</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                    <goal>jar</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

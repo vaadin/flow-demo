@@ -1,0 +1,16 @@
+.classpath
+.settings
+.project
+/.recommenders/
+/.metadata/
+/target/
+/node/
+/node_tmp/
+/node_modules/
+/*/bower_components
+/*/node_modules
+/*/src/main/generated-bower/bower_components/
+/*/target
+/*/error-screenshots
+npm-debug.log
+npm.tar.gz

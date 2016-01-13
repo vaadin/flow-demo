@@ -1,0 +1,53 @@
+<%= disclaimer() %>
+package <%= ns %>.event;
+
+<% if (hasParams()) { %>
+import com.vaadin.annotations.EventParameter;
+<% } %>
+import com.vaadin.annotations.EventType;
+import com.vaadin.hummingbird.polymer.PolymerComponent;
+import com.vaadin.hummingbird.polymer.PolymerComponentEvent;
+
+/**
+ * <%= getDescription(' ') %>
+ */
+@SuppressWarnings("serial")
+@EventType("<%= computeName(name) %>")
+public class <%= camelCase(name) %>Event<T extends PolymerComponent<T>>
+		extends PolymerComponentEvent {
+<% if (hasParams()) {
+	_.forEach(params, function(param){ 
+		if (param.name !== 'detail') { %>	
+    @EventParameter
+    private <%= computeEventPropertyType(param.type) %> <%= computeMethodName(param.name) %>;
+	<% }
+	});
+} %>
+    public <%= camelCase(name) %>Event(PolymerComponent<T> source) {
+        super(source);
+    }
+<% if (hasParams()) { 
+	_.forEach(params, function(param){
+		if (param.name !== 'detail') { %>	
+    /**
+     * <%= getDescription('         ', param) %>
+     */
+    public <%= computeEventPropertyType(param.type) %> <%= computeGetterWithPrefix(param) %>() {
+        return <%= computeMethodName(param.name) %>;
+    }
+
+    /**
+     * <%= getDescription('         ', param) %>
+     */
+    public void <%= computeSetterWithPrefix(param) %>(<%= computeEventPropertyType(param.type) %> <%= computeMethodName(param.name) %>) {
+        this.<%= computeMethodName(param.name) %> = <%= computeMethodName(param.name) %>;
+    }
+	<% }
+	});
+} %>
+    @SuppressWarnings("unchecked")
+    @Override
+    public T getPolymerComponent() {
+        return (T) super.getPolymerComponent();
+    }
+}

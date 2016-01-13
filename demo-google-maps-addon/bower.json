@@ -1,0 +1,21 @@
+{
+  "name": "progress-bubble-hummingbird",
+  "version": "1.0.0",
+  "homepage": "https://github.com/vaadin/hummingbird-demo",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "license": "Apache2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "google-map": "~1.0.5",
+    "geo-location": "~1.0.0",
+    "Imported-Maven-Bower-dependencies": "./src/main/generated-bower"
+  }
+}

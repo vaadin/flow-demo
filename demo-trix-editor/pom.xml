@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.vaadin</groupId>
+		<artifactId>hummingbird-demo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<name>Trix Editor Web Component</name>
+	<artifactId>demo-trix-editor</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird-core-elements</artifactId>
+		</dependency>
+                <dependency>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>demo-test-util</artifactId>
+                        <scope>test</scope>
+                </dependency>
+	</dependencies>
+
+	<build>
+                <resources>
+                        <resource>
+                                <directory>src/main/resources</directory>
+                        </resource>
+                        <resource>
+                                <directory>.</directory>
+                                <includes>
+                                        <include>bower_components/**</include>
+                                </includes>
+                        </resource>
+                </resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+                        <plugin>
+                                <groupId>org.eclipse.jetty</groupId>
+                                <artifactId>jetty-maven-plugin</artifactId>
+                                <executions>
+                                        <!-- start and stop jetty (running our app) when running integration 
+                                                tests -->
+                                        <execution>
+                                                <id>start-jetty</id>
+                                                <phase>pre-integration-test</phase>
+                                                <goals>
+                                                        <goal>start</goal>
+                                                </goals>
+                                        </execution>
+                                        <execution>
+                                                <id>stop-jetty</id>
+                                                <phase>post-integration-test</phase>
+                                                <goals>
+                                                        <goal>stop</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                        <plugin>
+                                <groupId>com.github.eirslett</groupId>
+                                <artifactId>frontend-maven-plugin</artifactId>
+                                <executions>
+                                        <execution>
+                                                <goals>
+                                                        <goal>install-node-and-npm</goal>
+                                                        <goal>npm</goal>
+                                                        <goal>bower</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+
+		</plugins>
+
+	</build>
+
+</project>

@@ -1,0 +1,16 @@
+@import 'mainpage.css';
+@import 'hljs.css';
+@import 'material.css';
+
+body { overflow: hidden; }
+
+body:not([style-scope]):not(.style-scope) {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 24px;
+}
+
+.menu-sample .horizontal-section {
+	padding: 0 !important;
+}

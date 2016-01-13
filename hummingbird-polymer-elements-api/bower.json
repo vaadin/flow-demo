@@ -1,0 +1,23 @@
+{
+  "name": "hummingbird-polymer-elements",
+  "homepage": "",
+  "authors": [
+    "Pekka Hyvönen <pekka@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vaadin/vaadin-combo-box": "vaadin/vaadin-combo-box#^1.0.0-alpha3",
+    "PolymerElements/paper-elements": "PolymerElements/paper-elements#^1.0.7"
+  }
+}

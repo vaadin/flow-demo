@@ -1,0 +1,30 @@
+<dom-module id="main-styles"> <template>
+<style>
+paper-header-panel[mode="waterfall-tall"] #mainContainer {
+	overflow: auto;
+}
+
+paper-fab.iconpolymer {
+	--paper-fab-background: var(--paper-purple-500) !IMPORTANT;
+}
+
+paper-fab.icongwt {
+	--paper-fab-background: var(--paper-red-500) !IMPORTANT;
+}
+
+paper-fab.iconvaadin {
+	--paper-fab-background: var(--paper-light-blue-500) !IMPORTANT;
+}
+/* Fix for https://github.com/PolymerElements/paper-menu/issues/31 */
+paper-item iron-icon, paper-item span {
+	pointer-events: none;
+}
+
+paper-drawer-panel {
+	--paper-drawer-panel-drawer-container: {
+		background-color: inherit;
+	}
+}
+
+</style>
+</template> </dom-module>

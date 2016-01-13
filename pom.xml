@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.vaadin</groupId>
+	<artifactId>hummingbird-demo</artifactId>
+	<name>Hummingbird Demo Parent Project</name>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<modules>
+		<module>demo-test-util</module>
+		<module>demo-progress-bubble-addon</module>
+		<module>demo-unpublished-web-component</module>
+		<module>demo-todomvc-notemplate</module>
+		<module>demo-todomvc</module>
+		<module>demo-google-maps-addon</module>
+		<module>demo-bootstrap</module>
+		<module>demo-addressbook</module>
+		<module>demo-simplecrm</module>
+		<module>demo-vaadinconnector</module>
+		<module>demo-trix-editor</module>
+		<module>demo-voice-chat</module>
+		<module>demo-twitter</module>
+		<module>demo-xtag-flipbox</module>
+		<module>demo-bootstrap4</module>
+		<module>demo-minesweeper</module>
+		<module>hummingbird-api-generator</module>
+		<module>hummingbird-polymer-elements-api</module>
+		<module>demo-polymer-elements</module>
+	</modules>
+
+	<properties>
+		<hummingbird.version>1.0-SNAPSHOT</hummingbird.version>
+		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<hummingbird.polymer.elements.path>hummingbird-polymer-elements-api</hummingbird.polymer.elements.path>
+		<node.version>v5.3.0</node.version>
+		<npm.version>2.11.0</npm.version>
+		<!-- add dash-dash-force for bower to update local
+		"Imported-Maven-Bower-dependencies" -->
+		<frontend.bower.arguments>install</frontend.bower.arguments>
+	</properties>
+	<repositories>
+		<repository>
+			<id>hummingbird-internal-snapshots</id>
+			<url>http://vaadin.com/download/internal/hummingbird/hummingbird-ef6448/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+
+	</repositories>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>hummingbird-core</artifactId>
+				<version>${hummingbird.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>hummingbird-core-elements</artifactId>
+				<version>${hummingbird.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>hummingbird-server</artifactId>
+				<version>${hummingbird.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>demo-test-util</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+                        	<groupId>com.vaadin</groupId>
+                        	<artifactId>vaadin-testbench</artifactId>
+                        	<version>4.0.3</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+        <pluginManagement>
+                <plugins>
+                        <plugin>
+                               <groupId>com.github.eirslett</groupId>
+                               <artifactId>frontend-maven-plugin</artifactId>
+                               <version>0.0.26</version>
+                                <configuration>
+                                    <installDirectory>..</installDirectory>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <npmVersion>${npm.version}</npmVersion>
+                                </configuration>
+                        </plugin>
+                </plugins>
+        </pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6.1</version>
+			</plugin>
+                        <plugin>
+                                <artifactId>maven-failsafe-plugin</artifactId>
+                                <version>2.17</version>
+                                <executions>
+                                        <execution>
+                                                <goals>
+                                                        <goal>integration-test</goal>
+                                                        <goal>verify</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+
+			<!-- The Jetty plugin allows us to easily test the development build by
+				running jetty:run on the command line. -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>-1</scanIntervalSeconds>
+					<stopPort>8081</stopPort>
+					<stopWait>5</stopWait>
+					<stopKey>foo</stopKey>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

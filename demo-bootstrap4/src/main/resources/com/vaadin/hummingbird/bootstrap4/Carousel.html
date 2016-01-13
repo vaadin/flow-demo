@@ -1,0 +1,38 @@
+<div style="position: relative">
+	<!-- Carousel container -->
+	<div id="my-pics" class="carousel slide" data-ride="carousel">
+
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+		</ol>
+
+		<!-- Content -->
+		<div class="carousel-inner" role="listbox">
+
+			<!-- Slides -->
+			<div *ng-for="#image of images" class="carousel-item">
+				<img [src]="image.url" [alt]="image.caption" style="height: 200px;">
+				<div class="carousel-caption" style="top: 100px;">
+					<h3>{{image.caption}}</h3>
+					<p>{{image.text}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Previous/Next controls -->
+	<a class="left carousel-control" href="#my-pics" role="button"
+		data-slide="prev"> <span class="icon-prev" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a> <a class="right carousel-control" href="#my-pics" role="button"
+		data-slide="next"> <span class="icon-next" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+
+	<!-- Center the image -->
+	<style scoped>
+	.carousel-item img {
+		margin: 0 auto;
+	}
+</style>
+</div>

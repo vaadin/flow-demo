@@ -1,0 +1,108 @@
+<%= disclaimer() %>
+package <%= ns %>;
+
+import com.vaadin.annotations.HTML;
+import com.vaadin.annotations.NotYetImplemented;
+import com.vaadin.annotations.Tag;
+
+import com.vaadin.hummingbird.polymer.PolymerComponent;
+<% if (hasEvents()) { %>
+import com.vaadin.event.ElementEvents;
+import com.vaadin.event.EventListener;
+<% _.forEach(events, function(event) { %>
+import <%= event.ns %>.event.<%= camelCase(event.name) %>Event;<% }); } %>
+
+/**
+ * <%= getDescription(' ') %>
+ */
+ @SuppressWarnings("serial")
+ @HTML("context://bower_components/<%= path %>")
+ @Tag("<%= computeName(name) %>")
+public class <%= className() %> extends PolymerComponent<<%= className() %>> {
+
+    protected <%= className() %> getThis() { return this; }
+<% _.forEach(getGettersAndSetters(properties), function(item) {
+	if (isSupportedProperty(item)) { 
+	var unSupportedType = isUnSupportedType(item);%>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * This is value is not <code>null</code> only if it has been set from the server.
+     * It is not updated from client side.
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */<%= unSupportedType === '' ? '' :
+'\n    @NotYetImplemented'%>
+    public <%= computeType(item.type) %> <%= item.getter %>() {<%
+    if (unSupportedType === '') {
+        if (item.type !== 'Boolean') { %>
+        return (<%= computeType(item.type) %>) getElement().getTemplate()
+            .getAttribute("<%= hyphenize(item.name) %>", getElement().getNode());<% } else { %>
+        return getBooleanAttribute("<%= hyphenize(item.name) %>");<% } } else { %>
+    	// TODO <%= unSupportedType %> type properties not supported yet
+    	return null;<% } %>
+    }
+    
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */<%= unSupportedType === '' ? '' :
+'\n    @NotYetImplemented'%>
+    public <%= className() %> <%= item.setter %> {<%
+     if (unSupportedType === '') {
+     	if (item.type !== 'Boolean') { %>
+        getElement().getTemplate().setAttribute("<%= hyphenize(item.name) %>", value, getElement().getNode());<% } else { %>
+     	setBooleanAttribute("<%= hyphenize(item.name) %>", value);<% } } else { %>
+    	// TODO <%= unSupportedType %> type properties not supported yet<% } %>
+        return this;
+    }
+<% } }); %>
+<% _.forEach(getStringSetters(properties), function(item) { %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @attribute <%= hyphenize(item.name) %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    public <%= className() %> <%= computeSetterWithPrefix(item) %>(String value) {
+        getElement().setAttribute("attr.<%= hyphenize(item.name) %>", value);
+        return this;
+    }
+<% }); _.forEach(getMethods(properties), function(item) { var params = paramsString(item); %>
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
+     * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
+    public <%= className() %> <%= item.method %> {
+        elementFunctionCall("<%= item.name %>"<%= (params === '' ? '' : ', ') + params %>);
+        return this;
+    }
+<% }); %>
+<% if (hasEvents()) _.forEach(events, function(event){
+	var eventClassName = getEventName(event.name, event.ns);%>
+    /**
+     * <%= getDescription('     ', event) %>
+     *
+     * JavaScript Info:
+     * @event <%= event.name %>
+     */
+    public <%= className() %> add<%= camelCase(event.name) %>Listener(
+    		EventListener<<%= eventClassName %><<%= className() %>>> listener) {
+        ElementEvents.addElementListener(this, <%= eventClassName %>.class,
+            listener);
+        return this;
+    }
+<% }); %>
+}
