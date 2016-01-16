@@ -98,6 +98,10 @@ module.exports = {
       return m.toUpperCase().replace(/-/, '');
     });
   },
+  computeTag: function(s) {
+	if (/^iron-form/i.test(s)) return 'value="form", is="iron-form';
+	return '"' + (s || '').replace(/[^\w\-\.:]/g, '');
+  },
   computeName: function(s) {
     return (s || '').replace(/[^\w\-\.:]/g, '');
   },
