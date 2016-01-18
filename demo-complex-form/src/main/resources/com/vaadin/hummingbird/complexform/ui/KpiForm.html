@@ -1,0 +1,93 @@
+<form is="iron-form" id="kpiForm" class="kpi-form" style="max-width: 500px">
+	<script>
+		var form = document.getElementById('kpiForm');
+		form.onChange = function() {
+			var form = document.getElementById('kpiForm');
+			if (form.validate && form.validate()) {
+				document.getElementById('save').removeAttribute('disabled');
+				document.getElementById('reset').removeAttribute('disabled');
+			} else {
+				document.getElementById('save').setAttribute('disabled', true);
+				document.getElementById('reset').setAttribute('disabled', true);
+			}
+		}
+		form.onGoalSelect = function() {
+			
+		}
+	</script>
+	<style is="custom-style">
+
+.kpi-form paper-button.red {
+	color: var(--paper-red-500);
+	--paper-button-flat-focus-color: var(--paper-red-50);
+}
+
+.kpi-form paper-button.red:hover {
+	background: var(--paper-red-50);
+}
+
+.kpi-form paper-button.green {
+	color: var(--paper-green-500);
+	--paper-button-flat-focus-color: var(--paper-green-50);
+}
+
+.kpi-form paper-button.green:hover {
+	background: var(--paper-green-50);
+}
+.kpi-form paper-button.orange {
+	color: var(--paper-orange-500);
+	--paper-button-flat-focus-color: var(--paper-orange-50);
+}
+.kpi-form paper-button.orange:hover {
+	background: var(--paper-orange-50);
+}
+</style>
+	<h3 id="header">{{header}}</h3>
+	<div id="content">
+		<div class="vertical layout">
+			<paper-dropdown-menu name="goal" label="Goal">
+				<paper-menu name="goal" id="goalMenu" class="dropdown-content" attr-for-selected="value"
+					[selected]="goal">
+					<paper-item *ng-for="#goal1 of goalOptions"
+						[value]="goal1.index"
+						(tap)="model.goal = goal1;"
+						>{{goal1.name}}</paper-item>
+				</paper-menu>
+			</paper-dropdown-menu>
+
+			<paper-input name="name" label="Name" required char-counter minLength=3
+				maxLength=32 [value]="name"
+				(change)="document.getElementById('kpiForm').onChange()"></paper-input>
+			<paper-textarea name="description" label="Description" required minLength=8
+				[value]="description"
+				(change)="document.getElementById('kpiForm').onChange()"></paper-textarea>
+			<paper-textarea name="dataSource" label="Data Source" [value]="dataSource" rows=3></paper-textarea>
+			</br>
+
+			<paper-radio-group [selected]="unitType.name" attr-for-selected="value">
+				<label>Unit Type</label>
+				<paper-radio-button *ng-for="#ut of unitTypes"
+					name="unitType" [value]="ut.name">{{ut.name}}</paper-radio-button>
+			</paper-radio-group>
+
+			<paper-radio-group [selected]="goal ? goal.frequency.name : ''"
+				attr-for-selected="value">
+				<label>Frequency (from Goal)</label>
+				<paper-radio-button *ng-for="#freq of frequencyOptions"
+					disabled [value]="freq.name">{{freq.name}}</paper-radio-button>
+			</paper-radio-group>
+			</br>
+			<paper-checkbox name="active" [selected]="active">Active</paper-checkbox>
+			</br>
+			<div class="horizontal layout">
+				<div class="flex"></div>
+				<paper-button id="save" class="green" raised disabled
+					(tap)="server.onCommit(document.getElementById('kpiForm').serialize());">
+					Save</paper-button>
+				<paper-button id="reset" raised class="orange"
+					disabled (tap)="document.getElementById('kpiForm').reset()">Reset</paper-button>
+				<paper-button id="cancel" class="red" (tap)="server.onCancel();">Cancel</paper-button>
+			</div>
+		</div>
+	</div>
+</form>

@@ -29,6 +29,7 @@
 		<module>hummingbird-api-generator</module>
 		<module>hummingbird-polymer-elements-api</module>
 		<module>demo-polymer-elements</module>
+		<module>demo-complex-form</module>
 	</modules>
 
 	<properties>
