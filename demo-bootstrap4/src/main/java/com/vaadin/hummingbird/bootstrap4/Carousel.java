@@ -50,8 +50,6 @@ public class Carousel extends Template {
     }
 
     public void addImage(String url, String caption, String text) {
-        getNode().getMultiValued("images"); // DAfq
-
         Image image = Model.create(Image.class);
         image.setUrl(url);
         image.setCaption(caption);

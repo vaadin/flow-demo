@@ -52,8 +52,6 @@ public class TodoList extends Template {
     }
 
     public TodoList() {
-        // Can't currently do this using the model api
-        getNode().getMultiValued("todos");
     }
 
     @TemplateEventHandler

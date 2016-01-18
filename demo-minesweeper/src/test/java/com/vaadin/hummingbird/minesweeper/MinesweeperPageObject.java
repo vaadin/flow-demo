@@ -43,7 +43,7 @@ public abstract class MinesweeperPageObject extends DemoTestBenchTest {
 
     protected WebElement getCell(int row, int col) {
         WebElement rowE = getMineField()
-                .findElements(By.xpath("//tr[@class='row']")).get(row);
+                .findElements(By.xpath(".//tr[@class='row']")).get(row);
         return rowE.findElements(By.xpath("td")).get(col);
     }
 

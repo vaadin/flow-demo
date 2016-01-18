@@ -7,7 +7,6 @@ import java.util.Set;
 
 import com.vaadin.annotations.TemplateEventHandler;
 import com.vaadin.hummingbird.kernel.Element;
-import com.vaadin.hummingbird.kernel.StateNode;
 import com.vaadin.hummingbird.minesweeper.Point;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Template;
@@ -27,15 +26,11 @@ public class SimpleMinesweeper extends Template {
     @Override
     protected void init() {
         super.init();
-
-        getNode().getMultiValued("rows");
         List<Row> data = getModel().getRows();
 
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
             Row row = Model.create(Row.class);
             data.add(row);
-            ((StateNode) getNode().getMultiValued("rows").get(rowIndex))
-                    .getMultiValued("cells");
             List<Cell> cells = row.getCells();
             for (int colIndex = 0; colIndex < cols; colIndex++) {
                 Cell cell = Model.create(Cell.class);
