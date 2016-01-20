@@ -30,7 +30,7 @@ public class IconButtonSample extends SampleBase {
                         .setTitle(
                                 "menu")
                 .withClassName("with-click-listener")
-                .withClickListener(e -> ((AbstractSimpleDOMComponentContainer) e
+                .withTapListener(e -> ((AbstractSimpleDOMComponentContainer) e
                         .getPolymerComponent().getParent()).addComponent(
                                 new PaperDialog().withClassName("event-dialog")
                                         .setTextContent(

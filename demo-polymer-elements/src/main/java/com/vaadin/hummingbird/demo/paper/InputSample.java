@@ -48,7 +48,7 @@ public class InputSample extends SampleBase {
                         .setErrorMessagePolymer("letters only!"),
                 lazyValidatedInput,
                 new PaperButton().setTextContent("Validate").setElevation("4")
-                        .withClickListener(e -> lazyValidatedInput.validate()));
+                        .withTapListener(e -> lazyValidatedInput.validate()));
     }
 
     private void addCharacterCounter(CssLayout root) {

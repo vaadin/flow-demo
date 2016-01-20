@@ -25,7 +25,6 @@ import com.vaadin.hummingbird.iron.IronFlexLayout;
 import com.vaadin.hummingbird.iron.IronIcon;
 import com.vaadin.hummingbird.iron.IronIcons;
 import com.vaadin.hummingbird.iron.IronSelector;
-import com.vaadin.hummingbird.iron.event.IronSelectEvent;
 import com.vaadin.hummingbird.paper.PaperButton;
 import com.vaadin.hummingbird.paper.PaperDialog;
 import com.vaadin.hummingbird.paper.PaperDialogScrollable;
@@ -109,7 +108,7 @@ public class PolymerSampler extends CssLayout {
                         + name.toLowerCase().replace(" ", "-") + "-category")
                 .with(new IronIcon().setIconPolymer("expand-more"),
                         createSpanElement(name), new PaperRipple())
-                .withClickListener(event -> {
+                .withTapListener(event -> {
                     collapse.setOpened(!collapse.isOpened());
                     if (currentCollapse != null) {
                         currentCollapse.setOpened(false);
@@ -133,7 +132,7 @@ public class PolymerSampler extends CssLayout {
         return new PaperItem().setDisabled(disabled)
                 .with(createSpanElement(name))
                 .withClassName("item " + name.toLowerCase() + "-sample")
-                .withClickListener(event -> openSample(name));
+                .withTapListener(event -> openSample(name));
     }
 
     private void openSample(String sampleName) {
@@ -230,15 +229,13 @@ public class PolymerSampler extends CssLayout {
 
         helpButton = new PaperButton().withClassName("buttons")
                 .with(new IronIcon().setIconPolymer("help"))
-                .withClickListener(event -> onAboutClick())
+                .withTapListener(event -> onAboutClick())
                 .appendTextContent("ABOUT");
 
         PaperDropdownMenu themeDropDown = new PaperDropdownMenu()
                 .setLabel("Theme").withClassName("theme-select")
                 .with(styleSelector = new PaperMenu()
                         .withClassName("dropdown-content")
-                        .addEventData(IronSelectEvent.class,
-                                "event.target.selected")
                         .with(createThemeItems()));
 
         CssLayout buttonsLayout = new CssLayout();
@@ -275,7 +272,7 @@ public class PolymerSampler extends CssLayout {
                 .setBooleanAttribute("dialog-dismiss", true).setRaised(true)
                 .setTextContent("OK")
                 // need to update the open property, or next open won't work
-                .withClickListener(event -> aboutDialog.setOpened(false)));
+                .withTapListener(event -> aboutDialog.setOpened(false)));
 
         aboutDialog = new PaperDialog().setModal(true)
                 .with(new PaperDialogScrollable()
