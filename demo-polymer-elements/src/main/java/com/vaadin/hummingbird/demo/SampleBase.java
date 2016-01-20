@@ -46,7 +46,7 @@ public class SampleBase extends CssLayout {
                 .setExitAnimation("fade-out-animation")
                 .withClassName("event-dialog")
                 .with(new PaperButton().setTextContent(stringBuilder.toString())
-                        .withClickListener(e -> dialog.setOpened(false)))
+                        .withTapListener(e -> dialog.setOpened(false)))
                 .setOpened(true);
         addComponent(dialog);
     }

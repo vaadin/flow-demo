@@ -2,6 +2,7 @@ package com.vaadin.hummingbird.demo.integration;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.vaadin.event.EventListener;
@@ -17,9 +18,6 @@ import com.vaadin.hummingbird.paper.PaperRadioButton;
 import com.vaadin.hummingbird.paper.PaperRadioGroup;
 import com.vaadin.hummingbird.paper.event.ChangeEvent;
 import com.vaadin.ui.CssLayout;
-
-import elemental.json.JsonType;
-import elemental.json.JsonValue;
 
 public class CustomerFormDemo extends SampleBase {
 
@@ -55,34 +53,34 @@ public class CustomerFormDemo extends SampleBase {
                 // inputs
                 new PaperInput().setValue((String) getValue("firstName"))
                         .setLabel("First name").setName("firstName")
-                        .addEventData(ChangeEvent.class, "event.target.value")
+                        .addEventUpdatedAttributes(ChangeEvent.class, "value")
                         .addChangeListener(basicInputChangeListener),
                 new PaperInput().setValue((String) getValue("lastName"))
                         .setLabel("Last name").setName("lastName")
-                        .addEventData(ChangeEvent.class, "event.target.value")
+                        .addEventUpdatedAttributes(ChangeEvent.class, "value")
                         .addChangeListener(basicInputChangeListener),
                 new PaperInput().setValue((String) getValue("email"))
                         .setLabel("Email").setName("email")
-                        .addEventData(ChangeEvent.class, "event.target.value")
+                        .addEventUpdatedAttributes(ChangeEvent.class, "value")
                         .addChangeListener(
                                 basicInputChangeListener),
                 new PaperInput().setValue((String) getValue("birthDate"))
                         .setLabel("Birthday").setName("birthDate")
                         .setType("date")
-                        .addEventData(ChangeEvent.class, "event.target.value")
+                        .addEventUpdatedAttributes(ChangeEvent.class, "value")
                         .addChangeListener(basicInputChangeListener),
                 // radio buttons
-                layout("flex",
-                        new PaperRadioGroup().setAttrForSelected("name")
-                                .setSelected((String) getValue("gender"))
-                                .addEventData("iron-select",
-                                        "event.target.selected")
+                layout("flex", new PaperRadioGroup().setAttrForSelected("name")
+                        .setSelected((String) getValue("gender"))
+                        .addEventUpdatedAttributes("iron-select", "selected")
                         .addIronSelectListener(e -> {
-                            cached.put("gender",
-                                    e.getEventDataString(
-                                            "event.target.selected")
+                            cached.put(
+                                    "gender", Optional
+                                            .ofNullable(e.getPolymerComponent()
+                                                    .getSelected())
                                     .orElse(null));
-                        }).with(new PaperRadioButton().setName("Female")
+                        })
+                        .with(new PaperRadioButton().setName("Female")
                                 .setTextContent("Female"),
                                 new PaperRadioButton().setName("Male")
                                         .setTextContent("Male"))),
@@ -90,7 +88,7 @@ public class CustomerFormDemo extends SampleBase {
                 new PaperDropdownMenu().setLabel("Status").with(new PaperMenu()
                         .withClassName("dropdown-content")
                         // .setAttrForSelected("value") // doesn't work
-                        .addEventData("iron-select", "event.target.selected")
+                        .addEventUpdatedAttributes("iron-select", "selected")
                         .setSelected(getValue("status") == null ? "-1"
                                 : getValue("status").toString())
                         .addIronSelectListener(e -> onStatusSelect(e))
@@ -103,9 +101,9 @@ public class CustomerFormDemo extends SampleBase {
         CssLayout buttons = layout("flex");
         buttons.addComponents(
                 new PaperButton().setTextContent("Save").setRaised(true)
-                        .withClickListener(e -> onSave()),
+                        .withTapListener(e -> onSave()),
                 new PaperButton().setTextContent("Reset").setRaised(true)
-                        .withClickListener(e -> onReset()));
+                        .withTapListener(e -> onReset()));
         section.addComponents(buttons);
     }
 
@@ -140,24 +138,14 @@ public class CustomerFormDemo extends SampleBase {
     }
 
     private void onInputChange(ChangeEvent<PaperInput> e) {
-        cached.put(e.getPolymerComponent().getName(),
-                e.getEventDataString("event.target.value").orElse(null));
+        cached.put(e.getPolymerComponent().getName(), Optional
+                .ofNullable(e.getPolymerComponent().getValue()).orElse(null));
     }
 
     private void onStatusSelect(IronSelectEvent<PaperMenu> selectEvent) {
-        JsonValue jsonValue = selectEvent.getEventData()
-                .get("event.target.selected");
-        if (jsonValue != null) {
-            if (jsonValue.getType() == JsonType.STRING) {
-                cached.put("status",
-                        selectEvent.getEventDataString("event.target.selected")
-                                .orElse("-1"));
-            } else if (jsonValue.getType() == JsonType.NUMBER) {
-                cached.put("status",
-                        selectEvent.getEventDataInteger("event.target.selected")
-                                .orElse(-1).toString());
-            }
-        }
+        int selected = selectEvent.getPolymerComponent().getElement()
+                .getAttribute("selected", -1);
+        cached.put("status", selected);
     }
 
 }
