@@ -40,7 +40,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
     if (unSupportedType === '') {
         if (item.type !== 'Boolean') { %>
         return (<%= computeType(item.type) %>) getElement().getTemplate()
-            .getAttribute("<%= hyphenize(item.name) %>", getElement().getNode());<% } else { %>
+            .getAttribute("<%= item.name %>", getElement().getNode());<% } else { %>
         return getBooleanAttribute("<%= hyphenize(item.name) %>");<% } } else { %>
     	// TODO <%= unSupportedType %> type properties not supported yet
     	return null;<% } %>
@@ -58,7 +58,7 @@ public class <%= className() %> extends PolymerComponent<<%= className() %>> {
     public <%= className() %> <%= item.setter %> {<%
      if (unSupportedType === '') {
      	if (item.type !== 'Boolean') { %>
-        getElement().getTemplate().setAttribute("<%= hyphenize(item.name) %>", value, getElement().getNode());<% } else { %>
+        getElement().getTemplate().setAttribute("<%= item.name %>", value, getElement().getNode());<% } else { %>
      	setBooleanAttribute("<%= hyphenize(item.name) %>", value);<% } } else { %>
     	// TODO <%= unSupportedType %> type properties not supported yet<% } %>
         return this;
