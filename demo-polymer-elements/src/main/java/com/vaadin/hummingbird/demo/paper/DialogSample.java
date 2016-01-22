@@ -47,12 +47,12 @@ public class DialogSample extends SampleBase {
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setTextContent("Cancel")
-                                .withClickListener(e -> scrollingDlg.close()),
+                                .withTapListener(e -> scrollingDlg.close()),
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setBooleanAttribute("autofocus", true)
                                 .setTextContent("OK")
-                                .withClickListener(e -> scrollingDlg.close())));
+                                .withTapListener(e -> scrollingDlg.close())));
 
         PaperDialog actionsDialog = new PaperDialog();
         actionsDialog.with(element("h2", "", "Dialog Title"), loremIpsum(),
@@ -61,33 +61,33 @@ public class DialogSample extends SampleBase {
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setTextContent("DECLINE")
-                                .withClickListener(e -> actionsDialog.close()),
+                                .withTapListener(e -> actionsDialog.close()),
                         new PaperButton()
                                 .setBooleanAttribute("dialog-dismiss", true)
                                 .setBooleanAttribute("autofocus", true)
-                                .setTextContent("ACCEPT").withClickListener(
-                                        e -> actionsDialog.close())));
+                                .setTextContent("ACCEPT")
+                                .withTapListener(e -> actionsDialog.close())));
 
         PaperDialog modalDialog = new PaperDialog();
         modalDialog.setModal(true).with(loremIpsum(), layout("buttons",
                 new PaperButton().setBooleanAttribute("dialog-dismiss", true)
                         .setBooleanAttribute("autofocus", true)
                         .setTextContent("Tap me to close")
-                        .withClickListener(e -> modalDialog.close())));
+                        .withTapListener(e -> modalDialog.close())));
 
         section.addComponents(
                 new PaperButton().setTextContent("Plain Dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> plainDialog.open()),
+                        .withTapListener(e -> plainDialog.open()),
                 new PaperButton().setTextContent("Scrolling Dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> scrollingDlg.open()),
+                        .withTapListener(e -> scrollingDlg.open()),
                 new PaperButton().setTextContent("Dialog with actions")
                         .withClassName("emphasised")
-                        .withClickListener(e -> actionsDialog.open()),
+                        .withTapListener(e -> actionsDialog.open()),
                 new PaperButton().setTextContent("Modal dialog")
                         .withClassName("emphasised")
-                        .withClickListener(e -> modalDialog.open()),
+                        .withTapListener(e -> modalDialog.open()),
                 plainDialog, scrollingDlg, actionsDialog, modalDialog);
 
         addComponents(header, section);
@@ -108,10 +108,10 @@ public class DialogSample extends SampleBase {
         section.addComponents(
                 new PaperButton().withClassName("emphasised")
                         .setTextContent("colors")
-                        .withClickListener(e -> colorsDialog.open()),
+                        .withTapListener(e -> colorsDialog.open()),
                 new PaperButton().withClassName("emphasised")
                         .setTextContent("size & position")
-                        .withClickListener(e -> positionDialog.open()),
+                        .withTapListener(e -> positionDialog.open()),
                 colorsDialog, positionDialog);
 
         addComponents(header, section);
@@ -130,7 +130,7 @@ public class DialogSample extends SampleBase {
 
         section.addComponents(new PaperButton().withClassName("emphasised")
                 .setTextContent("Transitions")
-                .withClickListener(e -> paperDialog.open()), paperDialog);
+                .withTapListener(e -> paperDialog.open()), paperDialog);
 
         addComponents(header, section);
     }

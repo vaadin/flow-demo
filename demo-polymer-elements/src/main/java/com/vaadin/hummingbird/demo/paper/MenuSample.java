@@ -1,6 +1,7 @@
 package com.vaadin.hummingbird.demo.paper;
 
 import com.vaadin.hummingbird.demo.SampleBase;
+import com.vaadin.hummingbird.iron.event.IronSelectEvent;
 import com.vaadin.hummingbird.paper.PaperItem;
 import com.vaadin.hummingbird.paper.PaperMenu;
 import com.vaadin.ui.CssLayout;
@@ -41,10 +42,16 @@ public class MenuSample extends SampleBase {
     private void addMultiselect(CssLayout root) {
         CssLayout section = createHorizontalSection(root, "Multi-select");
 
-        section.addComponents(new PaperMenu().setMulti(true).with(
-                new PaperItem().setTextContent("Bold"),
-                new PaperItem().setTextContent("Italic"),
-                new PaperItem().setTextContent("Underline"),
-                new PaperItem().setTextContent("Strikethrough")));
+        section.addComponents(new PaperMenu().setMulti(true)
+                .with(new PaperItem().setTextContent("Bold"),
+                        new PaperItem().setTextContent("Italic"),
+                        new PaperItem().setTextContent("Underline"),
+                        new PaperItem().setTextContent("Strikethrough"))
+                .addEventUpdatedAttributes(IronSelectEvent.class,
+                        "selectedValues")
+                .addIronSelectListener(this::onIronSelect));
+    }
+
+    private void onIronSelect(IronSelectEvent<PaperMenu> event) {
     }
 }

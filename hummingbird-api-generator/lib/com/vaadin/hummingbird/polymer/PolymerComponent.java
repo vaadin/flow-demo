@@ -95,8 +95,8 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         return getThis();
     }
 
-    public T withClickListener(EventListener<ClickEvent<T>> listener) {
-        ElementEvents.addElementListener(this, ClickEvent.class, listener);
+    public T withTapListener(EventListener<TapEvent<T>> listener) {
+        ElementEvents.addElementListener(this, TapEvent.class, listener);
         return getThis();
     }
 
@@ -126,36 +126,37 @@ public abstract class PolymerComponent<T extends PolymerComponent<T>>
         return getThis();
     }
 
-    public T addEventData(String eventType, String... data) {
-        getElement().addEventData(eventType, data);
+    public T addEventUpdatedAttributes(String eventType, String... attributes) {
+        getElement().addEventUpdatedAttribute(eventType, attributes);
         return getThis();
     }
 
-    public T addEventData(Class<? extends PolymerComponentEvent> eventType,
-            String... data) {
+    public T addEventUpdatedAttributes(
+            Class<? extends PolymerComponentEvent> eventType,
+            String... attributes) {
         EventType ann = eventType.getAnnotation(EventType.class);
         if (ann == null) {
             throw new IllegalArgumentException(
                     "Event type " + eventType.getName() + " should have an @"
                             + EventType.class.getSimpleName() + " annotation");
         }
-        return addEventData(ann.value(), data);
+        return addEventUpdatedAttributes(ann.value(), attributes);
     }
 
-    public T removeEventData(String eventType, String... data) {
-        getElement().removeEventData(eventType, data);
+    public T removeEventUpdatedAttributes(String eventType, String... attributes) {
+        getElement().removeEventData(eventType, attributes);
         return getThis();
     }
 
-    public T removeEventData(Class<? extends PolymerComponentEvent> eventType,
-            String... data) {
+    public T removeEventUpdatedAttributes(Class<? extends PolymerComponentEvent> eventType,
+            String... attributes) {
         EventType ann = eventType.getAnnotation(EventType.class);
         if (ann == null) {
             throw new IllegalArgumentException(
                     "Event type " + eventType.getName() + " should have an @"
                             + EventType.class.getSimpleName() + " annotation");
         }
-        return removeEventData(ann.value(), data);
+        return removeEventUpdatedAttributes(ann.value(), attributes);
     }
 
     protected void elementFunctionCall(String functionName, Object... params) {

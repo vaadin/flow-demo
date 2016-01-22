@@ -4,7 +4,7 @@ import com.vaadin.annotations.PolymerStyle;
 import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.paper.PaperButton;
 import com.vaadin.hummingbird.paper.PaperProgress;
-import com.vaadin.hummingbird.polymer.ClickEvent;
+import com.vaadin.hummingbird.polymer.TapEvent;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.UI;
 
@@ -27,13 +27,13 @@ public class ProgressSample extends SampleBase {
         PaperProgress progress = new PaperProgress().setValue(0);
         section.addComponents(progress,
                 new PaperButton().setRaised(true).setTextContent("Start")
-                        .withClickListener(e -> startStop(e, progress)));
+                        .withTapListener(e -> startStop(e, progress)));
 
     }
 
     private boolean started;
 
-    private void startStop(ClickEvent<PaperButton> event,
+    private void startStop(TapEvent<PaperButton> event,
             PaperProgress progress) {
         if (progress.getValue() >= 100.0D) {
             progress.setValue(0D);

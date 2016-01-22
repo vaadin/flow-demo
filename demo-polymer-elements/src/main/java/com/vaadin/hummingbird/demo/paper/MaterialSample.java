@@ -2,7 +2,7 @@ package com.vaadin.hummingbird.demo.paper;
 
 import com.vaadin.hummingbird.demo.SampleBase;
 import com.vaadin.hummingbird.paper.PaperMaterial;
-import com.vaadin.hummingbird.polymer.ClickEvent;
+import com.vaadin.hummingbird.polymer.TapEvent;
 import com.vaadin.ui.CssLayout;
 
 public class MaterialSample extends SampleBase {
@@ -28,16 +28,15 @@ public class MaterialSample extends SampleBase {
         CssLayout section2 = new CssLayout();
         section2.addComponents(element("div", "Animated", false),
                 new PaperMaterial().setElevation(0).setAnimated(true)
-                        .setTextContent("tap").withClickListener(e -> onTap(e)),
+                        .setTextContent("tap").withTapListener(e -> onTap(e)),
                 new PaperMaterial().setElevation(0).setAnimated(true)
                         .withClassName("fab layout center-center")
-                        .setTextContent("tap")
-                        .withClickListener(e -> onTap(e)));
+                        .setTextContent("tap").withTapListener(e -> onTap(e)));
 
         addComponents(section1, section2);
     }
 
-    private void onTap(ClickEvent<PaperMaterial> event) {
+    private void onTap(TapEvent<PaperMaterial> event) {
         PaperMaterial paperMaterial = event.getPolymerComponent();
         if (paperMaterial.getElevation() == 0) {
             paperMaterial.setElevation(5);
