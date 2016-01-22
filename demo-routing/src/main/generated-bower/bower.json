@@ -1,0 +1,18 @@
+{
+  "name": "Imported-Maven-Bower-dependencies",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "es6-collections": "0.5.5",
+    "webcomponentsjs": "~0.7.19",
+    "polymer": "Polymer/polymer#1.2.3",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1.0.3",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7"
+  }
+}
