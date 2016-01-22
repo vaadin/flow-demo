@@ -27,12 +27,8 @@ public class SecureMinesweeper extends Template {
     protected void init() {
         super.init();
 
-        minefield.init(10, 10, seed, mineDensity);
-        getModel().setNumberOfMines(minefield.getNumberOfMines());
-        List<Row> rows = getModel().getRows();
         minefield.init(10, 10);
-        getNode().getMultiValued("rows");
-        List<Row> data = getModel().getRows();
+		List<Row> rows = getModel().getRows();
 
         for (int rowIndex = 0; rowIndex < minefield.getRows(); rowIndex++) {
             Row row = Model.create(Row.class);
