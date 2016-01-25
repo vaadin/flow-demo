@@ -5,19 +5,29 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.vaadin.hummingbird.routing.router.History.PopStateEvent;
 import com.vaadin.ui.UI;
 
 public class Router {
+
+    private final History history;
 
     private Map<String, View> viewsMap;
 
     private Map<String, Set<String>> subViewsMap;
 
-    private final UI ui;
-
     public Router(UI ui) {
-        this.ui = ui;
+        this(new History(ui));
+    }
 
+    public Router(History history) {
+        this.history = history;
+
+        history.addPopStateListener(this::onPopState);
+    }
+
+    private void onPopState(PopStateEvent event) {
+        System.out.println("POPSTATE: " + event.getState().toJson());
     }
 
     public Router addView(View view) {
