@@ -12,10 +12,6 @@ public interface View {
     default void show(View subView) {
     };
 
-    default String getAliases() {
-        return null;
-    }
-
     default String getParentViewPath() {
         return null;
     }

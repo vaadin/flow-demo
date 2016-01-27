@@ -15,8 +15,4 @@ public class HomeView extends CssLayout implements View {
         return "home";
     }
 
-    @Override
-    public String getAliases() {
-        return "";
-    }
 }

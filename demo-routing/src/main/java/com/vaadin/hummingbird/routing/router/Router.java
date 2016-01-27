@@ -27,8 +27,6 @@ public class Router {
 
     private Map<String, View> viewsMap;
 
-    private Map<String, String> aliases;
-
     private Map<String, Set<String>> subViewsMap;
 
     private ArrayDeque<View> currentViews;
@@ -55,17 +53,9 @@ public class Router {
             HistoryStateUpdateStrategy popStateUpdateStrategy) {
         ArrayDeque<String> pathQue = new ArrayDeque<>(splitPathToParts(path));
 
-        String pathWithoutParams = removeFragmentAndParemetersFromPath(path);
-
         Map<String, View> registeredViews = getViewsMap(false);
         ArrayDeque<View> views = new ArrayDeque<>();
-        // first check for matching aliases
-        if (getAliasesMap(false).containsKey(pathWithoutParams)) {
-            String realPath = getAliasesMap(false).get(pathWithoutParams);
-            View aliasView = registeredViews.get(realPath);
-            views.add(aliasView);
-            findAndPushParents(aliasView, views);
-        } else if (!pathQue.isEmpty() && registeredViews != null) {
+        if (!pathQue.isEmpty() && registeredViews != null) {
             // match path to views from start of path
             StringBuilder viewPathBuilder = new StringBuilder();
             while (!pathQue.isEmpty()) {
@@ -253,20 +243,12 @@ public class Router {
     }
 
     public Router addView(View view) {
-        return addView(view, view.getPath(), view.getAliases(),
-                view.getParentViewPath());
+        return addView(view, view.getPath(), view.getParentViewPath());
     }
 
-    public Router addView(View view, String url, String aliases,
-            String parentViewUrl) {
+    public Router addView(View view, String url, String parentViewUrl) {
         Map<String, View> map = getViewsMap(true);
         map.put(url, view);
-        if (aliases != null) {
-            Map<String, String> aliasesMap = getAliasesMap(true);
-            for (String alias : aliases.split(" ")) {
-                aliasesMap.put(alias, url);
-            }
-        }
         if (view.getParentViewPath() != null) {
             for (String parent : parentViewUrl.split(" ")) {
                 getSubViewsFor(parent, true).add(view.getPath());
@@ -276,29 +258,16 @@ public class Router {
     }
 
     public Router removeView(View view) {
-        return removeView(view, view.getPath(), view.getAliases(),
-                view.getParentViewPath());
+        return removeView(view, view.getPath(), view.getParentViewPath());
     }
 
-    public Router removeView(View view, String url, String aliases,
-            String parentViewUrl) {
+    public Router removeView(View view, String url, String parentViewUrl) {
         // remove view
         Map<String, View> map = getViewsMap(false);
         if (view != null) {
             map.remove(url, view);
         } else {
             map.remove(url);
-        }
-        // remove aliases
-        if (aliases != null) {
-            Map<String, String> alisesMap = getAliasesMap(false);
-            for (String alias : aliases.split(" ")) {
-                if (view != null) {
-                    alisesMap.remove(alias, url);
-                } else {
-                    alisesMap.remove(alias);
-                }
-            }
         }
         // remove from parent view
         if (parentViewUrl != null) {
@@ -335,17 +304,6 @@ public class Router {
             }
         }
         return viewsMap;
-    }
-
-    private Map<String, String> getAliasesMap(boolean createIfNeeded) {
-        if (aliases == null) {
-            if (createIfNeeded) {
-                aliases = new LinkedHashMap<>();
-            } else {
-                return Collections.emptyMap();
-            }
-        }
-        return aliases;
     }
 
     private Map<String, Set<String>> getSubViewsMap(boolean createIfNeeded) {

@@ -10,11 +10,6 @@ public class TutorialView extends AbstractView {
     }
 
     @Override
-    public String getAliases() {
-        return "tutorial";
-    }
-
-    @Override
     public String getParentViewPath() {
         return "framework";
     }

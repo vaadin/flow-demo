@@ -61,8 +61,8 @@ public class RoutingUI extends UI {
         router.addView(new VaadinIconsView());
 
         String pathInfo = request.getPathInfo();
-        if (pathInfo == null) {
-            pathInfo = "";
+        if (pathInfo == null || pathInfo.isEmpty() || pathInfo.equals("/")) {
+            pathInfo = "home";
         }
         router.open(pathInfo, HistoryStateUpdateStrategy.NO);
     }

@@ -10,11 +10,6 @@ public class DemoView extends AbstractView {
     }
 
     @Override
-    public String getAliases() {
-        return "demo";
-    }
-
-    @Override
     public String getParentViewPath() {
         return "framework";
     }
