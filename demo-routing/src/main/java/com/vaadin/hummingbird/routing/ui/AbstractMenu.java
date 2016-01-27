@@ -47,7 +47,8 @@ public abstract class AbstractMenu extends Template {
 
     public void markSelected(String path) {
         getModel().getItems().forEach(item -> {
-            if (item.getPath().equals(path)) {
+            String itemPath = item.getPath();
+            if (itemPath.startsWith(path)) {
                 item.setSelected(true);
             } else {
                 item.setSelected(false);
@@ -55,7 +56,7 @@ public abstract class AbstractMenu extends Template {
         });
     }
 
-    public void removeSelected(String path) {
+    public void removeSelected() {
         getModel().getItems().forEach(item -> item.setSelected(false));
     }
 }

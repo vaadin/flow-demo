@@ -64,12 +64,7 @@ public class Router {
             String realPath = getAliasesMap(false).get(pathWithoutParams);
             View aliasView = registeredViews.get(realPath);
             views.add(aliasView);
-            String parentUrl = aliasView.getParentViewPath();
-            while (parentUrl != null) {
-                View parentView = registeredViews.get(parentUrl);
-                views.addFirst(parentView);
-                parentUrl = parentView.getParentViewPath();
-            }
+            findAndPushParents(aliasView, views);
         } else if (!pathQue.isEmpty() && registeredViews != null) {
             // match path to views from start of path
             StringBuilder viewPathBuilder = new StringBuilder();
@@ -101,6 +96,7 @@ public class Router {
                     View view = registeredViews.get(viewPathBuilder.toString());
                     if (view != null) {
                         views.add(view);
+                        findAndPushParents(view, views);
                         viewPathBuilder = new StringBuilder();
                     } else {
                         viewPathBuilder.append("/");
@@ -110,6 +106,15 @@ public class Router {
         }
 
         openViews(views, popStateUpdateStrategy, null, path);
+    }
+
+    private void findAndPushParents(View view, ArrayDeque<View> views) {
+        String parentUrl = view.getParentViewPath();
+        while (parentUrl != null) {
+            View parentView = getViewsMap(false).get(parentUrl);
+            views.addFirst(parentView);
+            parentUrl = parentView.getParentViewPath();
+        }
     }
 
     private void openViews(ArrayDeque<View> viewTree,
@@ -134,7 +139,7 @@ public class Router {
         updateHistoryState(state, path, strategy);
 
         if (viewDisplay != null && changedViewHierarchyIndex < 1) {
-            viewDisplay.show(this, viewTree.peekFirst());
+            viewDisplay.show(viewTree.peekFirst());
         }
 
         while (!viewTree.isEmpty()) {
@@ -196,7 +201,7 @@ public class Router {
     private void openErrorView(String path) {
         if (errorView != null) {
             getHistory().replaceState(null, "error", errorView.getPath());
-            viewDisplay.show(this, errorView);
+            viewDisplay.show(errorView);
             errorView.open(null, path);
             currentViews = new ArrayDeque<>();
             currentViews.add(errorView);

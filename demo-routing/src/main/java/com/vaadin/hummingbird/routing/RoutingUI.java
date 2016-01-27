@@ -15,7 +15,11 @@ import com.vaadin.hummingbird.routing.ui.view.FrameworkView;
 import com.vaadin.hummingbird.routing.ui.view.HomeView;
 import com.vaadin.hummingbird.routing.ui.view.ProToolsView;
 import com.vaadin.hummingbird.routing.ui.view.ServicesView;
+import com.vaadin.hummingbird.routing.ui.view.download.DocsView;
+import com.vaadin.hummingbird.routing.ui.view.download.MavenView;
+import com.vaadin.hummingbird.routing.ui.view.download.VaadinIconsView;
 import com.vaadin.hummingbird.routing.ui.view.framework.DemoView;
+import com.vaadin.hummingbird.routing.ui.view.framework.DirectoryView;
 import com.vaadin.hummingbird.routing.ui.view.framework.TutorialView;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -46,8 +50,15 @@ public class RoutingUI extends UI {
         router.addView(new CommunityView());
         router.addView(new ServicesView());
 
+        // framework
         router.addView(new DemoView());
         router.addView(new TutorialView());
+        router.addView(new DirectoryView());
+
+        // downloads
+        router.addView(new DocsView());
+        router.addView(new MavenView());
+        router.addView(new VaadinIconsView());
 
         String pathInfo = request.getPathInfo();
         if (pathInfo == null) {

@@ -12,7 +12,6 @@ public interface View {
     default void show(View subView) {
     };
 
-    // TODO whether alias should be replaced with actual path?
     default String getAliases() {
         return null;
     }

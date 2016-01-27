@@ -1,11 +1,11 @@
 package com.vaadin.hummingbird.routing.ui;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.hummingbird.routing.router.Router;
 import com.vaadin.hummingbird.routing.router.View;
 import com.vaadin.hummingbird.routing.router.ViewDisplay;
+import com.vaadin.hummingbird.routing.ui.view.AbstractSubMenuView;
 import com.vaadin.ui.HasElement;
 import com.vaadin.ui.Template;
 
@@ -32,23 +32,22 @@ public class MainView extends Template implements ViewDisplay {
     }
 
     @Override
-    public void show(Router router, View topLevelView) {
+    public void show(View topLevelView) {
         mainMenu.markSelected(topLevelView.getPath());
         if (topLevelView instanceof HasElement) {
             getElementById("main")
                     .appendChild(((HasElement) topLevelView).getElement());
         }
 
-        List<View> secondLevelViews = router
-                .getRegisteredSubViews(topLevelView);
-        if (!secondLevelViews.isEmpty()) {
+        if (topLevelView instanceof AbstractSubMenuView) {
             if (subMenu == null) {
                 subMenu = new SubMenu();
                 getElementById("sub-menu").appendChild(subMenu.getElement());
             }
             subMenu.removeAllItems();
-            secondLevelViews
-                    .forEach(v -> subMenu.addMenuItem(v.getPath(), v.getPath()));
+            Stream.of(((AbstractSubMenuView) topLevelView).getSubMenuLinks())
+                    .forEach(s -> subMenu.addMenuItem(s[0], s[1]));
+            ((AbstractSubMenuView) topLevelView).setSubMenu(subMenu);
         } else if (subMenu != null) {
             subMenu.removeAllItems();
             subMenu.getElement().removeFromParent();
@@ -58,7 +57,7 @@ public class MainView extends Template implements ViewDisplay {
 
     @Override
     public void remove(View view) {
-        mainMenu.removeSelected(view.getPath());
+        mainMenu.removeSelected();
     }
 
 }
