@@ -12,6 +12,12 @@ import elemental.json.JsonValue;
 
 public class History {
 
+    private static final String EVENT_DETAIL_STATE = "event.detail.state";
+
+    private static final String EVENT_DETAIL_PATH = "event.detail.path";
+
+    private static final String EVENT_DETAIL_HOST = "event.detail.host";
+
     public interface PopStateListener {
         void onPopState(PopStateEvent event);
     }
@@ -20,13 +26,32 @@ public class History {
 
         private final JsonValue state;
 
-        public PopStateEvent(JsonValue state, History source) {
+        private final String path;
+
+        private final String host;
+
+        public PopStateEvent(String host, String path, JsonValue state,
+                History source) {
             super(source);
+            this.host = host;
+            this.path = path;
             this.state = state;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public String getPath() {
+            return path;
         }
 
         public JsonValue getState() {
             return state;
+        }
+
+        public History getHistory() {
+            return (History) getSource();
         }
     }
 
@@ -71,9 +96,13 @@ public class History {
         ui.getRootNode().enqueueRpc(
                 "var ui = document.getElementsByClassName('history-ui')[0];"
                         + "window.onpopstate = function(e) {"
-                        + "var event = new CustomEvent('popstate', {detail: {state: e.state}});"
+                        + "var pathname = window.pathname;"
+                        + "var hostname = window.hostname;"
+                        + "var event = new CustomEvent('popstate', {detail: {state: e.state, host: pathname, path:hostname}});"
                         + "ui.dispatchEvent(event);};");
-        ui.getElement().addEventData("popstate", "event.detail.state");
+        ui.getElement().addEventData("popstate", EVENT_DETAIL_STATE);
+        ui.getElement().addEventData("popstate", EVENT_DETAIL_PATH);
+        ui.getElement().addEventData("popstate", EVENT_DETAIL_HOST);
         eventRegistrationHandle = ui.getElement().addEventListener("popstate",
                 this::handlePopState);
     }
@@ -87,7 +116,13 @@ public class History {
     private void handlePopState(JsonObject eventData) {
         if (listeners != null && !listeners.isEmpty()) {
             PopStateEvent event = new PopStateEvent(
-                    eventData.get("event.detail.state"), this);
+                    eventData.hasKey(EVENT_DETAIL_HOST)
+                            ? eventData.getString(EVENT_DETAIL_HOST) : null,
+                    eventData.hasKey(EVENT_DETAIL_PATH)
+                            ? eventData.getString(EVENT_DETAIL_PATH) : null,
+                    eventData.hasKey(EVENT_DETAIL_STATE)
+                            ? eventData.get(EVENT_DETAIL_STATE) : null,
+                    this);
             listeners.forEach(l -> l.onPopState(event));
         } else {
             removeClientSideListener();

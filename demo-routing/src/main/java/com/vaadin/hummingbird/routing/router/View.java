@@ -1,18 +1,23 @@
 package com.vaadin.hummingbird.routing.router;
 
+import elemental.json.JsonValue;
+
 public interface View {
 
-    String url();
+    String getPath();
 
-    // TODO add state object, e.g. a hash-map?
-    default void open(String fragment) {
+    default void open(JsonValue state, String path) {
     }
 
-    default String aliases() {
+    default void show(View subView) {
+    };
+
+    // TODO whether alias should be replaced with actual path?
+    default String getAliases() {
         return null;
     }
 
-    default String parentViewUrls() {
+    default String getParentViewPath() {
         return null;
     }
 
@@ -20,4 +25,9 @@ public interface View {
     default boolean remove() {
         return true;
     };
+
+    default boolean remove(View subView) {
+        return true;
+    };
+
 }

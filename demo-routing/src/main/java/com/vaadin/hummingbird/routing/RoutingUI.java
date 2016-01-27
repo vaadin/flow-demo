@@ -6,15 +6,23 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.routing.router.History;
 import com.vaadin.hummingbird.routing.router.Router;
+import com.vaadin.hummingbird.routing.router.Router.HistoryStateUpdateStrategy;
 import com.vaadin.hummingbird.routing.ui.MainView;
+import com.vaadin.hummingbird.routing.ui.view.CommunityView;
+import com.vaadin.hummingbird.routing.ui.view.DownloadView;
+import com.vaadin.hummingbird.routing.ui.view.ElementsView;
+import com.vaadin.hummingbird.routing.ui.view.FrameworkView;
+import com.vaadin.hummingbird.routing.ui.view.HomeView;
+import com.vaadin.hummingbird.routing.ui.view.ProToolsView;
+import com.vaadin.hummingbird.routing.ui.view.ServicesView;
+import com.vaadin.hummingbird.routing.ui.view.framework.DemoView;
+import com.vaadin.hummingbird.routing.ui.view.framework.TutorialView;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.UI;
 
 @Title("Routing")
 public class RoutingUI extends UI {
-    private CssLayout root;
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = RoutingUI.class, productionMode = false)
@@ -25,18 +33,27 @@ public class RoutingUI extends UI {
     protected void init(VaadinRequest request) {
         History history = new History(this);
 
-        history.pushState(1, "title 1", "?page=1");
-        history.pushState("State 2", "title 2", "?page=2");
-        history.pushState(null, "title 3", "#nullstate");
-        Object[] o = new Object[2];
-        o[0] = new String("Item 1");
-        o[1] = 1;
-        history.pushState(o, "title 4", "/foobar");
-        history.pushState(5, "title 5", "?page=5");
+        MainView mainView = new MainView();
+        setContent(mainView);
 
         Router router = new Router(history);
+        router.setViewDisplay(mainView);
+        router.addView(new HomeView());
+        router.addView(new FrameworkView());
+        router.addView(new ElementsView());
+        router.addView(new ProToolsView());
+        router.addView(new DownloadView());
+        router.addView(new CommunityView());
+        router.addView(new ServicesView());
 
-        setContent(new MainView());
+        router.addView(new DemoView());
+        router.addView(new TutorialView());
+
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null) {
+            pathInfo = "";
+        }
+        router.open(pathInfo, HistoryStateUpdateStrategy.NO);
     }
 
 }

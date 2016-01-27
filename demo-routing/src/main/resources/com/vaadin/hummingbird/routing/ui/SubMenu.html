@@ -1,0 +1,8 @@
+<div id="bottomitems" class="hidden-phone hidden-tablet">
+	<ul id="childnav">
+		<li *ng-for="#item of items" [class.selected]="item.selected">
+			<a [href]="item.path" tabindex="-1">{{item.title}}</a>
+		</li>
+	</ul>
+	<div class="noselection"></div>
+</div>
