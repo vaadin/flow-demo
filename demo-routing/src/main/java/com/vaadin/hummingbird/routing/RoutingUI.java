@@ -1,6 +1,11 @@
 package com.vaadin.hummingbird.routing;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -31,12 +36,19 @@ public class RoutingUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = RoutingUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+
+        @Override
+        protected void service(HttpServletRequest request,
+                HttpServletResponse response)
+                        throws ServletException, IOException {
+            // TODO Auto-generated method stub
+            super.service(request, response);
+        }
     }
 
     @Override
     protected void init(VaadinRequest request) {
         History history = new History(this);
-
         MainView mainView = new MainView();
         setContent(mainView);
 
@@ -51,14 +63,14 @@ public class RoutingUI extends UI {
         router.addView(new ServicesView());
 
         // framework
-        router.addView(new DemoView());
-        router.addView(new TutorialView());
-        router.addView(new DirectoryView());
+        router.addView(DemoView.class);
+        router.addView(TutorialView.class);
+        router.addView(DirectoryView.class);
 
         // downloads
-        router.addView(new DocsView());
-        router.addView(new MavenView());
-        router.addView(new VaadinIconsView());
+        router.addView(DocsView.class);
+        router.addView(MavenView.class);
+        router.addView(VaadinIconsView.class);
 
         String pathInfo = request.getPathInfo();
         if (pathInfo == null || pathInfo.isEmpty() || pathInfo.equals("/")) {
