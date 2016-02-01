@@ -48,7 +48,7 @@ public abstract class AbstractMenu extends Template {
     public void markSelected(String path) {
         getModel().getItems().forEach(item -> {
             String itemPath = item.getPath();
-            if (itemPath.startsWith(path)) {
+            if (itemPath.matches("(/)?(" + path + "){1}")) {
                 item.setSelected(true);
             } else {
                 item.setSelected(false);
