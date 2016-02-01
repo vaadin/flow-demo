@@ -1,11 +1,9 @@
 package com.vaadin.hummingbird.routing.ui.view;
 
-public class DownloadView extends AbstractSubMenuView {
+import com.vaadin.hummingbird.routing.router.Route;
 
-    @Override
-    public String getPath() {
-        return "download";
-    }
+@Route(path = "download")
+public class DownloadView extends AbstractSubMenuView {
 
     @Override
     public String[][] getSubMenuLinks() {

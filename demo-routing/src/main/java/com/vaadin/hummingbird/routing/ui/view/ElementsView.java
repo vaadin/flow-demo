@@ -1,10 +1,8 @@
 package com.vaadin.hummingbird.routing.ui.view;
 
-public class ElementsView extends AbstractView {
+import com.vaadin.hummingbird.routing.router.Route;
 
-    @Override
-    public String getPath() {
-        return "elements";
-    }
+@Route(path = "elements")
+public class ElementsView extends AbstractView {
 
 }

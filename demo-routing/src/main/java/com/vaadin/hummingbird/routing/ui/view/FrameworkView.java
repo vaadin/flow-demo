@@ -1,11 +1,9 @@
 package com.vaadin.hummingbird.routing.ui.view;
 
-public class FrameworkView extends AbstractSubMenuView {
+import com.vaadin.hummingbird.routing.router.Route;
 
-    @Override
-    public String getPath() {
-        return "framework";
-    }
+@Route(path = "framework")
+public class FrameworkView extends AbstractSubMenuView {
 
     @Override
     public String[][] getSubMenuLinks() {

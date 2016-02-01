@@ -11,7 +11,7 @@ import com.vaadin.ui.Template;
 
 @com.vaadin.annotations.HTML({
         "context://bower_components/promise-polyfill/promise-polyfill-lite.html" })
-@StyleSheet(value = "vaadin://main.css")
+@StyleSheet(value = { "vaadin://main.css", "vaadin://favicon.ico" })
 public class MainView extends Template implements ViewDisplay {
 
     private final MainMenu mainMenu;
@@ -22,18 +22,18 @@ public class MainView extends Template implements ViewDisplay {
         subMenu = null;
         getElementById("main-menu").appendChild(mainMenu.getElement());
 
-        mainMenu.addMenuItem("Framework", "framework");
-        mainMenu.addMenuItem("Elements", "elements");
-        mainMenu.addMenuItem("Pro Tools", "pro-tools");
-        mainMenu.addMenuItem("Download", "download");
-        mainMenu.addMenuItem("Community", "community");
-        mainMenu.addMenuItem("Services", "services");
-        mainMenu.addMenuItem("Vaadin Pro", "pro-oldpage");
+        mainMenu.addMenuItem("Framework", "/framework");
+        mainMenu.addMenuItem("Elements", "/elements");
+        mainMenu.addMenuItem("Pro Tools", "/pro-tools");
+        mainMenu.addMenuItem("Download", "/download");
+        mainMenu.addMenuItem("Community", "/community");
+        mainMenu.addMenuItem("Services", "/services");
+        mainMenu.addMenuItem("Vaadin Pro", "/pro-oldpage");
     }
 
     @Override
-    public void show(View topLevelView) {
-        mainMenu.markSelected(topLevelView.getPath());
+    public void show(View topLevelView, String path) {
+        mainMenu.markSelected(path);
         if (topLevelView instanceof HasElement) {
             getElementById("main")
                     .appendChild(((HasElement) topLevelView).getElement());
@@ -56,8 +56,9 @@ public class MainView extends Template implements ViewDisplay {
     }
 
     @Override
-    public void remove(View view) {
+    public void remove(View view, String path) {
         mainMenu.removeSelected();
+        view.getComponent().getElement().removeFromParent();
     }
 
 }

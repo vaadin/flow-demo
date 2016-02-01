@@ -12,19 +12,21 @@ public abstract class AbstractSubMenuView extends AbstractView {
     }
 
     @Override
-    public void show(View subView) {
-        super.show(subView);
-        subMenu.markSelected("/" + subView.getPath());
+    public void show(View subView, String subViewPath) {
+        super.show(subView, subViewPath);
+        subMenu.markSelected("/" + subViewPath);
     }
 
     @Override
-    public boolean remove(View subView) {
+    public boolean remove(View subView, String subViewPath) {
+        super.remove(subView, subViewPath);
         subMenu.removeSelected();
         return true;
     };
 
     @Override
     public boolean remove() {
+        super.remove();
         subMenu = null;
         return true;
     }

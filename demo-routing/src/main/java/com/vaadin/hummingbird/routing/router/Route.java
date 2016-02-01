@@ -13,5 +13,6 @@ public @interface Route {
 
     String parentPath() default "";
 
-    String[] subViews() default {};
+    // TODO maybe?
+    // String[] subViews() default {};
 }

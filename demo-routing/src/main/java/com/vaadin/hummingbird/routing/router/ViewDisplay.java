@@ -2,8 +2,8 @@ package com.vaadin.hummingbird.routing.router;
 
 public interface ViewDisplay {
 
-    void show(View topLevelView);
+    void show(View topLevelView, String path);
 
-    default void remove(View topLevelView) {
+    default void remove(View topLevelView, String path) {
     };
 }

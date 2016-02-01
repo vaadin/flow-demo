@@ -9,7 +9,7 @@ public interface View {
     default void open(JsonValue state, String path) {
     }
 
-    default void show(View subView) {
+    default void show(View subView, String subViewPath) {
     };
 
     // TODO needs to be able to continue navigation if blocked
@@ -17,7 +17,7 @@ public interface View {
         return true;
     };
 
-    default boolean remove(View subView) {
+    default boolean remove(View subView, String subViewPath) {
         return true;
     };
 
@@ -29,14 +29,6 @@ public interface View {
                     "View not a component and getComponent() not overridden for: "
                             + getClass().getName());
         }
-    }
-
-    default String getPath() {
-        return getPath(this);
-    };
-
-    default String getParentViewPath() {
-        return getParentViewPath(this);
     }
 
     static String getPath(Object o) {

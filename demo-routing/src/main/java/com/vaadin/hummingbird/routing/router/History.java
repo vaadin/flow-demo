@@ -96,9 +96,10 @@ public class History {
         ui.getRootNode().enqueueRpc(
                 "var ui = document.getElementsByClassName('history-ui')[0];"
                         + "window.onpopstate = function(e) {"
-                        + "var pathname = window.pathname;"
-                        + "var hostname = window.hostname;"
-                        + "var event = new CustomEvent('popstate', {detail: {state: e.state, host: pathname, path:hostname}});"
+                        + "e.preventDefault();"
+                        + "var pathname = window.location.pathname;"
+                        + "var hostname = window.location.hostname;"
+                        + "var event = new CustomEvent('popstate', {detail: {state: e.state, host: hostname, path: pathname}});"
                         + "ui.dispatchEvent(event);};");
         ui.getElement().addEventData("popstate", EVENT_DETAIL_STATE);
         ui.getElement().addEventData("popstate", EVENT_DETAIL_PATH);

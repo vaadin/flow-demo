@@ -1,10 +1,8 @@
 package com.vaadin.hummingbird.routing.ui.view;
 
-public class ProToolsView extends AbstractView {
+import com.vaadin.hummingbird.routing.router.Route;
 
-    @Override
-    public String getPath() {
-        return "pro-tools";
-    }
+@Route(path = "pro-tools")
+public class ProToolsView extends AbstractView {
 
 }
