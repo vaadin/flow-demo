@@ -3,19 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.vaadin</groupId>
+	<groupId>com.vaadin.hummingbird.demo</groupId>
 	<artifactId>hummingbird-demo</artifactId>
 	<name>Hummingbird Demo Parent Project</name>
 	<packaging>pom</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
 		<module>demo-minesweeper-element</module>
-		<module>demo-html5-inputs-element</module>
 	</modules>
 
 	<properties>
-		<hummingbird.version>1.0-SNAPSHOT</hummingbird.version>
+		<hummingbird.version>0.0.1-SNAPSHOT</hummingbird.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
