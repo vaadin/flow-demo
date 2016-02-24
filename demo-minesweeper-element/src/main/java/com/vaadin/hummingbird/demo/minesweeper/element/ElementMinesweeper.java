@@ -25,7 +25,7 @@ public class ElementMinesweeper {
                 final int thisRow = rowIndex;
                 final int thisCol = colIndex;
 
-                td.addEventListener("click", () -> cellClick(thisRow, thisCol));
+                td.addEventListener("click", e -> cellClick(thisRow, thisCol));
                 tr.appendChild(td);
             }
         }
