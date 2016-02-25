@@ -121,6 +121,14 @@
 					<stopPort>8081</stopPort>
 					<stopWait>5</stopWait>
 					<stopKey>foo</stopKey>
+					<!-- Prevent Jetty from scanning the classpath. -->
+					<!-- Speeds up startup time significantly -->
+					<webAppConfig>
+						<webInfIncludeJarPattern>^$</webInfIncludeJarPattern>
+						<containerIncludeJarPattern>^$</containerIncludeJarPattern>
+					</webAppConfig>
+
+
 				</configuration>
 				<executions>
 					<!-- start and stop jetty (running our app) when running integration 
