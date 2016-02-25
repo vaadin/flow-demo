@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.vaadin.hummingbird.demo</groupId>
-		<artifactId>hummingbird-demo</artifactId>
+		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<name>Minesweeper using Element API</name>
