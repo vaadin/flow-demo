@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>demo-minesweeper-element</module>
+		<module>demo-hello-world-element</module>
 	</modules>
 
 	<properties>
