@@ -25,6 +25,7 @@ public class HelloWorldUI extends UI {
             String inputValue = e.getEventData().getString("inputId.value");
             Element helloText = new Element("div")
                     .setTextContent("Hello " + inputValue);
+            helloText.getClassList().add("helloText");
             getElement().appendChild(helloText);
         } , "inputId.value");
 

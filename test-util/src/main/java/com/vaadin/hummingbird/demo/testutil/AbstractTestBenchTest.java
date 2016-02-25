@@ -30,7 +30,7 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
 
     private String baseUrl;
 
-    protected void openUrl(String... parameters) {
+    protected void open(String... parameters) {
         String url = baseUrl;
         if (parameters != null && parameters.length != 0) {
             url += "&" + Arrays.stream(parameters)
