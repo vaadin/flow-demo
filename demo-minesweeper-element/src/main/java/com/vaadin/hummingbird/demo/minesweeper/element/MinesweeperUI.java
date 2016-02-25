@@ -23,8 +23,15 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
+/**
+ * UI which demonstrates how you can use the Hummingbird {@link Element} API to
+ * create a Minesweeper game.
+ */
 public class MinesweeperUI extends UI {
 
+    /**
+     * The main servlet for the application.
+     */
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MinesweeperUI.class, productionMode = false)
     public static class Servlet extends VaadinServlet {

@@ -19,6 +19,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * A representation of a mine field with {@code rows}x{@code cols} cells, where
+ * each cell is either empty or contains a mine.
+ */
 public class Minefield {
 
     private Set<Point> mines;
@@ -26,6 +30,23 @@ public class Minefield {
     private int cols;
     private int numberOfMines;
 
+    /**
+     * Initializes the mine field and randomly places mines.
+     * <p>
+     * The random seed is used for placing the mines, making it possible to
+     * reproduce the same mine layout by passing the same seed and also
+     * otherwise the same parameters.
+     *
+     * @param rows
+     *            the number rows in the field
+     * @param cols
+     *            the number of columns in the field
+     * @param seed
+     *            a random seed used for placing mines
+     * @param mineDensity
+     *            a number between 0 and 1, describing the approximate fraction
+     *            of the cells which should contain a mine
+     */
     public void init(int rows, int cols, long seed, double mineDensity) {
         Random random = new Random(seed);
         this.rows = rows;
@@ -43,6 +64,15 @@ public class Minefield {
         }
     }
 
+    /**
+     * Retrieves a set of coordinates of the cells surrounding the given cell.
+     *
+     * @param row
+     *            the row of the cell to lookup
+     * @param col
+     *            the column of the cell to lookup
+     * @return a set of points referring to the neighboring cells
+     */
     public Set<Point> getNearbyPoints(int row, int col) {
         int rowStart = Math.max(0, row - 1);
         int rowEnd = Math.min(rows - 1, row + 1);
@@ -64,6 +94,15 @@ public class Minefield {
 
     }
 
+    /**
+     * Gets the total number of mines in the neighboring cells.
+     *
+     * @param row
+     *            the row of the cell to lookup
+     * @param col
+     *            the column of the cell to lookup
+     * @return the sum of mines in nearby cells
+     */
     public int getNearbyCount(int row, int col) {
         if (isMine(row, col)) {
             return -1;
@@ -78,22 +117,53 @@ public class Minefield {
         return count;
     }
 
+    /**
+     * Gets the number of rows in the minefield.
+     *
+     * @return the number of rows in the minefield
+     */
     public int getRows() {
         return rows;
     }
 
+    /**
+     * Gets the number of columns in the minefield.
+     *
+     * @return the number of columns in the minefield
+     */
     public int getCols() {
         return cols;
     }
 
+    /**
+     * Checks whether the given cell contains a mine.
+     *
+     * @param row
+     *            the row of the cell to lookup
+     * @param col
+     *            the column of the cell to lookup
+     * @return true if the cell contains a mine, false otherwise
+     */
     public boolean isMine(int row, int col) {
         return isMine(new Point(row, col));
     }
 
-    public boolean isMine(Point p) {
-        return mines.contains(p);
+    /**
+     * Checks whether the given cell contains a mine.
+     *
+     * @param point
+     *            the row and column of the cell to lookup
+     * @return true if the cell contains a mine, false otherwise
+     */
+    private boolean isMine(Point point) {
+        return mines.contains(point);
     }
 
+    /**
+     * Gets the number of mines in total in the minefield.
+     *
+     * @return the number of mines in the minefield
+     */
     public int getNumberOfMines() {
         return numberOfMines;
     }

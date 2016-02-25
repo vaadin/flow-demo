@@ -23,8 +23,15 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
+/**
+ * UI which demonstrates how a simple Hello World type application can be
+ * created.
+ */
 public class HelloWorldUI extends UI {
 
+    /**
+     * The main servlet for the application.
+     */
     @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = HelloWorldUI.class, productionMode = false)
     public static class Servlet extends VaadinServlet {

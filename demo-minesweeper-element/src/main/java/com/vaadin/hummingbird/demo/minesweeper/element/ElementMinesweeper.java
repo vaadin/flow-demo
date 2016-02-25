@@ -19,17 +19,36 @@ import java.util.Set;
 
 import com.vaadin.hummingbird.dom.Element;
 
+/**
+ * The Minesweeper UI component with the root element returned by
+ * {@link #getElement()}.
+ */
 public class ElementMinesweeper {
 
     private Element table = new Element("table");
     private Minefield minefield = new Minefield();
 
+    /**
+     * Creates a component and sets up a minefield using the given parameters.
+     *
+     * @param seed
+     *            the random seed to use when placing mines
+     * @param mineDensity
+     *            the ratio of mines to cells, between 0 and 1
+     * @param rows
+     *            the number of rows in the minefield
+     * @param cols
+     *            the number of columns in the minefield
+     */
     public ElementMinesweeper(long seed, double mineDensity, int rows,
             int cols) {
         minefield.init(rows, cols, seed, mineDensity);
         initDOM();
     }
 
+    /**
+     * Initializes the DOM for the component.
+     */
     private void initDOM() {
         for (int rowIndex = 0; rowIndex < minefield.getRows(); rowIndex++) {
             Element tr = new Element("tr");
@@ -46,6 +65,14 @@ public class ElementMinesweeper {
         }
     }
 
+    /**
+     * Handler called when the user clicks on a cell.
+     *
+     * @param row
+     *            the row which was clicked
+     * @param col
+     *            the column which was clicked
+     */
     private void cellClick(int row, int col) {
         if (minefield.isMine(row, col)) {
             boom();
@@ -59,10 +86,16 @@ public class ElementMinesweeper {
 
     }
 
+    /**
+     * Shows a message indicating mine explosion and failure.
+     */
     private void boom() {
         showMessage("BOOM! Reload to try again", "boom");
     }
 
+    /**
+     * Shows a message indicating the minefield was successfully cleared.
+     */
     private void success() {
         showMessage("Congratulations!", "success");
     }
@@ -103,11 +136,23 @@ public class ElementMinesweeper {
         }
     }
 
+    /**
+     * Checks if the cell represented by the given element has been revealed.
+     *
+     * @param td
+     *            the cell element
+     * @return true if the cell has been revealed, false otherwise
+     */
     private static boolean isRevealed(Element td) {
         Set<String> classList = td.getClassList();
         return classList.contains("mine") || classList.contains("empty");
     }
 
+    /**
+     * Checks if all empty cells have been revealed.
+     *
+     * @return true if all cells have been revealed, false otherwise.
+     */
     private boolean isAllRevealed() {
         for (int row = 0; row < minefield.getRows(); row++) {
             for (int col = 0; col < minefield.getCols(); col++) {
@@ -120,6 +165,9 @@ public class ElementMinesweeper {
         return true;
     }
 
+    /**
+     * Reveal all cells, regardless of whether they contain mines or not.
+     */
     private void revealAll() {
         for (int r = 0; r < minefield.getRows(); r++) {
             for (int c = 0; c < minefield.getCols(); c++) {
@@ -128,10 +176,24 @@ public class ElementMinesweeper {
         }
     }
 
+    /**
+     * Gets the element representing the given cell.
+     *
+     * @param row
+     *            the row coordinate
+     * @param col
+     *            the column coordinate
+     * @return the TD element representing the cell
+     */
     private Element getTd(int row, int col) {
         return table.getChild(row).getChild(col);
     }
 
+    /**
+     * Gets the root element for this component.
+     *
+     * @return the root element
+     */
     public Element getElement() {
         return table;
     }
