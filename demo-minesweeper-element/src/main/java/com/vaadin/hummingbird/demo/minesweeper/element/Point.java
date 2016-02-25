@@ -17,19 +17,40 @@ package com.vaadin.hummingbird.demo.minesweeper.element;
 
 import java.util.Objects;
 
+/**
+ * A representation of a position (row and column) in a grid.
+ */
 public class Point {
     int row, col;
 
+    /**
+     * Creates a point with the given position.
+     *
+     * @param row
+     *            the row coordinate
+     * @param col
+     *            the column coordinate
+     */
     public Point(int row, int col) {
         super();
         this.row = row;
         this.col = col;
     }
 
+    /**
+     * Gets the row
+     *
+     * @return the row
+     */
     public int getRow() {
         return row;
     }
 
+    /**
+     * Gets the column
+     *
+     * @return the column
+     */
     public int getCol() {
         return col;
     }
