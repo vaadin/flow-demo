@@ -1,3 +1,18 @@
+/*
+ * Copyright 2000-2016 Vaadin Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.vaadin.hummingbird.demo.testutil;
 
 import java.util.Arrays;
@@ -6,9 +21,8 @@ import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,20 +30,43 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBenchTestCase;
 
+/**
+ * Base class for demo tests, providing setup and helper methods..
+ *
+ * @author Vaadin
+ * @since
+ */
 public class AbstractTestBenchTest extends TestBenchTestCase {
 
+    /**
+     * Grab a screenshot if the test fails. The rule handles terminating the
+     * driver regardless of if the test fails or succeeds.
+     */
     @Rule
     public ScreenshotOnFailureRule screenshotOnFailure = new ScreenshotOnFailureRule(
             this, true);
 
+    private String baseUrl;
+
+    /**
+     * Creates the webdriver used for tests.
+     *
+     * @throws Exception
+     *             if anything at all goes wrong
+     */
     @Before
     public void setupDriver() throws Exception {
-        setDriver(new ChromeDriver());
+        setDriver(new PhantomJSDriver());
         baseUrl = "http://localhost:8080/?restartApplication";
     }
 
-    private String baseUrl;
-
+    /**
+     * Opens the test url using the given, optional query parameters.
+     *
+     * @param parameters
+     *            the parameters to append to the url, each in the format "foo"
+     *            or "foo=bar"
+     */
     protected void open(String... parameters) {
         String url = baseUrl;
         if (parameters != null && parameters.length != 0) {
@@ -41,7 +78,7 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
 
     /**
      * Waits up to 10s for the given condition to become true. Use e.g. as
-     * {@link #waitUntil(ExpectedConditions.textToBePresentInElement(by, text))}
+     * {@code waitUntil(ExpectedConditions.textToBePresentInElement(by, text))}
      *
      * @param condition
      *            the condition to wait for to become true
@@ -53,7 +90,7 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
     /**
      * Waits the given number of seconds for the given condition to become true.
      * Use e.g. as
-     * {@link #waitUntil(ExpectedConditions.textToBePresentInElement(by, text))}
+     * {@code waitUntil(ExpectedConditions.textToBePresentInElement(by, text), 20)}
      *
      * @param condition
      *            the condition to wait for to become true
@@ -65,8 +102,7 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
 
     /**
      * Waits up to 10s for the given condition to become false. Use e.g. as
-     * {@link #waitUntilNot(ExpectedConditions.textToBePresentInElement(by,
-     * text))}
+     * {@code waitUntilNot(ExpectedConditions.textToBePresentInElement(by, text))}
      *
      * @param condition
      *            the condition to wait for to become false
@@ -78,8 +114,7 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
     /**
      * Waits the given number of seconds for the given condition to become
      * false. Use e.g. as
-     * {@link #waitUntilNot(ExpectedConditions.textToBePresentInElement(by,
-     * text))}
+     * {@code waitUntilNot(ExpectedConditions.textToBePresentInElement(by, text),20)}
      *
      * @param condition
      *            the condition to wait for to become false
@@ -89,32 +124,48 @@ public class AbstractTestBenchTest extends TestBenchTestCase {
         waitUntil(ExpectedConditions.not(condition), timeoutInSeconds);
     }
 
+    /**
+     * Waits up to 10s for the given element to become present.
+     *
+     * @param by
+     *            the element locator
+     */
     protected void waitForElementPresent(final By by) {
         waitUntil(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    /**
+     * Waits up to 10s for the given element to become not present.
+     *
+     * @param by
+     *            the element locator
+     */
     protected void waitForElementNotPresent(final By by) {
-        waitUntil(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver input) {
-                return input.findElements(by).isEmpty();
-            }
-        });
+        waitUntil(driver -> driver.findElements(by).isEmpty());
+
     }
 
+    /**
+     * Waits up to 10s for the given element to become visible.
+     *
+     * @param by
+     *            the element locator
+     */
     protected void waitForElementVisible(final By by) {
         waitUntil(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     /**
      * Checks if the given element has the given class name.
-     *
+     * <p>
      * Matches only full class names, i.e. has ("foo") does not match
      * class="foobar"
      *
      * @param element
+     *            the element to check
      * @param className
-     * @return
+     *            the class name to check for
+     * @return true if the element has the class name, false otherwise
      */
     protected boolean hasCssClass(WebElement element, String className) {
         String classes = element.getAttribute("class");
