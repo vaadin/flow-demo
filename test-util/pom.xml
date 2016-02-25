@@ -5,7 +5,7 @@
 	<name>Test helpers for demos</name>
 	<parent>
 		<groupId>com.vaadin.hummingbird.demo</groupId>
-		<artifactId>hummingbird-demo</artifactId>
+		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
