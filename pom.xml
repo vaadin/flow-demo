@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vaadin.hummingbird.demo</groupId>
-	<artifactId>hummingbird-demo</artifactId>
-	<name>Hummingbird Demo Parent Project</name>
+	<artifactId>hummingbird-demo-project</artifactId>
+	<name>Hummingbird Demo</name>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
