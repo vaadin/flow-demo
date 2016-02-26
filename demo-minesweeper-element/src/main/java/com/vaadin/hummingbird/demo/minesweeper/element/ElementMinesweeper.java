@@ -25,6 +25,9 @@ import com.vaadin.hummingbird.dom.Element;
  */
 public class ElementMinesweeper {
 
+    private static final String CLASS_EMPTY = "empty";
+    private static final String CLASS_MINE = "mine";
+    private static final String CLASS_MARKED = "marked";
     private Element table = new Element("table");
     private Minefield minefield = new Minefield();
 
@@ -59,7 +62,16 @@ public class ElementMinesweeper {
                 final int thisRow = rowIndex;
                 final int thisCol = colIndex;
 
+                // Left click reveals cells
                 td.addEventListener("click", e -> cellClick(thisRow, thisCol));
+
+                // Right-click/ctrl-click marks a mine
+                // Here we abuse the event details feature which runs javascript
+                // as part of the event handler, to prevent the default
+                // behavior, i.e. showing the browser context menu
+                td.addEventListener("contextmenu",
+                        e -> markMine(thisRow, thisCol),
+                        "event.preventDefault()");
                 tr.appendChild(td);
             }
         }
@@ -74,6 +86,9 @@ public class ElementMinesweeper {
      *            the column which was clicked
      */
     private void cellClick(int row, int col) {
+        if (isMarked(getTd(row, col))) {
+            return;
+        }
         if (minefield.isMine(row, col)) {
             boom();
             revealAll();
@@ -83,7 +98,28 @@ public class ElementMinesweeper {
                 success();
             }
         }
+    }
 
+    /**
+     * Mark the cell as a mine, preventing accidental clicks on it.
+     *
+     * @param row
+     *            the row to mark
+     * @param col
+     *            the column to mark
+     */
+    private void markMine(int row, int col) {
+        Element cell = getTd(row, col);
+        if (isRevealed(cell)) {
+            return;
+        }
+
+        Set<String> classList = cell.getClassList();
+        if (isMarked(cell)) {
+            classList.remove(CLASS_MARKED);
+        } else {
+            classList.add(CLASS_MARKED);
+        }
     }
 
     /**
@@ -121,9 +157,9 @@ public class ElementMinesweeper {
             return;
         }
         if (minefield.isMine(row, col)) {
-            td.getClassList().add("mine");
+            td.getClassList().add(CLASS_MINE);
         } else {
-            td.getClassList().add("empty");
+            td.getClassList().add(CLASS_EMPTY);
             int count = minefield.getNearbyCount(row, col);
             if (count > 0) {
                 td.setTextContent(Integer.toString(count));
@@ -137,6 +173,18 @@ public class ElementMinesweeper {
     }
 
     /**
+     * Checks if the cell represented by the given element has been marked as a
+     * mine.
+     *
+     * @param td
+     *            the cell element
+     * @return true if the cell has been marked, false otherwise
+     */
+    private static boolean isMarked(Element td) {
+        return td.getClassList().contains(CLASS_MARKED);
+    }
+
+    /**
      * Checks if the cell represented by the given element has been revealed.
      *
      * @param td
@@ -145,7 +193,8 @@ public class ElementMinesweeper {
      */
     private static boolean isRevealed(Element td) {
         Set<String> classList = td.getClassList();
-        return classList.contains("mine") || classList.contains("empty");
+        return classList.contains(CLASS_MINE)
+                || classList.contains(CLASS_EMPTY);
     }
 
     /**
