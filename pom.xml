@@ -51,12 +51,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.vaadin</groupId>
-				<artifactId>hummingbird-server</artifactId>
-				<version>${hummingbird.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>hummingbird-client</artifactId>
+				<artifactId>hummingbird</artifactId>
 				<version>${hummingbird.version}</version>
 			</dependency>
 			<dependency>
