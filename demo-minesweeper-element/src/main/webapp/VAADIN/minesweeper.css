@@ -13,3 +13,7 @@ td {
 .mine {
 	background: red;
 }
+
+.marked {
+	background: yellow;
+}
