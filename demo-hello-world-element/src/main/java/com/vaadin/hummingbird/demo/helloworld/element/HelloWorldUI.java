@@ -40,16 +40,17 @@ public class HelloWorldUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         Element textInput = new Element("input").setAttribute("id", "inputId")
-                .setAttribute("placeholder", "Enter your name");
+                .setAttribute("placeholder", "Enter your name")
+                .setSynchronizedProperties("value")
+                .setSynchronizedPropertiesEvents("change");
 
         Element button = new Element("button").setTextContent("Say hello");
         button.addEventListener("click", e -> {
-            String inputValue = e.getEventData().getString("inputId.value");
             Element helloText = new Element("div")
-                    .setTextContent("Hello " + inputValue);
+                    .setTextContent("Hello " + textInput.getProperty("value"));
             helloText.getClassList().add("helloText");
             getElement().appendChild(helloText);
-        } , "inputId.value");
+        });
 
         getElement().appendChild(textInput, button);
     }
