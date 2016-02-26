@@ -13,15 +13,20 @@ public class Minefield {
     private int cols;
     private int numberOfMines;
 
-    public void init(int rows, int cols, long seed, double mineDensity) {
-        Random random = new Random(seed);
+    public void init(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        numberOfMines = 0;
+    }
+
+    public void initMines(int row, int col, long seed, double mineDensity) {
+        Random random = new Random(seed);
 
         mines = new HashSet<>();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
+                if (r == row && c == col) {
+                    continue;
+                }
                 if (random.nextDouble() > (1 - mineDensity)) {
                     mines.add(new Point(r, c));
                     numberOfMines++;
