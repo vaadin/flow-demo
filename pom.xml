@@ -10,6 +10,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
+		<module>test-util</module>
 		<module>demo-minesweeper-element</module>
 		<module>demo-hello-world-element</module>
 	</modules>
@@ -58,6 +59,11 @@
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-testbench</artifactId>
 				<version>4.1.0.alpha1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin.hummingbird.demo</groupId>
+				<artifactId>test-util</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

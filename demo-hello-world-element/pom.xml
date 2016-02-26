@@ -23,6 +23,10 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>hummingbird</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.vaadin.hummingbird.demo</groupId>
+			<artifactId>test-util</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
