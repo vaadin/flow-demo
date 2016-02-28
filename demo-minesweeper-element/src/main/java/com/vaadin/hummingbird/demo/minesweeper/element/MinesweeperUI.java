@@ -21,8 +21,6 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Dependency;
-import com.vaadin.ui.Dependency.Type;
 import com.vaadin.ui.UI;
 
 /**
@@ -71,8 +69,7 @@ public class MinesweeperUI extends UI {
             cols = 10;
         }
 
-        getPage().addDependency(
-                new Dependency(Type.STYLESHEET, "vaadin://minesweeper.css"));
+        getPage().addStyleSheet("vaadin://minesweeper.css");
 
         ElementMinesweeper minesweeper = new ElementMinesweeper(seed,
                 mineDensity, rows, cols);
