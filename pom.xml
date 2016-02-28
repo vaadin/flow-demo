@@ -64,6 +64,7 @@
 				<groupId>com.vaadin.hummingbird.demo</groupId>
 				<artifactId>test-util</artifactId>
 				<version>${project.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
