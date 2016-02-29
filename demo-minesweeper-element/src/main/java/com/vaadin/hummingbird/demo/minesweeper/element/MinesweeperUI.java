@@ -69,7 +69,7 @@ public class MinesweeperUI extends UI {
             cols = 10;
         }
 
-        getPage().addStyleSheet("vaadin://minesweeper.css");
+        getPage().addStyleSheet("VAADIN/minesweeper.css");
 
         ElementMinesweeper minesweeper = new ElementMinesweeper(seed,
                 mineDensity, rows, cols);
