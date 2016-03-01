@@ -7,7 +7,7 @@
 	<artifactId>hummingbird-demo-project</artifactId>
 	<name>Hummingbird Demo</name>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<modules>
 		<module>test-util</module>
@@ -16,12 +16,13 @@
 	</modules>
 
 	<properties>
-		<hummingbird.version>0.0.1-SNAPSHOT</hummingbird.version>
+		<hummingbird.version>${project.version}</hummingbird.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<sonar.java.source>8</sonar.java.source>
 		<sonar.analysis.mode>preview</sonar.analysis.mode>
 		<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
@@ -112,6 +113,19 @@
 					</execution>
 				</executions>
 			</plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-war-plugin</artifactId>
+                                <version>2.3</version>
+                                <configuration>
+                                        <archive>
+                                                <manifestEntries>
+                                                        <Implementation-Title>${project.name}</Implementation-Title>
+                                                        <Implementation-Version>${project.version}</Implementation-Version>
+                                                </manifestEntries>
+                                        </archive>
+                                </configuration>
+                        </plugin>
 
 			<!-- The Jetty plugin allows us to easily test the development build by 
 				running jetty:run on the command line. -->
