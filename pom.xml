@@ -7,7 +7,7 @@
 	<artifactId>hummingbird-demo-project</artifactId>
 	<name>Hummingbird Demo</name>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<modules>
 		<module>test-util</module>
@@ -16,7 +16,7 @@
 	</modules>
 
 	<properties>
-		<hummingbird.version>0.0.1-SNAPSHOT</hummingbird.version>
+		<hummingbird.version>${project.version}</hummingbird.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
