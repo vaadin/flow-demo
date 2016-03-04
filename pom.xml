@@ -141,7 +141,7 @@
 					<!-- Prevent Jetty from scanning the classpath. -->
 					<!-- Speeds up startup time significantly -->
 					<webAppConfig>
-						<webInfIncludeJarPattern>^$</webInfIncludeJarPattern>
+						<webInfIncludeJarPattern>.*/hummingbird-.*.jar$</webInfIncludeJarPattern>
 						<containerIncludeJarPattern>^$</containerIncludeJarPattern>
 					</webAppConfig>
 
@@ -168,6 +168,35 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>eclipse</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>${jetty.plugin.version}</version>
+						<configuration>
+							<webAppConfig>
+								<webInfIncludeJarPattern>^$</webInfIncludeJarPattern>
+								<!-- Configure all project META-INF/resources directories for Jetty 
+									as resource folders as Jetty inside Eclipse is run with "Resolve workspace 
+									artifacts" and this does not create any JARs. Jetty only scans JARs for META-INF/resources 
+									folders -->
+								<!-- Assumes hummingbird and hummingbird-demo have been clone in the same folder -->
+								<resourceBases>
+									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-server/src/main/resources/META-INF/resources</resourceBase>
+									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-client/target/classes/META-INF/resources</resourceBase>
+									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-push/src/main/resources/META-INF/resources</resourceBase>
+								</resourceBases>
+							</webAppConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
 
