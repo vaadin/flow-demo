@@ -16,7 +16,7 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.HasSubView;
+import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
 
@@ -26,7 +26,7 @@ import com.vaadin.shared.ApplicationConstants;
  * @since
  * @author Vaadin Ltd
  */
-public class MainLayout extends SimpleView implements HasSubView {
+public class MainLayout extends SimpleView implements HasChildView {
 
     private final Element contentHolder = new Element("div");
 
@@ -69,7 +69,7 @@ public class MainLayout extends SimpleView implements HasSubView {
     }
 
     @Override
-    public void setSubView(View content) {
+    public void setChildView(View content) {
         Element contentElement = content.getElement();
 
         contentHolder.setChild(0, contentElement);
