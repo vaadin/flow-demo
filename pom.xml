@@ -190,6 +190,7 @@
 									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-server/src/main/resources/META-INF/resources</resourceBase>
 									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-client/target/classes/META-INF/resources</resourceBase>
 									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-push/src/main/resources/META-INF/resources</resourceBase>
+									<resourceBase>${project.basedir}/src/main/webapp</resourceBase>
 								</resourceBases>
 							</webAppConfig>
 						</configuration>
