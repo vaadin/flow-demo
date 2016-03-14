@@ -18,17 +18,15 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.hummingbird.router.Location;
 import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.hummingbird.router.RouterUI;
-import com.vaadin.hummingbird.router.ViewRenderer;
 import com.vaadin.server.VaadinServlet;
 
 /**
  * Initializes the site by configuring the router to use different views for
  * different URLs.
- * 
+ *
  * @author Vaadin Ltd
  */
 public class SiteRouterConfigurator implements RouterConfigurator {
@@ -42,25 +40,10 @@ public class SiteRouterConfigurator implements RouterConfigurator {
 
     @Override
     public void configure(ModifiableRouterConfiguration configuration) {
-        configuration.setResolver(navigationEvent -> {
-            Location location = navigationEvent.getLocation();
-            String firstSegment = location.getFirstSegment();
-            switch (firstSegment) {
-            case "":
-                return new ViewRenderer(HomeView.class, MainLayout.class);
-            case "about":
-                return new ViewRenderer(AboutView.class, MainLayout.class);
-            case "dynamic":
-                // Only serve for /dynamic/{xyz}
-                if (location.getSegments().size() == 2) {
-                    return new ViewRenderer(DynamicView.class,
-                            MainLayout.class);
-                } else {
-                    return null;
-                }
-            default:
-                return null;
-            }
-        });
+        configuration.setRoute("", HomeView.class, MainLayout.class);
+        // Wildcard just to show all available features in the same demo
+        configuration.setRoute("about/*", AboutView.class, MainLayout.class);
+        configuration.setRoute("dynamic/{name}", DynamicView.class,
+                MainLayout.class);
     }
 }

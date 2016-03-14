@@ -56,7 +56,7 @@ public class MainLayout extends SimpleView implements HasChildView {
         Element logo = new Element("div");
         logo.getClassList().add("logo");
         homeLink.appendChild(logo);
-        menu.appendChild(homeLink, createMenuLink("About", "about"),
+        menu.appendChild(homeLink, createMenuLink("About", "about/"),
                 createMenuLink("Dynamic 1", "dynamic/one"),
                 createMenuLink("Dynamic 2", "dynamic/two"));
         return menu;
