@@ -15,6 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
+import com.vaadin.hummingbird.demo.website.community.CommunityMenuView;
+import com.vaadin.hummingbird.demo.website.download.DownloadMenuView;
+import com.vaadin.hummingbird.demo.website.elements.ElementsMenuView;
+import com.vaadin.hummingbird.demo.website.framework.FrameworkMenuView;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
@@ -29,6 +33,7 @@ import com.vaadin.ui.UI;
 public class MainLayout extends SimpleView implements HasChildView {
 
     private final Element contentHolder = new Element("div");
+    private MainMenu menu = new MainMenu();
 
     /**
      * Creates a new layout.
@@ -38,9 +43,7 @@ public class MainLayout extends SimpleView implements HasChildView {
 
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
-        Element menu = new Menu().getElement();
-        getElement().appendChild(menu, contentHolder);
-        contentHolder.getClassList().add("content");
+        getElement().appendChild(menu.getElement(), contentHolder);
 
         // Placeholder content
         contentHolder.appendChild(new Element("div"));
@@ -51,5 +54,18 @@ public class MainLayout extends SimpleView implements HasChildView {
         Element contentElement = content.getElement();
 
         contentHolder.setChild(0, contentElement);
+
+        if (content.getClass() == FrameworkMenuView.class) {
+            menu.setSelected("Framework");
+        } else if (content.getClass() == ElementsMenuView.class) {
+            menu.setSelected("Elements");
+        } else if (content.getClass() == DownloadMenuView.class) {
+            menu.setSelected("Download");
+        } else if (content.getClass() == CommunityMenuView.class) {
+            menu.setSelected("Community");
+        } else {
+            menu.setSelected("");
+        }
     }
+
 }

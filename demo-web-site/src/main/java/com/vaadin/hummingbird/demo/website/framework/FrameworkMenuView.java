@@ -13,26 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website;
+package com.vaadin.hummingbird.demo.website.framework;
 
-import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.demo.website.MenuView;
+import com.vaadin.hummingbird.demo.website.download.DocsView;
 
-/**
- * The static home page.
- *
- * @since
- * @author Vaadin Ltd
- */
-public class HomeView extends SimpleView {
-    /**
-     * Creates a new home view.
-     */
-    public HomeView() {
-        super(new Element("div").setAttribute("class", "home"));
+public class FrameworkMenuView extends MenuView {
 
-        getElement().appendChild(new Element("h1")
-                .setTextContent("User interface components for web apps"));
-        getElement().appendChild(
-                Element.createText("Build your apps in the language you ♥"));
+    public FrameworkMenuView() {
+        super();
+
+        getMenu().setAttribute("class", "submenu");
+
+        addItem("Demo", DemoView.class);
+        addItem("Tutorial", TutorialView.class);
+        addItem("Docs", DocsView.class);
+        addItem("Add-ons", DirectoryView.class);
     }
+
 }
