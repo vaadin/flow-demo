@@ -13,21 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website;
+package com.vaadin.hummingbird.demo.website.framework;
 
-import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.demo.website.SimpleMenuView;
+import com.vaadin.hummingbird.demo.website.download.DocsView;
 
-/**
- * The static about view.
- *
- * @since
- * @author Vaadin Ltd
- */
-public class AboutView extends SimpleView {
-    /**
-     * Creates as new view.
-     */
-    public AboutView() {
-        super(Element.createText("This is the about page"));
+public class FrameworkMenuView extends SimpleMenuView {
+
+    public FrameworkMenuView() {
+        super();
+
+        getMenu().setAttribute("class", "submenu");
+
+        addItem("Demo", DemoView.class);
+        addItem("Tutorial", TutorialView.class);
+        addItem("Docs", DocsView.class);
+        addItem("Add-ons", DirectoryView.class);
     }
+
 }

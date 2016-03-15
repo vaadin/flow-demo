@@ -13,31 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website;
+package com.vaadin.hummingbird.demo.website.framework;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.Location;
+import com.vaadin.hummingbird.demo.website.DummyView;
 
 /**
- * A dynamic view that shows different content based on a parameter in the URL.
+ * The framework view.
  *
  * @since
  * @author Vaadin Ltd
  */
-public class DynamicView extends SimpleView {
-
-    /**
-     * Creates a new dynamic view.
-     */
-    public DynamicView() {
-        super(Element.createText("Uninitialized dynamic page"));
-    }
-
-    @Override
-    public void onLocationChange(Location location) {
-        String parameter = location.getSegments().get(1);
-
-        getElement().setTextContent("Dynamic page " + parameter);
-    }
-
+public class FrameworkView extends DummyView {
 }
