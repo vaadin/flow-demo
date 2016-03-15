@@ -19,6 +19,7 @@ import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
+import com.vaadin.ui.UI;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -36,10 +37,10 @@ public class MainLayout extends SimpleView implements HasChildView {
     public MainLayout() {
         super(new Element("div"));
 
-        Element menu = createMenu();
+        UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
-        getElement().appendChild(Element.createText("My site"), menu,
-                contentHolder);
+        Element menu = createMenu();
+        getElement().appendChild(menu, contentHolder);
         contentHolder.getClassList().add("content");
 
         // Placeholder content
@@ -51,8 +52,11 @@ public class MainLayout extends SimpleView implements HasChildView {
         menu.getClassList().add("menu");
 
         // Configuring menu based on router configuration added in a separate PR
-        menu.appendChild(createMenuLink("Home", ""),
-                createMenuLink("About", "about"),
+        Element homeLink = createMenuLink("", "");
+        Element logo = new Element("div");
+        logo.getClassList().add("logo");
+        homeLink.appendChild(logo);
+        menu.appendChild(homeLink, createMenuLink("About", "about"),
                 createMenuLink("Dynamic 1", "dynamic/one"),
                 createMenuLink("Dynamic 2", "dynamic/two"));
         return menu;

@@ -54,6 +54,9 @@ public class WebSiteIT extends AbstractTestBenchTest {
     }
 
     public WebElement getMenuItem(String text) {
+        if (text.equals("Home")) {
+            return findElement(By.cssSelector(".logo"));
+        }
         List<WebElement> menuLinks = findElements(By.cssSelector(".menu a"));
 
         return menuLinks.stream().filter(link -> text.equals(link.getText()))
