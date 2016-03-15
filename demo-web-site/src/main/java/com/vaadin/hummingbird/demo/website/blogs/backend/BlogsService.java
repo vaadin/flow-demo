@@ -22,7 +22,7 @@ import java.util.Optional;
 
 public final class BlogsService {
 
-    private static final BlogsService INSTANE = new BlogsService();
+    private static final BlogsService INSTANCE = new BlogsService();
 
     private Collection<BlogItem> items;
 
@@ -31,7 +31,7 @@ public final class BlogsService {
     }
 
     public static BlogsService getInstance() {
-        return INSTANE;
+        return INSTANCE;
     }
 
     public Collection<BlogItem> getItems() {

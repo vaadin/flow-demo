@@ -74,6 +74,10 @@ public class BlogsView extends SimpleView {
         if (record.isPresent()) {
             BlogPost post = new BlogPost(record.get());
             blog = post.getElement();
+        } else {
+            blog = new Element(BlogsList.DIV);
+            blog.setTextContent("Unable to find the post");
+            blog.getClassList().add("no-post");
         }
         return blog;
     }
