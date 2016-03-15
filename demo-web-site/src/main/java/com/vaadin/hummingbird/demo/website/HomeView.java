@@ -28,6 +28,11 @@ public class HomeView extends SimpleView {
      * Creates a new home view.
      */
     public HomeView() {
-        super(Element.createText("This is the home page"));
+        super(new Element("div"));
+
+        getElement().appendChild(
+                Element.createText("User interface components for web apps"));
+        getElement().appendChild(
+                Element.createText("Build your apps in the language you ♥"));
     }
 }
