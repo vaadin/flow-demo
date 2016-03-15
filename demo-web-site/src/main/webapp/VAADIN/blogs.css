@@ -1,0 +1,33 @@
+a.blog-item-title, .read-more {
+    color: #00b4f0;
+}
+
+.blog-item-title{
+	display: block;
+}
+
+.blog-list{
+	float: right;
+	background-color: white;
+}
+
+.blog-item {
+	margin-top: 5px;
+	padding-bottom:3px;
+	border-bottom: 1px solid;
+}
+
+.read-more{
+	display: block;
+	margin-top: 10px;
+}
+
+div.blog-item-title {
+	font-size: x-large;
+	padding-bottom: 10px;
+	border-bottom: 1px solid;
+}
+
+.bog-content{
+	margin-top: 5px;
+}

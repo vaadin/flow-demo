@@ -18,7 +18,10 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.hummingbird.demo.website.blogs.BlogsView;
 import com.vaadin.hummingbird.router.Location;
+import com.vaadin.hummingbird.router.NavigationEvent;
+import com.vaadin.hummingbird.router.NavigationHandler;
 import com.vaadin.hummingbird.router.RouterUI;
 import com.vaadin.hummingbird.router.ViewRenderer;
 import com.vaadin.server.DeploymentConfiguration;
@@ -35,32 +38,35 @@ public class DemoSiteServlet extends VaadinServlet {
     @Override
     protected VaadinServletService createServletService(
             DeploymentConfiguration deploymentConfiguration)
-            throws ServiceException {
+                    throws ServiceException {
         VaadinServletService service = super.createServletService(
                 deploymentConfiguration);
 
         // Simpler configuration implemented separately
-        service.getRouter().setResolver(navigationEvent -> {
-            Location location = navigationEvent.getLocation();
-            String firstSegment = location.getFirstSegment();
-            switch (firstSegment) {
-            case "":
-                return new ViewRenderer(HomeView.class, MainLayout.class);
-            case "about":
-                return new ViewRenderer(AboutView.class, MainLayout.class);
-            case "dynamic":
-                // Only serve for /dynamic/{xyz}
-                if (location.getSegments().size() == 2) {
-                    return new ViewRenderer(DynamicView.class,
-                            MainLayout.class);
-                } else {
-                    return null;
-                }
-            default:
-                return null;
-            }
-        });
+        service.getRouter().setResolver(this::resolve);
 
         return service;
+    }
+
+    private NavigationHandler resolve(NavigationEvent event) {
+        Location location = event.getLocation();
+        String firstSegment = location.getFirstSegment();
+        switch (firstSegment) {
+        case "":
+            return new ViewRenderer(HomeView.class, MainLayout.class);
+        case MainLayout.ABOUT:
+            return new ViewRenderer(AboutView.class, MainLayout.class);
+        case MainLayout.DYNAMIC:
+            // Only serve for /dynamic/{xyz}
+            if (location.getSegments().size() == 2) {
+                return new ViewRenderer(DynamicView.class, MainLayout.class);
+            } else {
+                return null;
+            }
+        case MainLayout.BLOGS:
+            return new ViewRenderer(BlogsView.class, MainLayout.class);
+        default:
+            return null;
+        }
     }
 }

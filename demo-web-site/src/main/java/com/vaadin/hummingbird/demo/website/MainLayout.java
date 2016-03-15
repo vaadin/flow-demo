@@ -19,6 +19,7 @@ import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
+import com.vaadin.ui.UI;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -30,11 +31,17 @@ public class MainLayout extends SimpleView implements HasChildView {
 
     private final Element contentHolder = new Element("div");
 
+    public static final String ABOUT = "about";
+    public static final String DYNAMIC = "dynamic";
+    public static final String BLOGS = "blogs";
+
     /**
      * Creates a new layout.
      */
     public MainLayout() {
         super(new Element("div"));
+
+        UI.getCurrent().getPage().addStyleSheet("VAADIN/main.css");
 
         Element menu = createMenu();
 
@@ -52,9 +59,10 @@ public class MainLayout extends SimpleView implements HasChildView {
 
         // Configuring menu based on router configuration added in a separate PR
         menu.appendChild(createMenuLink("Home", ""),
-                createMenuLink("About", "about"),
-                createMenuLink("Dynamic 1", "dynamic/one"),
-                createMenuLink("Dynamic 2", "dynamic/two"));
+                createMenuLink("About", ABOUT),
+                createMenuLink("Dynamic 1", DYNAMIC + "/one"),
+                createMenuLink("Dynamic 2", DYNAMIC + "/two"),
+                createMenuLink("Blogs", BLOGS));
         return menu;
     }
 
@@ -63,6 +71,7 @@ public class MainLayout extends SimpleView implements HasChildView {
 
         link.setTextContent(caption);
         link.setAttribute("href", path);
+        link.getClassList().add("menu-item");
         link.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
 
         return link;
