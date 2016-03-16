@@ -20,32 +20,32 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.demo.website.blogs.BlogsView;
 import com.vaadin.hummingbird.router.Location;
+import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
 import com.vaadin.hummingbird.router.NavigationEvent;
 import com.vaadin.hummingbird.router.NavigationHandler;
+import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.hummingbird.router.RouterUI;
 import com.vaadin.hummingbird.router.ViewRenderer;
-import com.vaadin.server.DeploymentConfiguration;
-import com.vaadin.server.ServiceException;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletService;
 
 /**
- * The main servlet for the application.
+ * Initializes the site by configuring the router to use different views for
+ * different URLs.
+ * 
+ * @author Vaadin Ltd
  */
-@WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-@VaadinServletConfiguration(ui = RouterUI.class, productionMode = false)
-public class DemoSiteServlet extends VaadinServlet {
+public class SiteRouterConfigurator implements RouterConfigurator {
+    /**
+     * The main servlet for the application.
+     */
+    @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = RouterUI.class, routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
+    public static class DemoSiteServlet extends VaadinServlet {
+    }
+
     @Override
-    protected VaadinServletService createServletService(
-            DeploymentConfiguration deploymentConfiguration)
-                    throws ServiceException {
-        VaadinServletService service = super.createServletService(
-                deploymentConfiguration);
-
-        // Simpler configuration implemented separately
-        service.getRouter().setResolver(this::resolve);
-
-        return service;
+    public void configure(ModifiableRouterConfiguration configuration) {
+        configuration.setResolver(this::resolve);
     }
 
     private NavigationHandler resolve(NavigationEvent event) {

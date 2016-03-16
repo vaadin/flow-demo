@@ -43,10 +43,10 @@ public class MainLayout extends SimpleView implements HasChildView {
 
         UI.getCurrent().getPage().addStyleSheet("VAADIN/main.css");
 
-        Element menu = createMenu();
+        UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
-        getElement().appendChild(Element.createText("My site"), menu,
-                contentHolder);
+        Element menu = createMenu();
+        getElement().appendChild(menu, contentHolder);
         contentHolder.getClassList().add("content");
 
         // Placeholder content
@@ -58,6 +58,10 @@ public class MainLayout extends SimpleView implements HasChildView {
         menu.getClassList().add("menu");
 
         // Configuring menu based on router configuration added in a separate PR
+        Element homeLink = createMenuLink("", "");
+        Element logo = new Element("div");
+        logo.getClassList().add("logo");
+        homeLink.appendChild(logo);
         menu.appendChild(createMenuLink("Home", ""),
                 createMenuLink("About", ABOUT),
                 createMenuLink("Dynamic 1", DYNAMIC + "/one"),

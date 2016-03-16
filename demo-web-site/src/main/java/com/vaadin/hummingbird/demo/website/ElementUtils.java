@@ -18,7 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import com.vaadin.hummingbird.dom.Element;
 
 /**
- * @author denis
+ * @author Vaadin Ltd
  *
  */
 public interface ElementUtils {
