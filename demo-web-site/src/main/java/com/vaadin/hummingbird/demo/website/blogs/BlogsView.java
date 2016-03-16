@@ -43,13 +43,12 @@ public class BlogsView extends SimpleView implements HasChildView {
         list.getClassList().add("blog-list");
         getElement().appendChild(list);
         init(list);
+        getElement().appendChild(ElementUtils.createDiv());
     }
 
     @Override
     public void setChildView(View childView) {
-        if (getElement().getChildCount() > 1) {
-            getElement().removeChild(1);
-        }
+        getElement().removeChild(1);
         getElement().appendChild(childView.getElement());
     }
 
