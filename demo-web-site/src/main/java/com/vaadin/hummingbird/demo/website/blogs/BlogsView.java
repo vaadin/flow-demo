@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.website.blogs;
 
 import java.util.Optional;
 
+import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
@@ -29,7 +30,7 @@ public class BlogsView extends SimpleView {
     private final long topBlogId;
 
     public BlogsView() {
-        super(new Element(BlogsList.DIV));
+        super(ElementUtils.createDiv());
 
         UI.getCurrent().getPage().addStyleSheet("VAADIN/blogs.css");
 
@@ -60,7 +61,7 @@ public class BlogsView extends SimpleView {
     private void setPost(Element blogElement) {
         Element blog = blogElement;
         if (blog == null) {
-            blog = new Element(BlogsList.DIV);
+            blog = ElementUtils.createDiv();
         }
         if (getElement().getChildCount() > 1) {
             getElement().removeChild(1);
@@ -75,7 +76,7 @@ public class BlogsView extends SimpleView {
             BlogPost post = new BlogPost(record.get());
             blog = post.getElement();
         } else {
-            blog = new Element(BlogsList.DIV);
+            blog = ElementUtils.createDiv();
             blog.setTextContent("Unable to find the post");
             blog.getClassList().add("no-post");
         }

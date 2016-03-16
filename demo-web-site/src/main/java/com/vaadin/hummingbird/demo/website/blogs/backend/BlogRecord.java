@@ -15,9 +15,51 @@
  */
 package com.vaadin.hummingbird.demo.website.blogs.backend;
 
-public class BlogRecord extends BlogItem {
+import java.time.LocalDateTime;
+
+public class BlogRecord {
 
     private String text;
+
+    private long id;
+
+    private String title;
+
+    private String author;
+
+    private LocalDateTime date;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public String getText() {
         return text;

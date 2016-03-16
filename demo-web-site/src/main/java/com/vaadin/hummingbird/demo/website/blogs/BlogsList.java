@@ -18,31 +18,24 @@ package com.vaadin.hummingbird.demo.website.blogs;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
+import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.MainLayout;
-import com.vaadin.hummingbird.demo.website.blogs.backend.BlogItem;
+import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.shared.ApplicationConstants;
 
 public class BlogsList {
 
-    static final String TITLE_STYLE = "blog-item-title";
-
-    static final String DIV = "div";
-
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd/MM/yy hh:mm a");
 
-    private static final String HREF = "href";
-
     private final Element container;
-
-    private static final String A = "a";
 
     private final long firstBlogId;
 
     public BlogsList() {
-        container = new Element(DIV);
+        container = ElementUtils.createDiv();
         container.getClassList().add("blog-list");
         firstBlogId = init();
     }
@@ -56,37 +49,37 @@ public class BlogsList {
     }
 
     private long init() {
-        Collection<BlogItem> items = BlogsService.getInstance().getItems();
+        Collection<BlogRecord> items = BlogsService.getInstance().getItems();
         items.stream().map(this::makeItem).forEach(getElement()::appendChild);
         return items.iterator().next().getId();
     }
 
-    private Element makeItem(BlogItem item) {
-        Element element = new Element(DIV);
+    private Element makeItem(BlogRecord item) {
+        Element element = ElementUtils.createDiv();
         element.getClassList().add("blog-item");
 
-        Element title = new Element(A);
+        Element title = ElementUtils.createAnchor();
         title.setTextContent(item.getTitle());
         title.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
-        title.getClassList().add(TITLE_STYLE);
+        title.getClassList().add("blog-item-title");
 
         StringBuilder link = new StringBuilder(MainLayout.BLOGS);
         link.append('/').append(item.getId());
 
-        title.setAttribute(HREF, link.toString());
+        ElementUtils.setHref(title, link.toString());
 
-        Element by = new Element(DIV);
+        Element by = ElementUtils.createDiv();
         by.setTextContent("By " + item.getAuthor());
         by.getStyle().set("display", "inline");
 
-        Element date = new Element(DIV);
+        Element date = ElementUtils.createDiv();
         date.getStyle().set("display", "inline");
         date.setTextContent("On " + FORMATTER.format(item.getDate()));
 
-        Element readMore = new Element(A);
+        Element readMore = ElementUtils.createAnchor();
         readMore.setTextContent("Read More \u00BB");
         readMore.getClassList().add("read-more");
-        readMore.setAttribute(HREF, link.toString());
+        ElementUtils.setHref(readMore, link.toString());
         readMore.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
 
         element.appendChild(title, by, date, readMore);

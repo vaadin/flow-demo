@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.website.blogs;
 
+import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.dom.Element;
 
@@ -25,7 +26,7 @@ public class BlogPost {
 
     public BlogPost(BlogRecord record) {
         this.record = record;
-        element = new Element(BlogsList.DIV);
+        element = ElementUtils.createDiv();
 
         init();
     }
@@ -35,11 +36,11 @@ public class BlogPost {
     }
 
     private void init() {
-        Element title = new Element(BlogsList.DIV);
-        title.getClassList().add(BlogsList.TITLE_STYLE);
+        Element title = ElementUtils.createDiv();
+        title.getClassList().add("blog-item-title");
         title.setTextContent(record.getTitle());
 
-        Element text = new Element(BlogsList.DIV);
+        Element text = ElementUtils.createDiv();
         text.getClassList().add("blog-content");
         text.setTextContent(record.getText());
 

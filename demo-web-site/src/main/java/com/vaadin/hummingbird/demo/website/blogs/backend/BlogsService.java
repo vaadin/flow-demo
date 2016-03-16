@@ -24,7 +24,7 @@ public final class BlogsService {
 
     private static final BlogsService INSTANCE = new BlogsService();
 
-    private Collection<BlogItem> items;
+    private Collection<BlogRecord> items;
 
     private BlogsService() {
         items = init();
@@ -34,7 +34,7 @@ public final class BlogsService {
         return INSTANCE;
     }
 
-    public Collection<BlogItem> getItems() {
+    public Collection<BlogRecord> getItems() {
         return items;
     }
 
@@ -43,8 +43,8 @@ public final class BlogsService {
                 .map(BlogRecord.class::cast);
     }
 
-    private Collection<BlogItem> init() {
-        Collection<BlogItem> items = new ArrayList<>();
+    private Collection<BlogRecord> init() {
+        Collection<BlogRecord> items = new ArrayList<>();
 
         BlogRecord item = new BlogRecord();
         item.setAuthor("Jens Jensson");
