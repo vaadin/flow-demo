@@ -31,6 +31,12 @@ public interface ElementUtils {
         return new Element("a");
     }
 
+    static Element createAnchor(String href) {
+        Element element = createAnchor();
+        setHref(element, href);
+        return element;
+    }
+
     static void setHref(Element element, String value) {
         element.setAttribute("href", value);
     }

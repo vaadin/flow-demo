@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.hummingbird.demo.website.blogs.BlogPost;
 import com.vaadin.hummingbird.demo.website.blogs.BlogsView;
 import com.vaadin.hummingbird.router.Location;
 import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
@@ -64,7 +65,8 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 return null;
             }
         case MainLayout.BLOGS:
-            return new ViewRenderer(BlogsView.class, MainLayout.class);
+            return new ViewRenderer(BlogPost.class, BlogsView.class,
+                    MainLayout.class);
         default:
             return null;
         }

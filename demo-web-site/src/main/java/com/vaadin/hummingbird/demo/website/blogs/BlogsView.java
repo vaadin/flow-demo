@@ -15,71 +15,78 @@
  */
 package com.vaadin.hummingbird.demo.website.blogs;
 
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 
 import com.vaadin.hummingbird.demo.website.ElementUtils;
+import com.vaadin.hummingbird.demo.website.MainLayout;
 import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.Location;
+import com.vaadin.hummingbird.router.HasChildView;
+import com.vaadin.hummingbird.router.View;
+import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.UI;
 
-public class BlogsView extends SimpleView {
+public class BlogsView extends SimpleView implements HasChildView {
 
-    private final long topBlogId;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+            .ofPattern("dd/MM/yy hh:mm a");
 
     public BlogsView() {
         super(ElementUtils.createDiv());
 
         UI.getCurrent().getPage().addStyleSheet("VAADIN/blogs.css");
 
-        BlogsList list = new BlogsList();
-        getElement().appendChild(list.getElement());
-        topBlogId = list.getTopBlogId();
+        Element list = ElementUtils.createDiv();
+        list.getClassList().add("blog-list");
+        getElement().appendChild(list);
+        init(list);
     }
 
     @Override
-    public void onLocationChange(Location location) {
-        Element blog = null;
-        if (location.hasSegments()) {
-            String item = location.getSubLocation().getFirstSegment();
-            Long id = getId(item);
-            blog = makePostElement(id == null ? topBlogId : id);
-        }
-        setPost(blog);
-    }
-
-    private Long getId(String item) {
-        try {
-            return Long.parseLong(item);
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-
-    private void setPost(Element blogElement) {
-        Element blog = blogElement;
-        if (blog == null) {
-            blog = ElementUtils.createDiv();
-        }
+    public void setChildView(View childView) {
         if (getElement().getChildCount() > 1) {
             getElement().removeChild(1);
         }
-        getElement().appendChild(blog);
+        getElement().appendChild(childView.getElement());
     }
 
-    private Element makePostElement(long id) {
-        Element blog = null;
-        Optional<BlogRecord> record = BlogsService.getInstance().getRecord(id);
-        if (record.isPresent()) {
-            BlogPost post = new BlogPost(record.get());
-            blog = post.getElement();
-        } else {
-            blog = ElementUtils.createDiv();
-            blog.setTextContent("Unable to find the post");
-            blog.getClassList().add("no-post");
-        }
-        return blog;
+    private long init(Element list) {
+        Collection<BlogRecord> items = BlogsService.getInstance().getItems();
+        items.stream().map(this::makeItem).forEach(list::appendChild);
+        return items.iterator().next().getId();
     }
+
+    private Element makeItem(BlogRecord item) {
+        Element element = ElementUtils.createDiv();
+        element.getClassList().add("blog-item");
+
+        StringBuilder link = new StringBuilder(MainLayout.BLOGS);
+        link.append('/').append(item.getId());
+
+        Element title = ElementUtils.createAnchor(link.toString());
+        title.setTextContent(item.getTitle());
+        title.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
+        title.getClassList().add("blog-item-title");
+
+        Element by = ElementUtils.createDiv();
+        by.setTextContent("By " + item.getAuthor());
+        by.getStyle().set("display", "inline");
+
+        Element date = ElementUtils.createDiv();
+        date.getStyle().set("display", "inline");
+        date.setTextContent("On " + FORMATTER.format(item.getDate()));
+
+        Element readMore = ElementUtils.createAnchor(link.toString());
+        readMore.setTextContent("Read More \u00BB");
+        readMore.getClassList().add("read-more");
+        readMore.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
+
+        element.appendChild(title, by, date, readMore);
+
+        return element;
+    }
+
 }
