@@ -48,8 +48,7 @@ public class BlogsView extends SimpleView implements HasChildView {
 
     @Override
     public void setChildView(View childView) {
-        getElement().removeChild(1);
-        getElement().appendChild(childView.getElement());
+        getElement().setChild(1, childView.getElement());
     }
 
     private long init(Element list) {
