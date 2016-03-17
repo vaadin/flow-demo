@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.staticmenu.download;
 
+import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.staticmenu.DummyView;
 
 /**
@@ -23,5 +24,6 @@ import com.vaadin.hummingbird.demo.staticmenu.DummyView;
  * @since
  * @author Vaadin Ltd
  */
+@Title("Documentation")
 public class DocsView extends DummyView {
 }

@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import com.vaadin.annotations.AnnotationReader;
 import com.vaadin.hummingbird.router.Router;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.View;
@@ -54,13 +55,21 @@ public interface Util {
 
     /**
      * Gets the name of the view.
+     * <p>
+     * This utility method exists so we can get the title based on only the view
+     * class, for the menu. This works as we do not have any dynamic view names
+     * in this site.
      *
      * @param viewClass
      *            the view class
      * @return the view name
      */
-    static String getViewName(Class<? extends View> viewClass) {
-        return viewClass.getSimpleName().replace("View", "");
+    public static String getViewName(Class<? extends View> viewClass) {
+        String title = AnnotationReader.getPageTitle(viewClass);
+        if (title == null) {
+            title = viewClass.getSimpleName().replace("View", "");
+        }
+        return title;
     }
 
     /**
