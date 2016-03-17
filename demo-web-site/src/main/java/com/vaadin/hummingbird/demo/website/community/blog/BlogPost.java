@@ -13,14 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website.blogs;
+package com.vaadin.hummingbird.demo.website.community.blog;
 
 import java.util.Collection;
 
 import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.SimpleView;
-import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
-import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
+import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogRecord;
+import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 
@@ -63,7 +63,7 @@ public class BlogPost extends SimpleView {
             error.getClassList().add("no-post");
             getElement().appendChild(error);
         } else {
-            Element title = ElementUtils.createDiv();
+            Element title = ElementUtils.createH1();
             title.getClassList().add("blog-item-title");
             title.setTextContent(record.getTitle());
 

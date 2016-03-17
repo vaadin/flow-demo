@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website.blogs.backend;
+package com.vaadin.hummingbird.demo.website.community.blog.backend;
 
 import java.time.LocalDateTime;
 
