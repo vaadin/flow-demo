@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import com.vaadin.annotations.AnnotationReader;
 import com.vaadin.hummingbird.router.Router;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.View;
@@ -60,7 +61,22 @@ public interface Util {
      * @return the view name
      */
     static String getViewName(Class<? extends View> viewClass) {
-        return viewClass.getSimpleName().replace("View", "");
+        String title = AnnotationReader.getPageTitle(viewClass);
+        if (title == null) {
+            title = viewClass.getSimpleName().replace("View", "");
+        }
+        return title;
+    }
+
+    /**
+     * Gets the title of the view.
+     *
+     * @param viewClass
+     *            the view class
+     * @return the title to show for the view
+     */
+    static String getViewTitle(Class<? extends View> viewClass) {
+        return getViewName(viewClass) + " - vaadin.com";
     }
 
     /**
@@ -118,4 +134,5 @@ public interface Util {
         parameters.put(key, value);
         return getNavigablePath(childViewClass, parameters);
     }
+
 }

@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.staticmenu;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 
 /**
@@ -41,5 +42,10 @@ public abstract class SimpleView implements View {
     @Override
     public final Element getElement() {
         return element;
+    }
+
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        return Util.getViewTitle(getClass());
     }
 }
