@@ -37,8 +37,6 @@ public class MainLayout extends SimpleView implements HasChildView {
     public MainLayout() {
         super(new Element("div"));
 
-        UI.getCurrent().getPage().addStyleSheet("VAADIN/main.css");
-
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
         Element menu = createMenu();

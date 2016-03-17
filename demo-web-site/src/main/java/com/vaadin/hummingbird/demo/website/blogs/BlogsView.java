@@ -26,7 +26,6 @@ import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
-import com.vaadin.ui.UI;
 
 /**
  * The dynamic blogs page.
@@ -44,8 +43,6 @@ public class BlogsView extends SimpleView implements HasChildView {
      */
     public BlogsView() {
         super(ElementUtils.createDiv());
-
-        UI.getCurrent().getPage().addStyleSheet("VAADIN/blogs.css");
 
         Element list = ElementUtils.createDiv();
         list.getClassList().add("blog-list");
