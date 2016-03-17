@@ -36,14 +36,31 @@ public final class BlogsService {
         records = init();
     }
 
+    /**
+     * Get service instance.
+     * 
+     * @return service instance
+     */
     public static BlogsService getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Get blog records.
+     * 
+     * @return blog records
+     */
     public Collection<BlogRecord> getItems() {
         return records;
     }
 
+    /**
+     * Get record by its {@code id}/
+     * 
+     * @param id
+     *            record id
+     * @return blog record if it exists
+     */
     public Optional<BlogRecord> getRecord(long id) {
         return records.stream().filter(item -> item.getId() == id).findFirst()
                 .map(BlogRecord.class::cast);
