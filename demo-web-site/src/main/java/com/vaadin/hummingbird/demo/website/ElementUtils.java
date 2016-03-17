@@ -19,7 +19,7 @@ import com.vaadin.hummingbird.dom.Element;
 
 /**
  * Utility methods for DOM elements.
- * 
+ *
  * @since
  * @author Vaadin Ltd
  *
@@ -28,7 +28,7 @@ public interface ElementUtils {
 
     /**
      * Create new empty "div" element.
-     * 
+     *
      * @return new "&lt;div>" element.
      */
     static Element createDiv() {
@@ -36,8 +36,17 @@ public interface ElementUtils {
     }
 
     /**
+     * Create new empty "h1" element.
+     *
+     * @return new "&lt;h1>" element.
+     */
+    static Element createH1() {
+        return new Element("h1");
+    }
+
+    /**
      * Create new empty "a" element.
-     * 
+     *
      * @return new "&lt;a>" element.
      */
     static Element createAnchor() {
@@ -45,9 +54,9 @@ public interface ElementUtils {
     }
 
     /**
-     * 
+     *
      * Create new "a" element with given {@code href} attribute.
-     * 
+     *
      * @param href
      *            "href" attribute value
      * @return new "&lt;a>" element.
@@ -60,7 +69,7 @@ public interface ElementUtils {
 
     /**
      * Set "href" attribute {@code value} to {@code element.}
-     * 
+     *
      * @param element
      *            DOM element
      * @param value
@@ -69,4 +78,5 @@ public interface ElementUtils {
     static void setHref(Element element, String value) {
         element.setAttribute("href", value);
     }
+
 }

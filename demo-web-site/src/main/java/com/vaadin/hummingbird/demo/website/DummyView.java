@@ -16,29 +16,13 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.LocationChangeEvent;
 
-/**
- * A dynamic view that shows different content based on a parameter in the URL.
- *
- * @since
- * @author Vaadin Ltd
- */
-public class DynamicView extends SimpleView {
+public class DummyView extends SimpleView {
 
-    /**
-     * Creates a new dynamic view.
-     */
-    public DynamicView() {
-        super(Element.createText("Uninitialized dynamic page"));
-    }
-
-    @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        String parameter = locationChangeEvent.getLocation().getSegments()
-                .get(1);
-
-        getElement().setTextContent("Dynamic page " + parameter);
+    public DummyView() {
+        super(new Element("div"));
+        getElement().setTextContent("This is the "
+                + getClass().getSimpleName().replace("View", "") + " view");
     }
 
 }

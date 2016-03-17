@@ -13,19 +13,21 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website.blogs;
+package com.vaadin.hummingbird.demo.website.community.blog;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Optional;
 
 import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.SimpleView;
-import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
-import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
+import com.vaadin.hummingbird.demo.website.SiteRouterConfigurator;
+import com.vaadin.hummingbird.demo.website.Util;
+import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogRecord;
+import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.shared.ApplicationConstants;
 
 /**
  * The dynamic blogs page.
@@ -53,7 +55,13 @@ public class BlogsView extends SimpleView implements HasChildView {
 
     @Override
     public void setChildView(View childView) {
-        getElement().setChild(1, childView.getElement());
+        Element childViewElement;
+        if (childView != null) {
+            childViewElement = childView.getElement();
+        } else {
+            childViewElement = ElementUtils.createDiv();
+        }
+        getElement().setChild(1, childViewElement);
     }
 
     private long init(Element list) {
@@ -66,12 +74,9 @@ public class BlogsView extends SimpleView implements HasChildView {
         Element element = ElementUtils.createDiv();
         element.getClassList().add("blog-item");
 
-        StringBuilder link = new StringBuilder("blogs");
-        link.append('/').append(item.getId());
-
-        Element title = ElementUtils.createAnchor(link.toString());
-        title.setTextContent(item.getTitle());
-        title.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
+        Optional<String> link = SiteRouterConfigurator
+                .getNavigablePath(BlogPost.class, "id", "" + item.getId());
+        Element title = Util.createRouterLink(item.getTitle(), link.get());
         title.getClassList().add("blog-item-title");
 
         Element by = ElementUtils.createDiv();
@@ -82,10 +87,9 @@ public class BlogsView extends SimpleView implements HasChildView {
         date.getStyle().set("display", "inline");
         date.setTextContent("On " + FORMATTER.format(item.getDate()));
 
-        Element readMore = ElementUtils.createAnchor(link.toString());
-        readMore.setTextContent("Read More \u00BB");
+        Element readMore = Util.createRouterLink("Read More \u00BB",
+                link.get());
         readMore.getClassList().add("read-more");
-        readMore.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
 
         element.appendChild(title, by, date, readMore);
 
