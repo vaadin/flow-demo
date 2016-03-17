@@ -26,6 +26,9 @@ import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
 
 public class WebSiteIT extends AbstractTestBenchTest {
 
+    private static final String BLOGS = "Blogs";
+    private static final String BLOG_ITEM_TITLE = "blog-item-title";
+
     @Test
     public void testNavigation() {
         open();
@@ -49,6 +52,26 @@ public class WebSiteIT extends AbstractTestBenchTest {
         Assert.assertEquals("This is the home page", getContent().getText());
     }
 
+    @Test
+    public void testInitialBlogRecord() {
+        open();
+        getMenuItem(BLOGS).click();
+
+        String title = findBlogItem(0, false);
+
+        Assert.assertEquals(title, findActiveBlog().getText());
+    }
+
+    @Test
+    public void testBlogRecordClick() {
+        open();
+        getMenuItem(BLOGS).click();
+
+        String title = findBlogItem(1, true);
+
+        Assert.assertEquals(title, findActiveBlog().getText());
+    }
+
     public WebElement getContent() {
         return findElement(By.className("content"));
     }
@@ -61,5 +84,18 @@ public class WebSiteIT extends AbstractTestBenchTest {
 
         return menuLinks.stream().filter(link -> text.equals(link.getText()))
                 .findFirst().get();
+    }
+
+    private WebElement findActiveBlog() {
+        return findElement(By.cssSelector("div." + BLOG_ITEM_TITLE));
+    }
+
+    private String findBlogItem(int index, boolean click) {
+        WebElement postLink = findElements(By.className("blog-item")).get(index)
+                .findElement(By.className(BLOG_ITEM_TITLE));
+        if (click) {
+            postLink.click();
+        }
+        return postLink.getText();
     }
 }

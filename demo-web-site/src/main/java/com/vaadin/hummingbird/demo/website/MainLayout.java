@@ -58,7 +58,8 @@ public class MainLayout extends SimpleView implements HasChildView {
         homeLink.appendChild(logo);
         menu.appendChild(homeLink, createMenuLink("About", "about/"),
                 createMenuLink("Dynamic 1", "dynamic/one"),
-                createMenuLink("Dynamic 2", "dynamic/two"));
+                createMenuLink("Dynamic 2", "dynamic/two"),
+                createMenuLink("Blogs", "blogs/"));
         return menu;
     }
 
@@ -67,6 +68,7 @@ public class MainLayout extends SimpleView implements HasChildView {
 
         link.setTextContent(caption);
         link.setAttribute("href", path);
+        link.getClassList().add("menu-item");
         link.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
 
         return link;
