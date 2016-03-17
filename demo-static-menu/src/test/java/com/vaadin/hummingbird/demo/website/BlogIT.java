@@ -1,3 +1,5 @@
+package com.vaadin.hummingbird.demo.website;
+
 /*
  * Copyright 2000-2016 Vaadin Ltd.
  *
@@ -13,45 +15,21 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.website;
-
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
-
-public class WebSiteIT extends AbstractTestBenchTest {
-
-    private static final String BLOGS = "Blogs";
+public class BlogIT extends AbstractComplexStaticMenuTest {
+    private static final String COMMUNITY = "Community";
+    private static final String BLOG = "Blog";
     private static final String BLOG_ITEM_TITLE = "blog-item-title";
-
-    @Test
-    public void testNavigation() {
-        open();
-
-        Assert.assertEquals("This is the home page", getContent().getText());
-
-        getMenuItem("About").click();
-        Assert.assertEquals("This is the about page", getContent().getText());
-
-        getMenuItem("Dynamic 1").click();
-        Assert.assertEquals("Dynamic page one", getContent().getText());
-
-        getMenuItem("Dynamic 2").click();
-        Assert.assertEquals("Dynamic page two", getContent().getText());
-
-        getMenuItem("Home").click();
-        Assert.assertEquals("This is the home page", getContent().getText());
-    }
 
     @Test
     public void testInitialBlogRecord() {
         open();
-        getMenuItem(BLOGS).click();
+        getMenuItem(COMMUNITY).click();
+        getSubMenuItem(BLOG).click();
 
         String title = findBlogItem(0, false);
 
@@ -61,29 +39,16 @@ public class WebSiteIT extends AbstractTestBenchTest {
     @Test
     public void testBlogRecordClick() {
         open();
-        getMenuItem(BLOGS).click();
+        getMenuItem(COMMUNITY).click();
+        getSubMenuItem(BLOG).click();
 
         String title = findBlogItem(1, true);
 
         Assert.assertEquals(title, findActiveBlog().getText());
     }
 
-    public WebElement getContent() {
-        return findElement(By.className("content"));
-    }
-
-    public WebElement getMenuItem(String text) {
-        if (text.equals("Home")) {
-            return findElement(By.cssSelector(".logo"));
-        }
-        List<WebElement> menuLinks = findElements(By.cssSelector(".menu a"));
-
-        return menuLinks.stream().filter(link -> text.equals(link.getText()))
-                .findFirst().get();
-    }
-
     private WebElement findActiveBlog() {
-        return findElement(By.cssSelector("div." + BLOG_ITEM_TITLE));
+        return findElement(By.cssSelector("h1." + BLOG_ITEM_TITLE));
     }
 
     private String findBlogItem(int index, boolean click) {
@@ -94,4 +59,5 @@ public class WebSiteIT extends AbstractTestBenchTest {
         }
         return postLink.getText();
     }
+
 }
