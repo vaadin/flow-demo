@@ -31,10 +31,6 @@ public class MainLayout extends SimpleView implements HasChildView {
 
     private final Element contentHolder = new Element("div");
 
-    public static final String ABOUT = "about";
-    public static final String DYNAMIC = "dynamic";
-    public static final String BLOGS = "blogs";
-
     /**
      * Creates a new layout.
      */
@@ -62,11 +58,10 @@ public class MainLayout extends SimpleView implements HasChildView {
         Element logo = new Element("div");
         logo.getClassList().add("logo");
         homeLink.appendChild(logo);
-        menu.appendChild(createMenuLink("Home", ""),
-                createMenuLink("About", ABOUT),
-                createMenuLink("Dynamic 1", DYNAMIC + "/one"),
-                createMenuLink("Dynamic 2", DYNAMIC + "/two"),
-                createMenuLink("Blogs", BLOGS));
+        menu.appendChild(homeLink, createMenuLink("About", "about/"),
+                createMenuLink("Dynamic 1", "dynamic/one"),
+                createMenuLink("Dynamic 2", "dynamic/two"),
+                createMenuLink("Blogs", "blogs/"));
         return menu;
     }
 

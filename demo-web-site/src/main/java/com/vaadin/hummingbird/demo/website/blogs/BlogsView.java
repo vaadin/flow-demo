@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 import com.vaadin.hummingbird.demo.website.ElementUtils;
-import com.vaadin.hummingbird.demo.website.MainLayout;
 import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
@@ -61,7 +60,7 @@ public class BlogsView extends SimpleView implements HasChildView {
         Element element = ElementUtils.createDiv();
         element.getClassList().add("blog-item");
 
-        StringBuilder link = new StringBuilder(MainLayout.BLOGS);
+        StringBuilder link = new StringBuilder("blogs");
         link.append('/').append(item.getId());
 
         Element title = ElementUtils.createAnchor(link.toString());

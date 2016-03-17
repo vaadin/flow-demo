@@ -20,19 +20,15 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.demo.website.blogs.BlogPost;
 import com.vaadin.hummingbird.demo.website.blogs.BlogsView;
-import com.vaadin.hummingbird.router.Location;
 import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
-import com.vaadin.hummingbird.router.NavigationEvent;
-import com.vaadin.hummingbird.router.NavigationHandler;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.hummingbird.router.RouterUI;
-import com.vaadin.hummingbird.router.ViewRenderer;
 import com.vaadin.server.VaadinServlet;
 
 /**
  * Initializes the site by configuring the router to use different views for
  * different URLs.
- * 
+ *
  * @author Vaadin Ltd
  */
 public class SiteRouterConfigurator implements RouterConfigurator {
@@ -46,29 +42,12 @@ public class SiteRouterConfigurator implements RouterConfigurator {
 
     @Override
     public void configure(ModifiableRouterConfiguration configuration) {
-        configuration.setResolver(this::resolve);
-    }
-
-    private NavigationHandler resolve(NavigationEvent event) {
-        Location location = event.getLocation();
-        String firstSegment = location.getFirstSegment();
-        switch (firstSegment) {
-        case "":
-            return new ViewRenderer(HomeView.class, MainLayout.class);
-        case MainLayout.ABOUT:
-            return new ViewRenderer(AboutView.class, MainLayout.class);
-        case MainLayout.DYNAMIC:
-            // Only serve for /dynamic/{xyz}
-            if (location.getSegments().size() == 2) {
-                return new ViewRenderer(DynamicView.class, MainLayout.class);
-            } else {
-                return null;
-            }
-        case MainLayout.BLOGS:
-            return new ViewRenderer(BlogPost.class, BlogsView.class,
-                    MainLayout.class);
-        default:
-            return null;
-        }
+        configuration.setRoute("", HomeView.class, MainLayout.class);
+        // Wildcard just to show all available features in the same demo
+        configuration.setRoute("about/*", AboutView.class, MainLayout.class);
+        configuration.setRoute("dynamic/{name}", DynamicView.class,
+                MainLayout.class);
+        configuration.setParentView(BlogsView.class, MainLayout.class);
+        configuration.setRoute("blogs/{id}", BlogPost.class, BlogsView.class);
     }
 }
