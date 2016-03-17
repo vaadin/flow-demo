@@ -28,11 +28,20 @@ import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.UI;
 
+/**
+ * The dynamic blogs page.
+ *
+ * @since
+ * @author Vaadin Ltd
+ */
 public class BlogsView extends SimpleView implements HasChildView {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd/MM/yy hh:mm a");
 
+    /**
+     * Creates a new blogs view.
+     */
     public BlogsView() {
         super(ElementUtils.createDiv());
 

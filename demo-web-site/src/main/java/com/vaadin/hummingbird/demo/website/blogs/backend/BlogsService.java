@@ -20,14 +20,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Blogs backend service.
+ * 
+ * @author Vaadin Ltd
+ *
+ */
 public final class BlogsService {
 
     private static final BlogsService INSTANCE = new BlogsService();
 
-    private Collection<BlogRecord> items;
+    private Collection<BlogRecord> records;
 
     private BlogsService() {
-        items = init();
+        records = init();
     }
 
     public static BlogsService getInstance() {
@@ -35,11 +41,11 @@ public final class BlogsService {
     }
 
     public Collection<BlogRecord> getItems() {
-        return items;
+        return records;
     }
 
     public Optional<BlogRecord> getRecord(long id) {
-        return items.stream().filter(item -> item.getId() == id).findFirst()
+        return records.stream().filter(item -> item.getId() == id).findFirst()
                 .map(BlogRecord.class::cast);
     }
 

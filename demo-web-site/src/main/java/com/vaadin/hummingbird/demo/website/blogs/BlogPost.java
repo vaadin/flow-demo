@@ -24,8 +24,17 @@ import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.Location;
 
+/**
+ * The blog post view.
+ *
+ * @since
+ * @author Vaadin Ltd
+ */
 public class BlogPost extends SimpleView {
 
+    /**
+     * Creates a new blog post view.
+     */
     public BlogPost() {
         super(ElementUtils.createDiv());
     }
@@ -35,7 +44,7 @@ public class BlogPost extends SimpleView {
         getElement().removeAllChildren();
 
         Collection<BlogRecord> items = BlogsService.getInstance().getItems();
-        if (items.size() == 0) {
+        if (items.isEmpty()) {
             return;
         }
 

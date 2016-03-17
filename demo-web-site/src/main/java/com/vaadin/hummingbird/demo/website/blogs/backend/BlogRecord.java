@@ -17,6 +17,12 @@ package com.vaadin.hummingbird.demo.website.blogs.backend;
 
 import java.time.LocalDateTime;
 
+/**
+ * Blog DTO.
+ *
+ * @author Vaadin Ltd
+ *
+ */
 public class BlogRecord {
 
     private String text;
