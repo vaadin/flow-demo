@@ -55,7 +55,7 @@ public final class BlogsService {
     }
 
     /**
-     * Get record by its {@code id}/
+     * Get record by its {@code id}.
      * 
      * @param id
      *            record id
