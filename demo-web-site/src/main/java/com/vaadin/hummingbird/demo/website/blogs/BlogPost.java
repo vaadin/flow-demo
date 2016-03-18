@@ -22,7 +22,7 @@ import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.blogs.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.Location;
+import com.vaadin.hummingbird.router.LocationChangeEvent;
 
 /**
  * The blog post view.
@@ -40,7 +40,7 @@ public class BlogPost extends SimpleView {
     }
 
     @Override
-    public void onLocationChange(Location location) {
+    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         getElement().removeAllChildren();
 
         Collection<BlogRecord> items = BlogsService.getInstance().getItems();
@@ -49,8 +49,9 @@ public class BlogPost extends SimpleView {
         }
 
         BlogRecord record = items.iterator().next();
-        if (location.getSubLocation().hasSegments()) {
-            Long id = getId(location.getSubLocation().getFirstSegment());
+        if (locationChangeEvent.getLocation().getSubLocation().hasSegments()) {
+            Long id = getId(locationChangeEvent.getLocation().getSubLocation()
+                    .getFirstSegment());
             if (id != null) {
                 record = BlogsService.getInstance().getRecord(id).orElse(null);
             }
