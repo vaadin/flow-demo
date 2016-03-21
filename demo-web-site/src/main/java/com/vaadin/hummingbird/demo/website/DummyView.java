@@ -15,12 +15,12 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 
 public class DummyView extends SimpleView {
 
     public DummyView() {
-        super(new Element("div"));
+        super(ElementFactory.createDiv());
         getElement().setTextContent("This is the "
                 + getClass().getSimpleName().replace("View", "") + " view");
     }

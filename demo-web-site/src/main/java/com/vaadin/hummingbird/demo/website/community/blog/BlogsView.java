@@ -19,13 +19,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Optional;
 
-import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.SiteRouterConfigurator;
-import com.vaadin.hummingbird.demo.website.Util;
 import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 
@@ -44,13 +43,13 @@ public class BlogsView extends SimpleView implements HasChildView {
      * Creates a new blogs view.
      */
     public BlogsView() {
-        super(ElementUtils.createDiv());
+        super(ElementFactory.createDiv());
 
-        Element list = ElementUtils.createDiv();
+        Element list = ElementFactory.createDiv();
         list.getClassList().add("blog-list");
         getElement().appendChild(list);
         init(list);
-        getElement().appendChild(ElementUtils.createDiv());
+        getElement().appendChild(ElementFactory.createDiv());
     }
 
     @Override
@@ -59,7 +58,7 @@ public class BlogsView extends SimpleView implements HasChildView {
         if (childView != null) {
             childViewElement = childView.getElement();
         } else {
-            childViewElement = ElementUtils.createDiv();
+            childViewElement = ElementFactory.createDiv();
         }
         getElement().setChild(1, childViewElement);
     }
@@ -71,23 +70,23 @@ public class BlogsView extends SimpleView implements HasChildView {
     }
 
     private Element makeItem(BlogRecord item) {
-        Element element = ElementUtils.createDiv();
+        Element element = ElementFactory.createDiv();
         element.getClassList().add("blog-item");
 
         Optional<String> link = SiteRouterConfigurator
                 .getNavigablePath(BlogPost.class, "id", "" + item.getId());
-        Element title = Util.createRouterLink(item.getTitle(), link.get());
+        Element title = ElementFactory.createRouterLink(item.getTitle(),
+                link.get());
         title.getClassList().add("blog-item-title");
 
-        Element by = ElementUtils.createDiv();
-        by.setTextContent("By " + item.getAuthor());
+        Element by = ElementFactory.createDiv("By " + item.getAuthor());
         by.getStyle().set("display", "inline");
 
-        Element date = ElementUtils.createDiv();
+        Element date = ElementFactory
+                .createDiv("On " + FORMATTER.format(item.getDate()));
         date.getStyle().set("display", "inline");
-        date.setTextContent("On " + FORMATTER.format(item.getDate()));
 
-        Element readMore = Util.createRouterLink("Read More \u00BB",
+        Element readMore = ElementFactory.createRouterLink("Read More \u00BB",
                 link.get());
         readMore.getClassList().add("read-more");
 

@@ -15,8 +15,6 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import static com.vaadin.hummingbird.demo.website.Util.createRouterLink;
-
 import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.demo.website.community.CommunityView;
@@ -24,6 +22,7 @@ import com.vaadin.hummingbird.demo.website.download.DownloadView;
 import com.vaadin.hummingbird.demo.website.elements.ElementsView;
 import com.vaadin.hummingbird.demo.website.framework.FrameworkView;
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.UI;
 
@@ -37,10 +36,10 @@ public class MainMenuView extends SimpleMenuView {
 
         getMenu().getClassList().add("menu");
 
-        homeLink = createRouterLink("", SiteRouterConfigurator
+        homeLink = ElementFactory.createRouterLink("", SiteRouterConfigurator
                 .getNavigablePath(HomeView.class).orElse(null));
         registerMenuLinkView(HomeView.class);
-        Element logo = new Element("div").setAttribute("class", "logo");
+        Element logo = ElementFactory.createDiv().setAttribute("class", "logo");
         homeLink.appendChild(logo);
 
         ul = new Element("ul").setAttribute("class", "topnav");

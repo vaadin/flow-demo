@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 
 /**
  * The static home page.
@@ -28,10 +29,10 @@ public class HomeView extends SimpleView {
      * Creates a new home view.
      */
     public HomeView() {
-        super(new Element("div").setAttribute("class", "home"));
+        super(ElementFactory.createDiv().setAttribute("class", "home"));
 
-        getElement().appendChild(new Element("h1")
-                .setTextContent("User interface components for web apps"));
+        getElement().appendChild(ElementFactory
+                .createHeading1("User interface components for web apps"));
         getElement().appendChild(
                 Element.createText("Build your apps in the language you ♥"));
     }

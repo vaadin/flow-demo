@@ -17,11 +17,11 @@ package com.vaadin.hummingbird.demo.website.community.blog;
 
 import java.util.Collection;
 
-import com.vaadin.hummingbird.demo.website.ElementUtils;
 import com.vaadin.hummingbird.demo.website.SimpleView;
 import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.website.community.blog.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 
 /**
@@ -36,7 +36,7 @@ public class BlogPost extends SimpleView {
      * Creates a new blog post view.
      */
     public BlogPost() {
-        super(ElementUtils.createDiv());
+        super(ElementFactory.createDiv());
     }
 
     @Override
@@ -58,18 +58,15 @@ public class BlogPost extends SimpleView {
         }
 
         if (record == null) {
-            Element error = ElementUtils.createDiv();
-            error.setTextContent("Unable to find the post");
+            Element error = ElementFactory.createDiv("Unable to find the post");
             error.getClassList().add("no-post");
             getElement().appendChild(error);
         } else {
-            Element title = ElementUtils.createH1();
+            Element title = ElementFactory.createHeading1(record.getTitle());
             title.getClassList().add("blog-item-title");
-            title.setTextContent(record.getTitle());
 
-            Element text = ElementUtils.createDiv();
+            Element text = ElementFactory.createDiv(record.getText());
             text.getClassList().add("blog-content");
-            text.setTextContent(record.getText());
 
             getElement().appendChild(title, text);
         }

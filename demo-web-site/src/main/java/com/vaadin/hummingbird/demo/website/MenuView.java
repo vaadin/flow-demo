@@ -15,8 +15,6 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import static com.vaadin.hummingbird.demo.website.Util.createRouterLink;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
@@ -36,7 +35,7 @@ public abstract class MenuView implements View, HasChildView {
     }
 
     protected void addItem(String caption, String url) {
-        addMenuElement(createRouterLink(caption, url));
+        addMenuElement(ElementFactory.createRouterLink(caption, url));
     }
 
     protected void addItem(String caption, Class<? extends View> viewClass) {
@@ -54,9 +53,13 @@ public abstract class MenuView implements View, HasChildView {
             if (parameterKey != null) {
                 url = url.replace("{" + parameterKey + "}", parameterValue);
             }
-            addMenuElement(createRouterLink(caption, url));
+            if (url == null) {
+                addMenuElement(ElementFactory.createSpan(caption));
+            } else {
+                addMenuElement(ElementFactory.createRouterLink(url, caption));
+            }
         } else {
-            addMenuElement(new Element("span").setTextContent(caption));
+            addMenuElement(ElementFactory.createSpan(caption));
         }
 
     }
@@ -82,7 +85,7 @@ public abstract class MenuView implements View, HasChildView {
             Stream<Class<? extends HasChildView>> menuLinkViewChain = Util
                     .getRouterConfiguration().getParentViews(menuLinkView);
 
-            if (menuLinkViewChain.anyMatch(Util.isSame(targetView))) {
+            if (menuLinkViewChain.anyMatch(v -> v == targetView)) {
                 // Could cache for faster future lookups, even globally for all
                 // users
                 return menuLinkView;
@@ -115,7 +118,7 @@ public abstract class MenuView implements View, HasChildView {
                 menuLinkViewParameters.get(childViewClass)).orElse("");
         getMenuElements().forEach(e -> {
             boolean selected = path.equals(e.getAttribute("href"));
-            Util.setClassName(e, "selected", selected);
+            e.getClassList().set("selected", selected);
         });
     }
 

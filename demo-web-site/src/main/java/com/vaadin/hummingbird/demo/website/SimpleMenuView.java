@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.View;
 
 public class SimpleMenuView extends MenuView {
@@ -26,11 +27,11 @@ public class SimpleMenuView extends MenuView {
     private Element menu;
 
     public SimpleMenuView() {
-        element = new Element("div");
-        menu = new Element("div");
+        element = ElementFactory.createDiv();
+        menu = ElementFactory.createDiv();
 
         getElement().appendChild(menu);
-        getElement().appendChild(new Element("div"));
+        getElement().appendChild(ElementFactory.createDiv());
     }
 
     @Override

@@ -15,10 +15,6 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import java.util.function.Predicate;
-
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.Router;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterUI;
@@ -26,24 +22,6 @@ import com.vaadin.server.VaadinService;
 import com.vaadin.ui.UI;
 
 public class Util {
-
-    public static Element createRouterLink(String caption, String href) {
-        if (href == null) {
-            return new Element("span").setTextContent(caption);
-        } else {
-            return new Element("a").setAttribute("href", href)
-                    .setAttribute("routerLink", "").setTextContent(caption);
-        }
-    }
-
-    public static void setClassName(Element element, String className,
-            boolean add) {
-        if (add) {
-            element.getClassList().add(className);
-        } else {
-            element.getClassList().remove(className);
-        }
-    }
 
     public static Router getRouter() {
         return VaadinService.getCurrentRequest().getService().getRouter();
@@ -55,11 +33,6 @@ public class Util {
 
     public static RouterConfiguration getRouterConfiguration() {
         return getRouter().getConfiguration();
-    }
-
-    public static Predicate<? super Class<? extends HasChildView>> isSame(
-            Object o) {
-        return other -> other == o;
     }
 
 }

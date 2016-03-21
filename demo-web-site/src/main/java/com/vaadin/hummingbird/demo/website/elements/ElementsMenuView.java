@@ -29,7 +29,7 @@ public class ElementsMenuView extends SimpleMenuView {
         addItem("Getting Started",
                 "docs/-/part/elements/elements-getting-started.html");
         addItem("Videos", VideosView.class);
-        addItem("Demos", ElementsView.class);// FIXME #demos
+        addItem("Demos", "elements#demos");
         addItem("Docs", DocsView.class);
     }
 
