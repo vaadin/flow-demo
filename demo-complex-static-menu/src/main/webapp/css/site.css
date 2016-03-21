@@ -1,0 +1,155 @@
+body {
+    font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
+        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+        "STXihei", sans-serif;
+}
+
+.logo {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 131px;
+    height: 33px;
+    margin: 0;
+    background: url(../images/vaadin-logo-small.png);
+}
+
+.menu-item {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.logo a {
+    width: 100%;
+    height: 40px;
+    text-indent: 300px;
+    overflow: hidden;
+    text-decoration: none !important;
+    color: white;
+    position: relative;
+}
+
+.menu {
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    max-width: 80%;
+    margin: auto;
+    height: 90px;
+}
+
+.topnav {
+    position: absolute;
+    top: 42px;
+    left: 170px;
+    list-style: none;
+    white-space: nowrap;
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+    color: #a09f91;
+}
+
+.topnav>a {
+    color: #a09f91;
+}
+
+.topnav>* {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #ddd;
+}
+
+.topnav a:hover {
+    color: black;
+}
+
+h1 {
+    font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
+        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+        "STXihei", sans-serif;
+}
+
+.content {
+    margin: 24px auto 0 auto;
+    padding: 0 18px;
+}
+
+.home {
+    text-align: center;
+}
+
+.selected {
+    color: black !important;
+}
+
+.submenu {
+    padding: 14px 0px 10px 10%;
+    background: #00b4f0;
+}
+
+.submenu > * {
+    padding-right: 10px;
+    color: #ccf0fc;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.submenu .selected {
+    color: white !important;
+}
+
+
+.subsubmenu {
+    margin: 24px 24px;
+    padding: 10px 0px 10px 0px;
+    background: #00b4f0;
+    display: inline-block;
+}
+.subsubmenu > * {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+.subsubmenu .selected {
+    color: white !important;
+}
+
+; Blog
+
+a.blog-item-title, .read-more {
+    color: #00b4f0;
+}
+
+.blog-item-title{
+    display: block;
+}
+
+.blog-list{
+    float: right;
+    background-color: white;
+}
+
+.blog-item {
+    margin-top: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid;
+}
+
+.read-more{
+    display: block;
+    margin-top: 10px;
+}
+
+div.blog-item-title {
+    font-size: x-large;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+}
+
+.bog-content{
+    margin-top: 5px;
+}
