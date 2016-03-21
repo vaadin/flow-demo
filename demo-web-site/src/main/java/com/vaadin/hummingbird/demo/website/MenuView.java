@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import static com.vaadin.hummingbird.demo.website.Util.createRouterLink;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -124,7 +125,20 @@ public abstract class MenuView implements View, HasChildView {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
+
         markMenuLinkSelected(
-                locationChangeEvent.getViewChain().get(0).getClass());
+                findChild(getClass(), locationChangeEvent.getViewChain()));
+    }
+
+    private Class<? extends View> findChild(Class<? extends View> parentType,
+            List<View> viewChain) {
+        for (int i = 0; i < viewChain.size(); i++) {
+            if (viewChain.get(i).getClass() == parentType) {
+                if (i >= 0) {
+                    return viewChain.get(i - 1).getClass();
+                }
+            }
+        }
+        return null;
     }
 }
