@@ -1,44 +1,23 @@
 .logo {
-    width: 131px;
-    height: 32px;
+    display: inline-block;
+    width: 65px;
+    height: 16px;
     background: url(../images/vaadin-logo-small.png);
+    background-size: cover;
+    vertical-align: middle;
 }
 
-a.blog-item-title, .read-more {
-    color: #00b4f0;
+.menu {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em;
+    margin-left: 1em;
 }
-
-.blog-item-title{
-    display: block;
-}
-
-.blog-list{
-    float: right;
-    background-color: white;
-}
-
-.blog-item {
-    margin-top: 5px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid;
-}
-
-.read-more{
-    display: block;
-    margin-top: 10px;
-}
-
-div.blog-item-title {
-    font-size: x-large;
-    padding-bottom: 10px;
-    border-bottom: 1px solid;
-}
-
-.bog-content{
-    margin-top: 5px;
-}
-
 .menu-item {
     padding-left: 5px;
     padding-right: 5px;
+}
+.content {
+    margin-left: 1em;
 }
