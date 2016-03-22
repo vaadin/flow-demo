@@ -15,7 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 
 /**
  * The static about view.
@@ -28,6 +28,12 @@ public class AboutView extends SimpleView {
      * Creates as new view.
      */
     public AboutView() {
-        super(Element.createText("This is the about page"));
+        super(ElementFactory.createDiv());
+        getElement().appendChild(
+                getMappingInfo(SiteRouterConfigurator.MAPPING_ABOUT));
+        getElement()
+                .appendChild(ElementFactory.createDiv("This is the about page")
+                        .setAttribute("class", "content"));
+
     }
 }
