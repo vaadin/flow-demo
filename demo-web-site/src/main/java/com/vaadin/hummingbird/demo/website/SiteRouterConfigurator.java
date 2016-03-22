@@ -18,8 +18,6 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.hummingbird.demo.website.blogs.BlogPost;
-import com.vaadin.hummingbird.demo.website.blogs.BlogsView;
 import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.hummingbird.router.RouterUI;
@@ -32,6 +30,11 @@ import com.vaadin.server.VaadinServlet;
  * @author Vaadin Ltd
  */
 public class SiteRouterConfigurator implements RouterConfigurator {
+    static final String MAPPING_RESOURCE = "resource/*";
+    static final String MAPPING_PARAM = "param/{id}";
+    static final String MAPPING_ABOUT = "about";
+    static final String MAPPING_HOME = "";
+
     /**
      * The main servlet for the application.
      */
@@ -44,10 +47,11 @@ public class SiteRouterConfigurator implements RouterConfigurator {
     public void configure(ModifiableRouterConfiguration configuration) {
         configuration.setRoute("", HomeView.class, MainLayout.class);
         // Wildcard just to show all available features in the same demo
-        configuration.setRoute("about/*", AboutView.class, MainLayout.class);
-        configuration.setRoute("dynamic/{name}", DynamicView.class,
+        configuration.setRoute(MAPPING_ABOUT, AboutView.class,
                 MainLayout.class);
-        configuration.setParentView(BlogsView.class, MainLayout.class);
-        configuration.setRoute("blogs/{id}", BlogPost.class, BlogsView.class);
+        configuration.setRoute(MAPPING_PARAM, ParameterView.class,
+                MainLayout.class);
+        configuration.setRoute(MAPPING_RESOURCE, ResourcesView.class,
+                MainLayout.class);
     }
 }
