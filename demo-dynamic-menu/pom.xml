@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.vaadin.hummingbird.demo</groupId>
+		<artifactId>hummingbird-demo-project</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+	</parent>
+	<name>An example of creating a dynamic menu for a web site</name>
+	<artifactId>demo-dynamic-menu</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>hummingbird</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.hummingbird.demo</groupId>
+			<artifactId>test-util</artifactId>
+		</dependency>
+	</dependencies>
+</project>
