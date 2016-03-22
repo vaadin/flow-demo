@@ -49,9 +49,10 @@ public class BlogPost extends SimpleView {
         }
 
         BlogRecord record = items.iterator().next();
-        if (locationChangeEvent.getLocation().getSubLocation().hasSegments()) {
-            Long id = getId(locationChangeEvent.getLocation().getSubLocation()
-                    .getFirstSegment());
+
+        String idString = locationChangeEvent.getPathParameter("id");
+        if (!idString.isEmpty()) {
+            Long id = getId(idString);
             if (id != null) {
                 record = BlogsService.getInstance().getRecord(id).orElse(null);
             }
