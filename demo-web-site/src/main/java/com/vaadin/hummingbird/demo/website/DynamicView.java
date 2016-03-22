@@ -35,8 +35,7 @@ public class DynamicView extends SimpleView {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        String parameter = locationChangeEvent.getLocation().getSegments()
-                .get(1);
+        String parameter = locationChangeEvent.getPathParameter("name");
 
         getElement().setTextContent("Dynamic page " + parameter);
     }
