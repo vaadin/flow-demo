@@ -1,0 +1,42 @@
+.main {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.menu {
+    flex: 0;
+    min-width: 300px;
+}
+
+li.collapsed:before {
+    font-family: 'FontAwesome';
+    font-size: 0.7rem;
+    content: '\f0fe';
+    margin: 0 4px 0 -15px;
+    position: relative;
+    top: -1px;
+}
+
+li.expanded:before {
+    font-family: 'FontAwesome';
+    font-size: 0.7rem;
+    content: '\f146';
+    margin: 0 4px 0 -15px;
+    position: relative;
+    top: -1px;
+}
+
+.selected {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu ul {
+    list-style-type: none;
+}
+
+.content {
+    flex: 1;
+    margin-left: 1em;
+}
