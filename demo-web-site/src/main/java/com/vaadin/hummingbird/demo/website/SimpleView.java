@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.View;
 
 /**
@@ -41,6 +42,18 @@ public abstract class SimpleView implements View {
     @Override
     public final Element getElement() {
         return element;
+    }
+
+    protected Element getMappingInfo(String mappingInfo) {
+        Element mapping = ElementFactory.createDiv();
+        Element textElement = ElementFactory
+                .createStrong("Mapped using \"" + mappingInfo + "\"");
+        textElement.getStyle().set("borderBottom", "1px solid black");
+        mapping.getStyle().set("marginBottom", "1em");
+
+        mapping.appendChild(textElement);
+        return mapping;
+
     }
 
 }

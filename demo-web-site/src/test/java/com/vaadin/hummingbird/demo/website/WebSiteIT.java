@@ -26,9 +26,6 @@ import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
 
 public class WebSiteIT extends AbstractTestBenchTest {
 
-    private static final String BLOGS = "Blogs";
-    private static final String BLOG_ITEM_TITLE = "blog-item-title";
-
     @Test
     public void testNavigation() {
         open();
@@ -39,13 +36,15 @@ public class WebSiteIT extends AbstractTestBenchTest {
 
         Assert.assertEquals("This is the about page", getContent().getText());
 
-        getMenuItem("Dynamic 1").click();
+        getMenuItem("Parameter view").click();
 
-        Assert.assertEquals("Dynamic page one", getContent().getText());
+        Assert.assertEquals("Id parameter: 1",
+                getFirstContentChild().getText());
 
-        getMenuItem("Dynamic 2").click();
+        getMenuItem("Resource view").click();
 
-        Assert.assertEquals("Dynamic page two", getContent().getText());
+        Assert.assertEquals("Select the resource to display" + "",
+                getFirstContentChild().getText());
 
         getMenuItem("Home").click();
 
@@ -53,23 +52,52 @@ public class WebSiteIT extends AbstractTestBenchTest {
     }
 
     @Test
-    public void testInitialBlogRecord() {
+    public void testParametersView() {
         open();
-        getMenuItem(BLOGS).click();
+        getMenuItem("Parameter view").click();
+        assertLocation("param/1");
+        Assert.assertEquals("Id parameter: 1",
+                getFirstContentChild().getText());
 
-        String title = findBlogItem(0, false);
+        getContent().findElement(By.xpath("./a")).click();
+        assertLocation("param/2");
+        Assert.assertEquals("Id parameter: 2",
+                getFirstContentChild().getText());
 
-        Assert.assertEquals(title, findActiveBlog().getText());
+        getDriver().get("http://localhost:8080/param/3");
+        Assert.assertEquals("Id parameter: 3",
+                getFirstContentChild().getText());
     }
 
     @Test
-    public void testBlogRecordClick() {
+    public void testWildcardView() {
         open();
-        getMenuItem(BLOGS).click();
+        getMenuItem("Resource view").click();
 
-        String title = findBlogItem(1, true);
+        WebElement selectedResource = getContent()
+                .findElement(By.xpath("./*[4]"));
+        Assert.assertEquals("No resource selected", selectedResource.getText());
 
-        Assert.assertEquals(title, findActiveBlog().getText());
+        getContent().findElement(By.xpath("//a[text()='css/site.css']"))
+                .click();
+        assertLocation("resource/css/site.css");
+
+        WebElement iframe = getDriver().findElement(By.xpath("//iframe"));
+        assertLocation("css/site.css", iframe.getAttribute("src"));
+    }
+
+    private void assertLocation(String expectedLocation) {
+        assertLocation(expectedLocation, getDriver().getCurrentUrl());
+    }
+
+    private void assertLocation(String expectedLocation,
+            String currentLocation) {
+        Assert.assertEquals("http://localhost:8080/" + expectedLocation,
+                currentLocation);
+    }
+
+    private WebElement getFirstContentChild() {
+        return getContent().findElement(By.xpath("./*"));
     }
 
     public WebElement getContent() {
@@ -84,18 +112,5 @@ public class WebSiteIT extends AbstractTestBenchTest {
 
         return menuLinks.stream().filter(link -> text.equals(link.getText()))
                 .findFirst().get();
-    }
-
-    private WebElement findActiveBlog() {
-        return findElement(By.cssSelector("div." + BLOG_ITEM_TITLE));
-    }
-
-    private String findBlogItem(int index, boolean click) {
-        WebElement postLink = findElements(By.className("blog-item")).get(index)
-                .findElement(By.className(BLOG_ITEM_TITLE));
-        if (click) {
-            postLink.click();
-        }
-        return postLink.getText();
     }
 }
