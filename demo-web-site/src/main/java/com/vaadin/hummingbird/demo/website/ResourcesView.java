@@ -71,11 +71,11 @@ public class ResourcesView extends SimpleView {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        String resourcePath = "/" + locationChangeEvent.getPathWildcard();
-        if (resourceExists(resourcePath)) {
+        String resourcePath = locationChangeEvent.getPathWildcard();
+        if (resourceExists("/" + resourcePath)) {
             iframe.setAttribute("src", resourcePath);
             content.setChild(3, iframe);
-        } else if ("/".equals(resourcePath)) {
+        } else if ("".equals(resourcePath)) {
             content.setChild(3,
                     ElementFactory.createDiv("No resource selected"));
         } else {
