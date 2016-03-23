@@ -60,6 +60,15 @@ public class CategoryView extends SimpleView {
 
     }
 
+    /**
+     * Gets the category id based on the URL.
+     *
+     * @param locationChangeEvent
+     *            a location change event used for finding the URL and
+     *            parameters
+     * @return the category id or -1 if the URL does not refer to a category
+     *         view
+     */
     public static int getCategoryId(LocationChangeEvent locationChangeEvent) {
         if (!locationChangeEvent.getLocation().hasSegments()) {
             return -1;

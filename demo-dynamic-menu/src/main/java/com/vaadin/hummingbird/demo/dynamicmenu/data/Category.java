@@ -2,6 +2,12 @@ package com.vaadin.hummingbird.demo.dynamicmenu.data;
 
 import java.io.Serializable;
 
+/**
+ * Data describing a product category.
+ *
+ * @author Vaadin
+ * @since
+ */
 public class Category implements Serializable {
 
     private int id;

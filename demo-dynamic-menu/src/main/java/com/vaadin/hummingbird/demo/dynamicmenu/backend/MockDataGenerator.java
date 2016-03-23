@@ -8,11 +8,17 @@ import java.util.Random;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Category;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
 
+/**
+ * Helpers for generating random product data.
+ *
+ * @author Vaadin
+ * @since
+ */
 public class MockDataGenerator {
     private static int nextCategoryId = 1;
     private static int nextProductId = 1;
     private static final Random random = new Random(1);
-    private static final String categoryNames[] = new String[] {
+    private static final String[] categoryNames = new String[] {
             "Children's books", "Best sellers", "Romance", "Mystery",
             "Thriller", "Sci-fi", "Non-fiction", "Cookbooks" };
 
@@ -34,8 +40,12 @@ public class MockDataGenerator {
             "speaking to a big audience", "creating software", "giant needles",
             "elephants", "keeping your wife happy" };
 
+    private MockDataGenerator() {
+        // Only contains helpers
+    }
+
     static List<Category> createCategories() {
-        List<Category> categories = new ArrayList<Category>();
+        List<Category> categories = new ArrayList<>();
         for (String name : categoryNames) {
             Category c = createCategory(name);
             categories.add(c);
@@ -45,7 +55,7 @@ public class MockDataGenerator {
     }
 
     static List<Product> createProducts(List<Category> categories) {
-        List<Product> products = new ArrayList<Product>();
+        List<Product> products = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Product p = createProduct(categories);
             products.add(p);
@@ -66,7 +76,7 @@ public class MockDataGenerator {
         p.setId(nextProductId++);
         p.setProductName(generateName());
 
-        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
+        p.setPrice(BigDecimal.valueOf((random.nextInt(250) + 50) / 10.0));
         p.setStockCount(random.nextInt(523));
 
         p.setCategory(getCategory(categories));

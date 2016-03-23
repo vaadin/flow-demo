@@ -3,6 +3,12 @@ package com.vaadin.hummingbird.demo.dynamicmenu.data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * Data describing a product.
+ *
+ * @author Vaadin
+ * @since
+ */
 public class Product implements Serializable {
 
     private int id = -1;

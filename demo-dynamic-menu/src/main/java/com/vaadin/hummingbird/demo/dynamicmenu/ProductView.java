@@ -62,6 +62,14 @@ public class ProductView extends SimpleView {
 
     }
 
+    /**
+     * Gets the product id based on the URL.
+     *
+     * @param locationChangeEvent
+     *            a location change event used for finding the URL and
+     *            parameters
+     * @return the product id or -1 if the URL does not refer to a product view
+     */
     public static int getProductId(LocationChangeEvent locationChangeEvent) {
         if (!locationChangeEvent.getLocation().hasSegments()) {
             return -1;
