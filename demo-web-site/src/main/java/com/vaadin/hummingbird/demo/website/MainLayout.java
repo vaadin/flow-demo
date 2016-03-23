@@ -16,9 +16,9 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.UI;
 
 /**
@@ -29,55 +29,47 @@ import com.vaadin.ui.UI;
  */
 public class MainLayout extends SimpleView implements HasChildView {
 
-    private final Element contentHolder = new Element("div");
+    private final Element contentHolder = ElementFactory.createDiv();
 
     /**
      * Creates a new layout.
      */
     public MainLayout() {
-        super(new Element("div"));
+        super(ElementFactory.createDiv());
 
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
         Element menu = createMenu();
         getElement().appendChild(menu, contentHolder);
-        contentHolder.getClassList().add("content");
 
         // Placeholder content
-        contentHolder.appendChild(new Element("div"));
+        contentHolder.appendChild(ElementFactory.createDiv());
     }
 
     private Element createMenu() {
-        Element menu = new Element("div");
+        Element menu = ElementFactory.createDiv();
         menu.getClassList().add("menu");
 
-        // Configuring menu based on router configuration added in a separate PR
         Element homeLink = createMenuLink("", "");
-        Element logo = new Element("div");
+        Element logo = ElementFactory.createDiv();
         logo.getClassList().add("logo");
         homeLink.appendChild(logo);
-        menu.appendChild(homeLink, createMenuLink("About", "about/"),
-                createMenuLink("Dynamic 1", "dynamic/one"),
-                createMenuLink("Dynamic 2", "dynamic/two"),
-                createMenuLink("Blogs", "blogs/"));
+        menu.appendChild(homeLink, createMenuLink("About", "about"), //
+                createMenuLink("Parameter view", "param/1"), //
+                createMenuLink("Resource view", "resource/") //
+        );
         return menu;
     }
 
     private static Element createMenuLink(String caption, String path) {
-        Element link = new Element("a");
-
-        link.setTextContent(caption);
-        link.setAttribute("href", path);
+        Element link = ElementFactory.createRouterLink(path, caption);
         link.getClassList().add("menu-item");
-        link.setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
-
         return link;
     }
 
     @Override
     public void setChildView(View content) {
         Element contentElement = content.getElement();
-
         contentHolder.setChild(0, contentElement);
     }
 }

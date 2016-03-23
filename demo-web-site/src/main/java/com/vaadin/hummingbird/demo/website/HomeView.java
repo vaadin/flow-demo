@@ -15,7 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 
 /**
  * The static home page.
@@ -28,6 +28,12 @@ public class HomeView extends SimpleView {
      * Creates a new home view.
      */
     public HomeView() {
-        super(Element.createText("This is the home page"));
+        super(ElementFactory.createDiv());
+
+        getElement().appendChild(
+                getMappingInfo(SiteRouterConfigurator.MAPPING_HOME));
+        getElement()
+                .appendChild(ElementFactory.createDiv("This is the home page")
+                        .setAttribute("class", "content"));
     }
 }
