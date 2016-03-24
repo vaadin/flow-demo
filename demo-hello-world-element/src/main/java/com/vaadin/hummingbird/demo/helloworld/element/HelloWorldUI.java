@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
@@ -39,15 +40,16 @@ public class HelloWorldUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        Element textInput = new Element("input").setAttribute("id", "inputId")
+        Element textInput = ElementFactory.createInput()
+                .setAttribute("id", "inputId")
                 .setAttribute("placeholder", "Enter your name")
                 .setSynchronizedProperties("value")
                 .setSynchronizedPropertiesEvents("change");
 
-        Element button = new Element("button").setTextContent("Say hello");
+        Element button = ElementFactory.createButton("Say hello");
         button.addEventListener("click", e -> {
-            Element helloText = new Element("div")
-                    .setTextContent("Hello " + textInput.getProperty("value"));
+            Element helloText = ElementFactory
+                    .createDiv("Hello " + textInput.getProperty("value"));
             helloText.getClassList().add("helloText");
             getElement().appendChild(helloText);
         });

@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.minesweeper.element;
 import java.util.Set;
 
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 
 /**
  * The Minesweeper UI component with the root element returned by
@@ -137,7 +138,7 @@ public class ElementMinesweeper {
     }
 
     private void showMessage(String message, String className) {
-        Element div = new Element("div").setTextContent(message);
+        Element div = ElementFactory.createDiv(message);
         div.getClassList().add(className);
         getElement().getParent().appendChild(div);
     }
