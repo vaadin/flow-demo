@@ -7,7 +7,7 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<name>An example of creating a complex menu for a web site</name>
+	<name>Web site with complex menu</name>
 	<artifactId>demo-static-menu</artifactId>
 	<packaging>war</packaging>
 

@@ -7,7 +7,7 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<name>An example of creating a dynamic menu for a web site</name>
+	<name>Web site with dynamic menu</name>
 	<artifactId>demo-dynamic-menu</artifactId>
 	<packaging>war</packaging>
 
