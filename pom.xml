@@ -15,6 +15,7 @@
 		<module>demo-hello-world-element</module>
 		<module>demo-web-site</module>
 		<module>demo-static-menu</module>
+		<module>demo-dynamic-menu</module>
 	</modules>
 
 	<properties>

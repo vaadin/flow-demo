@@ -1,0 +1,34 @@
+.main {
+    display: flex;
+}
+
+.menu {
+    flex: 0;
+    min-width: 300px;
+}
+
+.category:before {
+    content: '+';
+    margin: 0 4px 0 -15px;
+    display: inline-block;
+    width: .6em;
+}
+
+.category.expanded:before {
+    content: '-';
+}
+
+.selected {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu ul {
+    list-style-type: none;
+}
+
+.content {
+    flex: 1;
+    margin-left: 1em;
+}
