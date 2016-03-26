@@ -56,7 +56,8 @@ public class MainLayout extends SimpleView implements HasChildView {
         homeLink.appendChild(logo);
         menu.appendChild(homeLink, createMenuLink("About", "about"), //
                 createMenuLink("Parameter view", "param/1"), //
-                createMenuLink("Resource view", "resource/") //
+                createMenuLink("Resource view", "resource/"), //
+                createMenuLink("Dynamic resource view", "dynresource/") //
         );
         return menu;
     }

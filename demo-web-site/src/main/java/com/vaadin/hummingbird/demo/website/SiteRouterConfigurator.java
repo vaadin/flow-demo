@@ -32,6 +32,7 @@ import com.vaadin.server.VaadinServlet;
 public class SiteRouterConfigurator implements RouterConfigurator {
     static final String MAPPING_RESOURCE = "resource/*";
     static final String MAPPING_PARAM = "param/{id}";
+    static final String MAPPING_DYN_RESOURCE = "dynresource";
     static final String MAPPING_ABOUT = "about";
     static final String MAPPING_HOME = "";
 
@@ -52,6 +53,8 @@ public class SiteRouterConfigurator implements RouterConfigurator {
         configuration.setRoute(MAPPING_PARAM, ParameterView.class,
                 MainLayout.class);
         configuration.setRoute(MAPPING_RESOURCE, ResourcesView.class,
+                MainLayout.class);
+        configuration.setRoute(MAPPING_DYN_RESOURCE, DynamicResourcesView.class,
                 MainLayout.class);
     }
 }
