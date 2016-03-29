@@ -31,6 +31,8 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  */
 public class ProductView extends SimpleView {
 
+    private Optional<Product> currentProduct;
+
     /**
      * Creates a new view.
      */
@@ -41,15 +43,14 @@ public class ProductView extends SimpleView {
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int productId = getProductId(locationChangeEvent);
-        Optional<Product> maybeProduct = DataService.get()
-                .getProductById(productId);
-        if (!maybeProduct.isPresent()) {
+        currentProduct = DataService.get().getProductById(productId);
+        if (!currentProduct.isPresent()) {
             getElement().setTextContent(
                     "Product does not exist or has been removed");
             return;
         }
 
-        Product product = maybeProduct.get();
+        Product product = currentProduct.get();
         getElement().removeAllChildren();
         getElement().appendChild(ElementFactory
                 .createStrong("Information about product " + product.getId()));
@@ -80,6 +81,15 @@ public class ProductView extends SimpleView {
             return Integer.parseInt(locationChangeEvent.getPathParameter("id"));
         } catch (NumberFormatException e) {
             return -1;
+        }
+    }
+
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        if (!currentProduct.isPresent()) {
+            return "Unknown product";
+        } else {
+            return "Product: " + currentProduct.get().getProductName();
         }
     }
 

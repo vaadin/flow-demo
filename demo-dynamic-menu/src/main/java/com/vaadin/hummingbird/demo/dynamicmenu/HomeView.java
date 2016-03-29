@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
+import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.dom.ElementFactory;
 
 /**
@@ -23,6 +24,7 @@ import com.vaadin.hummingbird.dom.ElementFactory;
  * @since
  * @author Vaadin Ltd
  */
+@Title("Home")
 public class HomeView extends SimpleView {
     /**
      * Creates a new home view.
