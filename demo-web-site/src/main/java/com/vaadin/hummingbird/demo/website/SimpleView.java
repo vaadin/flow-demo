@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 
 /**
@@ -56,4 +57,9 @@ public abstract class SimpleView implements View {
 
     }
 
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        // Title used for all views
+        return "Hummingbird Web Site Demo";
+    }
 }
