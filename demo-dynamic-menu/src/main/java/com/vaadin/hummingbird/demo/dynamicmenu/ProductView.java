@@ -83,4 +83,12 @@ public class ProductView extends SimpleView {
         }
     }
 
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        return DataService.get()
+                .getProductById(getProductId(locationChangeEvent))
+                .map(p -> "Product: " + p.getProductName())
+                .orElse("Unknown product");
+    }
+
 }
