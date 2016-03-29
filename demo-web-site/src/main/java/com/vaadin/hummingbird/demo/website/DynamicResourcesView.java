@@ -51,22 +51,20 @@ public class DynamicResourcesView extends SimpleView {
     private void initContent() {
         Element label = ElementFactory
                 .createDiv("Type a string to generate an image");
-        Element field = ElementFactory.createInput("text");
-        field.setSynchronizedProperties("value")
+        name = ElementFactory.createInput("text");
+        name.setSynchronizedProperties("value")
                 .setSynchronizedPropertiesEvents("change");
-        field.getStyle().set("display", "block");
+        name.getStyle().set("display", "block");
 
-        name = field;
-
-        getElement().appendChild(label, field);
+        getElement().appendChild(label, name);
         StreamResourceRegistration registration = createResource();
-        createDynamicImage(registration);
+        createGenerateImageButton(registration);
         createImageOpener(registration);
     }
 
-    private void createDynamicImage(StreamResourceRegistration registration) {
+    private void createGenerateImageButton(
+            StreamResourceRegistration registration) {
         Element button = ElementFactory.createButton("Generate Image");
-        button.setAttribute("type", "button");
 
         button.addEventListener("click", event -> generateImage(
                 registration.getResourceUri().toString()));
@@ -76,14 +74,12 @@ public class DynamicResourcesView extends SimpleView {
 
     private void createImageOpener(StreamResourceRegistration registration) {
         Element button = ElementFactory.createButton("Open Image");
-        button.setAttribute("type", "button");
 
         getElement().appendChild(button);
 
-        StringBuilder js = new StringBuilder(
-                "$0.onclick=function(){window.open('");
-        js.append(registration.getResourceUri()).append("')}");
-        UI.getCurrent().getPage().executeJavaScript(js.toString(), button);
+        UI.getCurrent().getPage().executeJavaScript(
+                "$0.onclick=function(){window.open($1);}", button,
+                registration.getResourceUri().toString());
 
     }
 
@@ -101,7 +97,7 @@ public class DynamicResourcesView extends SimpleView {
 
     private StreamResourceRegistration createResource() {
         StreamResource resource = new StreamResource("image",
-                () -> getImageInputStream());
+                this::getImageInputStream);
         resource.setContentType("image/svg+xml");
         return VaadinSession.getCurrent().getResourceRegistry()
                 .registerResource(resource);
