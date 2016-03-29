@@ -85,4 +85,12 @@ public class CategoryView extends SimpleView {
         }
     }
 
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        return DataService.get()
+                .getCategoryById(getCategoryId(locationChangeEvent))
+                .map(cat -> "Category: " + cat.getName())
+                .orElse("Unknown category");
+    }
+
 }
