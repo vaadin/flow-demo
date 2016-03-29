@@ -37,9 +37,10 @@ public class MenuIT extends AbstractTestBenchTest {
         open();
 
         assertContent("Please select a category in the menu");
-
+        assertPageTitle("Home");
         assertCollapsed(CHILDRENS_BOOKS);
         getMenuCategoryLink(CHILDRENS_BOOKS).click();
+        assertPageTitle("Category: " + CHILDRENS_BOOKS);
         assertExpanded(CHILDRENS_BOOKS);
         assertCategorySelected(CHILDRENS_BOOKS);
         assertCategoryViewShown(CHILDRENS_BOOKS);
@@ -47,6 +48,7 @@ public class MenuIT extends AbstractTestBenchTest {
         assertCollapsed(ROMANCE);
         assertCategoryNotSelected(ROMANCE);
         getMenuCategoryLink(ROMANCE).click();
+        assertPageTitle("Category: " + ROMANCE);
         assertCollapsed(CHILDRENS_BOOKS);
         assertCategoryNotSelected(CHILDRENS_BOOKS);
         assertCategorySelected(ROMANCE);
@@ -55,10 +57,16 @@ public class MenuIT extends AbstractTestBenchTest {
         assertCollapsed(COOKBOOKS);
         assertCategoryNotSelected(COOKBOOKS);
         getMenuCategoryLink(COOKBOOKS).click();
+        assertPageTitle("Category: " + COOKBOOKS);
         assertCollapsed(ROMANCE);
         assertCategoryNotSelected(ROMANCE);
         assertCategorySelected(COOKBOOKS);
         assertExpanded(COOKBOOKS);
+    }
+
+    private void assertPageTitle(String expected) {
+        Assert.assertEquals(expected, getDriver().getTitle());
+
     }
 
     @Test
@@ -67,11 +75,13 @@ public class MenuIT extends AbstractTestBenchTest {
         getMenuCategoryLink(CHILDRENS_BOOKS).click();
         assertProductNotSelected(THE_LIFE_CHANGER_DEBUGGING);
         getProductLink(THE_LIFE_CHANGER_DEBUGGING).click();
+        assertPageTitle("Product: " + THE_LIFE_CHANGER_DEBUGGING);
         assertProductSelected(THE_LIFE_CHANGER_DEBUGGING);
         assertProductViewShown(THE_LIFE_CHANGER_DEBUGGING, 13);
 
         getProductLink(BOOK_OF_DUMMIES).click();
         assertProductNotSelected(THE_LIFE_CHANGER_DEBUGGING);
+        assertPageTitle("Product: " + BOOK_OF_DUMMIES);
         assertProductSelected(BOOK_OF_DUMMIES);
         assertProductViewShown(BOOK_OF_DUMMIES, 63);
 
