@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.staticmenu.download;
 
+import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.staticmenu.DummyView;
 import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
@@ -25,6 +26,7 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  * @author Vaadin
  * @since
  */
+@Title("Documentation")
 public class DocsSubView extends DummyView {
 
     @Override

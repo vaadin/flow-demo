@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ComplexStaticMenuIT extends AbstractComplexStaticMenuTest {
@@ -25,33 +26,40 @@ public class ComplexStaticMenuIT extends AbstractComplexStaticMenuTest {
 
         assertContents("Home");
         getMenuItem("Framework").click();
+        assertPageTitle("Framework - vaadin.com");
         assertMenuSelected("Framework");
-        assertContents("Framework");
 
         testSubMenuItem("Tutorial");
+        assertPageTitle("Tutorial - vaadin.com");
         assertMenuSelected("Framework");
 
         // Cross link
         testSubMenuItem("Docs");
-        assertContents("Docs");
+        assertPageTitle("Docs - vaadin.com");
 
         // Sub sub menu
-        testSubMenuItem("Vaadin Icons", "IconsAbout");
+        testSubMenuItem("Vaadin Icons");
+        assertPageTitle("Vaadin Icons - vaadin.com");
         assertMenuSelected("Download");
         assertSubMenuSelected("Vaadin Icons");
         assertSubSubMenuSelected("About");
 
-        testSubSubMenuItem("Icons");
+        testSubSubMenuItem("Icons", "Vaadin Icons");
+        assertPageTitle("Vaadin Icons - vaadin.com");
         assertMenuSelected("Download");
         assertSubMenuSelected("Vaadin Icons");
         assertSubSubMenuSelected("Icons");
 
         // Sub docs link
         getMenuItem("Elements").click();
+        assertPageTitle("Elements - vaadin.com");
         getSubMenuItem("Getting Started").click();
         assertMenuSelected("Download");
         assertSubMenuSelected("Docs");
 
     }
 
+    private void assertPageTitle(String expected) {
+        Assert.assertEquals(expected, getDriver().getTitle());
+    }
 }

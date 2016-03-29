@@ -87,6 +87,12 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 CommunityMenuView.class);
         configuration.setParentView(BlogsView.class, CommunityMenuView.class);
         configuration.setRoute("blog/{id}", BlogPost.class, BlogsView.class);
+
+        configuration.setPageTitleGenerator(event -> {
+            String viewName = Util
+                    .getViewName(event.getViewChain().get(0).getClass());
+            return viewName + " - vaadin.com";
+        });
     }
 
 }
