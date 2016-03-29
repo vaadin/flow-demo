@@ -26,29 +26,42 @@ import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
 
 public class WebSiteIT extends AbstractTestBenchTest {
 
+    private static final String TITLE = "Hummingbird Web Site Demo";
+
     @Test
     public void testNavigation() {
         open();
-
-        Assert.assertEquals("This is the home page", getContent().getText());
+        assertPageTitle(TITLE);
+        assertContent("This is the home page");
 
         getMenuItem("About").click();
-
-        Assert.assertEquals("This is the about page", getContent().getText());
+        assertPageTitle(TITLE);
+        assertContent("This is the about page");
 
         getMenuItem("Parameter view").click();
+        assertPageTitle(TITLE);
 
         Assert.assertEquals("Id parameter: 1",
                 getFirstContentChild().getText());
 
         getMenuItem("Resource view").click();
+        assertPageTitle(TITLE);
 
         Assert.assertEquals("Select the resource to display" + "",
                 getFirstContentChild().getText());
 
         getMenuItem("Home").click();
+        assertPageTitle(TITLE);
 
-        Assert.assertEquals("This is the home page", getContent().getText());
+        assertContent("This is the home page");
+    }
+
+    private void assertContent(String expected) {
+        Assert.assertEquals(expected, getContent().getText());
+    }
+
+    private void assertPageTitle(String expected) {
+        Assert.assertEquals(expected, getDriver().getTitle());
     }
 
     @Test
