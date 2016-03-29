@@ -22,6 +22,7 @@ import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
 import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.ui.UI;
 
 /**
  * A view which shows a product.
@@ -47,10 +48,12 @@ public class ProductView extends SimpleView {
         if (!currentProduct.isPresent()) {
             getElement().setTextContent(
                     "Product does not exist or has been removed");
+            updateTitle(null);
             return;
         }
 
         Product product = currentProduct.get();
+        updateTitle(product);
         getElement().removeAllChildren();
         getElement().appendChild(ElementFactory
                 .createStrong("Information about product " + product.getId()));
@@ -84,13 +87,14 @@ public class ProductView extends SimpleView {
         }
     }
 
-    @Override
-    public String getTitle(LocationChangeEvent locationChangeEvent) {
-        if (!currentProduct.isPresent()) {
-            return "Unknown product";
+    private void updateTitle(Product product) {
+        String title;
+        if (product == null) {
+            title = "Unknown product";
         } else {
-            return "Product: " + currentProduct.get().getProductName();
+            title = "Product: " + product.getProductName();
         }
+        UI.getCurrent().getPage().setTitle(title);
     }
 
 }
