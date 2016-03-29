@@ -33,6 +33,8 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  */
 public class CategoryView extends SimpleView {
 
+    private Optional<Category> currentCategory;
+
     /**
      * Creates a new view.
      */
@@ -43,16 +45,18 @@ public class CategoryView extends SimpleView {
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int catId = getCategoryId(locationChangeEvent);
-        Optional<Category> category = DataService.get().getCategoryById(catId);
-        if (!category.isPresent()) {
+        currentCategory = DataService.get().getCategoryById(catId);
+
+        if (!currentCategory.isPresent()) {
             getElement().setTextContent(
                     "Category does not exist or has been removed");
             return;
         }
 
+        Category category = currentCategory.get();
         getElement().removeAllChildren();
         getElement().appendChild(ElementFactory
-                .createStrong("Products in " + category.get().getName()));
+                .createStrong("Products in " + category.getName()));
 
         Element ul = ElementFactory.createUnorderedList();
 
@@ -82,6 +86,15 @@ public class CategoryView extends SimpleView {
             return Integer.parseInt(locationChangeEvent.getPathParameter("id"));
         } catch (NumberFormatException e) {
             return -1;
+        }
+    }
+
+    @Override
+    public String getTitle(LocationChangeEvent locationChangeEvent) {
+        if (!currentCategory.isPresent()) {
+            return "Unknown category";
+        } else {
+            return "Category: " + currentCategory.get().getName();
         }
     }
 
