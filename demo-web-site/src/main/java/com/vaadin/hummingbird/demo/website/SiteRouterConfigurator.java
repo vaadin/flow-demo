@@ -46,7 +46,6 @@ public class SiteRouterConfigurator implements RouterConfigurator {
     @Override
     public void configure(ModifiableRouterConfiguration configuration) {
         configuration.setRoute("", HomeView.class, MainLayout.class);
-        // Wildcard just to show all available features in the same demo
         configuration.setRoute(MAPPING_ABOUT, AboutView.class,
                 MainLayout.class);
         configuration.setRoute(MAPPING_PARAM, ParameterView.class,
