@@ -36,7 +36,6 @@ import com.vaadin.hummingbird.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.TutorialView;
 import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
-import com.vaadin.hummingbird.router.RouterUI;
 import com.vaadin.server.VaadinServlet;
 
 /**
@@ -50,7 +49,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
      * The main servlet for the application.
      */
     @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = RouterUI.class, routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
+    @VaadinServletConfiguration(routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
     public static class DemoSiteServlet extends VaadinServlet {
     }
 
