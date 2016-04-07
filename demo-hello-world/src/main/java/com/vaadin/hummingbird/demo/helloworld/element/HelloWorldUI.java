@@ -43,8 +43,7 @@ public class HelloWorldUI extends UI {
         Element textInput = ElementFactory.createInput()
                 .setAttribute("id", "inputId")
                 .setAttribute("placeholder", "Enter your name")
-                .setSynchronizedProperties("value")
-                .setSynchronizedPropertiesEvents("change");
+                .synchronizeProperty("value", "change");
 
         Element button = ElementFactory.createButton("Say hello");
         button.addEventListener("click", e -> {
