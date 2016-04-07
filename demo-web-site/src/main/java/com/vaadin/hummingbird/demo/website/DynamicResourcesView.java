@@ -52,8 +52,7 @@ public class DynamicResourcesView extends SimpleView {
         Element label = ElementFactory
                 .createDiv("Type a string to generate an image");
         name = ElementFactory.createInput("text");
-        name.setSynchronizedProperties("value")
-                .setSynchronizedPropertiesEvents("change");
+        name.synchronizeProperty("value", "change");
         name.getStyle().set("display", "block");
 
         getElement().appendChild(label, name);
