@@ -34,7 +34,7 @@ import com.vaadin.hummingbird.demo.staticmenu.elements.ElementsView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.FrameworkMenuView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.TutorialView;
-import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
+import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
 
@@ -54,7 +54,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
     }
 
     @Override
-    public void configure(ModifiableRouterConfiguration configuration) {
+    public void configure(RouterConfiguration configuration) {
         configuration.setRoute("", HomeView.class, MainMenuView.class);
         configuration.setParentView(FrameworkMenuView.class,
                 MainMenuView.class);

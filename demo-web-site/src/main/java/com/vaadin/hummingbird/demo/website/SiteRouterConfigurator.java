@@ -18,7 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.hummingbird.router.ModifiableRouterConfiguration;
+import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
 
@@ -44,7 +44,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
     }
 
     @Override
-    public void configure(ModifiableRouterConfiguration configuration) {
+    public void configure(RouterConfiguration configuration) {
         configuration.setRoute("", HomeView.class, MainLayout.class);
         configuration.setRoute(MAPPING_ABOUT, AboutView.class,
                 MainLayout.class);
