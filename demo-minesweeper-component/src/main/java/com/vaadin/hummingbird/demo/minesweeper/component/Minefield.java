@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.minesweeper.component;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -23,7 +24,7 @@ import java.util.Set;
  * A representation of a mine field with {@code rows}x{@code cols} cells, where
  * each cell is either empty or contains a mine.
  */
-public class Minefield {
+public class Minefield implements Serializable {
 
     private Set<Point> mines;
     private int rows;

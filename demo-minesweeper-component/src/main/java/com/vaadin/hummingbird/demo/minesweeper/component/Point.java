@@ -15,12 +15,13 @@
  */
 package com.vaadin.hummingbird.demo.minesweeper.component;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * A representation of a position (row and column) in a grid.
  */
-public class Point {
+public class Point implements Serializable {
     int row, col;
 
     /**
