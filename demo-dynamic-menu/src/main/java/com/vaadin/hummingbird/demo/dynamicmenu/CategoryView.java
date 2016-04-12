@@ -18,12 +18,14 @@ package com.vaadin.hummingbird.demo.dynamicmenu;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Category;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 
 /**
  * A view which shows products in a given category.
@@ -31,7 +33,8 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  * @since
  * @author Vaadin Ltd
  */
-public class CategoryView extends SimpleView {
+@Tag("p")
+public final class CategoryView extends HtmlContainer implements View {
 
     private Optional<Category> currentCategory;
 
@@ -39,7 +42,6 @@ public class CategoryView extends SimpleView {
      * Creates a new view.
      */
     public CategoryView() {
-        super(ElementFactory.createParagraph(""));
     }
 
     @Override
@@ -48,23 +50,21 @@ public class CategoryView extends SimpleView {
         currentCategory = DataService.get().getCategoryById(catId);
 
         if (!currentCategory.isPresent()) {
-            getElement().setTextContent(
-                    "Category does not exist or has been removed");
+            setText("Category does not exist or has been removed");
             return;
         }
 
-        Category category = currentCategory.get();
-        getElement().removeAllChildren();
-        getElement().appendChild(ElementFactory
-                .createStrong("Products in " + category.getName()));
-
-        Element ul = ElementFactory.createUnorderedList();
+        removeAll();
+        HtmlContainer ul = new HtmlContainer("ul");
 
         Stream<Product> products = DataService.get().getProducts(catId);
-        products.map(Product::getProductName)
-                .map(ElementFactory::createListItem).forEach(ul::appendChild);
+        products.map(Product::getProductName).map(this::createListItem)
+                .forEach(ul::add);
 
-        getElement().appendChild(ul);
+        Category category = currentCategory.get();
+        HtmlContainer categoryName = new HtmlContainer("strong");
+        categoryName.setText("Products in " + category.getName());
+        add(categoryName, ul);
 
     }
 
@@ -96,6 +96,12 @@ public class CategoryView extends SimpleView {
         } else {
             return "Category: " + currentCategory.get().getName();
         }
+    }
+
+    private Component createListItem(String name) {
+        HtmlContainer item = new HtmlContainer("li");
+        item.setText(name);
+        return item;
     }
 
 }

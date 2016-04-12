@@ -17,7 +17,7 @@ package com.vaadin.hummingbird.demo.staticmenu.download;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.staticmenu.DummyView;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 
 /**
@@ -31,8 +31,9 @@ public class DocsSubView extends DummyView {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        getElement().appendChild(ElementFactory
-                .createDiv("Viewing " + locationChangeEvent.getPathWildcard()));
+        Div div = new Div();
+        div.setText("Viewing " + locationChangeEvent.getPathWildcard());
+        add(div);
     }
 
 }

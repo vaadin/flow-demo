@@ -15,16 +15,13 @@
  */
 package com.vaadin.hummingbird.demo.staticmenu.community.blog;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Optional;
 
-import com.vaadin.hummingbird.demo.staticmenu.SimpleView;
-import com.vaadin.hummingbird.demo.staticmenu.Util;
 import com.vaadin.hummingbird.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
 
@@ -34,22 +31,16 @@ import com.vaadin.hummingbird.router.View;
  * @since
  * @author Vaadin Ltd
  */
-public class BlogsView extends SimpleView implements HasChildView {
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("dd/MM/yy hh:mm a");
+public class BlogsView extends Div implements HasChildView {
 
     /**
      * Creates the view.
      */
     public BlogsView() {
-        super(ElementFactory.createDiv());
-
-        Element list = ElementFactory.createDiv();
-        list.getClassList().add("blog-list");
-        getElement().appendChild(list);
+        Div list = new Div();
         init(list);
-        getElement().appendChild(ElementFactory.createDiv());
+        list.setClassName("blog-list");
+        add(list, new Div());
     }
 
     @Override
@@ -63,36 +54,10 @@ public class BlogsView extends SimpleView implements HasChildView {
         getElement().setChild(1, childViewElement);
     }
 
-    private long init(Element list) {
+    private long init(Div list) {
         Collection<BlogRecord> items = BlogsService.getInstance().getItems();
-        items.stream().map(this::makeItem).forEach(list::appendChild);
+        items.stream().map(RecordComponent::new).forEach(list::add);
         return items.iterator().next().getId();
-    }
-
-    private Element makeItem(BlogRecord item) {
-        Element element = ElementFactory.createDiv();
-        element.getClassList().add("blog-item");
-
-        Optional<String> link = Util.getNavigablePath(BlogPost.class, "id",
-                "" + item.getId());
-        Element title = ElementFactory.createRouterLink(link.get(),
-                item.getTitle());
-        title.getClassList().add("blog-item-title");
-
-        Element by = ElementFactory.createDiv("By " + item.getAuthor());
-        by.getStyle().set("display", "inline");
-
-        Element date = ElementFactory
-                .createDiv("On " + FORMATTER.format(item.getDate()));
-        date.getStyle().set("display", "inline");
-
-        Element readMore = ElementFactory.createRouterLink(link.get(),
-                "Read More \u00BB");
-        readMore.getClassList().add("read-more");
-
-        element.appendChild(title, by, date, readMore);
-
-        return element;
     }
 
 }

@@ -17,6 +17,8 @@ package com.vaadin.hummingbird.demo.dynamicmenu;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 
 /**
  * The static home page.
@@ -25,7 +27,7 @@ import com.vaadin.hummingbird.dom.ElementFactory;
  * @author Vaadin Ltd
  */
 @Title("Home")
-public class HomeView extends SimpleView {
+public class HomeView extends Component implements View {
     /**
      * Creates a new home view.
      */

@@ -1,0 +1,109 @@
+/*
+ * Copyright 2000-2016 Vaadin Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.vaadin.hummingbird.demo.dynamicmenu;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
+import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
+import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.html.HtmlContainer;
+
+/**
+ * @author Vaadin Ltd
+ *
+ */
+public final class CategoryComponent extends ItemComponent {
+
+    private static final String CLASS_EXPANDED = "expanded";
+
+    private Map<Integer, ItemComponent> productItems = new HashMap<>();
+
+    public CategoryComponent(int id, String name) {
+        super("category", id, name);
+        setClassName("category");
+        setExpanded(false);
+    }
+
+    public void expand() {
+        if (isExpanded()) {
+            return;
+        }
+
+        setExpanded(true);
+
+        // The link is always the first child, the sub menu is the second
+        Element routerLinkElement = getElement().getChild(0);
+        HtmlContainer ul = new HtmlContainer("ul");
+        add(ul);
+
+        String categoryId = routerLinkElement.getAttribute("href")
+                .replace("category/", "");
+        Stream<Product> products = DataService.get()
+                .getProducts(Integer.parseInt(categoryId));
+        products.forEach(p -> {
+            ItemComponent product = new ItemComponent("product", p.getId(),
+                    p.getProductName());
+            ul.add(product);
+
+            productItems.put(p.getId(), product);
+        });
+    }
+
+    public void collapse() {
+        if (!isExpanded()) {
+            return;
+        }
+
+        // First child is the link, remove everything else
+        while (getElement().getChildCount() > 1) {
+            getElement().removeChild(1);
+        }
+        setExpanded(false);
+    }
+
+    public void selectProduct(int productId) {
+        if (productId != -1) {
+            Optional<ItemComponent> productElement = getElementForProduct(
+                    DataService.get().getProductById(productId));
+            if (productElement.isPresent()) {
+                productItems.values().forEach(item -> item.select(false));
+                productElement.get().select(true);
+            }
+        }
+    }
+
+    private boolean isExpanded() {
+        return getElement().getChildCount() > 1;
+    }
+
+    private void setExpanded(boolean expanded) {
+        getElement().getClassList().set(CLASS_EXPANDED, expanded);
+    }
+
+    private Optional<ItemComponent> getElementForProduct(
+            Optional<Product> product) {
+        if (!product.isPresent()) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(productItems.get(product.get().getId()));
+    }
+
+}

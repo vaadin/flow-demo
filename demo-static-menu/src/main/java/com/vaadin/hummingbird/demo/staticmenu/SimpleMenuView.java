@@ -17,8 +17,8 @@ package com.vaadin.hummingbird.demo.staticmenu;
 
 import java.util.stream.Stream;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.router.View;
 
 /**
@@ -29,37 +29,29 @@ import com.vaadin.hummingbird.router.View;
  */
 public class SimpleMenuView extends MenuView {
 
-    private Element element;
-    private Element menu;
+    private Div menu;
 
     /**
      * Creates the view.
      */
     public SimpleMenuView() {
-        element = ElementFactory.createDiv();
-        menu = ElementFactory.createDiv();
+        menu = new Div();
 
-        element.appendChild(menu);
-        element.appendChild(ElementFactory.createDiv());
+        add(menu, new Div());
     }
 
-    @Override
-    public Element getElement() {
-        return element;
-    }
-
-    protected final Element getMenu() {
+    protected final Div getMenu() {
         return menu;
     }
 
     @Override
-    protected void addMenuElement(Element e) {
-        getMenu().appendChild(e);
+    protected void addMenuElement(HtmlComponent component) {
+        getMenu().add(component);
     }
 
     @Override
-    protected Stream<Element> getMenuElements() {
-        return getMenu().getChildren();
+    protected Stream<HtmlComponent> getMenuElements() {
+        return getMenu().getChildren().map(HtmlComponent.class::cast);
     }
 
     @Override

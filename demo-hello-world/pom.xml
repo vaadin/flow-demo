@@ -7,8 +7,8 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-	<name>Hello World using Element API</name>
-	<artifactId>demo-hello-world-element</artifactId>
+	<name>Hello World using Component API</name>
+	<artifactId>demo-hello-world</artifactId>
 	<packaging>war</packaging>
 
 	<properties>

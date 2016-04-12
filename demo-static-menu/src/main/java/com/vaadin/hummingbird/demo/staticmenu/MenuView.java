@@ -21,8 +21,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlComponent;
+import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
@@ -34,7 +36,7 @@ import com.vaadin.hummingbird.router.View;
  * @author Vaadin
  * @since
  */
-public abstract class MenuView implements View, HasChildView {
+public abstract class MenuView extends Div implements View, HasChildView {
 
     private Map<Class<? extends View>, Map<String, String>> menuLinkViewParameters = new HashMap<>();
 
@@ -45,7 +47,7 @@ public abstract class MenuView implements View, HasChildView {
     }
 
     protected final void addItem(String caption, String url) {
-        addMenuElement(ElementFactory.createRouterLink(url, caption));
+        addMenuElement(new RouterLink(url, caption));
     }
 
     protected final void addItem(Class<? extends View> viewClass) {
@@ -69,12 +71,12 @@ public abstract class MenuView implements View, HasChildView {
                 url = url.replace("{" + parameterKey + "}", parameterValue);
             }
             if (url == null) {
-                addMenuElement(ElementFactory.createSpan(caption));
+                addMenuElement(createSpan(caption));
             } else {
-                addMenuElement(ElementFactory.createRouterLink(url, caption));
+                addItem(caption, url);
             }
         } else {
-            addMenuElement(ElementFactory.createSpan(caption));
+            addMenuElement(createSpan(caption));
         }
 
     }
@@ -91,6 +93,12 @@ public abstract class MenuView implements View, HasChildView {
                     childViewClass);
             selectMenuLink(registeredChildView);
         }
+    }
+
+    private HtmlComponent createSpan(String caption) {
+        HtmlContainer span = new HtmlContainer("span");
+        span.setText(caption);
+        return span;
     }
 
     private Class<? extends View> findMenuLinkForView(
@@ -131,15 +139,16 @@ public abstract class MenuView implements View, HasChildView {
     protected void selectMenuLink(Class<? extends View> childViewClass) {
         String path = Util.getNavigablePath(childViewClass,
                 menuLinkViewParameters.get(childViewClass)).orElse("");
-        getMenuElements().forEach(e -> {
-            boolean selected = path.equals(e.getAttribute("href"));
-            e.getClassList().set("selected", selected);
+        getMenuElements().forEach(component -> {
+            boolean selected = path
+                    .equals(component.getElement().getAttribute("href"));
+            component.setClassName("selected", selected);
         });
     }
 
-    protected abstract void addMenuElement(Element e);
+    protected abstract void addMenuElement(HtmlComponent component);
 
-    protected abstract Stream<Element> getMenuElements();
+    protected abstract Stream<HtmlComponent> getMenuElements();
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {

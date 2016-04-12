@@ -15,8 +15,9 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Anchor;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 
 /**
@@ -25,26 +26,25 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  * @since
  * @author Vaadin Ltd
  */
-public class ParameterView extends SimpleView {
+public final class ParameterView extends SimpleView {
 
-    private Element idElement;
-    private Element linkToNext;
+    private Div idElement;
+    private Anchor linkToNext;
 
     /**
      * Creates a new dynamic view.
      */
     public ParameterView() {
-        super(ElementFactory.createDiv());
-        getElement().appendChild(
-                getMappingInfo(SiteRouterConfigurator.MAPPING_PARAM));
-        Element content = ElementFactory.createDiv().setAttribute("class",
-                "content");
+        add(getMappingInfo(SiteRouterConfigurator.MAPPING_PARAM));
+        Div content = new Div();
+        content.setClassName("content");
 
-        idElement = ElementFactory.createDiv();
-        linkToNext = ElementFactory.createRouterLink("param/",
+        idElement = new Div();
+        linkToNext = new RouterLink("param/",
                 "Open the same view with another parameter");
-        content.appendChild(idElement, linkToNext);
-        getElement().appendChild(content);
+
+        content.add(idElement, linkToNext);
+        add(content);
     }
 
     @Override
@@ -53,12 +53,11 @@ public class ParameterView extends SimpleView {
         int id;
         try {
             id = Integer.parseInt(stringId);
-            idElement.setTextContent("Id parameter: " + id);
-            linkToNext.setAttribute("href", "param/" + (id + 1));
+            idElement.setText("Id parameter: " + id);
+            linkToNext.setHref("param/" + (id + 1));
         } catch (NumberFormatException e) {
-            idElement.setTextContent(
-                    "Id parameter: " + "Invalid, must be an integer");
-            linkToNext.setAttribute("href", "param/1");
+            idElement.setText("Id parameter: " + "Invalid, must be an integer");
+            linkToNext.setHref("param/1");
         }
     }
 

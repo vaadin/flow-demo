@@ -16,6 +16,7 @@
 		<module>demo-web-site</module>
 		<module>demo-static-menu</module>
 		<module>demo-dynamic-menu</module>
+		<module>demo-utils</module>
 	</modules>
 
 	<properties>
@@ -60,10 +61,20 @@
 				<version>${hummingbird.version}</version>
 			</dependency>
 			<dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>hummingbird-html-components</artifactId>
+                <version>${hummingbird.version}</version>
+            </dependency>
+			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-testbench</artifactId>
 				<version>4.1.0.alpha1</version>
 			</dependency>
+			<dependency>
+                <groupId>com.vaadin.hummingbird.demo</groupId>
+                <artifactId>demo-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 			<dependency>
 				<groupId>com.vaadin.hummingbird.demo</groupId>
 				<artifactId>test-util</artifactId>

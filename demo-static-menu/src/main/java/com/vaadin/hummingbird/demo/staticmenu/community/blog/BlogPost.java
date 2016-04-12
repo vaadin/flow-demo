@@ -17,12 +17,12 @@ package com.vaadin.hummingbird.demo.staticmenu.community.blog;
 
 import java.util.Collection;
 
-import com.vaadin.hummingbird.demo.staticmenu.SimpleView;
 import com.vaadin.hummingbird.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.hummingbird.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.hummingbird.router.View;
 
 /**
  * The blog post view.
@@ -30,18 +30,11 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  * @since
  * @author Vaadin Ltd
  */
-public class BlogPost extends SimpleView {
-
-    /**
-     * Creates the view.
-     */
-    public BlogPost() {
-        super(ElementFactory.createDiv());
-    }
+public class BlogPost extends Div implements View {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        getElement().removeAllChildren();
+        removeAll();
 
         Collection<BlogRecord> items = BlogsService.getInstance().getItems();
         if (items.isEmpty()) {
@@ -55,17 +48,20 @@ public class BlogPost extends SimpleView {
         }
 
         if (record == null) {
-            Element error = ElementFactory.createDiv("Unable to find the post");
-            error.getClassList().add("no-post");
-            getElement().appendChild(error);
+            Div error = new Div();
+            error.setText("Unable to find the post");
+            error.setClassName("no-post");
+            add(error);
         } else {
-            Element title = ElementFactory.createHeading1(record.getTitle());
-            title.getClassList().add("blog-item-title");
+            HtmlContainer title = new HtmlContainer("h1");
+            title.setText(record.getTitle());
+            title.setClassName("blog-item-title");
 
-            Element text = ElementFactory.createDiv(record.getText());
-            text.getClassList().add("blog-content");
+            Div text = new Div();
+            text.setText(record.getText());
+            text.setClassName("blog-content");
 
-            getElement().appendChild(title, text);
+            add(title, text);
         }
     }
 
