@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 import java.util.Optional;
 
 import com.vaadin.annotations.AnnotationReader;
+import com.vaadin.hummingbird.router.ImmutableRouterConfiguration;
 import com.vaadin.hummingbird.router.Router;
-import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.server.VaadinService;
 
@@ -49,7 +49,7 @@ public interface Util {
      *
      * @return the active router configuration
      */
-    static RouterConfiguration getRouterConfiguration() {
+    static ImmutableRouterConfiguration getRouterConfiguration() {
         return getRouter().getConfiguration();
     }
 
