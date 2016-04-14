@@ -47,7 +47,13 @@ public class WebSiteIT extends AbstractTestBenchTest {
         getMenuItem("Resource view").click();
         assertPageTitle(TITLE);
 
-        Assert.assertEquals("Select the resource to display" + "",
+        Assert.assertEquals("Select the resource to display",
+                getFirstContentChild().getText());
+
+        getMenuItem("Dynamic resource view").click();
+        assertPageTitle(TITLE);
+
+        Assert.assertEquals("Mapped using \"dynresource\"",
                 getFirstContentChild().getText());
 
         getMenuItem("Home").click();
