@@ -18,6 +18,7 @@
 		<module>demo-static-menu</module>
 		<module>demo-dynamic-menu</module>
 		<module>demo-textfield-component</module>
+		<module>demo-textfield-composite</module>
 	</modules>
 
 	<properties>
