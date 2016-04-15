@@ -17,6 +17,7 @@
 		<module>demo-web-site</module>
 		<module>demo-static-menu</module>
 		<module>demo-dynamic-menu</module>
+		<module>demo-textfield-component</module>
 	</modules>
 
 	<properties>
