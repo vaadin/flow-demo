@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 
 /**
  * A menu which adds all items to a single div.
@@ -57,6 +58,11 @@ public class SimpleMenuView extends MenuView {
     @Override
     public void setChildView(View childView) {
         getElement().setChild(1, childView.getElement());
+    }
+
+    @Override
+    public final void add(Component... components) {
+        super.add(components);
     }
 
 }

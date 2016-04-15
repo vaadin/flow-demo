@@ -44,7 +44,7 @@ public final class RecordComponent extends Div {
         setClassName("blog-item");
 
         Optional<String> link = Util.getNavigablePath(BlogPost.class, "id",
-                "" + item.getId());
+                Long.toString(item.getId()));
         RouterLink title = new RouterLink(link.get(), item.getTitle());
         title.setClassName("blog-item-title");
 

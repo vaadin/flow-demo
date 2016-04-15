@@ -37,7 +37,7 @@ public final class ResourcesView extends SimpleView {
     private Div content;
     private IFrame iframe;
 
-    private final static class IFrame extends HtmlComponent {
+    private static final class IFrame extends HtmlComponent {
         private IFrame() {
             super("iframe");
             getStyle().set("width", "50%");

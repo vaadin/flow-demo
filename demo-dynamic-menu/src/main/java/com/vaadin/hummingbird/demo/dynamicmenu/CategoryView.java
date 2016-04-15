@@ -38,12 +38,6 @@ public final class CategoryView extends HtmlContainer implements View {
 
     private Optional<Category> currentCategory;
 
-    /**
-     * Creates a new view.
-     */
-    public CategoryView() {
-    }
-
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int catId = getCategoryId(locationChangeEvent);

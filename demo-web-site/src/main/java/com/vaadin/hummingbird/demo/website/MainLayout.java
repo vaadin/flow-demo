@@ -29,7 +29,7 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
-public class MainLayout extends SimpleView implements HasChildView {
+public final class MainLayout extends SimpleView implements HasChildView {
 
     private final Div contentHolder = new Div();
 

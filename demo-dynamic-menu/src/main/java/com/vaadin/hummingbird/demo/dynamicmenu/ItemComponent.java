@@ -21,6 +21,8 @@ import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.HtmlContainer;
 
 /**
+ * A menu item component.
+ * 
  * @author Vaadin Ltd
  *
  */
@@ -29,6 +31,16 @@ public class ItemComponent extends HtmlContainer {
 
     private static final String CLASS_SELECTED = "selected";
 
+    /**
+     * Creates a new item component.
+     * 
+     * @param pathSegment
+     *            path segment for the item's link
+     * @param id
+     *            category id
+     * @param name
+     *            category name
+     */
     public ItemComponent(String pathSegment, int id, String name) {
         StringBuilder path = new StringBuilder(pathSegment);
         path.append('/').append(id);
@@ -37,6 +49,12 @@ public class ItemComponent extends HtmlContainer {
         getElement().appendChild(categoryLink);
     }
 
+    /**
+     * Selects or deselects the item.
+     * 
+     * @param select
+     *            if {@code true} then select the item and deselect it otherwise
+     */
     public void select(boolean select) {
         if (select) {
             getElement().getChild(0).getClassList().add(CLASS_SELECTED);

@@ -31,7 +31,7 @@ import com.vaadin.hummingbird.router.View;
  * @since
  * @author Vaadin Ltd
  */
-public class BlogsView extends Div implements HasChildView {
+public final class BlogsView extends Div implements HasChildView {
 
     /**
      * Creates the view.

@@ -26,6 +26,8 @@ import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.HtmlContainer;
 
 /**
+ * A category menu item component.
+ * 
  * @author Vaadin Ltd
  *
  */
@@ -35,12 +37,23 @@ public final class CategoryComponent extends ItemComponent {
 
     private Map<Integer, ItemComponent> productItems = new HashMap<>();
 
+    /**
+     * Creates a new category component.
+     * 
+     * @param id
+     *            category id
+     * @param name
+     *            category name
+     */
     public CategoryComponent(int id, String name) {
         super("category", id, name);
         setClassName("category");
         setExpanded(false);
     }
 
+    /**
+     * Expands the item.
+     */
     public void expand() {
         if (isExpanded()) {
             return;
@@ -66,6 +79,9 @@ public final class CategoryComponent extends ItemComponent {
         });
     }
 
+    /**
+     * Collapse the item.
+     */
     public void collapse() {
         if (!isExpanded()) {
             return;
@@ -78,6 +94,12 @@ public final class CategoryComponent extends ItemComponent {
         setExpanded(false);
     }
 
+    /**
+     * Select the product by its {@code productId}.
+     * 
+     * @param productId
+     *            product id
+     */
     public void selectProduct(int productId) {
         if (productId != -1) {
             Optional<ItemComponent> productElement = getElementForProduct(

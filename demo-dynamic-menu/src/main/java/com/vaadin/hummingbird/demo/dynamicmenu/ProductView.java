@@ -37,12 +37,6 @@ public class ProductView extends HtmlContainer implements View {
 
     private Optional<Product> currentProduct;
 
-    /**
-     * Creates a new view.
-     */
-    public ProductView() {
-    }
-
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int productId = getProductId(locationChangeEvent);
