@@ -29,7 +29,7 @@ import com.vaadin.hummingbird.html.RouterLink;
  * @author Vaadin Ltd
  *
  */
-public final class RecordComponent extends Div {
+public final class BlogRecordComponent extends Div {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd/MM/yy hh:mm a");
@@ -40,7 +40,7 @@ public final class RecordComponent extends Div {
      * @param item
      *            blog record item
      */
-    public RecordComponent(BlogRecord item) {
+    public BlogRecordComponent(BlogRecord item) {
         setClassName("blog-item");
 
         Optional<String> link = Util.getNavigablePath(BlogPost.class, "id",

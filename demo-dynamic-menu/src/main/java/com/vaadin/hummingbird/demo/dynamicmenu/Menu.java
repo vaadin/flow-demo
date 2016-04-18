@@ -34,7 +34,7 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  */
 public final class Menu extends Div {
 
-    private Map<Integer, CategoryComponent> categories = new HashMap<>();
+    private Map<Integer, CategoryMenuItem> categories = new HashMap<>();
 
     /**
      * Creates the menu.
@@ -44,7 +44,7 @@ public final class Menu extends Div {
         HtmlContainer ul = new HtmlContainer("ul");
         add(ul);
         for (Category c : DataService.get().getAllCategories()) {
-            CategoryComponent item = new CategoryComponent(c.getId(),
+            CategoryMenuItem item = new CategoryMenuItem(c.getId(),
                     c.getName());
             categories.put(c.getId(), item);
             ul.add(item);
@@ -69,7 +69,7 @@ public final class Menu extends Div {
         }
 
         if (categoryId != -1) {
-            Optional<CategoryComponent> category = getElementForCategory(
+            Optional<CategoryMenuItem> category = getElementForCategory(
                     DataService.get().getCategoryById(categoryId));
             if (category.isPresent()) {
                 categories.values().stream().filter(e -> e != category.get())
@@ -80,7 +80,7 @@ public final class Menu extends Div {
         }
     }
 
-    private void selectCategory(CategoryComponent category, boolean select) {
+    private void selectCategory(CategoryMenuItem category, boolean select) {
         if (select) {
             category.expand();
             category.select(true);
@@ -90,7 +90,7 @@ public final class Menu extends Div {
         }
     }
 
-    private Optional<CategoryComponent> getElementForCategory(
+    private Optional<CategoryMenuItem> getElementForCategory(
             Optional<Category> category) {
         if (!category.isPresent()) {
             return Optional.empty();

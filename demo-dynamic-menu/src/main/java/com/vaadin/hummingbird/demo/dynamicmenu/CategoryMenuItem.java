@@ -31,11 +31,11 @@ import com.vaadin.hummingbird.html.HtmlContainer;
  * @author Vaadin Ltd
  *
  */
-public final class CategoryComponent extends ItemComponent {
+public final class CategoryMenuItem extends MenuItemComponent {
 
     private static final String CLASS_EXPANDED = "expanded";
 
-    private Map<Integer, ItemComponent> productItems = new HashMap<>();
+    private Map<Integer, MenuItemComponent> productItems = new HashMap<>();
 
     /**
      * Creates a new category component.
@@ -45,7 +45,7 @@ public final class CategoryComponent extends ItemComponent {
      * @param name
      *            category name
      */
-    public CategoryComponent(int id, String name) {
+    public CategoryMenuItem(int id, String name) {
         super("category", id, name);
         setClassName("category");
         setExpanded(false);
@@ -71,7 +71,7 @@ public final class CategoryComponent extends ItemComponent {
         Stream<Product> products = DataService.get()
                 .getProducts(Integer.parseInt(categoryId));
         products.forEach(p -> {
-            ItemComponent product = new ItemComponent("product", p.getId(),
+            MenuItemComponent product = new MenuItemComponent("product", p.getId(),
                     p.getProductName());
             ul.add(product);
 
@@ -102,7 +102,7 @@ public final class CategoryComponent extends ItemComponent {
      */
     public void selectProduct(int productId) {
         if (productId != -1) {
-            Optional<ItemComponent> productElement = getElementForProduct(
+            Optional<MenuItemComponent> productElement = getElementForProduct(
                     DataService.get().getProductById(productId));
             if (productElement.isPresent()) {
                 productItems.values().forEach(item -> item.select(false));
@@ -119,7 +119,7 @@ public final class CategoryComponent extends ItemComponent {
         getElement().getClassList().set(CLASS_EXPANDED, expanded);
     }
 
-    private Optional<ItemComponent> getElementForProduct(
+    private Optional<MenuItemComponent> getElementForProduct(
             Optional<Product> product) {
         if (!product.isPresent()) {
             return Optional.empty();

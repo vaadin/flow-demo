@@ -27,7 +27,7 @@ import com.vaadin.hummingbird.html.HtmlContainer;
  *
  */
 @Tag("li")
-public class ItemComponent extends HtmlContainer {
+public class MenuItemComponent extends HtmlContainer {
 
     private static final String CLASS_SELECTED = "selected";
 
@@ -41,7 +41,7 @@ public class ItemComponent extends HtmlContainer {
      * @param name
      *            category name
      */
-    public ItemComponent(String pathSegment, int id, String name) {
+    public MenuItemComponent(String pathSegment, int id, String name) {
         StringBuilder path = new StringBuilder(pathSegment);
         path.append('/').append(id);
         Element categoryLink = ElementFactory.createRouterLink(path.toString(),
@@ -63,8 +63,4 @@ public class ItemComponent extends HtmlContainer {
         }
     }
 
-    @Override
-    public final Element getElement() {
-        return super.getElement();
-    }
 }

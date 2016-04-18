@@ -36,14 +36,4 @@ public abstract class DummyView extends Div implements View {
         setText("This is the " + Util.getViewName(getClass()) + " view");
     }
 
-    @Override
-    public final void setClassName(String className) {
-        super.setClassName(className);
-    }
-
-    @Override
-    public final void setText(String text) {
-        super.setText(text);
-    }
-
 }

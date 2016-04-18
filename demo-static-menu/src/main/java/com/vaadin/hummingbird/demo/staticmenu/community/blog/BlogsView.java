@@ -56,7 +56,7 @@ public final class BlogsView extends Div implements HasChildView {
 
     private long init(Div list) {
         Collection<BlogRecord> items = BlogsService.getInstance().getItems();
-        items.stream().map(RecordComponent::new).forEach(list::add);
+        items.stream().map(BlogRecordComponent::new).forEach(list::add);
         return items.iterator().next().getId();
     }
 
