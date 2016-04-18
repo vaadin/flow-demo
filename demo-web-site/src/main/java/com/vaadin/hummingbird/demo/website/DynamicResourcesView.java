@@ -24,9 +24,6 @@ import com.vaadin.hummingbird.html.Button;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.Input;
 import com.vaadin.server.StreamResource;
-import com.vaadin.server.StreamResourceRegistration;
-import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.UI;
 
 /**
  * A view that uses generated resources.
@@ -55,49 +52,47 @@ public final class DynamicResourcesView extends SimpleView {
         Div div = new Div();
         div.setText("Type a string to generate an image");
         add(name, div);
-        StreamResourceRegistration registration = createResource();
-        createGenerateImageButton(registration);
-        createImageOpener(registration);
-    }
-
-    private void createGenerateImageButton(
-            StreamResourceRegistration registration) {
-        Button button = new Button("Generate Image");
-
-        button.addClickListener(event -> generateImage(
-                registration.getResourceUri().toString()));
-
-        add(button);
-    }
-
-    private void createImageOpener(StreamResourceRegistration registration) {
-        Button button = new Button("Open Image");
-        add(button);
-
-        UI.getCurrent().getPage().executeJavaScript(
-                "$0.onclick=function(){window.open($1);}", button,
-                registration.getResourceUri().toString());
-
-    }
-
-    private void generateImage(String url) {
-        if (image != null) {
-            getElement().removeChild(image);
-        }
-        image = new Element("object");
-        image.setAttribute("type", "image/svg+xml");
-        image.getStyle().set("display", "block");
-        image.setAttribute("data", url);
-
+        StreamResource resource = createResource();
+        createGenerateImageButton(resource);
+        createImageOpener(resource);
         getElement().appendChild(image);
     }
 
-    private StreamResourceRegistration createResource() {
+    private void createGenerateImageButton(StreamResource resource) {
+        Button button = new Button("Generate Image");
+
+        button.addClickListener(event -> createImage(resource));
+
+        add(button);
+    }
+
+    private void createImageOpener(StreamResource resource) {
+        Button button = new Button("Open Image");
+        add(button);
+
+        // Delay until element is attached so we can find UI and Page
+        button.getElement().addAttachListener(e -> {
+            button.getUI().get().getPage().executeJavaScript(
+                    // Connect directly on the client side so we don't have a
+                    // server visit
+                    "$0.addEventListener('click',function(){window.open($1.getAttribute('data'))});",
+                    button, image);
+        });
+
+    }
+
+    private void createImage(StreamResource resource) {
+        image = new Element("object");
+        image.setAttribute("type", "image/svg+xml");
+        image.getStyle().set("display", "block");
+        image.setAttribute("data", resource);
+    }
+
+    private StreamResource createResource() {
         StreamResource resource = new StreamResource("image",
                 this::getImageInputStream);
         resource.setContentType("image/svg+xml");
-        return VaadinSession.getCurrent().getResourceRegistry()
-                .registerResource(resource);
+        return resource;
     }
 
     private InputStream getImageInputStream() {
