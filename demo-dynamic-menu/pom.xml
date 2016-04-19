@@ -24,8 +24,12 @@
 			<artifactId>hummingbird</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vaadin.hummingbird.demo</groupId>
-			<artifactId>test-util</artifactId>
-		</dependency>
+            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <artifactId>test-util</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <artifactId>demo-utils</artifactId>
+        </dependency>
 	</dependencies>
 </project>

@@ -13,26 +13,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.dynamicmenu;
+package com.vaadin.hummingbird.demo.minesweeper.component.component;
 
-import com.vaadin.annotations.Tag;
-import com.vaadin.annotations.Title;
-import com.vaadin.hummingbird.html.HtmlContainer;
-import com.vaadin.hummingbird.router.View;
+import com.vaadin.hummingbird.html.Div;
 
 /**
- * The static home page.
+ * A really simple notification component, which is just a {@link Div} with a
+ * class name.
  *
- * @since
  * @author Vaadin Ltd
+ * @since
  */
-@Title("Home")
-@Tag("p")
-public class HomeView extends HtmlContainer implements View {
+public class Notification extends Div {
+
     /**
-     * Creates a new home view.
+     * Creates a notification with the given text and class name.
+     *
+     * @param text
+     *            the text to show
+     * @param className
+     *            the class name to use
      */
-    public HomeView() {
-        setText("Please select a category in the menu");
+    public Notification(String text, String className) {
+        setText(text);
+        addClassName(className);
     }
+
 }

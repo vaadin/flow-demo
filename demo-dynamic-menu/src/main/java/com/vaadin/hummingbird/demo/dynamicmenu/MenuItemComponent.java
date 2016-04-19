@@ -16,9 +16,8 @@
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
 import com.vaadin.annotations.Tag;
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.html.RouterLink;
 
 /**
  * A menu item component.
@@ -44,9 +43,8 @@ public class MenuItemComponent extends HtmlContainer {
     public MenuItemComponent(String pathSegment, int id, String name) {
         StringBuilder path = new StringBuilder(pathSegment);
         path.append('/').append(id);
-        Element categoryLink = ElementFactory.createRouterLink(path.toString(),
-                name);
-        getElement().appendChild(categoryLink);
+        RouterLink categoryLink = new RouterLink(path.toString(), name);
+        add(categoryLink);
     }
 
     /**

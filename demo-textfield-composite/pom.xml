@@ -7,9 +7,9 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-	<name>Demo utils</name>
-	<artifactId>demo-utils</artifactId>
-	<packaging>jar</packaging>
+	<name>Text field composite using server side components</name>
+	<artifactId>demo-textfield-composite</artifactId>
+	<packaging>war</packaging>
 
 	<properties>
 	</properties>

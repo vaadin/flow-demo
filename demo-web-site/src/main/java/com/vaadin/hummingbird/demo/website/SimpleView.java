@@ -15,7 +15,6 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
@@ -47,8 +46,4 @@ public abstract class SimpleView extends Div implements View {
         return "Hummingbird Web Site Demo";
     }
 
-    @Override
-    public final Element getElement() {
-        return super.getElement();
-    }
 }

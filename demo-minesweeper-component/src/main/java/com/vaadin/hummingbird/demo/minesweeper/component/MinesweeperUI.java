@@ -13,11 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.minesweeper.element;
+package com.vaadin.hummingbird.demo.minesweeper.component;
 
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.hummingbird.demo.minesweeper.component.component.MinesweeperComponent;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -35,45 +36,31 @@ public class MinesweeperUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MinesweeperUI.class, productionMode = false)
     public static class Servlet extends VaadinServlet {
+
     }
 
     @Override
     protected void init(VaadinRequest request) {
-        long seed;
-        double mineDensity;
-        int rows, cols;
-
-        String seedParam = request.getParameter("seed");
-        if (seedParam != null) {
-            seed = Long.parseLong(seedParam);
-        } else {
-            seed = System.currentTimeMillis();
-        }
-
-        String mineDensityParam = request.getParameter("mineDensity");
-        if (mineDensityParam != null) {
-            mineDensity = Double.parseDouble(mineDensityParam);
-        } else {
-            mineDensity = 0.2;
-        }
-        String rowsParam = request.getParameter("rows");
-        if (rowsParam != null) {
-            rows = Integer.parseInt(rowsParam);
-        } else {
-            rows = 10;
-        }
-        String colsParam = request.getParameter("cols");
-        if (colsParam != null) {
-            cols = Integer.parseInt(colsParam);
-        } else {
-            cols = 10;
-        }
+        long seed = getParam(request, "seed", (int) System.currentTimeMillis());
+        double mineDensity = getParam(request, "mineDensity", 20) / 100.0;
+        int rows = getParam(request, "rows", 10);
+        int cols = getParam(request, "cols", 10);
 
         getPage().addStyleSheet("minesweeper.css");
 
-        ElementMinesweeper minesweeper = new ElementMinesweeper(seed,
-                mineDensity, rows, cols);
-        getElement().appendChild(minesweeper.getElement());
+        add(new MinesweeperComponent(seed, mineDensity, rows, cols));
+    }
+
+    private static int getParam(VaadinRequest request, String name,
+            int defaultValue) {
+        int value;
+        String colsParam = request.getParameter(name);
+        if (colsParam != null) {
+            value = Integer.parseInt(colsParam);
+        } else {
+            value = defaultValue;
+        }
+        return value;
     }
 
 }

@@ -7,9 +7,9 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-	<name>Demo utils</name>
-	<artifactId>demo-utils</artifactId>
-	<packaging>jar</packaging>
+	<name>Minesweeper using Components API</name>
+	<artifactId>demo-minesweeper-component</artifactId>
+	<packaging>war</packaging>
 
 	<properties>
 	</properties>

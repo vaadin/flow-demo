@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.website;
 
 import java.io.InputStream;
 
+import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
@@ -37,9 +38,9 @@ public final class ResourcesView extends SimpleView {
     private Div content;
     private IFrame iframe;
 
+    @Tag("iframe")
     private static final class IFrame extends HtmlComponent {
         private IFrame() {
-            super("iframe");
             getStyle().set("width", "50%");
             getStyle().set("height", "400px");
         }

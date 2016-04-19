@@ -12,11 +12,14 @@
 	<modules>
 		<module>test-util</module>
 		<module>demo-minesweeper-element</module>
+		<module>demo-minesweeper-component</module>
 		<module>demo-hello-world</module>
 		<module>demo-web-site</module>
 		<module>demo-static-menu</module>
 		<module>demo-dynamic-menu</module>
 		<module>demo-utils</module>
+		<module>demo-textfield-component</module>
+		<module>demo-textfield-composite</module>
 	</modules>
 
 	<properties>
@@ -60,11 +63,6 @@
 				<artifactId>hummingbird</artifactId>
 				<version>${hummingbird.version}</version>
 			</dependency>
-			<dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>hummingbird-html-components</artifactId>
-                <version>${hummingbird.version}</version>
-            </dependency>
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-testbench</artifactId>

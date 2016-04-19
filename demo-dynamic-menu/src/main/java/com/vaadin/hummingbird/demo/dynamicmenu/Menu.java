@@ -83,11 +83,10 @@ public final class Menu extends Div {
     private void selectCategory(CategoryMenuItem category, boolean select) {
         if (select) {
             category.expand();
-            category.select(true);
         } else {
             category.collapse();
-            category.select(false);
         }
+        category.select(select);
     }
 
     private Optional<CategoryMenuItem> getElementForCategory(

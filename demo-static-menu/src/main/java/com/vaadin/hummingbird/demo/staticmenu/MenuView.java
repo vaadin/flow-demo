@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
-import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.html.Label;
 import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
@@ -71,12 +71,12 @@ public abstract class MenuView extends Div implements View, HasChildView {
                 url = url.replace("{" + parameterKey + "}", parameterValue);
             }
             if (url == null) {
-                addMenuElement(createSpan(caption));
+                addMenuElement(new Label(caption));
             } else {
                 addItem(caption, url);
             }
         } else {
-            addMenuElement(createSpan(caption));
+            addMenuElement(new Label(caption));
         }
 
     }
@@ -93,12 +93,6 @@ public abstract class MenuView extends Div implements View, HasChildView {
                     childViewClass);
             selectMenuLink(registeredChildView);
         }
-    }
-
-    private HtmlComponent createSpan(String caption) {
-        HtmlContainer span = new HtmlContainer("span");
-        span.setText(caption);
-        return span;
     }
 
     private Class<? extends View> findMenuLinkForView(
