@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.staticmenu.elements;
 
 import com.vaadin.hummingbird.demo.staticmenu.SimpleMenuView;
+import com.vaadin.hummingbird.demo.staticmenu.download.DocsSubView;
 
 /**
  * The elements menu.
@@ -32,8 +33,8 @@ public class ElementsMenuView extends SimpleMenuView {
         super();
         getMenu().setClassName("submenu");
 
-        addItem("Getting Started",
-                "docs/-/part/elements/elements-getting-started.html");
+        addItem("Getting Started", DocsSubView.class,
+                "-/part/elements/elements-getting-started.html");
         addItem("Demos", "elements#demos");
     }
 

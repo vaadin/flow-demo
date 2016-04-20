@@ -18,8 +18,8 @@ package com.vaadin.hummingbird.demo.staticmenu;
 import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.html.Div;
-import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 
 /**
  * A menu which adds all items to a single div.
@@ -45,13 +45,13 @@ public class SimpleMenuView extends MenuView {
     }
 
     @Override
-    protected void addMenuElement(HtmlComponent component) {
+    protected void addMenuElement(Component component) {
         getMenu().add(component);
     }
 
     @Override
-    protected Stream<HtmlComponent> getMenuElements() {
-        return getMenu().getChildren().map(HtmlComponent.class::cast);
+    protected Stream<Component> getMenuElements() {
+        return getMenu().getChildren();
     }
 
     @Override

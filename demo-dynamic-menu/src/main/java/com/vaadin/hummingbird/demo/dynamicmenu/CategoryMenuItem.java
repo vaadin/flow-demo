@@ -46,7 +46,7 @@ public final class CategoryMenuItem extends MenuItemComponent {
      *            category name
      */
     public CategoryMenuItem(int id, String name) {
-        super("category", id, name);
+        super(CategoryView.class, id, name);
         setClassName("category");
         setExpanded(false);
     }
@@ -71,8 +71,8 @@ public final class CategoryMenuItem extends MenuItemComponent {
         Stream<Product> products = DataService.get()
                 .getProducts(Integer.parseInt(categoryId));
         products.forEach(p -> {
-            MenuItemComponent product = new MenuItemComponent("product", p.getId(),
-                    p.getProductName());
+            MenuItemComponent product = new MenuItemComponent(ProductView.class,
+                    p.getId(), p.getProductName());
             ul.add(product);
 
             productItems.put(p.getId(), product);
