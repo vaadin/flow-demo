@@ -15,10 +15,9 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.html.Anchor;
 import com.vaadin.hummingbird.html.Div;
-import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.hummingbird.router.RouterLink;
 
 /**
  * A dynamic view that shows different content based on a parameter in the URL.
@@ -29,7 +28,7 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
 public final class ParameterView extends SimpleView {
 
     private Div idElement;
-    private Anchor linkToNext;
+    private RouterLink linkToNext;
 
     /**
      * Creates a new dynamic view.
@@ -40,8 +39,8 @@ public final class ParameterView extends SimpleView {
         content.setClassName("content");
 
         idElement = new Div();
-        linkToNext = new RouterLink("param/",
-                "Open the same view with another parameter");
+        linkToNext = new RouterLink("Open the same view with another parameter",
+                ParameterView.class);
 
         content.add(idElement, linkToNext);
         add(content);
@@ -54,10 +53,10 @@ public final class ParameterView extends SimpleView {
         try {
             id = Integer.parseInt(stringId);
             idElement.setText("Id parameter: " + id);
-            linkToNext.setHref("param/" + (id + 1));
+            linkToNext.setRoute(ParameterView.class, Integer.toString(id + 1));
         } catch (NumberFormatException e) {
             idElement.setText("Id parameter: " + "Invalid, must be an integer");
-            linkToNext.setHref("param/1");
+            linkToNext.setRoute(ParameterView.class, Integer.toString(1));
         }
     }
 

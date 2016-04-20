@@ -22,10 +22,10 @@ import com.vaadin.hummingbird.demo.staticmenu.download.DownloadView;
 import com.vaadin.hummingbird.demo.staticmenu.elements.ElementsView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.hummingbird.html.Div;
-import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.html.HtmlContainer;
-import com.vaadin.hummingbird.html.RouterLink;
+import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
 /**
@@ -37,7 +37,7 @@ import com.vaadin.ui.UI;
 public class MainMenuView extends SimpleMenuView {
 
     private HtmlContainer ul;
-    private HtmlContainer homeLink;
+    private RouterLink homeLink;
 
     /**
      * Creates the view.
@@ -47,8 +47,7 @@ public class MainMenuView extends SimpleMenuView {
 
         getMenu().setClassName("menu");
 
-        homeLink = new RouterLink("",
-                Util.getNavigablePath(HomeView.class).orElse(null));
+        homeLink = new RouterLink("", HomeView.class);
         registerMenuLinkView(HomeView.class);
         Div logo = new Div();
         logo.setClassName("logo");
@@ -68,13 +67,12 @@ public class MainMenuView extends SimpleMenuView {
     }
 
     @Override
-    protected void addMenuElement(HtmlComponent component) {
+    protected void addMenuElement(Component component) {
         ul.add(component);
     }
 
     @Override
-    protected Stream<HtmlComponent> getMenuElements() {
-        return Stream.concat(Stream.of(homeLink), ul.getChildren())
-                .map(HtmlComponent.class::cast);
+    protected Stream<Component> getMenuElements() {
+        return Stream.concat(Stream.of(homeLink), ul.getChildren());
     }
 }
