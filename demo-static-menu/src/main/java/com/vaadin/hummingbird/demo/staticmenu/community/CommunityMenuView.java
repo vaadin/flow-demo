@@ -31,7 +31,7 @@ public class CommunityMenuView extends SimpleMenuView {
      */
     public CommunityMenuView() {
         super();
-        getMenu().setAttribute("class", "submenu");
+        getMenu().setClassName("submenu");
 
         addItem("Blog", BlogPost.class, "id", "");
     }

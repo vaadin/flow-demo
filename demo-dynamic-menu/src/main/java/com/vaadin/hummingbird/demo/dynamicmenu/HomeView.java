@@ -15,8 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
+import com.vaadin.annotations.Tag;
 import com.vaadin.annotations.Title;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.router.View;
 
 /**
  * The static home page.
@@ -25,12 +27,12 @@ import com.vaadin.hummingbird.dom.ElementFactory;
  * @author Vaadin Ltd
  */
 @Title("Home")
-public class HomeView extends SimpleView {
+@Tag("p")
+public class HomeView extends HtmlContainer implements View {
     /**
      * Creates a new home view.
      */
     public HomeView() {
-        super(ElementFactory
-                .createParagraph("Please select a category in the menu"));
+        setText("Please select a category in the menu");
     }
 }

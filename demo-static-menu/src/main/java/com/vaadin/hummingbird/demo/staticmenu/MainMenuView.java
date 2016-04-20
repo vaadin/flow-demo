@@ -21,8 +21,10 @@ import com.vaadin.hummingbird.demo.staticmenu.community.CommunityView;
 import com.vaadin.hummingbird.demo.staticmenu.download.DownloadView;
 import com.vaadin.hummingbird.demo.staticmenu.elements.ElementsView;
 import com.vaadin.hummingbird.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlComponent;
+import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.UI;
 
@@ -34,8 +36,8 @@ import com.vaadin.ui.UI;
  */
 public class MainMenuView extends SimpleMenuView {
 
-    private Element ul;
-    private Element homeLink;
+    private HtmlContainer ul;
+    private HtmlContainer homeLink;
 
     /**
      * Creates the view.
@@ -43,15 +45,17 @@ public class MainMenuView extends SimpleMenuView {
     public MainMenuView() {
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
-        getMenu().getClassList().add("menu");
+        getMenu().setClassName("menu");
 
-        homeLink = ElementFactory.createRouterLink("",
+        homeLink = new RouterLink("",
                 Util.getNavigablePath(HomeView.class).orElse(null));
         registerMenuLinkView(HomeView.class);
-        Element logo = ElementFactory.createDiv().setAttribute("class", "logo");
-        homeLink.appendChild(logo);
+        Div logo = new Div();
+        logo.setClassName("logo");
+        homeLink.add(logo);
 
-        ul = new Element("ul").setAttribute("class", "topnav");
+        ul = new HtmlContainer("ul");
+        ul.setClassName("topnav");
 
         addItem(FrameworkView.class);
         addItem(ElementsView.class);
@@ -60,16 +64,17 @@ public class MainMenuView extends SimpleMenuView {
         addItem(CommunityView.class);
         addItem("Services", (Class<? extends View>) null);
 
-        getMenu().appendChild(homeLink, ul);
+        getMenu().add(homeLink, ul);
     }
 
     @Override
-    protected void addMenuElement(Element e) {
-        ul.appendChild(e);
+    protected void addMenuElement(HtmlComponent component) {
+        ul.add(component);
     }
 
     @Override
-    protected Stream<Element> getMenuElements() {
-        return Stream.concat(Stream.of(homeLink), ul.getChildren());
+    protected Stream<HtmlComponent> getMenuElements() {
+        return Stream.concat(Stream.of(homeLink), ul.getChildren())
+                .map(HtmlComponent.class::cast);
     }
 }

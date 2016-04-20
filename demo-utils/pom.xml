@@ -7,9 +7,9 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-	<name>Web site with complex menu</name>
-	<artifactId>demo-static-menu</artifactId>
-	<packaging>war</packaging>
+	<name>Demo utils</name>
+	<artifactId>demo-utils</artifactId>
+	<packaging>jar</packaging>
 
 	<properties>
 	</properties>
@@ -27,9 +27,5 @@
 			<groupId>com.vaadin.hummingbird.demo</groupId>
 			<artifactId>test-util</artifactId>
 		</dependency>
-		<dependency>
-            <groupId>com.vaadin.hummingbird.demo</groupId>
-            <artifactId>demo-utils</artifactId>
-        </dependency>
 	</dependencies>
 </project>

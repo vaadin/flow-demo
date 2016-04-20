@@ -16,7 +16,7 @@
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
@@ -28,25 +28,21 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
-public class MainLayout extends SimpleView implements HasChildView {
+public final class MainLayout extends Div implements HasChildView {
 
-    private final Element contentHolder = ElementFactory.createDiv();
+    private final Div contentHolder = new Div();
     private final Menu menu;
 
     /**
      * Creates a new layout.
      */
     public MainLayout() {
-        super(ElementFactory.createDiv());
-        getElement().getClassList().add("main");
+        setClassName("main");
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
         menu = new Menu();
-        getElement().appendChild(menu.getElement(), contentHolder);
-        contentHolder.getClassList().add("content");
-
-        // Placeholder content
-        contentHolder.appendChild(ElementFactory.createDiv());
+        add(menu, contentHolder);
+        contentHolder.setClassName("content");
     }
 
     @Override
@@ -56,8 +52,8 @@ public class MainLayout extends SimpleView implements HasChildView {
 
     @Override
     public void setChildView(View content) {
+        contentHolder.removeAll();
         Element contentElement = content.getElement();
-
-        contentHolder.setChild(0, contentElement);
+        contentElement.getComponent().ifPresent(contentHolder::add);
     }
 }

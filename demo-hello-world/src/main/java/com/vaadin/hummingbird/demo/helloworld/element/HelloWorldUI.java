@@ -18,8 +18,9 @@ package com.vaadin.hummingbird.demo.helloworld.element;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Button;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.Input;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
@@ -40,20 +41,19 @@ public class HelloWorldUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        Element textInput = ElementFactory.createInput()
-                .setAttribute("id", "inputId")
-                .setAttribute("placeholder", "Enter your name")
-                .synchronizeProperty("value", "change");
+        Input textInput = new Input();
+        textInput.setId("inputId");
+        textInput.setPlaceholder("Enter your name");
 
-        Element button = ElementFactory.createButton("Say hello");
-        button.addEventListener("click", e -> {
-            Element helloText = ElementFactory
-                    .createDiv("Hello " + textInput.getProperty("value"));
-            helloText.getClassList().add("helloText");
-            getElement().appendChild(helloText);
+        Button button = new Button("Say hello");
+        button.addClickListener(e -> {
+            Div hello = new Div();
+            hello.setText("Hello " + textInput.getValue());
+            hello.setClassName("helloText");
+            add(hello);
         });
 
-        getElement().appendChild(textInput, button);
+        add(textInput, button);
     }
 
 }

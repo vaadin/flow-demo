@@ -20,7 +20,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Button;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.Input;
 import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamResourceRegistration;
 import com.vaadin.server.VaadinSession;
@@ -32,30 +34,27 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
-public class DynamicResourcesView extends SimpleView {
+public final class DynamicResourcesView extends SimpleView {
 
-    private Element name;
+    private Input name;
     private Element image;
 
     /**
      * Creates a new view.
      */
     public DynamicResourcesView() {
-        super(ElementFactory.createDiv());
-        getElement().appendChild(
-                getMappingInfo(SiteRouterConfigurator.MAPPING_DYN_RESOURCE));
+        add(getMappingInfo(SiteRouterConfigurator.MAPPING_DYN_RESOURCE));
 
         initContent();
     }
 
     private void initContent() {
-        Element label = ElementFactory
-                .createDiv("Type a string to generate an image");
-        name = ElementFactory.createInput("text");
-        name.synchronizeProperty("value", "change");
+        name = new Input();
         name.getStyle().set("display", "block");
 
-        getElement().appendChild(label, name);
+        Div div = new Div();
+        div.setText("Type a string to generate an image");
+        add(name, div);
         StreamResourceRegistration registration = createResource();
         createGenerateImageButton(registration);
         createImageOpener(registration);
@@ -63,18 +62,17 @@ public class DynamicResourcesView extends SimpleView {
 
     private void createGenerateImageButton(
             StreamResourceRegistration registration) {
-        Element button = ElementFactory.createButton("Generate Image");
+        Button button = new Button("Generate Image");
 
-        button.addEventListener("click", event -> generateImage(
+        button.addClickListener(event -> generateImage(
                 registration.getResourceUri().toString()));
 
-        getElement().appendChild(button);
+        add(button);
     }
 
     private void createImageOpener(StreamResourceRegistration registration) {
-        Element button = ElementFactory.createButton("Open Image");
-
-        getElement().appendChild(button);
+        Button button = new Button("Open Image");
+        add(button);
 
         UI.getCurrent().getPage().executeJavaScript(
                 "$0.onclick=function(){window.open($1);}", button,
@@ -108,7 +106,7 @@ public class DynamicResourcesView extends SimpleView {
                 + "xmlns:xlink='http://www.w3.org/1999/xlink'>"
                 + "<rect x='10' y='10' height='100' width='100' "
                 + "style=' fill: #90C3D4'/>" + "<text x='30' y='30' fill='red'>"
-                + name.getProperty("value") + "</text>" + "</svg>";
+                + name.getValue() + "</text>" + "</svg>";
         return new ByteArrayInputStream(svg.getBytes(StandardCharsets.UTF_8));
     }
 }

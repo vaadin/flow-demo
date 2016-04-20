@@ -15,7 +15,8 @@
  */
 package com.vaadin.hummingbird.demo.staticmenu;
 
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.router.View;
 
 /**
  * An abstract view which automatically contains a text, which tells the name of
@@ -24,17 +25,15 @@ import com.vaadin.hummingbird.dom.ElementFactory;
  * @author Vaadin
  * @since
  */
-public abstract class DummyView extends SimpleView {
+public abstract class DummyView extends Div implements View {
 
     /**
      * Creates the view.
      */
     public DummyView() {
-        super(ElementFactory.createDiv());
-        getElement().setAttribute("class", "content");
+        setClassName("content");
 
-        getElement().setTextContent(
-                "This is the " + Util.getViewName(getClass()) + " view");
+        setText("This is the " + Util.getViewName(getClass()) + " view");
     }
 
 }

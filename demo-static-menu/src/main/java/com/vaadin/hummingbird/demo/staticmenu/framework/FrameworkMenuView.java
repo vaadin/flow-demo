@@ -32,7 +32,7 @@ public class FrameworkMenuView extends SimpleMenuView {
     public FrameworkMenuView() {
         super();
 
-        getMenu().setAttribute("class", "submenu");
+        getMenu().setClassName("submenu");
 
         addItem("Tutorial", TutorialView.class);
         addItem("Docs", DocsView.class);

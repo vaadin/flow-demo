@@ -15,10 +15,12 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
 /**
@@ -27,34 +29,28 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
-public class MainLayout extends SimpleView implements HasChildView {
+public final class MainLayout extends SimpleView implements HasChildView {
 
-    private final Element contentHolder = ElementFactory.createDiv();
+    private final Div contentHolder = new Div();
 
     /**
      * Creates a new layout.
      */
     public MainLayout() {
-        super(ElementFactory.createDiv());
-
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
-        Element menu = createMenu();
-        getElement().appendChild(menu, contentHolder);
-
-        // Placeholder content
-        contentHolder.appendChild(ElementFactory.createDiv());
+        add(createMenu(), contentHolder);
     }
 
-    private Element createMenu() {
-        Element menu = ElementFactory.createDiv();
-        menu.getClassList().add("menu");
+    private Component createMenu() {
+        Div menu = new Div();
+        menu.setClassName("menu");
 
-        Element homeLink = createMenuLink("", "");
-        Element logo = ElementFactory.createDiv();
-        logo.getClassList().add("logo");
-        homeLink.appendChild(logo);
-        menu.appendChild(homeLink, createMenuLink("About", "about"), //
+        HtmlContainer homeLink = createMenuLink("", "");
+        Div logo = new Div();
+        logo.setClassName("logo");
+        homeLink.add(logo);
+        menu.add(homeLink, createMenuLink("About", "about"), //
                 createMenuLink("Parameter view", "param/1"), //
                 createMenuLink("Resource view", "resource/"), //
                 createMenuLink("Dynamic resource view", "dynresource/") //
@@ -62,15 +58,15 @@ public class MainLayout extends SimpleView implements HasChildView {
         return menu;
     }
 
-    private static Element createMenuLink(String caption, String path) {
-        Element link = ElementFactory.createRouterLink(path, caption);
-        link.getClassList().add("menu-item");
+    private static HtmlContainer createMenuLink(String caption, String path) {
+        RouterLink link = new RouterLink(path, caption);
+        link.setClassName("menu-item");
         return link;
     }
 
     @Override
     public void setChildView(View content) {
-        Element contentElement = content.getElement();
-        contentHolder.setChild(0, contentElement);
+        contentHolder.removeAll();
+        content.getElement().getComponent().ifPresent(contentHolder::add);
     }
 }

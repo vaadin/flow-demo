@@ -35,7 +35,7 @@ public class DownloadMenuView extends SimpleMenuView {
         addItem(DocsView.class);
         addItem("Vaadin Icons", IconsAboutView.class);
 
-        getMenu().setAttribute("class", "submenu");
+        getMenu().setClassName("submenu");
     }
 
     @Override

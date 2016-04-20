@@ -18,10 +18,13 @@ package com.vaadin.hummingbird.demo.dynamicmenu;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
+import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
 import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.hummingbird.router.View;
 
 /**
  * A view which shows a product.
@@ -29,24 +32,17 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
  * @since
  * @author Vaadin Ltd
  */
-public class ProductView extends SimpleView {
+@Tag("p")
+public class ProductView extends HtmlContainer implements View {
 
     private Optional<Product> currentProduct;
-
-    /**
-     * Creates a new view.
-     */
-    public ProductView() {
-        super(ElementFactory.createParagraph(""));
-    }
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int productId = getProductId(locationChangeEvent);
         currentProduct = DataService.get().getProductById(productId);
         if (!currentProduct.isPresent()) {
-            getElement().setTextContent(
-                    "Product does not exist or has been removed");
+            setText("Product does not exist or has been removed");
             return;
         }
 

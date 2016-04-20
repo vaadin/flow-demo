@@ -31,7 +31,7 @@ public class IconsMenuView extends SimpleMenuView {
      * Creates the view.
      */
     public IconsMenuView() {
-        getMenu().setAttribute("class", "subsubmenu");
+        getMenu().setClassName("subsubmenu");
 
         addItem("Icons", IconsView.class);
         addItem("About", IconsAboutView.class);

@@ -15,8 +15,8 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.dom.Element;
-import com.vaadin.hummingbird.dom.ElementFactory;
+import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 
@@ -26,33 +26,16 @@ import com.vaadin.hummingbird.router.View;
  * @since
  * @author Vaadin Ltd
  */
-public abstract class SimpleView implements View {
+public abstract class SimpleView extends Div implements View {
 
-    private final Element element;
-
-    /**
-     * Creates a new simple view for the given element.
-     *
-     * @param element
-     *            the element of the view
-     */
-    public SimpleView(Element element) {
-        this.element = element;
-    }
-
-    @Override
-    public final Element getElement() {
-        return element;
-    }
-
-    protected final Element getMappingInfo(String mappingInfo) {
-        Element mapping = ElementFactory.createDiv();
-        Element textElement = ElementFactory
-                .createStrong("Mapped using \"" + mappingInfo + "\"");
+    protected final Div getMappingInfo(String mappingInfo) {
+        Div mapping = new Div();
+        HtmlContainer textElement = new HtmlContainer("strong");
+        textElement.setText("Mapped using \"" + mappingInfo + "\"");
         textElement.getStyle().set("borderBottom", "1px solid black");
         mapping.getStyle().set("marginBottom", "1em");
 
-        mapping.appendChild(textElement);
+        mapping.add(textElement);
         return mapping;
 
     }
@@ -62,4 +45,5 @@ public abstract class SimpleView implements View {
         // Title used for all views
         return "Hummingbird Web Site Demo";
     }
+
 }

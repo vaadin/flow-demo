@@ -30,7 +30,7 @@ public class ElementsMenuView extends SimpleMenuView {
      */
     public ElementsMenuView() {
         super();
-        getMenu().setAttribute("class", "submenu");
+        getMenu().setClassName("submenu");
 
         addItem("Getting Started",
                 "docs/-/part/elements/elements-getting-started.html");
