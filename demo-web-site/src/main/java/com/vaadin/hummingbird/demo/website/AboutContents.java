@@ -15,25 +15,14 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.html.Div;
+import com.vaadin.ui.Template;
 
 /**
- * The static about view.
- *
+ * The actual contents of the about page. Loaded from a template file.
+ * 
  * @since
  * @author Vaadin Ltd
  */
-public final class AboutView extends SimpleView {
-    /**
-     * Creates as new view.
-     */
-    public AboutView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_ABOUT));
-        Div div = new Div();
-        // Must wrap the template component since it doesn't yet support adding
-        // class names
-        div.add(new AboutContents());
-        div.setClassName("content");
-        add(div);
-    }
+public class AboutContents extends Template {
+    // Contents read from AboutContents.html
 }
