@@ -16,12 +16,10 @@
 package com.vaadin.hummingbird.demo.staticmenu.community.blog;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
-import com.vaadin.hummingbird.demo.staticmenu.Util;
+import com.vaadin.hummingbird.RouterLink;
 import com.vaadin.hummingbird.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.hummingbird.html.Div;
-import com.vaadin.hummingbird.html.RouterLink;
 
 /**
  * The blog record component.
@@ -43,9 +41,8 @@ public final class BlogRecordComponent extends Div {
     public BlogRecordComponent(BlogRecord item) {
         setClassName("blog-item");
 
-        Optional<String> link = Util.getNavigablePath(BlogPost.class, "id",
+        RouterLink title = new RouterLink(item.getTitle(), BlogPost.class,
                 Long.toString(item.getId()));
-        RouterLink title = new RouterLink(link.get(), item.getTitle());
         title.setClassName("blog-item-title");
 
         Div by = new Div();
@@ -56,7 +53,8 @@ public final class BlogRecordComponent extends Div {
         date.setText("On " + FORMATTER.format(item.getDate()));
         date.getStyle().set("display", "inline");
 
-        RouterLink readMore = new RouterLink(link.get(), "Read More \u00BB");
+        RouterLink readMore = new RouterLink("Read More \u00BB", BlogPost.class,
+                Long.toString(item.getId()));
         readMore.setClassName("read-more");
 
         add(title, by, date, readMore);

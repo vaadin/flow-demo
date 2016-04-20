@@ -22,8 +22,8 @@ import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.html.HtmlContainer;
-import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
+import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.server.VaadinServletService;
 import com.vaadin.ui.Component;
 
@@ -82,7 +82,7 @@ public final class ResourcesView extends SimpleView {
     }
 
     private static Component createLink(String resource, String caption) {
-        RouterLink link = new RouterLink("resource/" + resource, caption);
+        RouterLink link = new RouterLink(caption, ResourcesView.class);
         HtmlContainer li = new HtmlContainer("li");
         li.add(link);
         return li;

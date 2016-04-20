@@ -18,16 +18,18 @@ package com.vaadin.hummingbird.demo.staticmenu;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Stream;
 
+import com.vaadin.hummingbird.RouterLink;
+import com.vaadin.hummingbird.html.Anchor;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.html.Label;
-import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.shared.ApplicationConstants;
+import com.vaadin.ui.Component;
 
 /**
  * Abstract class which keeps track of menu items and handles menu item
@@ -46,17 +48,24 @@ public abstract class MenuView extends Div implements View, HasChildView {
     public MenuView() {
     }
 
-    protected final void addItem(String caption, String url) {
-        addMenuElement(new RouterLink(url, caption));
+    protected final void addItem(String caption,
+            Class<? extends View> viewClass, String... parameterValues) {
+        if (viewClass == null) {
+            addMenuElement(new Label(caption));
+        } else {
+            addMenuElement(new RouterLink(caption, viewClass, parameterValues));
+        }
     }
 
     protected final void addItem(Class<? extends View> viewClass) {
         addItem(Util.getViewName(viewClass), viewClass);
     }
 
-    protected final void addItem(String caption,
-            Class<? extends View> viewClass) {
-        addItem(caption, viewClass, null, null);
+    protected final void addItem(String caption, String url) {
+        Anchor anchor = new Anchor(url, caption);
+        anchor.getElement()
+                .setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
+        addMenuElement(anchor);
     }
 
     protected final void addItem(String caption,
@@ -64,21 +73,7 @@ public abstract class MenuView extends Div implements View, HasChildView {
             String parameterValue) {
         registerMenuLinkView(viewClass, parameterKey, parameterValue);
 
-        Optional<String> path = Util.getNavigablePath(viewClass);
-        if (path.isPresent()) {
-            String url = path.get();
-            if (parameterKey != null) {
-                url = url.replace("{" + parameterKey + "}", parameterValue);
-            }
-            if (url == null) {
-                addMenuElement(new Label(caption));
-            } else {
-                addItem(caption, url);
-            }
-        } else {
-            addMenuElement(new Label(caption));
-        }
-
+        addItem(caption, viewClass, parameterValue);
     }
 
     protected void markMenuLinkSelected(Class<? extends View> childViewClass) {
@@ -133,16 +128,17 @@ public abstract class MenuView extends Div implements View, HasChildView {
     protected void selectMenuLink(Class<? extends View> childViewClass) {
         String path = Util.getNavigablePath(childViewClass,
                 menuLinkViewParameters.get(childViewClass)).orElse("");
-        getMenuElements().forEach(component -> {
-            boolean selected = path
-                    .equals(component.getElement().getAttribute("href"));
-            component.setClassName("selected", selected);
-        });
+        getMenuElements().filter(HtmlComponent.class::isInstance)
+                .map(HtmlComponent.class::cast).forEach(component -> {
+                    boolean selected = path.equals(
+                            component.getElement().getAttribute("href"));
+                    component.setClassName("selected", selected);
+                });
     }
 
-    protected abstract void addMenuElement(HtmlComponent component);
+    protected abstract void addMenuElement(Component component);
 
-    protected abstract Stream<HtmlComponent> getMenuElements();
+    protected abstract Stream<Component> getMenuElements();
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
