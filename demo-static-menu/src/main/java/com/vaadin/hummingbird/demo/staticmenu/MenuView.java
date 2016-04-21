@@ -29,7 +29,7 @@ import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.StylableComponent;
+import com.vaadin.ui.HasStyle;
 
 /**
  * Abstract class which keeps track of menu items and handles menu item
@@ -135,8 +135,8 @@ public abstract class MenuView extends Div implements View, HasChildView {
     protected void selectMenuLink(Class<? extends View> childViewClass) {
         String path = Util.getNavigablePath(childViewClass,
                 menuLinkViewParameters.get(childViewClass)).orElse("");
-        getMenuElements().filter(StylableComponent.class::isInstance)
-                .map(StylableComponent.class::cast)
+        getMenuElements().filter(HasStyle.class::isInstance)
+                .map(HasStyle.class::cast)
                 .forEach(component -> updateSelectClass(component, path));
     }
 
@@ -151,7 +151,7 @@ public abstract class MenuView extends Div implements View, HasChildView {
                 findChild(getClass(), locationChangeEvent.getViewChain()));
     }
 
-    private void updateSelectClass(StylableComponent component, String path) {
+    private void updateSelectClass(HasStyle component, String path) {
         boolean selected = path
                 .equals(component.getElement().getAttribute("href"));
         component.setClassName("selected", selected);
