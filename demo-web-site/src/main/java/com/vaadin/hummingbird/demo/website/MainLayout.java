@@ -16,9 +16,8 @@
 package com.vaadin.hummingbird.demo.website;
 
 import com.vaadin.hummingbird.html.Div;
-import com.vaadin.hummingbird.html.HtmlContainer;
-import com.vaadin.hummingbird.html.RouterLink;
 import com.vaadin.hummingbird.router.HasChildView;
+import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
@@ -46,20 +45,22 @@ public final class MainLayout extends SimpleView implements HasChildView {
         Div menu = new Div();
         menu.setClassName("menu");
 
-        HtmlContainer homeLink = createMenuLink("", "");
+        RouterLink homeLink = createMenuLink("", HomeView.class);
         Div logo = new Div();
         logo.setClassName("logo");
         homeLink.add(logo);
-        menu.add(homeLink, createMenuLink("About", "about"), //
-                createMenuLink("Parameter view", "param/1"), //
-                createMenuLink("Resource view", "resource/"), //
-                createMenuLink("Dynamic resource view", "dynresource/") //
+        menu.add(homeLink, createMenuLink("About", AboutView.class), //
+                createMenuLink("Parameter view", ParameterView.class, "1"), //
+                createMenuLink("Resource view", ResourcesView.class), //
+                createMenuLink("Dynamic resource view",
+                        DynamicResourcesView.class) //
         );
         return menu;
     }
 
-    private static HtmlContainer createMenuLink(String caption, String path) {
-        RouterLink link = new RouterLink(path, caption);
+    private static RouterLink createMenuLink(String caption,
+            Class<? extends View> viewClass, String... params) {
+        RouterLink link = new RouterLink(caption, viewClass, params);
         link.setClassName("menu-item");
         return link;
     }

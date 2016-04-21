@@ -16,7 +16,6 @@
 package com.vaadin.hummingbird.demo.staticmenu;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -110,22 +109,4 @@ public interface Util {
         return path;
     }
 
-    /**
-     * Returns a path you can use to navigate to the given view, using the given
-     * parameter.
-     *
-     * @param childViewClass
-     *            the view to navigate to
-     * @param key
-     *            the parameter key
-     * @param value
-     *            the parameter value
-     * @return a path to the given view
-     */
-    static Optional<String> getNavigablePath(
-            Class<? extends View> childViewClass, String key, String value) {
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put(key, value);
-        return getNavigablePath(childViewClass, parameters);
-    }
 }
