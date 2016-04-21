@@ -20,14 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import com.vaadin.hummingbird.html.Anchor;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.Label;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HasStyle;
 
@@ -55,13 +53,6 @@ public abstract class MenuView extends Div implements View, HasChildView {
     protected final void addItem(String caption,
             Class<? extends View> viewClass) {
         addItem(caption, viewClass, null, null);
-    }
-
-    protected final void addItem(String caption, String url) {
-        Anchor anchor = new Anchor(url, caption);
-        anchor.getElement()
-                .setAttribute(ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "");
-        addMenuElement(anchor);
     }
 
     protected final void addItem(String caption,

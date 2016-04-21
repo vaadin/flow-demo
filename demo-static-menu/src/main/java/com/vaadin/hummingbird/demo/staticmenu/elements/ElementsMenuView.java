@@ -35,7 +35,7 @@ public class ElementsMenuView extends SimpleMenuView {
 
         addItem("Getting Started", DocsSubView.class,
                 "-/part/elements/elements-getting-started.html");
-        addItem("Demos", "elements#demos");
+        addItem("Demos", ElementsView.class);
     }
 
 }
