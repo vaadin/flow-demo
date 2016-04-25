@@ -15,14 +15,12 @@
  */
 package com.vaadin.hummingbird.demo.textfieldcomposite;
 
-import java.util.function.Consumer;
-
 import com.vaadin.hummingbird.dom.EventRegistrationHandle;
+import com.vaadin.hummingbird.event.ComponentEventListener;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.Input;
 import com.vaadin.hummingbird.html.Label;
 import com.vaadin.hummingbird.html.event.ChangeEvent;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
 
 /**
@@ -36,7 +34,7 @@ import com.vaadin.ui.Composite;
  * @author Vaadin Ltd
  * @since
  */
-public class TextField extends Composite {
+public class TextField extends Composite<Div> {
 
     private static int id = 0;
     private Div layout;
@@ -77,7 +75,7 @@ public class TextField extends Composite {
     }
 
     @Override
-    protected Component initContent() {
+    protected Div initContent() {
         return layout;
     }
 
@@ -127,7 +125,7 @@ public class TextField extends Composite {
      * @return a handle which can be used to remove the listener
      */
     public EventRegistrationHandle addChangeListener(
-            Consumer<ChangeEvent> changeListener) {
+            ComponentEventListener<ChangeEvent> changeListener) {
         return input.addChangeListener(changeListener);
     }
 

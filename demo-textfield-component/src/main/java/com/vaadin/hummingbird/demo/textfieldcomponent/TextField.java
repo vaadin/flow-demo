@@ -15,11 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.textfieldcomponent;
 
-import java.util.function.Consumer;
-
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.dom.EventRegistrationHandle;
+import com.vaadin.hummingbird.event.ComponentEventListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 
@@ -117,7 +116,7 @@ public class TextField extends Component {
     /**
      * Event fired when the value of the text field changes.
      */
-    public static class ChangeEvent extends ComponentEvent {
+    public static class ChangeEvent extends ComponentEvent<TextField> {
         private String newValue;
 
         /**
@@ -153,7 +152,7 @@ public class TextField extends Component {
      * @return a handle which can be used to remove the listener
      */
     public EventRegistrationHandle addChangeListener(
-            Consumer<ChangeEvent> changeListener) {
+            ComponentEventListener<ChangeEvent> changeListener) {
         return addListener(ChangeEvent.class, changeListener);
     }
 }

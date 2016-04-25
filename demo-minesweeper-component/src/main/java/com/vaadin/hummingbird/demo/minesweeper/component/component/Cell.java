@@ -15,11 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.minesweeper.component.component;
 
-import java.util.function.Consumer;
-
 import com.vaadin.annotations.DomEvent;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.EventRegistrationHandle;
+import com.vaadin.hummingbird.event.ComponentEventListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 
@@ -105,7 +104,7 @@ public class Cell extends Component {
      * @return an handle which can be used to remove the listener
      */
     public EventRegistrationHandle addCellClickListener(
-            Consumer<CellClickEvent> listener) {
+            ComponentEventListener<CellClickEvent> listener) {
         return addListener(CellClickEvent.class, listener);
     }
 
