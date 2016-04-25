@@ -15,32 +15,17 @@
  */
 package com.vaadin.hummingbird.demo.helloworld.element;
 
-import javax.servlet.annotation.WebServlet;
-
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.html.Button;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.Input;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.UI;
+import com.vaadin.hummingbird.router.View;
 
 /**
- * UI which demonstrates how a simple Hello World type application can be
- * created.
+ * The one and only view in the hello world application.
  */
-public class HelloWorldUI extends UI {
+public class HelloWorld extends Div implements View {
 
-    /**
-     * The main servlet for the application.
-     */
-    @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = HelloWorldUI.class, productionMode = false)
-    public static class Servlet extends VaadinServlet {
-    }
-
-    @Override
-    protected void init(VaadinRequest request) {
+    public HelloWorld() {
         Input textInput = new Input();
         textInput.setId("inputId");
         textInput.setPlaceholder("Enter your name");
@@ -55,5 +40,4 @@ public class HelloWorldUI extends UI {
 
         add(textInput, button);
     }
-
 }
