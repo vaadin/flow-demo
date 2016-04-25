@@ -43,7 +43,7 @@ public class Cell extends Component {
      * @since
      */
     @DomEvent("click")
-    public static class CellClickEvent extends ComponentEvent {
+    public static class CellClickEvent extends ComponentEvent<Cell> {
 
         /**
          * Creates a new event using the given source and client information.
@@ -56,11 +56,6 @@ public class Cell extends Component {
          */
         public CellClickEvent(Cell source, boolean fromClient) {
             super(source, fromClient);
-        }
-
-        @Override
-        public Cell getSource() {
-            return (Cell) super.getSource();
         }
 
     }
