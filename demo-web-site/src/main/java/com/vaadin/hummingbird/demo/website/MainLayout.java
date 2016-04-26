@@ -15,11 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.router.HasChildView;
-import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.ui.Component;
+import com.vaadin.ui.Template;
 import com.vaadin.ui.UI;
 
 /**
@@ -28,46 +27,38 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
-public final class MainLayout extends SimpleView implements HasChildView {
+public final class MainLayout extends Template implements View, HasChildView {
 
-    private final Div contentHolder = new Div();
+    private final Element contentHolder;
 
     /**
      * Creates a new layout.
      */
     public MainLayout() {
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
+        contentHolder = findContentHolder();
 
-        add(createMenu(), contentHolder);
     }
 
-    private Component createMenu() {
-        Div menu = new Div();
-        menu.setClassName("menu");
-
-        RouterLink homeLink = createMenuLink("", HomeView.class);
-        Div logo = new Div();
-        logo.setClassName("logo");
-        homeLink.add(logo);
-        menu.add(homeLink, createMenuLink("About", AboutView.class), //
-                createMenuLink("Parameter view", ParameterView.class, "1"), //
-                createMenuLink("Resource view", ResourcesView.class), //
-                createMenuLink("Dynamic resource view",
-                        DynamicResourcesView.class) //
-        );
-        return menu;
-    }
-
-    private static RouterLink createMenuLink(String caption,
-            Class<? extends View> viewClass, String... params) {
-        RouterLink link = new RouterLink(caption, viewClass, params);
-        link.setClassName("menu-item");
-        return link;
+    private Element findContentHolder() {
+        for (int i = 0; i < getElement().getChildCount(); i++) {
+            Element child = getElement().getChild(i);
+            if (child.isTextNode()) {
+                continue;
+            }
+            if ("contentholder".equals(child.getAttribute("id"))) {
+                return child;
+            }
+        }
+        throw new IllegalStateException(
+                "No content holder defined in the template");
     }
 
     @Override
     public void setChildView(View content) {
-        contentHolder.removeAll();
-        content.getElement().getComponent().ifPresent(contentHolder::add);
+        contentHolder.removeAllChildren();
+        if (content != null) {
+            contentHolder.appendChild(content.getElement());
+        }
     }
 }
