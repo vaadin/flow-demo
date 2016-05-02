@@ -15,6 +15,11 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vaadin.hummingbird.StateNode;
+import com.vaadin.hummingbird.nodefeature.ModelMap;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Template;
 import com.vaadin.ui.UI;
@@ -28,9 +33,35 @@ import com.vaadin.ui.UI;
 public final class MainLayout extends Template implements View {
 
     /**
-     * Creates a new layout.
+     * Creates a new layout and menu.
      */
     public MainLayout() {
         UI.getCurrent().getPage().addStyleSheet("css/site.css");
+
+        createMenu();
+    }
+
+    private void createMenu() {
+        List<StateNode> items = createMenuItems();
+
+        ModelMap model = getElement().getNode().getFeature(ModelMap.class);
+
+        model.setValue("items", items);
+    }
+
+    private List<StateNode> createMenuItems() {
+        ArrayList<StateNode> items = new ArrayList<>();
+        items.add(createMenuItem("about", "About"));
+        items.add(createMenuItem("param/1", "Parameter view"));
+        items.add(createMenuItem("resource/", "Resource view"));
+        items.add(createMenuItem("dynresource", "Dynamic resource view"));
+        return items;
+    }
+
+    private StateNode createMenuItem(String href, String caption) {
+        StateNode menuItem = new StateNode(ModelMap.class);
+        menuItem.getFeature(ModelMap.class).setValue("href", href);
+        menuItem.getFeature(ModelMap.class).setValue("caption", caption);
+        return menuItem;
     }
 }
