@@ -1,10 +1,7 @@
-<div>
+<div class="main">
   <div class="menu">
     <a class="menu-item" href="" routerLink><div class="logo"></div></a>
-    <a class="menu-item" href="about" routerLink>About</a>
-    <a class="menu-item" href="param/1" routerLink>Parameter view</a>
-    <a class="menu-item" href="resource/" routerLink>Resource view</a>
-    <a class="menu-item" href="dynresource" routerLink>Dynamic resource view</a>
+    <a *ngFor="let item of items" class="menu-item" routerLink [href]="item.href">{{item.caption}}</a> 
   </div>
   @child@
 </div>
