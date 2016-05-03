@@ -1,0 +1,14 @@
+<div class="menu">
+  <ul>
+    <li *ngFor="let item of items" class="category">
+      <a routerLink [class.selected]="item.selected"
+                    [href]="item.href">{{item.caption}}</a>
+        <ul>
+          <li *ngFor="let subitem of subitems">
+            <a routerLink [class.selected]="subitem.selected"
+                          [href]="subitem.href">{{subitem.caption}}</a>
+          </li>
+        </ul>
+    </li>
+  </ul>
+</div>

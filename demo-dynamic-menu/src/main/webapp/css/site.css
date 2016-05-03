@@ -14,11 +14,12 @@
     width: .6em;
 }
 
-.category.expanded:before {
+.category.selected:before {
     content: '-';
 }
 
-.selected {
+.category.selected > a,
+a.selected {
     text-decoration: none;
     color: black;
     font-weight: bold;
@@ -28,7 +29,15 @@
     list-style-type: none;
 }
 
-.content {
+.category ul {
+	display: none;
+}
+.category.selected ul {
+	display: block;
+}
+
+
+.main > *:nth-child(0n+2) {
     flex: 1;
     margin-left: 1em;
 }
