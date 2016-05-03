@@ -19,10 +19,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
 import com.vaadin.testbench.By;
 
-public class HelloWorldIT extends AbstractTestBenchTest {
+public class HelloWorldIT extends AbstractDemoTest {
 
     @Test
     public void basicFunctionality() {
