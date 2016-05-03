@@ -22,9 +22,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
 
-public class WebSiteIT extends AbstractTestBenchTest {
+public class WebSiteIT extends AbstractDemoTest {
 
     private static final String TITLE = "Hummingbird Web Site Demo";
 

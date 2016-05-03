@@ -20,10 +20,10 @@ import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
 import com.vaadin.testbench.By;
 
-public class TextFieldIT extends AbstractTestBenchTest {
+public class TextFieldIT extends AbstractDemoTest {
 
     @Test
     public void basicFunctionality() {

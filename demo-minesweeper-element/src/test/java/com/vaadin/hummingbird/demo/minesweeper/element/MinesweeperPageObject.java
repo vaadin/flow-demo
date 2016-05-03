@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractTestBenchTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
 
-public abstract class MinesweeperPageObject extends AbstractTestBenchTest {
+public abstract class MinesweeperPageObject extends AbstractDemoTest {
 
     protected void waitForBoomNotification() {
         waitForNotification("BOOM! Reload to try again");
