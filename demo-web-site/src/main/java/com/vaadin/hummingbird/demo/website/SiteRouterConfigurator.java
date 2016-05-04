@@ -18,6 +18,8 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.hummingbird.router.ErrorNavigationHandler;
+import com.vaadin.hummingbird.router.Location;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
@@ -54,5 +56,32 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 MainLayout.class);
         configuration.setRoute(MAPPING_DYN_RESOURCE, DynamicResourcesView.class,
                 MainLayout.class);
+
+        // Set a view that handles html/*
+        configuration.setRoute("html/*", HtmlView.class, MainLayout.class);
+
+        // Bonus: Use the default error handling for missing files
+        configuration.setResolver(event -> {
+            Location location = event.getLocation();
+            if (!location.getFirstSegment().equals("html")) {
+                // Not our concern, fall back to registered routes
+                return null;
+            }
+
+            String htmlFilePath = location.getSubLocation()
+                    .map(Location::getPath).orElse("");
+            if (htmlFilePath.isEmpty()) {
+                htmlFilePath = "index.html";
+            }
+
+            if (getClass().getClassLoader()
+                    .getResource("html/" + htmlFilePath) == null) {
+                // Force a 404 instead of looking for registered view
+                return new ErrorNavigationHandler(404);
+            } else {
+                // All is fine, let the view be resolved as any other route
+                return null;
+            }
+        });
     }
 }
