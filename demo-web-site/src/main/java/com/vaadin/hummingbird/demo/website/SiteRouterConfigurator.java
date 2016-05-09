@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.website;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.hummingbird.router.DefaultErrorView;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
@@ -54,5 +55,8 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 MainLayout.class);
         configuration.setRoute(MAPPING_DYN_RESOURCE, DynamicResourcesView.class,
                 MainLayout.class);
+
+        // use default error view but wrap it around main layout
+        configuration.setErrorView(DefaultErrorView.class, MainLayout.class);
     }
 }
