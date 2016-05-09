@@ -44,5 +44,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 MainLayout.class);
         configuration.setRoute("product/{id}", ProductView.class,
                 MainLayout.class);
+
+        configuration.setErrorView(ErrorView.class);
     }
 }
