@@ -54,5 +54,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                 MainLayout.class);
         configuration.setRoute(MAPPING_DYN_RESOURCE, DynamicResourcesView.class,
                 MainLayout.class);
+
+        configuration.setErrorView(ErrorView.class, MainLayout.class);
     }
 }
