@@ -15,9 +15,9 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.hummingbird.StateNode;
-import com.vaadin.hummingbird.nodefeature.ModelList;
-import com.vaadin.hummingbird.nodefeature.ModelMap;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Template;
 import com.vaadin.ui.UI;
@@ -39,28 +39,61 @@ public final class MainLayout extends Template implements View {
         createMenu();
     }
 
+    public static class MenuItem {
+        private String href, caption;
+
+        public MenuItem(String caption, Class<? extends View> viewClass,
+                String... viewParameters) {
+            href = getUrl(viewClass, viewParameters);
+            this.caption = caption;
+        }
+
+        private static String getUrl(Class<? extends View> viewClass,
+                String[] viewParameters) {
+            return "TODO Use router easily, maybe extract logic from RouterLink";
+        }
+
+        public String getHref() {
+            return href;
+        }
+
+        public void setHref(String href) {
+            this.href = href;
+        }
+
+        public String getCaption() {
+            return caption;
+        }
+
+        public void setCaption(String caption) {
+            this.caption = caption;
+        }
+    }
+
+    public static class MyModel {
+        private List<MenuItem> items;
+
+        public List<MenuItem> getItems() {
+            return items;
+        }
+
+        public void setItems(List<MenuItem> items) {
+            this.items = items;
+        }
+    }
+
+    protected MyModel getModel() {
+        return (MyModel) super.getModel();
+    }
+
     private void createMenu() {
-        StateNode items = createMenuItems();
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("About", AboutView.class));
+        menuItems.add(new MenuItem("Parameter view", ParameterView.class, "1"));
+        menuItems.add(new MenuItem("Resource view", ResourcesView.class));
+        menuItems.add(new MenuItem("Dynamic resource view",
+                DynamicResourcesView.class));
 
-        ModelMap model = getElement().getNode().getFeature(ModelMap.class);
-
-        model.setValue("items", items);
-    }
-
-    private StateNode createMenuItems() {
-        StateNode items = new StateNode(ModelList.class);
-        ModelList itemsList = items.getFeature(ModelList.class);
-        itemsList.add(createMenuItem("about", "About"));
-        itemsList.add(createMenuItem("param/1", "Parameter view"));
-        itemsList.add(createMenuItem("resource/", "Resource view"));
-        itemsList.add(createMenuItem("dynresource", "Dynamic resource view"));
-        return items;
-    }
-
-    private StateNode createMenuItem(String href, String caption) {
-        StateNode menuItem = new StateNode(ModelMap.class);
-        menuItem.getFeature(ModelMap.class).setValue("href", href);
-        menuItem.getFeature(ModelMap.class).setValue("caption", caption);
-        return menuItem;
+        getModel().setItems(menuItems);
     }
 }
