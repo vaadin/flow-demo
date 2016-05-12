@@ -92,6 +92,8 @@ public class SiteRouterConfigurator implements RouterConfigurator {
                     .getViewName(event.getViewChain().get(0).getClass());
             return viewName + " - vaadin.com";
         });
+
+        configuration.setErrorView(ErrorView.class, MainMenuView.class);
     }
 
 }
