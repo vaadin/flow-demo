@@ -37,6 +37,7 @@
 		<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
 		<phantomjs.plugin.version>0.7</phantomjs.plugin.version>
 		<phantomjs.version>2.1.1</phantomjs.version>
+		<phantomjs.outputDir>${project.rootdir}/target/phantomjs-maven-plugin</phantomjs.outputDir>
 	</properties>
 	<repositories>
 		<repository>
@@ -199,10 +200,28 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.commonjava.maven.plugins</groupId>
+				<artifactId>directory-maven-plugin</artifactId>
+				<version>0.1</version>
+				<executions>
+					<execution>
+						<id>directories</id>
+						<goals>
+							<goal>highest-basedir</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<property>project.rootdir</property>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -223,6 +242,25 @@
 										</versionRange>
 										<goals>
 											<goal>install</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.commonjava.maven.plugins
+										</groupId>
+										<artifactId>
+											directory-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.1,)
+										</versionRange>
+										<goals>
+											<goal>highest-basedir</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
