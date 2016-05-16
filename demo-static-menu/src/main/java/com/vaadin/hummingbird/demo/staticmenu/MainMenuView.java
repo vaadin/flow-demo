@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.staticmenu;
 
 import java.util.stream.Stream;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.demo.staticmenu.community.CommunityView;
 import com.vaadin.hummingbird.demo.staticmenu.download.DownloadView;
 import com.vaadin.hummingbird.demo.staticmenu.elements.ElementsView;
@@ -26,7 +27,6 @@ import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
 
 /**
  * The main menu.
@@ -34,6 +34,7 @@ import com.vaadin.ui.UI;
  * @author Vaadin
  * @since
  */
+@StyleSheet("css/site.css")
 public class MainMenuView extends SimpleMenuView {
 
     private HtmlContainer ul;
@@ -43,8 +44,6 @@ public class MainMenuView extends SimpleMenuView {
      * Creates the view.
      */
     public MainMenuView() {
-        UI.getCurrent().getPage().addStyleSheet("css/site.css");
-
         getMenu().setClassName("menu");
 
         homeLink = new RouterLink("", HomeView.class);

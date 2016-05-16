@@ -15,12 +15,12 @@
  */
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.router.HasChildView;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.ui.UI;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -28,6 +28,7 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
+@StyleSheet("css/site.css")
 public final class MainLayout extends Div implements HasChildView {
 
     private final Div contentHolder = new Div();
@@ -38,7 +39,6 @@ public final class MainLayout extends Div implements HasChildView {
      */
     public MainLayout() {
         setClassName("main");
-        UI.getCurrent().getPage().addStyleSheet("css/site.css");
 
         menu = new Menu();
         add(menu, contentHolder);
