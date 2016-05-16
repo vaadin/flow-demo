@@ -1,0 +1,23 @@
+{
+  "name": "demo-web-component-progress-bubble",
+  "homepage": "https://github.com/vaadin/hummingbird-demo",
+  "authors": [
+    "Artur Signell <artur@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "progress-bubble": "~1.2.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1.2.3"
+  }
+}
