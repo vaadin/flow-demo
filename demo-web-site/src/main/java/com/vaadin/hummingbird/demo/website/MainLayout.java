@@ -15,12 +15,12 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.StateNode;
 import com.vaadin.hummingbird.nodefeature.ModelList;
 import com.vaadin.hummingbird.nodefeature.ModelMap;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Template;
-import com.vaadin.ui.UI;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -28,14 +28,13 @@ import com.vaadin.ui.UI;
  * @since
  * @author Vaadin Ltd
  */
+@StyleSheet("css/site.css")
 public final class MainLayout extends Template implements View {
 
     /**
      * Creates a new layout and menu.
      */
     public MainLayout() {
-        UI.getCurrent().getPage().addStyleSheet("css/site.css");
-
         createMenu();
     }
 

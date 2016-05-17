@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.minesweeper.element;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.server.VaadinRequest;
@@ -27,6 +28,7 @@ import com.vaadin.ui.UI;
  * UI which demonstrates how you can use the Hummingbird {@link Element} API to
  * create a Minesweeper game.
  */
+@StyleSheet("minesweeper.css")
 public class MinesweeperUI extends UI {
 
     /**
@@ -68,8 +70,6 @@ public class MinesweeperUI extends UI {
         } else {
             cols = 10;
         }
-
-        getPage().addStyleSheet("minesweeper.css");
 
         ElementMinesweeper minesweeper = new ElementMinesweeper(seed,
                 mineDensity, rows, cols);
