@@ -15,37 +15,49 @@
  */
 package com.vaadin.hummingbird.demo.helloworld.template;
 
-import com.vaadin.hummingbird.html.Button;
-import com.vaadin.hummingbird.html.Div;
+import com.vaadin.annotations.EventHandler;
 import com.vaadin.hummingbird.html.Input;
-import com.vaadin.hummingbird.router.View;
+import com.vaadin.hummingbird.nodefeature.ModelMap;
+import com.vaadin.hummingbird.nodefeature.TemplateMap;
+import com.vaadin.ui.Template;
 
 /**
  * The one and only view in the hello world application.
  */
-public class HelloWorld extends Div implements View {
+public class HelloWorld extends Template {
 
-    Greeting greeting;
+    private Input input = new Input();
 
     /**
      * Initializes the view. Invoked by the framework when needed.
      */
     public HelloWorld() {
-        Input textInput = new Input();
-        textInput.setId("inputId");
-        textInput.setPlaceholder("Enter your name");
+        input.setId("inputId");
+        injectInput();
+    }
 
-        Button button = new Button("Say hello");
-        button.addClickListener(e -> {
-            String value = textInput.getValue();
-            if (value == null || value.isEmpty()) {
-                greeting.setText("Don't be shy");
-            } else {
-                greeting.setText("Hello " + value + "!");
-            }
-        });
+    private void injectInput() {
+        // This is a hack until there is support for parameter passing to
+        // @TemplateEventHandler
+        TemplateMap templateMap = getElement().getNode()
+                .getFeature(TemplateMap.class);
+        templateMap.setChild(input.getElement().getNode());
 
-        greeting = new Greeting();
-        add(textInput, button, greeting);
+    }
+
+    @EventHandler
+    private void sayHello() {
+        // Called from the template click handler
+        String inputValue = input.getValue();
+        String text;
+        if (inputValue == null || inputValue.isEmpty()) {
+            text = "Don't be shy";
+        } else {
+            text = "Hello " + inputValue + "!";
+        }
+
+        // This is a hack until there is proper model support in template
+        getElement().getNode().getFeature(ModelMap.class).setValue("text",
+                text);
     }
 }

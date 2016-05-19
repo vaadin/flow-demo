@@ -29,7 +29,7 @@ public class HelloWorldIT extends AbstractDemoTest {
         open();
         WebElement input = findElement(By.id("inputId"));
         WebElement greeting = findElement(By.id("greeting"));
-        WebElement button = findElement(By.cssSelector("button"));
+        WebElement button = findElement(By.tagName("button"));
         Assert.assertEquals("", greeting.getText());
         button.click();
         Assert.assertEquals("Don't be shy", greeting.getText());
