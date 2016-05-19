@@ -9,3 +9,6 @@ target
 */target
 
 *pom.xml.versionsBackup
+*~
+hs_err_pid*
+error-screenshots
