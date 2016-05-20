@@ -16,9 +16,7 @@
 package com.vaadin.hummingbird.demo.helloworld.template;
 
 import com.vaadin.annotations.EventHandler;
-import com.vaadin.hummingbird.html.Input;
 import com.vaadin.hummingbird.nodefeature.ModelMap;
-import com.vaadin.hummingbird.nodefeature.TemplateMap;
 import com.vaadin.ui.Template;
 
 /**
@@ -26,31 +24,17 @@ import com.vaadin.ui.Template;
  */
 public class HelloWorld extends Template {
 
-    private Input input = new Input();
-
     /**
      * Initializes the view. Invoked by the framework when needed.
      */
     public HelloWorld() {
-        input.setId("inputId");
-        injectInput();
-    }
-
-    private void injectInput() {
-        // This is a hack until there is support for parameter passing to
-        // @TemplateEventHandler
-        TemplateMap templateMap = getElement().getNode()
-                .getFeature(TemplateMap.class);
-        templateMap.setChild(input.getElement().getNode());
-
     }
 
     @EventHandler
-    private void sayHello() {
+    private void sayHello(String inputValue) {
         // Called from the template click handler
-        String inputValue = input.getValue();
         String text;
-        if (inputValue == null || inputValue.isEmpty()) {
+        if (inputValue.isEmpty()) {
             text = "Don't be shy";
         } else {
             text = "Hello " + inputValue + "!";
