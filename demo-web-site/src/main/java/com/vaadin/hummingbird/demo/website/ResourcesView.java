@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.website;
 
 import java.io.InputStream;
+import java.util.Optional;
 
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.ElementFactory;
@@ -26,6 +27,8 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.RouterLink;
 import com.vaadin.server.VaadinServletService;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.PropertyDescriptor;
+import com.vaadin.ui.PropertyDescriptors;
 
 /**
  * A view that shows different resources based on the URL.
@@ -40,13 +43,16 @@ public final class ResourcesView extends SimpleView {
 
     @Tag("iframe")
     private static final class IFrame extends HtmlComponent {
+        private static final PropertyDescriptor<String, Optional<String>> srcDescriptor = PropertyDescriptors
+                .optionalAttributeWithDefault("src", "");
+
         private IFrame() {
             getStyle().set("width", "50%");
             getStyle().set("height", "400px");
         }
 
         void setSrc(String src) {
-            setAttribute("src", src);
+            set(srcDescriptor, src);
         }
     }
 
