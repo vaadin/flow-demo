@@ -21,6 +21,7 @@
 		<module>demo-utils</module>
 		<module>demo-textfield-component</module>
 		<module>demo-textfield-composite</module>
+		<module>demo-web-component-progress-bubble</module>
 	</modules>
 
 	<properties>
