@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.vaadin.hummingbird.demo</groupId>
 		<artifactId>hummingbird-demo-project</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
+		<version>0.0.8-SNAPSHOT</version>
 	</parent>
 	<name>Text field component using the Element API</name>
 	<artifactId>demo-textfield-component</artifactId>
