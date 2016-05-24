@@ -21,3 +21,8 @@
 .main > *:last-child {
     margin-left: 1em;
 }
+.active {
+   font-weight: bold;
+   text-decoration: none;
+   color: black;
+}
