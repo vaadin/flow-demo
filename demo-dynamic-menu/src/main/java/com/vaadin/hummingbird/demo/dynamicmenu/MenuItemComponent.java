@@ -22,7 +22,7 @@ import com.vaadin.hummingbird.router.View;
 
 /**
  * A menu item component.
- * 
+ *
  * @author Vaadin Ltd
  *
  */
@@ -33,7 +33,7 @@ public class MenuItemComponent extends HtmlContainer {
 
     /**
      * Creates a new item component.
-     * 
+     *
      * @param viewClass
      *            view class for the item's link to navigate
      * @param id
@@ -50,7 +50,7 @@ public class MenuItemComponent extends HtmlContainer {
 
     /**
      * Selects or deselects the item.
-     * 
+     *
      * @param select
      *            if {@code true} then select the item and deselect it otherwise
      */

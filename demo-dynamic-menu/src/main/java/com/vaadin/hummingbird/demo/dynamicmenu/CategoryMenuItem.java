@@ -27,7 +27,7 @@ import com.vaadin.hummingbird.html.HtmlContainer;
 
 /**
  * A category menu item component.
- * 
+ *
  * @author Vaadin Ltd
  *
  */
@@ -39,7 +39,7 @@ public final class CategoryMenuItem extends MenuItemComponent {
 
     /**
      * Creates a new category component.
-     * 
+     *
      * @param id
      *            category id
      * @param name
@@ -96,7 +96,7 @@ public final class CategoryMenuItem extends MenuItemComponent {
 
     /**
      * Select the product by its {@code productId}.
-     * 
+     *
      * @param productId
      *            product id
      */

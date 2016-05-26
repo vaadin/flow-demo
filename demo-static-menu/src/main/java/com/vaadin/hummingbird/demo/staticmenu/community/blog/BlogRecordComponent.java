@@ -23,7 +23,7 @@ import com.vaadin.hummingbird.router.RouterLink;
 
 /**
  * The blog record component.
- * 
+ *
  * @author Vaadin Ltd
  *
  */
@@ -34,7 +34,7 @@ public final class BlogRecordComponent extends Div {
 
     /**
      * Creates the record component for the {@code item}.
-     * 
+     *
      * @param item
      *            blog record item
      */

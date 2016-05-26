@@ -19,7 +19,7 @@ import com.vaadin.ui.Template;
 
 /**
  * The actual contents of the about page. Loaded from a template file.
- * 
+ *
  * @since
  * @author Vaadin Ltd
  */
