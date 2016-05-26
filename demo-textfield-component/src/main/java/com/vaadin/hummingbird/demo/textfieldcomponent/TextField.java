@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.textfieldcomponent;
 
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.dom.EventRegistrationHandle;
 import com.vaadin.hummingbird.event.ComponentEventListener;
 import com.vaadin.ui.Component;
@@ -40,8 +41,8 @@ public class TextField extends Component {
      * Create an empty text field without a label.
      */
     public TextField() {
-        labelElement = new Element("label");
-        inputElement = new Element("input");
+        labelElement = ElementFactory.createLabel();
+        inputElement = ElementFactory.createInput();
 
         String textFieldId = generateId();
         inputElement.setAttribute("id", textFieldId);
