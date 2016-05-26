@@ -22,6 +22,8 @@ import com.vaadin.hummingbird.dom.EventRegistrationHandle;
 import com.vaadin.hummingbird.event.ComponentEventListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
+import com.vaadin.ui.PropertyDescriptor;
+import com.vaadin.ui.PropertyDescriptors;
 
 /**
  * A component which consist of a label and an input field.
@@ -32,7 +34,8 @@ import com.vaadin.ui.ComponentEvent;
 @Tag("div")
 public class TextField extends Component {
 
-    private static final String VALUE_PROPERTY = "value";
+    private static final PropertyDescriptor<String, String> VALUE_PROPERTY = PropertyDescriptors
+            .propertyWithDefault("value", "");
     private static int id = 0;
     private Element labelElement;
     private Element inputElement;
@@ -48,7 +51,7 @@ public class TextField extends Component {
         inputElement.setAttribute("id", textFieldId);
         labelElement.setAttribute("for", textFieldId);
 
-        inputElement.synchronizeProperty(VALUE_PROPERTY, "change");
+        inputElement.synchronizeProperty("value", "change");
         inputElement.addEventListener("change",
                 e -> fireEvent(new ChangeEvent(this, true)));
 
@@ -100,7 +103,7 @@ public class TextField extends Component {
      * @return the value of the input field
      */
     public String getValue() {
-        return inputElement.getProperty(VALUE_PROPERTY, "");
+        return VALUE_PROPERTY.get(inputElement);
     }
 
     /**
@@ -110,7 +113,7 @@ public class TextField extends Component {
      *            the value of the input field
      */
     public void setValue(String value) {
-        inputElement.setProperty(VALUE_PROPERTY, value);
+        VALUE_PROPERTY.set(inputElement, value);
         fireEvent(new ChangeEvent(this, false));
     }
 
