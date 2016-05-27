@@ -22,7 +22,7 @@ import java.util.Optional;
 
 /**
  * Blogs backend service.
- * 
+ *
  * @author Vaadin Ltd
  *
  */
@@ -38,7 +38,7 @@ public final class BlogsService {
 
     /**
      * Get service instance.
-     * 
+     *
      * @return service instance
      */
     public static BlogsService getInstance() {
@@ -47,7 +47,7 @@ public final class BlogsService {
 
     /**
      * Get blog records.
-     * 
+     *
      * @return blog records
      */
     public Collection<BlogRecord> getItems() {
@@ -56,7 +56,7 @@ public final class BlogsService {
 
     /**
      * Get record by its {@code id}.
-     * 
+     *
      * @param id
      *            record id
      * @return blog record if it exists

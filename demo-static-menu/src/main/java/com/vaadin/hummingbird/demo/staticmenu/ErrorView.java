@@ -15,8 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.staticmenu;
 
-import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.Emphasis;
+import com.vaadin.hummingbird.html.H1;
+import com.vaadin.hummingbird.html.Span;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 
@@ -27,11 +29,9 @@ public class ErrorView extends Div implements View {
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        getElement().appendChild(
-                ElementFactory.createHeading1("404 - Page not found"),
-                ElementFactory.createSpan("Please check the location "),
-                ElementFactory.createEmphasis(
-                        locationChangeEvent.getLocation().getPath()),
-                ElementFactory.createSpan(" and try again."));
+        add(new H1("404 - Page not found"),
+                new Span("Please check the location "),
+                new Emphasis(locationChangeEvent.getLocation().getPath()),
+                new Span(" and try again."));
     }
 }
