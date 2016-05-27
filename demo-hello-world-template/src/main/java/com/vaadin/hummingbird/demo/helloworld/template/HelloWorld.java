@@ -16,13 +16,21 @@
 package com.vaadin.hummingbird.demo.helloworld.template;
 
 import com.vaadin.annotations.EventHandler;
-import com.vaadin.hummingbird.nodefeature.ModelMap;
+import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.ui.Template;
 
 /**
  * The one and only view in the hello world application.
  */
 public class HelloWorld extends Template {
+    public interface HelloWorldModel extends TemplateModel {
+        void setText(String text);
+    }
+
+    @Override
+    protected HelloWorldModel getModel() {
+        return (HelloWorldModel) super.getModel();
+    }
 
     @EventHandler
     private void sayHello(String inputValue) {
@@ -34,8 +42,6 @@ public class HelloWorld extends Template {
             text = "Hello " + inputValue + "!";
         }
 
-        // This is a hack until there is proper model support in template
-        getElement().getNode().getFeature(ModelMap.class).setValue("text",
-                text);
+        getModel().setText(text);
     }
 }
