@@ -31,29 +31,46 @@ public class WebSiteIT extends AbstractDemoTest {
     @Test
     public void testNavigation() {
         open();
+        assertMenuItemSelected(null);
         assertPageTitle(TITLE);
         assertContent("This is the home page");
 
         getMenuItem("About").click();
+        assertMenuItemSelected("About");
         assertPageTitle(TITLE);
         assertContent("This is the about page");
 
         getMenuItem("Parameter view").click();
+        assertMenuItemSelected("Parameter view");
         assertPageTitle(TITLE);
 
         Assert.assertEquals("Id parameter: 1",
                 getFirstContentChild().getText());
 
         getMenuItem("Resource view").click();
+        assertMenuItemSelected("Resource view");
         assertPageTitle(TITLE);
 
         Assert.assertEquals("Select the resource to display" + "",
                 getFirstContentChild().getText());
 
         getMenuItem("Home").click();
+        assertMenuItemSelected(null);
         assertPageTitle(TITLE);
 
         assertContent("This is the home page");
+    }
+
+    private void assertMenuItemSelected(String menuItem) {
+        List<WebElement> activeItems = findElements(
+                By.cssSelector(".menu-item.active"));
+        if (menuItem == null) {
+            Assert.assertEquals(0, activeItems.size());
+        } else {
+            Assert.assertEquals(1, activeItems.size());
+            WebElement activeItem = activeItems.get(0);
+            Assert.assertEquals(menuItem, activeItem.getText());
+        }
     }
 
     private void assertContent(String expected) {

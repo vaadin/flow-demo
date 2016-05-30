@@ -19,6 +19,7 @@ import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.StateNode;
 import com.vaadin.hummingbird.nodefeature.ModelList;
 import com.vaadin.hummingbird.nodefeature.ModelMap;
+import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.ui.Template;
 
@@ -60,6 +61,30 @@ public final class MainLayout extends Template implements View {
         StateNode menuItem = new StateNode(ModelMap.class);
         menuItem.getFeature(ModelMap.class).setValue("href", href);
         menuItem.getFeature(ModelMap.class).setValue("caption", caption);
+        menuItem.getFeature(ModelMap.class).setValue("active", false);
         return menuItem;
+    }
+
+    @Override
+    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
+        // The first segment uniquely identifies the views in this app so we do
+        // not need to check anything else
+        String navigatedToFirstSegment = locationChangeEvent.getLocation()
+                .getFirstSegment();
+
+        ModelMap model = getElement().getNode().getFeature(ModelMap.class);
+        StateNode items = (StateNode) model.getValue("items");
+        ModelList list = items.getFeature(ModelList.class);
+
+        for (int i = 0; i < list.size(); i++) {
+            StateNode itemNode = list.get(i);
+            ModelMap map = itemNode.getFeature(ModelMap.class);
+
+            String itemPathFirstSegment = ((String) map.getValue("href"))
+                    .split("/")[0];
+            boolean active = itemPathFirstSegment
+                    .equals(navigatedToFirstSegment);
+            map.setValue("active", active);
+        }
     }
 }
