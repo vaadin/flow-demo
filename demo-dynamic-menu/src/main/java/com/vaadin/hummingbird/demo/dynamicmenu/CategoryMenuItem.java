@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 
 import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
-import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.HtmlContainer;
+import com.vaadin.hummingbird.router.RouterLink;
 
 /**
  * A category menu item component.
@@ -61,13 +61,13 @@ public final class CategoryMenuItem extends MenuItemComponent {
 
         setExpanded(true);
 
+        RouterLink routerLink = getElement().getChild(0).as(RouterLink.class);
+
         // The link is always the first child, the sub menu is the second
-        Element routerLinkElement = getElement().getChild(0);
         HtmlContainer ul = new HtmlContainer("ul");
         add(ul);
 
-        String categoryId = routerLinkElement.getAttribute("href")
-                .replace("category/", "");
+        String categoryId = routerLink.getHref().replace("category/", "");
         Stream<Product> products = DataService.get()
                 .getProducts(Integer.parseInt(categoryId));
         products.forEach(p -> {
