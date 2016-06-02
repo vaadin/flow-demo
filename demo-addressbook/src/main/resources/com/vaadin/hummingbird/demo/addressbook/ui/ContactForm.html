@@ -1,0 +1,18 @@
+<div class="contactform" [class.hidden]="formHidden">
+	<div class="buttons">
+		<button class="save" (click)="$server.onSave">Save</button>
+		<button (click)="$server.onCancel">Cancel</button>
+	</div>
+	<div class="row">
+		<span>First name</span> <input [value]="firstName"></input>
+	</div>
+	<div class="row">
+		<span>Last name</span> <input [value]="lastName"></input>
+	</div>
+	<div class="row">
+		<span>Phone number</span> <input [value]="phoneNumber"></input>
+	</div>
+	<div class="row">
+		<span>Email</span> <input [value]="email"></input>
+	</div>
+</div>
