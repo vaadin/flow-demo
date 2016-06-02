@@ -1,0 +1,31 @@
+<table class="contactstable">
+	<tr>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+	</tr>
+	<tbody
+		(click)="var tr;
+			if ($event.target.tagName == 'TR') tr = $event.target;
+			else if ($event.target.tagName == 'TD') tr = $event.target.parentNode;
+			else return;
+			
+			var previouslySelected = document.getElementsByClassName('selected-row');
+			var unselect = false;
+			if (previouslySelected != undefined && previouslySelected.length == 1) {
+				unselect = (previouslySelected[0].id == tr.id);
+				previouslySelected[0].className = '';
+			}
+			if (unselect) {
+				$server.onRowSelect('');
+			} else {
+				tr.className = 'selected-row';
+				$server.onRowSelect(tr.id);
+			}">
+		<tr *ngFor="let contact of contacts" [id]="contact.id">
+			<td>{{contact.firstName}}</td>
+			<td>{{contact.lastName}}</td>
+			<td>{{contact.email}}</td>
+		</tr>
+	</tbody>
+</table>
