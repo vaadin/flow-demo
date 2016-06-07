@@ -1,7 +1,7 @@
 <div class="contactform">
 	<div class="buttons">
-		<button class="save" (click)="$server.onSave">Save</button>
-		<button (click)="$server.onCancel">Cancel</button>
+		<button disabled class="save" (click)="$server.onSave()">Save</button>
+		<button (click)="$server.onCaancel()">Cancel</button>
 	</div>
 	<div class="row">
 		<span>First name</span> <input [value]="firstName"></input>
