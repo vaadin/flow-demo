@@ -21,15 +21,19 @@ import com.vaadin.annotations.EventHandler;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
 import com.vaadin.hummingbird.template.model.TemplateModel;
+import com.vaadin.server.Command;
 import com.vaadin.ui.Template;
 
 /**
  * Contact editor form.
- * 
+ *
  * @author Vaadin Ltd
  *
  */
 public class ContactForm extends Template {
+
+    private Command onSave;
+    private Command onCancel;
 
     interface ContactBean extends TemplateModel {
         public String getFirstName();
@@ -49,7 +53,10 @@ public class ContactForm extends Template {
         public void setEmail(String email);
     }
 
-    public ContactForm(String id) {
+    public ContactForm(String id, Command onSave, Command onCancel) {
+        // Uglyness to avoid needing an event bus only for this
+        this.onSave = onSave;
+        this.onCancel = onCancel;
         Optional<Contact> contact = ContactService.getDemoService()
                 .findById(Long.parseLong(id));
         if (contact.isPresent()) {
@@ -70,8 +77,8 @@ public class ContactForm extends Template {
     }
 
     @EventHandler
-    protected void onCancel() {
-        // TODO
+    protected void onCaancel() {
+        onCancel.execute();
     }
 
 }

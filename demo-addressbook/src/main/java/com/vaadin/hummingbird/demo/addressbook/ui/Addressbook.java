@@ -68,7 +68,9 @@ public class Addressbook extends Template implements View {
         if (id.isEmpty()) {
             feature.setChild(null);
         } else {
-            feature.setChild(new ContactForm(id).getElement().getNode());
+            ContactForm contactForm = new ContactForm(id,
+                    () -> feature.setChild(null), () -> feature.setChild(null));
+            feature.setChild(contactForm.getElement().getNode());
         }
 
     }
@@ -78,11 +80,7 @@ public class Addressbook extends Template implements View {
 
         // TODO import as a list
 
-        // Predicate<String> filter = propertyName -> "firstName"
-        // .equals(propertyName) || "lastName".equals(propertyName)
-        // || "email".equals(propertyName);
-        // getModel().importBeans(allContacts, "contacts", filter);
-
+        // TODO Store highlighted class in model instead of using JS logic
         ModelList contacts = getContactsList();
 
         for (Contact c : allContacts) {
