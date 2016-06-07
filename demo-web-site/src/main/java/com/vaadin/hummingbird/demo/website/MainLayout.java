@@ -15,12 +15,16 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.StateNode;
 import com.vaadin.hummingbird.nodefeature.ModelList;
 import com.vaadin.hummingbird.nodefeature.ModelMap;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.ui.Template;
 
 /**
@@ -32,6 +36,33 @@ import com.vaadin.ui.Template;
 @StyleSheet("css/site.css")
 public final class MainLayout extends Template implements View {
 
+    public static class MenuItem {
+        private String href;
+        private String caption;
+        private boolean active = false;
+
+        public MenuItem(String href, String caption) {
+            this.href = href;
+            this.caption = caption;
+        }
+
+        public String getHref() {
+            return href;
+        }
+
+        public String getCaption() {
+            return caption;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+    }
+
+    public interface MainLayoutModel extends TemplateModel {
+        void setItems(List<MenuItem> items);
+    }
+
     /**
      * Creates a new layout and menu.
      */
@@ -39,30 +70,24 @@ public final class MainLayout extends Template implements View {
         createMenu();
     }
 
+    @Override
+    protected MainLayoutModel getModel() {
+        return (MainLayoutModel) super.getModel();
+    }
+
     private void createMenu() {
-        StateNode items = createMenuItems();
-
-        ModelMap model = getElement().getNode().getFeature(ModelMap.class);
-
-        model.setValue("items", items);
+        getModel().setItems(createMenuItems());
     }
 
-    private StateNode createMenuItems() {
-        StateNode items = new StateNode(ModelList.class);
-        ModelList itemsList = items.getFeature(ModelList.class);
-        itemsList.add(createMenuItem("about", "About"));
-        itemsList.add(createMenuItem("param/1", "Parameter view"));
-        itemsList.add(createMenuItem("resource/", "Resource view"));
-        itemsList.add(createMenuItem("dynresource", "Dynamic resource view"));
-        return items;
-    }
+    private static List<MenuItem> createMenuItems() {
+        List<MenuItem> itemsList = new ArrayList<>();
 
-    private StateNode createMenuItem(String href, String caption) {
-        StateNode menuItem = new StateNode(ModelMap.class);
-        menuItem.getFeature(ModelMap.class).setValue("href", href);
-        menuItem.getFeature(ModelMap.class).setValue("caption", caption);
-        menuItem.getFeature(ModelMap.class).setValue("active", false);
-        return menuItem;
+        itemsList.add(new MenuItem("about", "About"));
+        itemsList.add(new MenuItem("param/1", "Parameter view"));
+        itemsList.add(new MenuItem("resource/", "Resource view"));
+        itemsList.add(new MenuItem("dynresource", "Dynamic resource view"));
+
+        return itemsList;
     }
 
     @Override
@@ -72,6 +97,8 @@ public final class MainLayout extends Template implements View {
         String navigatedToFirstSegment = locationChangeEvent.getLocation()
                 .getFirstSegment();
 
+        // There's not yet any convenient way of updating values in a model
+        // list, so must use low-level APIs for that
         ModelMap model = getElement().getNode().getFeature(ModelMap.class);
         StateNode items = (StateNode) model.getValue("items");
         ModelList list = items.getFeature(ModelList.class);
