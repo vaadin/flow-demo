@@ -95,6 +95,10 @@ input {
   color: #ecf2f8;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
+.save:disabled {
+    background-color: #1927e1;
+    color: #555;
+}
 
 .row {
   align-self: flex-end;
