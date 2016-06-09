@@ -1,5 +1,5 @@
 <div>
   <input type="text" id="inputId">
   <button (click)="$server.sayHello(inputId.value)">Say hello</button>
-  <div id="greeting">{{text}}</div>
+  <div id="greeting">{{(text.length==0) ? "Don't be shy": "Hello " + text + "!" }}</div>
 </div>

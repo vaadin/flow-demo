@@ -44,13 +44,6 @@ public class HelloWorld extends Template {
     @EventHandler
     private void sayHello(String inputValue) {
         // Called from the template click handler
-        String text;
-        if (inputValue.isEmpty()) {
-            text = "Don't be shy";
-        } else {
-            text = "Hello " + inputValue + "!";
-        }
-
-        getModel().setText(text);
+        getModel().setText(inputValue);
     }
 }
