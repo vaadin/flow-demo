@@ -15,16 +15,15 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
-import com.vaadin.hummingbird.StateNode;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
-import com.vaadin.hummingbird.nodefeature.ModelList;
-import com.vaadin.hummingbird.nodefeature.ModelMap;
 import com.vaadin.hummingbird.nodefeature.TemplateMap;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
@@ -47,6 +46,7 @@ public class Addressbook extends Template implements View {
 
         boolean isFormHidden();
 
+        // @Include("firstName","lastName","email","id");
         void setContacts(List<Contact> contacts);
     }
 
@@ -78,34 +78,14 @@ public class Addressbook extends Template implements View {
     private void writeContactsToModel() {
         List<Contact> allContacts = ContactService.getDemoService().findAll("");
 
-        // TODO import as a list
-
+        Set<String> propertiesToImport = new HashSet<>();
+        propertiesToImport.add("firstName");
+        propertiesToImport.add("lastName");
+        propertiesToImport.add("email");
+        propertiesToImport.add("id");
         // TODO Store highlighted class in model instead of using JS logic
-        ModelList contacts = getContactsList();
-
-        for (Contact c : allContacts) {
-            StateNode node = new StateNode(ModelMap.class);
-            ModelMap modelMap = node.getFeature(ModelMap.class);
-            modelMap.setValue("firstName", c.getFirstName());
-            modelMap.setValue("lastName", c.getLastName());
-            modelMap.setValue("email", c.getEmail());
-            modelMap.setValue("id", c.getId().intValue());
-            contacts.add(node);
-        }
+        // TODO Use getModel().setContacts(contacts) + @Include when available
+        TemplateModel.importBeans("contacts", allContacts, Contact.class,
+                propertyName -> propertiesToImport.contains(propertyName));
     }
-
-    private ModelList getContactsList() {
-        ModelMap modelMap = getElement().getNode().getFeature(ModelMap.class);
-        ModelList contacts;
-        if (modelMap.hasValue(CONTACTS_PROPERTY_NAME)) {
-            contacts = ((StateNode) modelMap.getValue(CONTACTS_PROPERTY_NAME))
-                    .getFeature(ModelList.class);
-        } else {
-            StateNode stateNode = new StateNode(ModelList.class);
-            modelMap.setValue(CONTACTS_PROPERTY_NAME, stateNode);
-            contacts = stateNode.getFeature(ModelList.class);
-        }
-        return contacts;
-    }
-
 }
