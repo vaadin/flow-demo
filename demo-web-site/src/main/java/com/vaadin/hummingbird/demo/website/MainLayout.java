@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.hummingbird.StateNode;
-import com.vaadin.hummingbird.nodefeature.ModelList;
-import com.vaadin.hummingbird.nodefeature.ModelMap;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.hummingbird.template.model.TemplateModel;
@@ -41,6 +38,10 @@ public final class MainLayout extends Template implements View {
         private String caption;
         private boolean active = false;
 
+        public MenuItem() {
+            // no arg CTOR to be able to proxy
+        }
+
         public MenuItem(String href, String caption) {
             this.href = href;
             this.caption = caption;
@@ -57,10 +58,16 @@ public final class MainLayout extends Template implements View {
         public boolean isActive() {
             return active;
         }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
     }
 
     public interface MainLayoutModel extends TemplateModel {
         void setItems(List<MenuItem> items);
+
+        List<MenuItem> getItems();
     }
 
     /**
@@ -97,21 +104,12 @@ public final class MainLayout extends Template implements View {
         String navigatedToFirstSegment = locationChangeEvent.getLocation()
                 .getFirstSegment();
 
-        // There's not yet any convenient way of updating values in a model
-        // list, so must use low-level APIs for that
-        ModelMap model = getElement().getNode().getFeature(ModelMap.class);
-        StateNode items = (StateNode) model.getValue("items");
-        ModelList list = items.getFeature(ModelList.class);
+        getModel().getItems().stream()
+                .forEach(item -> updateActive(item, navigatedToFirstSegment));
+    }
 
-        for (int i = 0; i < list.size(); i++) {
-            StateNode itemNode = list.get(i);
-            ModelMap map = itemNode.getFeature(ModelMap.class);
-
-            String itemPathFirstSegment = ((String) map.getValue("href"))
-                    .split("/")[0];
-            boolean active = itemPathFirstSegment
-                    .equals(navigatedToFirstSegment);
-            map.setValue("active", active);
-        }
+    private void updateActive(MenuItem item, String firstSegment) {
+        String itemPathFirstSegment = item.getHref().split("/")[0];
+        item.setActive(itemPathFirstSegment.equals(firstSegment));
     }
 }
