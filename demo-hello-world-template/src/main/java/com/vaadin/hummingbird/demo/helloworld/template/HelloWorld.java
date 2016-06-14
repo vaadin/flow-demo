@@ -36,6 +36,13 @@ public class HelloWorld extends Template {
         void setText(String text);
     }
 
+    /**
+     * Creates new template instance.
+     */
+    public HelloWorld() {
+        getModel();
+    }
+
     @Override
     protected HelloWorldModel getModel() {
         return (HelloWorldModel) super.getModel();
