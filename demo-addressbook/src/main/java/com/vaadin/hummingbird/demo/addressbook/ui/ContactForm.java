@@ -60,7 +60,7 @@ public class ContactForm extends Template {
         Optional<Contact> contact = ContactService.getDemoService()
                 .findById(Long.parseLong(id));
         if (contact.isPresent()) {
-            getModel().importBean(contact.get(),
+            getModel().importBean("", contact.get(),
                     propertyName -> !"id".equals(propertyName)
                             && !"birthDate".equals(propertyName));
         }
