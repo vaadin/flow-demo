@@ -35,7 +35,7 @@ public class ContactForm extends Template {
     private Command onSave;
     private Command onCancel;
 
-    interface ContactBean extends TemplateModel {
+    public interface ContactBean extends TemplateModel {
         public String getFirstName();
 
         public void setFirstName(String firstName);
@@ -53,12 +53,12 @@ public class ContactForm extends Template {
         public void setEmail(String email);
     }
 
-    public ContactForm(String id, Command onSave, Command onCancel) {
+    public ContactForm(Integer id, Command onSave, Command onCancel) {
         // Uglyness to avoid needing an event bus only for this
         this.onSave = onSave;
         this.onCancel = onCancel;
         Optional<Contact> contact = ContactService.getDemoService()
-                .findById(Long.parseLong(id));
+                .findById(id);
         if (contact.isPresent()) {
             getModel().importBean("", contact.get(),
                     propertyName -> !"id".equals(propertyName)
@@ -77,7 +77,7 @@ public class ContactForm extends Template {
     }
 
     @EventHandler
-    protected void onCaancel() {
+    protected void onCancel() {
         onCancel.execute();
     }
 

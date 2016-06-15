@@ -62,10 +62,10 @@ public class Addressbook extends Template implements View {
     }
 
     @EventHandler
-    protected void onRowSelect(String id) {
+    protected void onRowSelect(Integer id) {
         TemplateMap feature = getElement().getNode()
                 .getFeature(TemplateMap.class);
-        if (id.isEmpty()) {
+        if (id == null) {
             feature.setChild(null);
         } else {
             ContactForm contactForm = new ContactForm(id, () -> {
