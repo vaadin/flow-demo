@@ -42,7 +42,7 @@ public class Addressbook extends Template implements View {
 
     private static final String CONTACTS_PROPERTY_NAME = "contacts";
 
-    interface AddressbookModel extends TemplateModel {
+    public interface AddressbookModel extends TemplateModel {
         void setFormHidden(boolean formHidden);
 
         boolean isFormHidden();
@@ -97,7 +97,7 @@ public class Addressbook extends Template implements View {
     private ModelList getContactsList() {
         ModelMap modelMap = getElement().getNode().getFeature(ModelMap.class);
         ModelList contacts;
-        if (modelMap.hasValue(CONTACTS_PROPERTY_NAME)) {
+        if (modelMap.getValue(CONTACTS_PROPERTY_NAME) != null) {
             contacts = ((StateNode) modelMap.getValue(CONTACTS_PROPERTY_NAME))
                     .getFeature(ModelList.class);
         } else {
