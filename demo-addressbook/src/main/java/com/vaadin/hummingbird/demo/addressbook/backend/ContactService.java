@@ -46,8 +46,8 @@ public class ContactService {
 
     private static final ContactService INSTANCE = new ContactService();
 
-    private LinkedHashMap<Long, Contact> contacts = new LinkedHashMap<>();
-    private long nextId = 0;
+    private LinkedHashMap<Integer, Contact> contacts = new LinkedHashMap<>();
+    private int nextId = 0;
 
     private ContactService() {
         Random random = new Random(0);
@@ -101,7 +101,7 @@ public class ContactService {
      *            the id of the contact to get
      * @return the contact matching the id or an empty optional if none found
      */
-    public synchronized Optional<Contact> findById(Long id) {
+    public synchronized Optional<Contact> findById(Integer id) {
         Contact contact = contacts.get(id);
         return Optional.ofNullable(contact).map(Contact::copy);
     }
