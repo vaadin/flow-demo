@@ -31,7 +31,7 @@ import org.apache.commons.beanutils.BeanUtils;
 // class and nothing Vaadin specific.
 public final class Contact implements Serializable {
 
-    private Long id;
+    private Integer id;
 
     private String firstName = "";
     private String lastName = "";
@@ -44,7 +44,7 @@ public final class Contact implements Serializable {
      *
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -54,7 +54,7 @@ public final class Contact implements Serializable {
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

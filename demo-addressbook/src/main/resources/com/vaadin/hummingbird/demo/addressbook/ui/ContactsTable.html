@@ -17,7 +17,7 @@
 				previouslySelected[0].className = '';
 			}
 			if (unselect) {
-				$server.onRowSelect('');
+				$server.onRowSelect(null);
 			} else {
 				tr.className = 'selected-row';
 				$server.onRowSelect(tr.id);
