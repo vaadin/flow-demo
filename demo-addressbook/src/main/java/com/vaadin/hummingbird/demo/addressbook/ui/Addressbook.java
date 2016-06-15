@@ -15,11 +15,10 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.Include;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
@@ -39,14 +38,12 @@ import com.vaadin.ui.Template;
 @StyleSheet("css/site.css")
 public class Addressbook extends Template implements View {
 
-    private static final String CONTACTS_PROPERTY_NAME = "contacts";
-
     public interface AddressbookModel extends TemplateModel {
         void setFormHidden(boolean formHidden);
 
         boolean isFormHidden();
 
-        // @Include("firstName","lastName","email","id");
+        @Include({ "firstName", "lastName", "email", "id" })
         void setContacts(List<Contact> contacts);
     }
 
@@ -78,14 +75,7 @@ public class Addressbook extends Template implements View {
     private void writeContactsToModel() {
         List<Contact> allContacts = ContactService.getDemoService().findAll("");
 
-        Set<String> propertiesToImport = new HashSet<>();
-        propertiesToImport.add("firstName");
-        propertiesToImport.add("lastName");
-        propertiesToImport.add("email");
-        propertiesToImport.add("id");
         // TODO Store highlighted class in model instead of using JS logic
-        // TODO Use getModel().setContacts(contacts) + @Include when available
-        getModel().importBeans(CONTACTS_PROPERTY_NAME, allContacts,
-                Contact.class, propertiesToImport::contains);
+        getModel().setContacts(allContacts);
     }
 }
