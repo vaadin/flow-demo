@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.addressbook.ui;
 import java.util.Optional;
 
 import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.Exclude;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
 import com.vaadin.hummingbird.template.model.TemplateModel;
@@ -36,21 +37,10 @@ public class ContactForm extends Template {
     private Command onCancel;
 
     public interface ContactBean extends TemplateModel {
-        public String getFirstName();
+        @Exclude({ "id", "birthDate" })
+        public void setContact(Contact contact);
 
-        public void setFirstName(String firstName);
-
-        public String getLastName();
-
-        public void setLastName(String lastName);
-
-        public String getPhoneNumber();
-
-        public void setPhoneNumber(String phoneNumber);
-
-        public String getEmail();
-
-        public void setEmail(String email);
+        public Contact getContact();
     }
 
     public ContactForm(Integer id, Command onSave, Command onCancel) {
@@ -60,9 +50,7 @@ public class ContactForm extends Template {
         Optional<Contact> contact = ContactService.getDemoService()
                 .findById(id);
         if (contact.isPresent()) {
-            getModel().importBean("", contact.get(),
-                    propertyName -> !"id".equals(propertyName)
-                            && !"birthDate".equals(propertyName));
+            getModel().setContact(contact.get());
         }
     }
 
