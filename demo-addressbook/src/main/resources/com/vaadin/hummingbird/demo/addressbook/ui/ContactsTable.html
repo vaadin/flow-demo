@@ -4,11 +4,9 @@
 		<th>Last Name</th>
 		<th>Email</th>
 	</tr>
-	<tbody
-		(click)="var tr;
-			if ($event.target.tagName == 'TR') tr = $event.target;
-			else if ($event.target.tagName == 'TD') tr = $event.target.parentNode;
-			else return;
+	<tbody>
+		<tr *ngFor="let contact of contacts" [id]="contact.id"
+			(click)="var tr = $event.currentTarget;
 			
 			var previouslySelected = document.getElementsByClassName('selected-row');
 			var unselect = false;
@@ -22,7 +20,6 @@
 				tr.className = 'selected-row';
 				$server.onRowSelect(tr.id);
 			}">
-		<tr *ngFor="let contact of contacts" [id]="contact.id">
 			<td>{{contact.firstName}}</td>
 			<td>{{contact.lastName}}</td>
 			<td>{{contact.email}}</td>
