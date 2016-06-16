@@ -163,7 +163,7 @@ public class ElementMinesweeper {
             td.getClassList().add(CLASS_EMPTY);
             int count = minefield.getNearbyCount(row, col);
             if (count > 0) {
-                td.setTextContent(Integer.toString(count));
+                td.setText(Integer.toString(count));
             } else {
                 // Autoreveal
                 for (Point p : minefield.getNearbyPoints(row, col)) {

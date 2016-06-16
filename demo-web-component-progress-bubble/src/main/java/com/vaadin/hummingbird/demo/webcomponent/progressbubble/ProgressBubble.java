@@ -64,7 +64,7 @@ public class ProgressBubble extends Component {
             adjustedValue = getMax();
         }
         getElement().setProperty("value", adjustedValue);
-        getElement().setTextContent(adjustedValue + " %");
+        getElement().setText(adjustedValue + " %");
     }
 
     /**
