@@ -45,6 +45,8 @@ public class Addressbook extends Template implements View {
 
         @Exclude({ "birthDate" })
         void setContacts(List<Contact> contacts);
+
+        List<Contact> getContacts();
     }
 
     @Override
@@ -60,16 +62,35 @@ public class Addressbook extends Template implements View {
 
     @EventHandler
     protected void onRowSelect(Integer id) {
-        TemplateMap feature = getElement().getNode()
-                .getFeature(TemplateMap.class);
         if (id == null) {
-            feature.setChild(null);
+            hideForm();
         } else {
-            ContactForm contactForm = new ContactForm(id, () -> {
-            }, () -> feature.setChild(null));
-            feature.setChild(contactForm.getElement().getNode());
+            ContactForm contactForm = new ContactForm(id, contact -> {
+                // Update model with the new contact
+                List<Contact> modelContacts = getModel().getContacts();
+                for (int i = 0; i < modelContacts.size(); i++) {
+                    if (modelContacts.get(i).getId() == id) {
+                        modelContacts.set(i, contact);
+                        break;
+                    }
+                }
+                hideForm();
+            }, this::hideForm);
+            showForm(contactForm);
         }
 
+    }
+
+    private void showForm(ContactForm contactForm) {
+        TemplateMap feature = getElement().getNode()
+                .getFeature(TemplateMap.class);
+        feature.setChild(contactForm.getElement().getNode());
+    }
+
+    private void hideForm() {
+        TemplateMap feature = getElement().getNode()
+                .getFeature(TemplateMap.class);
+        feature.setChild(null);
     }
 
     private void writeContactsToModel() {
