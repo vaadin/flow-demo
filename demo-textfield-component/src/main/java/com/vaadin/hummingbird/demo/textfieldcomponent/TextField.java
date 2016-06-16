@@ -84,7 +84,7 @@ public class TextField extends Component {
      * @return the text field label
      */
     public String getLabel() {
-        return labelElement.getOwnTextContent();
+        return labelElement.getText();
     }
 
     /**
@@ -94,7 +94,7 @@ public class TextField extends Component {
      *            the text field label
      */
     public void setLabel(String label) {
-        labelElement.setTextContent(label);
+        labelElement.setText(label);
     }
 
     /**
