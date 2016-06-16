@@ -33,14 +33,18 @@ import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
  */
 public class AddressbookIT extends AbstractDemoTest {
 
+    private static final By TABLE_LOCATOR = By.className("contactstable");
+    private static final By FORM_LOCATOR = By.className("contactform");
+    private static final By BUTTONS_CONTAINER_LOCATOR = By.className("buttons");
+
     @Before
     public void setUp() {
         open();
     }
 
     @Test
-    public void tableWithData() {
-        WebElement table = findElement(By.className("contactstable"));
+    public void validateTableData10Rows() {
+        WebElement table = findElement(TABLE_LOCATOR);
         Assert.assertEquals("table", table.getTagName());
 
         List<WebElement> headers = table.findElements(By.tagName("th"));
@@ -58,7 +62,7 @@ public class AddressbookIT extends AbstractDemoTest {
         Assert.assertEquals(size, rows.size());
 
         for (int i = 0; i < 10; i++) {
-            assertRowData(i, rows, contacts);
+            assertRowData(rows.get(i), contacts.get(i));
         }
     }
 
@@ -70,15 +74,13 @@ public class AddressbookIT extends AbstractDemoTest {
 
         rows.get(index).click();
 
-        List<WebElement> buttons = findElement(By.className("buttons"))
+        assertFormVisible(true);
+
+        List<WebElement> buttons = findElement(BUTTONS_CONTAINER_LOCATOR)
                 .findElements(By.tagName("button"));
         Assert.assertEquals(2, buttons.size());
 
-        Assert.assertEquals(Boolean.TRUE.toString(),
-                buttons.get(0).getAttribute("disabled"));
-        Assert.assertNull(buttons.get(1).getAttribute("disabled"));
-
-        WebElement form = findElement(By.className("contactform"));
+        WebElement form = findElement(FORM_LOCATOR);
         List<WebElement> inputs = form.findElements(By.tagName("input"));
         Assert.assertEquals(4, inputs.size());
 
@@ -92,6 +94,9 @@ public class AddressbookIT extends AbstractDemoTest {
                 inputs.get(2).getAttribute("value"));
         Assert.assertEquals(contact.getEmail(),
                 inputs.get(3).getAttribute("value"));
+
+        getCancelButton().click();
+        assertFormVisible(false);
     }
 
     @Test
@@ -103,17 +108,65 @@ public class AddressbookIT extends AbstractDemoTest {
         // select a row
         rows.get(index).click();
 
-        List<WebElement> buttons = findElement(By.className("buttons"))
+        List<WebElement> buttons = findElement(BUTTONS_CONTAINER_LOCATOR)
                 .findElements(By.tagName("button"));
         Assert.assertEquals(2, buttons.size());
 
         // deselect
         rows.get(index).click();
-        Assert.assertFalse(isElementPresent(By.className("buttons")));
+        Assert.assertFalse(isElementPresent(BUTTONS_CONTAINER_LOCATOR));
+    }
+
+    @Test
+    public void updateEleventh() {
+        int index = 10;
+
+        List<WebElement> rows = getRows();
+
+        // select a row
+        rows.get(index).click();
+
+        Contact before = getContact(rows.get(index));
+
+        WebElement form = findElement(FORM_LOCATOR);
+        List<WebElement> inputs = form.findElements(By.tagName("input"));
+        inputs.get(0).sendKeys("123");
+        inputs.get(3).sendKeys("456");
+        getSaveButton().click();
+
+        assertFormVisible(false);
+
+        Contact after = getContact(getRows().get(index));
+        Assert.assertEquals(before.getFirstName() + "123",
+                after.getFirstName());
+        Assert.assertEquals(before.getLastName(), after.getLastName());
+        Assert.assertEquals(before.getEmail() + "456", after.getEmail());
+    }
+
+    private WebElement getSaveButton() {
+        return findElement(By.id("save"));
+    }
+
+    private WebElement getCancelButton() {
+        return findElement(By.id("cancel"));
+    }
+
+    private void assertFormVisible(boolean expected) {
+        boolean formVisible = isElementPresent(FORM_LOCATOR);
+        Assert.assertEquals(expected, formVisible);
+    }
+
+    private Contact getContact(WebElement tr) {
+        List<WebElement> tds = tr.findElements(By.tagName("td"));
+        Contact contact = new Contact();
+        contact.setFirstName(tds.get(0).getText());
+        contact.setLastName(tds.get(1).getText());
+        contact.setEmail(tds.get(2).getText());
+        return contact;
     }
 
     private List<WebElement> getRows() {
-        WebElement table = findElement(By.className("contactstable"));
+        WebElement table = findElement(TABLE_LOCATOR);
 
         List<WebElement> bodies = table.findElements(By.tagName("tbody"));
         List<WebElement> rows = bodies.get(bodies.size() - 1)
@@ -121,15 +174,10 @@ public class AddressbookIT extends AbstractDemoTest {
         return rows;
     }
 
-    private void assertRowData(int row, List<WebElement> rows,
-            List<Contact> contacts) {
-        List<WebElement> columns = rows.get(row).findElements(By.tagName("td"));
-        Assert.assertEquals(3, columns.size());
-        Assert.assertEquals(contacts.get(row).getFirstName(),
-                columns.get(0).getText());
-        Assert.assertEquals(contacts.get(row).getLastName(),
-                columns.get(1).getText());
-        Assert.assertEquals(contacts.get(row).getEmail(),
-                columns.get(2).getText());
+    private void assertRowData(WebElement tr, Contact expected) {
+        Contact actual = getContact(tr);
+        Assert.assertEquals(expected.getFirstName(), actual.getFirstName());
+        Assert.assertEquals(expected.getLastName(), actual.getLastName());
+        Assert.assertEquals(expected.getEmail(), actual.getEmail());
     }
 }
