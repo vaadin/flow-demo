@@ -39,7 +39,7 @@ public class AddressbookIT extends AbstractDemoTest {
     }
 
     @Test
-    public void tableWithData() {
+    public void validateTableData10Rows() {
         WebElement table = findElement(By.className("contactstable"));
         Assert.assertEquals("table", table.getTagName());
 
@@ -58,7 +58,7 @@ public class AddressbookIT extends AbstractDemoTest {
         Assert.assertEquals(size, rows.size());
 
         for (int i = 0; i < 10; i++) {
-            assertRowData(i, rows, contacts);
+            assertRowData(rows.get(i), contacts.get(i));
         }
     }
 
@@ -73,10 +73,6 @@ public class AddressbookIT extends AbstractDemoTest {
         List<WebElement> buttons = findElement(By.className("buttons"))
                 .findElements(By.tagName("button"));
         Assert.assertEquals(2, buttons.size());
-
-        Assert.assertEquals(Boolean.TRUE.toString(),
-                buttons.get(0).getAttribute("disabled"));
-        Assert.assertNull(buttons.get(1).getAttribute("disabled"));
 
         WebElement form = findElement(By.className("contactform"));
         List<WebElement> inputs = form.findElements(By.tagName("input"));
@@ -112,6 +108,39 @@ public class AddressbookIT extends AbstractDemoTest {
         Assert.assertFalse(isElementPresent(By.className("buttons")));
     }
 
+    @Test
+    public void updateEleventh() {
+        int index = 10;
+
+        List<WebElement> rows = getRows();
+
+        // select a row
+        rows.get(index).click();
+
+        Contact before = getContact(rows.get(index));
+
+        WebElement form = findElement(By.className("contactform"));
+        List<WebElement> inputs = form.findElements(By.tagName("input"));
+        inputs.get(0).sendKeys("123");
+        inputs.get(3).sendKeys("456");
+        findElement(By.id("save")).click();
+
+        Contact after = getContact(getRows().get(index));
+        Assert.assertEquals(before.getFirstName() + "123",
+                after.getFirstName());
+        Assert.assertEquals(before.getLastName(), after.getLastName());
+        Assert.assertEquals(before.getEmail() + "456", after.getEmail());
+    }
+
+    private Contact getContact(WebElement tr) {
+        List<WebElement> tds = tr.findElements(By.tagName("td"));
+        Contact contact = new Contact();
+        contact.setFirstName(tds.get(0).getText());
+        contact.setLastName(tds.get(1).getText());
+        contact.setEmail(tds.get(2).getText());
+        return contact;
+    }
+
     private List<WebElement> getRows() {
         WebElement table = findElement(By.className("contactstable"));
 
@@ -121,15 +150,10 @@ public class AddressbookIT extends AbstractDemoTest {
         return rows;
     }
 
-    private void assertRowData(int row, List<WebElement> rows,
-            List<Contact> contacts) {
-        List<WebElement> columns = rows.get(row).findElements(By.tagName("td"));
-        Assert.assertEquals(3, columns.size());
-        Assert.assertEquals(contacts.get(row).getFirstName(),
-                columns.get(0).getText());
-        Assert.assertEquals(contacts.get(row).getLastName(),
-                columns.get(1).getText());
-        Assert.assertEquals(contacts.get(row).getEmail(),
-                columns.get(2).getText());
+    private void assertRowData(WebElement tr, Contact expected) {
+        Contact actual = getContact(tr);
+        Assert.assertEquals(expected.getFirstName(), actual.getFirstName());
+        Assert.assertEquals(expected.getLastName(), actual.getLastName());
+        Assert.assertEquals(expected.getEmail(), actual.getEmail());
     }
 }
