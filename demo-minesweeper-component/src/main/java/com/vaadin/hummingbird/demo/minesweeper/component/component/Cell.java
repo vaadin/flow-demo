@@ -182,7 +182,7 @@ public class Cell extends Component {
      *            the text content to set
      */
     public void setText(String text) {
-        getElement().setTextContent(text);
+        getElement().setText(text);
     }
 
 }
