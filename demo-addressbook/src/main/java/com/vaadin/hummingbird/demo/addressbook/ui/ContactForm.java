@@ -15,14 +15,21 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
-import java.util.Optional;
-
 import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.Exclude;
+import com.vaadin.annotations.Id;
+import com.vaadin.hummingbird.StateNode;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
+import com.vaadin.hummingbird.dom.Element;
+import com.vaadin.hummingbird.dom.impl.BasicElementStateProvider;
+import com.vaadin.hummingbird.dom.impl.TemplateElementStateProvider;
+import com.vaadin.hummingbird.html.Input;
+import com.vaadin.hummingbird.nodefeature.TemplateOverridesMap;
+import com.vaadin.hummingbird.template.ElementTemplateNode;
 import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.server.Command;
+import com.vaadin.ui.HasElement;
 import com.vaadin.ui.Template;
 
 /**
@@ -33,25 +40,43 @@ import com.vaadin.ui.Template;
  */
 public class ContactForm extends Template {
 
-    private Command onSave;
+    @Id("firstName")
+    private Input firstName;
+    @Id("lastName")
+    private Input lastName;
+    @Id("phoneNumber")
+    private Input phoneNumber;
+    @Id("email")
+    private Input email;
+
+    private SerializableConsumer<Contact> onSave;
     private Command onCancel;
+    private Contact editContact;
 
     public interface ContactBean extends TemplateModel {
         @Exclude({ "id", "birthDate" })
-        public void setContact(Contact contact);
+        void setContact(Contact contact);
 
-        public Contact getContact();
+        Contact getContact();
     }
 
-    public ContactForm(Integer id, Command onSave, Command onCancel) {
+    /**
+     * Creates a new form for editing the given contact.
+     *
+     * @param contact
+     *            the contact to edit
+     * @param onSave
+     *            the callback to invoke when the contact is saved
+     * @param onCancel
+     *            the callback to invoke when cancel is pressed
+     */
+    public ContactForm(Contact contact, SerializableConsumer<Contact> onSave,
+            Command onCancel) {
         // Uglyness to avoid needing an event bus only for this
         this.onSave = onSave;
         this.onCancel = onCancel;
-        Optional<Contact> contact = ContactService.getDemoService()
-                .findById(id);
-        if (contact.isPresent()) {
-            getModel().setContact(contact.get());
-        }
+        editContact = contact;
+        getModel().setContact(contact);
     }
 
     @Override
@@ -61,7 +86,39 @@ public class ContactForm extends Template {
 
     @EventHandler
     protected void onSave() {
-        onSave.execute();
+        Contact contact = new Contact();
+        // TODO Use getModel().update(editContact,"contact") once
+        // https://github.com/vaadin/hummingbird/issues/732 is implemented
+        contact.setId(editContact.getId());
+        contact.setBirthDate(editContact.getBirthDate());
+
+        // TODO Update model in template once
+        // https://github.com/vaadin/hummingbird/issues/612 is implemented
+        contact.setFirstName(getValue(firstName));
+        contact.setLastName(getValue(lastName));
+        contact.setPhoneNumber(getValue(phoneNumber));
+        contact.setEmail(getValue(email));
+
+        onSave.accept(ContactService.getDemoService().save(contact));
+    }
+
+    private static String getValue(HasElement hasElement) {
+        StateNode node = getOverrideNode(hasElement.getElement());
+        String valueProperty = "value";
+        if (BasicElementStateProvider.get().hasProperty(node, valueProperty)) {
+            return (String) BasicElementStateProvider.get().getProperty(node,
+                    valueProperty);
+        } else {
+            return hasElement.getElement().getProperty(valueProperty);
+        }
+    }
+
+    private static StateNode getOverrideNode(Element element) {
+        ElementTemplateNode templateNode = ((TemplateElementStateProvider) element
+                .getStateProvider()).getTemplateNode();
+        StateNode node = element.getNode();
+        return node.getFeature(TemplateOverridesMap.class).get(templateNode,
+                false);
     }
 
     @EventHandler
