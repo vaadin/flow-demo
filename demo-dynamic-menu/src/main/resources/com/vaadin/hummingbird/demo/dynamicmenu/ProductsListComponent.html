@@ -1,0 +1,4 @@
+<ul>
+	<li *ngFor="let product of products"><a [attr.href]="product.link"
+		routerLink [class.selected]="product.id == selectedProduct">{{product.productName}}</a></li>
+</ul>
