@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.dynamicmenu.backend;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -39,7 +40,7 @@ public interface DataService {
      *
      * @return all categories
      */
-    Collection<Category> getAllCategories();
+    List<Category> getAllCategories();
 
     /**
      * Gets the product with the given id.
