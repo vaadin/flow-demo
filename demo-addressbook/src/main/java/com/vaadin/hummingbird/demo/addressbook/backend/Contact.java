@@ -29,7 +29,7 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 // Backend DTO class. This is just a typical Java backend implementation
 // class and nothing Vaadin specific.
-public final class Contact implements Serializable {
+public class Contact implements Serializable {
 
     private Integer id;
 
