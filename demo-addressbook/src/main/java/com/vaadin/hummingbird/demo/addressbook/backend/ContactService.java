@@ -130,13 +130,16 @@ public class ContactService {
      *
      * @param entry
      *            the contact to save
+     * @return the saved contact
      */
-    public synchronized void save(Contact entry) {
+    public synchronized Contact save(Contact entry) {
         if (entry.getId() == null) {
             entry.setId(nextId);
             nextId++;
         }
         contacts.put(entry.getId(), entry);
+
+        return entry;
     }
 
     private static boolean contactMatches(String filter, Contact contact) {

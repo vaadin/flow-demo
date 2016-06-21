@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.Exclude;
@@ -27,6 +28,7 @@ import com.vaadin.hummingbird.nodefeature.TemplateMap;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.hummingbird.template.model.TemplateModel;
+import com.vaadin.server.Command;
 import com.vaadin.ui.Template;
 
 /**
@@ -43,8 +45,10 @@ public class Addressbook extends Template implements View {
 
         boolean isFormHidden();
 
-        @Exclude({ "birthDate" })
+        @Exclude("birthDate")
         void setContacts(List<Contact> contacts);
+
+        List<Contact> getContacts();
     }
 
     @Override
@@ -60,16 +64,48 @@ public class Addressbook extends Template implements View {
 
     @EventHandler
     protected void onRowSelect(Integer id) {
-        TemplateMap feature = getElement().getNode()
-                .getFeature(TemplateMap.class);
         if (id == null) {
-            feature.setChild(null);
+            hideForm();
         } else {
-            ContactForm contactForm = new ContactForm(id, () -> {
-            }, () -> feature.setChild(null));
-            feature.setChild(contactForm.getElement().getNode());
+            Optional<Contact> toEdit = ContactService.getDemoService()
+                    .findById(id);
+            if (!toEdit.isPresent()) {
+                // If the client sends a non existing id, ignore it
+                return;
+            }
+            SerializableConsumer<Contact> onSave = contact -> {
+                // Update model with the new contact
+                List<Contact> modelContacts = getModel().getContacts();
+                for (int i = 0; i < modelContacts.size(); i++) {
+                    if (modelContacts.get(i).getId() == id) {
+                        // TODO Remove this once
+                        // https://github.com/vaadin/hummingbird/issues/968 is
+                        // implemented
+                        contact.setBirthDate(null);
+                        modelContacts.set(i, contact);
+                        break;
+                    }
+                }
+                hideForm();
+            };
+            Command onCancel = this::hideForm;
+            ContactForm contactForm = new ContactForm(toEdit.get(), onSave,
+                    onCancel);
+            showForm(contactForm);
         }
 
+    }
+
+    private void showForm(ContactForm contactForm) {
+        TemplateMap feature = getElement().getNode()
+                .getFeature(TemplateMap.class);
+        feature.setChild(contactForm.getElement().getNode());
+    }
+
+    private void hideForm() {
+        TemplateMap feature = getElement().getNode()
+                .getFeature(TemplateMap.class);
+        feature.setChild(null);
     }
 
     private void writeContactsToModel() {
