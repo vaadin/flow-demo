@@ -98,12 +98,12 @@ public final class ResourcesView extends SimpleView {
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         String resourcePath = locationChangeEvent.getPathWildcard();
-        if (resourceExists("/" + resourcePath)) {
-            iframe.setSrc(resourcePath);
-            content.getElement().setChild(3, iframe.getElement());
-        } else if ("".equals(resourcePath)) {
+        if ("".equals(resourcePath)) {
             content.getElement().setChild(3,
                     ElementFactory.createDiv("No resource selected"));
+        } else if (resourceExists("/" + resourcePath)) {
+            iframe.setSrc(resourcePath);
+            content.getElement().setChild(3, iframe.getElement());
         } else {
             content.getElement().setChild(3, ElementFactory
                     .createDiv("Resource " + resourcePath + " not available"));
