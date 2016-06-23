@@ -25,7 +25,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin.hummingbird.demo</groupId>
-			<artifactId>test-util</artifactId>
+			<artifactId>demo-test-util</artifactId>
 		</dependency>
 		<dependency>
             <groupId>com.vaadin.hummingbird.demo</groupId>

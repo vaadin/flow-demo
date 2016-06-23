@@ -8,8 +8,7 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.12-SNAPSHOT</version>
 	</parent>
-
-	<artifactId>test-util</artifactId>
+	<artifactId>demo-test-util</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>

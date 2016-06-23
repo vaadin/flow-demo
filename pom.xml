@@ -10,7 +10,7 @@
 	<version>0.0.12-SNAPSHOT</version>
 
 	<modules>
-		<module>test-util</module>
+		<module>demo-test-util</module>
 		<module>demo-minesweeper-element</module>
 		<module>demo-minesweeper-component</module>
 		<module>demo-hello-world</module>
@@ -86,7 +86,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.vaadin.hummingbird.demo</groupId>
-				<artifactId>test-util</artifactId>
+				<artifactId>demo-test-util</artifactId>
 				<version>${project.version}</version>
 				<scope>test</scope>
 			</dependency>
