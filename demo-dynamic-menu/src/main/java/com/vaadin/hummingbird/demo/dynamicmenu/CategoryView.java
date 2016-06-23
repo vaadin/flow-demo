@@ -15,9 +15,11 @@
  */
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
+import com.vaadin.annotations.Include;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Category;
@@ -25,7 +27,8 @@ import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
 import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
-import com.vaadin.ui.Component;
+import com.vaadin.hummingbird.template.model.TemplateModel;
+import com.vaadin.ui.Template;
 
 /**
  * A view which shows products in a given category.
@@ -38,6 +41,21 @@ public final class CategoryView extends HtmlContainer implements View {
 
     private Optional<Category> currentCategory;
 
+    public interface ProductModel extends TemplateModel {
+
+        @Include("productName")
+        void setProducts(List<Product> products);
+
+    }
+
+    public static class CategorySection extends Template {
+
+        @Override
+        protected ProductModel getModel() {
+            return (ProductModel) super.getModel();
+        }
+    }
+
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int catId = getCategoryId(locationChangeEvent);
@@ -49,16 +67,14 @@ public final class CategoryView extends HtmlContainer implements View {
         }
 
         removeAll();
-        HtmlContainer ul = new HtmlContainer("ul");
-
-        Stream<Product> products = DataService.get().getProducts(catId);
-        products.map(Product::getProductName).map(this::createListItem)
-                .forEach(ul::add);
+        CategorySection section = new CategorySection();
+        section.getModel().setProducts(DataService.get().getProducts(catId)
+                .collect(Collectors.toList()));
 
         Category category = currentCategory.get();
         HtmlContainer categoryName = new HtmlContainer("strong");
         categoryName.setText("Products in " + category.getName());
-        add(categoryName, ul);
+        add(categoryName, section);
 
     }
 
@@ -90,12 +106,6 @@ public final class CategoryView extends HtmlContainer implements View {
         } else {
             return "Category: " + currentCategory.get().getName();
         }
-    }
-
-    private Component createListItem(String name) {
-        HtmlContainer item = new HtmlContainer("li");
-        item.setText(name);
-        return item;
     }
 
 }

@@ -21,10 +21,11 @@ import java.util.Optional;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.dynamicmenu.backend.DataService;
 import com.vaadin.hummingbird.demo.dynamicmenu.data.Product;
-import com.vaadin.hummingbird.dom.ElementFactory;
 import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
+import com.vaadin.hummingbird.template.model.TemplateModel;
+import com.vaadin.ui.Template;
 
 /**
  * A view which shows a product.
@@ -37,6 +38,24 @@ public class ProductView extends HtmlContainer implements View {
 
     private Optional<Product> currentProduct;
 
+    public interface ProductModel extends TemplateModel {
+        void setId(int id);
+
+        void setProductName(String productName);
+
+        void setPrice(String price);
+
+        void setStockCount(int stockCount);
+    }
+
+    public static class ProductInfo extends Template {
+
+        @Override
+        protected ProductModel getModel() {
+            return (ProductModel) super.getModel();
+        }
+    }
+
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
         int productId = getProductId(locationChangeEvent);
@@ -46,17 +65,17 @@ public class ProductView extends HtmlContainer implements View {
             return;
         }
 
-        Product product = currentProduct.get();
         getElement().removeAllChildren();
-        getElement().appendChild(ElementFactory
-                .createStrong("Information about product " + product.getId()));
-        getElement().appendChild(
-                ElementFactory.createDiv("Title: " + product.getProductName()));
-        getElement()
-                .appendChild(ElementFactory.createDiv("Price: " + DecimalFormat
-                        .getCurrencyInstance().format(product.getPrice())));
-        getElement().appendChild(ElementFactory
-                .createDiv("Stock count: " + product.getStockCount()));
+
+        ProductInfo info = new ProductInfo();
+        Product product = currentProduct.get();
+        info.getModel().importBean("", product,
+                property -> property.equals("id")
+                        || property.equals("productName")
+                        || property.equals("stockCount"));
+        info.getModel().setPrice(
+                DecimalFormat.getCurrencyInstance().format(product.getPrice()));
+        add(info);
 
     }
 

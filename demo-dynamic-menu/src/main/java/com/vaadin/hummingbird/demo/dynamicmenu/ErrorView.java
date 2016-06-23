@@ -15,24 +15,26 @@
  */
 package com.vaadin.hummingbird.demo.dynamicmenu;
 
-import com.vaadin.hummingbird.dom.ElementFactory;
-import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
-import com.vaadin.hummingbird.router.View;
+import com.vaadin.hummingbird.template.model.TemplateModel;
+import com.vaadin.ui.Template;
 
 /**
  * An error view showing a message with the wrong location to the user.
  */
-public class ErrorView extends Div implements View {
+public class ErrorView extends Template {
+
+    public interface ErrorModel extends TemplateModel {
+        void setPath(String path);
+    }
 
     @Override
     public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        getStyle().set("textAlign", "center");
-        getElement().appendChild(
-                ElementFactory.createHeading1("404 - Page not found"),
-                ElementFactory.createSpan("Please check the location "),
-                ElementFactory.createEmphasis(
-                        locationChangeEvent.getLocation().getPath()),
-                ElementFactory.createSpan(" and try again."));
+        getModel().setPath(locationChangeEvent.getLocation().getPath());
+    }
+
+    @Override
+    protected ErrorModel getModel() {
+        return (ErrorModel) super.getModel();
     }
 }

@@ -13,22 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.dynamicmenu;
+package com.vaadin.hummingbird.demo.addressbook.ui;
 
-import com.vaadin.annotations.Title;
-import com.vaadin.ui.Template;
+import java.io.Serializable;
+import java.util.function.Consumer;
 
 /**
- * The static home page.
+ * A consumer which is serializable.
  *
- * @since
  * @author Vaadin Ltd
+ * @param <T>
+ *            the type of the input to the consumer
  */
-@Title("Home")
-public class HomeView extends Template {
-    /**
-     * Creates a new home view.
-     */
-    public HomeView() {
-    }
+public interface SerializableConsumer<T> extends Consumer<T>, Serializable {
+
 }
