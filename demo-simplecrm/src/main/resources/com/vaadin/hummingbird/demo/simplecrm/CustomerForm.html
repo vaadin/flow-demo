@@ -1,0 +1,26 @@
+<form is="iron-form" id="customerForm" class="visible">
+	<paper-input label="First name" [value]="firstName" (blur)="server.setFirstName(element.value);"></paper-input>
+	<paper-input label="Last name" [value]="lastName" (blur)="server.setLastName(element.value);"></paper-input>
+	<paper-input label="Email" [value]="email" (blur)="server.setEmail(element.value);"></paper-input>
+	<paper-input label="Birthday" type="date" [value]="birthDate" (blur)="server.setBirthDate(element.value);"></paper-input>
+	<paper-radio-group [selected]="gender" attr-for-selected="name" (iron-select)="server.setGender(element.selected);">
+		<paper-radio-button name="Female">Female</paper-radio-button>
+		<paper-radio-button name="Male">Male</paper-radio-button> 
+	</paper-radio-group>
+
+	<paper-dropdown-menu label="Status">
+		<paper-menu id="menunen" class="dropdown-content" attr-for-selected="value" [selected]="status" (iron-select)="server.setStatus(element.selected);" >
+			<paper-item value="ImportedLead">Imported Lead</paper-item>
+			<paper-item value="NotContacted">Not contacted</paper-item>
+			<paper-item value="Contacted">Contacted</paper-item>
+			<paper-item value="Customer">Customer</paper-item>
+			<paper-item value="ClosedLost">Closed/lost</paper-item>
+		</paper-menu> 
+	</paper-dropdown-menu>
+
+	<div class="buttons">
+		<paper-button id="save" (click)="server.save();">Save</paper-button>
+		<paper-button id="cancel" (click)="document.getElementById('form-wrapper').style.display = 'none';">Cancel</paper-button>
+		<paper-button id="delete" (click)="server.delete();">Delete</paper-button>
+	</div>
+</form>
