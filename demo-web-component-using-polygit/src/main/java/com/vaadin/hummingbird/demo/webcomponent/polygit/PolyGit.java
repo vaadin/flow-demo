@@ -13,7 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.webcomponent.progressbubble;
+package com.vaadin.hummingbird.demo.webcomponent.polygit;
+
+import com.vaadin.hummingbird.demo.webcomponent.polygit.component.ProgressBubble;
 
 /**
  * Helper for managing a application wide PolyGit URL.
@@ -25,17 +27,23 @@ public class PolyGit {
     // component+org+ver (given version)
     // component+org+:branch (tip of branch)
     // component+org+:* (latest release)
+
+    private static final String POLYMER_POLYGIT_DEFINITION = "polymer++v1.4.0";
+
     /**
-     * The URL to use for polygit.org when loading web components.
+     * The URL to use for polygit.org when loading web components. Starts with
+     * "//" to support both http and https.
      */
-    public static final String BASE_URL = "http://polygit.org/"
-            + "progress-bubble+tehapo+v1.2.0" //
+    public static final String BASE_URL = "//polygit.org/"
+            + ProgressBubble.POLYGIT_DEFINITION //
             + "/" //
-            + "polymer++v1.4.0" //
+            + "vaadin-combo-box+vaadin+v1.1.1" //
+            + "/" //
+            + POLYMER_POLYGIT_DEFINITION //
             + "/" //
             + "components/";
 
     private PolyGit() {
-        // Static URL should be the only public API
+        // The static URL is the only API
     }
 }

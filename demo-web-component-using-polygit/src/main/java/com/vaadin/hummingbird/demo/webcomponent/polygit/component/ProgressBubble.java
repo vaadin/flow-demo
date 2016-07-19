@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.webcomponent.progressbubble;
+package com.vaadin.hummingbird.demo.webcomponent.polygit.component;
 
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
+import com.vaadin.hummingbird.demo.webcomponent.polygit.PolyGit;
 import com.vaadin.ui.Component;
 
 /**
@@ -27,6 +28,11 @@ import com.vaadin.ui.Component;
 @Tag("progress-bubble")
 @HtmlImport(PolyGit.BASE_URL + "progress-bubble/progress-bubble.html")
 public class ProgressBubble extends Component {
+
+    /**
+     * component+org+ver
+     */
+    public static final String POLYGIT_DEFINITION = "progress-bubble+tehapo+v1.3.1";
 
     /**
      * Creates a new progress bubble with the default value (0) and max value
@@ -64,7 +70,8 @@ public class ProgressBubble extends Component {
             adjustedValue = getMax();
         }
         getElement().setProperty("value", adjustedValue);
-        getElement().setText(adjustedValue + " %");
+        getElement().setText(
+                String.format("%.1f", 100.0 * adjustedValue / getMax()) + " %");
     }
 
     /**
