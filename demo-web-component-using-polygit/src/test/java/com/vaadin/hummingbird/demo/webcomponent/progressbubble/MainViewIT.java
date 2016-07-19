@@ -15,8 +15,6 @@ package com.vaadin.hummingbird.demo.webcomponent.progressbubble;
  * the License.
  */
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -24,30 +22,29 @@ import org.openqa.selenium.WebElement;
 
 import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
 
-public class ProgressBubbleIT extends AbstractDemoTest {
+public class MainViewIT extends AbstractDemoTest {
 
     @Test
     public void domCorrect() {
         open();
-        WebElement bubble = findElement(By.tagName("progress-bubble"));
+        WebElement bubble = findElements(By.tagName("progress-bubble")).get(1);
         WebElement content = bubble
                 .findElement(By.xpath("./div[@id='content']"));
-        Assert.assertEquals("0 %", content.getText());
+        Assert.assertEquals("62.5 %", content.getText());
     }
 
     @Test
     public void updatesWork() {
         open();
-        List<WebElement> bubbles = findElements(By.tagName("progress-bubble"));
-        Assert.assertEquals(4, bubbles.size());
+        WebElement bubble = findElements(By.tagName("progress-bubble")).get(1);
+        WebElement content = bubble
+                .findElement(By.xpath("./div[@id='content']"));
 
-        WebElement makeProgress = findElement(By.id("makeProgress"));
-        makeProgress.click();
-        makeProgress.click();
+        executeScript("value.value='10'");
+        executeScript("rangeEnd.value='40'");
 
-        for (WebElement bubble : bubbles) {
-            Assert.assertEquals(10, getPropertyLong(bubble, "value"));
-        }
+        Assert.assertEquals(10, getPropertyLong(bubble, "value"));
+        Assert.assertEquals("25.0 %", content.getText());
     }
 
     private long getPropertyLong(WebElement bubble, String property) {
