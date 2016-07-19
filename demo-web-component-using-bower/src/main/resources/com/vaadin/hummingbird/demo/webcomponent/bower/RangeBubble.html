@@ -1,0 +1,7 @@
+<div>
+	Progress bubble with selectable range:<br>
+	<vaadin-combo-box id="value" label="Value"></vaadin-combo-box>
+	<vaadin-combo-box id="rangeEnd" label="Range end"></vaadin-combo-box>
+	<progress-bubble id="bubble" style="background: purple;" [max]="end"
+		[value]="value">{{(100*value/end).toFixed(1)+ " %"}}</progress-bubble>
+</div>
