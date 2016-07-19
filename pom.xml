@@ -21,7 +21,7 @@
 		<module>demo-utils</module>
 		<module>demo-textfield-component</module>
 		<module>demo-textfield-composite</module>
-		<module>demo-web-component-progress-bubble</module>
+		<module>demo-web-component-using-polygit</module>
 		<module>demo-addressbook</module>
 	</modules>
 
