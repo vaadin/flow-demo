@@ -7,8 +7,8 @@
 		<artifactId>hummingbird-demo-project</artifactId>
 		<version>0.0.15-SNAPSHOT</version>
 	</parent>
-	<name>Progress Bubble Web Component Integration</name>
-	<artifactId>demo-web-component-progress-bubble</artifactId>
+	<name>Web Components using Polygit CDN</name>
+	<artifactId>demo-web-component-using-polygit</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
