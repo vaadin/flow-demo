@@ -1,5 +1,11 @@
 package com.vaadin.hummingbird.demo.website;
 
+import java.io.IOException;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 /*
  * Copyright 2000-2016 Vaadin Ltd.
  *
@@ -45,6 +51,38 @@ public class BlogIT extends AbstractComplexStaticMenuTest {
         String title = findBlogItem(1, true);
 
         Assert.assertEquals(title, findActiveBlog().getText());
+    }
+
+    @Test
+    public void testBlogErrorPage() {
+        getDriver().get(getBlogUrl("4"));
+
+        String headingText = findElement(By.cssSelector("h1")).getText();
+
+        Assert.assertEquals("404 - Page not found", headingText);
+    }
+
+    @Test
+    public void testBlogOkStatusCode() throws IOException {
+        Assert.assertEquals(200, getHttpStatusCode(getBlogUrl("1")));
+    }
+
+    @Test
+    public void testBlogErrorStatusCode() throws IOException {
+        Assert.assertEquals(404, getHttpStatusCode(getBlogUrl("4")));
+    }
+
+    private static int getHttpStatusCode(String url) throws IOException {
+        try (CloseableHttpClient client = HttpClientBuilder.create().build();
+                CloseableHttpResponse response = client
+                        .execute(new HttpGet(url))) {
+
+            return response.getStatusLine().getStatusCode();
+        }
+    }
+
+    private String getBlogUrl(String string) {
+        return getTestURL() + "/blog/" + string;
     }
 
     private WebElement findActiveBlog() {
