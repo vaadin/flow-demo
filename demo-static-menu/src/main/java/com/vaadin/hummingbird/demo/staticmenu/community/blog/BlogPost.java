@@ -48,10 +48,8 @@ public class BlogPost extends Div implements View {
         }
 
         if (record == null) {
-            Div error = new Div();
-            error.setText("Unable to find the post");
-            error.setClassName("no-post");
-            add(error);
+            locationChangeEvent.rerouteToErrorView();
+            return;
         } else {
             HtmlContainer title = new HtmlContainer("h1");
             title.setText(record.getTitle());
