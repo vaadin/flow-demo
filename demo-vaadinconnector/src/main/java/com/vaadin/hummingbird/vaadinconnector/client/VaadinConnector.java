@@ -5,6 +5,7 @@ import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorMap;
 import com.vaadin.client.JsArrayObject;
+import com.vaadin.client.LayoutManager;
 import com.vaadin.client.Util;
 import com.vaadin.client.communication.JsonDecoder;
 import com.vaadin.client.communication.JsonEncoder;
@@ -78,10 +79,10 @@ public class VaadinConnector extends Element {
 
         ConnectorMap connectorMap = getConnectorMap(connection);
 
+        LayoutManager.get(connection).setConnection(connection);
         FakeParentConnector fakeParent = new FakeParentConnector(this);
         connectorMap.registerConnector(parentConnectorId, fakeParent);
         fakeParent.doInit(parentConnectorId, connection);
-
         Type type = TypeData.getType(TypeData.getClass(connectorClass));
         ComponentConnector connector = (ComponentConnector) type
                 .createInstance();
