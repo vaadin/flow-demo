@@ -1,7 +1,24 @@
 <div class="main">
   <div class="menu">
     <a class="menu-item" href="" routerLink><div class="logo"></div></a>
-    <a *ngFor="let item of items" class="menu-item" [class.active]="item.active" routerLink [href]="item.href">{{item.caption}}</a> 
+    <dom-repeat items="[[items]]">
+    	<template>
+    		<a class$="[[_itemClass(item)]]" routerLink href$="[[item.href]]">[[item.caption]]</a>
+    	</template>
+    </dom-repeat>
   </div>
-  @child@
+  <slot></slot>
 </div>
+<script>
+class MainLayout extends Polymer.Element {
+	static get is() { return "main-layout"; }
+	
+	_itemClass(item) {
+		if (item.active)
+			return "menu-item active"
+		else
+			return "menu-item";
+	}
+}
+customElements.define(MainLayout.is, MainLayout);
+</script>

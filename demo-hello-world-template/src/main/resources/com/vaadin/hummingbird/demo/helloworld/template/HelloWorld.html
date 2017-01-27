@@ -1,5 +1,19 @@
 <div>
   <input type="text" id="inputId">
-  <button (click)="$server.sayHello(inputId.value)">Say hello</button>
-  <div id="greeting">{{text ? "Hello " + text + "!" : "Please enter your name"}}</div>
+  <button on-tap="_sayHello">Say hello</button>
+  <div id="greeting">[]</div>
 </div>
+<script>
+class HelloWorld extends Polymer.Element {
+	static get is() { return "hello-world"; }
+	
+	_sayHello() {
+		$server.sayHello(this.$.inputId.value);
+	}
+	
+	_formatGreeting(text) {
+		text ? "Hello " + text + "!" : "Please enter your name"
+	}
+}
+customElements.define(HelloWorld.is, HelloWorld);
+</script>

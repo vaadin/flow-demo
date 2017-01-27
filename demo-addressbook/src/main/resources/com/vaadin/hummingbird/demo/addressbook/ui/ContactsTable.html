@@ -5,24 +5,37 @@
 		<th>Email</th>
 	</tr>
 	<tbody>
-		<tr *ngFor="let contact of contacts" [id]="contact.id"
-			(click)="var tr = $event.currentTarget;
-			
-			var previouslySelected = document.getElementsByClassName('selected-row');
-			var unselect = false;
-			if (previouslySelected != undefined && previouslySelected.length == 1) {
-				unselect = (previouslySelected[0].id == tr.id);
-				previouslySelected[0].className = '';
-			}
-			if (unselect) {
-				$server.onRowSelect(null);
-			} else {
-				tr.className = 'selected-row';
-				$server.onRowSelect(tr.id);
-			}">
-			<td>{{contact.firstName}}</td>
-			<td>{{contact.lastName}}</td>
-			<td>{{contact.email}}</td>
-		</tr>
+		<dom-repeat items="[[contacts]]">
+			<template>
+				<tr on-tap="_itemClicked">
+					<td>[[item.firstName]]</td>
+					<td>[[item.lastName]]</td>
+					<td>[[item.email]]</td>
+				</tr>
+			</template>
+		</dom-repeat>
 	</tbody>
 </table>
+<script>
+class ContactTable extends Polymer.Element {
+	static get is() { return "contacts-table"; }
+	
+	_itemClicked(event) {
+		var tr = event.target;
+		
+		var previouslySelected = document.getElementsByClassName('selected-row');
+		var unselect = false;
+		if (previouslySelected != undefined && previouslySelected.length == 1) {
+			unselect = (previouslySelected[0].id == tr.id);
+			previouslySelected[0].className = '';
+		}
+		if (unselect) {
+			$server.onRowSelect(null);
+		} else {
+			tr.className = 'selected-row';
+			$server.onRowSelect(tr.id);
+		}
+	}
+}
+customElements.define(ContactTable.is, ContactTable);
+</script>
