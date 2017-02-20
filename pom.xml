@@ -13,6 +13,7 @@
 		<module>demo-test-util</module>
 		<module>demo-minesweeper-element</module>
 		<module>demo-minesweeper-component</module>
+		<module>demo-minesweeper-polymer</module>
 		<module>demo-hello-world</module>
 		<module>demo-hello-world-template</module>
 		<module>demo-web-site</module>
