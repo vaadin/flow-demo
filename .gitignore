@@ -12,3 +12,7 @@ target
 *~
 hs_err_pid*
 error-screenshots
+
+bower_components
+node
+node_modules
