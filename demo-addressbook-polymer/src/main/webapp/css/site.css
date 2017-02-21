@@ -1,0 +1,115 @@
+/********** MAIN **********/
+body {
+  font: 300 16px/1.55 "Open Sans", sans-serif;
+  color: #464646;
+}
+
+button {
+  background-color: #fafafa;
+  background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
+  border: 1px solid #c5c5c5;
+  border-top-color: #c5c5c5;
+  border-bottom-color: #bcbcbc;
+  box-shadow: inset 0 1px 0 white, inset 0 -1px 0 #e7e7e7, 0 2px 3px
+    rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  color: #191919;
+  cursor: pointer;
+  font: 300 16px/1.55 "Open Sans", sans-serif;
+  font-weight: 400;
+  height: 37px;
+  outline: none;
+  padding: 0 16px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+}
+
+input {
+  background: white;
+  border: 1px solid #c5c5c5;
+  box-sizing: border-box;
+  color: #474747;
+  font: inherit;
+  font-weight: 400;
+  height: 37px;
+  line-height: normal;
+  margin: 0;
+  padding: 4px 9px;
+}
+
+.main {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/********** TABLE **********/
+.contactstable {
+    border: 1px solid #d4d4d4;
+    border-collapse: collapse;
+  box-sizing: border-box;
+  font-size: 14px;
+  width: 50%;
+}
+.contactstable th {
+  background-color: #fafafa;
+  background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
+  border-left: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 14px;
+  font-weight: inherit;
+  text-align: left;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.contactstable td,
+.contactstable th{
+  border: 1px solid rgb(212,212,212);
+    line-height: 37px;
+  padding: 0 12px;
+    text-overflow: ellipsis;
+}
+.selected-row {
+  background-color: #197de1;
+  background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
+  border-color: #1d69b4;
+  color: #c8dbed;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/********** FORM **********/
+.contactform {
+  display: flex;
+  flex-flow: column nowrap;
+  /*width: 50%;  */
+}
+
+.save {
+  background-color: #197de1;
+  background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
+  border: 1px solid #1362b1;
+  border-top-color: #156ab3;
+  border-bottom-color: #1156a8;
+  box-shadow: inset 0 1px 0 #4d98e6, inset 0 -1px 0 #166bca, 0 2px 3px
+    rgba(0, 0, 0, 0.05);
+  color: #ecf2f8;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+.save:disabled {
+    background-color: #1927e1;
+    color: #555;
+}
+
+.row {
+  align-self: flex-end;
+  margin-right: 25%;
+  padding: 12px 37px 0 37px;
+}
+
+.buttons {
+  align-self: center;
+  padding: 12px 37px 0 37px;
+}
+
+.row span, .buttons button {
+  margin-right: 15px;
+}

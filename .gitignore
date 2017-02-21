@@ -12,3 +12,15 @@ target
 *~
 hs_err_pid*
 error-screenshots
+
+# Idea
+.idea
+*.iml
+
+.DS_Store
+
+# Polymer
+bower_components
+etc
+node
+node_modules
