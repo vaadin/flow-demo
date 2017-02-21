@@ -13,6 +13,13 @@ target
 hs_err_pid*
 error-screenshots
 
+# Idea
+.idea
+*.iml
+
+.DS_Store
+
+# Polymer
 bower_components
 node
 node_modules
