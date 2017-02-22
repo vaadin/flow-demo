@@ -33,7 +33,7 @@ import elemental.json.JsonValue;
  */
 @Tag("contacts-table")
 class ContactsTable extends HtmlComponent {
-    private final Consumer<String> selectedRowIdProcessor;
+    private transient final Consumer<String> selectedRowIdProcessor;
 
     ContactsTable(Consumer<String> selectedRowIdProcessor) {
         this.selectedRowIdProcessor = selectedRowIdProcessor;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,15 +15,16 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
+import java.util.Objects;
+import java.util.function.Consumer;
+
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
 import com.vaadin.hummingbird.html.HtmlComponent;
+
 import elemental.json.Json;
 import elemental.json.JsonObject;
-
-import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * Contact editor form.
@@ -33,7 +34,7 @@ import java.util.function.Consumer;
  */
 @Tag("contacts-form")
 class ContactForm extends HtmlComponent {
-    private final Consumer<Boolean> elementUpdateCallback;
+    private transient final Consumer<Boolean> elementUpdateCallback;
 
     private JsonObject selectedObject = Json.createObject();
 

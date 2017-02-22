@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,13 +15,14 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.backend;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
-import org.apache.commons.beanutils.BeanUtils;
-
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
+
+import org.apache.commons.beanutils.BeanUtils;
+
+import elemental.json.Json;
+import elemental.json.JsonObject;
 
 /**
  * A simple DTO for the address book example.
@@ -41,10 +42,17 @@ public class Contact implements Serializable {
     private String email = "";
     private LocalDate birthDate;
 
+    /**
+     * Creates a contact with default values for a fields.
+     */
     public Contact() {
-
     }
 
+    /**
+     * Creates a contact and fills it with data from JsonObject.
+     *
+     * @param jsonObject the json object with Contact data
+     */
     public Contact(JsonObject jsonObject) {
         id = (int) jsonObject.getNumber("id");
         firstName = jsonObject.getString("firstName");
@@ -178,7 +186,7 @@ public class Contact implements Serializable {
             return (Contact) BeanUtils.cloneBean(this);
         } catch (IllegalAccessException | InstantiationException
                 | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException("Unable to clone the instance", e);
+            throw new IllegalStateException("Unable to clone the instance", e);
         }
     }
 
@@ -189,6 +197,11 @@ public class Contact implements Serializable {
                 + ", email=" + email + ", birthDate=" + birthDate + '}';
     }
 
+    /**
+     * Converts Contact to a JsonObject and populates it with corresponding data.
+     *
+     * @return JsonObject filled with Contact data
+     */
     public JsonObject toJsonObject() {
         JsonObject jsonContact = Json.createObject();
         jsonContact.put("id", id);

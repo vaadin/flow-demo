@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,13 +15,13 @@
  */
 package com.vaadin.hummingbird.demo.addressbook;
 
+import javax.servlet.annotation.WebServlet;
+
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.hummingbird.demo.addressbook.ui.Addressbook;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
-
-import javax.servlet.annotation.WebServlet;
 
 /**
  * Initializes the site by configuring the router to use different views for
