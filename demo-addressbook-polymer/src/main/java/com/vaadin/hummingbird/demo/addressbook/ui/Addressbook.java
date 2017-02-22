@@ -43,22 +43,16 @@ public class Addressbook extends HtmlContainer implements View {
     private final ContactsTable contactsTable = new ContactsTable(
             this::tableRowClick);
 
-    private boolean contactFormRemoved = true;
+    public Addressbook() {
+        setClassName("main");
+        add(contactsTable);
+    }
 
     private void updateForm(Boolean dataUpdated) {
         if (dataUpdated) {
             contactsTable.updateTableContents();
         }
-
-        if (!contactFormRemoved) {
-            remove(contactForm);
-            contactFormRemoved = true;
-        }
-    }
-
-    public Addressbook() {
-        setClassName("main");
-        add(contactsTable);
+        removeContactForm();
     }
 
     private void tableRowClick(String selectedRowId) {
@@ -69,12 +63,16 @@ public class Addressbook extends HtmlContainer implements View {
 
         if (selectedObject.isPresent()) {
             add(contactForm);
-            contactFormRemoved = false;
-        } else if (!contactFormRemoved) {
-            remove(contactForm);
-            contactFormRemoved = true;
+        } else {
+            removeContactForm();
         }
 
         contactForm.updateContent(selectedObject.orElse(Json.createObject()));
+    }
+
+    private void removeContactForm() {
+        if (getChildren().anyMatch(contactForm::equals)) {
+            remove(contactForm);
+        }
     }
 }
