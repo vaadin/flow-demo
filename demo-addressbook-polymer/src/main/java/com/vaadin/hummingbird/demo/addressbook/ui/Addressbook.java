@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -43,6 +43,9 @@ public class Addressbook extends HtmlContainer implements View {
     private final ContactsTable contactsTable = new ContactsTable(
             this::tableRowClick);
 
+    /**
+     * Creates the Addressbook view.
+     */
     public Addressbook() {
         setClassName("main");
         add(contactsTable);
