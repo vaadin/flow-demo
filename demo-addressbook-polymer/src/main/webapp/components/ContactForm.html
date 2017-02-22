@@ -1,0 +1,42 @@
+<dom-module id="contacts-form">
+    <template>
+        <div class="contactform">
+            <div class="buttons">
+                <button id="save" class="save" on-tap="_save">Save</button>
+                <button id="cancel" on-tap="_cancel">Cancel</button>
+            </div>
+            <div class="row">
+                <span>First name</span> <input id="firstName" value="{{contactToEdit.firstName::input}}"/>
+            </div>
+            <div class="row">
+                <span>Last name</span> <input id="lastName" value="{{contactToEdit.lastName::input}}"/>
+            </div>
+            <div class="row">
+                <span>Phone number</span> <input id="phoneNumber" value="{{contactToEdit.phoneNumber::input}}"/>
+            </div>
+            <div class="row">
+                <span>Email</span> <input id="email" value="{{contactToEdit.email::input}}"/>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'contacts-form',
+
+            properties: {
+                contactToEdit: {
+                    type: Object,
+                    value: {}
+                },
+            },
+
+            _save() {
+                this.dispatchEvent(new CustomEvent('form-saved', {detail: this.contactToEdit}));
+            },
+
+            _cancel() {
+                this.fire("form-closed");
+            }
+        })
+    </script>
+</dom-module>
