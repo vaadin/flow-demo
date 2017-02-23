@@ -31,7 +31,7 @@ import elemental.json.JsonValue;
  * The Minesweeper main UI component.
  */
 @Tag("mine-sweeper")
-@HtmlImport("minesweeper.html")
+@HtmlImport("context://minesweeper.html")
 public class MinesweeperComponent extends HtmlComponent {
 
     private static final String EVENT_DETAIL = "event.detail";
