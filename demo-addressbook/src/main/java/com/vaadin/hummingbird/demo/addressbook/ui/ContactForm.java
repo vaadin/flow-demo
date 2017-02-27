@@ -26,11 +26,11 @@ import com.vaadin.hummingbird.dom.impl.BasicElementStateProvider;
 import com.vaadin.hummingbird.dom.impl.TemplateElementStateProvider;
 import com.vaadin.hummingbird.html.Input;
 import com.vaadin.hummingbird.nodefeature.TemplateOverridesMap;
-import com.vaadin.hummingbird.template.ElementTemplateNode;
+import com.vaadin.hummingbird.template.angular.ElementTemplateNode;
 import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.server.Command;
 import com.vaadin.ui.HasElement;
-import com.vaadin.ui.Template;
+import com.vaadin.ui.AngularTemplate;
 
 /**
  * Contact editor form.
@@ -38,7 +38,7 @@ import com.vaadin.ui.Template;
  * @author Vaadin Ltd
  *
  */
-public class ContactForm extends Template {
+public class ContactForm extends AngularTemplate {
 
     @Id("firstName")
     private Input firstName;
