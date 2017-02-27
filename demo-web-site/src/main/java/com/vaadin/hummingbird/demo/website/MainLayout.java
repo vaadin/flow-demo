@@ -22,7 +22,7 @@ import com.vaadin.annotations.StyleSheet;
 import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.hummingbird.template.model.TemplateModel;
-import com.vaadin.ui.Template;
+import com.vaadin.ui.AngularTemplate;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -31,7 +31,7 @@ import com.vaadin.ui.Template;
  * @author Vaadin Ltd
  */
 @StyleSheet("css/site.css")
-public final class MainLayout extends Template implements View {
+public final class MainLayout extends AngularTemplate implements View {
 
     public static class MenuItem {
         private String href;

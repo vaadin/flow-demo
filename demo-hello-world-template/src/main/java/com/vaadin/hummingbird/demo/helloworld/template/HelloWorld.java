@@ -17,12 +17,12 @@ package com.vaadin.hummingbird.demo.helloworld.template;
 
 import com.vaadin.annotations.EventHandler;
 import com.vaadin.hummingbird.template.model.TemplateModel;
-import com.vaadin.ui.Template;
+import com.vaadin.ui.AngularTemplate;
 
 /**
  * The one and only view in the hello world application.
  */
-public class HelloWorld extends Template {
+public class HelloWorld extends AngularTemplate {
     /**
      * Model for the template.
      */

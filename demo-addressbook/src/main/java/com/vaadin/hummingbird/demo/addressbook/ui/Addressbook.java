@@ -29,7 +29,7 @@ import com.vaadin.hummingbird.router.LocationChangeEvent;
 import com.vaadin.hummingbird.router.View;
 import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.server.Command;
-import com.vaadin.ui.Template;
+import com.vaadin.ui.AngularTemplate;
 
 /**
  * Displays a list of contacts.
@@ -38,7 +38,7 @@ import com.vaadin.ui.Template;
  */
 @Title("Addressbook")
 @StyleSheet("css/site.css")
-public class Addressbook extends Template implements View {
+public class Addressbook extends AngularTemplate implements View {
 
     public interface AddressbookModel extends TemplateModel {
         void setFormHidden(boolean formHidden);

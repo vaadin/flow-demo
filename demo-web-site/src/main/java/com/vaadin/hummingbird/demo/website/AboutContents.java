@@ -15,7 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.website;
 
-import com.vaadin.ui.Template;
+import com.vaadin.ui.AngularTemplate;
 
 /**
  * The actual contents of the about page. Loaded from a template file.
@@ -23,6 +23,6 @@ import com.vaadin.ui.Template;
  * @since
  * @author Vaadin Ltd
  */
-public class AboutContents extends Template {
+public class AboutContents extends AngularTemplate {
     // Contents read from AboutContents.html
 }
