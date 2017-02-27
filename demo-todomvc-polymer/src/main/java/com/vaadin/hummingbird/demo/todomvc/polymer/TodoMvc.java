@@ -17,6 +17,7 @@ package com.vaadin.hummingbird.demo.todomvc.polymer;
 
 import java.util.List;
 
+import com.vaadin.annotations.EventData;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.todomvc.polymer.TodoMvc.TodoMvcModel;
 import com.vaadin.hummingbird.router.View;
@@ -26,11 +27,7 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
 
     public static class TodoMvcModel {
         private String newTodo;
-        private boolean hasTodos;
-        private boolean toggleAllChecked;
         private List<TodoItem> todos;
-        private int itemsLeft;
-        private boolean noCompleted;
 
         public String getNewTodo() {
             return newTodo;
@@ -40,20 +37,14 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
             this.newTodo = newTodo;
         }
 
+        @ComputedProperty("todos")
         public boolean isHasTodos() {
-            return hasTodos;
+            return !todos.isEmpty();
         }
 
-        public void setHasTodos(boolean hasTodos) {
-            this.hasTodos = hasTodos;
-        }
-
+        @ComputedProperty("todos")
         public boolean isToggleAllChecked() {
-            return toggleAllChecked;
-        }
-
-        public void setToggleAllChecked(boolean toggleAllChecked) {
-            this.toggleAllChecked = toggleAllChecked;
+            return getItemsLeft() == 0;
         }
 
         public List<TodoItem> getTodos() {
@@ -64,26 +55,21 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
             this.todos = todos;
         }
 
+        @ComputedProperty("todos")
         public int getItemsLeft() {
-            return itemsLeft;
+            return (int) todos.stream().filter(item -> !item.isCompleted())
+                    .count();
         }
 
-        public void setItemsLeft(int itemsLeft) {
-            this.itemsLeft = itemsLeft;
-        }
-
+        @ComputedProperty("todos")
         public boolean isNoCompleted() {
-            return noCompleted;
-        }
-
-        public void setNoCompleted(boolean noCompleted) {
-            this.noCompleted = noCompleted;
+            return getItemsLeft() == todos.size();
         }
     }
 
     public class TodoItem {
         private boolean completed;
-        private String className;
+        private boolean editing;
         private String caption;
 
         public boolean isCompleted() {
@@ -94,12 +80,12 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
             this.completed = completed;
         }
 
-        public String getClassName() {
-            return className;
+        public boolean isEditing() {
+            return editing;
         }
 
-        public void setClassName(String className) {
-            this.className = className;
+        public void setEditing(boolean editing) {
+            this.editing = editing;
         }
 
         public String getCaption() {
@@ -123,23 +109,9 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
         todo.setCaption(caption);
         getModel().getTodos().add(todo);
         getModel().setNewTodo("");
-        updateCounts();
     }
 
-    private void updateCounts() {
-        TodoMvcModel model = getModel();
-
-        int completedCount = (int) model.getTodos().stream()
-                .filter(TodoItem::isCompleted).count();
-        int todoCount = model.getTodos().size();
-
-        model.setHasTodos(todoCount != 0);
-        model.setItemsLeft(todoCount - completedCount);
-        model.setToggleAllChecked(completedCount == todoCount);
-        model.setNoCompleted(completedCount == 0);
-    }
-
-    @TemplateEventHandler
+    @PropertyChangeHandler("newTodo")
     private void newTodo() {
         String newTodoCaption = getModel().getNewTodo();
         if (newTodoCaption != null && !newTodoCaption.isEmpty()) {
@@ -148,62 +120,37 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
     }
 
     @TemplateEventHandler
-    private void toggleAll() {
+    private void toggleAll(@EventData("event.target.checked") boolean checked) {
         List<TodoItem> todos = getModel().getTodos();
-        boolean completed = getModel().getToggleAllChecked();
 
-        todos.forEach(todo -> setCompleted(todo, completed));
-        updateCounts();
+        todos.forEach(todo -> todo.setCompleted(checked));
     }
 
     @TemplateEventHandler
     private void editItem(TodoItem eventTarget) {
-        eventTarget.setClassName(
-                createItemClassName(true, eventTarget.isCompleted()));
-        updateCounts();
+        eventTarget.setEditing(true);
     }
 
     @TemplateEventHandler
     private void destroyItem(TodoItem eventTarget) {
+        // Should also persist the change
         getModel().getTodos().remove(eventTarget);
-        updateCounts();
     }
 
     @TemplateEventHandler
     private void completeItem(TodoItem eventTarget) {
-        // Model already updated, only need to update counts (and persist)
-        updateCounts();
+        // Model already updated, should also persist
     }
 
     @TemplateEventHandler
     private void saveCaption(TodoItem eventTarget) {
-        eventTarget.setClassName(
-                createItemClassName(false, eventTarget.isCompleted()));
-        updateCounts();
+        // Model already updated, should also persist
+        eventTarget.setEditing(false);
     }
 
     @TemplateEventHandler
     private void clearCompleted() {
         List<TodoItem> items = getModel().getTodos();
         items.removeIf(TodoItem::isCompleted);
-        updateCounts();
-    }
-
-    private static void setCompleted(TodoItem todoItem, boolean completed) {
-        todoItem.setCompleted(completed);
-        todoItem.setClassName(createItemClassName(false, completed));
-    }
-
-    private static String createItemClassName(boolean editing,
-            boolean completed) {
-        if (editing && completed) {
-            return "editing completed";
-        } else if (editing) {
-            return "editing";
-        } else if (completed) {
-            return "completed";
-        } else {
-            return "";
-        }
     }
 }

@@ -2,16 +2,17 @@
 	<header class="header">
 		<h1>todos</h1>
 		<input class="new-todo" placeholder="What needs to be done?" autofocus
-			value="{{newTodo::change}}" on-change="newTodo">
+			value="{{newTodo::change}}">
 	</header>
 	<dom-if if="[[hasTodos]]"> <template>
 	<section class="main">
 		<input class="toggle-all" type="checkbox"
-			checked="{{toggleAllChecked}}" on-tap="toggleAll"> <label
+			checked="[[toggleAllChecked]]" on-tap="toggleAll"> <label
 			for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
 			<dom-repeat items="[[todos]]"> <template>
-			<li class$="[[item.class]]">
+			<li class$editing="[[item.editing]]"
+				class$completed="[[item.completed]]">
 				<div class="view" on-dblclick="editItem">
 					<input class="toggle" type="checkbox" checked="{{item.completed}}"
 						on-tap="completeItem"> <label>[[item.caption]]</label>
