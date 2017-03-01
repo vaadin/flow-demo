@@ -25,76 +25,47 @@ import com.vaadin.hummingbird.router.View;
 @Tag("todo-mvc")
 public class TodoMvc extends Template<TodoMvcModel> implements View {
 
-    public static class TodoMvcModel {
-        private String newTodo;
-        private List<TodoItem> todos;
+    public interface TodoMvcModel {
 
-        public String getNewTodo() {
-            return newTodo;
+        String getNewTodo();
+
+        void setNewTodo(String newTodo);
+
+        default boolean isHasTodos() {
+            return !getTodos().isEmpty();
         }
 
-        public void setNewTodo(String newTodo) {
-            this.newTodo = newTodo;
-        }
-
-        @ComputedProperty("todos")
-        public boolean isHasTodos() {
-            return !todos.isEmpty();
-        }
-
-        @ComputedProperty("todos")
-        public boolean isToggleAllChecked() {
+        default boolean isToggleAllChecked() {
             return getItemsLeft() == 0;
         }
 
-        public List<TodoItem> getTodos() {
-            return todos;
-        }
+        List<TodoItem> getTodos();
 
-        public void setTodos(List<TodoItem> todos) {
-            this.todos = todos;
-        }
+        void setTodos(List<TodoItem> todos);
 
-        @ComputedProperty("todos")
-        public int getItemsLeft() {
-            return (int) todos.stream().filter(item -> !item.isCompleted())
+        default int getItemsLeft() {
+            return (int) getTodos().stream().filter(item -> !item.isCompleted())
                     .count();
         }
 
-        @ComputedProperty("todos")
-        public boolean isNoCompleted() {
-            return getItemsLeft() == todos.size();
+        default boolean isNoCompleted() {
+            return getItemsLeft() == getTodos().size();
         }
     }
 
-    public class TodoItem {
-        private boolean completed;
-        private boolean editing;
-        private String caption;
+    public interface TodoItem {
 
-        public boolean isCompleted() {
-            return completed;
-        }
+        public boolean isCompleted();
 
-        public void setCompleted(boolean completed) {
-            this.completed = completed;
-        }
+        public void setCompleted(boolean completed);
 
-        public boolean isEditing() {
-            return editing;
-        }
+        public boolean isEditing();
 
-        public void setEditing(boolean editing) {
-            this.editing = editing;
-        }
+        public void setEditing(boolean editing);
 
-        public String getCaption() {
-            return caption;
-        }
+        public String getCaption();
 
-        public void setCaption(String caption) {
-            this.caption = caption;
-        }
+        public void setCaption(String caption);
     }
 
     /**
@@ -105,7 +76,7 @@ public class TodoMvc extends Template<TodoMvcModel> implements View {
     }
 
     public void addTodo(String caption) {
-        TodoItem todo = new TodoItem();
+        TodoItem todo = createModel(TodoItem.class);
         todo.setCaption(caption);
         getModel().getTodos().add(todo);
         getModel().setNewTodo("");
