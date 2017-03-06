@@ -12,6 +12,7 @@
 	<packaging>war</packaging>
 
 	<properties>
+		<js.working.directory>src/main/webapp/js</js.working.directory>
 	</properties>
 
 	<dependencies>
@@ -28,4 +29,43 @@
 			<artifactId>demo-test-util</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>${js.working.directory}</directory>
+							<include>bower_components/**</include>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.3</version>
+				<configuration>
+					<nodeVersion>v7.7.1</nodeVersion>
+					<npmVersion>4.1.2</npmVersion>
+					<workingDirectory>${js.working.directory}</workingDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-node-and-npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+							<goal>npm</goal> <!-- runs 'install' by default -->
+							<goal>bower</goal> <!-- runs 'install' by default -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

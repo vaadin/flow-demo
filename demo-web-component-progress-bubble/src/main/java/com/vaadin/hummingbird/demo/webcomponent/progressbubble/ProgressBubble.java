@@ -25,7 +25,7 @@ import com.vaadin.ui.Component;
  * @author Vaadin Ltd
  */
 @Tag("progress-bubble")
-@HtmlImport(PolyGit.BASE_URL + "progress-bubble/progress-bubble.html")
+@HtmlImport("js/bower_components/progress-bubble/progress-bubble.html")
 public class ProgressBubble extends Component {
 
     /**
