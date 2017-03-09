@@ -61,7 +61,8 @@ public final class DynamicResourcesView extends SimpleView {
         Button button = new Button("Generate image");
 
         button.addClickListener(event -> {
-            image.setAttribute("data", createResource());
+            // image.setAttribute("data", createResource());
+            updateImage();
         });
 
         add(button);
@@ -83,12 +84,22 @@ public final class DynamicResourcesView extends SimpleView {
     }
 
     private void createImage() {
-        image = new Element("object");
-        image.setAttribute("type", "image/svg+xml");
-        image.getStyle().set("display", "block");
-        image.setAttribute("data", createResource());
+        image = new Element("div");
+        // image.setAttribute("type", "image/svg+xml");
+        // image.getStyle().set("display", "block");
+        // image.setAttribute("data", createResource());
+        updateImage();
+
         getElement().appendChild(image);
 
+    }
+
+    private void updateImage() {
+        StreamResource resource = createResource();
+        image.setAttribute("non-existent", resource);
+        image.setProperty("innerHTML",
+                "<object type='image/svg+xml' style='display:block' data='"
+                        + image.getAttribute("non-existent") + "'></object>");
     }
 
     private StreamResource createResource() {
