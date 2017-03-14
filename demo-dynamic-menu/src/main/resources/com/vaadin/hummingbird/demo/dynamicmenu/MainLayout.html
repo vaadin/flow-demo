@@ -1,0 +1,12 @@
+<div class="main">
+	<div class="menu">
+		<ul>
+			<li *ngFor="let category of categories" class="category"><a
+				[attr.href]="category.link"
+				routerLink [class.selected]="category.id == selectedCategory"
+				[class.expanded]="category.expanded">{{category.name}}</a>
+			<div></div></li>
+		</ul>
+	</div>
+	@child@
+</div>
