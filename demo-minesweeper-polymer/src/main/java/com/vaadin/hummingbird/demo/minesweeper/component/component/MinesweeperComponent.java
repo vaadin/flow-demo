@@ -21,7 +21,6 @@ import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.Point;
-import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.template.PolymerTemplate;
 import com.vaadin.hummingbird.util.JsonUtils;
 
@@ -37,7 +36,6 @@ import elemental.json.JsonValue;
 @HtmlImport("context://minesweeper.html")
 public class MinesweeperComponent extends PolymerTemplate {
 
-    private static final String EVENT_DETAIL = "event.detail";
     private final MineFieldData mineFieldData;
 
     /**
@@ -66,15 +64,17 @@ public class MinesweeperComponent extends PolymerTemplate {
     }
 
     @EventHandler
-    private void handleClick(@EventData("event.model.item.row") int row, @EventData("event.model.item.col") int col) {
+    private void handleClick(@EventData("event.model.item.row") int row,
+            @EventData("event.model.item.col") int col) {
         clickCell(row, col);
     }
 
     @EventHandler
-    private void handleRightClick(@EventData("event.model.item.row") int row, @EventData("event.model.item.col") int col) {
-        if(mineFieldData.isMarked(row,col)){
+    private void handleRightClick(@EventData("event.model.item.row") int row,
+            @EventData("event.model.item.col") int col) {
+        if (mineFieldData.isMarked(row, col)) {
             mineFieldData.removeMarked(row, col);
-        }else {
+        } else {
             mineFieldData.setMarked(row, col);
         }
         setModel();

@@ -226,7 +226,7 @@ public class MineFieldData implements Serializable {
     }
 
     /**
-     * Removes cell marking
+     * Removes cell marking.
      *
      * @param row
      *            the row of the cell
