@@ -29,6 +29,11 @@ import com.vaadin.hummingbird.template.model.TemplateModel;
 @HtmlImport("js/bower_components/polymer/polymer.html")
 @HtmlImport("components/HelloWorld.html")
 public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
+
+    public HelloWorld() {
+        setId("template");
+    }
+
     /**
      * Model for the template.
      */

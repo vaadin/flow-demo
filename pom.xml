@@ -79,7 +79,7 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-testbench</artifactId>
-				<version>4.1.0.alpha1</version>
+				<version>5.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>com.vaadin.hummingbird.demo</groupId>
@@ -157,7 +157,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- The Jetty plugin allows us to easily test the development build by 
+			<!-- The Jetty plugin allows us to easily test the development build by
 				running jetty:run on the command line. -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
@@ -176,7 +176,7 @@
 					</webAppConfig>
 				</configuration>
 				<executions>
-					<!-- start and stop jetty (running our app) when running integration 
+					<!-- start and stop jetty (running our app) when running integration
 						tests -->
 					<execution>
 						<id>start-jetty</id>
@@ -229,7 +229,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -295,11 +295,11 @@
 						<configuration>
 							<webAppConfig>
 								<webInfIncludeJarPattern>^$</webInfIncludeJarPattern>
-								<!-- Configure all project META-INF/resources directories for Jetty 
-									as resource folders as Jetty inside Eclipse is run with "Resolve workspace 
-									artifacts" and this does not create any JARs. Jetty only scans JARs for META-INF/resources 
+								<!-- Configure all project META-INF/resources directories for Jetty
+									as resource folders as Jetty inside Eclipse is run with "Resolve workspace
+									artifacts" and this does not create any JARs. Jetty only scans JARs for META-INF/resources
 									folders -->
-								<!-- Assumes hummingbird and hummingbird-demo have been clone in 
+								<!-- Assumes hummingbird and hummingbird-demo have been clone in
 									the same folder -->
 								<resourceBases>
 									<resourceBase>${project.basedir}/../../hummingbird/hummingbird-server/src/main/resources/META-INF/resources</resourceBase>

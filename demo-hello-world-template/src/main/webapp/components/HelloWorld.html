@@ -18,7 +18,7 @@
     <template>
         <div>
             <input type="text" id="inputId">
-            <button on-click="sayHello">Say hello</button>
+            <button id="helloButton" on-click="sayHello">Say hello</button>
             <div id="greeting">
                 <template is="dom-if" if="[[text]]">
                     Hello [[text]]!
