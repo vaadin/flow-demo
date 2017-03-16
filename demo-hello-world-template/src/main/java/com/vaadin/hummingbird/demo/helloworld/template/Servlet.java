@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.helloworld.template;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.WebComponents;
 import com.vaadin.hummingbird.demo.helloworld.template.Servlet.MyRouterConfigurator;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
@@ -28,6 +29,7 @@ import com.vaadin.server.VaadinServlet;
  */
 @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
 @VaadinServletConfiguration(routerConfigurator = MyRouterConfigurator.class, productionMode = false)
+@WebComponents(1)
 public class Servlet extends VaadinServlet {
 
     /**
