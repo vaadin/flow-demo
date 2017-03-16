@@ -49,16 +49,11 @@
 			    }
 		  };
 	  }
-	  
-	  handleClick (event) {
-          this.dispatchEvent(new CustomEvent('clicked', { detail : event.model.item }));
-      }
-	  
+
 	  handleRightClick (event) {
-		  this.dispatchEvent(new CustomEvent('marked', { detail : event.model.item }));
           event.preventDefault();
       }
-	  
+
   }
   
   customElements.define(MineSweeper.is, MineSweeper);

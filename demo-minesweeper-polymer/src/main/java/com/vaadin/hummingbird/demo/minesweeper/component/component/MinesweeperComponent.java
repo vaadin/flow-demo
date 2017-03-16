@@ -15,11 +15,13 @@
  */
 package com.vaadin.hummingbird.demo.minesweeper.component.component;
 
+import com.vaadin.annotations.EventData;
+import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.Point;
-import com.vaadin.hummingbird.html.HtmlComponent;
+import com.vaadin.hummingbird.template.PolymerTemplate;
 import com.vaadin.hummingbird.util.JsonUtils;
 
 import elemental.json.Json;
@@ -32,9 +34,8 @@ import elemental.json.JsonValue;
  */
 @Tag("mine-sweeper")
 @HtmlImport("context://minesweeper.html")
-public class MinesweeperComponent extends HtmlComponent {
+public class MinesweeperComponent extends PolymerTemplate {
 
-    private static final String EVENT_DETAIL = "event.detail";
     private final MineFieldData mineFieldData;
 
     /**
@@ -60,12 +61,23 @@ public class MinesweeperComponent extends HtmlComponent {
      */
     private void init() {
         setModel();
+    }
 
-        getElement().addEventListener("clicked",
-                e -> cellClick(e.getEventData()), EVENT_DETAIL);
+    @EventHandler
+    private void handleClick(@EventData("event.model.item.row") int row,
+            @EventData("event.model.item.col") int col) {
+        clickCell(row, col);
+    }
 
-        getElement().addEventListener("marked", e -> marked(e.getEventData()),
-                EVENT_DETAIL);
+    @EventHandler
+    private void handleRightClick(@EventData("event.model.item.row") int row,
+            @EventData("event.model.item.col") int col) {
+        if (mineFieldData.isMarked(row, col)) {
+            mineFieldData.removeMarked(row, col);
+        } else {
+            mineFieldData.setMarked(row, col);
+        }
+        setModel();
     }
 
     private void setModel() {
@@ -107,11 +119,10 @@ public class MinesweeperComponent extends HtmlComponent {
         return builder.toString();
     }
 
-    private void cellClick(JsonObject object) {
-        JsonObject json = object.get(EVENT_DETAIL);
-        int row = (int) json.getNumber("row");
-        int col = (int) json.getNumber("col");
+    private void clickCell(int row, int col) {
         if (mineFieldData.isMarked(row, col)) {
+            // Unmark cell on click
+            mineFieldData.removeMarked(row, col);
             return;
         }
         if (mineFieldData.isMine(row, col)) {
@@ -123,14 +134,6 @@ public class MinesweeperComponent extends HtmlComponent {
                 success();
             }
         }
-        setModel();
-    }
-
-    private void marked(JsonObject object) {
-        JsonObject json = object.get(EVENT_DETAIL);
-        int row = (int) json.getNumber("row");
-        int col = (int) json.getNumber("col");
-        mineFieldData.setMarked(row, col);
         setModel();
     }
 
