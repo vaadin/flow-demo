@@ -226,6 +226,17 @@ public class MineFieldData implements Serializable {
     }
 
     /**
+     * Removes cell marking
+     *
+     * @param row
+     *            the row of the cell
+     * @param col
+     *            the column of the cell
+     */
+    public void removeMarked(int row, int col) {
+        marked.put(new Point(row, col), Boolean.FALSE);
+    }
+    /**
      * Sets the text for the cell.
      * 
      * @param row
