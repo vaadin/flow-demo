@@ -140,6 +140,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<phantomjs.binary.path>${phantomjs.binary}</phantomjs.binary.path>
+						<webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>

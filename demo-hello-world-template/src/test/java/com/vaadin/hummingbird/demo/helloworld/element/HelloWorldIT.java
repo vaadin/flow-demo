@@ -52,6 +52,7 @@ public class HelloWorldIT extends AbstractChromeTest {
 
         input.sendKeys("John Doe");
         button.click();
+        waitUntil(whatever -> !greeting.getText().contains("enter"));
         Assert.assertEquals("Hello John Doe!", greeting.getText());
     }
 }
