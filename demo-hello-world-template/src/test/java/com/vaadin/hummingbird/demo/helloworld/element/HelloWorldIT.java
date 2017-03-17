@@ -27,16 +27,6 @@ import com.vaadin.testbench.By;
 @Category(ChromeTests.class)
 public class HelloWorldIT extends AbstractChromeTest {
 
-    @Override
-    protected String getTestPath() {
-        return "/";
-    }
-
-    @Override
-    protected String getRootURL() {
-        return "http://localhost:8080/";
-    }
-
     @Test
     public void basicFunctionality() {
         open();
@@ -50,12 +40,12 @@ public class HelloWorldIT extends AbstractChromeTest {
         // see https://github.com/vaadin/hummingbird/issues/1371 for details
 //        Assert.assertEquals("Please enter your name", greeting.getText());
         button.click();
-        waitUntil(whatever -> greeting.getText().contains("enter"));
+        waitUntil(driver -> greeting.getText().contains("enter"));
         Assert.assertEquals("Please enter your name", greeting.getText());
 
         input.sendKeys("John Doe");
         button.click();
-        waitUntil(whatever -> !greeting.getText().contains("enter"));
+        waitUntil(driver -> !greeting.getText().contains("enter"));
         Assert.assertEquals("Hello John Doe!", greeting.getText());
     }
 }
