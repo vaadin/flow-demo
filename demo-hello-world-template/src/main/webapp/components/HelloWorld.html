@@ -35,6 +35,8 @@
                 return 'hello-world'
             }
 
+            // same method is defined on a server side with the 'event.hello' value as a parameter value.
+            // it will always be called after client handlers are executed (after this method in this case)
             sayHello(event) {
                 event.hello = this.$.inputId.value;
             }
