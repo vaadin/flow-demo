@@ -15,14 +15,28 @@
  */
 package com.vaadin.hummingbird.demo.helloworld.template;
 
+import com.vaadin.annotations.EventData;
 import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.HtmlImport;
+import com.vaadin.annotations.Tag;
+import com.vaadin.hummingbird.template.PolymerTemplate;
 import com.vaadin.hummingbird.template.model.TemplateModel;
-import com.vaadin.ui.AngularTemplate;
 
 /**
  * The one and only view in the hello world application.
  */
-public class HelloWorld extends AngularTemplate {
+@Tag("hello-world")
+@HtmlImport("js/bower_components/polymer/polymer.html")
+@HtmlImport("components/HelloWorld.html")
+public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
+
+    /**
+     * Creates the hello world template.
+     */
+    public HelloWorld() {
+        setId("template");
+    }
+
     /**
      * Model for the template.
      */
@@ -36,13 +50,8 @@ public class HelloWorld extends AngularTemplate {
         void setText(String text);
     }
 
-    @Override
-    protected HelloWorldModel getModel() {
-        return (HelloWorldModel) super.getModel();
-    }
-
     @EventHandler
-    private void sayHello(String inputValue) {
+    private void sayHello(@EventData("event.hello") String inputValue) {
         // Called from the template click handler
         getModel().setText(inputValue);
     }
