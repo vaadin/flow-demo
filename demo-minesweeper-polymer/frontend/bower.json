@@ -1,8 +1,7 @@
 {
   "name": "demo-minesweeper-polymer",
   "homepage": "https://github.com/vaadin/hummingbird-demo/demo-minesweeper-polymer",
-  "authors": [
-  ],
+  "authors": [],
   "description": "",
   "main": "",
   "license": "Apache2",
@@ -15,6 +14,9 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#v2.0.0-rc.1"
+    "polymer": "Polymer/polymer#v2.0.0-rc.3"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0-rc.5"
   }
 }
