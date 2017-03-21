@@ -17,7 +17,7 @@ package com.vaadin.hummingbird.demo.testutil;
 
 import org.junit.Before;
 
-import com.vaadin.hummingbird.testutil.AbstractTestBenchTest;
+import com.vaadin.hummingbird.testutil.PhantomJSTest;
 
 /**
  * TestBench test class which sets up URLs according to how demo projects are
@@ -25,7 +25,7 @@ import com.vaadin.hummingbird.testutil.AbstractTestBenchTest;
  *
  * @author Vaadin Ltd
  */
-public abstract class AbstractDemoTest extends AbstractTestBenchTest {
+public abstract class AbstractDemoTest extends PhantomJSTest {
 
     /**
      * Setup the PhantomJS driver.
