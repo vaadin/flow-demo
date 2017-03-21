@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+    font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
+        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+        "STXihei", sans-serif;
+    padding: 10px;
+}
+
+select {
+	padding: 5px;
+	min-width: 250px;	
+}
+
+header {
+	padding-bottom: 10px;
+}
+
+header > span, header > label {
+	padding: 10px;
+	margin: 0 10px;
+}
+
+.number-of-reports {
+	background-color: #A0A0A0;
+	color: #FFF;
+	font-weight: bold;
+	border-radius: 50%;
+}

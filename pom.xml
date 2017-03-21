@@ -25,6 +25,7 @@
 		<module>demo-web-component-progress-bubble</module>
 		<module>demo-addressbook</module>
 		<module>demo-addressbook-polymer</module>
+		<module>demo-jquery-table</module>
 	</modules>
 
 	<properties>

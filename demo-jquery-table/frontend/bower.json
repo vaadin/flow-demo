@@ -1,0 +1,19 @@
+{
+  "name": "demo-jquery-table",
+  "homepage": "",
+  "authors": [],
+  "description": "",
+  "main": "",
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tablesorter": "jquery.tablesorter#^2.28.5"
+  }
+}
