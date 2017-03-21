@@ -17,14 +17,11 @@ package com.vaadin.hummingbird.demo.helloworld.element;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.hummingbird.demo.testutil.AbstractChromeTest;
-import com.vaadin.hummingbird.testcategory.ChromeTests;
 import com.vaadin.testbench.By;
 
-@Category(ChromeTests.class)
 public class HelloWorldIT extends AbstractChromeTest {
 
     @Test
