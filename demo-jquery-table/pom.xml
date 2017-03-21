@@ -13,6 +13,13 @@
 
 	<properties>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>bugrap</id>
+			<url>https://repo.vaadin.com/nexus/content/repositories/vaadin-bugrap/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
