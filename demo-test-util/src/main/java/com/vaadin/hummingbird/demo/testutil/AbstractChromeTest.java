@@ -15,7 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.testutil;
 
-import com.vaadin.hummingbird.testutil.SingleBrowserTest;
+import com.vaadin.hummingbird.testutil.ChromeBrowserTest;
 
 /**
  * TestBench test class which sets up URLs according to how demo projects are
@@ -23,7 +23,7 @@ import com.vaadin.hummingbird.testutil.SingleBrowserTest;
  *
  * @author Vaadin Ltd
  */
-public abstract class AbstractChromeTest extends SingleBrowserTest {
+public abstract class AbstractChromeTest extends ChromeBrowserTest {
 
     @Override
     protected String getTestPath() {

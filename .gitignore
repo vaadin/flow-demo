@@ -2,8 +2,8 @@
 .settings
 .classpath
 target
-*/driver
-*/selenium_standalone_zips
+driver
+driver_zips
 
 */.project
 */.settings
