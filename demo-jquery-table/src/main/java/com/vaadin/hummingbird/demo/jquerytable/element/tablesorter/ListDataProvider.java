@@ -15,15 +15,20 @@
  */
 package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Convenience concrete class for the {@link DataProvider}, that uses an
- * internal {@link List} to provide the items.
+ * Convenience class for the {@link DataProvider}, that uses an internal
+ * {@link List} to provide the items.
+ * 
+ * @param T
+ *            the type of the model object used with this data provider
  * 
  */
-public class ListDataProvider<T> implements DataProvider<T> {
+public abstract class ListDataProvider<T extends Serializable>
+        implements DataProvider<T> {
 
     private int index = 0;
     private List<T> data;

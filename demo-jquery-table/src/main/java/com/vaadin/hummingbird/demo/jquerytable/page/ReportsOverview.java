@@ -31,10 +31,14 @@ import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.jquerytable.element.html5.Header;
 import com.vaadin.hummingbird.demo.jquerytable.element.html5.Main;
 import com.vaadin.hummingbird.demo.jquerytable.element.html5.Option;
+import com.vaadin.hummingbird.demo.jquerytable.element.html5.Section;
 import com.vaadin.hummingbird.demo.jquerytable.element.html5.Select;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.ListDataProvider;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
+import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionChangeEvent;
+import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionModel;
 import com.vaadin.hummingbird.demo.jquerytable.persistence.BugrapPersistence;
+import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.Label;
 import com.vaadin.hummingbird.html.Span;
@@ -56,12 +60,13 @@ public class ReportsOverview extends Div implements View {
     private Span numberOfReports;
     private ListDataProvider<Report> dataProvider;
     private RichTable<Report> table;
+    private Span selectedReport;
 
     /**
      * Initializes the view. Invoked by the framework when needed.
      */
     public ReportsOverview() {
-        this.add(getHeader(), getMainContent());
+        this.add(createHeader(), createMainContent(), createSelectionContent());
 
         projectName.addChangeListener(evt -> {
             Project selectedProject = getSelectedProject();
@@ -84,9 +89,9 @@ public class ReportsOverview extends Div implements View {
     }
 
     /**
-     * Creates and gets the header part of the application
+     * Creates and gets the header part of the application.
      */
-    private Header getHeader() {
+    private Header createHeader() {
         Header header = new Header();
 
         projectName = new Select();
@@ -123,6 +128,9 @@ public class ReportsOverview extends Div implements View {
                 return project.get();
             }
         }
+
+        // in this demo is guaranteed that there is at least one project in the
+        // database
         return repository.findProjects().stream().sorted(
                 (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
                 .findFirst().get();
@@ -189,18 +197,56 @@ public class ReportsOverview extends Div implements View {
     }
 
     /**
-     * Gets the main content, with th {@link RichTable} inside.
+     * Gets the main content, with the {@link RichTable} inside.
      */
-    private Main getMainContent() {
+    private Main createMainContent() {
         Main mainContent = new Main();
 
         table = new ReportsTable("main-table");
-        table.setDataProvider(dataProvider = new ListDataProvider<>());
+        dataProvider = new ListDataProvider<Report>() {
+            @Override
+            public String getId(Report object) {
+                return String.valueOf(object.getId());
+            }
+        };
+        table.setDataProvider(dataProvider);
         dataProvider.setData(
                 new ArrayList<>(repository.findReports(buildReportsQuery())));
 
         mainContent.add(table);
+
+        SelectionModel<Report> selectionModel = new SelectionModel<>();
+        table.setSelectionModel(selectionModel);
+
+        // SelectionChangeEvent listener that shows a message on screen when
+        // something is selected
+        table.addListener(SelectionChangeEvent.class, evt -> {
+            Optional<Report> selectedObject = table.getSelectionModel()
+                    .getSelectedObject();
+            selectedReport.getElement().removeAllChildren();
+            if (selectedObject.isPresent()) {
+                Element dialog = new Element("dialog");
+                dialog.setAttribute("open", true);
+                dialog.setText("You selected the report #"
+                        + selectedObject.get().getId());
+                selectedReport.getElement().appendChild(dialog);
+            }
+        });
+
         return mainContent;
+    }
+
+    /**
+     * Gets the section where the selection message is shown.
+     */
+    private Section createSelectionContent() {
+        Section section = new Section();
+
+        selectedReport = new Span();
+        selectedReport.setClassName("selected-report");
+        section.add(selectedReport);
+
+        return section;
     }
 
     /**

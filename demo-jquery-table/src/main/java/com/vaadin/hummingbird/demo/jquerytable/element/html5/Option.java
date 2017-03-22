@@ -17,7 +17,6 @@ package com.vaadin.hummingbird.demo.jquerytable.element.html5;
 
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.html.HtmlComponent;
-import com.vaadin.hummingbird.html.event.ChangeNotifier;
 import com.vaadin.ui.HasText;
 import com.vaadin.ui.PropertyDescriptor;
 import com.vaadin.ui.PropertyDescriptors;
@@ -32,7 +31,7 @@ public class Option extends HtmlComponent implements HasText {
             .propertyWithDefault("value", "");
 
     /**
-     * Sets the model value of the option
+     * Sets the model value of the option.
      * 
      * @param value
      *            the model value
@@ -42,7 +41,7 @@ public class Option extends HtmlComponent implements HasText {
     }
 
     /**
-     * Gets the model value of the option
+     * Gets the model value of the option.
      * 
      * @return the model value
      */

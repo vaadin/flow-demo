@@ -21,8 +21,6 @@ import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.html.event.ChangeNotifier;
-import com.vaadin.ui.PropertyDescriptor;
-import com.vaadin.ui.PropertyDescriptors;
 
 /**
  * Component representing a <code>&lt;select&gt;</code> element.
@@ -63,7 +61,7 @@ public class Select extends HtmlComponent implements ChangeNotifier {
             Optional<Element> first = getElement().getChildren().filter(el -> el
                     .getComponent().isPresent()
                     && el.getComponent().get() instanceof Option
-                    && selectedValue.equals(
+                    && selectedValue.get().equals(
                             ((Option) el.getComponent().get()).getValue()))
                     .findFirst();
             return first.map(Option.class::cast);

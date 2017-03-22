@@ -21,6 +21,8 @@ import java.util.List;
 /**
  * Column definition used in conjunction with {@link RichTable}.
  * 
+ * @param T
+ *            the type of the model object used with this column
  * @see RichTable#setColumns(List)
  */
 public interface RichColumn<T> extends Serializable {

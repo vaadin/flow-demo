@@ -31,7 +31,11 @@ import humanize.Humanize;
  * render {@link Report}s.
  *
  */
-public class ReportsTable extends RichTable<Report> {
+public final class ReportsTable extends RichTable<Report> {
+
+    private static final String FILTER_SELECT = "filter-select";
+    private static final String GROUP_BY_TEXT = "group-text";
+    private static final String GROUP_DISABLED = "group-false";
 
     /**
      * Creates a new ReportsTable with the given element id.
@@ -49,6 +53,29 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public String getRenderedValue(Report object) {
+                return String.valueOf(object.getId());
+            }
+
+            @Override
+            public String getModelValue(Report object) {
+                return null;
+            }
+
+            @Override
+            public List<String> getColumnClasses() {
+                return Arrays.asList(GROUP_DISABLED);
+            }
+
+            @Override
+            public String getColumnName() {
+                return "ID";
+            }
+        });
+
+        columns.add(new RichColumn<Report>() {
+
+            @Override
+            public String getRenderedValue(Report object) {
                 return object.getPriority().name();
             }
 
@@ -59,7 +86,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("filter-select", "group-text");
+                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
             }
 
             @Override
@@ -82,7 +109,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("filter-select", "group-text");
+                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
             }
 
             @Override
@@ -105,7 +132,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("group-false");
+                return Arrays.asList(GROUP_DISABLED);
             }
 
             @Override
@@ -129,7 +156,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("filter-select", "group-text");
+                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
             }
 
             @Override
@@ -154,7 +181,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("group-false");
+                return Arrays.asList(GROUP_DISABLED);
             }
 
             @Override
@@ -180,7 +207,7 @@ public class ReportsTable extends RichTable<Report> {
 
             @Override
             public List<String> getColumnClasses() {
-                return Arrays.asList("group-false");
+                return Arrays.asList(GROUP_DISABLED);
             }
 
             @Override
