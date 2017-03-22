@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.vaadin.bugrap.domain.BugrapRepository;
 import org.vaadin.bugrap.domain.BugrapRepository.ReportsQuery;
@@ -157,15 +158,13 @@ public class ReportsOverview extends Div implements View {
      * select at the header.
      */
     private List<Option> getProjectOptions() {
-        List<Option> options = new ArrayList<>();
-
         Set<Project> projects = repository.findProjects();
-        projects.stream().sorted().forEach(project -> {
+        List<Option> options = projects.stream().sorted().map(project -> {
             Option opt = new Option();
             opt.setText(project.getName());
             opt.setValue(String.valueOf(project.getId()));
-            options.add(opt);
-        });
+            return opt;
+        }).collect(Collectors.toList());
 
         return options;
     }
@@ -175,17 +174,17 @@ public class ReportsOverview extends Div implements View {
      * the project.
      */
     private List<Option> getProjectVersionOptions() {
-        List<Option> options = new ArrayList<>();
-
         Project project = getSelectedProject();
+        Set<ProjectVersion> projectVersions = repository
+                .findProjectVersions(project);
+
+        List<Option> options = new ArrayList<>(projectVersions.size() + 1);
 
         Option all = new Option();
         all.setText("All versions");
         all.setValue(ALL_VERSIONS_KEY);
         options.add(all);
 
-        Set<ProjectVersion> projectVersions = repository
-                .findProjectVersions(project);
         projectVersions.stream().sorted().forEach(version -> {
             Option opt = new Option();
             opt.setText(version.getVersion());
