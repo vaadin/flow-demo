@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,9 +20,8 @@ import org.vaadin.bugrap.domain.BugrapRepository;
 /**
  * Wrapper class of the {@link BugrapRepository} that ensures only a single
  * instance of the repository is used across the application.
- *
  */
-public class BugrapPersistence {
+public final class BugrapPersistence {
 
     private static BugrapRepository repository;
 
