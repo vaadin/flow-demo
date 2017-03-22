@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -147,10 +147,9 @@ public class ReportsOverview extends Div implements View {
             return null;
         }
         long versionId = Long.parseLong(selectedValue.get());
-        Optional<ProjectVersion> v = repository
-                .findProjectVersions(getSelectedProject()).stream()
-                .filter(version -> versionId == version.getId()).findFirst();
-        return v.orElse(null);
+        return repository.findProjectVersions(getSelectedProject()).stream()
+                .filter(version -> versionId == version.getId()).findFirst()
+                .orElse(null);
     }
 
     /**
@@ -159,14 +158,12 @@ public class ReportsOverview extends Div implements View {
      */
     private List<Option> getProjectOptions() {
         Set<Project> projects = repository.findProjects();
-        List<Option> options = projects.stream().sorted().map(project -> {
+        return projects.stream().sorted().map(project -> {
             Option opt = new Option();
             opt.setText(project.getName());
             opt.setValue(String.valueOf(project.getId()));
             return opt;
         }).collect(Collectors.toList());
-
-        return options;
     }
 
     /**

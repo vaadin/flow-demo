@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,7 @@ import java.util.Optional;
  * Convenience class for the {@link DataProvider}, that uses an internal
  * {@link List} to provide the items.
  * 
- * @param T
+ * @param <T>
  *            the type of the model object used with this data provider
  * 
  */

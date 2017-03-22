@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2016 Vaadin Ltd.
+ * Copyright 2000-2017 Vaadin Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -47,7 +47,7 @@ import com.vaadin.ui.HasStyle;
  * <li>zebra</li>
  * </ul>
  * 
- * @param T
+ * @param <T>
  *            the type of the model object used with this table
  * 
  */
@@ -73,6 +73,9 @@ public class RichTable<T extends Serializable> extends Component
 
     private final InnerClickListener innerClickListener = new InnerClickListener();
 
+    /**
+     * Default constructor.
+     */
     public RichTable() {
         dataById = HashBiMap.create();
         rowsById = new HashMap<>();
@@ -131,6 +134,9 @@ public class RichTable<T extends Serializable> extends Component
      * Users should call this method when there are updates in the model.
      */
     public void updateContent() {
+        assert getUI()
+                .isPresent() : "The component needs to be attached to an UI.";
+        assert getId().isPresent() : "The component needs to have an ID.";
 
         Optional<Element> tbodyOptional = getElement().getChildren()
                 .filter(el -> "tbody".equals(el.getTag())).findFirst();
@@ -179,6 +185,8 @@ public class RichTable<T extends Serializable> extends Component
         if (attachEvent.isInitialAttach()) {
             assert getUI()
                     .isPresent() : "The component needs to be attached to an UI.";
+            assert getId().isPresent() : "The component needs to have an ID.";
+
             // Initialization script. This is needed only once.
             this.addClassName("tablesorter");
             getUI().get().getPage().executeJavaScript("$('#" + getId().get()
@@ -219,37 +227,38 @@ public class RichTable<T extends Serializable> extends Component
         public void handleEvent(DomEvent event) {
             String id = event.getSource().getProperty(DATA_ID_PROPERTY);
 
-            if (id != null && selectionModel != null) {
-                T object = dataById.get(id);
-                if (object != null) {
-                    Set<T> previousSelectedObjects = selectionModel
-                            .getSelectedObjects();
-                    selectionModel.addOrRemoveFromSelection(object);
-                    Set<T> newSelectedObjects = selectionModel
-                            .getSelectedObjects();
-
-                    previousSelectedObjects.removeAll(newSelectedObjects);
-
-                    BiMap<T, String> inverse = dataById.inverse();
-                    previousSelectedObjects.forEach(obj -> {
-                        String key = inverse.get(obj);
-                        Element tr = rowsById.get(key);
-                        if (tr != null) {
-                            tr.getClassList().remove(SELECTED_CSS_CLASS);
-                        }
-                    });
-
-                    newSelectedObjects.forEach(obj -> {
-                        String key = inverse.get(obj);
-                        Element tr = rowsById.get(key);
-                        if (tr != null) {
-                            tr.getClassList().add(SELECTED_CSS_CLASS);
-                        }
-                    });
-
-                    fireEvent(new SelectionChangeEvent(RichTable.this, false));
-                }
+            if (id == null || selectionModel == null) {
+                return;
             }
+            T object = dataById.get(id);
+            if (object == null) {
+                return;
+            }
+            Set<T> previousSelectedObjects = selectionModel
+                    .getSelectedObjects();
+            selectionModel.addOrRemoveFromSelection(object);
+            Set<T> newSelectedObjects = selectionModel.getSelectedObjects();
+
+            previousSelectedObjects.removeAll(newSelectedObjects);
+
+            BiMap<T, String> inverse = dataById.inverse();
+            previousSelectedObjects.forEach(obj -> {
+                String key = inverse.get(obj);
+                Element tr = rowsById.get(key);
+                if (tr != null) {
+                    tr.getClassList().remove(SELECTED_CSS_CLASS);
+                }
+            });
+
+            newSelectedObjects.forEach(obj -> {
+                String key = inverse.get(obj);
+                Element tr = rowsById.get(key);
+                if (tr != null) {
+                    tr.getClassList().add(SELECTED_CSS_CLASS);
+                }
+            });
+
+            fireEvent(new SelectionChangeEvent(RichTable.this, false));
         }
     }
 
