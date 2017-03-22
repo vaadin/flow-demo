@@ -13,7 +13,7 @@ body {
 
 select {
 	padding: 5px;
-	min-width: 250px;	
+	min-width: 250px;
 }
 
 header {
@@ -26,8 +26,19 @@ header > span, header > label {
 }
 
 .number-of-reports {
-	background-color: #A0A0A0;
-	color: #FFF;
+	background-color: #a0a0a0;
+	color: #fff;
 	font-weight: bold;
 	border-radius: 50%;
+}
+
+tr.selected td {
+	background-color: #7070ff !important;
+	color: white !important;
+}
+
+.selected-report dialog {
+	padding: 10px;
+	position: fixed;
+	bottom: 0;
 }

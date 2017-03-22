@@ -21,6 +21,9 @@ import java.util.Optional;
 /**
  * Interface that establishes the communication interface between the
  * {@link RichTable} and the data repository.
+ * 
+ * @param T
+ *            the type of the model object used with this data provider
  */
 public interface DataProvider<T> extends Serializable {
 
@@ -30,5 +33,16 @@ public interface DataProvider<T> extends Serializable {
      * @return the next item
      */
     Optional<T> getNext();
+
+    /**
+     * Gets the String representation of the identifier of a particular object.
+     * This identifier should be unique, not <code>null</code> and immutable
+     * among all objects provided by the same DataProvider.
+     * 
+     * @param object
+     *            Object returned by the {@link #getNext()} method
+     * @return the unique ID of the object
+     */
+    String getId(T object);
 
 }

@@ -26,6 +26,9 @@ public class BugrapPersistence {
 
     private static BugrapRepository repository;
 
+    private BugrapPersistence() {
+    }
+
     /**
      * Connects to the {@link BugrapRepository}. This method should be called
      * before any view is rendered.
