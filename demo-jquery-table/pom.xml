@@ -35,6 +35,10 @@
             <artifactId>demo-test-util</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <artifactId>demo-utils</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.vaadin</groupId>
             <artifactId>bugrap-domain</artifactId>
             <version>1.0</version>
@@ -69,6 +73,12 @@
             <groupId>com.github.mfornos</groupId>
             <artifactId>humanize-slim</artifactId>
             <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

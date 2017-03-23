@@ -58,7 +58,7 @@ public class ReportsOverview extends Div implements View {
     private Span numberOfReports;
     private ListDataProvider<Report> dataProvider;
     private RichTable<Report> table;
-    private Span selectedReport;
+    private Div selectedReport;
 
     /**
      * Initializes the view. Invoked by the framework when needed.
@@ -212,12 +212,13 @@ public class ReportsOverview extends Div implements View {
         // something is selected
         table.addListener(SelectionChangeEvent.class, evt -> {
             Optional<Report> selectedObject = table.getSelectedObject();
-            selectedReport.removeAll();
             if (selectedObject.isPresent()) {
-                Div dialog = new Div();
-                dialog.setText("You selected the report #"
+                selectedReport.setClassName("selected-report");
+                selectedReport.setText("You selected the report #"
                         + selectedObject.get().getId());
-                selectedReport.add(dialog);
+            } else {
+                selectedReport.setText("");
+                selectedReport.removeClassName("selected-report");
             }
         });
 
@@ -230,8 +231,7 @@ public class ReportsOverview extends Div implements View {
     private HtmlContainer createSelectionContent() {
         HtmlContainer section = new HtmlContainer("section");
 
-        selectedReport = new Span();
-        selectedReport.setClassName("selected-report");
+        selectedReport = new Div();
         section.add(selectedReport);
 
         return section;
