@@ -17,28 +17,15 @@
 <dom-module id="hello-world">
     <template>
         <div>
-            <input type="text" id="inputId">
+            <paper-input id="inputId" value="{{userInput}}"></paper-input>
             <button id="helloButton" on-click="sayHello">Say hello</button>
-            <div id="greeting">
-                <template is="dom-if" if="[[text]]">
-                    Hello [[text]]!
-                </template>
-                <template is="dom-if" if="[[!text]]">
-                    Please enter your name
-                </template>
-            </div>
+            <div id="greeting">[[greeting]]</div>
         </div>
     </template>
     <script>
         class HelloWorld extends Polymer.Element {
             static get is() {
                 return 'hello-world'
-            }
-
-            // same method is defined on a server side with the 'event.hello' value as a parameter value.
-            // it will always be called after client handlers are executed (after this method in this case)
-            sayHello(event) {
-                event.hello = this.$.inputId.value;
             }
         }
         customElements.define(HelloWorld.is, HelloWorld);
