@@ -19,11 +19,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Tag;
@@ -64,12 +62,12 @@ public class RichTable<T extends Serializable> extends Component
     private static final String DATA_ID_PROPERTY = "dataid";
     private static final String SELECTED_CSS_CLASS = "selected";
 
-    private DataProvider<T> dataProvider;
+    private ListDataProvider<T> dataProvider;
     private List<RichColumn<T>> columns;
-    private BiMap<String, T> dataById;
+    private Map<String, T> dataById;
     private Map<String, Element> rowsById;
-    private SelectionModel<T> selectionModel;
     private boolean updated;
+    private T selectedObject;
 
     private final InnerClickListener innerClickListener = new InnerClickListener();
 
@@ -77,19 +75,18 @@ public class RichTable<T extends Serializable> extends Component
      * Default constructor.
      */
     public RichTable() {
-        dataById = HashBiMap.create();
+        dataById = new HashMap<>();
         rowsById = new HashMap<>();
     }
 
     /**
-     * Sets the {@link DataProvider} from where the data will be fetched to be
-     * rendered in the table.
+     * Sets the {@link ListDataProvider} from where the data will be fetched to
+     * be rendered in the table.
      * 
      * @param dataProvider
-     *            The {@link DataProvider}. Must be not null.
+     *            The {@link ListDataProvider}.
      */
-    public void setDataProvider(DataProvider<T> dataProvider) {
-        assert dataProvider != null : "The dataProvider must not be null.";
+    public void setDataProvider(ListDataProvider<T> dataProvider) {
         this.dataProvider = dataProvider;
     }
 
@@ -98,15 +95,14 @@ public class RichTable<T extends Serializable> extends Component
      * values and provide its configuration options.
      * 
      * @param columns
-     *            The list of columns to render in the table. Must be not null,
-     *            not empty.
+     *            The list of columns to render in the table. Must be not
+     *            <code>null</code>.
      * 
      * @see RichColumn
      */
     public void setColumns(List<RichColumn<T>> columns) {
-        assert columns != null && columns
-                .isEmpty() : "At least 1 column is needed to render the table.";
-        this.columns = columns;
+        this.columns = Objects.requireNonNull(columns,
+                "Null columns are not allowed.");
 
         Element thead = new Element("thead");
         Element tr = new Element("tr");
@@ -126,17 +122,22 @@ public class RichTable<T extends Serializable> extends Component
     }
 
     /**
-     * Updates the table content, reading the data from the {@link DataProvider}
-     * and rebuilding the body the table. After the data is read, it notifies
-     * the client-side framework of the changes, and the plugin does the
-     * sorting, filtering and grouping.
+     * Updates the table content, reading the data from the
+     * {@link ListDataProvider} and rebuilding the body the table. After the
+     * data is read, it notifies the client-side framework of the changes, and
+     * the plugin does the sorting, filtering and grouping.
      * 
      * Users should call this method when there are updates in the model.
      */
     public void updateContent() {
-        assert getUI()
-                .isPresent() : "The component needs to be attached to an UI.";
-        assert getId().isPresent() : "The component needs to have an ID.";
+        if (!getUI().isPresent()) {
+            throw new IllegalStateException(
+                    "The component needs to be attached to an UI.");
+        }
+        if (!getId().isPresent()) {
+            throw new IllegalStateException(
+                    "The component needs to have an ID.");
+        }
 
         Optional<Element> tbodyOptional = getElement().getChildren()
                 .filter(el -> "tbody".equals(el.getTag())).findFirst();
@@ -148,9 +149,8 @@ public class RichTable<T extends Serializable> extends Component
         dataById.clear();
         rowsById.clear();
 
-        Optional<T> object = dataProvider.getNext();
-        while (object.isPresent()) {
-            T modelObject = object.get();
+        List<T> data = dataProvider.getData();
+        for (T modelObject : data) {
             Element tr = new Element("tr");
             String objectId = dataProvider.getId(modelObject);
             dataById.put(objectId, modelObject);
@@ -171,7 +171,6 @@ public class RichTable<T extends Serializable> extends Component
             }
 
             tbody.appendChild(tr);
-            object = dataProvider.getNext();
         }
         getUI().get().getPage().executeJavaScript(
                 "$('#" + getId().get() + "').trigger('update', [ true ]);");
@@ -183,12 +182,17 @@ public class RichTable<T extends Serializable> extends Component
         super.onAttach(attachEvent);
 
         if (attachEvent.isInitialAttach()) {
-            assert getUI()
-                    .isPresent() : "The component needs to be attached to an UI.";
-            assert getId().isPresent() : "The component needs to have an ID.";
+            if (!getUI().isPresent()) {
+                throw new IllegalStateException(
+                        "The component needs to be attached to an UI.");
+            }
+            if (!getId().isPresent()) {
+                throw new IllegalStateException(
+                        "The component needs to have an ID.");
+            }
 
             // Initialization script. This is needed only once.
-            this.addClassName("tablesorter");
+            addClassName("tablesorter");
             getUI().get().getPage().executeJavaScript("$('#" + getId().get()
                     + "').tablesorter({ theme : 'bootstrap', widgets : [ 'group', 'filter', 'columns', 'zebra' ] });");
         }
@@ -199,23 +203,12 @@ public class RichTable<T extends Serializable> extends Component
     }
 
     /**
-     * Gets the current selection model of this RichTable, if any.
+     * Gets the selected object by the client, if any.
      * 
-     * @return the selection model, or <code>null</code> if not present.
+     * @return The object referenced by the table row clicked on the client.
      */
-    public SelectionModel<T> getSelectionModel() {
-        return selectionModel;
-    }
-
-    /**
-     * Sets the selection model used for this RichTable.
-     * 
-     * @param selectionModel
-     *            the selection model. Use <code>null</code> to disable
-     *            selection of items.
-     */
-    public void setSelectionModel(SelectionModel<T> selectionModel) {
-        this.selectionModel = selectionModel;
+    public Optional<T> getSelectedObject() {
+        return Optional.ofNullable(selectedObject);
     }
 
     /*
@@ -227,38 +220,46 @@ public class RichTable<T extends Serializable> extends Component
         public void handleEvent(DomEvent event) {
             String id = event.getSource().getProperty(DATA_ID_PROPERTY);
 
-            if (id == null || selectionModel == null) {
+            if (id == null) {
                 return;
             }
             T object = dataById.get(id);
             if (object == null) {
                 return;
             }
-            Set<T> previousSelectedObjects = selectionModel
-                    .getSelectedObjects();
-            selectionModel.addOrRemoveFromSelection(object);
-            Set<T> newSelectedObjects = selectionModel.getSelectedObjects();
+            T previousSelectedObject = selectedObject;
 
-            previousSelectedObjects.removeAll(newSelectedObjects);
+            if (previousSelectedObject != null) {
+                setObjectSelected(previousSelectedObject, false);
 
-            BiMap<T, String> inverse = dataById.inverse();
-            previousSelectedObjects.forEach(obj -> {
-                String key = inverse.get(obj);
-                Element tr = rowsById.get(key);
-                if (tr != null) {
-                    tr.getClassList().remove(SELECTED_CSS_CLASS);
+                if (!previousSelectedObject.equals(object)) {
+                    selectedObject = object;
+                    setObjectSelected(object, true);
+                } else {
+                    selectedObject = null;
                 }
-            });
 
-            newSelectedObjects.forEach(obj -> {
-                String key = inverse.get(obj);
-                Element tr = rowsById.get(key);
-                if (tr != null) {
-                    tr.getClassList().add(SELECTED_CSS_CLASS);
-                }
-            });
+            } else {
+                selectedObject = object;
+                setObjectSelected(object, true);
+            }
 
             fireEvent(new SelectionChangeEvent(RichTable.this, false));
+        }
+    }
+
+    /*
+     * Sets or removed the selected CSS class at the table row.
+     */
+    private void setObjectSelected(T object, boolean selected) {
+        String key = dataProvider.getId(object);
+        Element tr = rowsById.get(key);
+        if (tr != null) {
+            if (selected) {
+                tr.getClassList().add(SELECTED_CSS_CLASS);
+            } else {
+                tr.getClassList().remove(SELECTED_CSS_CLASS);
+            }
         }
     }
 

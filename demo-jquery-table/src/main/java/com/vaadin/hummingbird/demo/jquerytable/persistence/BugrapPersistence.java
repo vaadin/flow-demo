@@ -15,6 +15,8 @@
  */
 package com.vaadin.hummingbird.demo.jquerytable.persistence;
 
+import java.util.Objects;
+
 import org.vaadin.bugrap.domain.BugrapRepository;
 
 /**
@@ -45,8 +47,8 @@ public final class BugrapPersistence {
      * @see #connect()
      */
     public static BugrapRepository getRepository() {
-        assert repository != null : "The repository was not configured properly. Call the connect() method before getting the repository.";
-        return repository;
+        return Objects.requireNonNull(repository,
+                "The repository was not configured properly. Call the connect() method before getting the repository.");
     }
 
 }

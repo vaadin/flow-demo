@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.jquerytable.page;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.vaadin.bugrap.domain.entities.Report;
 
@@ -41,12 +42,13 @@ public final class ReportsTable extends RichTable<Report> {
      * Creates a new ReportsTable with the given element id.
      * 
      * @param id
-     *            The id for the table element. Must be not null and not empty.
+     *            The id for the table element. Must be not <code>null</code>.
      */
     public ReportsTable(String id) {
-        assert id != null && !id
-                .isEmpty() : "The ReportsTable must have a not null, not empty ID.";
-        setId(id);
+        setId(Objects.requireNonNull(id,
+                "The ReportsTable must have a not null ID."));
+
+        // The column definitions. Each column is a anonymous class.
 
         List<RichColumn<Report>> columns = new ArrayList<>();
         columns.add(new RichColumn<Report>() {
@@ -216,6 +218,7 @@ public final class ReportsTable extends RichTable<Report> {
             }
         });
 
+        // sets the list of columns to the table
         setColumns(columns);
     }
 

@@ -29,18 +29,15 @@ import org.vaadin.bugrap.domain.entities.Report;
 
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
-import com.vaadin.hummingbird.demo.jquerytable.element.html5.Header;
-import com.vaadin.hummingbird.demo.jquerytable.element.html5.Main;
-import com.vaadin.hummingbird.demo.jquerytable.element.html5.Option;
-import com.vaadin.hummingbird.demo.jquerytable.element.html5.Section;
-import com.vaadin.hummingbird.demo.jquerytable.element.html5.Select;
+import com.vaadin.hummingbird.demo.jquerytable.element.html.Option;
+import com.vaadin.hummingbird.demo.jquerytable.element.html.Select;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.ListDataProvider;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionChangeEvent;
-import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionModel;
 import com.vaadin.hummingbird.demo.jquerytable.persistence.BugrapPersistence;
-import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.Div;
+import com.vaadin.hummingbird.html.HtmlComponent;
+import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.html.Label;
 import com.vaadin.hummingbird.html.Span;
 import com.vaadin.hummingbird.router.View;
@@ -67,7 +64,7 @@ public class ReportsOverview extends Div implements View {
      * Initializes the view. Invoked by the framework when needed.
      */
     public ReportsOverview() {
-        this.add(createHeader(), createMainContent(), createSelectionContent());
+        add(createHeader(), createMainContent(), createSelectionContent());
 
         projectName.addChangeListener(evt -> {
             Project selectedProject = getSelectedProject();
@@ -92,8 +89,8 @@ public class ReportsOverview extends Div implements View {
     /**
      * Creates and gets the header part of the application.
      */
-    private Header createHeader() {
-        Header header = new Header();
+    private HtmlComponent createHeader() {
+        HtmlContainer header = new HtmlContainer("header");
 
         projectName = new Select();
         projectName.setId("projectName");
@@ -195,8 +192,8 @@ public class ReportsOverview extends Div implements View {
     /**
      * Gets the main content, with the {@link RichTable} inside.
      */
-    private Main createMainContent() {
-        Main mainContent = new Main();
+    private HtmlContainer createMainContent() {
+        HtmlContainer mainContent = new HtmlContainer("main");
 
         table = new ReportsTable("main-table");
         dataProvider = new ListDataProvider<Report>() {
@@ -211,21 +208,16 @@ public class ReportsOverview extends Div implements View {
 
         mainContent.add(table);
 
-        SelectionModel<Report> selectionModel = new SelectionModel<>();
-        table.setSelectionModel(selectionModel);
-
         // SelectionChangeEvent listener that shows a message on screen when
         // something is selected
         table.addListener(SelectionChangeEvent.class, evt -> {
-            Optional<Report> selectedObject = table.getSelectionModel()
-                    .getSelectedObject();
-            selectedReport.getElement().removeAllChildren();
+            Optional<Report> selectedObject = table.getSelectedObject();
+            selectedReport.removeAll();
             if (selectedObject.isPresent()) {
-                Element dialog = new Element("dialog");
-                dialog.setAttribute("open", true);
+                Div dialog = new Div();
                 dialog.setText("You selected the report #"
                         + selectedObject.get().getId());
-                selectedReport.getElement().appendChild(dialog);
+                selectedReport.add(dialog);
             }
         });
 
@@ -235,8 +227,8 @@ public class ReportsOverview extends Div implements View {
     /**
      * Gets the section where the selection message is shown.
      */
-    private Section createSelectionContent() {
-        Section section = new Section();
+    private HtmlContainer createSelectionContent() {
+        HtmlContainer section = new HtmlContainer("section");
 
         selectedReport = new Span();
         selectedReport.setClassName("selected-report");

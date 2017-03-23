@@ -16,53 +16,55 @@
 package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Convenience class for the {@link DataProvider}, that uses an internal
- * {@link List} to provide the items.
+ * Class responsible of providing data objects to the {@link RichTable}. This
+ * class is also responsible for resolving the ID of the objects when requested
+ * by the table.
  * 
  * @param <T>
  *            the type of the model object used with this data provider
  * 
  */
 public abstract class ListDataProvider<T extends Serializable>
-        implements DataProvider<T> {
+        implements Serializable {
 
-    private int index = 0;
-    private List<T> data;
+    private List<T> data = Collections.emptyList();
 
     /**
-     * Sets the internal List used by the {@link #getNext()} method. After
-     * setting thre list, the iteration is reset. In other words, the
-     * {@link #getNext()} method will return the first element of the list.
+     * Sets the internal List used by the {@link RichTable}.
      * 
      * @param data
-     *            not null List of objects
+     *            List of objects.
      * @see RichTable#updateContent()
      */
     public void setData(List<T> data) {
-        assert data != null : "The data list cannot be null.";
+        if (data == null) {
+            data = Collections.emptyList();
+        }
         this.data = data;
-        index = 0;
     }
 
     /**
      * Gets the internal list of items.
      * 
-     * @return the list, or <code>null</code> if no list was set
+     * @return the list, can be empty, but never <code>null</code>.
      */
     public List<T> getData() {
         return data;
     }
 
-    @Override
-    public Optional<T> getNext() {
-        if (data == null || index >= data.size()) {
-            return Optional.empty();
-        }
-        return Optional.of(data.get(index++));
-    }
+    /**
+     * Gets the String representation of the identifier of a particular object.
+     * This identifier should be unique, not <code>null</code> and immutable
+     * among all objects provided by the same data provider.
+     * 
+     * @param object
+     *            Object returned by the {@link #getNext()} method
+     * @return the unique ID of the object
+     */
+    public abstract String getId(T object);
 
 }

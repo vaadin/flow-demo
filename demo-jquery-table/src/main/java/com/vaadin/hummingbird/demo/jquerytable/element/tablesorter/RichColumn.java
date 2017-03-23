@@ -37,7 +37,7 @@ public interface RichColumn<T> extends Serializable {
     /**
      * Gets the CSS classes applied to the column at the table header.
      * 
-     * @return a list of classes. Can be null or empty.
+     * @return a list of classes. Can return empty.
      */
     List<String> getColumnClasses();
 
@@ -47,7 +47,7 @@ public interface RichColumn<T> extends Serializable {
      * {@link #getRenderedValue(Object)}.
      * 
      * @param object
-     *            The model object, fetched from the {@link DataProvider}
+     *            The model object, fetched from the {@link ListDataProvider}
      * @return the model value.
      */
     String getModelValue(T object);
@@ -57,8 +57,9 @@ public interface RichColumn<T> extends Serializable {
      * effectively what the user sees in the table.
      * 
      * @param object
-     *            The model object, fetched from the {@link DataProvider}
-     * @return the rendered value. Null Strings will be rendered as "null"
+     *            The model object, fetched from the {@link ListDataProvider}
+     * @return the rendered value. <code>null</code> Strings will be rendered as
+     *         "null".
      */
     String getRenderedValue(T object);
 

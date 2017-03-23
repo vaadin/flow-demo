@@ -40,6 +40,8 @@ public class DemoUI extends UI {
     public static class Servlet extends VaadinServlet {
         @Override
         public void init() throws ServletException {
+            // starts the connection with the database. This should be called
+            // only once, when starting the server.
             BugrapPersistence.connect();
             super.init();
         }

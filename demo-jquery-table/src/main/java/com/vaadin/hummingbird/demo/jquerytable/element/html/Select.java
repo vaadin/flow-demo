@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.jquerytable.element.html5;
+package com.vaadin.hummingbird.demo.jquerytable.element.html;
 
 import java.util.Optional;
 
@@ -34,39 +34,20 @@ public class Select extends HtmlComponent implements ChangeNotifier {
      * Creates an empty select.
      */
     public Select() {
-        this.getElement().addSynchronizedPropertyEvent("change");
-        this.getElement().addSynchronizedProperty("value");
+        getElement().addSynchronizedPropertyEvent("change");
+        getElement().addSynchronizedProperty("value");
     }
 
     /**
      * Adds an option to this select.
      * 
      * @param option
-     *            A not null Option
+     *            A not <code>null</code> Option
      */
     public void addOption(Option option) {
-        assert option != null : "The option cannot be null.";
-        getElement().appendChild(option.getElement());
-    }
-
-    /**
-     * Gets the selected Option, if any.
-     * 
-     * @return the selected Option component, based on the
-     *         {@link #getSelectedValue()}
-     */
-    public Optional<Option> getSelectedOption() {
-        Optional<String> selectedValue = getSelectedValue();
-        if (selectedValue.isPresent()) {
-            Optional<Element> first = getElement().getChildren().filter(el -> el
-                    .getComponent().isPresent()
-                    && el.getComponent().get() instanceof Option
-                    && selectedValue.get().equals(
-                            ((Option) el.getComponent().get()).getValue()))
-                    .findFirst();
-            return first.map(Option.class::cast);
+        if (option != null) {
+            getElement().appendChild(option.getElement());
         }
-        return Optional.empty();
     }
 
     /**
