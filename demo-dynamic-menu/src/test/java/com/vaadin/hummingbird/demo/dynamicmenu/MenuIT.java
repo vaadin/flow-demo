@@ -22,9 +22,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractChromeTest;
 
-public class MenuIT extends AbstractDemoTest {
+public class MenuIT extends AbstractChromeTest {
 
     private static final String BOOK_OF_DUMMIES = "Book of dummies";
     private static final String THE_LIFE_CHANGER_DEBUGGING = "The life changer: debugging";

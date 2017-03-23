@@ -52,7 +52,6 @@
                         </goals>
                         <configuration>
                             <workingDirectory>${js.working.directory}</workingDirectory>
-                            <arguments>-f install</arguments>
                         </configuration>
                     </execution>
                 </executions>

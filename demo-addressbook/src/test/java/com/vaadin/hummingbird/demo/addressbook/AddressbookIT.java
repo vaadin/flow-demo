@@ -25,13 +25,13 @@ import org.openqa.selenium.WebElement;
 
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
-import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractChromeTest;
 
 /**
  * @author Vaadin Ltd
  *
  */
-public class AddressbookIT extends AbstractDemoTest {
+public class AddressbookIT extends AbstractChromeTest {
 
     private static final By TABLE_LOCATOR = By.className("contactstable");
     private static final By FORM_LOCATOR = By.className("contactform");

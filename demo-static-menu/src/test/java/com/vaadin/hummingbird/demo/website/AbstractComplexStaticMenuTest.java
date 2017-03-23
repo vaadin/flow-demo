@@ -21,9 +21,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.hummingbird.demo.testutil.AbstractDemoTest;
+import com.vaadin.hummingbird.demo.testutil.AbstractChromeTest;
 
-public abstract class AbstractComplexStaticMenuTest extends AbstractDemoTest {
+public abstract class AbstractComplexStaticMenuTest extends AbstractChromeTest {
 
     protected void testSubMenuItem(String caption) {
         testSubMenuItem(caption, caption);
