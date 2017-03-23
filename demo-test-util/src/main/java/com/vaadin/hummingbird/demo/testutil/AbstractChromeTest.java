@@ -31,7 +31,7 @@ public abstract class AbstractChromeTest extends ChromeBrowserTest {
     }
 
     @Override
-    protected String getRootURL() {
-        return "http://localhost:8080/";
+    protected int getDeploymentPort() {
+        return 8080;
     }
 }
