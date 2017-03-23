@@ -17,7 +17,7 @@ package com.vaadin.hummingbird.demo.jquerytable.persistence;
 
 import java.util.Objects;
 
-import org.vaadin.bugrap.domain.BugrapRepository;
+import org.vaadin.bugrap.domain.BugrapRepository; 
 
 /**
  * Wrapper class of the {@link BugrapRepository} that ensures only a single

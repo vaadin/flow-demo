@@ -16,55 +16,33 @@
 package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 /**
- * Class responsible of providing data objects to the {@link RichTable}. This
- * class is also responsible for resolving the ID of the objects when requested
- * by the table.
+ * Interface that establishes the communication interface between the
+ * {@link RichTable} and the data repository.
  * 
  * @param <T>
  *            the type of the model object used with this data provider
- * 
  */
-public abstract class ListDataProvider<T extends Serializable>
-        implements Serializable {
-
-    private List<T> data = Collections.emptyList();
+public interface DataProvider<T> extends Serializable {
 
     /**
-     * Sets the internal List used by the {@link RichTable}.
+     * Gets the next item from the data repository.
      * 
-     * @param data
-     *            List of objects.
-     * @see RichTable#updateContent()
+     * @return the next item
      */
-    public void setData(List<T> data) {
-        if (data == null) {
-            data = Collections.emptyList();
-        }
-        this.data = data;
-    }
-
-    /**
-     * Gets the internal list of items.
-     * 
-     * @return the list, can be empty, but never <code>null</code>.
-     */
-    public List<T> getData() {
-        return data;
-    }
+    Optional<T> getNext();
 
     /**
      * Gets the String representation of the identifier of a particular object.
      * This identifier should be unique, not <code>null</code> and immutable
-     * among all objects provided by the same data provider.
+     * among all objects provided by the same DataProvider.
      * 
      * @param object
      *            Object returned by the {@link #getNext()} method
      * @return the unique ID of the object
      */
-    public abstract String getId(T object); 
+    String getId(T object);
 
 }
