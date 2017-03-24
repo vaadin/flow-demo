@@ -25,7 +25,7 @@
 		}
   </style>
   <table>
-    <template is="dom-repeat" items="[[model]]">
+    <template is="dom-repeat" items="[[cells]]">
         <tr>
              <template is="dom-repeat" items="[[item]]">
                 <td on-click="handleClick" class$="[[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</td>
@@ -39,17 +39,6 @@
   class MineSweeper extends Polymer.Element {
 	  static get is() { return 'mine-sweeper'; }
 	  
-	  static get config() {
-		  return {
-			  properties : {
-			        model: {
-			            type: Array,
-			            value: []
-			        },
-			    }
-		  };
-	  }
-
 	  handleRightClick (event) {
           event.preventDefault();
       }
