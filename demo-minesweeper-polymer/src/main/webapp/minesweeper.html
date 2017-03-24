@@ -2,65 +2,48 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 
 <dom-module id="mine-sweeper">
-    <template>
-        <style>
-            td {
-                background: grey;
-                border: 1px solid black;
-                width: 20px;
-                height: 20px;
-                text-align: center;
-            }
-
-            .empty {
-                background: white;
-            }
-
-            .mine {
-                background: red;
-            }
-
-            .marked {
-                background: yellow;
-            }
-        </style>
-        <table>
-            <template is="dom-repeat" items="[[model]]">
-                <tr>
-                    <template is="dom-repeat" items="[[item]]">
-                        <td on-click="handleClick" class$="[[item.style]]" on-contextmenu="handleRightClick">
-                            [[item.text]]
-                        </td>
-                    </template>
-                </tr>
-            </template>
-        </table>
+  <template>
+  <style>
+		  td {
+		    background: grey;
+		    border: 1px solid black;
+		    width: 20px;
+		    height: 20px;
+		    text-align: center;
+		}
+		
+		.empty {
+		    background: white;
+		}
+		
+		.mine {
+		    background: red;
+		}
+		
+		.marked {
+		    background: yellow;
+		}
+  </style>
+  <table>
+    <template is="dom-repeat" items="[[cells]]">
+        <tr>
+             <template is="dom-repeat" items="[[item]]">
+                <td on-click="handleClick" class$="[[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</td>
+             </template>
+        </tr>
     </template>
+   </table>
+   </template>
 
     <script>
-        class MineSweeper extends Polymer.Element {
-            static get is() {
-                return 'mine-sweeper';
-            }
-
-            static get config() {
-                return {
-                    properties: {
-                        model: {
-                            type: Array,
-                            value: []
-                        },
-                    }
-                };
-            }
-
-            handleRightClick(event) {
-                event.preventDefault();
-            }
-
-        }
-
-        customElements.define(MineSweeper.is, MineSweeper);
+    class MineSweeper extends Polymer.Element {
+	  static get is() { return 'mine-sweeper'; }
+	  
+	  handleRightClick (event) {
+          event.preventDefault();
+      }
+    }
+    customElements.define(MineSweeper.is, MineSweeper);
 
     </script>
 </dom-module>

@@ -15,28 +15,68 @@
  */
 package com.vaadin.hummingbird.demo.minesweeper.component.component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import com.vaadin.annotations.EventData;
 import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
+import com.vaadin.hummingbird.demo.minesweeper.component.component.MinesweeperComponent.MinesweeperModel;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.Point;
 import com.vaadin.hummingbird.template.PolymerTemplate;
 import com.vaadin.hummingbird.template.model.TemplateModel;
-import com.vaadin.hummingbird.util.JsonUtils;
-import elemental.json.Json;
-import elemental.json.JsonArray;
-import elemental.json.JsonObject;
-import elemental.json.JsonValue;
 
 /**
  * The Minesweeper main UI component.
  */
 @Tag("mine-sweeper")
 @HtmlImport("context://minesweeper.html")
-public class MinesweeperComponent extends PolymerTemplate<TemplateModel> {
+public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
 
     private final MineFieldData mineFieldData;
+
+    public static class Cell {
+
+        private int row;
+
+        private int col;
+
+        private String style;
+
+        private String text;
+
+        public Cell(int row, int col, String style, String text) {
+            this.row = row;
+            this.col = col;
+            this.style = style;
+            this.text = text;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getCol() {
+            return col;
+        }
+
+        public String getStyle() {
+            return style;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+    }
+
+    public interface MinesweeperModel extends TemplateModel {
+
+        public void setCells(List<List<Cell>> cells);
+    }
 
     /**
      * Creates a component and sets up a minefield using the given parameters.
@@ -82,25 +122,15 @@ public class MinesweeperComponent extends PolymerTemplate<TemplateModel> {
     }
 
     private void setModel() {
-        JsonArray[] rows = new JsonArray[mineFieldData.getRows()];
-        for (int rowIndex = 0; rowIndex < mineFieldData.getRows(); rowIndex++) {
-            JsonValue[] values = new JsonValue[mineFieldData.getCols()];
-            for (int colIndex = 0; colIndex < mineFieldData
-                    .getCols(); colIndex++) {
-                JsonObject object = Json.createObject();
-                object.put("style", computeStyle(rowIndex, colIndex));
-                String text = mineFieldData.getText(rowIndex, colIndex);
-                if (text != null) {
-                    object.put("text", text);
-                }
-                object.put("row", rowIndex);
-                object.put("col", colIndex);
-                values[colIndex] = object;
-            }
-            rows[rowIndex] = JsonUtils.createArray(values);
-        }
+        List<List<Cell>> cells = IntStream.range(0, mineFieldData.getRows())
+                .mapToObj(row -> IntStream.range(0, mineFieldData.getCols())
+                        .mapToObj(col -> new Cell(row, col,
+                                computeStyle(row, col),
+                                mineFieldData.getText(row, col)))
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
 
-        getElement().setPropertyJson("model", JsonUtils.createArray(rows));
+        getModel().setCells(cells);
     }
 
     private String computeStyle(int row, int col) {
