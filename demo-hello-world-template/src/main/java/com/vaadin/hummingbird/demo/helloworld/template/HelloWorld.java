@@ -27,8 +27,6 @@ import com.vaadin.hummingbird.template.model.TemplateModel;
  * The one and only view in the hello world application.
  */
 @Tag("hello-world")
-@HtmlImport("js/bower_components/polymer/polymer.html")
-@HtmlImport("js/bower_components/paper-input/paper-input.html")
 @HtmlImport("components/HelloWorld.html")
 public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
     private static final String EMPTY_NAME_GREETING = "Please enter your name";
@@ -65,7 +63,7 @@ public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
     private void sayHello() {
         // Called from the template click handler
         getModel().setGreeting(Optional.ofNullable(getModel().getUserInput())
-                .filter(string -> !string.isEmpty())
+                .filter(userInput -> !userInput.isEmpty())
                 .map(greeting -> String.format("Hello %s!", greeting))
                 .orElse(EMPTY_NAME_GREETING));
     }
