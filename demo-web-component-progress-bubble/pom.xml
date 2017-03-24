@@ -5,15 +5,11 @@
 	<parent>
 		<groupId>com.vaadin.hummingbird.demo</groupId>
 		<artifactId>hummingbird-demo-project</artifactId>
-		<version>0.0.21-SNAPSHOT</version>
+		<version>0.0.22-SNAPSHOT</version>
 	</parent>
 	<name>Progress Bubble Web Component Integration</name>
 	<artifactId>demo-web-component-progress-bubble</artifactId>
 	<packaging>war</packaging>
-
-	<properties>
-		<js.working.directory>src/main/webapp/js</js.working.directory>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -51,8 +47,8 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
-					<nodeVersion>v7.7.1</nodeVersion>
-					<npmVersion>4.1.2</npmVersion>
+					<nodeVersion>${node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
 					<workingDirectory>${js.working.directory}</workingDirectory>
 				</configuration>
 				<executions>
