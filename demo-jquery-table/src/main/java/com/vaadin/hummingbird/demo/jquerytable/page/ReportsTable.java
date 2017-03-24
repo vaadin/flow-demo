@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import org.vaadin.bugrap.domain.entities.Report;
+import java.util.function.Function;
 
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichColumn;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
+import com.vaadin.hummingbird.demo.jquerytable.persistence.Report;
 
 import humanize.Humanize;
 
@@ -51,175 +51,100 @@ public final class ReportsTable extends RichTable<Report> {
         // The column definitions. Each column is a anonymous class.
 
         List<RichColumn<Report>> columns = new ArrayList<>();
-        columns.add(new RichColumn<Report>() {
+        columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
+                .setColumnName("ID").setRenderedValueFunction(
+                        object -> String.valueOf(object.getId())));
 
-            @Override
-            public String getRenderedValue(Report object) {
-                return String.valueOf(object.getId());
-            }
+        columns.add(new ReportColumn()
+                .setColumnClasses(FILTER_SELECT, GROUP_BY_TEXT)
+                .setColumnName("Priority").setRenderedValueFunction(
+                        object -> object.getPriority().name()));
 
-            @Override
-            public String getModelValue(Report object) {
-                return null;
-            }
+        columns.add(new ReportColumn()
+                .setColumnClasses(FILTER_SELECT, GROUP_BY_TEXT)
+                .setColumnName("Type")
+                .setRenderedValueFunction(object -> object.getType().name()));
 
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(GROUP_DISABLED);
-            }
+        columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
+                .setColumnName("Summary")
+                .setRenderedValueFunction(Report::getSummary));
 
-            @Override
-            public String getColumnName() {
-                return "ID";
-            }
-        });
+        columns.add(new ReportColumn()
+                .setColumnClasses(FILTER_SELECT, GROUP_BY_TEXT)
+                .setColumnName("Assigned to")
+                .setRenderedValueFunction(Report::getAssignedTo));
 
-        columns.add(new RichColumn<Report>() {
+        columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
+                .setColumnName("Last modified")
+                .setRenderedValueFunction(object -> Humanize
+                        .naturalTime(object.getLastModified()))
+                .setModelValueFunction(object -> String
+                        .valueOf(object.getLastModified().getTime())));
 
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getPriority().name();
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return null;
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Priority";
-            }
-        });
-
-        columns.add(new RichColumn<Report>() {
-
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getType() == null ? "" : object.getType().name();
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return null;
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Type";
-            }
-        });
-
-        columns.add(new RichColumn<Report>() {
-
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getSummary();
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return null;
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(GROUP_DISABLED);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Summary";
-            }
-        });
-
-        columns.add(new RichColumn<Report>() {
-
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getAssigned() == null ? ""
-                        : object.getAssigned().getName();
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return null;
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(FILTER_SELECT, GROUP_BY_TEXT);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Assigned to";
-            }
-        });
-
-        columns.add(new RichColumn<Report>() {
-
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getTimestamp() == null ? ""
-                        : Humanize.naturalTime(object.getTimestamp());
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return object.getTimestamp() == null ? ""
-                        : String.valueOf(object.getTimestamp().getTime());
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(GROUP_DISABLED);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Last modified";
-            }
-        });
-
-        columns.add(new RichColumn<Report>() {
-
-            @Override
-            public String getRenderedValue(Report object) {
-                return object.getReportedTimestamp() == null ? ""
-                        : Humanize.naturalTime(object.getReportedTimestamp());
-            }
-
-            @Override
-            public String getModelValue(Report object) {
-                return object.getReportedTimestamp() == null ? ""
-                        : String.valueOf(
-                                object.getReportedTimestamp().getTime());
-            }
-
-            @Override
-            public List<String> getColumnClasses() {
-                return Arrays.asList(GROUP_DISABLED);
-            }
-
-            @Override
-            public String getColumnName() {
-                return "Reported";
-            }
-        });
+        columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
+                .setColumnName("Reported")
+                .setRenderedValueFunction(
+                        object -> Humanize.naturalTime(object.getReported()))
+                .setModelValueFunction(object -> String
+                        .valueOf(object.getReported().getTime())));
 
         // sets the list of columns to the table
         setColumns(columns);
+    }
+
+    /*
+     * Helper class to provide a fluent interface to create columns for reports
+     */
+    private class ReportColumn implements RichColumn<Report> {
+
+        private Function<Report, String> renderedValueFunction;
+        private Function<Report, String> modelValueFunction;
+        private List<String> columnClasses;
+        private String columnName;
+
+        public ReportColumn setColumnName(String columnName) {
+            this.columnName = columnName;
+            return this;
+        }
+
+        public ReportColumn setColumnClasses(String... columnClasses) {
+            this.columnClasses = Arrays.asList(columnClasses);
+            return this;
+        }
+
+        public ReportColumn setModelValueFunction(
+                Function<Report, String> modelValueFunction) {
+            this.modelValueFunction = modelValueFunction;
+            return this;
+        }
+
+        public ReportColumn setRenderedValueFunction(
+                Function<Report, String> renderedValueFunction) {
+            this.renderedValueFunction = renderedValueFunction;
+            return this;
+        }
+
+        @Override
+        public String getColumnName() {
+            return columnName;
+        }
+
+        @Override
+        public List<String> getColumnClasses() {
+            return columnClasses;
+        }
+
+        @Override
+        public String getModelValue(Report object) {
+            return modelValueFunction == null ? null
+                    : modelValueFunction.apply(object);
+        }
+
+        @Override
+        public String getRenderedValue(Report object) {
+            return renderedValueFunction == null ? null
+                    : renderedValueFunction.apply(object);
+        }
     }
 
 }

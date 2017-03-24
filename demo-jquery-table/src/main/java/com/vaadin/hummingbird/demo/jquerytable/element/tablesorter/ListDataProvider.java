@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Class responsible of providing data objects to the {@link RichTable}. This
@@ -28,10 +29,10 @@ import java.util.List;
  *            the type of the model object used with this data provider
  * 
  */
-public abstract class ListDataProvider<T extends Serializable>
-        implements Serializable {
+public class ListDataProvider<T extends Serializable> implements Serializable {
 
     private List<T> data = Collections.emptyList();
+    private Function<T, String> idFunction;
 
     /**
      * Sets the internal List used by the {@link RichTable}.
@@ -57,14 +58,23 @@ public abstract class ListDataProvider<T extends Serializable>
     }
 
     /**
-     * Gets the String representation of the identifier of a particular object.
-     * This identifier should be unique, not <code>null</code> and immutable
-     * among all objects provided by the same data provider.
+     * Sets the {@link Function} capable of getting the unique identifier for a
+     * given object. This identifier should be unique, not <code>null</code> and
+     * immutable among all objects provided by the same data provider.
      * 
-     * @param object
-     *            Object returned by the {@link #getNext()} method
-     * @return the unique ID of the object
+     * @param idFunction
+     *            The function that receives an object and return its ID in
+     *            String form.
      */
-    public abstract String getId(T object); 
+    public void setIdFunction(Function<T, String> idFunction) {
+        this.idFunction = idFunction;
+    }
+
+    /*
+     * Internal method called by RichTable.
+     */
+    String getId(T object) {
+        return idFunction.apply(object);
+    }
 
 }

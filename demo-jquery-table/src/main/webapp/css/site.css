@@ -39,7 +39,7 @@ tr.selected td {
     color: white !important;
 }
 
-.selected-report div {
+.selected-report {
     padding: 10px;
     position: fixed;
     bottom: 10px;

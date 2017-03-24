@@ -18,14 +18,7 @@ package com.vaadin.hummingbird.demo.jquerytable.page;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.vaadin.bugrap.domain.BugrapRepository;
-import org.vaadin.bugrap.domain.BugrapRepository.ReportsQuery;
-import org.vaadin.bugrap.domain.entities.Project;
-import org.vaadin.bugrap.domain.entities.ProjectVersion;
-import org.vaadin.bugrap.domain.entities.Report;
 
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
@@ -34,7 +27,10 @@ import com.vaadin.hummingbird.demo.jquerytable.element.html.Select;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.ListDataProvider;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionChangeEvent;
-import com.vaadin.hummingbird.demo.jquerytable.persistence.BugrapPersistence;
+import com.vaadin.hummingbird.demo.jquerytable.persistence.IssuesRepository;
+import com.vaadin.hummingbird.demo.jquerytable.persistence.Project;
+import com.vaadin.hummingbird.demo.jquerytable.persistence.ProjectVersion;
+import com.vaadin.hummingbird.demo.jquerytable.persistence.Report;
 import com.vaadin.hummingbird.html.Div;
 import com.vaadin.hummingbird.html.HtmlComponent;
 import com.vaadin.hummingbird.html.HtmlContainer;
@@ -51,8 +47,7 @@ public class ReportsOverview extends Div implements View {
 
     private static final String ALL_VERSIONS_KEY = "all-versions";
 
-    private final BugrapRepository repository = BugrapPersistence
-            .getRepository();
+    private final IssuesRepository repository = IssuesRepository.get();
     private final Option allVersions;
 
     private Select projectName;
@@ -80,14 +75,14 @@ public class ReportsOverview extends Div implements View {
             projectVersion.getElement().removeAllChildren();
             getProjectVersionOptions().forEach(projectVersion::addOption);
 
-            dataProvider.setData(new ArrayList<>(
-                    repository.findReports(buildReportsQuery())));
+            dataProvider.setData(new ArrayList<>(repository.findReports(
+                    getSelectedProject(), getSelectedProjectVersion())));
             table.updateContent();
         });
 
         projectVersion.addChangeListener(evt -> {
-            dataProvider.setData(new ArrayList<>(
-                    repository.findReports(buildReportsQuery())));
+            dataProvider.setData(new ArrayList<>(repository.findReports(
+                    getSelectedProject(), getSelectedProjectVersion())));
             table.updateContent();
         });
     }
@@ -160,7 +155,7 @@ public class ReportsOverview extends Div implements View {
      * select at the header.
      */
     private List<Option> getProjectOptions() {
-        Set<Project> projects = repository.findProjects();
+        List<Project> projects = repository.findProjects();
         return projects.stream().sorted().map(project -> {
             Option opt = new Option();
             opt.setText(project.getName());
@@ -175,7 +170,7 @@ public class ReportsOverview extends Div implements View {
      */
     private List<Option> getProjectVersionOptions() {
         Project project = getSelectedProject();
-        Set<ProjectVersion> projectVersions = repository
+        List<ProjectVersion> projectVersions = repository
                 .findProjectVersions(project);
 
         List<Option> options = new ArrayList<>(projectVersions.size() + 1);
@@ -183,7 +178,7 @@ public class ReportsOverview extends Div implements View {
 
         projectVersions.stream().sorted().forEach(version -> {
             Option opt = new Option();
-            opt.setText(version.getVersion());
+            opt.setText(version.getName());
             opt.setValue(String.valueOf(version.getId()));
             options.add(opt);
         });
@@ -198,15 +193,12 @@ public class ReportsOverview extends Div implements View {
         HtmlContainer mainContent = new HtmlContainer("main");
 
         table = new ReportsTable("main-table");
-        dataProvider = new ListDataProvider<Report>() {
-            @Override
-            public String getId(Report object) {
-                return String.valueOf(object.getId());
-            }
-        };
+        dataProvider = new ListDataProvider<Report>();
+        dataProvider.setIdFunction(object -> String.valueOf(object.getId()));
+
         table.setDataProvider(dataProvider);
-        dataProvider.setData(
-                new ArrayList<>(repository.findReports(buildReportsQuery())));
+        dataProvider.setData(new ArrayList<>(repository.findReports(
+                getSelectedProject(), getSelectedProjectVersion())));
 
         mainContent.add(table);
 
@@ -239,14 +231,4 @@ public class ReportsOverview extends Div implements View {
         return section;
     }
 
-    /**
-     * Builds and gets the {@link ReportsQuery} based on the selections in the
-     * UI.
-     */
-    private ReportsQuery buildReportsQuery() {
-        ReportsQuery query = new ReportsQuery();
-        query.project = getSelectedProject();
-        query.projectVersion = getSelectedProjectVersion();
-        return query;
-    }
 }

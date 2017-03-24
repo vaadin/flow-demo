@@ -54,8 +54,7 @@ public class ReportsOverviewIT extends AbstractDemoTest {
         Assert.assertTrue(secondRowClasses.contains(SELECTED_CSS_CLASS));
 
         // verifying the contents of the dialog
-        WebElement secondCell = secondRow
-                .findElement(By.cssSelector("td:first-child"));
+        WebElement secondCell = secondRow.findElement(By.tagName("td"));
         selectedId = secondCell.getText();
         dialog = findElement(By.className("selected-report"));
         Assert.assertTrue(dialog.getText().contains("#" + selectedId));
@@ -70,13 +69,13 @@ public class ReportsOverviewIT extends AbstractDemoTest {
     @Test
     public void testJQuerySorting() {
         open();
-        waitForElementPresent(By.tagName("table"));
+        waitForElementPresent(By.className("tablesorter"));
 
-        WebElement table = findElement(By.tagName("table"));
+        WebElement table = findElement(By.className("tablesorter"));
         List<WebElement> rows = table.findElements(By.cssSelector("tbody tr"));
         List<Integer> idsBeforeJQuerySort = new ArrayList<>(rows.size());
         for (WebElement row : rows) {
-            WebElement cell = row.findElement(By.cssSelector("td:first-child"));
+            WebElement cell = row.findElement(By.tagName("td"));
             idsBeforeJQuerySort.add(Integer.parseInt(cell.getText()));
         }
 
@@ -88,7 +87,7 @@ public class ReportsOverviewIT extends AbstractDemoTest {
         rows = table.findElements(By.cssSelector("tbody tr"));
         List<Integer> idsAfterJQuerySort = new ArrayList<>(rows.size());
         for (WebElement row : rows) {
-            WebElement cell = row.findElement(By.cssSelector("td:first-child"));
+            WebElement cell = row.findElement(By.tagName("td"));
             idsAfterJQuerySort.add(Integer.parseInt(cell.getText()));
         }
         // sort the first list and compare it with the list sorted by jquery

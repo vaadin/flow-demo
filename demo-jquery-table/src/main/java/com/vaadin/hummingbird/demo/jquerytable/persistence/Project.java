@@ -13,34 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.hummingbird.demo.jquerytable.element.html5;
-
-import com.vaadin.annotations.Tag;
-import com.vaadin.hummingbird.html.HtmlContainer;
-import com.vaadin.hummingbird.html.event.ClickNotifier;
-import com.vaadin.ui.Component;
+package com.vaadin.hummingbird.demo.jquerytable.persistence;
 
 /**
- * Component representing a <code>&lt;main&gt;</code> element.
+ * Entity that represents a project in the database.
+ *
  */
-@Tag("main")
-public class Main extends HtmlContainer implements ClickNotifier {
+public class Project extends BaseEntity {
+
+    private String name;
 
     /**
-     * Creates a new empty main.
+     * @return the name
      */
-    public Main() {
-        super();
+    public String getName() {
+        return name;
     }
 
     /**
-     * Creates a new main with the given child components.
-     *
-     * @param components
-     *            the child components
+     * @param name
+     *            the name to set
      */
-    public Main(Component... components) {
-        super(components);
+    public void setName(String name) {
+        this.name = name;
     }
-
 }

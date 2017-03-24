@@ -19,8 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.annotations.WebComponents;
-import com.vaadin.hummingbird.demo.jquerytable.persistence.BugrapPersistence;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
@@ -29,7 +27,6 @@ import com.vaadin.ui.UI;
 /**
  * The main UI for the application.
  */
-@WebComponents(1)
 public class DemoUI extends UI {
 
     /**
@@ -40,12 +37,8 @@ public class DemoUI extends UI {
     public static class Servlet extends VaadinServlet {
         @Override
         public void init() throws ServletException {
-            // starts the connection with the database. This should be called
-            // only once, when starting the server.
-            BugrapPersistence.connect();
             super.init();
         }
-
     }
 
     /**

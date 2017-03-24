@@ -49,12 +49,12 @@ import com.vaadin.ui.HasStyle;
  *            the type of the model object used with this table
  * 
  */
-@JavaScript("context://bower_components/jquery/dist/jquery.min.js")
-@JavaScript("context://bower_components/tablesorter/dist/js/jquery.tablesorter.min.js")
-@JavaScript("context://bower_components/tablesorter/dist/js/jquery.tablesorter.widgets.min.js")
-@JavaScript("context://bower_components/tablesorter/dist/js/widgets/widget-grouping.min.js")
-@StyleSheet("context://bower_components/tablesorter/dist/css/theme.bootstrap_4.min.css")
-@StyleSheet("context://bower_components/tablesorter/dist/css/widget.grouping.min.css")
+@JavaScript("context://jquery.min.js")
+@JavaScript("context://js/jquery.tablesorter.min.js")
+@JavaScript("context://js/jquery.tablesorter.widgets.min.js")
+@JavaScript("context://js/widgets/widget-grouping.min.js")
+@StyleSheet("context://css/theme.bootstrap_4.min.css")
+@StyleSheet("context://css/widget.grouping.min.css")
 @Tag("table")
 public class RichTable<T extends Serializable> extends Component
         implements ClickNotifier, HasStyle {
