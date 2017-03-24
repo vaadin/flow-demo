@@ -5,17 +5,11 @@
     <parent>
         <groupId>com.vaadin.hummingbird.demo</groupId>
         <artifactId>hummingbird-demo-project</artifactId>
-        <version>0.0.21-SNAPSHOT</version>
+        <version>0.0.22-SNAPSHOT</version>
     </parent>
     <name>Hello World using Template API</name>
     <artifactId>demo-hello-world-template</artifactId>
     <packaging>war</packaging>
-
-    <properties>
-        <node.version>v6.2.0</node.version>
-        <npm.version>3.9.3</npm.version>
-        <js.working.directory>src/main/webapp/js</js.working.directory>
-    </properties>
 
     <dependencies>
         <dependency>

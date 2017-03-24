@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin.hummingbird.demo</groupId>
         <artifactId>hummingbird-demo-project</artifactId>
-        <version>0.0.21-SNAPSHOT</version>
+        <version>0.0.22-SNAPSHOT</version>
     </parent>
     <name>Minesweeper using Polymer</name>
     <artifactId>demo-minesweeper-polymer</artifactId>
@@ -49,8 +49,8 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.0</version>
                 <configuration>
-                    <nodeVersion>v6.2.0</nodeVersion>
-                    <npmVersion>3.9.3</npmVersion>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <npmVersion>${npm.version}</npmVersion>
                     <workingDirectory>frontend</workingDirectory>
                 </configuration>
                 <executions>
@@ -84,5 +84,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>local-run</id>
+            <activation>
+                <property>
+                    <name>!test.use.hub</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.lazerycode.selenium</groupId>
+                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                        <version>1.0.10</version>
+                        <configuration>
+                            <!-- root directory that downloaded driver binaries will
+                                be stored in -->
+                            <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
+                            <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
+                            <downloadedZipFileDirectory>../driver_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>../repo.xml</customRepositoryMap>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

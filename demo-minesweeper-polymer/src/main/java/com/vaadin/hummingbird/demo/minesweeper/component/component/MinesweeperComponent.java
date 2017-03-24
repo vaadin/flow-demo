@@ -22,8 +22,8 @@ import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.hummingbird.demo.minesweeper.component.data.Point;
 import com.vaadin.hummingbird.template.PolymerTemplate;
+import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.hummingbird.util.JsonUtils;
-
 import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
@@ -34,7 +34,7 @@ import elemental.json.JsonValue;
  */
 @Tag("mine-sweeper")
 @HtmlImport("context://minesweeper.html")
-public class MinesweeperComponent extends PolymerTemplate {
+public class MinesweeperComponent extends PolymerTemplate<TemplateModel> {
 
     private final MineFieldData mineFieldData;
 
@@ -54,6 +54,7 @@ public class MinesweeperComponent extends PolymerTemplate {
             int cols) {
         mineFieldData = new MineFieldData(rows, cols, seed, mineDensity);
         init();
+        setId("template");
     }
 
     /**
@@ -208,5 +209,4 @@ public class MinesweeperComponent extends PolymerTemplate {
             }
         }
     }
-
 }
