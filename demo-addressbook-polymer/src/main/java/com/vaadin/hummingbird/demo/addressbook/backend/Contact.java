@@ -53,20 +53,6 @@ public class Contact implements Serializable {
     }
 
     /**
-     * Creates a contact and fills it with data from JsonObject.
-     *
-     * @param jsonObject the json object with Contact data
-     */
-    public Contact(JsonObject jsonObject) {
-        id = (int) jsonObject.getNumber("id");
-        firstName = jsonObject.getString("firstName");
-        lastName = jsonObject.getString("lastName");
-        phoneNumber = jsonObject.getString("phoneNumber");
-        email = jsonObject.getString("email");
-        birthDate = null;
-    }
-
-    /**
      * Gets the id.
      *
      * @return the id
@@ -202,7 +188,8 @@ public class Contact implements Serializable {
     }
 
     /**
-     * Converts Contact to a JsonObject and populates it with corresponding data.
+     * Converts Contact to a JsonObject and populates it with corresponding
+     * data.
      *
      * @return JsonObject filled with Contact data
      */
