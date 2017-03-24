@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import com.vaadin.server.SerializableFunction;
+
 /**
  * Class responsible of providing data objects to the {@link RichTable}. This
  * class is also responsible for resolving the ID of the objects when requested
@@ -32,7 +34,7 @@ import java.util.function.Function;
 public class ListDataProvider<T extends Serializable> implements Serializable {
 
     private List<T> data = Collections.emptyList();
-    private Function<T, String> idFunction;
+    private SerializableFunction<T, String> idFunction;
 
     /**
      * Sets the internal List used by the {@link RichTable}.
@@ -66,7 +68,7 @@ public class ListDataProvider<T extends Serializable> implements Serializable {
      *            The function that receives an object and return its ID in
      *            String form.
      */
-    public void setIdFunction(Function<T, String> idFunction) {
+    public void setIdFunction(SerializableFunction<T, String> idFunction) {
         this.idFunction = idFunction;
     }
 

@@ -31,6 +31,8 @@ public class Report extends BaseEntity {
     private Date reported;
 
     /**
+     * Gets the {@link ProjectVersion} of this report.
+     * 
      * @return the version
      */
     public ProjectVersion getVersion() {
@@ -38,6 +40,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the {@link ProjectVersion} of this report.
+     * 
      * @param version
      *            the version to set
      */
@@ -46,6 +50,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the {@link IssuePriority} of this report.
+     * 
      * @return the priority
      */
     public IssuePriority getPriority() {
@@ -53,6 +59,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the {@link IssuePriority} of this report.
+     * 
      * @param priority
      *            the priority to set
      */
@@ -61,6 +69,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the {@link IssueType} of this report.
+     * 
      * @return the type
      */
     public IssueType getType() {
@@ -68,6 +78,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the {@link IssueType} of this report.
+     * 
      * @param type
      *            the type to set
      */
@@ -76,6 +88,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the summary text of this report.
+     * 
      * @return the summary
      */
     public String getSummary() {
@@ -83,6 +97,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the summary text of this report.
+     * 
      * @param summary
      *            the summary to set
      */
@@ -91,6 +107,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the name of the person who is assigned to this report.
+     * 
      * @return the assignedTo
      */
     public String getAssignedTo() {
@@ -98,6 +116,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the name of the person who is assigned to this report.
+     * 
      * @param assignedTo
      *            the assignedTo to set
      */
@@ -106,6 +126,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the {@link Date} when this report was last modified.
+     * 
      * @return the lastModified
      */
     public Date getLastModified() {
@@ -113,6 +135,9 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * 
+     * Sets the {@link Date} when this report was last modified.
+     * 
      * @param lastModified
      *            the lastModified to set
      */
@@ -121,6 +146,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Gets the {@link Date} when this report was created.
+     * 
      * @return the reported
      */
     public Date getReported() {
@@ -128,6 +155,8 @@ public class Report extends BaseEntity {
     }
 
     /**
+     * Sets the {@link Date} when this report was created.
+     * 
      * @param reported
      *            the reported to set
      */

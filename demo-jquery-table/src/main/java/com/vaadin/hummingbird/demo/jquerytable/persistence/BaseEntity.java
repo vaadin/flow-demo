@@ -26,6 +26,8 @@ public abstract class BaseEntity
     protected long id;
 
     /**
+     * Gets the unique identifier of the entity.
+     * 
      * @return the id
      */
     public long getId() {
@@ -33,6 +35,8 @@ public abstract class BaseEntity
     }
 
     /**
+     * Sets the unique identifier of the entity.
+     * 
      * @param id
      *            the id to set
      */

@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichColumn;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
 import com.vaadin.hummingbird.demo.jquerytable.persistence.Report;
+import com.vaadin.server.SerializableFunction;
 
 import humanize.Humanize;
 
@@ -95,10 +95,10 @@ public final class ReportsTable extends RichTable<Report> {
     /*
      * Helper class to provide a fluent interface to create columns for reports
      */
-    private class ReportColumn implements RichColumn<Report> {
+    private static class ReportColumn implements RichColumn<Report> {
 
-        private Function<Report, String> renderedValueFunction;
-        private Function<Report, String> modelValueFunction;
+        private SerializableFunction<Report, String> renderedValueFunction;
+        private SerializableFunction<Report, String> modelValueFunction;
         private List<String> columnClasses;
         private String columnName;
 
@@ -113,13 +113,13 @@ public final class ReportsTable extends RichTable<Report> {
         }
 
         public ReportColumn setModelValueFunction(
-                Function<Report, String> modelValueFunction) {
+                SerializableFunction<Report, String> modelValueFunction) {
             this.modelValueFunction = modelValueFunction;
             return this;
         }
 
         public ReportColumn setRenderedValueFunction(
-                Function<Report, String> renderedValueFunction) {
+                SerializableFunction<Report, String> renderedValueFunction) {
             this.renderedValueFunction = renderedValueFunction;
             return this;
         }

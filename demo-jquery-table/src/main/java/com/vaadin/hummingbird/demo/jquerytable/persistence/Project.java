@@ -24,6 +24,8 @@ public class Project extends BaseEntity {
     private String name;
 
     /**
+     * Gets the name of the project.
+     * 
      * @return the name
      */
     public String getName() {
@@ -31,6 +33,8 @@ public class Project extends BaseEntity {
     }
 
     /**
+     * Sets the name of the project.
+     * 
      * @param name
      *            the name to set
      */

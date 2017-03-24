@@ -24,6 +24,8 @@ public class ProjectVersion extends BaseEntity {
     private String name;
 
     /**
+     * Gets the {@link Project} of this version.
+     * 
      * @return the project
      */
     public Project getProject() {
@@ -31,6 +33,8 @@ public class ProjectVersion extends BaseEntity {
     }
 
     /**
+     * Sets the {@link Project} of this version.
+     * 
      * @param project
      *            the project to set
      */
@@ -39,6 +43,8 @@ public class ProjectVersion extends BaseEntity {
     }
 
     /**
+     * Gets the name of this version.
+     * 
      * @return the name
      */
     public String getName() {
@@ -46,6 +52,8 @@ public class ProjectVersion extends BaseEntity {
     }
 
     /**
+     * Sets the name of this version.
+     * 
      * @param name
      *            the name to set
      */

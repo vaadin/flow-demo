@@ -15,6 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.jquerytable.persistence;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.Period;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
  * Repository class for {@link Project}, {@link ProjectVersion} and
  * {@link Report}, that creates an in-memory, random generated database.
  */
-public final class IssuesRepository {
+public final class IssuesRepository implements Serializable {
 
     private static final IssuesRepository INSTANCE = new IssuesRepository(42);
 
