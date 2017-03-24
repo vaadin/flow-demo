@@ -31,7 +31,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>${frontend.maven.plugin.version}</version>
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
                     <npmVersion>${npm.version}</npmVersion>
@@ -80,7 +80,7 @@
                     <plugin>
                         <groupId>com.lazerycode.selenium</groupId>
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                        <version>1.0.10</version>
+                        <version>${driver.binary.downloader.maven.plugin.version}</version>
                         <configuration>
                             <!-- root directory that downloaded driver binaries will
                                 be stored in -->

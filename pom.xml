@@ -28,8 +28,14 @@
 	</modules>
 
 	<properties>
+		<!-- Libraries -->
 		<hummingbird.version>${project.version}</hummingbird.version>
+		<commons.beanutils.version>1.9.3</commons.beanutils.version>
+
+		<!-- Plugins -->
 		<jetty.version>9.3.7.v20160115</jetty.version>
+		<frontend.maven.plugin.version>1.3</frontend.maven.plugin.version>
+		<driver.binary.downloader.maven.plugin.version>1.0.11</driver.binary.downloader.maven.plugin.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +49,7 @@
 		<phantomjs.version>2.1.1</phantomjs.version>
 		<phantomjs.outputDir>${project.rootdir}/target/phantomjs-maven-plugin</phantomjs.outputDir>
 
+		<!-- Frontend -->
 		<node.version>v7.7.4</node.version>
 		<npm.version>4.1.2</npm.version>
 		<js.working.directory>src/main/webapp/js</js.working.directory>
@@ -103,17 +110,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.6.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
+				<version>3.0.2</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -128,11 +135,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.6.1</version>
+				<version>3.0.0</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.17</version>
+				<version>2.19.1</version>
 				<executions>
 					<execution>
 						<goals>
@@ -151,7 +158,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
+				<version>3.0.0</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -252,7 +259,7 @@
 											driver-binary-downloader-maven-plugin
 										</artifactId>
 										<versionRange>
-											[1.0.10,)
+											[${driver.binary.downloader.maven.plugin.version},)
 										</versionRange>
 										<goals>
 											<goal>selenium</goal>
