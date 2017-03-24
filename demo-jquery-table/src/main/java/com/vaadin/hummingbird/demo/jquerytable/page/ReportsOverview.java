@@ -53,6 +53,8 @@ public class ReportsOverview extends Div implements View {
 
     private final BugrapRepository repository = BugrapPersistence
             .getRepository();
+    private final Option allVersions;
+
     private Select projectName;
     private Select projectVersion;
     private Span numberOfReports;
@@ -65,6 +67,10 @@ public class ReportsOverview extends Div implements View {
      */
     public ReportsOverview() {
         add(createHeader(), createMainContent(), createSelectionContent());
+
+        allVersions = new Option();
+        allVersions.setText("All versions");
+        allVersions.setValue(ALL_VERSIONS_KEY);
 
         projectName.addChangeListener(evt -> {
             Project selectedProject = getSelectedProject();
@@ -173,11 +179,7 @@ public class ReportsOverview extends Div implements View {
                 .findProjectVersions(project);
 
         List<Option> options = new ArrayList<>(projectVersions.size() + 1);
-
-        Option all = new Option();
-        all.setText("All versions");
-        all.setValue(ALL_VERSIONS_KEY);
-        options.add(all);
+        options.add(allVersions);
 
         projectVersions.stream().sorted().forEach(version -> {
             Option opt = new Option();
