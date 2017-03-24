@@ -52,7 +52,7 @@
 		<!-- Frontend -->
 		<node.version>v7.7.4</node.version>
 		<npm.version>4.1.2</npm.version>
-		<js.working.directory>src/main/webapp/js</js.working.directory>
+		<bower.working.directory>src/main/webapp</bower.working.directory>
 	</properties>
 	<repositories>
 		<repository>
@@ -166,6 +166,7 @@
 							<Implementation-Version>${project.version}</Implementation-Version>
 						</manifestEntries>
 					</archive>
+					<packagingExcludes>node_modules/,node/,etc/,**/bower.json,**/package.json</packagingExcludes>
 				</configuration>
 			</plugin>
 

@@ -45,24 +45,11 @@
                             <goal>bower</goal> <!-- runs 'install' by default -->
                         </goals>
                         <configuration>
-                            <workingDirectory>${js.working.directory}</workingDirectory>
+                            <workingDirectory>${bower.working.directory}</workingDirectory>
                             <arguments>-f install</arguments>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>${js.working.directory}</directory>
-                            <include>bower_components/**</include>
-                        </resource>
-                    </webResources>
-                </configuration>
             </plugin>
         </plugins>
     </build>
