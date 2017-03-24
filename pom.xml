@@ -42,6 +42,10 @@
 		<phantomjs.plugin.version>0.7</phantomjs.plugin.version>
 		<phantomjs.version>2.1.1</phantomjs.version>
 		<phantomjs.outputDir>${project.rootdir}/target/phantomjs-maven-plugin</phantomjs.outputDir>
+
+		<node.version>v7.7.4</node.version>
+		<npm.version>4.1.2</npm.version>
+		<js.working.directory>src/main/webapp/js</js.working.directory>
 	</properties>
 	<repositories>
 		<repository>
