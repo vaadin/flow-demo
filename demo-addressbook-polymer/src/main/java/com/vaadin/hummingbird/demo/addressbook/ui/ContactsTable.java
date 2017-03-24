@@ -16,7 +16,6 @@
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
@@ -33,9 +32,9 @@ import elemental.json.JsonValue;
  */
 @Tag("contacts-table")
 class ContactsTable extends HtmlComponent {
-    private final transient Consumer<String> selectedRowIdProcessor;
+    private final SerializableConsumer<String> selectedRowIdProcessor;
 
-    ContactsTable(Consumer<String> selectedRowIdProcessor) {
+    ContactsTable(SerializableConsumer<String> selectedRowIdProcessor) {
         this.selectedRowIdProcessor = selectedRowIdProcessor;
 
         updateTableContents();
