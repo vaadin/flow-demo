@@ -39,17 +39,6 @@
   class MineSweeper extends Polymer.Element {
 	  static get is() { return 'mine-sweeper'; }
 	  
-	  static get config() {
-		  return {
-			  properties : {
-			        model: {
-			            type: Array,
-			            value: []
-			        },
-			    }
-		  };
-	  }
-
 	  handleRightClick (event) {
           event.preventDefault();
       }
