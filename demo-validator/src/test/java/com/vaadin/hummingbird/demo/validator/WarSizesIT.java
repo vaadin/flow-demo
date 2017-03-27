@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -83,6 +84,7 @@ public class WarSizesIT {
                 });
 
         assertTrue("No war files were analysed.", warFilesAnalysed > 0);
+        Assert.fail("FU");
     }
 
     private Path getProjectBaseDirectory() {
