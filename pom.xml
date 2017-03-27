@@ -25,6 +25,8 @@
 		<module>demo-web-component-progress-bubble</module>
 		<module>demo-addressbook</module>
 		<module>demo-addressbook-polymer</module>
+		<!-- have it as the last module-->
+		<module>demo-validator</module>
 	</modules>
 
 	<properties>
@@ -105,6 +107,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -152,6 +155,7 @@
 					<systemPropertyVariables>
 						<phantomjs.binary.path>${phantomjs.binary}</phantomjs.binary.path>
 						<webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+						<projectBaseDirectory>${user.dir}</projectBaseDirectory>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
