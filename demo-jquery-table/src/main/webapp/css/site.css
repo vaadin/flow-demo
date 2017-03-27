@@ -34,7 +34,7 @@ header>span, header>label {
     border-radius: 50%;
 }
 
-tr.selected td {
+.tablesorter tr.selected td {
     background-color: #7070ff !important;
     color: white !important;
 }

@@ -59,7 +59,7 @@ public abstract class BaseEntity
     @Override
     public int hashCode() {
         return Long.hashCode(id);
-    };
+    }
 
     @Override
     public int compareTo(BaseEntity o) {
