@@ -134,10 +134,6 @@ public class RichTable<T extends Serializable> extends Component
             throw new IllegalStateException(
                     "The component needs to be attached to an UI.");
         }
-        if (!getId().isPresent()) {
-            throw new IllegalStateException(
-                    "The component needs to have an ID.");
-        }
 
         Optional<Element> tbodyOptional = getElement().getChildren()
                 .filter(el -> "tbody".equals(el.getTag())).findFirst();
@@ -173,7 +169,7 @@ public class RichTable<T extends Serializable> extends Component
             tbody.appendChild(tr);
         }
         getUI().get().getPage().executeJavaScript(
-                "$('#" + getId().get() + "').trigger('update', [ true ]);");
+                "jQuery($0).trigger('update', [ true ]);", getElement());
         updated = true;
     }
 
@@ -186,15 +182,12 @@ public class RichTable<T extends Serializable> extends Component
                 throw new IllegalStateException(
                         "The component needs to be attached to an UI.");
             }
-            if (!getId().isPresent()) {
-                throw new IllegalStateException(
-                        "The component needs to have an ID.");
-            }
 
             // Initialization script. This is needed only once.
             addClassName("tablesorter");
-            getUI().get().getPage().executeJavaScript("$('#" + getId().get()
-                    + "').tablesorter({ theme : 'bootstrap', widgets : [ 'group', 'filter', 'columns', 'zebra' ] });");
+            getUI().get().getPage().executeJavaScript(
+                    "jQuery($0).tablesorter({ theme : 'bootstrap', widgets : [ 'group', 'filter', 'columns', 'zebra' ] });",
+                    getElement());
         }
 
         if (!updated) {

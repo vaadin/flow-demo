@@ -192,7 +192,7 @@ public class ReportsOverview extends Div implements View {
     private HtmlContainer createMainContent() {
         HtmlContainer mainContent = new HtmlContainer("main");
 
-        table = new ReportsTable("main-table");
+        table = new ReportsTable();
         dataProvider = new ListDataProvider<Report>();
         dataProvider.setIdFunction(object -> String.valueOf(object.getId()));
 

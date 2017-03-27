@@ -18,7 +18,6 @@ package com.vaadin.hummingbird.demo.jquerytable.page;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichColumn;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
@@ -39,17 +38,9 @@ public final class ReportsTable extends RichTable<Report> {
     private static final String GROUP_DISABLED = "group-false";
 
     /**
-     * Creates a new ReportsTable with the given element id.
-     * 
-     * @param id
-     *            The id for the table element. Must be not <code>null</code>.
+     * Default constructor. It sets the column definitions of the table.
      */
-    public ReportsTable(String id) {
-        setId(Objects.requireNonNull(id,
-                "The ReportsTable must have a not null ID."));
-
-        // The column definitions. Each column is a anonymous class.
-
+    public ReportsTable() {
         List<RichColumn<Report>> columns = new ArrayList<>();
         columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
                 .setColumnName("ID").setRenderedValueFunction(
