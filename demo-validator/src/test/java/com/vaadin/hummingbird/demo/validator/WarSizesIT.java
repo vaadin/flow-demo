@@ -19,16 +19,14 @@ package com.vaadin.hummingbird.demo.validator;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -39,50 +37,35 @@ public class WarSizesIT {
     private static final String PROJECT_BASE_DIRECTORY_ENV_VARIABLE_NAME = "projectBaseDirectory";
     // 20 MB
     private static final long MAX_ALLOWED_WAR_SIZE_BYTES = 20 * 1024 * 1024;
-    private static final Set<String> EXCLUDED_DIRECTORY_NAMES = Stream
-            .of(".git", "bower_components", "node", "node_modules")
-            .collect(Collectors.toSet());
-
-    private long warFilesAnalysed;
 
     @Test
     public void checkWarSizes() throws Exception {
-        warFilesAnalysed = 0;
+        Path projectBaseDirectory = getProjectBaseDirectory();
+        List<Path> warFiles = Files
+                .walk(projectBaseDirectory, FileVisitOption.FOLLOW_LINKS)
+                .filter(path -> Files.isRegularFile(path)).filter(path -> path
+                        .toString().toLowerCase(Locale.ENGLISH).endsWith("war"))
+                .collect(Collectors.toList());
+        assertTrue(String.format("Could not find war files in %s",
+                projectBaseDirectory), warFiles.size() > 0);
 
-        Files.walkFileTree(getProjectBaseDirectory(),
-                new SimpleFileVisitor<Path>() {
-                    @Override
-                    public FileVisitResult visitFile(Path file,
-                            BasicFileAttributes attrs) throws IOException {
-                        String fileName = file.toString()
-                                .toLowerCase(Locale.ENGLISH);
-                        if (fileName.endsWith(".war")) {
-                            long fileSizeBytes = Files.size(file);
-                            assertTrue(
-                                    String.format(
-                                            "File %s has size %s bytes, which is bigger than threshold: %s bytes",
-                                            fileName, fileSizeBytes,
-                                            MAX_ALLOWED_WAR_SIZE_BYTES),
-                                    fileSizeBytes < MAX_ALLOWED_WAR_SIZE_BYTES);
-                            warFilesAnalysed += 1;
-                        }
-                        return FileVisitResult.CONTINUE;
-                    }
+        Set<Path> warsExceedingSize = warFiles.stream()
+                .filter(path -> getFileSize(path) > MAX_ALLOWED_WAR_SIZE_BYTES)
+                .collect(Collectors.toSet());
 
-                    @Override
-                    public FileVisitResult preVisitDirectory(Path dir,
-                            BasicFileAttributes attrs) {
-                        String dirPath = dir.toString()
-                                .toLowerCase(Locale.ENGLISH);
-                        if (EXCLUDED_DIRECTORY_NAMES.stream()
-                                .anyMatch(dirPath::endsWith)) {
-                            return FileVisitResult.SKIP_SUBTREE;
-                        }
-                        return FileVisitResult.CONTINUE;
-                    }
-                });
+        assertTrue(
+                String.format(
+                        "Found war files that exceed maximum allowed size (%s b), list of files: %s",
+                        MAX_ALLOWED_WAR_SIZE_BYTES, warsExceedingSize),
+                warsExceedingSize.isEmpty());
+    }
 
-        assertTrue("No war files were analysed.", warFilesAnalysed > 0);
+    private static long getFileSize(Path path) {
+        try {
+            return Files.size(path);
+        } catch (IOException ioe) {
+            throw new IllegalStateException(ioe);
+        }
     }
 
     private Path getProjectBaseDirectory() {
