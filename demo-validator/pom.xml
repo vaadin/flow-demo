@@ -9,10 +9,7 @@
     </parent>
     <name>Demo validator</name>
     <artifactId>demo-validator</artifactId>
-    <packaging>pom</packaging>
-
-    <properties>
-    </properties>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -20,4 +17,18 @@
             <artifactId>demo-test-util</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <projectBaseDirectory>${project.basedir}/..</projectBaseDirectory>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
