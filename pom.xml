@@ -170,7 +170,7 @@
 							<Implementation-Version>${project.version}</Implementation-Version>
 						</manifestEntries>
 					</archive>
-					<packagingExcludes>node_modules/,node/,etc/,**/bower.json,**/package.json</packagingExcludes>
+					<packagingExcludes>**/node_modules/,**/node/,**/etc/,**/bower.json,**/package.json</packagingExcludes>
 				</configuration>
 			</plugin>
 
