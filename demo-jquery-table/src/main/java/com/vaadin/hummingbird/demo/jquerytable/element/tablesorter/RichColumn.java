@@ -37,7 +37,7 @@ public interface RichColumn<T> extends Serializable {
     /**
      * Gets the CSS classes applied to the column at the table header.
      * 
-     * @return a list of classes. Can return empty.
+     * @return a list of CSS classes.
      */
     List<String> getColumnClasses();
 

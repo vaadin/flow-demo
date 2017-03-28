@@ -15,7 +15,6 @@
  */
 package com.vaadin.hummingbird.demo.jquerytable.page;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -35,10 +34,6 @@ public class DemoUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "Servlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = DemoUI.class, routerConfigurator = DemoRouterConfigurator.class, productionMode = false)
     public static class Servlet extends VaadinServlet {
-        @Override
-        public void init() throws ServletException {
-            super.init();
-        }
     }
 
     /**
