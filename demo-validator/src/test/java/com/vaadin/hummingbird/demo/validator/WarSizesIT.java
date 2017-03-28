@@ -34,7 +34,7 @@ import org.junit.Test;
  * @author Vaadin Ltd.
  */
 public class WarSizesIT {
-    private static final String PROJECT_BASE_DIRECTORY_ENV_VARIABLE_NAME = "projectBaseDirectory";
+    private static final String PROJECT_BASE_DIRECTORY_PROPERTY_NAME = "projectBaseDirectory";
     // 20 MB
     private static final long MAX_ALLOWED_WAR_SIZE_BYTES = 20 * 1024 * 1024;
 
@@ -64,24 +64,25 @@ public class WarSizesIT {
         try {
             return Files.size(path);
         } catch (IOException ioe) {
-            throw new IllegalStateException(ioe);
+            throw new IllegalArgumentException(
+                    "Could not read size of a file, path=" + path, ioe);
         }
     }
 
     private Path getProjectBaseDirectory() {
-        String baseDirectoryEnvValue = System
-                .getProperty(PROJECT_BASE_DIRECTORY_ENV_VARIABLE_NAME);
+        String baseDirectoryPropertyValue = System
+                .getProperty(PROJECT_BASE_DIRECTORY_PROPERTY_NAME);
         assertTrue(
-                String.format("`%s` environment variable not set",
-                        PROJECT_BASE_DIRECTORY_ENV_VARIABLE_NAME),
-                baseDirectoryEnvValue != null
-                        && !baseDirectoryEnvValue.isEmpty());
-        Path projectBaseDirectory = Paths.get(baseDirectoryEnvValue);
+                String.format("`%s` property is not set",
+                        PROJECT_BASE_DIRECTORY_PROPERTY_NAME),
+                baseDirectoryPropertyValue != null
+                        && !baseDirectoryPropertyValue.isEmpty());
+        Path projectBaseDirectory = Paths.get(baseDirectoryPropertyValue);
         assertTrue(
                 String.format(
                         "`%s` is invalid, should be pointing at project directory, projectBaseDirectory=%s",
-                        PROJECT_BASE_DIRECTORY_ENV_VARIABLE_NAME,
-                        baseDirectoryEnvValue),
+                        PROJECT_BASE_DIRECTORY_PROPERTY_NAME,
+                        baseDirectoryPropertyValue),
                 Files.isDirectory(projectBaseDirectory));
         return projectBaseDirectory;
     }
