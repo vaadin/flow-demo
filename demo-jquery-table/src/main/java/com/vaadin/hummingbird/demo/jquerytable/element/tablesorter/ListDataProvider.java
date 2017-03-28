@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import com.vaadin.server.SerializableFunction;
@@ -44,10 +45,7 @@ public class ListDataProvider<T extends Serializable> implements Serializable {
      * @see RichTable#updateContent()
      */
     public void setData(List<T> data) {
-        if (data == null) {
-            data = Collections.emptyList();
-        }
-        this.data = data;
+        this.data = Optional.ofNullable(data).orElse(Collections.emptyList());
     }
 
     /**
