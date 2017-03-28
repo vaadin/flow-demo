@@ -14,12 +14,12 @@
   ~ the License.
   -->
 
-<link rel="import" href="../js/bower_components/polymer/polymer.html">
-<link rel="import" href="../js/bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <dom-module id="hello-world">
     <template>
-        <div>
+        <div style="width: 200px;">
             <paper-input id="inputId" value="{{userInput}}"></paper-input>
             <button id="helloButton" on-click="sayHello">Say hello</button>
             <div id="greeting">[[greeting]]</div>

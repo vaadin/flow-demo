@@ -35,7 +35,7 @@ import elemental.json.JsonObject;
 @Title("Addressbook")
 @Tag("div")
 @StyleSheet("css/site.css")
-@HtmlImport("js/bower_components/polymer/polymer.html")
+@HtmlImport("bower_components/polymer/polymer.html")
 @HtmlImport("components/ContactsTable.html")
 @HtmlImport("components/ContactForm.html")
 public class Addressbook extends HtmlContainer implements View {
