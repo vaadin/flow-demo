@@ -1,28 +1,28 @@
 <table class="contactstable">
-	<tr>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Email</th>
-	</tr>
-	<tbody>
-		<tr *ngFor="let contact of contacts" [id]="contact.id"
-			(click)="var tr = $event.currentTarget;
-			
-			var previouslySelected = document.getElementsByClassName('selected-row');
-			var unselect = false;
-			if (previouslySelected != undefined && previouslySelected.length == 1) {
-				unselect = (previouslySelected[0].id == tr.id);
-				previouslySelected[0].className = '';
-			}
-			if (unselect) {
-				$server.onRowSelect(null);
-			} else {
-				tr.className = 'selected-row';
-				$server.onRowSelect(tr.id);
-			}">
-			<td>{{contact.firstName}}</td>
-			<td>{{contact.lastName}}</td>
-			<td>{{contact.email}}</td>
-		</tr>
-	</tbody>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+    </tr>
+    <tbody>
+    <tr *ngFor="let contact of contacts" [id]="contact.id"
+        (click)="var tr = $event.currentTarget;
+
+            var previouslySelected = document.getElementsByClassName('selected-row');
+            var unselect = false;
+            if (previouslySelected != undefined && previouslySelected.length == 1) {
+                unselect = (previouslySelected[0].id == tr.id);
+                previouslySelected[0].className = '';
+            }
+            if (unselect) {
+                $server.onRowSelect(null);
+            } else {
+                tr.className = 'selected-row';
+                $server.onRowSelect(tr.id);
+            }">
+        <td>{{contact.firstName}}</td>
+        <td>{{contact.lastName}}</td>
+        <td>{{contact.email}}</td>
+    </tr>
+    </tbody>
 </table>
