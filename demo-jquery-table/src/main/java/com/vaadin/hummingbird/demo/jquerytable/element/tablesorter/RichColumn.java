@@ -47,7 +47,7 @@ public interface RichColumn<T> extends Serializable {
      * {@link #getRenderedValue(Object)}.
      * 
      * @param object
-     *            The model object, fetched from the {@link ListDataProvider}
+     *            The model object
      * @return the model value.
      */
     String getModelValue(T object);
@@ -57,7 +57,7 @@ public interface RichColumn<T> extends Serializable {
      * effectively what the user sees in the table.
      * 
      * @param object
-     *            The model object, fetched from the {@link ListDataProvider}
+     *            The model object
      * @return the rendered value. <code>null</code> Strings will be rendered as
      *         "null".
      */

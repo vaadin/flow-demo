@@ -16,6 +16,7 @@
 package com.vaadin.hummingbird.demo.jquerytable.element.tablesorter;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.vaadin.hummingbird.dom.DomEvent;
 import com.vaadin.hummingbird.dom.DomEventListener;
 import com.vaadin.hummingbird.dom.Element;
 import com.vaadin.hummingbird.html.event.ClickNotifier;
+import com.vaadin.server.SerializableFunction;
 import com.vaadin.ui.AttachEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HasStyle;
@@ -62,32 +64,30 @@ public class RichTable<T extends Serializable> extends Component
     private static final String DATA_ID_PROPERTY = "dataid";
     private static final String SELECTED_CSS_CLASS = "selected";
 
-    private ListDataProvider<T> dataProvider;
+    private List<T> data = Collections.emptyList();
+    private SerializableFunction<T, String> idFunction;
     private List<RichColumn<T>> columns;
     private Map<String, T> dataById;
     private Map<String, Element> rowsById;
-    private boolean updated;
     private T selectedObject;
 
     private final InnerClickListener innerClickListener = new InnerClickListener();
 
     /**
-     * Default constructor.
+     * Constructor for the RichTable. Sets the function capable of getting the
+     * unique identifier for a given object. This identifier should be unique,
+     * not <code>null</code> and immutable among all objects provided by the
+     * same RichTable.
+     * 
+     * @param idFunction
+     *            The function that can return the unique ID of a given object
+     *            from the model. Can not be <code>null</code>.
      */
-    public RichTable() {
+    public RichTable(SerializableFunction<T, String> idFunction) {
+        this.idFunction = Objects.requireNonNull(idFunction,
+                "The idFunction can not be null.");
         dataById = new HashMap<>();
         rowsById = new HashMap<>();
-    }
-
-    /**
-     * Sets the {@link ListDataProvider} from where the data will be fetched to
-     * be rendered in the table.
-     * 
-     * @param dataProvider
-     *            The {@link ListDataProvider}.
-     */
-    public void setDataProvider(ListDataProvider<T> dataProvider) {
-        this.dataProvider = dataProvider;
     }
 
     /**
@@ -122,17 +122,35 @@ public class RichTable<T extends Serializable> extends Component
     }
 
     /**
-     * Updates the table content, reading the data from the
-     * {@link ListDataProvider} and rebuilding the body the table. After the
-     * data is read, it notifies the client-side framework of the changes, and
-     * the plugin does the sorting, filtering and grouping.
+     * Sets the data objects to be visible in the component. If the component is
+     * already attached to the document, the table is refreshed.
      * 
-     * Users should call this method when there are updates in the model.
+     * @param data
+     *            The model objects.
      */
-    public void updateContent() {
+    public void setData(List<T> data) {
+        this.data = data;
+        updateContentIfAttached();
+    }
+
+    /**
+     * Gets the data objects currently displayed by the table. The returned list
+     * can not be modified.
+     * 
+     * @return The model objects.
+     */
+    public List<T> getData() {
+        return Collections.unmodifiableList(data);
+    }
+
+    /**
+     * Updates the table content, reading the data model and rebuilding the body
+     * the table. After the data is read, it notifies the client-side framework
+     * of the changes, and the plugin does the sorting, filtering and grouping.
+     */
+    private void updateContentIfAttached() {
         if (!getUI().isPresent()) {
-            throw new IllegalStateException(
-                    "The component needs to be attached to an UI.");
+            return;
         }
 
         Optional<Element> tbodyOptional = getElement().getChildren()
@@ -145,10 +163,9 @@ public class RichTable<T extends Serializable> extends Component
         dataById.clear();
         rowsById.clear();
 
-        List<T> data = dataProvider.getData();
         for (T modelObject : data) {
             Element tr = new Element("tr");
-            String objectId = dataProvider.getId(modelObject);
+            String objectId = idFunction.apply(modelObject);
             dataById.put(objectId, modelObject);
             rowsById.put(objectId, tr);
 
@@ -170,7 +187,6 @@ public class RichTable<T extends Serializable> extends Component
         }
         getUI().get().getPage().executeJavaScript(
                 "jQuery($0).trigger('update', [ true ]);", getElement());
-        updated = true;
     }
 
     @Override
@@ -188,10 +204,8 @@ public class RichTable<T extends Serializable> extends Component
             getUI().get().getPage().executeJavaScript(
                     "jQuery($0).tablesorter({ theme : 'bootstrap', widgets : [ 'group', 'filter', 'columns', 'zebra' ] });",
                     getElement());
-        }
 
-        if (!updated) {
-            updateContent();
+            updateContentIfAttached();
         }
     }
 
@@ -239,21 +253,20 @@ public class RichTable<T extends Serializable> extends Component
 
             fireEvent(new SelectionChangeEvent(RichTable.this, false));
         }
-    }
 
-    /*
-     * Sets or removed the selected CSS class at the table row.
-     */
-    private void setObjectSelected(T object, boolean selected) {
-        String key = dataProvider.getId(object);
-        Element tr = rowsById.get(key);
-        if (tr != null) {
-            if (selected) {
-                tr.getClassList().add(SELECTED_CSS_CLASS);
-            } else {
-                tr.getClassList().remove(SELECTED_CSS_CLASS);
+        /*
+         * Sets or removed the selected CSS class at the table row.
+         */
+        private void setObjectSelected(T object, boolean selected) {
+            String key = idFunction.apply(object);
+            Element tr = rowsById.get(key);
+            if (tr != null) {
+                if (selected) {
+                    tr.getClassList().add(SELECTED_CSS_CLASS);
+                } else {
+                    tr.getClassList().remove(SELECTED_CSS_CLASS);
+                }
             }
         }
     }
-
 }

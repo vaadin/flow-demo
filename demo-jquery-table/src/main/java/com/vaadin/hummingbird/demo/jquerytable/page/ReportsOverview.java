@@ -24,7 +24,6 @@ import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
 import com.vaadin.hummingbird.demo.jquerytable.element.html.Option;
 import com.vaadin.hummingbird.demo.jquerytable.element.html.Select;
-import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.ListDataProvider;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.RichTable;
 import com.vaadin.hummingbird.demo.jquerytable.element.tablesorter.SelectionChangeEvent;
 import com.vaadin.hummingbird.demo.jquerytable.persistence.IssuesRepository;
@@ -53,7 +52,6 @@ public class ReportsOverview extends Div implements View {
     private Select projectName;
     private Select projectVersion;
     private Span numberOfReports;
-    private ListDataProvider<Report> dataProvider;
     private RichTable<Report> table;
     private Div selectedReport;
 
@@ -75,15 +73,13 @@ public class ReportsOverview extends Div implements View {
             projectVersion.getElement().removeAllChildren();
             getProjectVersionOptions().forEach(projectVersion::addOption);
 
-            dataProvider.setData(new ArrayList<>(repository.findReports(
-                    getSelectedProject(), getSelectedProjectVersion())));
-            table.updateContent();
+            table.setData(repository.findReports(getSelectedProject(),
+                    getSelectedProjectVersion()));
         });
 
         projectVersion.addChangeListener(evt -> {
-            dataProvider.setData(new ArrayList<>(repository.findReports(
-                    getSelectedProject(), getSelectedProjectVersion())));
-            table.updateContent();
+            table.setData(repository.findReports(getSelectedProject(),
+                    getSelectedProjectVersion()));
         });
     }
 
@@ -193,12 +189,8 @@ public class ReportsOverview extends Div implements View {
         HtmlContainer mainContent = new HtmlContainer("main");
 
         table = new ReportsTable();
-        dataProvider = new ListDataProvider<Report>();
-        dataProvider.setIdFunction(object -> String.valueOf(object.getId()));
-
-        table.setDataProvider(dataProvider);
-        dataProvider.setData(new ArrayList<>(repository.findReports(
-                getSelectedProject(), getSelectedProjectVersion())));
+        table.setData(repository.findReports(getSelectedProject(),
+                getSelectedProjectVersion()));
 
         mainContent.add(table);
 

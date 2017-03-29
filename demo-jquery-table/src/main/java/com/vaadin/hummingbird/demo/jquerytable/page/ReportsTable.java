@@ -41,6 +41,8 @@ public final class ReportsTable extends RichTable<Report> {
      * Default constructor. It sets the column definitions of the table.
      */
     public ReportsTable() {
+        super(report -> String.valueOf(report.getId()));
+
         List<RichColumn<Report>> columns = new ArrayList<>();
         columns.add(new ReportColumn().setColumnClasses(GROUP_DISABLED)
                 .setColumnName("ID").setRenderedValueFunction(
