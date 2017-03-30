@@ -1,0 +1,52 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
+        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+        "STXihei", sans-serif;
+    padding: 10px;
+}
+
+select {
+    padding: 5px;
+    min-width: 250px;
+}
+
+header {
+    padding-bottom: 10px;
+}
+
+header>span, header>label {
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.number-of-reports {
+    background-color: #a0a0a0;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.tablesorter tr.selected td {
+    background-color: #7070ff !important;
+    color: white !important;
+}
+
+.selected-report {
+    padding: 10px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 250px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
