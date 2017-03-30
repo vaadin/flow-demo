@@ -18,6 +18,7 @@ package com.vaadin.hummingbird.demo.addressbook;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.WebComponents;
 import com.vaadin.hummingbird.demo.addressbook.ui.Addressbook;
 import com.vaadin.hummingbird.router.RouterConfiguration;
 import com.vaadin.hummingbird.router.RouterConfigurator;
@@ -35,6 +36,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
      */
     @WebServlet(urlPatterns = "/*", name = "DemoSiteServlet", asyncSupported = true)
     @VaadinServletConfiguration(routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
+    @WebComponents(1)
     public static class DemoSiteServlet extends VaadinServlet {
     }
 

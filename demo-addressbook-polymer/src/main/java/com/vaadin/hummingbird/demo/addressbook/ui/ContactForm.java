@@ -15,16 +15,13 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-
+import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.Tag;
 import com.vaadin.hummingbird.demo.addressbook.backend.Contact;
 import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
-import com.vaadin.hummingbird.html.HtmlComponent;
-
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import com.vaadin.hummingbird.demo.addressbook.ui.ContactForm.ContactModel;
+import com.vaadin.hummingbird.template.PolymerTemplate;
+import com.vaadin.hummingbird.template.model.TemplateModel;
 
 /**
  * Contact editor form.
@@ -33,32 +30,56 @@ import elemental.json.JsonObject;
  *
  */
 @Tag("contacts-form")
-class ContactForm extends HtmlComponent {
-    private final transient Consumer<Boolean> elementUpdateCallback;
+class ContactForm extends PolymerTemplate<ContactModel> {
 
-    private JsonObject selectedObject = Json.createObject();
+    /**
+     * Contact model interface to bind properties to the template.
+     */
+    public interface ContactModel extends TemplateModel {
 
-    ContactForm(Consumer<Boolean> elementUpdateCallback) {
+        void setFirstName(String firstName);
+
+        String getFirstName();
+
+        void setLastName(String lastName);
+
+        String getLastName();
+
+        void setPhoneNumber(String phone);
+
+        String getPhoneNumber();
+
+        void setEmail(String mail);
+
+        String getEmail();
+    }
+
+    private final SerializableConsumer<Boolean> elementUpdateCallback;
+
+    private Contact selectedContact;
+
+    ContactForm(SerializableConsumer<Boolean> elementUpdateCallback) {
         this.elementUpdateCallback = elementUpdateCallback;
-
-        getElement().addEventListener("form-saved",
-                e -> updateContact(e.getEventData()), "event.detail");
-
-        getElement().addEventListener("form-closed",
-                e -> elementUpdateCallback.accept(false));
     }
 
-    void updateContent(JsonObject selectedObject) {
-        this.selectedObject = selectedObject;
-        getElement().setPropertyJson("contactToEdit", selectedObject);
+    void updateContent(Contact contact) {
+        selectedContact = contact;
+        getModel().importBean("", contact, property -> true);
     }
 
-    private void updateContact(JsonObject eventData) {
-        JsonObject newContact = eventData.get("event.detail");
-        if (!Objects.equals(selectedObject, newContact)) {
-            ContactService.getDemoService().save(new Contact(newContact));
-            elementUpdateCallback.accept(true);
-            selectedObject = newContact;
-        }
+    @EventHandler
+    private void save() {
+        selectedContact.setFirstName(getModel().getFirstName());
+        selectedContact.setLastName(getModel().getLastName());
+        selectedContact.setPhoneNumber(getModel().getPhoneNumber());
+        selectedContact.setEmail(getModel().getEmail());
+        ContactService.getDemoService().save(selectedContact);
+        elementUpdateCallback.accept(true);
     }
+
+    @EventHandler
+    private void cancel() {
+        elementUpdateCallback.accept(false);
+    }
+
 }
