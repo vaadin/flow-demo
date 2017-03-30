@@ -26,9 +26,6 @@ import com.vaadin.hummingbird.demo.addressbook.backend.ContactService;
 import com.vaadin.hummingbird.html.HtmlContainer;
 import com.vaadin.hummingbird.router.View;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
-
 /**
  * Displays a list of contacts.
  */
@@ -59,10 +56,9 @@ public class Addressbook extends HtmlContainer implements View {
     }
 
     private void tableRowClick(String selectedRowId) {
-        Optional<JsonObject> selectedObject = Optional.ofNullable(selectedRowId)
+        Optional<Contact> selectedObject = Optional.ofNullable(selectedRowId)
                 .map(Integer::parseInt).map(id -> ContactService
-                        .getDemoService().findById(id).orElse(null))
-                .map(Contact::toJsonObject);
+                        .getDemoService().findById(id).orElse(null));
 
         if (selectedObject.isPresent()) {
             add(contactForm);
@@ -70,7 +66,7 @@ public class Addressbook extends HtmlContainer implements View {
             removeContactForm();
         }
 
-        contactForm.updateContent(selectedObject.orElse(Json.createObject()));
+        contactForm.updateContent(selectedObject.orElse(new Contact()));
     }
 
     private void removeContactForm() {

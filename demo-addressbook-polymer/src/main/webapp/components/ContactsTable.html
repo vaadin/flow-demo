@@ -8,44 +8,37 @@
             </tr>
             <tbody>
             <template is="dom-repeat" items="[[contacts]]">
-                <tr on-tap="_itemClicked" id="[[item.id]]">
-                    <td>[[item.firstName]]</td>
-                    <td>[[item.lastName]]</td>
-                    <td>[[item.email]]</td>
+                <tr on-click="_itemClicked" id="[[item.id]]" class='contact-row'>
+                    <td class='column'>[[item.firstName]]</td>
+                    <td class='column'>[[item.lastName]]</td>
+                    <td class='column'>[[item.email]]</td>
                 </tr>
             </template>
             </tbody>
         </table>
     </template>
     <script>
-        Polymer({
-            is: 'contacts-table',
+    class ContactsTable extends Polymer.Element {
+        static get is() { return 'contacts-table'; }
+  
+        _itemClicked(event) {
+            const tr = event.currentTarget;
+            const previouslySelected = document.getElementsByClassName('selected-row');
+            let unselect = false;
+            if (previouslySelected != undefined && previouslySelected.length == 1) {
+                unselect = (previouslySelected[0].id == tr.id);
+                previouslySelected[0].className = '';
+            }
 
-            properties: {
-                contacts: {
-                    type: Array,
-                    value: function () {
-                        return [];
-                    },
-                }
-            },
-
-            _itemClicked(event) {
-                const tr = event.currentTarget;
-                const previouslySelected = document.getElementsByClassName('selected-row');
-                let unselect = false;
-                if (previouslySelected != undefined && previouslySelected.length == 1) {
-                    unselect = (previouslySelected[0].id == tr.id);
-                    previouslySelected[0].className = '';
-                }
-
-                let selectedId = null;
-                if (!unselect) {
-                    tr.className = 'selected-row';
-                    selectedId = tr.id;
-                }
-                this.dispatchEvent(new CustomEvent('row-selection-updated', {detail: selectedId}));
-            },
-        })
+            let selectedId = null;
+            if (!unselect) {
+                tr.className = 'selected-row';
+                selectedId = tr.id;
+            }
+            this.dispatchEvent(new CustomEvent('row-selection-updated', {detail: selectedId}));
+        }
+    }
+    
+    customElements.define(ContactsTable.is, ContactsTable);
     </script>
 </dom-module>
