@@ -25,10 +25,6 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin.hummingbird.demo</groupId>
-            <artifactId>demo-test-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin.hummingbird.demo</groupId>
             <artifactId>demo-utils</artifactId>
         </dependency>
         <dependency>
@@ -42,6 +38,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <artifactId>demo-test-util</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,12 +53,12 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>frontend</directory>
-                            <includes>
-                                <include>bower_components/jquery/dist/**</include>
-                                <include>bower_components/tablesorter/dist/**</include>
-                            </includes>
+                            <directory>frontend/bower_components/jquery/dist</directory>
+                            <include>**/*.min.*</include>
+                        </resource>
+                        <resource>
+                            <directory>frontend/bower_components/tablesorter/dist</directory>
+                            <include>**/*.min.*</include>
                         </resource>
                     </webResources>
                 </configuration>
