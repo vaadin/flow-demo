@@ -18,7 +18,7 @@ package com.vaadin.hummingbird.demo.addressbook.ui;
 import java.util.List;
 import java.util.Optional;
 
-import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.ClientDelegate;
 import com.vaadin.annotations.Exclude;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Title;
@@ -62,7 +62,7 @@ public class Addressbook extends AngularTemplate implements View {
         return (AddressbookModel) super.getModel();
     }
 
-    @EventHandler
+    @ClientDelegate
     protected void onRowSelect(Integer id) {
         if (id == null) {
             hideForm();
