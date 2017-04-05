@@ -15,7 +15,7 @@
  */
 package com.vaadin.hummingbird.demo.addressbook.ui;
 
-import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.ClientDelegate;
 import com.vaadin.annotations.Exclude;
 import com.vaadin.annotations.Id;
 import com.vaadin.hummingbird.StateNode;
@@ -29,8 +29,8 @@ import com.vaadin.hummingbird.nodefeature.TemplateOverridesMap;
 import com.vaadin.hummingbird.template.angular.ElementTemplateNode;
 import com.vaadin.hummingbird.template.model.TemplateModel;
 import com.vaadin.server.Command;
-import com.vaadin.ui.HasElement;
 import com.vaadin.ui.AngularTemplate;
+import com.vaadin.ui.HasElement;
 
 /**
  * Contact editor form.
@@ -84,7 +84,7 @@ public class ContactForm extends AngularTemplate {
         return (ContactBean) super.getModel();
     }
 
-    @EventHandler
+    @ClientDelegate
     protected void onSave() {
         Contact contact = new Contact();
         // TODO Use getModel().update(editContact,"contact") once
@@ -121,7 +121,7 @@ public class ContactForm extends AngularTemplate {
                 false);
     }
 
-    @EventHandler
+    @ClientDelegate
     protected void onCancel() {
         onCancel.execute();
     }
