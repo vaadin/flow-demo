@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <name>Test helpers for demos</name>
     <parent>
-        <groupId>com.vaadin.hummingbird.demo</groupId>
-        <artifactId>hummingbird-demo-project</artifactId>
+        <groupId>com.vaadin.flow.demo</groupId>
+        <artifactId>flow-demo-project</artifactId>
         <version>0.0.24-SNAPSHOT</version>
     </parent>
     <artifactId>demo-test-util</artifactId>
@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hummingbird-test-util</artifactId>
+            <artifactId>flow-test-util</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -1,6 +1,6 @@
-Hummingbird Demos
+Flow Demos
 ======
-*See [Hummingbird](https://github.com/vaadin/hummingbird) about the platform*
+*See [Flow](https://github.com/vaadin/flow) about the platform*
 
 Instructions on how to set up a working environment to run demo projects follow below.
 
@@ -8,7 +8,7 @@ The project contains several sub modules (module per demo).
 
 Quick Setup
 ======
-1. <code>git clone https://github.com/vaadin/hummingbird-demo.git</code>
+1. <code>git clone https://github.com/vaadin/flow-demo.git</code>
 1. make sure you have a TestBench license if you want to run the tests (get it otherwise on https://vaadin.com/pro/licenses)
 1. <code>mvn install</code>
 

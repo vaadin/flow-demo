@@ -3,8 +3,8 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.vaadin.hummingbird.demo</groupId>
-        <artifactId>hummingbird-demo-project</artifactId>
+        <groupId>com.vaadin.flow.demo</groupId>
+        <artifactId>flow-demo-project</artifactId>
         <version>0.0.24-SNAPSHOT</version>
     </parent>
     <name>jQuery plugin table controlled by the server</name>
@@ -21,10 +21,10 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>hummingbird</artifactId>
+            <artifactId>flow</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-utils</artifactId>
         </dependency>
         <dependency>
@@ -39,7 +39,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.hummingbird.demo</groupId>
+            <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
             <scope>test</scope>
         </dependency>
@@ -92,7 +92,7 @@
                 <version>${jetty.version}</version>
                 <configuration>
                     <webAppConfig>
-                        <webInfIncludeJarPattern>.*/hummingbird-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
+                        <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                         <resourceBases>
                             <!-- Make the frontend directory containing the 
