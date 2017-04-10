@@ -1,0 +1,16 @@
+{
+  "entrypoint": "HelloWorld.html",
+  "sources": [
+   "bower.json"
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.js"
+  ],
+  "builds": [{
+    "name": "es5",
+    "js": {"compile": true}
+  },
+  {
+    "name": "es6"
+  }]
+}

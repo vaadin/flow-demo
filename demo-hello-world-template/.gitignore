@@ -1,0 +1,8 @@
+/src/main/webapp/build/
+/frontend/bin/
+/frontend/bower_components/
+/frontend/build/
+/frontend/etc/
+/frontend/lib/
+/frontend/node/
+/frontend/node_modules/

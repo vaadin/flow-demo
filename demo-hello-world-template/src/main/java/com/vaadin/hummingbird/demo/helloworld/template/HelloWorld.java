@@ -27,7 +27,7 @@ import com.vaadin.hummingbird.template.model.TemplateModel;
  * The one and only view in the hello world application.
  */
 @Tag("hello-world")
-@HtmlImport("components/HelloWorld.html")
+@HtmlImport("webcomponent://HelloWorld.html")
 public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
     private static final String EMPTY_NAME_GREETING = "Please enter your name";
 
