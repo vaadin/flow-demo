@@ -17,6 +17,6 @@ cache:
   - demo-hello-world-template/driver
 before_cache:
   # remove all build artifacts
-  - rm -rf $HOME/.m2/repository/com/vaadin/hummingbird
-  - rm -rf $HOME/.m2/repository/com/vaadin/hummingbird-*
+  - rm -rf $HOME/.m2/repository/com/vaadin/flow
+  - rm -rf $HOME/.m2/repository/com/vaadin/flow-*
 

@@ -3,36 +3,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.vaadin.hummingbird.demo</groupId>
-    <artifactId>hummingbird-demo-project</artifactId>
-    <name>Hummingbird Demo</name>
+    <groupId>com.vaadin.flow.demo</groupId>
+    <artifactId>flow-demo-project</artifactId>
+    <name>Flow Demo</name>
     <packaging>pom</packaging>
     <version>0.0.24-SNAPSHOT</version>
 
-	<modules>
-		<module>demo-test-util</module>
-		<module>demo-minesweeper-element</module>
-		<module>demo-minesweeper-component</module>
-		<module>demo-minesweeper-polymer</module>
-		<module>demo-hello-world</module>
-		<module>demo-hello-world-template</module>
-		<module>demo-web-site</module>
-		<module>demo-static-menu</module>
-		<module>demo-dynamic-menu</module>
-		<module>demo-utils</module>
-		<module>demo-textfield-component</module>
-		<module>demo-textfield-composite</module>
-		<module>demo-web-component-progress-bubble</module>
-		<module>demo-addressbook</module>
-		<module>demo-addressbook-polymer</module>
-		<module>demo-jquery-table</module>
-		<!-- have it as the last module-->
-		<module>demo-validator</module>
-	</modules>
+    <modules>
+        <module>demo-test-util</module>
+        <module>demo-minesweeper-element</module>
+        <module>demo-minesweeper-component</module>
+        <module>demo-minesweeper-polymer</module>
+        <module>demo-hello-world</module>
+        <module>demo-hello-world-template</module>
+        <module>demo-web-site</module>
+        <module>demo-static-menu</module>
+        <module>demo-dynamic-menu</module>
+        <module>demo-utils</module>
+        <module>demo-textfield-component</module>
+        <module>demo-textfield-composite</module>
+        <module>demo-web-component-progress-bubble</module>
+        <module>demo-addressbook</module>
+        <module>demo-addressbook-polymer</module>
+        <module>demo-jquery-table</module>
+        <!-- have it as the last module-->
+        <module>demo-validator</module>
+    </modules>
 
     <properties>
         <!-- Libraries -->
-        <hummingbird.version>${project.version}</hummingbird.version>
+        <flow.version>${project.version}</flow.version>
         <commons.beanutils.version>1.9.3</commons.beanutils.version>
 
         <!-- Plugins -->
@@ -60,7 +60,7 @@
     </properties>
     <repositories>
         <repository>
-            <id>hummingbird-internal-snapshots</id>
+            <id>flow-internal-snapshots</id>
             <url>https://repo.vaadin.com/nexus/content/repositories/hummingbird-snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -68,7 +68,7 @@
         </repository>
 
         <repository>
-            <id>hummingbird-internal-release</id>
+            <id>flow-internal-release</id>
             <url>https://repo.vaadin.com/nexus/content/repositories/hummingbird</url>
         </repository>
 
@@ -88,8 +88,8 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
-                <artifactId>hummingbird</artifactId>
-                <version>${hummingbird.version}</version>
+                <artifactId>flow</artifactId>
+                <version>${flow.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -97,12 +97,12 @@
                 <version>5.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.vaadin.hummingbird.demo</groupId>
+                <groupId>com.vaadin.flow.demo</groupId>
                 <artifactId>demo-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.vaadin.hummingbird.demo</groupId>
+                <groupId>com.vaadin.flow.demo</groupId>
                 <artifactId>demo-test-util</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -171,7 +171,8 @@
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
-                    <packagingExcludes>**/node_modules/,**/node/,**/etc/,**/bower.json,**/package.json</packagingExcludes>
+                    <packagingExcludes>**/node_modules/,**/node/,**/etc/,**/bower.json,**/package.json
+                    </packagingExcludes>
                 </configuration>
             </plugin>
 
@@ -189,7 +190,7 @@
                     <!-- Prevent Jetty from scanning the classpath. -->
                     <!-- Speeds up startup time significantly -->
                     <webAppConfig>
-                        <webInfIncludeJarPattern>.*/hummingbird-.*.jar$</webInfIncludeJarPattern>
+                        <webInfIncludeJarPattern>.*/flow-.*.jar$</webInfIncludeJarPattern>
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                     </webAppConfig>
                 </configuration>
@@ -336,17 +337,17 @@
                                     as resource folders as Jetty inside Eclipse is run with "Resolve workspace
                                     artifacts" and this does not create any JARs. Jetty only scans JARs for META-INF/resources
                                     folders -->
-                                <!-- Assumes hummingbird and hummingbird-demo have been clone in
+                                <!-- Assumes flow and flow-demo have been clone in
                                     the same folder -->
                                 <resourceBases>
                                     <resourceBase>
-                                        ${project.basedir}/../../hummingbird/hummingbird-server/src/main/resources/META-INF/resources
+                                        ${project.basedir}/../../flow/flow-server/src/main/resources/META-INF/resources
                                     </resourceBase>
                                     <resourceBase>
-                                        ${project.basedir}/../../hummingbird/hummingbird-client/target/classes/META-INF/resources
+                                        ${project.basedir}/../../flow/flow-client/target/classes/META-INF/resources
                                     </resourceBase>
                                     <resourceBase>
-                                        ${project.basedir}/../../hummingbird/hummingbird-push/src/main/resources/META-INF/resources
+                                        ${project.basedir}/../../flow/flow-push/src/main/resources/META-INF/resources
                                     </resourceBase>
                                     <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
                                 </resourceBases>
