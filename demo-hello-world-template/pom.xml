@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin.flow.demo</groupId>
@@ -10,9 +10,10 @@
     <name>Hello World using Template API</name>
     <artifactId>demo-hello-world-template</artifactId>
     <packaging>war</packaging>
-    
+
     <properties>
-        <bower.working.directory>frontend</bower.working.directory>
+        <bower.working.directory>src/main/frontend</bower.working.directory>
+        <vaadin.plugin.version>8.0.5</vaadin.plugin.version>
     </properties>
 
     <dependencies>
@@ -32,83 +33,18 @@
 
     <build>
         <plugins>
-            <!-- Install node, npm and polymer-cli -->
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend.maven.plugin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
-                    <workingDirectory>${bower.working.directory}</workingDirectory>
-                    <nodeVersion>${node.version}</nodeVersion>
-                    <npmVersion>${npm.version}</npmVersion>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/frontend/build</directory>
+                            <targetPath>VAADIN/static/frontend</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>install-node-and-npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                            <goal>npm</goal> <!-- runs 'install' by default -->
-                            <goal>bower</goal> <!-- runs 'install' by default -->
-                        </goals>
-                        <configuration>
-                            <arguments>-f install</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>install-polymer-cli</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install -g polymer-cli</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Run polymer-cli -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>polymer</executable>
-                            <workingDirectory>${bower.working.directory}</workingDirectory>
-                            <arguments>
-                                <argument>build</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <!-- Copy the generated files to the webapps directory -->
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>src/main/webapp/build</outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>${bower.working.directory}/build</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -128,8 +64,8 @@
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                         <version>${driver.binary.downloader.maven.plugin.version}</version>
                         <configuration>
-                            <!-- root directory that downloaded driver binaries will
-                                be stored in -->
+                            <!-- root directory that downloaded driver binaries 
+                                will be stored in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                             <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
                             <downloadedZipFileDirectory>../driver_zips</downloadedZipFileDirectory>
@@ -139,6 +75,44 @@
                             <execution>
                                 <goals>
                                     <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>frontend-files</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <nodeVersion>v6.9.1</nodeVersion>
+                            <yarnVersion>v0.22.0</yarnVersion>
+                            <workingDirectory>src/main/frontend</workingDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration></configuration>
+                            </execution>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>yarn install</id>
+                                <goals>
+                                    <goal>yarn</goal>
                                 </goals>
                             </execution>
                         </executions>
