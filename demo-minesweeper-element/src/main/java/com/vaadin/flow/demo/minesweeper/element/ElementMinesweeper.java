@@ -144,7 +144,7 @@ public class ElementMinesweeper {
     }
 
     /**
-     * Reveal the cell at the given coordinates
+     * Reveal the cell at the given coordinates.
      *
      * @param row
      *            the row
