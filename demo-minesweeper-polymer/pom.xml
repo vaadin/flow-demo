@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin.flow.demo</groupId>
@@ -10,6 +10,11 @@
     <name>Minesweeper using Polymer</name>
     <artifactId>demo-minesweeper-polymer</artifactId>
     <packaging>war</packaging>
+
+    <properties>
+        <bower.working.directory>src/main/frontend</bower.working.directory>
+        <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -28,28 +33,62 @@
 
     <build>
         <plugins>
+            <!-- Copies the files compiled by Polymer to a directory from 
+                where it can be served (root of the WAR) -->
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend.maven.plugin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
-                    <nodeVersion>${node.version}</nodeVersion>
-                    <npmVersion>${npm.version}</npmVersion>
-                    <workingDirectory>${bower.working.directory}</workingDirectory>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/frontend/build</directory>
+                            <targetPath>${vaadin.frontend.path}</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
+            </plugin>
+
+            <!-- Copies the files compiled by Polymer to a directory where 
+                jetty:run can use as resource folder -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
-                        <id>install-node-and-npm</id>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
                         <goals>
-                            <goal>install-node-and-npm</goal>
-                            <goal>npm</goal> <!-- runs 'install' by default -->
-                            <goal>bower</goal> <!-- runs 'install' by default -->
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <arguments>-f install</arguments>
+                            <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/frontend/build</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Configures the jetty plugin to use the extra resource folder -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webAppConfig>
+                        <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
+                        <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                        <resourceBases>
+                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
+                            <resourceBase>${project.build.directory}/jetty-extra-resources</resourceBase>
+                        </resourceBases>
+                    </webAppConfig>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -69,8 +108,8 @@
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                         <version>${driver.binary.downloader.maven.plugin.version}</version>
                         <configuration>
-                            <!-- root directory that downloaded driver binaries will
-                                be stored in -->
+                            <!-- root directory that downloaded driver binaries 
+                                will be stored in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                             <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
                             <downloadedZipFileDirectory>../driver_zips</downloadedZipFileDirectory>
@@ -80,6 +119,48 @@
                             <execution>
                                 <goals>
                                     <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Configures the frontend plugin to compile the web components 
+            source -->
+        <profile>
+            <id>frontend-files</id>
+            <activation>
+                <property>
+                    <name>!skip.bower</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <nodeVersion>v6.9.1</nodeVersion>
+                            <yarnVersion>v0.22.0</yarnVersion>
+                            <workingDirectory>src/main/frontend</workingDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration></configuration>
+                            </execution>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>yarn install</id>
+                                <goals>
+                                    <goal>yarn</goal>
                                 </goals>
                             </execution>
                         </executions>
