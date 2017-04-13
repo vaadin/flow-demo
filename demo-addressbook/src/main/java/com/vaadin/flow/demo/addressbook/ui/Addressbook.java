@@ -27,7 +27,7 @@ import com.vaadin.flow.demo.addressbook.backend.ContactService;
 import com.vaadin.flow.nodefeature.TemplateMap;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
-import com.vaadin.flow.template.model.TemplateModel;
+import com.vaadin.flow.template.angular.model.TemplateModel;
 import com.vaadin.server.Command;
 import com.vaadin.ui.AngularTemplate;
 
