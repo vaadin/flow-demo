@@ -35,6 +35,9 @@ public class HelloWorldIT extends AbstractChromeTest {
         Assert.assertEquals("Please enter your name", greeting.getText());
 
         input.sendKeys("John Doe");
+
+        waitUntil(driver -> !greeting.getText().contains("enter"));
+
         Assert.assertEquals("Hello John Doe!", greeting.getText());
     }
 }
