@@ -32,15 +32,9 @@ public class HelloWorldIT extends AbstractChromeTest {
 
         WebElement input = getInShadowRoot(template, By.id("inputId")).get();
         WebElement greeting = getInShadowRoot(template, By.id("greeting")).get();
-        WebElement button = getInShadowRoot(template, By.id("helloButton")).get();
-        Assert.assertEquals("Please enter your name", greeting.getText());
-        button.click();
-        waitUntil(driver -> greeting.getText().contains("enter"));
         Assert.assertEquals("Please enter your name", greeting.getText());
 
         input.sendKeys("John Doe");
-        button.click();
-        waitUntil(driver -> !greeting.getText().contains("enter"));
         Assert.assertEquals("Hello John Doe!", greeting.getText());
     }
 }
