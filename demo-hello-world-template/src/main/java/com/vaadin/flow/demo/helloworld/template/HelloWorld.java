@@ -15,9 +15,6 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
-import java.util.Optional;
-
-import com.vaadin.annotations.EventHandler;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.template.PolymerTemplate;
@@ -37,6 +34,9 @@ public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
     public HelloWorld() {
         setId("template");
         getModel().setGreeting(EMPTY_NAME_GREETING);
+
+        getElement().addPropertyChangeListener("userInput",
+                event -> sayHello(event.getValue().toString()));
     }
 
     /**
@@ -59,12 +59,11 @@ public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> {
         void setGreeting(String greeting);
     }
 
-    @EventHandler
-    private void sayHello() {
-        // Called from the template click handler
-        getModel().setGreeting(Optional.ofNullable(getModel().getUserInput())
-                .filter(userInput -> !userInput.isEmpty())
-                .map(greeting -> String.format("Hello %s!", greeting))
-                .orElse(EMPTY_NAME_GREETING));
+    private void sayHello(String nameString) {
+        if (nameString == null || nameString.isEmpty()) {
+            getModel().setGreeting(EMPTY_NAME_GREETING);
+        } else {
+            getModel().setGreeting(String.format("Hello %s!", nameString));
+        }
     }
 }
