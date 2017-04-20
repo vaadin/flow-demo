@@ -84,7 +84,6 @@
                         <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                         <resourceBases>
-                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
                             <resourceBase>${project.build.directory}/jetty-extra-resources</resourceBase>
                         </resourceBases>
                     </webAppConfig>
