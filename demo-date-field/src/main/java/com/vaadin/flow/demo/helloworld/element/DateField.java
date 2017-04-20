@@ -29,10 +29,10 @@ import com.vaadin.ui.Component;
 @Tag("date-field")
 public class DateField extends Component {
 
-    SelectElement day, month, year;
+    private SelectElement day, month, year;
 
-    ShadowRoot shadowRoot;
-    List<ValueChangeCallback> callbacks = new ArrayList<>(0);
+    private ShadowRoot shadowRoot;
+    private List<ValueChangeCallback> callbacks = new ArrayList<>(0);
 
     /**
      * Construct a date field component <date-field></date-field>.
