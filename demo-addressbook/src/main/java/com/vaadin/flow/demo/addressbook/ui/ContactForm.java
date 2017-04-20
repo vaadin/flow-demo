@@ -27,7 +27,7 @@ import com.vaadin.flow.dom.impl.TemplateElementStateProvider;
 import com.vaadin.flow.html.Input;
 import com.vaadin.flow.nodefeature.TemplateOverridesMap;
 import com.vaadin.flow.template.angular.ElementTemplateNode;
-import com.vaadin.flow.template.model.TemplateModel;
+import com.vaadin.flow.template.angular.model.TemplateModel;
 import com.vaadin.server.Command;
 import com.vaadin.ui.AngularTemplate;
 import com.vaadin.ui.HasElement;

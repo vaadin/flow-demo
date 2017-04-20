@@ -7,7 +7,7 @@
     <artifactId>flow-demo-project</artifactId>
     <name>Flow Demo</name>
     <packaging>pom</packaging>
-    <version>0.0.24-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <modules>
         <module>demo-test-util</module>
@@ -61,7 +61,7 @@
     <repositories>
         <repository>
             <id>flow-internal-snapshots</id>
-            <url>https://repo.vaadin.com/nexus/content/repositories/hummingbird-snapshots/</url>
+            <url>https://repo.vaadin.com/nexus/content/repositories/flow-snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -69,7 +69,7 @@
 
         <repository>
             <id>flow-internal-release</id>
-            <url>https://repo.vaadin.com/nexus/content/repositories/hummingbird</url>
+            <url>https://repo.vaadin.com/nexus/content/repositories/flow</url>
         </repository>
 
         <repository>
