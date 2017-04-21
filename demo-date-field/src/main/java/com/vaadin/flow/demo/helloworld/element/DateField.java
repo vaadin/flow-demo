@@ -16,15 +16,16 @@
 package com.vaadin.flow.demo.helloworld.element;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import com.vaadin.annotations.Tag;
+import com.vaadin.flow.dom.EventRegistrationHandle;
+import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.ComponentEvent;
 
 /**
- * Cusom element date-field for selecting dates.
+ * Custom element date-field for selecting dates.
  */
 @Tag("date-field")
 public class DateField extends Component {
@@ -32,7 +33,6 @@ public class DateField extends Component {
     private SelectElement day, month, year;
 
     private ShadowRoot shadowRoot;
-    private List<ValueChangeCallback> callbacks = new ArrayList<>(0);
 
     /**
      * Construct a date field component <date-field></date-field>.
@@ -72,7 +72,7 @@ public class DateField extends Component {
     /**
      * Get current date selection.
      * 
-     * @return LocalDate of current selection
+     * @return {@link LocalDate} of current selection
      */
     public LocalDate getValue() {
         return LocalDate.of(Integer.parseInt(day.getValue()),
@@ -81,35 +81,24 @@ public class DateField extends Component {
     }
 
     private void valueChange() {
-        callbacks.forEach(ValueChangeCallback::valueChange);
+        fireEvent(new ValueChangeEvent(this, false));
     }
 
     /**
-     * Add a callback that will be called when value changes.
+     * Add a value change listener for date field.
      * 
-     * @param callback
-     *            Value change callback
-     * @return CallbackRemover to remove callback
+     * @param valueChangeListener
+     *            value change listener
+     * @return registration handle for removing listener
      */
-    public CallbackRemover addValueChangeListener(
-            ValueChangeCallback callback) {
-        callbacks.add(callback);
-        return () -> callbacks.remove(callback);
+    public EventRegistrationHandle addValueChangeListener(
+            ComponentEventListener<ValueChangeEvent> valueChangeListener) {
+        return addListener(ValueChangeEvent.class, valueChangeListener);
     }
 
-    /**
-     * Interface for ValueChangeCallback.
-     */
-    @FunctionalInterface
-    public interface ValueChangeCallback {
-        void valueChange();
-    }
-
-    /**
-     * Interface for removing callback.
-     */
-    @FunctionalInterface
-    public interface CallbackRemover {
-        void remove();
+    public static class ValueChangeEvent extends ComponentEvent<DateField> {
+        public ValueChangeEvent(DateField source, boolean fromClient) {
+            super(source, fromClient);
+        }
     }
 }

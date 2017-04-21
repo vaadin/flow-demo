@@ -38,7 +38,7 @@ public class DateView extends Div implements View {
         dateField.setId("date-field");
 
         dateField.addValueChangeListener(
-                () -> updateTextContents(dateField.getValue()));
+                valueChangeEvent -> updateTextContents(dateField.getValue()));
         text.setId("value");
 
         add(dateField, text);

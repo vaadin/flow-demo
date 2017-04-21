@@ -19,6 +19,7 @@ import com.vaadin.annotations.DomEvent;
 import com.vaadin.annotations.Synchronize;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.ui.Component;
@@ -33,13 +34,12 @@ public class SelectElement extends Component {
     /**
      * Init select element with the selections given.
      * 
-     * @param selections
-     *            Selections to populate
+     * @param options
+     *            select options to populate select with
      */
-    public SelectElement(String... selections) {
-        for (String selection : selections) {
-            Element option = new Element("Option");
-            option.setText(selection);
+    public SelectElement(String... options) {
+        for (String selection : options) {
+            Element option = ElementFactory.createOption(selection);
             getElement().appendChild(option);
         }
     }
@@ -47,7 +47,7 @@ public class SelectElement extends Component {
     /**
      * Get the current selection.
      * 
-     * @return Currently selected value
+     * @return currently selected value
      */
     @Synchronize("change")
     public String getValue() {
@@ -58,7 +58,7 @@ public class SelectElement extends Component {
      * Set selected value for Select.
      * 
      * @param value
-     *            Value to set selected
+     *            value to set selected
      */
     public void setValue(String value) {
         getElement().setProperty("value", value);
@@ -68,8 +68,8 @@ public class SelectElement extends Component {
      * Add a change listener for select.
      * 
      * @param listener
-     *            Change listener
-     * @return Registration handle for removing listener
+     *            change listener
+     * @return registration handle for removing listener
      */
     public EventRegistrationHandle addChangeListener(
             ComponentEventListener<ChangeEvent> listener) {
@@ -80,7 +80,7 @@ public class SelectElement extends Component {
      * ComponentEvent for change event in the dom.
      */
     @DomEvent("change")
-    public class ChangeEvent extends ComponentEvent<SelectElement> {
+    public static class ChangeEvent extends ComponentEvent<SelectElement> {
         public ChangeEvent(SelectElement source, boolean fromClient) {
             super(source, fromClient);
         }
