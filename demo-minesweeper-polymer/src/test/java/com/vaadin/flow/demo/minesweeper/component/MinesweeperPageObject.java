@@ -1,12 +1,14 @@
 package com.vaadin.flow.demo.minesweeper.component;
 
-import com.vaadin.flow.demo.minesweeper.component.data.MineFieldData;
-import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.vaadin.flow.demo.minesweeper.component.data.MineFieldData;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
+
 abstract class MinesweeperPageObject extends AbstractChromeTest {
-    private final MineFieldData seed1MineFieldData = new MineFieldData(10, 10, 1, 0.2);
+    private final MineFieldData seed1MineFieldData = new MineFieldData(10, 10,
+            1, 0.2);
 
     boolean isMineSeed1(int row, int col) {
         return seed1MineFieldData.isMine(row, col);
@@ -36,9 +38,10 @@ abstract class MinesweeperPageObject extends AbstractChromeTest {
 
     WebElement getCell(int row, int col) {
         WebElement template = findElement(By.id("template"));
-        WebElement mineField = getInShadowRoot(template, By.cssSelector("table")).get();
-        WebElement rowE = mineField.findElements(By.xpath(".//tr"))
+        WebElement mineField = getInShadowRoot(template,
+                By.cssSelector(".table")).get();
+        WebElement rowE = mineField.findElements(By.cssSelector(".row"))
                 .get(row);
-        return rowE.findElements(By.xpath("td")).get(col);
+        return rowE.findElements(By.cssSelector(".cell")).get(col);
     }
 }

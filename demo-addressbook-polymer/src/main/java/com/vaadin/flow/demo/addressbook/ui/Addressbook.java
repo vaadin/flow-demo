@@ -31,10 +31,9 @@ import com.vaadin.flow.router.View;
  */
 @Title("Addressbook")
 @Tag("div")
-@StyleSheet("css/site.css")
-@HtmlImport("bower_components/polymer/polymer.html")
-@HtmlImport("components/ContactsTable.html")
-@HtmlImport("components/ContactForm.html")
+@StyleSheet("context://css/site.css")
+@HtmlImport("frontend://components/ContactsTable.html")
+@HtmlImport("frontend://components/ContactForm.html")
 public class Addressbook extends HtmlContainer implements View {
     private final ContactForm contactForm = new ContactForm(this::updateForm);
     private final ContactsTable contactsTable = new ContactsTable(
