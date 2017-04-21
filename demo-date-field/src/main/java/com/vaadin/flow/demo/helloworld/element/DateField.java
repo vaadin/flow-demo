@@ -72,7 +72,7 @@ public class DateField extends Component {
     /**
      * Get current date selection.
      * 
-     * @return {@link LocalDate} of current selection
+     * @return date for current selections
      */
     public LocalDate getValue() {
         return LocalDate.of(Integer.parseInt(day.getValue()),
