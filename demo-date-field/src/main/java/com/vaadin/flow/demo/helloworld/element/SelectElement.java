@@ -15,21 +15,18 @@
  */
 package com.vaadin.flow.demo.helloworld.element;
 
-import com.vaadin.annotations.DomEvent;
 import com.vaadin.annotations.Synchronize;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.dom.EventRegistrationHandle;
-import com.vaadin.flow.event.ComponentEventListener;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentEvent;
+import com.vaadin.flow.html.HtmlComponent;
+import com.vaadin.flow.html.event.ChangeNotifier;
 
 /**
  * Native select element for selecting items.
  */
 @Tag("select")
-public class SelectElement extends Component {
+public class SelectElement extends HtmlComponent implements ChangeNotifier {
 
     /**
      * Init select element with the selections given.
@@ -62,27 +59,5 @@ public class SelectElement extends Component {
      */
     public void setValue(String value) {
         getElement().setProperty("value", value);
-    }
-
-    /**
-     * Add a change listener for select.
-     * 
-     * @param listener
-     *            change listener
-     * @return registration handle for removing listener
-     */
-    public EventRegistrationHandle addChangeListener(
-            ComponentEventListener<ChangeEvent> listener) {
-        return addListener(ChangeEvent.class, listener);
-    }
-
-    /**
-     * ComponentEvent for change event in the dom.
-     */
-    @DomEvent("change")
-    public static class ChangeEvent extends ComponentEvent<SelectElement> {
-        public ChangeEvent(SelectElement source, boolean fromClient) {
-            super(source, fromClient);
-        }
     }
 }
