@@ -1,15 +1,24 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="mine-sweeper">
   <template>
   <style>
-		  td {
+        .table {
+            display: table;
+        }
+		.row {
+            display: table-row;
+        }
+        .cell {
 		    background: grey;
 		    border: 1px solid black;
-		    width: 20px;
-		    height: 20px;
+		    width: 24px;
+		    height: 24px;
 		    text-align: center;
+            vertical-align: middle;
+            display: table-cell;
+            box-sizing: border-box;
+            font-size: 14px;
 		}
 		
 		.empty {
@@ -24,15 +33,15 @@
 		    background: yellow;
 		}
   </style>
-  <table>
+  <div class="table">
     <template is="dom-repeat" items="[[cells]]">
-        <tr>
+        <div class="row">
              <template is="dom-repeat" items="[[item]]">
-                <td on-click="handleClick" class$="[[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</td>
+                <div on-click="handleClick" class$="cell [[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</div>
              </template>
-        </tr>
+        </div>
     </template>
-   </table>
+   </div>
    </template>
 
     <script>

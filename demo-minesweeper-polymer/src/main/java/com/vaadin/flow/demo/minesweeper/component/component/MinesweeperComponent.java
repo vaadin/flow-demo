@@ -33,7 +33,7 @@ import com.vaadin.flow.template.model.TemplateModel;
  * The Minesweeper main UI component.
  */
 @Tag("mine-sweeper")
-@HtmlImport("context://minesweeper.html")
+@HtmlImport("frontend://components/minesweeper.html")
 public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
 
     private final MineFieldData mineFieldData;
