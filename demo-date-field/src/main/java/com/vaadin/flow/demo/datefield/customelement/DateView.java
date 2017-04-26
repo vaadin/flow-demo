@@ -23,7 +23,7 @@ import com.vaadin.flow.router.View;
 
 /**
  * View containing text field and a div with text that is updated when selection
- * changes in the DateField
+ * changes in the DateField.
  */
 public class DateView extends Div implements View {
 

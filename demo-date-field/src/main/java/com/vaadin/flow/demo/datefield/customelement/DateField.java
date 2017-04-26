@@ -98,7 +98,20 @@ public class DateField extends Component {
         return addListener(ValueChangeEvent.class, valueChangeListener);
     }
 
+    /**
+     *  Event triggered when a DateField value changes.
+     */
     public static class ValueChangeEvent extends ComponentEvent<DateField> {
+
+        /**
+         * Creates a new event using the given source and client information.
+         *
+         * @param source
+         *            the cell which was clicked
+         * @param fromClient
+         *            <code>true</code> if the event originated from the client
+         *            side, <code>false</code> otherwise
+         */
         public ValueChangeEvent(DateField source, boolean fromClient) {
             super(source, fromClient);
         }
