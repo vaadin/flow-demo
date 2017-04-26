@@ -17,14 +17,13 @@ package com.vaadin.flow.demo.datefield.customelement;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import com.vaadin.testbench.By;
 
-public class DateFieldIT extends AbstractDemoTest {
+public class DateFieldIT extends AbstractChromeTest {
 
     @Test
     public void basicFunctionality() {
@@ -32,7 +31,8 @@ public class DateFieldIT extends AbstractDemoTest {
 
         WebElement dateField = findElement(By.id("date-field"));
         // Finds the first select element which is the day
-        WebElement selectElement = getInShadowRoot(dateField, org.openqa.selenium.By.tagName("select")).get();
+        WebElement selectElement = getInShadowRoot(dateField,
+                org.openqa.selenium.By.tagName("select")).get();
         Select select = new Select(selectElement);
 
         select.selectByValue("3");
