@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.helloworld.element;
+package com.vaadin.flow.demo.datefield.customelement;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,6 +39,6 @@ public class DateFieldIT extends AbstractDemoTest {
 
         WebElement value = findElement(By.id("value"));
 
-        Assert.assertEquals("3.1.1900", value.getText());
+        Assert.assertEquals("03.01.1900", value.getText());
     }
 }

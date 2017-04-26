@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.helloworld.element;
+package com.vaadin.flow.demo.datefield.customelement;
 
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.flow.demo.helloworld.element.Servlet.MyRouterConfigurator;
+import com.vaadin.flow.demo.datefield.customelement.Servlet.MyRouterConfigurator;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;

@@ -13,11 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.helloworld.element;
+package com.vaadin.flow.demo.datefield.customelement;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.router.View;
@@ -45,7 +44,6 @@ public class DateView extends Div implements View {
     }
 
     private void updateTextContents(LocalDate value) {
-        text.setText(value
-                .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+        text.setText(value.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
     }
 }

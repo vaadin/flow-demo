@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.helloworld.element;
+package com.vaadin.flow.demo.datefield.customelement;
 
 import com.vaadin.annotations.Synchronize;
 import com.vaadin.annotations.Tag;
@@ -35,10 +35,13 @@ public class SelectElement extends HtmlComponent implements ChangeNotifier {
      *            select options to populate select with
      */
     public SelectElement(String... options) {
+        assert options.length > 0 : "Select should get at least on option";
         for (String selection : options) {
             Element option = ElementFactory.createOption(selection);
             getElement().appendChild(option);
         }
+        setValue(options[0]);
+        getElement().getChild(0).setProperty("selected", true);
     }
 
     /**

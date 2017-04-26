@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.helloworld.element;
+package com.vaadin.flow.demo.datefield.customelement;
 
 import java.time.LocalDate;
 import java.util.stream.IntStream;
@@ -23,6 +23,8 @@ import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
+
+import com.vaadin.flow.dom.ShadowRoot;
 
 /**
  * Custom element date-field for selecting dates.
@@ -64,9 +66,9 @@ public class DateField extends Component {
         year.addChangeListener(event -> valueChange());
 
         // Add selectors to shadow tree
-        shadowRoot.appendElement(day.getElement());
-        shadowRoot.appendElement(month.getElement());
-        shadowRoot.appendElement(year.getElement());
+        shadowRoot.appendChild(day.getElement());
+        shadowRoot.appendChild(month.getElement());
+        shadowRoot.appendChild(year.getElement());
     }
 
     /**
@@ -75,9 +77,9 @@ public class DateField extends Component {
      * @return date for current selections
      */
     public LocalDate getValue() {
-        return LocalDate.of(Integer.parseInt(day.getValue()),
+        return LocalDate.of(Integer.parseInt(year.getValue()),
                 Integer.parseInt(month.getValue()),
-                Integer.parseInt(year.getValue()));
+                Integer.parseInt(day.getValue()));
     }
 
     private void valueChange() {
