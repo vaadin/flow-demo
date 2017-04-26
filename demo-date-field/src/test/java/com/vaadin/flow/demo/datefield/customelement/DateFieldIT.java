@@ -39,6 +39,6 @@ public class DateFieldIT extends AbstractChromeTest {
 
         WebElement value = findElement(By.id("value"));
 
-        Assert.assertEquals("03.01.1900", value.getText());
+        Assert.assertEquals("04.01.1900", value.getText());
     }
 }
