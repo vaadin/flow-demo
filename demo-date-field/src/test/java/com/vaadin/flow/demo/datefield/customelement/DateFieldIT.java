@@ -30,11 +30,9 @@ public class DateFieldIT extends AbstractChromeTest {
         open();
 
         WebElement dateField = findElement(By.id("date-field"));
-        WebElement shadowRoot = (WebElement) getCommandExecutor()
-                .executeScript("return arguments[0].shadowRoot", dateField);
         // Finds the first select element which is the day
         WebElement selectElement = getInShadowRoot(dateField,
-                By.xpath(".//select")).get();
+                By.cssSelector("select")).get();
         Select select = new Select(selectElement);
 
         select.selectByValue("3");
