@@ -35,7 +35,11 @@ public class SelectElement extends HtmlComponent implements ChangeNotifier {
      *            select options to populate select with
      */
     public SelectElement(String... options) {
-        assert options.length > 0 : "Select should get at least on option";
+        if (options.length == 0) {
+            throw new IllegalArgumentException(
+                    "Select should be given at least one option");
+        }
+
         for (String selection : options) {
             Element option = ElementFactory.createOption(selection);
             getElement().appendChild(option);
