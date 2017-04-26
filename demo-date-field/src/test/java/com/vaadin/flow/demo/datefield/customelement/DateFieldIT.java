@@ -35,7 +35,7 @@ public class DateFieldIT extends AbstractChromeTest {
                 By.cssSelector("select")).get();
         Select select = new Select(selectElement);
 
-        select.selectByValue("3");
+        select.selectByIndex(3);
 
         WebElement value = findElement(By.id("value"));
 
