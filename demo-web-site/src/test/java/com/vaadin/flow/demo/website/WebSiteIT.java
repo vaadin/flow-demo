@@ -15,7 +15,9 @@
  */
 package com.vaadin.flow.demo.website;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -44,15 +46,13 @@ public class WebSiteIT extends AbstractDemoTest {
         assertMenuItemSelected("Parameter view");
         assertPageTitle(TITLE);
 
-        Assert.assertEquals("Id parameter: 1",
-                getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 1", getFirstContentChild().getText());
 
         getMenuItem("Resource view").click();
         assertMenuItemSelected("Resource view");
         assertPageTitle(TITLE);
 
-        Assert.assertEquals("Select the resource to display" + "",
-                getFirstContentChild().getText());
+        Assert.assertEquals("Select the resource to display" + "", getFirstContentChild().getText());
 
         getMenuItem("Home").click();
         assertMenuItemSelected(null);
@@ -61,9 +61,17 @@ public class WebSiteIT extends AbstractDemoTest {
         assertContent("This is the home page");
     }
 
+    private void assertMeta(WebElement element, Map<String, String> metas) {
+        String property = element.getAttribute("property");
+        String content = element.getAttribute("content");
+        String value = metas.remove(property);
+        if (value != null) {
+            Assert.assertEquals(value, content);
+        }
+    }
+
     private void assertMenuItemSelected(String menuItem) {
-        List<WebElement> activeItems = findElements(
-                By.cssSelector(".menu-item.active"));
+        List<WebElement> activeItems = findElements(By.cssSelector(".menu-item.active"));
         if (menuItem == null) {
             Assert.assertEquals(0, activeItems.size());
         } else {
@@ -86,17 +94,14 @@ public class WebSiteIT extends AbstractDemoTest {
         open();
         getMenuItem("Parameter view").click();
         assertLocation("param/1");
-        Assert.assertEquals("Id parameter: 1",
-                getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 1", getFirstContentChild().getText());
 
         getContent().findElement(By.xpath("./a")).click();
         assertLocation("param/2");
-        Assert.assertEquals("Id parameter: 2",
-                getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 2", getFirstContentChild().getText());
 
         getDriver().get("http://localhost:8080/param/3");
-        Assert.assertEquals("Id parameter: 3",
-                getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 3", getFirstContentChild().getText());
     }
 
     @Test
@@ -104,26 +109,37 @@ public class WebSiteIT extends AbstractDemoTest {
         open();
         getMenuItem("Resource view").click();
 
-        WebElement selectedResource = getContent()
-                .findElement(By.xpath("./*[4]"));
+        WebElement selectedResource = getContent().findElement(By.xpath("./*[4]"));
         Assert.assertEquals("No resource selected", selectedResource.getText());
 
-        getContent().findElement(By.xpath("//a[text()='css/site.css']"))
-                .click();
+        getContent().findElement(By.xpath("//a[text()='css/site.css']")).click();
         assertLocation("resource/css/site.css");
 
         WebElement iframe = getDriver().findElement(By.xpath("//iframe"));
         assertLocation("css/site.css", iframe.getAttribute("src"));
     }
 
+    @Test
+    public void checkMetatagsAndBootstrapListener() {
+        open();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("og:title", "The Rock");
+        map.put("og:type", "video.movie");
+        map.put("og:url", "http://www.imdb.com/title/tt0117500/");
+        map.put("og:image", "http://ia.media-imdb.com/images/rock.jpg");
+        List<WebElement> metas = findElements(By.tagName("meta"));
+        metas.stream().forEach(meta -> assertMeta(meta, map));
+
+        Assert.assertTrue(map.isEmpty());
+    }
+
     private void assertLocation(String expectedLocation) {
         assertLocation(expectedLocation, getDriver().getCurrentUrl());
     }
 
-    private void assertLocation(String expectedLocation,
-            String currentLocation) {
-        Assert.assertEquals("http://localhost:8080/" + expectedLocation,
-                currentLocation);
+    private void assertLocation(String expectedLocation, String currentLocation) {
+        Assert.assertEquals("http://localhost:8080/" + expectedLocation, currentLocation);
     }
 
     private WebElement getFirstContentChild() {
@@ -140,7 +156,7 @@ public class WebSiteIT extends AbstractDemoTest {
         }
         List<WebElement> menuLinks = findElements(By.cssSelector(".menu a"));
 
-        return menuLinks.stream().filter(link -> text.equals(link.getText()))
-                .findFirst().get();
+        return menuLinks.stream().filter(link -> text.equals(link.getText())).findFirst().get();
     }
+
 }
