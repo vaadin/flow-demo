@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
-public class ReportsOverviewIT extends AbstractDemoTest {
+public class ReportsOverviewIT extends AbstractChromeTest {
 
     private static final String SELECTED_CSS_CLASS = "selected";
 
