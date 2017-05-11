@@ -34,11 +34,11 @@
         </style>
 
         <div id="todoEntry">
-            <paper-input value="{{task}}" label="Task"></paper-input>
+            <paper-input value="{{task}}" label="Task" id="task-input"></paper-input>
             <paper-input value="{{user}}" char-counter label="Username" maxlength="16"
                          error="maximum characters exceeded"
-                         style="width: 75%; display: inline-block"></paper-input>
-            <paper-fab icon="add" on-click="postTask"></paper-fab>
+                         style="width: 75%; display: inline-block" id="user-name-input"></paper-input>
+            <paper-fab icon="add" on-click="postTask" id="create-button"></paper-fab>
         </div>
     </template>
 

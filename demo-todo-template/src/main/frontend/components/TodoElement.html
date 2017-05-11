@@ -57,7 +57,6 @@
             paper-input {
                 margin: 0 2vw;
                 z-index: 1;
-                width: 100%;
             }
 
             paper-item {
@@ -68,7 +67,7 @@
 
         <div class="todo" elevation="1">
             <paper-checkbox hidden={{completed}}
-                            checked={{completed}}></paper-checkbox>
+                            checked={{completed}} id="checkbox"></paper-checkbox>
 
             <template is="dom-if" if="{{!completed}}">
                 <paper-fab hidden={{editing}} icon="icons:create"

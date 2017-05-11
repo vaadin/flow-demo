@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.helloworld.template;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -67,7 +68,13 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
      * Creation callback interface.
      */
     @FunctionalInterface
-    public interface CreateCallback {
+    public interface CreateCallback extends Serializable {
+        /**
+         * Method called when a new {@link Todo} item is created.
+         * 
+         * @param todo
+         *            the created {@link Todo} item
+         */
         void createdNewTodo(Todo todo);
     }
 
