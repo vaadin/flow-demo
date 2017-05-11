@@ -10,38 +10,103 @@ import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
 
 /**
- * Created by Mikael on 21/02/17.
+ * An element for displaying the Todo item. Task can be edited and completion of
+ * task can be set in the element.
  */
 @Tag("todo-element")
 @HtmlImport("frontend://components/TodoElement.html")
 public class TodoElement extends PolymerTemplate<TodoElement.TodoModel> {
 
-    List<Runnable> changeListeners = new ArrayList<>(0);
+    private List<Runnable> changeListeners = new ArrayList<>(0);
 
+    /**
+     * The TodoModel.
+     */
     public interface TodoModel extends TemplateModel {
+        /**
+         * Get task text.
+         * 
+         * @return task
+         */
         String getTask();
 
+        /**
+         * Set task.
+         * 
+         * @param task
+         *            task
+         */
         void setTask(String task);
 
+        /**
+         * Get user.
+         * 
+         * @return user
+         */
         String getUser();
 
+        /**
+         * Set user.
+         * 
+         * @param user
+         *            user
+         */
         void setUser(String user);
 
+        /**
+         * Get Id.
+         * 
+         * @return id
+         */
         Number getRid();
 
+        /**
+         * Set id.
+         * 
+         * @param rid
+         *            id
+         */
         void setRid(Number rid);
 
+        /**
+         * Get the stored time string.
+         * 
+         * @return time
+         */
         String getTime();
 
+        /**
+         * Set the time string.
+         * 
+         * @param time
+         *            time
+         */
         void setTime(String time);
 
+        /**
+         * Get task completion.
+         * 
+         * @return task completion
+         */
         boolean isCompleted();
 
+        /**
+         * Set task completion.
+         * 
+         * @param completed
+         *            task completion.
+         */
         void setCompleted(boolean completed);
     }
 
     private Todo todo;
 
+    /**
+     * Todo element constructor.
+     * 
+     * @param todo
+     *            todo item for this element
+     */
     public TodoElement(Todo todo) {
         this.todo = todo;
 
@@ -75,7 +140,7 @@ public class TodoElement extends PolymerTemplate<TodoElement.TodoModel> {
     /**
      * Returns completion state of this {@link Todo} item.
      * 
-     * @return
+     * @return todo item completion status
      */
     public boolean isCompleted() {
         return getModel().isCompleted();

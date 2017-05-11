@@ -15,10 +15,21 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.vaadin.annotations.ClientDelegate;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
+
+import elemental.json.JsonObject;
 
 /**
  * Creator layout for creating todo items.
@@ -27,11 +38,48 @@ import com.vaadin.flow.template.model.TemplateModel;
 @HtmlImport("frontend://components/TodoCreator.html")
 public class TodoCreator extends PolymerTemplate<TemplateModel> {
 
+    private List<CreateCallback> callbacks = new ArrayList<>(0);
+
     /**
      * Todo item creator constructor.
      */
     public TodoCreator() {
         setId("todo-creator-template");
+    }
 
+    /**
+     * Add a creation callback to listen to for newly created todo items.
+     * 
+     * @param callback
+     *            creation callback
+     */
+    public void addCreateCallback(CreateCallback callback) {
+        callbacks.add(callback);
+    }
+
+    @ClientDelegate
+    private void createTodo(JsonObject todoObject) {
+        Todo todo = mapTodo(todoObject);
+        callbacks.forEach(callback -> callback.createdNewTodo(todo));
+    }
+
+    /**
+     * Creation callback interface.
+     */
+    @FunctionalInterface
+    public interface CreateCallback {
+        void createdNewTodo(Todo todo);
+    }
+
+    private Todo mapTodo(JsonObject json) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        try {
+            return mapper.readValue(json.toJson(), Todo.class);
+        } catch (IOException e) {
+            Logger.getLogger("TodoCreator").log(Level.WARNING,
+                    "Couldn't parse the JsonObject to a Todo item", e);
+        }
+        return null;
     }
 }

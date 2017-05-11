@@ -79,7 +79,7 @@
                     time: new Date().toJSON()
                 };
 
-                this.dispatchEvent(new CustomEvent('new-task', {detail: item}));
+                this.$server.createTodo(item);
             }
 
             randID() {

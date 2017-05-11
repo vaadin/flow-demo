@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
  * Todo item.
  */
 public class Todo {
-    String task;
-    String user;
-    Number rid;
+    private String task;
+    private String user;
+    private Number rid;
 
-    LocalDateTime time;
+    private LocalDateTime time;
 
-    boolean completed = false;
+    private boolean completed = false;
 
 
     public String getTask() {

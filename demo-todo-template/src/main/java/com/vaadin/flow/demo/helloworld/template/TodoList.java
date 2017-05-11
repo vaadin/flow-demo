@@ -15,17 +15,11 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Id;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
-
-import elemental.json.JsonObject;
 
 /**
  * The main application view of the todo application.
@@ -35,7 +29,7 @@ import elemental.json.JsonObject;
 public class TodoList extends PolymerTemplate<TemplateModel> {
 
     @Id("creator")
-    TodoCreator creator;
+    private TodoCreator creator;
 
     /**
      * Creates the todo list applicaton base.
@@ -43,33 +37,24 @@ public class TodoList extends PolymerTemplate<TemplateModel> {
     public TodoList() {
         setId("template");
 
-        creator.getElement().addEventListener("new-task", event -> {
-            Todo todo = mapTodo(event.getEventData());
-            TodoElement todoElement = new TodoElement(todo);
-
-            todoElement.getElement().addEventListener("remove",
-                    e -> getElement().removeChild(todoElement.getElement()));
-
-            todoElement.addStateChangeListener(
-                    () -> {
-                        if (todoElement.isCompleted()) {
-                            todoElement.getElement().setAttribute("slot", "done");
-                        }
-                    });
-
-            getElement().appendChild(todoElement.getElement());
-        }, "event.detail");
+        creator.addCreateCallback(todo -> {
+            addNewTodoItem(todo);
+        });
     }
 
-    private Todo mapTodo(JsonObject json) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        try {
-            return mapper.readValue(json.getObject("event.detail").toJson(),
-                    Todo.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    private void addNewTodoItem(Todo todo) {
+        TodoElement todoElement = new TodoElement(todo);
+
+        todoElement.getElement().addEventListener("remove",
+                e -> getElement().removeChild(todoElement.getElement()));
+
+        todoElement.addStateChangeListener(() -> {
+            if (todoElement.isCompleted()) {
+                todoElement.getElement().setAttribute("slot", "done");
+            }
+        });
+
+        getElement().appendChild(todoElement.getElement());
     }
+
 }
