@@ -1,0 +1,91 @@
+<link href="../bower_components/polymer/polymer.html" rel="import">
+
+<link href="../bower_components/paper-input/paper-input.html" rel="import">
+<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+<link href="../bower_components/paper-fab/paper-fab.html" rel="import">
+
+<dom-module id="todo-creator">
+    <template>
+        <style>
+            paper-input {
+                margin: 0 4vw;
+                padding: 0;
+            }
+
+            #todoEntry {
+                margin: 0;
+                width: 100%;
+                max-width: none;
+                border-bottom: 1px solid #ccc;
+                position: relative;
+            }
+
+            paper-input {
+                margin: 0 4vw;
+                padding: 0;
+            }
+
+            paper-fab {
+                position: absolute;
+                background: #00BCD4;
+                bottom: 1.5vh;
+                right: 2vw;
+            }
+        </style>
+
+        <div id="todoEntry">
+            <paper-input value="{{task}}" label="Task"></paper-input>
+            <paper-input value="{{user}}" char-counter label="Username" maxlength="16"
+                         error="maximum characters exceeded"
+                         style="width: 75%; display: inline-block"></paper-input>
+            <paper-fab icon="add" on-click="postTask"></paper-fab>
+        </div>
+    </template>
+
+    <script>
+        class TodoCreator extends Polymer.Element {
+            static get is() {
+                return 'todo-creator'
+            }
+            static get properties() {
+                return {
+                    task: {
+                        type: String,
+                        value: "",
+                    },
+                    user: {
+                        type: String,
+                        value: "",
+                    }
+                };
+            }
+
+            postTask() {
+                var tsk = this.task;
+                var usr = this.user;
+
+                if (tsk == "") {
+                    alert("Task is Empty!");
+                    return;
+                }
+                if (usr == "") {
+                    usr = "Anonymous";
+                }
+                this.task = "";
+                var item = {
+                    task: tsk,
+                    user: usr,
+                    rid: this.randID(),
+                    time: new Date().toJSON()
+                };
+
+                this.dispatchEvent(new CustomEvent('new-task', {detail: item}));
+            }
+
+            randID() {
+                return Math.floor(Math.random() * 10000);
+            }
+        }
+        customElements.define(TodoCreator.is, TodoCreator);
+    </script>
+</dom-module>

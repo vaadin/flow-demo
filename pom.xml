@@ -26,6 +26,7 @@
         <module>demo-addressbook-polymer</module>
         <module>demo-jquery-table</module>
         <module>demo-date-field</module>
+        <module>demo-todo-template</module>
         <!-- have it as the last module-->
         <module>demo-validator</module>
     </modules>

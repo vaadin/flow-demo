@@ -1,0 +1,25 @@
+{
+  "name": "demo-todo-template",
+  "homepage": "https://github.com/vaadin/flow-demo/demo-todo-template",
+  "authors": [
+  ],
+  "description": "",
+  "main": "",
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#v2.0.0-rc.7",
+    "paper-input": "PolymerElements/paper-input#2.0-preview",
+    "paper-fab": "git@github.com:PolymerElements/paper-fab.git#2.0-preview",
+    "iron-icon": "PolymerElements/iron-icon.git#2.0-preview",
+    "paper-checkbox": "PolymerElements/paper-checkbox#2.0-preview",
+    "paper-item": "PolymerElements/paper-item#2.0-preview"
+  }
+}

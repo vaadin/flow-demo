@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vaadin.flow.demo</groupId>
+        <artifactId>flow-demo-project</artifactId>
+        <version>0.1.4-SNAPSHOT</version>
+    </parent>
+    <name>Todo using Template API</name>
+    <artifactId>demo-todo-template</artifactId>
+    <packaging>war</packaging>
+
+    <properties>
+        <bower.working.directory>src/main/frontend</bower.working.directory>
+        <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.flow.demo</groupId>
+            <artifactId>demo-test-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Copies the files compiled by Polymer to a directory from where it can be served (root of the WAR) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/frontend/build</directory>
+                            <targetPath>${vaadin.frontend.path}</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            
+            <!-- Copies the files compiled by Polymer to a directory where jetty:run can use as resource folder -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/frontend/build</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Configures the jetty plugin to use the extra resource folder -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webAppConfig>
+                        <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
+                        <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                        <resourceBases>
+                            <resourceBase>${project.build.directory}/jetty-extra-resources</resourceBase>
+                        </resourceBases>
+                    </webAppConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local-run</id>
+            <activation>
+                <property>
+                    <name>!test.use.hub</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.lazerycode.selenium</groupId>
+                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                        <version>${driver.binary.downloader.maven.plugin.version}</version>
+                        <configuration>
+                            <!-- root directory that downloaded driver binaries 
+                                will be stored in -->
+                            <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
+                            <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
+                            <downloadedZipFileDirectory>../driver_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>../repo.xml</customRepositoryMap>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Configures the frontend plugin to compile the web components source -->
+        <profile>
+            <id>frontend-files</id>
+            <activation>
+                <property>
+                    <name>!skip.bower</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <nodeVersion>v6.9.1</nodeVersion>
+                            <yarnVersion>v0.22.0</yarnVersion>
+                            <workingDirectory>src/main/frontend</workingDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration></configuration>
+                            </execution>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>yarn install</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
