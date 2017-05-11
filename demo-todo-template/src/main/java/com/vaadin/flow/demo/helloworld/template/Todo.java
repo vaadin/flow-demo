@@ -1,4 +1,3 @@
-package com.vaadin.flow.demo.helloworld.template;
 /*
  * Copyright 2000-2017 Vaadin Ltd.
  *
@@ -14,12 +13,16 @@ package com.vaadin.flow.demo.helloworld.template;
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.vaadin.flow.demo.helloworld.template;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * Todo item.
  */
-public class Todo {
+public class Todo implements Serializable {
+
     private String task;
     private String user;
     private Number rid;

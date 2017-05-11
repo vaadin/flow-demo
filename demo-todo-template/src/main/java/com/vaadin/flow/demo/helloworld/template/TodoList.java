@@ -37,9 +37,7 @@ public class TodoList extends PolymerTemplate<TemplateModel> {
     public TodoList() {
         setId("template");
 
-        creator.addCreateCallback(todo -> {
-            addNewTodoItem(todo);
-        });
+        creator.addCreateCallback(todo -> addNewTodoItem(todo));
     }
 
     private void addNewTodoItem(Todo todo) {

@@ -125,12 +125,19 @@ public class TodoElement extends PolymerTemplate<TodoElement.TodoModel> {
     public TodoElement(Todo todo) {
         this.todo = todo;
 
+        populateModel(todo);
+        addChangeListeners(todo);
+    }
+
+    private void populateModel(Todo todo) {
         getModel().setTask(todo.getTask());
         getModel().setUser(todo.getUser());
         getModel().setRid(todo.getRid());
         getModel().setTime(todo.getTime()
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm")));
+    }
 
+    private void addChangeListeners(Todo todo) {
         getElement().addPropertyChangeListener("completed",
                 event -> taskCompleted());
         getElement().addPropertyChangeListener("task",
