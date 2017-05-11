@@ -15,22 +15,17 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Random;
 
 import com.vaadin.annotations.ClientDelegate;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
-
-import elemental.json.JsonObject;
 
 /**
  * Creator layout for creating todo items.
@@ -39,6 +34,7 @@ import elemental.json.JsonObject;
 @HtmlImport("frontend://components/TodoCreator.html")
 public class TodoCreator extends PolymerTemplate<TemplateModel> {
 
+    private Random rand = new Random(System.currentTimeMillis());
     private List<CreateCallback> callbacks = new ArrayList<>(0);
 
     /**
@@ -59,8 +55,14 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
     }
 
     @ClientDelegate
-    private void createTodo(JsonObject todoObject) {
-        Todo todo = mapTodo(todoObject);
+    private void createTodo(String task, String user) {
+        Todo todo = new Todo();
+        todo.setTask(task);
+        todo.setUser(user);
+        todo.setTime(LocalDateTime.now());
+        todo.setCompleted(false);
+        todo.setRid(rand.nextInt());
+
         callbacks.forEach(callback -> callback.createdNewTodo(todo));
     }
 
@@ -78,15 +80,4 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
         void createdNewTodo(Todo todo);
     }
 
-    private Todo mapTodo(JsonObject json) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        try {
-            return mapper.readValue(json.toJson(), Todo.class);
-        } catch (IOException e) {
-            Logger.getLogger("TodoCreator").log(Level.WARNING,
-                    "Couldn't parse the JsonObject to a Todo item", e);
-        }
-        return null;
-    }
 }

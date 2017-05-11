@@ -47,6 +47,7 @@
             static get is() {
                 return 'todo-creator'
             }
+
             static get properties() {
                 return {
                     task: {
@@ -72,20 +73,11 @@
                     usr = "Anonymous";
                 }
                 this.task = "";
-                var item = {
-                    task: tsk,
-                    user: usr,
-                    rid: this.randID(),
-                    time: new Date().toJSON()
-                };
 
-                this.$server.createTodo(item);
-            }
-
-            randID() {
-                return Math.floor(Math.random() * 10000);
+                this.$server.createTodo(tsk, usr);
             }
         }
+
         customElements.define(TodoCreator.is, TodoCreator);
     </script>
 </dom-module>
