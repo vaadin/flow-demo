@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin.flow.demo</groupId>
         <artifactId>flow-demo-project</artifactId>
-        <version>0.1.4-SNAPSHOT</version>
+        <version>0.1.5-SNAPSHOT</version>
     </parent>
     <name>Hello World using Template API</name>
     <artifactId>demo-hello-world-template</artifactId>
