@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#v2.0.0-rc.3",
-    "paper-input": "git@github.com:PolymerElements/paper-input.git#ec5fe6497711fb4987f294b67240c45da2959941"
+    "polymer": "2.0.0",
+    "paper-input": "2.0.0"
   }
 }

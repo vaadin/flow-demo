@@ -33,7 +33,7 @@
 
     <build>
         <plugins>
-            <!-- Copies the files compiled by Polymer to a directory from 
+            <!-- Copies the files compiled by Polymer to a directory from
                 where it can be served (root of the WAR) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -49,7 +49,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Copies the files compiled by Polymer to a directory where 
+            <!-- Copies the files compiled by Polymer to a directory where
                 jetty:run can use as resource folder -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -107,7 +107,7 @@
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                         <version>${driver.binary.downloader.maven.plugin.version}</version>
                         <configuration>
-                            <!-- root directory that downloaded driver binaries 
+                            <!-- root directory that downloaded driver binaries
                                 will be stored in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                             <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
@@ -126,7 +126,7 @@
             </build>
         </profile>
 
-        <!-- Configures the frontend plugin to compile the web components 
+        <!-- Configures the frontend plugin to compile the web components
             source -->
         <profile>
             <id>frontend-files</id>
@@ -142,8 +142,8 @@
                         <artifactId>frontend-maven-plugin</artifactId>
                         <version>1.4</version>
                         <configuration>
-                            <nodeVersion>v6.9.1</nodeVersion>
-                            <yarnVersion>v0.22.0</yarnVersion>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <yarnVersion>${yarn.version}</yarnVersion>
                             <workingDirectory>src/main/frontend</workingDirectory>
                         </configuration>
                         <executions>

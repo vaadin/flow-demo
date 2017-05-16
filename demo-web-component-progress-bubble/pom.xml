@@ -45,9 +45,6 @@
                             <goal>npm</goal> <!-- runs 'install' by default -->
                             <goal>bower</goal> <!-- runs 'install' by default -->
                         </goals>
-                        <configuration>
-                            <arguments>-f install</arguments>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
