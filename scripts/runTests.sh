@@ -19,8 +19,11 @@ while [ "$1" != "" ]; do
          -token )        shift
                          token=$1
                          ;;
-         -javadoc )      shift
-                         javadoc=1
+         -javadoc )      javadoc=1
+                         ;;
+         -sonar )        sonar=1
+                         ;;
+         -sonaronly )    sonaronly=1
                          ;;
          * )             usage
                          exit 1
@@ -50,6 +53,14 @@ script="./.travis.validation.sh"
 
 if [ "$javadoc" = "1" ]; then
    script=$script" -javadoc"
+fi
+
+if [ "$sonar" = "1" ]; then
+   script=$script" -sonar"
+fi
+
+if [ "$sonaronly" = "1" ]; then
+   script=$script" -sonaronly"
 fi
 
 if [ -z $message ]; then

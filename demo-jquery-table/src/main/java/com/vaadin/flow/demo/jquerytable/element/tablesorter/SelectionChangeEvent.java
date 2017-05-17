@@ -19,7 +19,6 @@ import com.vaadin.ui.ComponentEvent;
 
 /**
  * Event for selection changes in {@link RichTable}s.
- * 
  */
 public class SelectionChangeEvent extends ComponentEvent<RichTable<?>> {
 

@@ -27,6 +27,7 @@ import com.vaadin.ui.ComponentEvent;
 
 /**
  * Custom element date-field for selecting dates.
+ * 
  */
 @Tag("date-field")
 public class DateField extends Component {
