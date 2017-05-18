@@ -19,14 +19,11 @@ import com.vaadin.ui.ComponentEvent;
 
 /**
  * Event for selection changes in {@link RichTable}s.
- * 
- * @see SelectionModel
  */
 public class SelectionChangeEvent extends ComponentEvent<RichTable<?>> {
 
     /**
-     * Constructor for the event. The actual selection can be retrieved by
-     * calling {@link SelectionModel#getSelectedObjects()}.
+     * Constructor for the event.
      * 
      * @param source
      *            the table from where the event was originated.

@@ -20,14 +20,14 @@ import java.util.stream.IntStream;
 
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.EventRegistrationHandle;
+import com.vaadin.flow.dom.ShadowRoot;
 import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 
-import com.vaadin.flow.dom.ShadowRoot;
-
 /**
  * Custom element date-field for selecting dates.
+ * 
  */
 @Tag("date-field")
 public class DateField extends Component {
@@ -37,16 +37,20 @@ public class DateField extends Component {
     private ShadowRoot shadowRoot;
 
     /**
-     * Construct a date field component <date-field></date-field>.
+     * Construct a date field component {@code <date-field></date-field>}.
      * <p>
      * The actual dom will be:
-     * <p>
+     * 
+     * <pre>
+     * {@code
      * <date-field>
      *     #shadowroot
      *          <select>...</select>
      *          <select>...</select>
      *          <select>...</select>
      * </date-field>
+     * }
+     * </pre>
      */
     public DateField() {
         // Create shadow root for element
@@ -99,7 +103,7 @@ public class DateField extends Component {
     }
 
     /**
-     *  Event triggered when a DateField value changes.
+     * Event triggered when a DateField value changes.
      */
     public static class ValueChangeEvent extends ComponentEvent<DateField> {
 
