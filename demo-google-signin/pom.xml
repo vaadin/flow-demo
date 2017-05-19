@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vaadin.flow.demo</groupId>
+        <artifactId>flow-demo-project</artifactId>
+        <version>0.1.6-SNAPSHOT</version>
+    </parent>
+    <name>Google signin using Polymer</name>
+    <artifactId>demo-google-signin</artifactId>
+    <packaging>war</packaging>
+
+    <properties>
+        <jetty.version>9.4.5.v20170502</jetty.version>
+        <frontend.working.directory>src/main/frontend</frontend.working.directory>
+        <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.flow.demo</groupId>
+            <artifactId>demo-test-util</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Configures the cleanup process for JS dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${frontend.working.directory}/bower_components</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/build</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node_modules</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <!-- Configures the frontend plugin to compile the web components 
+                source -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <nodeVersion>v6.9.1</nodeVersion>
+                    <yarnVersion>v0.22.0</yarnVersion>
+                    <workingDirectory>${frontend.working.directory}</workingDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and bower</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>${yarn.build.goal}</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>productionMode</id>
+            <activation>
+                <property>
+                    <name>vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <yarn.build.goal>install</yarn.build.goal>
+            </properties>
+
+            <build>
+                <plugins>
+                    <!-- Copies the files compiled by Polymer to a directory 
+                        from where it can be served (root of the WAR) when in production mode -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}/build</directory>
+                                    <targetPath>${vaadin.frontend.path}</targetPath>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Copies the files compiled by Polymer to a directory 
+                        where jetty:run can use as resource folder -->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.0.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
+                                    <overwrite>true</overwrite>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/${frontend.working.directory}/build</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Configures the jetty plugin to use the extra resource 
+                        folder -->
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty.version}</version>
+                        <configuration>
+                            <webAppConfig>
+                                <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
+                                <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                                <resourceBases>
+                                    <resourceBase>${project.build.directory}/jetty-extra-resources</resourceBase>
+                                </resourceBases>
+                            </webAppConfig>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>debugMode</id>
+            <activation>
+                <property>
+                    <name>!vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <yarn.build.goal>run devMode</yarn.build.goal>
+            </properties>
+
+            <build>
+                <!-- Adds the files from src/main/frontend directly into 
+                    the WAR when in debug mode -->
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}</directory>
+                                    <excludes>
+                                        <exclude>build/**</exclude>
+                                    </excludes>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Configures the jetty plugin to use the extra resource 
+                        folder -->
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty.version}</version>
+                        <configuration>
+                            <webAppConfig>
+                                <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
+                                <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                                <resourceBases>
+                                    <resourceBase>${project.basedir}/${frontend.working.directory}</resourceBase>
+                                </resourceBases>
+                            </webAppConfig>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <profile>
+            <id>local-run</id>
+            <activation>
+                <property>
+                    <name>!test.use.hub</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.lazerycode.selenium</groupId>
+                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                        <version>${driver.binary.downloader.maven.plugin.version}</version>
+                        <configuration>
+                            <!-- root directory that downloaded driver binaries 
+                                will be stored in -->
+                            <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
+                            <rootStandaloneServerDirectory>../driver</rootStandaloneServerDirectory>
+                            <downloadedZipFileDirectory>../driver_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>../repo.xml</customRepositoryMap>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>selenium</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
