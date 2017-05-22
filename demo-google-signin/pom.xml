@@ -12,7 +12,6 @@
     <packaging>war</packaging>
 
     <properties>
-        <jetty.version>9.4.5.v20170502</jetty.version>
         <frontend.working.directory>src/main/frontend</frontend.working.directory>
         <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
     </properties>

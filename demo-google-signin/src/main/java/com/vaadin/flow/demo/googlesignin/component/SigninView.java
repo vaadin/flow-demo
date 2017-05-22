@@ -20,6 +20,8 @@ import com.vaadin.annotations.Id;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.googlesignin.component.SigninView.SigninModel;
 import com.vaadin.flow.html.Div;
+import com.vaadin.flow.html.H2;
+import com.vaadin.flow.html.HtmlComponent;
 import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
 import com.vaadin.ui.AttachEvent;
@@ -45,8 +47,26 @@ public class SigninView extends PolymerTemplate<SigninModel> {
         void setClientId(String clientId);
     }
 
+    private void clear() {
+        info.removeAll();
+        info.add(new H2("Google signin"));
+    }
+
+    private void showClientIdError() {
+        clear();
+
+        HtmlComponent message = new HtmlComponent("p");
+        message.getElement().setText(
+                "Cloud not find a Google Auth client ID. Please set one by using the "
+                        + "'vaadin.google.auth.client.id' system property or by setting the "
+                        + "'google.auth.client.id' servlet init parameter.");
+        info.add(message);
+    }
+
     @Override
     protected void onAttach(AttachEvent attachEvent) {
+        clear();
+
         // receives the "signin" event and extracts the profile info
         getElement().addEventListener("signin", evt -> {
             JsonObject eventData = evt.getEventData().getObject("event.detail");
@@ -61,7 +81,7 @@ public class SigninView extends PolymerTemplate<SigninModel> {
         }, "event.detail");
 
         // receives the "signout" event and removes the profile info
-        getElement().addEventListener("signout", evt -> info.removeAll());
+        getElement().addEventListener("signout", evt -> clear());
 
         /*
          * Client ID required by the Google Authentication process. Use your own
@@ -73,12 +93,10 @@ public class SigninView extends PolymerTemplate<SigninModel> {
                 .getApplicationOrSystemProperty("google.auth.client.id", null);
 
         if (googleAuthClientId == null) {
-            throw new IllegalStateException(
-                    "Cloud not find a Google Auth client ID. Please set one by using the "
-                            + "'vaadin.google.auth.client.id' system property or by setting the "
-                            + "'google.auth.client.id' servlet init parameter.");
+            showClientIdError();
+        } else {
+            getModel().setClientId(googleAuthClientId);
         }
 
-        getModel().setClientId(googleAuthClientId);
     }
 }
