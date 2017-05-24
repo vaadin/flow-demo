@@ -203,7 +203,7 @@
             </activation>
 
             <properties>
-                <yarn.build.goal>run</yarn.build.goal>
+                <yarn.build.goal>run devMode</yarn.build.goal>
                 <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}</jetty.extra.resource.base>
             </properties>
 
