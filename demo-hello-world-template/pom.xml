@@ -70,7 +70,6 @@
                         <id>install node and yarn</id>
                         <goals>
                             <goal>install-node-and-yarn</goal>
-                            <goal>npm</goal>
                         </goals>
                         <configuration></configuration>
                     </execution>
