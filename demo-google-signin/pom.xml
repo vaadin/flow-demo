@@ -101,6 +101,14 @@
             <properties>
                 <yarn.build.goal>install</yarn.build.goal>
             </properties>
+            
+            <dependencies>
+                    <dependency>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>flow-server-production-mode</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+            </dependencies>
 
             <build>
                 <plugins>
