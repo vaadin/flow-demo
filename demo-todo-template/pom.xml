@@ -75,6 +75,16 @@
                     </execution>
                     <execution>
                         <phase>generate-resources</phase>
+                        <id>add bower</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>add bower</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
                         <id>yarn install</id>
                         <goals>
                             <goal>yarn</goal>
