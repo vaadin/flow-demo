@@ -96,7 +96,6 @@
                         <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                         <resourceBases>
-                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
                             <resourceBase>${jetty.extra.resource.base}</resourceBase>
                         </resourceBases>
                     </webAppConfig>
@@ -152,6 +151,14 @@
                 <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
             </properties>
 
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>flow-server-production-mode</artifactId>
+                    <version>${flow.version}</version>
+                </dependency>
+            </dependencies>
+
             <build>
                 <plugins>
                     <plugin>
@@ -203,7 +210,7 @@
             </activation>
 
             <properties>
-                <yarn.build.goal>run</yarn.build.goal>
+                <yarn.build.goal>run devMode</yarn.build.goal>
                 <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}</jetty.extra.resource.base>
             </properties>
 
@@ -216,7 +223,7 @@
                         <configuration>
                             <webResources>
                                 <resource>
-                                    <directory>${frontend.working.directory}</directory>
+                       1             <directory>${frontend.working.directory}</directory>
                                     <excludes>
                                         <exclude>build/**</exclude>
                                     </excludes>
