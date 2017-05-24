@@ -41,7 +41,6 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
      * Todo item creator constructor.
      */
     public TodoCreator() {
-        setId("todo-creator-template");
     }
 
     /**

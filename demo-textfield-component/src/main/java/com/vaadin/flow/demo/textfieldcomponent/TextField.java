@@ -18,8 +18,8 @@ package com.vaadin.flow.demo.textfieldcomponent;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.event.ComponentEventListener;
+import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 import com.vaadin.ui.PropertyDescriptor;
@@ -155,7 +155,7 @@ public class TextField extends Component {
      *            the listener to add
      * @return a handle which can be used to remove the listener
      */
-    public EventRegistrationHandle addChangeListener(
+    public Registration addChangeListener(
             ComponentEventListener<ChangeEvent> changeListener) {
         return addListener(ChangeEvent.class, changeListener);
     }

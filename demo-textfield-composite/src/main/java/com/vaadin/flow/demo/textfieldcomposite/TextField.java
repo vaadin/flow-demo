@@ -15,12 +15,12 @@
  */
 package com.vaadin.flow.demo.textfieldcomposite;
 
-import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.html.Input;
 import com.vaadin.flow.html.Label;
 import com.vaadin.flow.html.event.ChangeEvent;
+import com.vaadin.shared.Registration;
 import com.vaadin.ui.Composite;
 
 /**
@@ -124,7 +124,7 @@ public class TextField extends Composite<Div> {
      *            the listener to add
      * @return a handle which can be used to remove the listener
      */
-    public EventRegistrationHandle addChangeListener(
+    public Registration addChangeListener(
             ComponentEventListener<ChangeEvent> changeListener) {
         return input.addChangeListener(changeListener);
     }

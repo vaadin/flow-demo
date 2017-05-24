@@ -12,7 +12,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <bower.working.directory>src/main/frontend</bower.working.directory>
+        <frontend.working.directory>src/main/frontend</frontend.working.directory>
         <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
     </properties>
 
@@ -42,46 +42,60 @@
 
     <build>
         <plugins>
-            <!-- Copies the files compiled by Polymer to a directory from where it can be served (root of the WAR) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <artifactId>maven-clean-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>src/main/frontend/build</directory>
-                            <targetPath>${vaadin.frontend.path}</targetPath>
-                        </resource>
-                    </webResources>
+                    <filesets>
+                        <fileset>
+                            <directory>${frontend.working.directory}/bower_components</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/build</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node_modules</directory>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
 
-            <!-- Copies the files compiled by Polymer to a directory where jetty:run can use as resource folder -->
             <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <yarnVersion>${yarn.version}</yarnVersion>
+                    <workingDirectory>${frontend.working.directory}</workingDirectory>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
+                        <id>install node and yarn</id>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <configuration></configuration>
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/src/main/frontend/build</directory>
-                                </resource>
-                            </resources>
+                            <arguments>${yarn.build.goal}</arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Configures the jetty plugin to use the extra resource folder -->
+
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -92,7 +106,7 @@
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                         <resourceBases>
                             <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
-                            <resourceBase>${project.build.directory}/jetty-extra-resources</resourceBase>
+                            <resourceBase>${jetty.extra.resource.base}</resourceBase>
                         </resourceBases>
                     </webAppConfig>
                 </configuration>
@@ -134,42 +148,90 @@
             </build>
         </profile>
 
-        <!-- Configures the frontend plugin to compile the web components source -->
         <profile>
-            <id>frontend-files</id>
+            <id>productionMode</id>
             <activation>
                 <property>
-                    <name>!skip.bower</name>
+                    <name>vaadin.productionMode</name>
                 </property>
             </activation>
+
+            <properties>
+                <yarn.build.goal>install</yarn.build.goal>
+                <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
+            </properties>
+
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <version>1.4</version>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
                         <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <yarnVersion>${yarn.version}</yarnVersion>
-                            <workingDirectory>src/main/frontend</workingDirectory>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}/build</directory>
+                                    <targetPath>${vaadin.frontend.path}</targetPath>
+                                </resource>
+                            </webResources>
                         </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.0.2</version>
                         <executions>
                             <execution>
-                                <phase>generate-resources</phase>
-                                <id>install node and yarn</id>
+                                <id>copy-resources</id>
+                                <phase>process-resources</phase>
                                 <goals>
-                                    <goal>install-node-and-yarn</goal>
+                                    <goal>copy-resources</goal>
                                 </goals>
-                                <configuration></configuration>
-                            </execution>
-                            <execution>
-                                <phase>generate-resources</phase>
-                                <id>yarn install</id>
-                                <goals>
-                                    <goal>yarn</goal>
-                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
+                                    <overwrite>true</overwrite>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/${frontend.working.directory}/build</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>debugMode</id>
+            <activation>
+                <property>
+                    <name>!vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <yarn.build.goal>run</yarn.build.goal>
+                <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}</jetty.extra.resource.base>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}</directory>
+                                    <excludes>
+                                        <exclude>build/**</exclude>
+                                    </excludes>
+                                </resource>
+                            </webResources>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

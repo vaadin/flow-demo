@@ -19,9 +19,9 @@ import java.time.LocalDate;
 import java.util.stream.IntStream;
 
 import com.vaadin.annotations.Tag;
-import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.dom.ShadowRoot;
 import com.vaadin.flow.event.ComponentEventListener;
+import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 
@@ -97,7 +97,7 @@ public class DateField extends Component {
      *            value change listener
      * @return registration handle for removing listener
      */
-    public EventRegistrationHandle addValueChangeListener(
+    public Registration addValueChangeListener(
             ComponentEventListener<ValueChangeEvent> valueChangeListener) {
         return addListener(ValueChangeEvent.class, valueChangeListener);
     }
