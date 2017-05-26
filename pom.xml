@@ -60,7 +60,7 @@
         <node.version>v7.10.0</node.version>
         <npm.version>4.6.1</npm.version>
         <yarn.version>v0.24.5</yarn.version>
-        <bower.working.directory>src/main/webapp</bower.working.directory>
+        <frontend.working.directory>src/main/webapp</frontend.working.directory>
     </properties>
     <repositories>
         <repository>
@@ -148,16 +148,16 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${bower.working.directory}/bower_components</directory>
+                            <directory>${frontend.working.directory}/bower_components</directory>
                         </fileset>
                         <fileset>
-                            <directory>${bower.working.directory}/build</directory>
+                            <directory>${frontend.working.directory}/build</directory>
                         </fileset>
                         <fileset>
-                            <directory>${bower.working.directory}/node</directory>
+                            <directory>${frontend.working.directory}/node</directory>
                         </fileset>
                         <fileset>
-                            <directory>${bower.working.directory}/node_modules</directory>
+                            <directory>${frontend.working.directory}/node_modules</directory>
                         </fileset>
                     </filesets>
                 </configuration>

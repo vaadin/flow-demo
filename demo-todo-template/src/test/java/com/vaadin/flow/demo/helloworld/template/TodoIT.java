@@ -31,7 +31,7 @@ public class TodoIT extends AbstractChromeTest {
         WebElement template = findElement(By.id("template"));
 
         WebElement createTemplate = getInShadowRoot(template,
-                By.id("todo-creator-template")).get();
+                By.id("creator")).get();
 
         WebElement todo = getInShadowRoot(createTemplate, By.id("task-input"))
                 .get();

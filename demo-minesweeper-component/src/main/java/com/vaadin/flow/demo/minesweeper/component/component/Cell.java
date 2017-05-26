@@ -17,8 +17,8 @@ package com.vaadin.flow.demo.minesweeper.component.component;
 
 import com.vaadin.annotations.DomEvent;
 import com.vaadin.annotations.Tag;
-import com.vaadin.flow.dom.EventRegistrationHandle;
 import com.vaadin.flow.event.ComponentEventListener;
+import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentEvent;
 
@@ -103,7 +103,7 @@ public class Cell extends Component {
      *            the listener to add
      * @return an handle which can be used to remove the listener
      */
-    public EventRegistrationHandle addCellClickListener(
+    public Registration addCellClickListener(
             ComponentEventListener<CellClickEvent> listener) {
         return addListener(CellClickEvent.class, listener);
     }
