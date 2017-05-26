@@ -8,9 +8,14 @@
   ],
   "builds": [{
     "name": "es5",
-    "js": {"compile": true}
+    "js": {"compile": true, "minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
   },
-  {
-    "name": "es6"
-  }]
+    {
+      "name": "es6",
+      "js": {"minify": true},
+      "css": {"minify": true},
+      "html": {"minify": true}
+    }]
 }
