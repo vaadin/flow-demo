@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "install": "bower install && polymer build",
+    "prodMode": "bower install && polymer build",
     "devMode": "bower install"
   },
   "author": "",
