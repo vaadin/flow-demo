@@ -38,12 +38,6 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
     private List<CreateCallback> callbacks = new ArrayList<>(0);
 
     /**
-     * Todo item creator constructor.
-     */
-    public TodoCreator() {
-    }
-
-    /**
      * Add a creation callback to listen to for newly created todo items.
      * 
      * @param callback
