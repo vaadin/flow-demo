@@ -157,7 +157,7 @@
             </activation>
 
             <properties>
-                <yarn.build.goal>install</yarn.build.goal>
+                <yarn.build.goal>run prodMode</yarn.build.goal>
                 <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
             </properties>
 
