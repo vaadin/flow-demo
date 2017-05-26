@@ -159,6 +159,12 @@
                         <fileset>
                             <directory>${frontend.working.directory}/node_modules</directory>
                         </fileset>
+                        <fileset>
+                            <directory>driver</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>driver_zips</directory>
+                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
