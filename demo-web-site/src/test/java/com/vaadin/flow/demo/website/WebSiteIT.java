@@ -24,9 +24,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
-public class WebSiteIT extends AbstractDemoTest {
+public class WebSiteIT extends AbstractChromeTest {
 
     private static final String TITLE = "Flow Web Site Demo";
 

@@ -18,7 +18,6 @@ package com.vaadin.flow.demo.datefield.customelement;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.annotations.WebComponents;
 import com.vaadin.flow.demo.datefield.customelement.Servlet.MyRouterConfigurator;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
@@ -29,7 +28,6 @@ import com.vaadin.server.VaadinServlet;
  */
 @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
 @VaadinServletConfiguration(routerConfigurator = MyRouterConfigurator.class, productionMode = false)
-@WebComponents(WebComponents.PolyfillVersion.V1)
 public class Servlet extends VaadinServlet {
 
     /**

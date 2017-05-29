@@ -8,8 +8,6 @@
 # Exclude the bower_components and node_modules from Sonar analysis
 SONAR_EXCLUSIONS=**/bower_components/**,**/node_modules/**,**/node/**
 
-export DISPLAY=:99.0
-sh -e /etc/init.d/xvfb start
 if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]
 then
     # Pull request inside repository, secure vars available (needed for Sonar and TestBench tests)

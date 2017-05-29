@@ -21,8 +21,9 @@ error-screenshots
 
 .DS_Store
 
-# Polymer
+# Frontend
 bower_components
 node
 node_modules
 etc
+yarn.lock

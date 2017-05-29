@@ -19,10 +19,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import com.vaadin.testbench.By;
 
-public class HelloWorldIT extends AbstractDemoTest {
+public class HelloWorldIT extends AbstractChromeTest {
 
     @Test
     public void basicFunctionality() {
