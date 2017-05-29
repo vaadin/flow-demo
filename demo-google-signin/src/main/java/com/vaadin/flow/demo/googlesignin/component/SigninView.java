@@ -44,6 +44,12 @@ public class SigninView extends PolymerTemplate<SigninModel> {
      * Model created just to set the client-id property from the server side.
      */
     public interface SigninModel extends TemplateModel {
+        /**
+         * Sets the Google Auth Client ID at the google-signin webcomponent.
+         * 
+         * @param clientId
+         *            The auth client id.
+         */
         void setClientId(String clientId);
     }
 
