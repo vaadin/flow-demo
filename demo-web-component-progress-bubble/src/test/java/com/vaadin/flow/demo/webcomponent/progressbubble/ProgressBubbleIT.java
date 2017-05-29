@@ -22,9 +22,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
-public class ProgressBubbleIT extends AbstractDemoTest {
+public class ProgressBubbleIT extends AbstractChromeTest {
 
     @Test
     public void domCorrect() {

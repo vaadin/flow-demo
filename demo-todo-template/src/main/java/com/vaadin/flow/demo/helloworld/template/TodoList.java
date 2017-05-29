@@ -18,6 +18,7 @@ package com.vaadin.flow.demo.helloworld.template;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Id;
 import com.vaadin.annotations.Tag;
+import com.vaadin.flow.router.View;
 import com.vaadin.flow.template.PolymerTemplate;
 import com.vaadin.flow.template.model.TemplateModel;
 
@@ -26,7 +27,7 @@ import com.vaadin.flow.template.model.TemplateModel;
  */
 @Tag("todo-template")
 @HtmlImport("frontend://components/TodoTemplate.html")
-public class TodoList extends PolymerTemplate<TemplateModel> {
+public class TodoList extends PolymerTemplate<TemplateModel> implements View {
 
     @Id("creator")
     private TodoCreator creator;

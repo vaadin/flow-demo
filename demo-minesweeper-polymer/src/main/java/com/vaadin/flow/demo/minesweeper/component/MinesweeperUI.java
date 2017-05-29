@@ -20,8 +20,6 @@ import java.util.Optional;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.annotations.WebComponents;
-import com.vaadin.annotations.WebComponents.PolyfillVersion;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -32,7 +30,6 @@ import com.vaadin.ui.UI;
  * UI which demonstrates how you can use the Flow {@link Component} API to
  * create a Minesweeper game.
  */
-@WebComponents(PolyfillVersion.V1)
 public class MinesweeperUI extends UI {
 
     /**
