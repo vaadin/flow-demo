@@ -1,6 +1,12 @@
 language: java
 jdk: oraclejdk8
-before_install: ./.travis.before_install.sh
+# Run on a dedicated Trusty VM to avoid random problems like "User limit of inotify watches reached"
+sudo: required
+dist: trusty
+
+before_install:
+  # Disable all Travis default repositories
+  - sed -i "s/activeByDefault>true</activeByDefault>false</g"  ~/.m2/settings.xml
 
 # Make Chrome IT tests more stable
 addons:
@@ -20,10 +26,6 @@ before_script:
 
 script: ./.travis.script.sh
 
-# Run on a dedicated Trusty VM to avoid random problems like "User limit of inotify watches reached"
-sudo: required
-dist: trusty
-
 # Cache requires a master build
 branches:
   only:
@@ -36,6 +38,4 @@ before_cache:
   # remove all build artifacts
   - rm -rf $HOME/.m2/repository/com/vaadin/flow
   - rm -rf $HOME/.m2/repository/com/vaadin/flow-*
-
-
 

@@ -18,8 +18,6 @@ package com.vaadin.flow.demo.addressbook;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.annotations.WebComponents;
-import com.vaadin.annotations.WebComponents.PolyfillVersion;
 import com.vaadin.flow.demo.addressbook.ui.Addressbook;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
@@ -37,7 +35,6 @@ public class SiteRouterConfigurator implements RouterConfigurator {
      */
     @WebServlet(urlPatterns = "/*", name = "DemoSiteServlet", asyncSupported = true)
     @VaadinServletConfiguration(routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
-    @WebComponents(PolyfillVersion.V1)
     public static class DemoSiteServlet extends VaadinServlet {
     }
 

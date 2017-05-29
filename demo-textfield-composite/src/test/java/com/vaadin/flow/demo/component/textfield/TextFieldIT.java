@@ -20,10 +20,10 @@ import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.demo.testutil.AbstractDemoTest;
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import com.vaadin.testbench.By;
 
-public class TextFieldIT extends AbstractDemoTest {
+public class TextFieldIT extends AbstractChromeTest {
 
     @Test
     public void basicFunctionality() {
