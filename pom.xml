@@ -161,10 +161,10 @@
                             <directory>${frontend.working.directory}/node_modules</directory>
                         </fileset>
                         <fileset>
-                            <directory>${session.executionRootDirectory}/driver</directory>
+                            <directory>${project.rootdir}/driver</directory>
                         </fileset>
                         <fileset>
-                            <directory>${session.executionRootDirectory}/driver_zips</directory>
+                            <directory>${project.rootdir}/driver_zips</directory>
                         </fileset>
                     </filesets>
                 </configuration>
@@ -367,9 +367,9 @@
                             <!-- root directory that downloaded driver binaries
                                 will be stored in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
-                            <rootStandaloneServerDirectory>${session.executionRootDirectory}/driver</rootStandaloneServerDirectory>
-                            <downloadedZipFileDirectory>${session.executionRootDirectory}/driver_zips</downloadedZipFileDirectory>
-                            <customRepositoryMap>${session.executionRootDirectory}/drivers.xml</customRepositoryMap>
+                            <rootStandaloneServerDirectory>${project.rootdir}/driver</rootStandaloneServerDirectory>
+                            <downloadedZipFileDirectory>${project.rootdir}/driver_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>${project.rootdir}/drivers.xml</customRepositoryMap>
                         </configuration>
                         <executions>
                             <execution>
