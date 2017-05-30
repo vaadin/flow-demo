@@ -1,0 +1,76 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/google-signin/google-signin.html">
+
+<dom-module id="signin-page">
+  <template>
+  <style>
+        :host {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: space-around;
+        }
+        google-signin {
+            display: block;
+        }
+        #login-info {
+          padding-bottom: 20px;
+        }
+  </style>
+  <div>
+    <main>
+        <div id="login-info"></div>
+        <div>
+            <google-signin
+                id="glogin"
+                label-signin="Sign-in with your Google account"
+                client-id="{{clientId}}"
+                scopes="https://www.googleapis.com/auth/userinfo.profile"
+                theme="light"
+                brand="none"
+                height="tall"></google-signin>
+        </div>
+    </main>
+  </div>
+  </template>
+
+  <script>
+    class SigninPage extends Polymer.Element {
+      static get is() { return 'signin-page'; }
+
+      static get properties() {
+            return {
+              clientId: {
+                type: String,
+                value: ''
+              }
+            }
+        }
+
+      ready() {
+          super.ready();
+          this.$.glogin.addEventListener('google-signin-success', e => this._onSignin(e));
+          this.$.glogin.addEventListener('google-signed-out', e => this._onSignout(e));
+          if (this.$.glogin.signedIn) {
+              this._onSignin();
+          }
+        }
+
+      _onSignin() {
+          let profile = gapi.auth2.getAuthInstance()['currentUser'].get().getBasicProfile();
+          this.dispatchEvent(new CustomEvent('signin', {bubbles: true, composed: true, detail: {
+              name: profile.getName(),
+              picture: profile.getImageUrl(),
+              email: profile.getEmail()
+              }}));
+      }
+      _onSignout() {
+        this.dispatchEvent(new CustomEvent('signout', {bubbles: true, composed: true}));
+      }
+    }
+
+    customElements.define(SigninPage.is, SigninPage);
+  </script>
+</dom-module>

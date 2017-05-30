@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="signin-info">
+  <template>
+  <style>
+        .image-container {
+          text-align: center;
+        }
+        .image-container img {
+          display: inline-block;
+          border-radius: 50%;
+          box-shadow: 0 0 8px rgba(0,0,0,.18), 0 8px 16px rgba(0,0,0,.36);
+        }
+  </style>
+  <div>
+    <h2>Welcome {{name}}!</h2>
+    <p>{{email}}</p>
+    <div class="image-container">
+        <img src="{{picture}}" />
+    </div>
+  </div>
+  </template>
+
+  <script>
+    class ProfileInfo extends Polymer.Element {
+      static get is() { return 'signin-info'; }
+
+      static get properties() {
+            return {
+              name: String,
+              email: String,
+              picture: String
+            }
+        }
+    }
+    customElements.define(ProfileInfo.is, ProfileInfo);
+  </script>
+</dom-module>

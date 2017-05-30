@@ -27,6 +27,7 @@
         <module>demo-jquery-table</module>
         <module>demo-date-field</module>
         <module>demo-todo-template</module>
+        <module>demo-google-signin</module>
         <!-- have it as the last module-->
         <module>demo-validator</module>
     </modules>

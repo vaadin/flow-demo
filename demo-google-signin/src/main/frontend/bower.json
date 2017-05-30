@@ -1,0 +1,27 @@
+{
+  "name": "demo-google-signin",
+  "homepage": "https://github.com/vaadin/flow-demo/demo-google-signin",
+  "authors": [],
+  "description": "",
+  "main": "",
+  "license": "Apache2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "2.0.0",
+    "google-signin": "Scarygami/google-signin#2.0-preview",
+    "google-apis": "2.0-preview",
+    "webcomponentsjs": "1.0.0"
+  },
+  "resolutions": {
+    "polymer": "2.0.0",
+    "webcomponentsjs": "1.0.0",
+    "google-apis": "2.0-preview"
+  }
+}
