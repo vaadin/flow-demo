@@ -17,7 +17,6 @@ package com.vaadin.flow.demo.addressbook.ui;
 
 import java.util.Optional;
 
-import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Tag;
 import com.vaadin.annotations.Title;
@@ -32,8 +31,6 @@ import com.vaadin.flow.router.View;
 @Title("Addressbook")
 @Tag("div")
 @StyleSheet("context://css/site.css")
-@HtmlImport("frontend://components/ContactsTable.html")
-@HtmlImport("frontend://components/ContactForm.html")
 public class Addressbook extends HtmlContainer implements View {
     private final ContactForm contactForm = new ContactForm(this::updateForm);
     private final ContactsTable contactsTable = new ContactsTable(

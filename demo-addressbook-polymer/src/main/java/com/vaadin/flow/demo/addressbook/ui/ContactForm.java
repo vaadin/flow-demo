@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.addressbook.ui;
 
 import com.vaadin.annotations.EventHandler;
+import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
@@ -30,6 +31,7 @@ import com.vaadin.flow.template.model.TemplateModel;
  *
  */
 @Tag("contacts-form")
+@HtmlImport("frontend://components/ContactForm.html")
 class ContactForm extends PolymerTemplate<ContactModel> {
 
     /**
