@@ -108,7 +108,7 @@
             </activation>
 
             <properties>
-                <yarn.build.goal>install</yarn.build.goal>
+                <yarn.build.goal>run prodMode</yarn.build.goal>
             </properties>
 
             <dependencies>
