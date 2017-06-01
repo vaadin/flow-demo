@@ -17,6 +17,7 @@ package com.vaadin.flow.demo.addressbook.ui;
 
 import java.util.List;
 
+import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
@@ -31,6 +32,7 @@ import elemental.json.JsonValue;
  * @author Vaadin Ltd.
  */
 @Tag("contacts-table")
+@HtmlImport("frontend://components/ContactsTable.html")
 class ContactsTable extends HtmlComponent {
     private final SerializableConsumer<String> selectedRowIdProcessor;
 
