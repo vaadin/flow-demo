@@ -39,7 +39,7 @@ abstract class MinesweeperPageObject extends AbstractChromeTest {
     WebElement getCell(int row, int col) {
         WebElement template = findElement(By.id("template"));
         WebElement mineField = getInShadowRoot(template,
-                By.cssSelector(".table")).get();
+                By.cssSelector(".table"));
         WebElement rowE = mineField.findElements(By.cssSelector(".row"))
                 .get(row);
         return rowE.findElements(By.cssSelector(".cell")).get(col);

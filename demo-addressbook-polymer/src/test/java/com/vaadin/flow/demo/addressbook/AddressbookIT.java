@@ -48,10 +48,10 @@ public class AddressbookIT extends AbstractChromeTest {
         rows.get(0).click();
 
         WebElement contactForm = findElement(By.tagName("contacts-form"));
-        setText(getInShadowRoot(contactForm, By.id("firstName")).get(), "foo");
-        setText(getInShadowRoot(contactForm, By.id("lastName")).get(), "bar");
+        setText(getInShadowRoot(contactForm, By.id("firstName")), "foo");
+        setText(getInShadowRoot(contactForm, By.id("lastName")), "bar");
 
-        getInShadowRoot(contactForm, By.id("save")).get().click();
+        getInShadowRoot(contactForm, By.id("save")).click();
 
         waitUntil(driver -> assertFirstRow(rows.get(0), "foo", "bar",
                 contact.getEmail(), false));
