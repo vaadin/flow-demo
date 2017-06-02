@@ -138,8 +138,10 @@ public class WebSiteIT extends AbstractChromeTest {
         assertLocation(expectedLocation, getDriver().getCurrentUrl());
     }
 
-    private void assertLocation(String expectedLocation, String currentLocation) {
-        Assert.assertEquals("http://localhost:8080/" + expectedLocation, currentLocation);
+    private void assertLocation(String expectedLocation,
+            String currentLocation) {
+        Assert.assertEquals(getRootURL() + "/" + expectedLocation,
+                currentLocation);
     }
 
     private WebElement getFirstContentChild() {
