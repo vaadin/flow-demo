@@ -31,27 +31,26 @@ public class TodoIT extends AbstractChromeTest {
         WebElement template = findElement(By.id("template"));
 
         WebElement createTemplate = getInShadowRoot(template,
-                By.id("creator")).get();
+                By.id("creator"));
 
-        WebElement todo = getInShadowRoot(createTemplate, By.id("task-input"))
-                .get();
+        WebElement todo = getInShadowRoot(createTemplate, By.id("task-input"));
         todo.sendKeys("Important task");
 
         WebElement user = getInShadowRoot(createTemplate,
-                By.id("user-name-input")).get();
+                By.id("user-name-input"));
         user.sendKeys("Teuvo testi");
 
         WebElement createButton = getInShadowRoot(createTemplate,
-                By.id("create-button")).get();
+                By.id("create-button"));
         createButton.click();
 
         WebElement todoElement = template
                 .findElement(By.tagName("todo-element"));
         Assert.assertEquals("Important task",
-                getInShadowRoot(todoElement, By.id("task")).get()
+                getInShadowRoot(todoElement, By.id("task"))
                         .getText());
 
-        getInShadowRoot(todoElement, By.id("checkbox")).get().click();
+        getInShadowRoot(todoElement, By.id("checkbox")).click();
 
         todoElement = template
                 .findElement(By.tagName("todo-element"));

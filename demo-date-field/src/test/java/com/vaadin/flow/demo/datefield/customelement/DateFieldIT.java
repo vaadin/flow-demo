@@ -32,7 +32,7 @@ public class DateFieldIT extends AbstractChromeTest {
         WebElement dateField = findElement(By.id("date-field"));
         // Finds the first select element which is the day
         WebElement selectElement = getInShadowRoot(dateField,
-                By.cssSelector("select")).get();
+                By.cssSelector("select"));
         Select select = new Select(selectElement);
 
         select.selectByIndex(3);
