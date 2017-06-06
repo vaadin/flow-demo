@@ -100,7 +100,7 @@ public class WebSiteIT extends AbstractChromeTest {
         assertLocation("param/2");
         Assert.assertEquals("Id parameter: 2", getFirstContentChild().getText());
 
-        getDriver().get("http://localhost:8080/param/3");
+        getDriver().get(getRootURL() + "/param/3");
         Assert.assertEquals("Id parameter: 3", getFirstContentChild().getText());
     }
 
