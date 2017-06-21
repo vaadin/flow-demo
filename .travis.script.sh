@@ -12,9 +12,41 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_SECURE_ENV_VARS" == "true
 then
     # Pull request inside repository, secure vars available (needed for Sonar and TestBench tests)
     # Run verify + Sonar analysis
-    mvn -B -e -V -Dmaven.javadoc.skip=false -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE -Dtest.excludegroup= -Dsonar.verbose=true -Dsonar.analysis.mode=issues -Dsonar.github.repository=$TRAVIS_REPO_SLUG -Dsonar.host.url=$SONAR_HOST -Dsonar.github.oauth=$SONAR_GITHUB_OAUTH -Dsonar.login=$SONAR_LOGIN -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST -Dsonar.exclusions=$SONAR_EXCLUSIONS clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
-elif [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]
+    mvn -B -e -V \
+        -Dmaven.javadoc.skip=false \
+        -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
+        -Dtest.excludegroup= \
+        -Dsonar.verbose=true \
+        -Dsonar.analysis.mode=issues \
+        -Dsonar.github.repository=$TRAVIS_REPO_SLUG \
+        -Dsonar.host.url=$SONAR_HOST \
+        -Dsonar.github.oauth=$SONAR_GITHUB_OAUTH \
+        -Dsonar.login=$SONAR_LOGIN \
+        -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST \
+        -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+        clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
+elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]
 then
+    # master build
+    mvn -B -e -V \
+        -Pall-tests \
+        -Dtest.use.hub=true \
+        -Dvaadin.productionMode=true \
+        -Dmaven.javadoc.skip=false \
+        -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
+        clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+
+    # run sonar
+    mvn -B -e -V \
+        -Dsonar.analysis.mode=publish \
+        -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+        compile sonar:sonar
+else
     # Branch build, secure vars available (needed for TestBench tests)
-    mvn -B -e -V -Dmaven.javadoc.skip=false -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE -Dsonar.exclusions=$SONAR_EXCLUSIONS -Dtest.excludegroup= verify
+    mvn -B -e -V \
+        -Dmaven.javadoc.skip=false \
+        -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
+        -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+        -Dtest.excludegroup= \
+        verify
 fi
