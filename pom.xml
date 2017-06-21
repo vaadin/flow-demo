@@ -373,6 +373,7 @@
                         </configuration>
                         <executions>
                             <execution>
+                                <phase>pre-integration-test</phase>
                                 <goals>
                                     <goal>selenium</goal>
                                 </goals>
