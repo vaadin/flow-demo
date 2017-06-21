@@ -24,6 +24,8 @@ then
         -Dsonar.login=$SONAR_LOGIN \
         -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST \
         -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+        -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
 elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]
 then
@@ -34,6 +36,8 @@ then
         -Dvaadin.productionMode=true \
         -Dmaven.javadoc.skip=false \
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
+        -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         clean org.jacoco:jacoco-maven-plugin:prepare-agent install
 
     # run sonar
@@ -48,5 +52,7 @@ else
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
         -Dsonar.exclusions=$SONAR_EXCLUSIONS \
         -Dtest.excludegroup= \
+        -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         verify
 fi
