@@ -38,8 +38,14 @@ then
 
     # run sonar
     mvn -B -e -V \
+        -Dmaven.javadoc.skip=false \
+        -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
         -Dsonar.analysis.mode=publish \
         -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+        -Dsonar.verbose=true \
+        -Dsonar.host.url=$SONAR_HOST \
+        -Dsonar.login=$SONAR_LOGIN \
+        -DskipTests \
         compile sonar:sonar
 else
     # Branch build, secure vars available (needed for TestBench tests)
