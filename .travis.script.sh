@@ -36,17 +36,25 @@ then
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
         clean org.jacoco:jacoco-maven-plugin:prepare-agent install
 
-    # run sonar
-    mvn -B -e -V \
-        -Dmaven.javadoc.skip=false \
-        -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
-        -Dsonar.analysis.mode=publish \
-        -Dsonar.exclusions=$SONAR_EXCLUSIONS \
-        -Dsonar.verbose=true \
-        -Dsonar.host.url=$SONAR_HOST \
-        -Dsonar.login=$SONAR_LOGIN \
-        -DskipTests \
-        compile sonar:sonar
+    STATUS=$?
+    if [ $STATUS -eq 0 ]
+    then
+        # run sonar
+        echo "Running Sonar"
+        mvn -B -e -V \
+            -Dmaven.javadoc.skip=false \
+            -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
+            -Dsonar.analysis.mode=publish \
+            -Dsonar.exclusions=$SONAR_EXCLUSIONS \
+            -Dsonar.verbose=true \
+            -Dsonar.host.url=$SONAR_HOST \
+            -Dsonar.login=$SONAR_LOGIN \
+            -DskipTests \
+            compile sonar:sonar
+    else
+        echo "Build failed, skipping sonar."
+        exit 1
+    fi
 else
     # Branch build, secure vars available (needed for TestBench tests)
     mvn -B -e -V \
