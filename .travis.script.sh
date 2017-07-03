@@ -30,7 +30,6 @@ then
     # master build
     mvn -B -e -V \
         -Pall-tests \
-        -Dtest.use.hub=true \
         -Dvaadin.productionMode=true \
         -Dmaven.javadoc.skip=false \
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
