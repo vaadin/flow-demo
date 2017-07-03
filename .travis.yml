@@ -4,9 +4,10 @@ jdk: oraclejdk8
 sudo: required
 dist: trusty
 
-before_install:
-  # Disable all Travis default repositories
-  - sed -i "s/activeByDefault>true</activeByDefault>false</g"  ~/.m2/settings.xml
+services:
+  - docker
+
+before_install: ./.travis.before_install.sh
 
 # Make Chrome IT tests more stable
 addons:

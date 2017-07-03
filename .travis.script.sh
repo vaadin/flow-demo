@@ -16,6 +16,8 @@ then
         -Dmaven.javadoc.skip=false \
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
         -Dtest.excludegroup= \
+        -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         -Dsonar.verbose=true \
         -Dsonar.analysis.mode=issues \
         -Dsonar.github.repository=$TRAVIS_REPO_SLUG \
@@ -31,6 +33,7 @@ then
     mvn -B -e -V \
         -Pall-tests \
         -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         -Dvaadin.productionMode=true \
         -Dmaven.javadoc.skip=false \
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
@@ -62,5 +65,7 @@ else
         -Dvaadin.testbench.developer.license=$TESTBENCH_LICENSE \
         -Dsonar.exclusions=$SONAR_EXCLUSIONS \
         -Dtest.excludegroup= \
+        -Dtest.use.hub=true \
+        -Dcom.vaadin.testbench.Parameters.hubHostname="localhost" \
         verify
 fi
