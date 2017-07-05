@@ -29,6 +29,8 @@ public class ProgressBubbleIT extends AbstractChromeTest {
     @Test
     public void domCorrect() {
         open();
+        waitForElementPresent(By.tagName("progress-bubble"));
+
         WebElement bubble = findElement(By.tagName("progress-bubble"));
         WebElement content = bubble
                 .findElement(By.xpath("./div[@id='content']"));
@@ -38,6 +40,8 @@ public class ProgressBubbleIT extends AbstractChromeTest {
     @Test
     public void updatesWork() {
         open();
+        waitForElementPresent(By.tagName("progress-bubble"));
+
         List<WebElement> bubbles = findElements(By.tagName("progress-bubble"));
         Assert.assertEquals(4, bubbles.size());
 
