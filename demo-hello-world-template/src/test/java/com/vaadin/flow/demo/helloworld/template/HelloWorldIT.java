@@ -27,6 +27,7 @@ public class HelloWorldIT extends AbstractChromeTest {
     @Test
     public void basicFunctionality() {
         open();
+        waitForElementPresent(By.id("template"));
 
         WebElement template = findElement(By.id("template"));
 
