@@ -73,7 +73,7 @@ public class TodoElement extends PolymerTemplate<TodoElement.TodoModel> {
          * 
          * @return id
          */
-        Number getRid();
+        int getRid();
 
         /**
          * Set id.
@@ -81,7 +81,7 @@ public class TodoElement extends PolymerTemplate<TodoElement.TodoModel> {
          * @param rid
          *            id
          */
-        void setRid(Number rid);
+        void setRid(int rid);
 
         /**
          * Get the stored time string.
