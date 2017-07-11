@@ -25,7 +25,7 @@ public class Todo implements Serializable {
 
     private String task;
     private String user;
-    private Number rid;
+    private int rid;
 
     private LocalDateTime time;
 
@@ -48,11 +48,11 @@ public class Todo implements Serializable {
         this.user = user;
     }
 
-    public Number getRid() {
+    public int getRid() {
         return rid;
     }
 
-    public void setRid(Number rid) {
+    public void setRid(int rid) {
         this.rid = rid;
     }
 
