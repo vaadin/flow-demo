@@ -15,7 +15,9 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Logger;
 
 import com.vaadin.annotations.Convert;
@@ -119,8 +121,10 @@ public class SignInForm extends PolymerTemplate<SignInModel> implements View {
         Logger.getLogger(SignInForm.class.getName())
                 .info("Register a new user with the name '" + name
                         + "; and  SSS  '" + ssd + "', and birthday: " + date);
-        Date current = new Date();
+        int currentYear = GregorianCalendar.getInstance().get(Calendar.YEAR);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
         getModel().setRegistrationMessage("Welcome " + name + ", your are "
-                + (current.getYear() - date.getYear()) + " years old");
+                + (currentYear - calendar.get(Calendar.YEAR)) + " years old");
     }
 }
