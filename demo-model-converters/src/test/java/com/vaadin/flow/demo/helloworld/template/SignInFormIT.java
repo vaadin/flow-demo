@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Period;
 
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -39,9 +39,11 @@ public class SignInFormIT extends AbstractChromeTest {
         getInShadowRoot(template, By.id("register")).click();
         WebElement msg = getInShadowRoot(template, By.id("reg-msg"));
 
-        int year = GregorianCalendar.getInstance().get(Calendar.YEAR);
-        waitUntil(driver -> msg.getText().equals(
-                "Welcome John Doe, your are " + (year - 1975) + " years old"));
+        LocalDate date = LocalDate.of(1975, 4, 2);
+        waitUntil(driver -> msg.getText()
+                .equals("Welcome John Doe, your are "
+                        + Period.between(date, LocalDate.now()).getYears()
+                        + " years old"));
     }
 
     private void setText(String inputId, String text) {

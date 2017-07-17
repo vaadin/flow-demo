@@ -15,7 +15,12 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Logger;
 
 import com.vaadin.annotations.Convert;
@@ -118,9 +123,14 @@ public class SignInForm extends PolymerTemplate<SignInModel> implements View {
         Date date = getModel().getBirthDate();
         Logger.getLogger(SignInForm.class.getName())
                 .info("Register a new user with the name '" + name
-                        + "; and  SSS  '" + ssd + "', and birthday: " + date);
-        Date current = new Date();
+                        + "; and  SSD  '" + ssd + "', and birthday: " + date);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+
+        LocalDate birthDay = calendar.toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDate();
         getModel().setRegistrationMessage("Welcome " + name + ", your are "
-                + (current.getYear() - date.getYear()) + " years old");
+                + Period.between(birthDay, LocalDate.now()).getYears()
+                + " years old");
     }
 }
