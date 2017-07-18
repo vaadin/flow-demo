@@ -41,7 +41,7 @@
         <jetty.version>9.3.7.v20160115</jetty.version>
         <frontend.maven.plugin.version>1.4</frontend.maven.plugin.version>
         <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
-        <maven.failsafe.plugin.version>2.19.1</maven.failsafe.plugin.version>
+        <maven.failsafe.plugin.version>2.20</maven.failsafe.plugin.version>
         <driver.binary.downloader.maven.plugin.version>1.0.14</driver.binary.downloader.maven.plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -52,11 +52,13 @@
         <sonar.analysis.mode>preview</sonar.analysis.mode>
         <sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
         <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
+        <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
 
         <!-- Frontend -->
-        <node.version>v7.10.0</node.version>
-        <npm.version>4.6.1</npm.version>
-        <yarn.version>v0.24.5</yarn.version>
+        <!-- Not the newest version because of https://www.polymer-project.org/2.0/docs/tools/node-support -->
+        <node.version>v7.10.1</node.version>
+        <npm.version>5.3.0</npm.version>
+        <yarn.version>v0.28.1</yarn.version>
         <frontend.working.directory>src/main/webapp</frontend.working.directory>
     </properties>
     <repositories>
@@ -189,7 +191,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.war.plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
