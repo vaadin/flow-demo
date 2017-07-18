@@ -14,14 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "2.0.0",
+    "polymer": "~2.0.2",
     "google-signin": "Scarygami/google-signin#2.0-preview",
-    "google-apis": "2.0-preview",
-    "webcomponentsjs": "1.0.0"
-  },
-  "resolutions": {
-    "polymer": "2.0.0",
-    "webcomponentsjs": "1.0.0",
-    "google-apis": "2.0-preview"
+    "google-apis": "~2.0.0"
   }
 }

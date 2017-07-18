@@ -56,7 +56,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Configures the frontend plugin to compile the web components 
+            <!-- Configures the frontend plugin to compile the web components
                 source -->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -121,12 +121,12 @@
 
             <build>
                 <plugins>
-                    <!-- Copies the files compiled by Polymer to a directory 
+                    <!-- Copies the files compiled by Polymer to a directory
                         from where it can be served (root of the WAR) when in production mode -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>${maven.war.plugin.version}</version>
                         <configuration>
                             <webResources>
                                 <resource>
@@ -137,7 +137,7 @@
                         </configuration>
                     </plugin>
 
-                    <!-- Copies the files compiled by Polymer to a directory 
+                    <!-- Copies the files compiled by Polymer to a directory
                         where jetty:run can use as resource folder -->
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
@@ -162,7 +162,7 @@
                         </executions>
                     </plugin>
 
-                    <!-- Configures the jetty plugin to use the extra resource 
+                    <!-- Configures the jetty plugin to use the extra resource
                         folder -->
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>
@@ -195,13 +195,13 @@
             </properties>
 
             <build>
-                <!-- Adds the files from src/main/frontend directly into 
+                <!-- Adds the files from src/main/frontend directly into
                     the WAR when in debug mode -->
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>${maven.war.plugin.version}</version>
                         <configuration>
                             <webResources>
                                 <resource>
@@ -214,7 +214,7 @@
                         </configuration>
                     </plugin>
 
-                    <!-- Configures the jetty plugin to use the extra resource 
+                    <!-- Configures the jetty plugin to use the extra resource
                         folder -->
                     <plugin>
                         <groupId>org.eclipse.jetty</groupId>

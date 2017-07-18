@@ -15,11 +15,11 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "2.0.0",
-    "paper-input": "2.0.0",
-    "paper-fab": "2.0.0",
-    "iron-icons": "2.0.0",
-    "paper-checkbox": "2.0.0",
-    "paper-item": "2.0.0"
+    "polymer": "~2.0.2",
+    "paper-input": "~2.0.1",
+    "paper-fab": "~2.0.0",
+    "iron-icons": "~2.0.1",
+    "paper-checkbox": "~2.0.1",
+    "paper-item": "~2.0.0"
   }
 }
