@@ -1,0 +1,42 @@
+<!--
+  ~ Copyright 2000-2017 Vaadin Ltd.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  ~ use this file except in compliance with the License. You may obtain a copy of
+  ~ the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing permissions and limitations under
+  ~ the License.
+  -->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+<dom-module id="sign-in-form">
+    <template>
+        <div style="width: 200px;">
+            <label for="name">Enter your name:</label><paper-input id="name" value="{{name}}"></paper-input>
+            <label for="ssd">Enter your SSD:</label><paper-input id="ssd" value="{{ssd}}"></paper-input>
+            <br>
+            <label>Birth date:</label>
+            <label for="day">Enter your birthday:</label><paper-input id="day" value="{{birthDate.day}}"></paper-input>
+            <label for="month">Enter the month of your birthday:</label><paper-input id="month" value="{{birthDate.month}}"></paper-input>
+            <label for="year">Enter the year of your birthday:</label><paper-input id="year" value="{{birthDate.year}}"></paper-input>
+            <button on-click="signIn" id="register">Register</button>
+            <label id="reg-msg">[[registrationMessage]]</label>
+        </div>
+    </template>
+    <script>
+        class SignInForm extends Polymer.Element {
+            static get is() {
+                return 'sign-in-form'
+            }
+        }
+        customElements.define(SignInForm.is, SignInForm);
+    </script>
+</dom-module>
