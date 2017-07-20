@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=flow-tests/*/error-screenshots/*
+FILES=./*/error-screenshots/*
 for file in $FILES
 do
   echo $file
