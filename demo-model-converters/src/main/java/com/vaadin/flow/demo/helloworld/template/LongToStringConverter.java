@@ -28,24 +28,14 @@ import com.vaadin.flow.template.model.ModelConverter;
 public class LongToStringConverter implements ModelConverter<Long, String> {
 
     @Override
-    public Class<Long> getApplicationType() {
-        return Long.class;
-    }
-
-    @Override
-    public Class<String> getModelType() {
-        return String.class;
-    }
-
-    @Override
-    public String toModel(Long modelValue) {
+    public String toPresentation(Long modelValue) {
         return Optional.ofNullable(modelValue).map(Object::toString)
                 .orElse(null);
     }
 
     @Override
-    public Long toApplication(String applicationValue) {
-        return Optional.ofNullable(applicationValue).map(Long::parseLong)
+    public Long toModel(String presentationValue) {
+        return Optional.ofNullable(presentationValue).map(Long::parseLong)
                 .orElse(null);
 
     }
