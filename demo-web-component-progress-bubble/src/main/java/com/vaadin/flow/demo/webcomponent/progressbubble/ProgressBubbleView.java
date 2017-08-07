@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.flow.html.Button;
+import com.vaadin.flow.html.NativeButton;
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
@@ -54,13 +54,13 @@ public class ProgressBubbleView extends Div implements View {
         bubble.getElement().getStyle().set(BACKGROUND, "purple");
         bubbles.add(bubble);
 
-        Button makeProgress = new Button("Make progress");
+        NativeButton makeProgress = new NativeButton("Make progress");
         makeProgress.setId("makeProgress");
         makeProgress.addClickListener(e -> {
             bubbles.forEach(pb -> pb.setValue(pb.getValue() + 5));
         });
 
-        Button increaseMax = new Button("Increase max value");
+        NativeButton increaseMax = new NativeButton("Increase max value");
         increaseMax.setId("increaseMax");
         increaseMax.addClickListener(e -> {
             bubbles.forEach(pb -> pb.setMax(pb.getMax() * 2));
