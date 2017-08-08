@@ -4,6 +4,9 @@ jdk: oraclejdk8
 sudo: required
 dist: trusty
 
+addons:
+  chrome: stable
+
 services:
   - docker
 
@@ -29,7 +32,6 @@ branches:
 cache:
   directories:
   - $HOME/.m2
-  - demo-hello-world-template/driver
 before_cache:
   # remove all build artifacts
   - rm -rf $HOME/.m2/repository/com/vaadin/flow
