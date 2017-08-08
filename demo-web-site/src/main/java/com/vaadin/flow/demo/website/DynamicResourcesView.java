@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.html.Button;
+import com.vaadin.flow.html.NativeButton;
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.html.Input;
 import com.vaadin.server.StreamResource;
@@ -58,7 +58,7 @@ public final class DynamicResourcesView extends SimpleView {
     }
 
     private void createGenerateImageButton() {
-        Button button = new Button("Generate image");
+        NativeButton button = new NativeButton("Generate image");
 
         button.addClickListener(event -> {
             image.setAttribute("data", createResource());
@@ -68,7 +68,7 @@ public final class DynamicResourcesView extends SimpleView {
     }
 
     private void createImageOpener() {
-        Button button = new Button("Open image in a new window");
+        NativeButton button = new NativeButton("Open image in a new window");
         add(button);
 
         // Delay until element is attached so we can find UI and Page

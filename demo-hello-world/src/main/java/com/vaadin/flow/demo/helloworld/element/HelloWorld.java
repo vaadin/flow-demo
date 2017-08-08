@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.helloworld.element;
 
-import com.vaadin.flow.html.Button;
+import com.vaadin.flow.html.NativeButton;
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.html.Input;
 import com.vaadin.flow.router.View;
@@ -33,7 +33,7 @@ public class HelloWorld extends Div implements View {
         textInput.setId("inputId");
         textInput.setPlaceholder("Enter your name");
 
-        Button button = new Button("Say hello");
+        NativeButton button = new NativeButton("Say hello");
         button.addClickListener(e -> {
             Div hello = new Div();
             hello.setText("Hello " + textInput.getValue());
