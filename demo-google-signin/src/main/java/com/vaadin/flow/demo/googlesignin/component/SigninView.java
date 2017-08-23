@@ -46,7 +46,7 @@ public class SigninView extends PolymerTemplate<SigninModel> {
     public interface SigninModel extends TemplateModel {
         /**
          * Sets the Google Auth Client ID at the google-signin webcomponent.
-         * 
+         *
          * @param clientId
          *            The auth client id.
          */
@@ -96,7 +96,7 @@ public class SigninView extends PolymerTemplate<SigninModel> {
          * https://developers.google.com/identity/protocols/OAuth2UserAgent
          */
         String googleAuthClientId = attachEvent.getSession().getConfiguration()
-                .getApplicationOrSystemProperty("google.auth.client.id", null);
+                .getStringProperty("google.auth.client.id", null);
 
         if (googleAuthClientId == null) {
             showClientIdError();
