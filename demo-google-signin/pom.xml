@@ -64,32 +64,18 @@
                 <version>${frontend.maven.plugin.version}</version>
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
-                    <yarnVersion>${yarn.version}</yarnVersion>
-                    <workingDirectory>${frontend.working.directory}</workingDirectory>
+                    <npmVersion>${npm.version}</npmVersion>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install node and bower</id>
+                        <id>install-node-and-npm</id>
                         <goals>
-                            <goal>install-node-and-yarn</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>add bower</id>
-                        <goals>
-                            <goal>yarn</goal>
+                            <goal>install-node-and-npm</goal>
+                            <goal>npm</goal> <!-- runs 'install' by default -->
+                            <goal>bower</goal> <!-- runs 'install' by default -->
                         </goals>
                         <configuration>
-                            <arguments>add bower</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>yarn install</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>${yarn.build.goal}</arguments>
+                            <workingDirectory>${frontend.working.directory}</workingDirectory>
                         </configuration>
                     </execution>
                 </executions>
