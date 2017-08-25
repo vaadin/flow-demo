@@ -1,16 +1,25 @@
 <html>
 <head>
 <style>
-img {
+.logo {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+}
+.logo img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
 }
 </style>
 
 <body>
-<div style="height: 100%; width: 100%; position: absolute; z-index: -1; top: 0; left: 0">
-    <img src="bird.png" style="height: 100%"/>
+<div class="logo">
+    <img src="flow-logo.svg"/>
 </div>
 <%@page import="java.io.File" %>
 <%@page import="java.io.FileInputStream" %>

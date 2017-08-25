@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="382" height="374" viewBox="0 0 382 374">
+  <title>Untitled-1</title>
+  <g>
+    <path d="M340.85,35A152,152,0,1,1,36.77,35" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="12"/>
+    <path d="M38.23,339a152,152,0,1,1,304.08,0" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="12"/>
+    <circle cx="342.31" cy="339.04" r="29.94" fill="#ff3a49"/>
+    <circle cx="39.69" cy="340.5" r="29.94" fill="#ff3a49"/>
+    <circle cx="342.31" cy="33.5" r="29.94" fill="#00b4f0"/>
+    <circle cx="39.69" cy="34.96" r="29.94" fill="#00b4f0"/>
+  </g>
+</svg>
