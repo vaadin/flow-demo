@@ -93,7 +93,8 @@ public abstract class MenuView extends Div implements View, HasChildView {
         for (Class<? extends View> menuLinkView : menuLinkViewParameters
                 .keySet()) {
             Stream<Class<? extends HasChildView>> menuLinkViewChain = Util
-                    .getRouterConfiguration().getParentViews(menuLinkView);
+                    .getRouterConfiguration()
+                    .getParentViewsAscending(menuLinkView);
 
             if (menuLinkViewChain.anyMatch(v -> v == targetView)) {
                 // Could cache for faster future lookups, even globally for all
