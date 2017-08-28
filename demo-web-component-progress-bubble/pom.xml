@@ -11,10 +11,6 @@
     <artifactId>demo-web-component-progress-bubble</artifactId>
     <packaging>war</packaging>
 
-    <properties>
-        <frontend.working.directory>src/main/webapp</frontend.working.directory>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>

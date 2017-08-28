@@ -41,7 +41,7 @@ import com.vaadin.flow.router.View;
  * The one and only view in the jQuery demo application.
  */
 @Title("Reports overview")
-@StyleSheet("css/site.css")
+@StyleSheet("frontend://css/site.css")
 public class ReportsOverview extends Div implements View {
 
     private static final String ALL_VERSIONS_KEY = "all-versions";

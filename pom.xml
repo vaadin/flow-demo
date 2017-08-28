@@ -59,7 +59,8 @@
         <!-- Not the newest version because of https://www.polymer-project.org/2.0/docs/tools/node-support -->
         <node.version>v7.10.1</node.version>
         <npm.version>5.3.0</npm.version>
-        <frontend.working.directory>src/main/webapp</frontend.working.directory>
+        <frontend.working.directory>src/main/frontend</frontend.working.directory>
+        <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
     </properties>
     <repositories>
         <repository>
