@@ -1,0 +1,17 @@
+{
+  "name": "demo-web-component-progress-bubble",
+  "version": "1.0.0",
+  "description": "This file exists only to define the Bower version",
+  "main": "",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "gulp": "~3.9.1",
+    "polymer-cli": "~1.5.2"
+  },
+  "scripts": {
+    "prodMode": "bower install && polymer build",
+    "devMode": "bower install"
+  },
+  "author": "",
+  "license": "Apache-2.0"
+}
