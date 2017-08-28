@@ -26,4 +26,4 @@ bower_components
 node
 node_modules
 etc
-yarn.lock
+build
