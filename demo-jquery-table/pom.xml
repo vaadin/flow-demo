@@ -48,41 +48,34 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>frontend/bower_components/jquery/dist</directory>
-                            <include>**/*.min.*</include>
-                        </resource>
-                        <resource>
-                            <directory>frontend/bower_components/tablesorter/dist</directory>
-                            <include>**/*.min.*</include>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>${frontend.maven.plugin.version}</version>
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
                     <npmVersion>${npm.version}</npmVersion>
-                    <workingDirectory>frontend</workingDirectory>
+                    <workingDirectory>${frontend.working.directory}</workingDirectory>
                 </configuration>
                 <executions>
                     <execution>
                         <id>install-node-and-npm</id>
                         <goals>
                             <goal>install-node-and-npm</goal>
-                            <goal>npm</goal> <!-- runs 'install' by default -->
-                            <goal>bower</goal> <!-- runs 'install' by default -->
+                            <goal>npm</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>npm run</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>${npm.build.goal}</arguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -92,16 +85,110 @@
                         <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
                         <containerIncludeJarPattern>^$</containerIncludeJarPattern>
                         <resourceBases>
-                            <!-- Make the frontend directory containing the
-                                Bower files available for jetty:run when run from command line (Eclipse profile
-                                handles Eclipse) -->
-                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
-                            <resourceBase>${project.basedir}/frontend/bower_components/jquery/dist</resourceBase>
-                            <resourceBase>${project.basedir}/frontend/bower_components/tablesorter/dist</resourceBase>
+                            <resourceBase>${jetty.extra.resource.base}</resourceBase>
                         </resourceBases>
                     </webAppConfig>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>productionMode</id>
+            <activation>
+                <property>
+                    <name>vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <npm.build.goal>run prodMode</npm.build.goal>
+                <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>flow-server-production-mode</artifactId>
+                    <version>${flow.version}</version>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}/build</directory>
+                                    <targetPath>${vaadin.frontend.path}</targetPath>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.0.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
+                                    <overwrite>true</overwrite>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/${frontend.working.directory}/build</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>debugMode</id>
+            <activation>
+                <property>
+                    <name>!vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <npm.build.goal>run devMode</npm.build.goal>
+                <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}</jetty.extra.resource.base>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${frontend.working.directory}</directory>
+                                    <excludes>
+                                        <exclude>build/**</exclude>
+                                    </excludes>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

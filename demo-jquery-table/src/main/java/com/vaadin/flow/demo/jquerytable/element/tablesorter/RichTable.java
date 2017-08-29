@@ -38,7 +38,7 @@ import com.vaadin.ui.HasStyle;
 /**
  * Table component based on the jQuery Tablesorter plugin, available at
  * https://mottie.github.io/tablesorter/docs/
- * 
+ *
  * This implementation uses the Bootstrap 4 theme, and the following widgets:
  * <ul>
  * <li>group</li>
@@ -46,17 +46,17 @@ import com.vaadin.ui.HasStyle;
  * <li>columns</li>
  * <li>zebra</li>
  * </ul>
- * 
+ *
  * @param <T>
  *            the type of the model object used with this table
- * 
+ *
  */
-@JavaScript("context://jquery.min.js")
-@JavaScript("context://js/jquery.tablesorter.min.js")
-@JavaScript("context://js/jquery.tablesorter.widgets.min.js")
-@JavaScript("context://js/widgets/widget-grouping.min.js")
-@StyleSheet("context://css/theme.bootstrap_4.min.css")
-@StyleSheet("context://css/widget.grouping.min.css")
+@JavaScript("frontend://bower_components/jquery/dist/jquery.min.js")
+@JavaScript("frontend://bower_components/tablesorter/dist/js/jquery.tablesorter.min.js")
+@JavaScript("frontend://bower_components/tablesorter/dist/js/jquery.tablesorter.widgets.min.js")
+@JavaScript("frontend://bower_components/tablesorter/dist/js/widgets/widget-grouping.min.js")
+@StyleSheet("frontend://bower_components/tablesorter/dist/css/theme.bootstrap_4.min.css")
+@StyleSheet("frontend://bower_components/tablesorter/dist/css/widget.grouping.min.css")
 @Tag("table")
 public class RichTable<T extends Serializable> extends Component
         implements ClickNotifier, HasStyle {
@@ -78,7 +78,7 @@ public class RichTable<T extends Serializable> extends Component
      * unique identifier for a given object. This identifier should be unique,
      * not <code>null</code> and immutable among all objects provided by the
      * same RichTable.
-     * 
+     *
      * @param idFunction
      *            The function that can return the unique ID of a given object
      *            from the model. Can not be <code>null</code>.
@@ -93,11 +93,11 @@ public class RichTable<T extends Serializable> extends Component
     /**
      * Set the columns of the table. Each column is responsible to render its
      * values and provide its configuration options.
-     * 
+     *
      * @param columns
      *            The list of columns to render in the table. Must be not
      *            <code>null</code>.
-     * 
+     *
      * @see RichColumn
      */
     public void setColumns(List<RichColumn<T>> columns) {
@@ -124,7 +124,7 @@ public class RichTable<T extends Serializable> extends Component
     /**
      * Sets the data objects to be visible in the component. If the component is
      * already attached to the document, the table is refreshed.
-     * 
+     *
      * @param data
      *            The model objects.
      */
@@ -136,7 +136,7 @@ public class RichTable<T extends Serializable> extends Component
     /**
      * Gets the data objects currently displayed by the table. The returned list
      * can not be modified.
-     * 
+     *
      * @return The model objects.
      */
     public List<T> getData() {
@@ -211,7 +211,7 @@ public class RichTable<T extends Serializable> extends Component
 
     /**
      * Gets the selected object by the client, if any.
-     * 
+     *
      * @return The object referenced by the table row clicked on the client.
      */
     public Optional<T> getSelectedObject() {
