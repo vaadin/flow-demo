@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-scp ./demo-server/bird.png flow:~/tomcat/webapps/ROOT/bird.png
+scp ./demo-server/flow-logo.svg flow:~/tomcat/webapps/ROOT/flow-logo.svg
 scp ./demo-server/index.jsp flow:~/tomcat/webapps/ROOT/index.jsp

@@ -86,6 +86,11 @@ if (files != null) {
     }
 }
 
+out.println("<b>Flow documentation</b>");
+out.println("<ul>");
+out.println("<li><a href='https://github.com/vaadin/flow/blob/master/flow-documentation/Overview.asciidoc'>Current documentation</a></li>");
+out.println("</ul>");
+
 List<String> sortedStableVersions = new ArrayList<>(stableVersions.keySet());
 if (!sortedStableVersions.isEmpty()) {
   Collections.sort(sortedStableVersions);
