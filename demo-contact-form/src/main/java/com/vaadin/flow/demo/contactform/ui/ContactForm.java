@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.contactform.ui;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ import com.vaadin.ui.DatePicker;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 
 /**
  * Contact editor form.
@@ -60,6 +62,7 @@ public class ContactForm extends Composite<FormLayout> implements View {
     private Label infoLabel = new Label();
 
     public ContactForm() {
+        UI.getCurrent().setLocale(Locale.ENGLISH);
         setId("contactform");
 
         HorizontalLayout layout = new HorizontalLayout();
@@ -76,6 +79,15 @@ public class ContactForm extends Composite<FormLayout> implements View {
 
         getContent().add(infoLabel);
 
+        firstName.setId("first-name");
+        lastName.setId("last-name");
+        phone.setId("phone");
+        email.setId("email");
+        birthDate.setId("birth-date");
+        doNotCall.setId("do-not-call");
+
+        save.setId("save");
+        reset.setId("reset");
         configureComponents();
     }
 
