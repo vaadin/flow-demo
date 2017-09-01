@@ -29,6 +29,7 @@
         <module>demo-date-field</module>
         <module>demo-todo-template</module>
         <module>demo-google-signin</module>
+        <module>demo-contact-form</module>
         <!-- have it as the last module-->
         <module>demo-validator</module>
     </modules>
@@ -114,6 +115,11 @@
                 <artifactId>demo-test-util</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>flow-components</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
