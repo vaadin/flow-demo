@@ -61,6 +61,9 @@ public class ContactForm extends Composite<FormLayout> implements View {
 
     private Label infoLabel = new Label();
 
+    /**
+     * Creates an instance of contact form view.
+     */
     public ContactForm() {
         UI.getCurrent().setLocale(Locale.ENGLISH);
         setId("contactform");
@@ -128,11 +131,10 @@ public class ContactForm extends Composite<FormLayout> implements View {
         reset.addClickListener(this::reset);
     }
 
-    public void save(Button.ClickEvent<Button> event) {
+    private void save(Button.ClickEvent<Button> event) {
         if (binder.writeBeanIfValid(contactBeingEdited)) {
             infoLabel.setText("Saved bean values :" + contactBeingEdited);
-        }
-        else {
+        } else {
             BinderValidationStatus<Contact> validate = binder.validate();
             infoLabel.setText(
                     "There are errors :" + getValidationErrors(
@@ -148,7 +150,7 @@ public class ContactForm extends Composite<FormLayout> implements View {
                 .collect(Collectors.joining(", "));
     }
 
-    public void reset(Button.ClickEvent<Button> event) {
+    private void reset(Button.ClickEvent<Button> event) {
         // clear fields via setting <code>null</code>
         binder.readBean(null);
         infoLabel.setText("");

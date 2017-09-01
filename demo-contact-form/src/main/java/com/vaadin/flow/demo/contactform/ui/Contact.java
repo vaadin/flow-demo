@@ -20,8 +20,6 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 public class Contact implements Serializable, Cloneable {
 
     private String firstName = "";
@@ -86,17 +84,6 @@ public class Contact implements Serializable, Cloneable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    @Override
-    public Contact clone() throws CloneNotSupportedException {
-        try {
-            Contact contact = (Contact) BeanUtils.cloneBean(this);
-            contact.createdTimestamp = createdTimestamp;
-            return contact;
-        } catch (Exception ex) {
-            throw new CloneNotSupportedException();
-        }
     }
 
     @Override
