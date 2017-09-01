@@ -1,8 +1,6 @@
 {
-  "name": "demo-addressbook-polymer",
-  "homepage": "https://github.com/vaadin/flow-demo",
-  "authors": [
-  ],
+  "name": "demo-flow-components",
+  "authors": [],
   "description": "",
   "main": "",
   "license": "Apache2",
@@ -15,6 +13,18 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~2.0.2"
+    "polymer": "~2.0.2",
+    "vaadin-text-field": "~1.1.0-alpha2",
+    "vaadin-button": "~1.0.0",
+    "vaadin-checkbox": "~1.0.0-alpha1",
+    "vaadin-form-layout": "~1.0.0",
+    "vaadin-date-picker": "~2.0.0"
+  },
+  "resolutions": {
+    "iron-flex-layout": "1 - 2",
+    "iron-meta": "1 - 2",
+    "iron-media-query": "1 - 2",
+    "iron-resizable-behavior": "1 - 2",
+    "iron-scroll-target-behavior": "1 - 2"
   }
 }

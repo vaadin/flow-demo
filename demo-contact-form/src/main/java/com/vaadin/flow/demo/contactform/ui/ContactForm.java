@@ -15,9 +15,26 @@
  */
 package com.vaadin.flow.demo.contactform.ui;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.vaadin.annotations.StyleSheet;
+import com.vaadin.data.Binder;
+import com.vaadin.data.Binder.Binding;
+import com.vaadin.data.BinderValidationStatus;
+import com.vaadin.data.BindingValidationStatus;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.flow.html.Label;
 import com.vaadin.flow.router.View;
+import com.vaadin.server.SerializablePredicate;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Checkbox;
 import com.vaadin.ui.Composite;
+import com.vaadin.ui.DatePicker;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.TextField;
 
 /**
  * Contact editor form.
@@ -25,6 +42,104 @@ import com.vaadin.ui.FormLayout;
  * @author Vaadin Ltd
  *
  */
+@StyleSheet("frontend://src/style.css")
 public class ContactForm extends Composite<FormLayout> implements View {
 
+    private TextField firstName = new TextField("First name");
+    private TextField lastName = new TextField("Last name");
+    private TextField phone = new TextField("Phone");
+    private TextField email = new TextField("Email");
+    private DatePicker birthDate = new DatePicker();
+    private Checkbox doNotCall = new Checkbox("Do not call");
+    private Button save = new Button("Save");
+    private Button reset = new Button("Reset");
+
+    private final Binder<Contact> binder = new Binder<>();
+    private Contact contactBeingEdited = new Contact();
+
+    private Label infoLabel = new Label();
+
+    public ContactForm() {
+        setId("contactform");
+
+        HorizontalLayout layout = new HorizontalLayout();
+        layout.setWidth("100%");
+        layout.getClassNames().add("buttons");
+        layout.add(save, reset);
+        getContent().add(layout);
+
+        birthDate.setLabel("Birth date");
+        getContent().add(firstName, lastName, phone, email, birthDate,
+                doNotCall);
+
+        infoLabel.setId("info");
+
+        getContent().add(infoLabel);
+
+        configureComponents();
+    }
+
+    @Override
+    protected FormLayout initContent() {
+        return new FormLayout();
+    }
+
+    private void configureComponents() {
+        final SerializablePredicate<String> phoneOrEmailPredicate = value -> !phone
+                .getValue().trim().isEmpty()
+                || !email.getValue().trim().isEmpty();
+
+        Binding<Contact, String> emailBinding = binder.forField(email)
+                .withValidator(phoneOrEmailPredicate,
+                        "Both phone and email cannot be empty")
+                .withValidator(new EmailValidator("Incorrect email address"))
+                .bind(Contact::getEmail, Contact::setEmail);
+
+        Binding<Contact, String> phoneBinding = binder.forField(phone)
+                .withValidator(phoneOrEmailPredicate,
+                        "Both phone and email cannot be empty")
+                .bind(Contact::getPhone, Contact::setPhone);
+
+        // Trigger cross-field validation when the other field is changed
+        email.addValueChangeListener(event -> phoneBinding.validate());
+        phone.addValueChangeListener(event -> emailBinding.validate());
+
+        firstName.setRequiredIndicatorVisible(true);
+        lastName.setRequiredIndicatorVisible(true);
+
+        binder.bind(firstName, Contact::getFirstName, Contact::setFirstName);
+        binder.bind(lastName, Contact::getLastName, Contact::setLastName);
+        binder.bind(doNotCall, Contact::isDoNotCall, Contact::setDoNotCall);
+        binder.bind(birthDate, Contact::getBirthDate, Contact::setBirthDate);
+
+        save.addClickListener(this::save);
+        reset.addClickListener(this::reset);
+    }
+
+    public void save(Button.ClickEvent<Button> event) {
+        if (binder.writeBeanIfValid(contactBeingEdited)) {
+            infoLabel.setText("Saved bean values :" + contactBeingEdited);
+        }
+        else {
+            BinderValidationStatus<Contact> validate = binder.validate();
+            infoLabel.setText(
+                    "There are errors :" + getValidationErrors(
+                            validate.getFieldValidationStatuses()));
+        }
+    }
+
+    private String getValidationErrors(
+            List<BindingValidationStatus<?>> statuses) {
+        return statuses.stream().filter(BindingValidationStatus::isError)
+                .map(BindingValidationStatus::getMessage).map(Optional::get)
+                .distinct()
+                .collect(Collectors.joining(", "));
+    }
+
+    public void reset(Button.ClickEvent<Button> event) {
+        // clear fields via setting <code>null</code>
+        binder.readBean(null);
+        infoLabel.setText("");
+        doNotCall.setValue(false);
+    }
 }
