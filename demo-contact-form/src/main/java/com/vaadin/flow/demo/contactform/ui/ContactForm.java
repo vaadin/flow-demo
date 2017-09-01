@@ -47,19 +47,19 @@ import com.vaadin.ui.UI;
 @StyleSheet("frontend://src/style.css")
 public class ContactForm extends Composite<FormLayout> implements View {
 
-    private TextField firstName = new TextField("First name");
-    private TextField lastName = new TextField("Last name");
-    private TextField phone = new TextField("Phone");
-    private TextField email = new TextField("Email");
-    private DatePicker birthDate = new DatePicker();
-    private Checkbox doNotCall = new Checkbox("Do not call");
-    private Button save = new Button("Save");
-    private Button reset = new Button("Reset");
+    private final TextField firstName = new TextField("First name");
+    private final TextField lastName = new TextField("Last name");
+    private final TextField phone = new TextField("Phone");
+    private final TextField email = new TextField("Email");
+    private final DatePicker birthDate = new DatePicker();
+    private final Checkbox doNotCall = new Checkbox("Do not call");
+    private final Button save = new Button("Save");
+    private final Button reset = new Button("Reset");
 
     private final Binder<Contact> binder = new Binder<>();
-    private Contact contactBeingEdited = new Contact();
+    private final Contact contactBeingEdited = new Contact();
 
-    private Label infoLabel = new Label();
+    private final Label infoLabel = new Label();
 
     /**
      * Creates an instance of contact form view.

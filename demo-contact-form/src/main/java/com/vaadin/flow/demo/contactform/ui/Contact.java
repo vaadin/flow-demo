@@ -17,10 +17,9 @@
 package com.vaadin.flow.demo.contactform.ui;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 
-public class Contact implements Serializable, Cloneable {
+public class Contact implements Serializable {
 
     private String firstName = "";
     private String lastName = "";
@@ -28,15 +27,7 @@ public class Contact implements Serializable, Cloneable {
     private String email = "";
     private LocalDate birthDate;
     private boolean doNotCall;
-    private Instant createdTimestamp;
 
-    public Contact() {
-        createdTimestamp = Instant.now();
-    }
-
-    public long getCreatedTimestamp() {
-        return createdTimestamp.toEpochMilli();
-    }
 
     public boolean isDoNotCall() {
         return doNotCall;
@@ -90,8 +81,8 @@ public class Contact implements Serializable, Cloneable {
     public String toString() {
         return "Contact{ firstName=" + firstName
                 + ", lastName=" + lastName + ", phone=" + phone + ", email="
-                + email + ", birthDate=" + birthDate + ", createdTimestamp="
-                + createdTimestamp + ",doNotCall=" + doNotCall + '}';
+                + email + ", birthDate=" + birthDate + ",doNotCall=" + doNotCall
+                + '}';
     }
 
 }
