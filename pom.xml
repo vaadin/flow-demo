@@ -30,6 +30,7 @@
         <module>demo-todo-template</module>
         <module>demo-google-signin</module>
         <module>demo-contact-form</module>
+        <module>demo-registration-form</module>
         <!-- have it as the last module-->
         <module>demo-validator</module>
     </modules>
