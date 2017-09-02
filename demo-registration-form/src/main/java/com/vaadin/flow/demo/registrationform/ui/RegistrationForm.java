@@ -194,6 +194,7 @@ implements View {
         dialog.setEntryAnimation("scale-up-animation");
         dialog.setExitAnimation("scale-down-animation");
         dialog.setWithBackdrop(true);
+        getUI().get().add(dialog);
         dialog.open();
     }
 

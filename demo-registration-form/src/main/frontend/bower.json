@@ -13,6 +13,10 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~2.0.2"
+    "polymer": "~2.0.2",
+    "vaadin-text-field": "~1.1.0-alpha2",
+    "vaadin-button": "~1.0.0",
+    "paper-dialog": "~2.0.0",
+    "iron-flex-layout": "~2.0.0"
   }
 }
