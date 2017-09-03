@@ -70,7 +70,7 @@ implements View {
         .bind(Person::getFullName, Person::setFullName);
 
         RegistrationTextField phoneOrEmailField = new RegistrationTextField();
-        phoneOrEmailField.setId("pnone-or-email");
+        phoneOrEmailField.setId("phone-or-email");
         addToLayout(phoneOrEmailField, "Phone or Email");
         binder.forField(phoneOrEmailField)
         .withValidator(new EmailOrPhoneValidator())
@@ -207,11 +207,12 @@ implements View {
     private GeneratedPaperDialog<?> createDialog(String title, String text,
             boolean error) {
         GeneratedPaperDialog dialog = new GeneratedPaperDialog();
+        dialog.setId("notification");
         dialog.add(new H2(title));
         HtmlComponent paragraph = new HtmlComponent(Tag.P);
         paragraph.getElement().setText(text);
         if (error) {
-            paragraph.getClassNames().add("error");
+            paragraph.setClassName("error");
         }
         dialog.add(paragraph);
         return dialog;
