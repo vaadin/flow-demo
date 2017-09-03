@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
+import java.util.Optional;
+
 import com.vaadin.ui.HasSize;
 
 /**
@@ -29,4 +31,5 @@ public interface AbstractTextField<T> extends HasSize {
 
     Object getData();
 
+    Optional<String> getId();
 }

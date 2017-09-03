@@ -60,6 +60,7 @@ implements View {
 
     public RegistrationForm() {
         RegistrationTextField fullNameField = new RegistrationTextField();
+        fullNameField.setId("full-name");
         addToLayout(fullNameField, "Full name");
 
         binder.forField(fullNameField).asRequired("Full name may not be empty")
@@ -69,6 +70,7 @@ implements View {
         .bind(Person::getFullName, Person::setFullName);
 
         RegistrationTextField phoneOrEmailField = new RegistrationTextField();
+        phoneOrEmailField.setId("pnone-or-email");
         addToLayout(phoneOrEmailField, "Phone or Email");
         binder.forField(phoneOrEmailField)
         .withValidator(new EmailOrPhoneValidator())
@@ -78,6 +80,7 @@ implements View {
         .bind(Person::getEmailOrPhone, Person::setEmailOrPhone);
 
         RegistrationPasswordField passwordField = new RegistrationPasswordField();
+        passwordField.setId("pwd");
         addToLayout(passwordField, "Password");
         passwordBinding = binder.forField(passwordField)
                 .withValidator(new PasswordValidator())
@@ -89,6 +92,7 @@ implements View {
                 event -> confirmPasswordBinding.validate());
 
         RegistrationPasswordField confirmPasswordField = new RegistrationPasswordField();
+        confirmPasswordField.setId("confirm-pwd");
         addToLayout(confirmPasswordField, "Password again");
 
         confirmPasswordBinding = binder.forField(confirmPasswordField)
@@ -111,6 +115,8 @@ implements View {
             String placeHolderText) {
         textField.setPlaceholder(placeHolderText);
         Label statusMessage = new Label();
+        assert textField.getId().isPresent();
+        statusMessage.setId(textField.getId().get() + "-status");
         setVisible(statusMessage, false);
         statusMessage.getClassNames().add("validation-message");
         textField.setData(statusMessage);
@@ -126,6 +132,7 @@ implements View {
         Button button = new Button("Sign Up", event -> save());
         button.getClassNames().add("primary");
         button.setWidth(WIDTH);
+        button.setId("sign-up");
         return button;
     }
 
