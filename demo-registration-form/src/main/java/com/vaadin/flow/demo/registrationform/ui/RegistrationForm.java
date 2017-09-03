@@ -136,16 +136,15 @@ implements View {
         switch (event.getStatus()) {
         case OK:
             statusLabel.setText("");
-            statusLabel.getClassNames().add("ok");
-            ((HasStyle) statusLabel.getParent().get()).getClassNames()
-            .add(VALID);
+            statusLabel.setClassName("ok");
+            statusLabel.removeClassName("error");
+            ((HasStyle) statusLabel.getParent().get()).setClassName(VALID);
             break;
         case ERROR:
-            statusLabel.getClassNames().remove("ok");
-            statusLabel.getClassNames().remove("error");
+            statusLabel.removeClassName("ok");
+            statusLabel.setClassName("error");
             statusLabel.setText(event.getMessage().orElse("Unknown error"));
-            ((HasStyle) statusLabel.getParent().get()).getClassNames()
-            .remove(VALID);
+            ((HasStyle) statusLabel.getParent().get()).removeClassName(VALID);
         default:
             break;
         }
