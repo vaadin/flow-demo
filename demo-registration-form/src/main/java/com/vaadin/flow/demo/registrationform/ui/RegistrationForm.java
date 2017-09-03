@@ -135,7 +135,7 @@ implements View {
         setVisible(statusLabel, !event.getStatus().equals(Status.UNRESOLVED));
         switch (event.getStatus()) {
         case OK:
-            statusLabel.setText("");
+            statusLabel.setText(" ");
             statusLabel.setClassName("ok");
             statusLabel.removeClassName("error");
             ((HasStyle) statusLabel.getParent().get()).setClassName(VALID);
