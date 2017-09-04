@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.demo.contactform;
 
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -91,6 +93,42 @@ public class RegistrationFormIT extends AbstractChromeTest {
         phoneOrEmailInput.clear();
         phoneOrEmailInput.sendKeys("foo@example.com");
         Assert.assertEquals("ok", phoneOrEmailStatus.getAttribute("class"));
-    }
 
+        // fill passwd with bad passwords
+        WebElement pwd = findElement(By.id("pwd"));
+        WebElement pwdInput = getInShadowRoot(pwd,
+                By.id("input"));
+        pwdInput.sendKeys("bar");
+
+        WebElement pwdStatus = findElement(By.id("pwd-status"));
+        Assert.assertEquals("error", pwdStatus.getAttribute("class"));
+
+        // fill passwd with good passwords
+        pwdInput.clear();
+        pwdInput.sendKeys("1a2s3d4f");
+        Assert.assertEquals("ok", pwdStatus.getAttribute("class"));
+
+        // fill passwd confirmation with bad value
+        WebElement pwdConfirm = findElement(By.id("confirm-pwd"));
+        WebElement pwdConfirmInput = getInShadowRoot(pwdConfirm,
+                By.id("input"));
+        pwdConfirmInput.sendKeys("bar");
+
+        WebElement pwdConfirmStatus = findElement(By.id("confirm-pwd-status"));
+        Assert.assertEquals("error", pwdConfirmStatus.getAttribute("class"));
+
+        // fill passwd confirmation with good value
+        pwdConfirmInput.clear();
+        pwdConfirmInput.sendKeys("1a2s3d4f");
+        Assert.assertEquals("ok", pwdConfirmStatus.getAttribute("class"));
+
+        signUp.click();
+
+        Assert.assertTrue(isElementPresent(By.id("notification")));
+        Optional<WebElement> message = findElements(By.tagName("p")).stream()
+                .filter(paragraph -> paragraph.getText().equals(
+                        "Full name 'foo', email or phone 'foo@example.com'"))
+                .findAny();
+        Assert.assertTrue(message.isPresent());
+    }
 }
