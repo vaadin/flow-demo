@@ -47,6 +47,10 @@ import com.vaadin.ui.VerticalLayout;
 public class RegistrationForm extends Composite<VerticalLayout>
 implements View {
 
+    private static final String ERROR = "error";
+
+    private static final String OK = "ok";
+
     private static final String WIDTH = "350px";
 
     private final Binder<Person> binder = new Binder<>();
@@ -145,14 +149,14 @@ implements View {
         setVisible(statusLabel, !event.getStatus().equals(Status.UNRESOLVED));
         switch (event.getStatus()) {
         case OK:
-            statusLabel.setText(" ");
-            statusLabel.setClassName("ok");
-            statusLabel.removeClassName("error");
+            statusLabel.setText("");
+            statusLabel.setClassName(OK);
+            statusLabel.removeClassName(ERROR);
             ((HasStyle) statusLabel.getParent().get()).setClassName(VALID);
             break;
         case ERROR:
-            statusLabel.removeClassName("ok");
-            statusLabel.setClassName("error");
+            statusLabel.removeClassName(OK);
+            statusLabel.setClassName(ERROR);
             statusLabel.setText(event.getMessage().orElse("Unknown error"));
             ((HasStyle) statusLabel.getParent().get()).removeClassName(VALID);
         default:
@@ -215,7 +219,7 @@ implements View {
         HtmlComponent paragraph = new HtmlComponent(Tag.P);
         paragraph.getElement().setText(text);
         if (error) {
-            paragraph.setClassName("error");
+            paragraph.setClassName(ERROR);
         }
         dialog.add(paragraph);
         return dialog;
