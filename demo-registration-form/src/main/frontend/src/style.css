@@ -1,15 +1,15 @@
 .error {
-	color: red;
-	padding-left:25px;
-	margin-left:10px;
-	background-image: url("cross.png");
-	background-repeat: no-repeat;
+    color: red;
+    padding-left: 25px;
+    margin-left: 10px;
+    background-image: url("cross.png");
+    background-repeat: no-repeat;
 }
 
 .ok {
-	background-image: url("check.png");
+    background-image: url("check.png");
     background-repeat: no-repeat;
-    padding-left:25px;
-    margin-left:10px;
-    height:16px;
+    padding-left: 25px;
+    margin-left: 10px;
+    height: 16px;
 }
