@@ -16,6 +16,8 @@
 package com.vaadin.flow.demo.registrationform.ui;
 
 /**
+ * Person bean class.
+ * 
  * @author Vaadin Ltd
  *
  */

@@ -58,6 +58,9 @@ implements View {
 
     private static final String VALID = "valid";
 
+    /**
+     * Creates a new instance of the form.
+     */
     public RegistrationForm() {
         RegistrationTextField fullNameField = new RegistrationTextField();
         fullNameField.setId("full-name");

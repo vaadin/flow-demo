@@ -20,11 +20,16 @@ import com.vaadin.data.ValueContext;
 import com.vaadin.data.validator.StringLengthValidator;
 
 /**
+ * Custom password validator class.
+ *
  * @author Vaadin Ltd
  *
  */
 public class PasswordValidator extends StringLengthValidator {
 
+    /**
+     * Creates a new instance.
+     */
     public PasswordValidator() {
         super("", 6, Integer.MAX_VALUE);
     }

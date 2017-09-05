@@ -20,16 +20,47 @@ import java.util.Optional;
 import com.vaadin.ui.HasSize;
 
 /**
+ * Abstract component with common text field functionality.
+ *
+ * @param <T>
+ *            the Flow text field component type
+ *
  * @author Vaadin Ltd
  *
  */
 public interface AbstractTextField<T> extends HasSize {
 
-    T setPlaceholder(java.lang.String placeholder);
+    /**
+     * A hint to the user of what can be entered in the control.
+     *
+     * @param placeholder
+     *            the String value to set
+     * @return this instance, for method chaining
+     */
+    T setPlaceholder(String placeholder);
 
+    /**
+     * Sets an arbitrary data into the instance.
+     *
+     * @see #getData()
+     *
+     * @param object
+     *            a data to set
+     */
     void setData(Object object);
 
+    /**
+     * Gets the data set via {@link #setData(Object)}.
+     *
+     * @see #setData(Object)
+     * @return the stored data
+     */
     Object getData();
 
+    /**
+     * Gets the id of the component.
+     *
+     * @return the element id.
+     */
     Optional<String> getId();
 }

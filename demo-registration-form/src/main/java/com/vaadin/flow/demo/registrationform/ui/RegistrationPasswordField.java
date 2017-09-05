@@ -18,6 +18,8 @@ package com.vaadin.flow.demo.registrationform.ui;
 import com.vaadin.ui.PasswordField;
 
 /**
+ * Password field component extension.
+ *
  * @author Vaadin Ltd
  *
  */
