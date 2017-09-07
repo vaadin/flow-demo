@@ -15,16 +15,12 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import com.vaadin.annotations.AnnotationReader;
-import com.vaadin.flow.router.ImmutableRouterConfiguration;
-import com.vaadin.flow.router.Router;
-import com.vaadin.flow.router.View;
-import com.vaadin.server.VaadinService;
+import com.vaadin.annotations.Route;
+import com.vaadin.annotations.Title;
+import com.vaadin.ui.Component;
 
 /**
  * Generic helpers for the demo.
@@ -35,78 +31,43 @@ import com.vaadin.server.VaadinService;
 public interface Util {
 
     /**
-     * Gets the active router.
-     *
-     * @return the active router
-     */
-    static Router getRouter() {
-        return VaadinService.getCurrentRequest().getService().getRouter();
-    }
-
-    /**
-     * Gets the active router configuration.
-     *
-     * @return the active router configuration
-     */
-    static ImmutableRouterConfiguration getRouterConfiguration() {
-        return getRouter().getConfiguration();
-    }
-
-    /**
      * Gets the name of the view.
      * <p>
      * This utility method exists so we can get the title based on only the view
      * class, for the menu. This works as we do not have any dynamic view names
      * in this site.
      *
-     * @param viewClass
-     *            the view class
-     * @return the view name
+     * @param navigationTarget
+     *            the navigation target class
+     * @return the target's name
      */
-    static String getViewName(Class<? extends View> viewClass) {
-        Optional<String> title = AnnotationReader.getPageTitle(viewClass);
+    static String getNavigationTargetName(
+            Class<? extends Component> navigationTarget) {
+        Optional<String> title = AnnotationReader
+                .getAnnotationFor(navigationTarget, Title.class)
+                .map(Title::value);
         if (title.isPresent()) {
             return title.get();
         } else {
-            return viewClass.getSimpleName().replace("View", "");
+            return navigationTarget.getSimpleName();
         }
     }
 
     /**
-     * Returns a path you can use to navigate to the given view.
+     * Gets the path this navigation target class can be found in.
      *
-     * @param childViewClass
-     *            the view to navigate to
-     * @return a path to the given view
+     * @param navigationTarget
+     *            the navigation target class
+     * @return the target's path
      */
-    static Optional<String> getNavigablePath(
-            Class<? extends View> childViewClass) {
-        return getNavigablePath(childViewClass, Collections.emptyMap());
+    static String getNavigationTargetPath(
+            Class<? extends Component> navigationTarget) {
+        Optional<String> title = AnnotationReader
+                .getAnnotationFor(navigationTarget, Route.class)
+                .map(Route::value);
+        return title.orElseThrow(() -> new IllegalArgumentException(String
+                .format("Attempted to get navigation target path for class '%s' "
+                        + "which doesn't hava a valid @Route annotation.",
+                        navigationTarget.getName())));
     }
-
-    /**
-     * Returns a path you can use to navigate to the given view, using the given
-     * parameters.
-     *
-     * @param childViewClass
-     *            the view to navigate to
-     * @param parameters
-     *            the parameters to use
-     * @return a path to the given view
-     */
-    static Optional<String> getNavigablePath(
-            Class<? extends View> childViewClass,
-            Map<String, String> parameters) {
-        Optional<String> path = Util.getRouterConfiguration()
-                .getRoute(childViewClass);
-        if (path.isPresent() && parameters != null) {
-            String url = path.get();
-            for (Entry<String, String> entry : parameters.entrySet()) {
-                url = url.replace("{" + entry.getKey() + "}", entry.getValue());
-            }
-            path = Optional.of(url);
-        }
-        return path;
-    }
-
 }

@@ -32,7 +32,8 @@ public abstract class DummyView extends Div {
     public DummyView() {
         setClassName("content");
 
-        setText("This is the " + Util.getViewName(getClass()) + " view");
+        setText("This is the " + Util.getNavigationTargetName(getClass())
+                + " view");
     }
 
 }

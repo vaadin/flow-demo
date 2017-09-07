@@ -13,29 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.staticmenu.framework;
+package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.flow.demo.staticmenu.SimpleMenuView;
-import com.vaadin.flow.demo.staticmenu.download.DocsView;
+import javax.servlet.annotation.WebServlet;
+
+import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.VaadinServlet;
 
 /**
- * The Framework menu.
- *
- * @author Vaadin
- * @since
+ * The main servlet for the application.
  */
-public class FrameworkMenuView extends SimpleMenuView {
-
-    /**
-     * Creates the view.
-     */
-    public FrameworkMenuView() {
-        super();
-
-        getMenu().setClassName("submenu");
-
-        addItem("Tutorial", TutorialView.class);
-        addItem("Docs", DocsView.class);
-    }
-
+@WebServlet(urlPatterns = "/*", name = "DemoSiteServlet", asyncSupported = true)
+@VaadinServletConfiguration(usingNewRouting = true, productionMode = false)
+public class DemoSiteServlet extends VaadinServlet {
 }

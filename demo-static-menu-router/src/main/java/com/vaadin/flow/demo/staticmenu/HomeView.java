@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.staticmenu;
 
 import com.vaadin.annotations.Route;
+import com.vaadin.annotations.Title;
 
 /**
  * The static home page.
@@ -23,7 +24,8 @@ import com.vaadin.annotations.Route;
  * @since
  * @author Vaadin Ltd
  */
-@Route("")
+@Route("home")
+@Title("Home")
 public class HomeView extends DummyView {
     /**
      * Creates the view.
