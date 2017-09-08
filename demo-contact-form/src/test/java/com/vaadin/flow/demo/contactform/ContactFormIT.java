@@ -19,13 +19,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import com.vaadin.testbench.By;
 
 public class ContactFormIT extends AbstractChromeTest {
-
     @Test
     public void validateContactForm() {
         open();
@@ -40,25 +38,13 @@ public class ContactFormIT extends AbstractChromeTest {
                 "There are errors :Both phone and email cannot be empty",
                 info.getText());
 
-        WebElement firstName = getInShadowRoot(findElement(By.id("first-name")),
-                By.id("input"));
-        firstName.sendKeys("foo");
+        findFirstNameInput().sendKeys("foo");
+        findLastNameInput().sendKeys("bar");
+        findEmailInput().sendKeys("example@foo.bar");
+        findBirthDayInput().sendKeys("01/02/2003");
+        findBirthDayInput().sendKeys(Keys.ENTER);
 
-        WebElement lastName = getInShadowRoot(findElement(By.id("last-name")),
-                By.id("input"));
-        lastName.sendKeys("bar");
-
-        WebElement email = getInShadowRoot(findElement(By.id("email")),
-                By.id("input"));
-        email.sendKeys("example@foo.bar");
-
-        WebElement birthDate = getInShadowRoot(findElement(By.id("birth-date")),
-                By.id("input"));
-        birthDate.sendKeys("01/02/2003");
-        birthDate.sendKeys(Keys.ENTER);
-
-        WebElement doNotCall =
-                findElement(By.id("do-not-call"));
+        WebElement doNotCall = findElement(By.id("do-not-call"));
         WebElement checkBox = getInShadowRoot(doNotCall,
                 By.id("nativeCheckbox"));
         click(checkBox);
@@ -75,30 +61,47 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertTrue(info.getText().contains("doNotCall=true"));
 
         // Make email address incorrect
-        email.clear();
-        email.sendKeys("abc");
+        findEmailInput().clear();
+        findEmailInput().sendKeys("abc");
         click(save);
 
         waitUntil(driver -> info.getText().startsWith("There are errors"));
-        Assert.assertEquals(
-                "There are errors :Incorrect email address",
+        Assert.assertEquals("There are errors :Incorrect email address",
                 info.getText());
 
         // reset
         click(findElement(By.id("reset")));
 
-        Assert.assertEquals("", firstName.getAttribute("value"));
-        Assert.assertEquals("", lastName.getAttribute("value"));
+        Assert.assertEquals("", findFirstNameInput().getAttribute("value"));
+        Assert.assertEquals("", findLastNameInput().getAttribute("value"));
         Assert.assertEquals("",
                 getInShadowRoot(findElement(By.id("phone")), By.id("input"))
-                .getAttribute("value"));
-        Assert.assertEquals("", email.getAttribute("value"));
-        Assert.assertEquals("", birthDate.getAttribute("value"));
+                        .getAttribute("value"));
+        Assert.assertEquals("", findEmailInput().getAttribute("value"));
+        Assert.assertEquals("", findBirthDayInput().getAttribute("value"));
         Assert.assertFalse(checkBox.isSelected());
     }
 
+    private WebElement findBirthDayInput() {
+        return getInShadowRoot(findElement(By.id("birth-date")),
+                By.id("input"));
+    }
+
+    private WebElement findEmailInput() {
+        return getInShadowRoot(findElement(By.id("email")), By.id("input"));
+    }
+
+    private WebElement findLastNameInput() {
+        return getInShadowRoot(findElement(By.id("last-name")), By.id("input"));
+    }
+
+    private WebElement findFirstNameInput() {
+        return getInShadowRoot(findElement(By.id("first-name")),
+                By.id("input"));
+    }
+
     private void click(WebElement element) {
-        new Actions(getDriver()).moveToElement(element).click().build()
-        .perform();
+        scrollToElement(element);
+        element.click();
     }
 }

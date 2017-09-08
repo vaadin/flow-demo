@@ -23,7 +23,6 @@
         <module>demo-utils</module>
         <module>demo-textfield-component</module>
         <module>demo-textfield-composite</module>
-        <module>demo-web-component-progress-bubble</module>
         <module>demo-addressbook-polymer</module>
         <module>demo-jquery-table</module>
         <module>demo-date-field</module>
