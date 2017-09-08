@@ -46,11 +46,7 @@ public interface Util {
         Optional<String> title = AnnotationReader
                 .getAnnotationFor(navigationTarget, Title.class)
                 .map(Title::value);
-        if (title.isPresent()) {
-            return title.get();
-        } else {
-            return navigationTarget.getSimpleName();
-        }
+        return title.orElse(navigationTarget.getSimpleName());
     }
 
     /**
