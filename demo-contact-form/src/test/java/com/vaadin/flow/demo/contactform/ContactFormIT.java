@@ -19,13 +19,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import com.vaadin.testbench.By;
 
 public class ContactFormIT extends AbstractChromeTest {
-
     @Test
     public void validateContactForm() {
         open();
@@ -98,7 +96,7 @@ public class ContactFormIT extends AbstractChromeTest {
     }
 
     private void click(WebElement element) {
-        new Actions(getDriver()).moveToElement(element).click().build()
-        .perform();
+        scrollToElement(element);
+        element.click();
     }
 }
