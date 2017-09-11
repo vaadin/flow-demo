@@ -159,8 +159,10 @@ public class MenuIT extends AbstractChromeTest {
     }
 
     private WebElement getMenuCategoryLink(String text) {
-        return getDriver().findElement(By.className("menu"))
+        WebElement menu = getDriver().findElement(By.className("menu"))
                 .findElement(By.xpath(".//a[text()=\"" + text + "\"]"));
+        scrollToElement(menu);
+        return menu;
     }
 
     private WebElement getProductLink(String productName) {
