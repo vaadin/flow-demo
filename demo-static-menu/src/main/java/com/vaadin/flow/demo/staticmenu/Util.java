@@ -22,7 +22,7 @@ import java.util.Optional;
 
 import com.vaadin.annotations.AnnotationReader;
 import com.vaadin.flow.router.ImmutableRouterConfiguration;
-import com.vaadin.flow.router.NEW_RouterInterface;
+import com.vaadin.flow.router.RouterInterface;
 import com.vaadin.flow.router.View;
 import com.vaadin.server.VaadinService;
 
@@ -39,7 +39,7 @@ public interface Util {
      *
      * @return the active router
      */
-    static NEW_RouterInterface getRouter() {
+    static RouterInterface getRouter() {
         return VaadinService.getCurrentRequest().getService().getRouter();
     }
 
