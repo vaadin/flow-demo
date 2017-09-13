@@ -69,8 +69,13 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertEquals("There are errors :Incorrect email address",
                 info.getText());
 
+        findEmailInput().sendKeys("a@foo.bar");
+
         // reset
         click(findElement(By.id("reset")));
+
+        // Wait for everything to update.
+        waitUntil(driver -> info.getText().isEmpty());
 
         Assert.assertEquals("", findFirstNameInput().getAttribute("value"));
         Assert.assertEquals("", findLastNameInput().getAttribute("value"));
