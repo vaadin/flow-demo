@@ -72,6 +72,9 @@ public class ContactFormIT extends AbstractChromeTest {
         // reset
         click(findElement(By.id("reset")));
 
+        // Wait for everything to update.
+        waitUntil(driver -> info.getText().isEmpty());
+
         Assert.assertEquals("", findFirstNameInput().getAttribute("value"));
         Assert.assertEquals("", findLastNameInput().getAttribute("value"));
         Assert.assertEquals("",
