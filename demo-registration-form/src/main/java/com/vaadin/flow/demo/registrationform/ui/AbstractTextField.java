@@ -37,7 +37,7 @@ public interface AbstractTextField<T> extends HasSize {
      *            the String value to set
      * @return this instance, for method chaining
      */
-    T setPlaceholder(String placeholder);
+    void setPlaceholder(String placeholder);
 
     /**
      * Sets an arbitrary data into the instance.
