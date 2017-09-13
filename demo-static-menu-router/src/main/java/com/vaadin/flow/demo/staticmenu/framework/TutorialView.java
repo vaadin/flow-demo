@@ -13,24 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.staticmenu;
+package com.vaadin.flow.demo.staticmenu.framework;
 
 import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
+import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.flow.demo.staticmenu.MainLayout;
 
 /**
- * The static home page.
+ * The Tutorial view.
  *
  * @since
  * @author Vaadin Ltd
  */
-@Title("Home")
-@Route(value="", layout = MainLayout.class)
-public class HomeView extends DummyView {
-    /**
-     * Creates the view.
-     */
-    public HomeView() {
-        super();
-    }
+@Route(value = "tutorial", layout = MainLayout.class)
+public class TutorialView extends DummyView {
 }
