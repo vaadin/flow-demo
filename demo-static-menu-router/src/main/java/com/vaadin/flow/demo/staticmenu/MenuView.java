@@ -15,47 +15,55 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.StyleSheet;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.vaadin.flow.html.Anchor;
 import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
+import com.vaadin.flow.router.event.ActivationState;
+import com.vaadin.flow.router.event.BeforeNavigationEvent;
+import com.vaadin.flow.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
 
 /**
- * The main menu.
+ * Menu view handler. Updates menu item highlights before navigation in the
+ * ACTIVATING step.
  */
-@Route("")
-@StyleSheet("css/site.css")
-public class MenuView extends Div {
+public abstract class MenuView extends Div implements BeforeNavigationListener {
 
-    private HtmlContainer ul;
-    private Anchor homeLink;
+    private Map<Class<? extends Component>, Anchor> targets = new HashMap<>();
+    private Anchor selected;
 
     public MenuView() {
         setClassName("menu");
-        initHomeLink();
-        initLinkContainer();
+
+        init();
     }
 
-    private void initHomeLink() {
-        homeLink = new Anchor("home", "");
-        Div logo = new Div();
-        logo.setClassName("logo");
-        homeLink.add(logo);
-        add(homeLink);
-    }
+    public abstract void init();
 
-    private void initLinkContainer() {
-        ul = new HtmlContainer("ul");
-        ul.setClassName("topnav");
-        add(ul);
-        addLink(HomeView.class);
-    }
-
-    private void addLink(Class<? extends Component> navigationTarget) {
+    protected Anchor createLink(Class<? extends Component> navigationTarget,
+            String name) {
         Anchor link = new Anchor(Util.getNavigationTargetPath(navigationTarget),
-                Util.getNavigationTargetName(navigationTarget));
-        ul.add(link);
+                name);
+        targets.put(navigationTarget, link);
+
+        return link;
+    }
+
+    // protected abstract void
+
+    @Override
+    public void beforeNavigation(BeforeNavigationEvent event) {
+        if (ActivationState.ACTIVATING.equals(event.getActivationState())) {
+            if (selected != null) {
+                selected.removeClassName("selected");
+            }
+            if (targets.containsKey(event.getNavigationTarget())) {
+                Anchor activatedLink = targets.get(event.getNavigationTarget());
+                activatedLink.addClassName("selected");
+                selected = activatedLink;
+            }
+        }
     }
 }
