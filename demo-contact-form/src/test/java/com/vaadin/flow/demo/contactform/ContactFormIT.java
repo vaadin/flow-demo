@@ -61,6 +61,7 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertTrue(info.getText().contains("doNotCall=true"));
 
         // Make email address incorrect
+        findFirstNameInput().sendKeys("foo");
         findEmailInput().clear();
         findEmailInput().sendKeys("abc");
         click(save);
