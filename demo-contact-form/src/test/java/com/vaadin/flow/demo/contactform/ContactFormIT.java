@@ -61,7 +61,6 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertTrue(info.getText().contains("doNotCall=true"));
 
         // Make email address incorrect
-        findFirstNameInput().sendKeys("foo");
         findEmailInput().clear();
         findEmailInput().sendKeys("abc");
         click(save);
@@ -69,6 +68,8 @@ public class ContactFormIT extends AbstractChromeTest {
         waitUntil(driver -> info.getText().startsWith("There are errors"));
         Assert.assertEquals("There are errors :Incorrect email address",
                 info.getText());
+
+        findEmailInput().sendKeys("a@foo.bar");
 
         // reset
         click(findElement(By.id("reset")));
