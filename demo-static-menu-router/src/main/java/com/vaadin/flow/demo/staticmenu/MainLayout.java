@@ -7,7 +7,7 @@ import com.vaadin.flow.router.RouterLayout;
 @StyleSheet("css/site.css")
 public class MainLayout extends Div implements RouterLayout {
 
-    private MenuView menu = new MainMenu();
+    private MainMenuBar menu = new MainMenu();
 
     public MainLayout() {
         add(menu);
