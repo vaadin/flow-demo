@@ -41,7 +41,12 @@ public class SimpleMenuBar extends MainMenuBar {
         add(menu, new Div());
     }
 
-    public void addMenuElement(Class<? extends Component> navigationTarget, String name) {
+    protected Div getMenu() {
+        return menu;
+    }
+
+    public void addMenuElement(Class<? extends Component> navigationTarget,
+            String name) {
         Anchor link = createLink(navigationTarget, name);
         menu.add(link);
     }

@@ -26,9 +26,31 @@ public class HomePageIT extends AbstractComplexStaticMenuTest {
     public void topMenuIsPresent() {
         open();
 
-        Assert.assertTrue("Home link is present",
+        Assert.assertTrue("Home link not present",
                 isElementPresent(By.className("logo")));
         Assert.assertTrue("Links present",
                 isElementPresent(By.className("topnav")));
+
+        Assert.assertTrue("Framework link not present", getMenuItem("Framework").isDisplayed());
+        Assert.assertTrue("Elements link not present", getMenuItem("Elements").isDisplayed());
+        Assert.assertTrue("Download link not present", getMenuItem("Download").isDisplayed());
+
+        getMenuItem("Framework").click();
+
+        Assert.assertTrue("SubMenu item 'Tutorial' is missing", getSubMenuItem("Tutorial").isDisplayed());
+
+        getMenuItem("Elements").click();
+
+        Assert.assertTrue("SubMenu item 'Demos' is missing", getSubMenuItem("Demos").isDisplayed());
+
+        getMenuItem("Download").click();
+
+        Assert.assertTrue("SubMenu item 'Docs' is missing", getSubMenuItem("Docs").isDisplayed());
+        Assert.assertTrue("SubMenu item 'Vaadin Icons' is missing", getSubMenuItem("Vaadin Icons").isDisplayed());
+
+        getSubMenuItem("Vaadin Icons").click();
+
+        Assert.assertTrue("SubSubMenu item 'Icons' is missing", getSubSubMenuItem("Icons").isDisplayed());
+        Assert.assertTrue("SubSubMenu item 'About' is missing", getSubSubMenuItem("About").isDisplayed());
     }
 }

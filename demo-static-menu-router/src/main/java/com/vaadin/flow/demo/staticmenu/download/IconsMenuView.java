@@ -34,6 +34,8 @@ public class IconsMenuView extends SimpleMenuBar implements RouterLayout {
      * Creates the view.
      */
     public IconsMenuView() {
+        getMenu().setClassName("subsubmenu");
+
         addMenuElement(IconsView.class, "Icons");
         addMenuElement(IconsAboutView.class, "About");
     }
