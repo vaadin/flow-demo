@@ -35,7 +35,6 @@ public class FrameworkMenuBar extends SimpleMenuBar implements RouterLayout {
      */
     public FrameworkMenuBar() {
         addMenuElement(TutorialView.class, "Tutorial");
-//        addMenuElement(DocsView.class, "Docs");
     }
 
 }
