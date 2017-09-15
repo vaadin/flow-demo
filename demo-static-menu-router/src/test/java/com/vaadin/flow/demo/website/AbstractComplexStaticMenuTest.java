@@ -111,4 +111,7 @@ public abstract class AbstractComplexStaticMenuTest extends AbstractChromeTest {
         return findElements(By.cssSelector(".subsubmenu a"));
     }
 
+    protected void openRouteUrl(String route) {
+        getDriver().get(getRootURL() + getTestPath() + route);
+    }
 }
