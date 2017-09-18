@@ -30,7 +30,7 @@ public class MainLayout extends Div implements RouterLayout {
     private MainMenuBar menu = new MainMenu();
 
     /**
-     * Setup main layout
+     * Setup main layout.
      */
     public MainLayout() {
         add(menu);

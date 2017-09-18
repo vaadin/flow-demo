@@ -38,7 +38,7 @@ public abstract class MainMenuBar extends Div
     private Anchor selected;
 
     /**
-     * Build main menu bar
+     * Build main menu bar.
      */
     public MainMenuBar() {
         setClassName("menu");
@@ -47,7 +47,7 @@ public abstract class MainMenuBar extends Div
     }
 
     /**
-     * Initialize any component extending menu bar
+     * Initialize any component extending menu bar.
      */
     public abstract void init();
 
