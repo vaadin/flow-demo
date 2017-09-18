@@ -21,7 +21,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
 /**
  * The Docs view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Route(value = "docs", layout = DownloadMenuView.class)

@@ -22,7 +22,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
 /**
  * The Framework view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Route(value = "framework", layout = FrameworkMenuBar.class)

@@ -25,7 +25,6 @@ import com.vaadin.ui.Component;
  * A menu which adds all items to a single div.
  *
  * @author Vaadin
- * @since
  */
 public class SimpleMenuBar extends MainMenuBar {
 
@@ -42,7 +41,7 @@ public class SimpleMenuBar extends MainMenuBar {
     }
 
     protected Div getMenu() {
-        return menu;
+        return menu;2
     }
 
     public void addMenuElement(Class<? extends Component> navigationTarget,

@@ -22,7 +22,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
 /**
  * The Icons about view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Title("Vaadin Icons")

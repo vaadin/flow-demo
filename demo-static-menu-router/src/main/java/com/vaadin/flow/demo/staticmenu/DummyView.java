@@ -22,7 +22,6 @@ import com.vaadin.flow.html.Div;
  * the view.
  *
  * @author Vaadin
- * @since
  */
 public abstract class DummyView extends Div {
 

@@ -24,7 +24,6 @@ import com.vaadin.flow.router.RouterLayout;
  * The elements menu.
  *
  * @author Vaadin
- * @since
  */
 @ParentLayout(MainLayout.class)
 public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {

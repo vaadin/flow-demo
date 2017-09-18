@@ -23,7 +23,6 @@ import com.vaadin.flow.router.RouterLayout;
 /**
  * The Download menu.
  *
- * @since
  * @author Vaadin Ltd
  */
 @ParentLayout(MainLayout.class)

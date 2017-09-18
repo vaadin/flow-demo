@@ -23,7 +23,6 @@ import com.vaadin.flow.router.RouterLayout;
 /**
  * The Icons menu.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Title("Vaadin Icons")

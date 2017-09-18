@@ -21,7 +21,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
 /**
  * The Elements view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Route(value = "elements", layout = ElementsMenuView.class)

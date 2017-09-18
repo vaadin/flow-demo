@@ -22,7 +22,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
 /**
  * The Tutorial view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Route(value = "tutorial", layout = FrameworkMenuBar.class)

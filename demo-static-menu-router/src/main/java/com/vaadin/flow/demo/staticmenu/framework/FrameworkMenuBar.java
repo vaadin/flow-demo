@@ -25,7 +25,6 @@ import com.vaadin.flow.router.RouterLayout;
  * The Framework menu.
  *
  * @author Vaadin
- * @since
  */
 @ParentLayout(MainLayout.class)
 public class FrameworkMenuBar extends SimpleMenuBar implements RouterLayout {
