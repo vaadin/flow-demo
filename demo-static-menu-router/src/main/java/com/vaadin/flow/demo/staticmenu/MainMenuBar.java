@@ -28,6 +28,8 @@ import com.vaadin.ui.Component;
 /**
  * Menu view handler. Updates menu item highlights before navigation in the
  * ACTIVATING step.
+ *
+ * @author Vaadin
  */
 public abstract class MainMenuBar extends Div
         implements BeforeNavigationListener {
@@ -35,12 +37,18 @@ public abstract class MainMenuBar extends Div
     private Map<Class<? extends Component>, Anchor> targets = new HashMap<>();
     private Anchor selected;
 
+    /**
+     * Build main menu bar
+     */
     public MainMenuBar() {
         setClassName("menu");
 
         init();
     }
 
+    /**
+     * Initialize any component extending menu bar
+     */
     public abstract void init();
 
     protected Anchor createLink(Class<? extends Component> navigationTarget,
@@ -57,11 +65,10 @@ public abstract class MainMenuBar extends Div
 
     @Override
     public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.ACTIVATING.equals(event.getActivationState())) {
-            if (targetExists(event.getNavigationTarget())) {
-                clearSelection();
-                activateMenuTarget(event.getNavigationTarget());
-            }
+        if (ActivationState.ACTIVATING.equals(event.getActivationState())
+                && targetExists(event.getNavigationTarget())) {
+            clearSelection();
+            activateMenuTarget(event.getNavigationTarget());
         }
     }
 

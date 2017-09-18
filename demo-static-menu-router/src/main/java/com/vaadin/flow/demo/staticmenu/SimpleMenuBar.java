@@ -44,6 +44,14 @@ public class SimpleMenuBar extends MainMenuBar {
         return menu;
     }
 
+    /**
+     * Add a new menu element to this simple menu.
+     * 
+     * @param navigationTarget
+     *            menu element navigation target
+     * @param name
+     *            name to show
+     */
     public void addMenuElement(Class<? extends Component> navigationTarget,
             String name) {
         Anchor link = createLink(navigationTarget, name);

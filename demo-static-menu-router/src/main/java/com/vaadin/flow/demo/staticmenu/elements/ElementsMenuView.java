@@ -32,9 +32,6 @@ public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {
      * Creates the view.
      */
     public ElementsMenuView() {
-        // To be added after we have UrlParameter support
-        // addMenuElement(DocsSubView.class,"Getting Started",
-        // "-/part/elements/elements-getting-started.html");
         addMenuElement(ElementsView.class, "Demos");
     }
 

@@ -18,7 +18,6 @@ package com.vaadin.flow.demo.staticmenu.framework;
 import com.vaadin.annotations.ParentLayout;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
-import com.vaadin.flow.demo.staticmenu.download.DocsView;
 import com.vaadin.flow.router.RouterLayout;
 
 /**

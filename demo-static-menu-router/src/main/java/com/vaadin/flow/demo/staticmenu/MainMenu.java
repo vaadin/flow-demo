@@ -1,3 +1,18 @@
+/*
+ * Copyright 2000-2017 Vaadin Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.vaadin.flow.demo.staticmenu;
 
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
@@ -8,12 +23,11 @@ import com.vaadin.flow.html.Div;
 import com.vaadin.flow.html.HtmlContainer;
 
 /**
- * Main menu bar containing top level navigation items
+ * Main menu bar containing top level navigation items.
+ *
+ * @author Vaadin
  */
 public class MainMenu extends MainMenuBar {
-
-    private HtmlContainer ul;
-    private Anchor homeLink;
 
     @Override
     public void init() {
@@ -22,7 +36,7 @@ public class MainMenu extends MainMenuBar {
     }
 
     private void initHomeLink() {
-        homeLink = new Anchor("/", "");
+        Anchor homeLink = new Anchor("/", "");
         homeLink.getElement().setAttribute("router-link", "true");
         Div logo = new Div();
         logo.setClassName("logo");
@@ -31,7 +45,7 @@ public class MainMenu extends MainMenuBar {
     }
 
     private void initLinkContainer() {
-        ul = new HtmlContainer("ul");
+        HtmlContainer ul = new HtmlContainer("ul");
         ul.setClassName("topnav");
         add(ul);
 
