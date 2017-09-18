@@ -41,7 +41,7 @@ public class SimpleMenuBar extends MainMenuBar {
     }
 
     protected Div getMenu() {
-        return menu;2
+        return menu;
     }
 
     public void addMenuElement(Class<? extends Component> navigationTarget,
