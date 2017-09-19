@@ -17,12 +17,10 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.vaadin.flow.html.Anchor;
 import com.vaadin.flow.html.Div;
-import com.vaadin.flow.router.event.ActivationState;
-import com.vaadin.flow.router.event.BeforeNavigationEvent;
-import com.vaadin.flow.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
 
 /**
@@ -31,10 +29,10 @@ import com.vaadin.ui.Component;
  *
  * @author Vaadin
  */
-public abstract class MainMenuBar extends Div
-        implements BeforeNavigationListener {
+public abstract class MainMenuBar extends Div {
 
     private Map<Class<? extends Component>, Anchor> targets = new HashMap<>();
+    private Map<String, Class<? extends Component>> targetPaths = new HashMap<>();
     private Anchor selected;
 
     /**
@@ -57,24 +55,14 @@ public abstract class MainMenuBar extends Div
                 name);
         link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
+        targetPaths.put(link.getHref(), navigationTarget);
 
         return link;
     }
 
-    // protected abstract void
-
-    @Override
-    public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.ACTIVATING.equals(event.getActivationState())
-                && targetExists(event.getNavigationTarget())) {
-            clearSelection();
-            activateMenuTarget(event.getNavigationTarget());
-        }
-    }
-
     /**
      * This menu contains a navigation item for given target.
-     * 
+     *
      * @param navigationTarget
      *            navigation target
      * @return true/false
@@ -94,7 +82,7 @@ public abstract class MainMenuBar extends Div
 
     /**
      * Activate menu item for navigation target.
-     * 
+     *
      * @param navigationTarget
      *            navigation target
      */
@@ -102,5 +90,14 @@ public abstract class MainMenuBar extends Div
         Anchor activatedLink = targets.get(navigationTarget);
         activatedLink.addClassName("selected");
         selected = activatedLink;
+    }
+
+    protected Optional<Class> getTargetForPath(String path) {
+        if (targetPaths.containsKey(path)) {
+            return Optional.of(targetPaths.get(path));
+        } else if (targetPaths.containsKey(path + "/")) {
+            return Optional.of(targetPaths.get(path + "/"));
+        }
+        return Optional.empty();
     }
 }

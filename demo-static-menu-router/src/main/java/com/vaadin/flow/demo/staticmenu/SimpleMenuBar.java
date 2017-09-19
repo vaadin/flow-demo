@@ -15,10 +15,13 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
+import java.util.Optional;
+
 import com.vaadin.flow.html.Anchor;
 import com.vaadin.flow.html.Div;
 import com.vaadin.flow.router.event.ActivationState;
 import com.vaadin.flow.router.event.BeforeNavigationEvent;
+import com.vaadin.flow.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
 
 /**
@@ -26,7 +29,8 @@ import com.vaadin.ui.Component;
  *
  * @author Vaadin
  */
-public class SimpleMenuBar extends MainMenuBar {
+public class SimpleMenuBar extends MainMenuBar implements
+        BeforeNavigationListener {
 
     private Div menu;
 
@@ -46,7 +50,7 @@ public class SimpleMenuBar extends MainMenuBar {
 
     /**
      * Add a new menu element to this simple menu.
-     * 
+     *
      * @param navigationTarget
      *            menu element navigation target
      * @param name
@@ -64,6 +68,17 @@ public class SimpleMenuBar extends MainMenuBar {
             clearSelection();
             if (targetExists(event.getNavigationTarget())) {
                 activateMenuTarget(event.getNavigationTarget());
+            } else {
+                StringBuilder path = new StringBuilder();
+                for (String segment : event.getLocation().getSegments()) {
+                    path.append(segment);
+                    Optional<Class> target = getTargetForPath(path.toString());
+                    if (target.isPresent()) {
+                        activateMenuTarget(target.get());
+                        break;
+                    }
+                    path.append("/");
+                }
             }
         }
     }
