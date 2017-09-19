@@ -31,7 +31,6 @@ import com.vaadin.flow.router.event.BeforeNavigationEvent;
 /**
  * The blog post view.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Route(value = "blog", layout = MainLayout.class)

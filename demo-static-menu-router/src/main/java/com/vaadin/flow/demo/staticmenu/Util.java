@@ -26,7 +26,6 @@ import com.vaadin.ui.Component;
  * Generic helpers for the demo.
  *
  * @author Vaadin
- * @since
  */
 public interface Util {
 

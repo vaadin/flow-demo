@@ -13,18 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.staticmenu.framework;
+package com.vaadin.flow.demo.staticmenu.download;
 
 import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
 import com.vaadin.flow.demo.staticmenu.DummyView;
 
 /**
- * The Framework view.
+ * The Download view.
  *
  * @author Vaadin Ltd
  */
-@Route(value = "framework", layout = FrameworkMenuBar.class)
-@Title("Framework")
-public class FrameworkView extends DummyView {
+@Route(value = "download", layout = DownloadMenuView.class)
+public class DownloadView extends DummyView {
 }

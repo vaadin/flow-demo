@@ -15,16 +15,24 @@
  */
 package com.vaadin.flow.demo.staticmenu.framework;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
-import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.annotations.ParentLayout;
+import com.vaadin.flow.demo.staticmenu.MainLayout;
+import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
- * The Framework view.
+ * The Framework menu.
  *
- * @author Vaadin Ltd
+ * @author Vaadin
  */
-@Route(value = "framework", layout = FrameworkMenuBar.class)
-@Title("Framework")
-public class FrameworkView extends DummyView {
+@ParentLayout(MainLayout.class)
+public class FrameworkMenuBar extends SimpleMenuBar implements RouterLayout {
+
+    /**
+     * Creates the view.
+     */
+    public FrameworkMenuBar() {
+        addMenuElement(TutorialView.class, "Tutorial");
+    }
+
 }

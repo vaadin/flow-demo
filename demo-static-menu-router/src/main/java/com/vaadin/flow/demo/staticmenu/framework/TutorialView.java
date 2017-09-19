@@ -18,15 +18,13 @@ package com.vaadin.flow.demo.staticmenu.framework;
 import com.vaadin.annotations.Route;
 import com.vaadin.annotations.Title;
 import com.vaadin.flow.demo.staticmenu.DummyView;
-import com.vaadin.flow.demo.staticmenu.MainLayout;
 
 /**
  * The Tutorial view.
  *
- * @since
  * @author Vaadin Ltd
  */
-@Route(value = "tutorial", layout = MainLayout.class)
+@Route(value = "tutorial", layout = FrameworkMenuBar.class)
 @Title("Tutorial")
 public class TutorialView extends DummyView {
 }

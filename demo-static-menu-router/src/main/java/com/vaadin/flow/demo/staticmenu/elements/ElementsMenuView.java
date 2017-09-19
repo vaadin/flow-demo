@@ -13,18 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.staticmenu.framework;
+package com.vaadin.flow.demo.staticmenu.elements;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
-import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.annotations.ParentLayout;
+import com.vaadin.flow.demo.staticmenu.MainLayout;
+import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
- * The Framework view.
+ * The elements menu.
  *
- * @author Vaadin Ltd
+ * @author Vaadin
  */
-@Route(value = "framework", layout = FrameworkMenuBar.class)
-@Title("Framework")
-public class FrameworkView extends DummyView {
+@ParentLayout(MainLayout.class)
+public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {
+
+    /**
+     * Creates the view.
+     */
+    public ElementsMenuView() {
+        addMenuElement(ElementsView.class, "Demos");
+    }
+
 }

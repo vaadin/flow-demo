@@ -128,7 +128,6 @@ implements View {
         statusMessage.getClassNames().add("validation-message");
         textField.setData(statusMessage);
         HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.setSpacing(false);
         horizontalLayout.add((Component) textField);
         textField.setWidth(WIDTH);
         horizontalLayout.add(statusMessage);

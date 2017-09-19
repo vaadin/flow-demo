@@ -21,7 +21,6 @@ import com.vaadin.annotations.Title;
 /**
  * The static home page.
  *
- * @since
  * @author Vaadin Ltd
  */
 @Title("Home")

@@ -28,24 +28,34 @@ import com.vaadin.ui.Component;
 /**
  * Menu view handler. Updates menu item highlights before navigation in the
  * ACTIVATING step.
+ *
+ * @author Vaadin
  */
-public abstract class MenuView extends Div implements BeforeNavigationListener {
+public abstract class MainMenuBar extends Div
+        implements BeforeNavigationListener {
 
     private Map<Class<? extends Component>, Anchor> targets = new HashMap<>();
     private Anchor selected;
 
-    public MenuView() {
+    /**
+     * Build main menu bar.
+     */
+    public MainMenuBar() {
         setClassName("menu");
 
         init();
     }
 
+    /**
+     * Initialize any component extending menu bar.
+     */
     public abstract void init();
 
     protected Anchor createLink(Class<? extends Component> navigationTarget,
             String name) {
         Anchor link = new Anchor(Util.getNavigationTargetPath(navigationTarget),
                 name);
+        link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
 
         return link;
@@ -55,15 +65,42 @@ public abstract class MenuView extends Div implements BeforeNavigationListener {
 
     @Override
     public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.ACTIVATING.equals(event.getActivationState())) {
-            if (selected != null) {
-                selected.removeClassName("selected");
-            }
-            if (targets.containsKey(event.getNavigationTarget())) {
-                Anchor activatedLink = targets.get(event.getNavigationTarget());
-                activatedLink.addClassName("selected");
-                selected = activatedLink;
-            }
+        if (ActivationState.ACTIVATING.equals(event.getActivationState())
+                && targetExists(event.getNavigationTarget())) {
+            clearSelection();
+            activateMenuTarget(event.getNavigationTarget());
         }
+    }
+
+    /**
+     * This menu contains a navigation item for given target.
+     * 
+     * @param navigationTarget
+     *            navigation target
+     * @return true/false
+     */
+    protected boolean targetExists(Class<?> navigationTarget) {
+        return targets.containsKey(navigationTarget);
+    }
+
+    /**
+     * Clear selection for selected menu item.
+     */
+    protected void clearSelection() {
+        if (selected != null) {
+            selected.removeClassName("selected");
+        }
+    }
+
+    /**
+     * Activate menu item for navigation target.
+     * 
+     * @param navigationTarget
+     *            navigation target
+     */
+    protected void activateMenuTarget(Class<?> navigationTarget) {
+        Anchor activatedLink = targets.get(navigationTarget);
+        activatedLink.addClassName("selected");
+        selected = activatedLink;
     }
 }
