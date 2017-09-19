@@ -23,6 +23,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
  *
  * @author Vaadin Ltd
  */
-@Route(value = "download", layout = DownloadMenuView.class)
+@Route(value = "", layout = DownloadMenuView.class)
 public class DownloadView extends DummyView {
 }
