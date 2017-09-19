@@ -61,8 +61,12 @@
         <!-- Not the newest version because of https://www.polymer-project.org/2.0/docs/tools/node-support -->
         <node.version>v7.10.1</node.version>
         <npm.version>5.3.0</npm.version>
-        <frontend.working.directory>src/main/webapp/frontend</frontend.working.directory>
+
+        <frontend.working.directory>${project.basedir}/src/main/webapp/frontend</frontend.working.directory>
+        <jetty.extra.resource.base>${frontend.working.directory}</jetty.extra.resource.base>
+        <npm.build.goal>run devMode</npm.build.goal>
     </properties>
+
     <repositories>
         <repository>
             <id>flow-internal-snapshots</id>
@@ -131,6 +135,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -144,8 +149,8 @@
                         </goals>
                     </execution>
                 </executions>
-
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -173,6 +178,7 @@
                     </filesets>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven.failsafe.plugin.version}</version>
@@ -190,6 +196,7 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -201,8 +208,7 @@
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
-                    <packagingExcludes>**/node_modules/,**/node/,**/etc/,**/bower.json,**/package.json
-                    </packagingExcludes>
+                    <warSourceExcludes>**/node_modules/,**/node/,**/build/,**/etc/</warSourceExcludes>
                 </configuration>
             </plugin>
 
@@ -243,17 +249,28 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.commonjava.maven.plugins</groupId>
                 <artifactId>directory-maven-plugin</artifactId>
                 <version>0.1</version>
                 <executions>
                     <execution>
-                        <id>directories</id>
+                        <id>set-root-dir-for-common-lifecycle</id>
                         <goals>
                             <goal>highest-basedir</goal>
                         </goals>
                         <phase>initialize</phase>
+                        <configuration>
+                            <property>project.rootdir</property>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>set-root-dir-for-clean-lifecycle</id>
+                        <goals>
+                            <goal>highest-basedir</goal>
+                        </goals>
+                        <phase>pre-clean</phase>
                         <configuration>
                             <property>project.rootdir</property>
                         </configuration>
