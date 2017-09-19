@@ -1,8 +1,7 @@
 {
   "name": "demo-todo-template",
   "homepage": "https://github.com/vaadin/flow-demo/demo-todo-template",
-  "authors": [
-  ],
+  "authors": [],
   "description": "",
   "main": "",
   "license": "Apache2",

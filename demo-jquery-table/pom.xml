@@ -104,7 +104,7 @@
 
             <properties>
                 <npm.build.goal>run prodMode</npm.build.goal>
-                <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
+                <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}/build</jetty.extra.resource.base>
             </properties>
 
             <dependencies>
@@ -125,33 +125,12 @@
                             <webResources>
                                 <resource>
                                     <directory>${frontend.working.directory}/build</directory>
-                                    <targetPath>${vaadin.frontend.path}</targetPath>
                                 </resource>
                             </webResources>
+                            <packagingExcludes>
+                                **/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/
+                            </packagingExcludes>
                         </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.0.2</version>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
-                                    <overwrite>true</overwrite>
-                                    <resources>
-                                        <resource>
-                                            <directory>${project.basedir}/${frontend.working.directory}/build</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -177,14 +156,7 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>3.0.0</version>
                         <configuration>
-                            <webResources>
-                                <resource>
-                                    <directory>${frontend.working.directory}</directory>
-                                    <excludes>
-                                        <exclude>build/**</exclude>
-                                    </excludes>
-                                </resource>
-                            </webResources>
+                            <packagingExcludes>**/node_modules/,**/node/,**/build/,**/etc/</packagingExcludes>
                         </configuration>
                     </plugin>
                 </plugins>

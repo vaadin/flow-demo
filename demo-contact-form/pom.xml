@@ -11,11 +11,6 @@
     <artifactId>demo-contact-form</artifactId>
     <packaging>war</packaging>
 
-    <properties>
-        <frontend.working.directory>src/main/frontend</frontend.working.directory>
-        <vaadin.frontend.path>VAADIN/static/frontend</vaadin.frontend.path>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -53,7 +48,7 @@
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
                     <npmVersion>${npm.version}</npmVersion>
-                    <workingDirectory>${frontend.working.directory}</workingDirectory>
+                    <workingDirectory>src/main/webapp/frontend</workingDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -103,7 +98,7 @@
 
             <properties>
                 <npm.build.goal>run prodMode</npm.build.goal>
-                <jetty.extra.resource.base>${project.build.directory}/jetty-extra-resources</jetty.extra.resource.base>
+                <jetty.extra.resource.base>${project.basedir}/${frontend.working.directory}/build</jetty.extra.resource.base>
             </properties>
 
             <dependencies>
@@ -124,33 +119,12 @@
                             <webResources>
                                 <resource>
                                     <directory>${frontend.working.directory}/build</directory>
-                                    <targetPath>${vaadin.frontend.path}</targetPath>
                                 </resource>
                             </webResources>
+                            <packagingExcludes>
+                                **/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/
+                            </packagingExcludes>
                         </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.0.2</version>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/jetty-extra-resources/${vaadin.frontend.path}</outputDirectory>
-                                    <overwrite>true</overwrite>
-                                    <resources>
-                                        <resource>
-                                            <directory>${project.basedir}/${frontend.working.directory}/build</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -176,14 +150,7 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven.war.plugin.version}</version>
                         <configuration>
-                            <webResources>
-                                <resource>
-                                    <directory>${frontend.working.directory}</directory>
-                                    <excludes>
-                                        <exclude>build/**</exclude>
-                                    </excludes>
-                                </resource>
-                            </webResources>
+                            <packagingExcludes>**/node_modules/,**/node/,**/build/,**/etc/</packagingExcludes>
                         </configuration>
                     </plugin>
                 </plugins>

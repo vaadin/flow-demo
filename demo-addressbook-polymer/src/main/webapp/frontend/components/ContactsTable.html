@@ -22,7 +22,7 @@
     <script>
     class ContactsTable extends Polymer.Element {
         static get is() { return 'contacts-table'; }
-  
+
         _itemClicked(event) {
             const tr = event.currentTarget;
             const previouslySelected = document.getElementsByClassName('selected-row');
@@ -40,7 +40,7 @@
             this.dispatchEvent(new CustomEvent('row-selection-updated', {detail: selectedId}));
         }
     }
-    
+
     customElements.define(ContactsTable.is, ContactsTable);
     </script>
 </dom-module>

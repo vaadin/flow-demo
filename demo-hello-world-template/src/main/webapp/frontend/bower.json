@@ -1,8 +1,7 @@
 {
   "name": "demo-hello-world-es5",
   "homepage": "https://github.com/vaadin/flow-demo/demo-hello-world-es5",
-  "authors": [
-  ],
+  "authors": [],
   "description": "",
   "main": "",
   "license": "Apache2",
@@ -16,6 +15,6 @@
   ],
   "dependencies": {
     "polymer": "~2.0.2",
-    "paper-input": "~2.0.0"
+    "paper-input": "~2.0.1"
   }
 }
