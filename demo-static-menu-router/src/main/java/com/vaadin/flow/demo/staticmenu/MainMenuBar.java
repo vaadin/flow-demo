@@ -21,7 +21,9 @@ import java.util.Optional;
 
 import com.vaadin.flow.html.Anchor;
 import com.vaadin.flow.html.Div;
+import com.vaadin.flow.router.NewRouter;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 
 /**
  * Menu view handler. Updates menu item highlights before navigation in the
@@ -51,8 +53,9 @@ public abstract class MainMenuBar extends Div {
 
     protected Anchor createLink(Class<? extends Component> navigationTarget,
             String name) {
-        Anchor link = new Anchor(Util.getNavigationTargetPath(navigationTarget),
-                name);
+        String url = ((NewRouter) UI.getCurrent().getRouter().get())
+                .getUrl(navigationTarget);
+        Anchor link = new Anchor(url, name);
         link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
         targetPaths.put(link.getHref(), navigationTarget);

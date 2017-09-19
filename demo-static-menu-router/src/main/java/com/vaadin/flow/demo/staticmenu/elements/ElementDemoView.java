@@ -15,26 +15,14 @@
  */
 package com.vaadin.flow.demo.staticmenu.elements;
 
-import com.vaadin.annotations.ParentLayout;
-import com.vaadin.annotations.RoutePrefix;
-import com.vaadin.flow.demo.staticmenu.MainLayout;
-import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
-import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.annotations.Route;
+import com.vaadin.flow.demo.staticmenu.DummyView;
 
 /**
- * The elements menu.
+ * The Elements view.
  *
- * @author Vaadin
+ * @author Vaadin Ltd
  */
-@RoutePrefix("elements")
-@ParentLayout(MainLayout.class)
-public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {
-
-    /**
-     * Creates the view.
-     */
-    public ElementsMenuView() {
-        addMenuElement(ElementDemoView.class, "Demos");
-    }
-
+@Route(value = "demo", layout = ElementsMenuView.class)
+public class ElementDemoView extends DummyView {
 }
