@@ -24,7 +24,7 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
  *
  * @author Vaadin Ltd
  */
-@Route(value = "framework", layout = FrameworkMenuBar.class)
+@Route(value = "", layout = FrameworkMenuBar.class)
 @Title("Framework")
 public class FrameworkView extends DummyView {
 }

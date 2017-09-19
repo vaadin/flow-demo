@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.staticmenu.download;
 
 import com.vaadin.annotations.ParentLayout;
+import com.vaadin.annotations.RoutePrefix;
 import com.vaadin.annotations.Title;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
 import com.vaadin.flow.router.RouterLayout;
@@ -26,6 +27,7 @@ import com.vaadin.flow.router.RouterLayout;
  * @author Vaadin Ltd
  */
 @Title("Vaadin Icons")
+@RoutePrefix(value = "icons", absolute = true)
 @ParentLayout(DownloadMenuView.class)
 public class IconsMenuView extends SimpleMenuBar implements RouterLayout {
 

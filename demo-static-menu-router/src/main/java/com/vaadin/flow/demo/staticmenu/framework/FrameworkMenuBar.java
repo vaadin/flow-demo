@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.staticmenu.framework;
 
 import com.vaadin.annotations.ParentLayout;
+import com.vaadin.annotations.RoutePrefix;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
 import com.vaadin.flow.router.RouterLayout;
@@ -25,6 +26,7 @@ import com.vaadin.flow.router.RouterLayout;
  *
  * @author Vaadin
  */
+@RoutePrefix("framework")
 @ParentLayout(MainLayout.class)
 public class FrameworkMenuBar extends SimpleMenuBar implements RouterLayout {
 

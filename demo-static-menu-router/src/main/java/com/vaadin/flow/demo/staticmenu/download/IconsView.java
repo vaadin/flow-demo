@@ -25,6 +25,6 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
  * @author Vaadin Ltd
  */
 @Title("Vaadin Icons")
-@Route(value="icons", layout = IconsMenuView.class)
+@Route(value="", layout = IconsMenuView.class)
 public class IconsView extends DummyView {
 }
