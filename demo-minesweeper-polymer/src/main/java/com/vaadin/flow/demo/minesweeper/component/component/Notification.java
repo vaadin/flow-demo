@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.minesweeper.component.component;
 
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 
 /**
  * A really simple notification component, which is just a {@link Div} with a

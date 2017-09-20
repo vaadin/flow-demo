@@ -20,23 +20,23 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.vaadin.annotations.StyleSheet;
 import com.vaadin.data.Binder;
 import com.vaadin.data.Binder.Binding;
 import com.vaadin.data.BinderValidationStatus;
 import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.flow.html.Label;
-import com.vaadin.flow.router.View;
-import com.vaadin.server.SerializablePredicate;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Checkbox;
+import com.vaadin.function.SerializablePredicate;
 import com.vaadin.ui.Composite;
-import com.vaadin.ui.DatePicker;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.button.Button;
+import com.vaadin.ui.checkbox.Checkbox;
+import com.vaadin.ui.common.StyleSheet;
+import com.vaadin.ui.datepicker.DatePicker;
+import com.vaadin.ui.formlayout.FormLayout;
+import com.vaadin.ui.html.Label;
+import com.vaadin.flow.router.View;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.layout.HorizontalLayout;
+import com.vaadin.ui.textfield.TextField;
 
 /**
  * Contact editor form.

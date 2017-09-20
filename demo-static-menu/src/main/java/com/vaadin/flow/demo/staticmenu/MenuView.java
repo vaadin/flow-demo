@@ -20,14 +20,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.Label;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.html.Label;
 import com.vaadin.flow.router.HasChildView;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.HasStyle;
+import com.vaadin.ui.common.HasStyle;
 
 /**
  * Abstract class which keeps track of menu items and handles menu item

@@ -15,19 +15,23 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
+import java.util.Optional;
+
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.flow.html.Anchor;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.router.event.AfterNavigationEvent;
+import com.vaadin.router.event.AfterNavigationListener;
 
 /**
  * Main menu bar containing top level navigation items.
  *
  * @author Vaadin
  */
-public class MainMenu extends MainMenuBar {
+public class MainMenu extends MainMenuBar implements AfterNavigationListener {
 
     @Override
     public void init() {
@@ -54,4 +58,22 @@ public class MainMenu extends MainMenuBar {
         ul.add(createLink(DownloadView.class, "Download"));
     }
 
+    @Override
+    public void afterNavigation(AfterNavigationEvent event) {
+        if (event.getLocation().getPath().isEmpty()) {
+            clearSelection();
+        } else {
+            StringBuilder path = new StringBuilder();
+            for (String segment : event.getLocation().getSegments()) {
+                path.append(segment);
+                Optional<Class> target = getTargetForPath(path.toString());
+                if (target.isPresent()) {
+                    clearSelection();
+                    activateMenuTarget(target.get());
+                    break;
+                }
+                path.append("/");
+            }
+        }
+    }
 }

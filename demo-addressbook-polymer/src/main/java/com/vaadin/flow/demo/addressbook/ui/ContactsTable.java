@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.addressbook.ui;
 
 import java.util.List;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
-import com.vaadin.flow.html.HtmlComponent;
+import com.vaadin.ui.common.HtmlImport;
+import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.flow.util.JsonUtils;
 
 import elemental.json.JsonArray;

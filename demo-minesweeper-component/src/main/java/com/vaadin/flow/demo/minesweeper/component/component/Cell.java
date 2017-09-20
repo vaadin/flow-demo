@@ -15,12 +15,12 @@
  */
 package com.vaadin.flow.demo.minesweeper.component.component;
 
-import com.vaadin.annotations.DomEvent;
-import com.vaadin.annotations.Tag;
-import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentEvent;
+import com.vaadin.ui.event.ComponentEvent;
+import com.vaadin.ui.event.ComponentEventListener;
+import com.vaadin.ui.event.DomEvent;
+import com.vaadin.ui.event.Tag;
 
 /**
  * A component representing a cell.

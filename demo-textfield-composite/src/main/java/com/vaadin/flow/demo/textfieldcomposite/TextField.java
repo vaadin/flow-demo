@@ -15,13 +15,13 @@
  */
 package com.vaadin.flow.demo.textfieldcomposite;
 
-import com.vaadin.flow.event.ComponentEventListener;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.Input;
-import com.vaadin.flow.html.Label;
-import com.vaadin.flow.html.event.ChangeEvent;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Composite;
+import com.vaadin.ui.event.ChangeEvent;
+import com.vaadin.ui.event.ComponentEventListener;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.html.Input;
+import com.vaadin.ui.html.Label;
 
 /**
  * A text field component consisting of a label and an input field.

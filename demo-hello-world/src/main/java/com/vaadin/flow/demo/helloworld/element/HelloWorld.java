@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.helloworld.element;
 
-import com.vaadin.flow.html.NativeButton;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.Input;
 import com.vaadin.flow.router.View;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.html.Input;
+import com.vaadin.ui.html.NativeButton;
 
 /**
  * The one and only view in the hello world application.

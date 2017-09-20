@@ -15,18 +15,19 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.Tag;
+import com.vaadin.flow.model.TemplateModel;
 import com.vaadin.flow.router.View;
-import com.vaadin.flow.template.PolymerTemplate;
-import com.vaadin.flow.template.model.TemplateModel;
+import com.vaadin.ui.common.HtmlImport;
+import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
 /**
  * The one and only view in the hello world application.
  */
 @Tag("hello-world")
 @HtmlImport("frontend://components/HelloWorld.html")
-public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> implements View {
+public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel>
+        implements View {
     private static final String EMPTY_NAME_GREETING = "Please enter your name";
 
     /**

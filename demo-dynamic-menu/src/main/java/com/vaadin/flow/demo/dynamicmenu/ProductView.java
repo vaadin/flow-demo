@@ -18,13 +18,13 @@ package com.vaadin.flow.demo.dynamicmenu;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.html.HtmlContainer;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.event.Tag;
 
 /**
  * A view which shows a product.

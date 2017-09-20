@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 import java.time.format.DateTimeFormatter;
 
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.RouterLink;
 
 /**

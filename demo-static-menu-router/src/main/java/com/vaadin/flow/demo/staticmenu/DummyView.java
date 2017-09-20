@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 
 /**
  * An abstract view which automatically contains a text, which tells the name of

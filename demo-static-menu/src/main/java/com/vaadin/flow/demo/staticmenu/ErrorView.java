@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.Emphasis;
-import com.vaadin.flow.html.H1;
-import com.vaadin.flow.html.Span;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.html.Emphasis;
+import com.vaadin.ui.html.H1;
+import com.vaadin.ui.html.Span;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
 

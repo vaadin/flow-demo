@@ -18,11 +18,11 @@ package com.vaadin.flow.demo.website;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.annotations.StyleSheet;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
 import com.vaadin.flow.template.angular.model.TemplateModel;
 import com.vaadin.ui.AngularTemplate;
+import com.vaadin.ui.common.StyleSheet;
 
 /**
  * Layout showing the main menu above a sub view.

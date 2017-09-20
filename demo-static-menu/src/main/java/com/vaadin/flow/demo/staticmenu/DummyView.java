@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.View;
 
 /**

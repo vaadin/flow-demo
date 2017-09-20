@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.annotations.Title;
+import com.vaadin.router.Title;
 import com.vaadin.flow.demo.staticmenu.DummyView;
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.LocationChangeEvent;
 
 /**

@@ -18,14 +18,14 @@ package com.vaadin.flow.demo.dynamicmenu;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.vaadin.annotations.Tag;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.html.HtmlContainer;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.event.Tag;
 
 /**
  * A view which shows products in a given category.

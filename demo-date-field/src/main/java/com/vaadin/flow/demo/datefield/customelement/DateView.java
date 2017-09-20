@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.datefield.customelement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.View;
 
 /**

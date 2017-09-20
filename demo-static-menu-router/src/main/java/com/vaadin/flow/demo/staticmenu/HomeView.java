@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
+import com.vaadin.router.Route;
+import com.vaadin.router.Title;
 
 /**
  * The static home page.

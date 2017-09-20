@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.staticmenu.framework;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
+import com.vaadin.router.Route;
+import com.vaadin.router.Title;
 import com.vaadin.flow.demo.staticmenu.DummyView;
 
 /**

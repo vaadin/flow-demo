@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.html.HtmlContainer;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.ui.common.HtmlContainer;
 
 /**
  * A category menu item component.

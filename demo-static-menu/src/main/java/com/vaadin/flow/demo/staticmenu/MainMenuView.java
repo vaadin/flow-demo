@@ -17,13 +17,13 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.stream.Stream;
 
-import com.vaadin.annotations.StyleSheet;
+import com.vaadin.ui.common.StyleSheet;
 import com.vaadin.flow.demo.staticmenu.community.CommunityView;
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.Component;
