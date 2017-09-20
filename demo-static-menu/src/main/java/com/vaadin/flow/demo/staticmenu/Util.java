@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import com.vaadin.annotations.AnnotationReader;
 import com.vaadin.flow.router.ImmutableRouterConfiguration;
-import com.vaadin.flow.router.RouterInterface;
 import com.vaadin.flow.router.View;
+import com.vaadin.router.RouterInterface;
 import com.vaadin.server.VaadinService;
+import com.vaadin.util.AnnotationReader;
 
 /**
  * Generic helpers for the demo.
