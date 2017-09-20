@@ -20,11 +20,11 @@ import java.util.Optional;
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.flow.html.Anchor;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
-import com.vaadin.flow.router.event.AfterNavigationEvent;
-import com.vaadin.flow.router.event.AfterNavigationListener;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.router.event.AfterNavigationEvent;
+import com.vaadin.router.event.AfterNavigationListener;
 
 /**
  * Main menu bar containing top level navigation items.

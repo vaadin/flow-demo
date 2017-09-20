@@ -21,7 +21,7 @@ import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.HasChildView;
 import com.vaadin.flow.router.View;
 

@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.vaadin.flow.template.model.ModelConverter;
+import com.vaadin.flow.model.ModelConverter;
 
 /**
  * Convert a {@link Date} to a {@link DateBean}.

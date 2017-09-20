@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.vaadin.flow.html.Anchor;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.router.NewRouter;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
+import com.vaadin.router.Router;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
@@ -53,7 +53,7 @@ public abstract class MainMenuBar extends Div {
 
     protected Anchor createLink(Class<? extends Component> navigationTarget,
             String name) {
-        String url = ((NewRouter) UI.getCurrent().getRouter().get())
+        String url = ((Router) UI.getCurrent().getRouter().get())
                 .getUrl(navigationTarget);
         Anchor link = new Anchor(url, name);
         link.getElement().setAttribute("router-link", "true");

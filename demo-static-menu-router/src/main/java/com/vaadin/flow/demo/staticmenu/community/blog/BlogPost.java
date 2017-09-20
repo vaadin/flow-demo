@@ -17,16 +17,17 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 
 import java.util.List;
 
-import com.vaadin.annotations.Route;
-import com.vaadin.annotations.Title;
 import com.vaadin.flow.demo.staticmenu.HomeView;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
-import com.vaadin.flow.router.HasUrlParameter;
-import com.vaadin.flow.router.event.BeforeNavigationEvent;
+import com.vaadin.router.HasUrlParameter;
+import com.vaadin.router.Route;
+import com.vaadin.router.Title;
+import com.vaadin.router.event.BeforeNavigationEvent;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.html.Div;
 
 /**
  * The blog post view.
@@ -47,7 +48,8 @@ public class BlogPost extends Div implements HasUrlParameter<Long> {
             return;
         }
 
-        BlogRecord record = BlogsService.getInstance().getRecord(parameter).orElse(null);
+        BlogRecord record = BlogsService.getInstance().getRecord(parameter)
+                .orElse(null);
 
         if (record == null) {
             // FIXME reroute to correct error view

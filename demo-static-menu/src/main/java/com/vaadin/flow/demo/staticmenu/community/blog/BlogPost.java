@@ -19,8 +19,8 @@ import java.util.Collection;
 
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
 

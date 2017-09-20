@@ -23,17 +23,17 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.vaadin.annotations.JavaScript;
-import com.vaadin.annotations.StyleSheet;
-import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.DomEvent;
 import com.vaadin.flow.dom.DomEventListener;
 import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.html.event.ClickNotifier;
-import com.vaadin.server.SerializableFunction;
-import com.vaadin.ui.AttachEvent;
+import com.vaadin.function.SerializableFunction;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.HasStyle;
+import com.vaadin.ui.common.AttachEvent;
+import com.vaadin.ui.common.HasStyle;
+import com.vaadin.ui.common.JavaScript;
+import com.vaadin.ui.common.StyleSheet;
+import com.vaadin.ui.event.ClickNotifier;
+import com.vaadin.ui.event.Tag;
 
 /**
  * Table component based on the jQuery Tablesorter plugin, available at

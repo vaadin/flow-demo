@@ -16,9 +16,9 @@
 package com.vaadin.flow.demo.dynamicmenu;
 
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.html.Div;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
+import com.vaadin.ui.html.Div;
 
 /**
  * An error view showing a message with the wrong location to the user.

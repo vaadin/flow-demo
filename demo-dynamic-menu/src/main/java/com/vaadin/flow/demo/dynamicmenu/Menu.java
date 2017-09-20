@@ -22,9 +22,9 @@ import java.util.Optional;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
 import com.vaadin.flow.router.LocationChangeEvent;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.html.Div;
 
 /**
  * Menu displaying categories as groups and products as items in the groups.

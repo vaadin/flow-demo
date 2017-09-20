@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
-import com.vaadin.flow.html.Anchor;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.router.event.ActivationState;
-import com.vaadin.flow.router.event.BeforeNavigationEvent;
-import com.vaadin.flow.router.event.BeforeNavigationListener;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
+import com.vaadin.router.event.ActivationState;
+import com.vaadin.router.event.BeforeNavigationEvent;
+import com.vaadin.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
 
 /**

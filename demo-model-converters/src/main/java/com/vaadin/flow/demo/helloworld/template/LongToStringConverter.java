@@ -17,7 +17,7 @@ package com.vaadin.flow.demo.helloworld.template;
 
 import java.util.Optional;
 
-import com.vaadin.flow.template.model.ModelConverter;
+import com.vaadin.flow.model.ModelConverter;
 
 /**
  * Converts {@link Long} to {@link String} to use the value on the client side.

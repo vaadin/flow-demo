@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.helloworld.template;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.flow.demo.helloworld.template.Servlet.MyRouterConfigurator;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletConfiguration;
 
 /**
  * The main servlet for the application.

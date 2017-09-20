@@ -22,7 +22,7 @@ import java.util.List;
 import com.vaadin.flow.demo.jquerytable.element.tablesorter.RichColumn;
 import com.vaadin.flow.demo.jquerytable.element.tablesorter.RichTable;
 import com.vaadin.flow.demo.jquerytable.persistence.Report;
-import com.vaadin.server.SerializableFunction;
+import com.vaadin.function.SerializableFunction;
 
 import humanize.Humanize;
 

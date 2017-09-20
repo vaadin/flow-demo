@@ -15,11 +15,11 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.annotations.ParentLayout;
-import com.vaadin.annotations.RoutePrefix;
+import com.vaadin.router.ParentLayout;
+import com.vaadin.router.RoutePrefix;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
-import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.router.RouterLayout;
 
 /**
  * The Download menu.

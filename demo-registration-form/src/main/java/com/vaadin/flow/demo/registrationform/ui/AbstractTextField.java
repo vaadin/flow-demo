@@ -17,7 +17,7 @@ package com.vaadin.flow.demo.registrationform.ui;
 
 import java.util.Optional;
 
-import com.vaadin.ui.HasSize;
+import com.vaadin.ui.common.HasSize;
 
 /**
  * Abstract component with common text field functionality.

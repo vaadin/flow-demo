@@ -17,7 +17,6 @@ package com.vaadin.flow.demo.staticmenu;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.flow.demo.staticmenu.community.CommunityMenuView;
 import com.vaadin.flow.demo.staticmenu.community.CommunityView;
 import com.vaadin.flow.demo.staticmenu.community.blog.BlogPost;
@@ -37,6 +36,7 @@ import com.vaadin.flow.demo.staticmenu.framework.TutorialView;
 import com.vaadin.flow.router.RouterConfiguration;
 import com.vaadin.flow.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletConfiguration;
 
 /**
  * Initializes the site by configuring the router to use different views for

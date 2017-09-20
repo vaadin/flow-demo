@@ -17,9 +17,9 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
-import com.vaadin.annotations.AnnotationReader;
-import com.vaadin.annotations.Title;
+import com.vaadin.router.Title;
 import com.vaadin.ui.Component;
+import com.vaadin.util.AnnotationReader;
 
 /**
  * Generic helpers for the demo.

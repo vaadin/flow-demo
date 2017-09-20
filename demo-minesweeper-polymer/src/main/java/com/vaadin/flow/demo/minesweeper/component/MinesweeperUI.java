@@ -19,10 +19,10 @@ import java.util.Optional;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletConfiguration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
