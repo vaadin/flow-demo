@@ -17,20 +17,20 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
-import com.vaadin.ui.html.Anchor;
-import com.vaadin.ui.html.Div;
 import com.vaadin.router.event.ActivationState;
 import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
 
 /**
  * A menu which adds all items to a single div.
  *
  * @author Vaadin
  */
-public class SimpleMenuBar extends MainMenuBar implements
-        BeforeNavigationListener {
+public class SimpleMenuBar extends MainMenuBar
+        implements BeforeNavigationListener {
 
     private Div menu;
 
@@ -64,21 +64,22 @@ public class SimpleMenuBar extends MainMenuBar implements
 
     @Override
     public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.ACTIVATING.equals(event.getActivationState())) {
-            clearSelection();
-            if (targetExists(event.getNavigationTarget())) {
-                activateMenuTarget(event.getNavigationTarget());
-            } else {
-                StringBuilder path = new StringBuilder();
-                for (String segment : event.getLocation().getSegments()) {
-                    path.append(segment);
-                    Optional<Class> target = getTargetForPath(path.toString());
-                    if (target.isPresent()) {
-                        activateMenuTarget(target.get());
-                        break;
-                    }
-                    path.append("/");
+        if (ActivationState.DEACTIVATING.equals(event.getActivationState())) {
+            return;
+        }
+        clearSelection();
+        if (targetExists(event.getNavigationTarget())) {
+            activateMenuTarget(event.getNavigationTarget());
+        } else {
+            StringBuilder path = new StringBuilder();
+            for (String segment : event.getLocation().getSegments()) {
+                path.append(segment);
+                Optional<Class> target = getTargetForPath(path.toString());
+                if (target.isPresent()) {
+                    activateMenuTarget(target.get());
+                    break;
                 }
+                path.append("/");
             }
         }
     }
