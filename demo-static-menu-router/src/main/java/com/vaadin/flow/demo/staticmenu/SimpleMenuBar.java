@@ -15,18 +15,22 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.flow.html.Anchor;
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.router.event.ActivationState;
-import com.vaadin.flow.router.event.BeforeNavigationEvent;
+import java.util.Optional;
+
+import com.vaadin.router.event.ActivationState;
+import com.vaadin.router.event.BeforeNavigationEvent;
+import com.vaadin.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
 
 /**
  * A menu which adds all items to a single div.
  *
  * @author Vaadin
  */
-public class SimpleMenuBar extends MainMenuBar {
+public class SimpleMenuBar extends MainMenuBar
+        implements BeforeNavigationListener {
 
     private Div menu;
 
@@ -46,7 +50,7 @@ public class SimpleMenuBar extends MainMenuBar {
 
     /**
      * Add a new menu element to this simple menu.
-     * 
+     *
      * @param navigationTarget
      *            menu element navigation target
      * @param name
@@ -60,10 +64,22 @@ public class SimpleMenuBar extends MainMenuBar {
 
     @Override
     public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.ACTIVATING.equals(event.getActivationState())) {
-            clearSelection();
-            if (targetExists(event.getNavigationTarget())) {
-                activateMenuTarget(event.getNavigationTarget());
+        if (ActivationState.DEACTIVATING.equals(event.getActivationState())) {
+            return;
+        }
+        clearSelection();
+        if (targetExists(event.getNavigationTarget())) {
+            activateMenuTarget(event.getNavigationTarget());
+        } else {
+            StringBuilder path = new StringBuilder();
+            for (String segment : event.getLocation().getSegments()) {
+                path.append(segment);
+                Optional<Class> target = getTargetForPath(path.toString());
+                if (target.isPresent()) {
+                    activateMenuTarget(target.get());
+                    break;
+                }
+                path.append("/");
             }
         }
     }

@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.flow.html.Div;
+import com.vaadin.ui.html.Div;
 
 /**
  * The static home page.

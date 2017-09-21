@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.flow.html.Div;
-import com.vaadin.flow.html.HtmlContainer;
 import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.View;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.html.Div;
 
 /**
  * Abstract view class using the same element all the time.

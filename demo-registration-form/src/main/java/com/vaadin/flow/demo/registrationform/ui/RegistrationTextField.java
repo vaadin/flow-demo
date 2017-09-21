@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.textfield.TextField;
 
 /**
  * Text field component extension.

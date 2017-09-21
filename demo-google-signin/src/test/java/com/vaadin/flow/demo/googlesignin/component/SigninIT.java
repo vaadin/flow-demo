@@ -22,12 +22,11 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.annotations.Id;
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
 /**
  * Tests the basic layout of the demo, which includes the server rendering
- * inside the template by using {@link Id}. The authentication mechanism itself
+ * inside the template by using {@link com.vaadin.ui.polymertemplate.Id}. The authentication mechanism itself
  * is not tested, because it opens a second window for specific credentials.
  */
 public class SigninIT extends AbstractChromeTest {

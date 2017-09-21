@@ -17,25 +17,25 @@ package com.vaadin.flow.demo.registrationform.ui;
 
 import java.util.Objects;
 
-import com.vaadin.annotations.StyleSheet;
-import com.vaadin.annotations.Tag;
-import com.vaadin.components.data.HasValue;
 import com.vaadin.data.Binder;
 import com.vaadin.data.Binder.Binding;
 import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.data.BindingValidationStatus.Status;
 import com.vaadin.data.Validator;
-import com.vaadin.flow.html.H2;
-import com.vaadin.flow.html.HtmlComponent;
-import com.vaadin.flow.html.Label;
 import com.vaadin.flow.router.View;
 import com.vaadin.generated.paper.dialog.GeneratedPaperDialog;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
-import com.vaadin.ui.HasStyle;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.button.Button;
+import com.vaadin.ui.common.HasStyle;
+import com.vaadin.ui.common.HasValue;
+import com.vaadin.ui.common.HtmlComponent;
+import com.vaadin.ui.common.StyleSheet;
+import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.html.H2;
+import com.vaadin.ui.html.Label;
+import com.vaadin.ui.layout.HorizontalLayout;
+import com.vaadin.ui.layout.VerticalLayout;
 
 /**
  * Contact editor form.

@@ -17,13 +17,13 @@ package com.vaadin.flow.demo.minesweeper.component;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.annotations.StyleSheet;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletConfiguration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.common.StyleSheet;
 
 /**
  * UI which demonstrates how you can use the Flow {@link Component} API

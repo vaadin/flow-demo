@@ -18,12 +18,12 @@ package com.vaadin.flow.demo.datefield.customelement;
 import java.time.LocalDate;
 import java.util.stream.IntStream;
 
-import com.vaadin.annotations.Tag;
 import com.vaadin.flow.dom.ShadowRoot;
-import com.vaadin.flow.event.ComponentEventListener;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentEvent;
+import com.vaadin.ui.event.ComponentEvent;
+import com.vaadin.ui.event.ComponentEventListener;
+import com.vaadin.ui.event.Tag;
 
 /**
  * Custom element date-field for selecting dates.
