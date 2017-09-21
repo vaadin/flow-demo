@@ -1,0 +1,21 @@
+{
+  "entrypoint": "index.html",
+  "sources": [
+    "bower_components/jquery/dist/jquery.min.js",
+    "bower_components/tablesorter/dist/js/jquery.tablesorter.min.js",
+    "bower_components/tablesorter/dist/js/jquery.tablesorter.widgets.min.js",
+    "bower_components/tablesorter/dist/js/widgets/widget-grouping.min.js"
+  ],
+  "builds": [{
+    "name": "frontend-es5",
+    "js": {"compile": true, "minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  },
+    {
+      "name": "frontend-es6",
+      "js": {"minify": true},
+      "css": {"minify": true},
+      "html": {"minify": true}
+    }]
+}

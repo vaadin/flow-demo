@@ -1,0 +1,58 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="mine-sweeper">
+  <template>
+  <style>
+        .table {
+            display: table;
+        }
+		.row {
+            display: table-row;
+        }
+        .cell {
+		    background: grey;
+		    border: 1px solid black;
+		    width: 24px;
+		    height: 24px;
+		    text-align: center;
+            vertical-align: middle;
+            display: table-cell;
+            box-sizing: border-box;
+            font-size: 14px;
+		}
+
+		.empty {
+		    background: white;
+		}
+
+		.mine {
+		    background: red;
+		}
+
+		.marked {
+		    background: yellow;
+		}
+  </style>
+  <div class="table">
+    <template is="dom-repeat" items="[[cells]]">
+        <div class="row">
+             <template is="dom-repeat" items="[[item]]">
+                <div on-click="handleClick" class$="cell [[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</div>
+             </template>
+        </div>
+    </template>
+   </div>
+   </template>
+
+    <script>
+    class MineSweeper extends Polymer.Element {
+	  static get is() { return 'mine-sweeper'; }
+
+	  handleRightClick (event) {
+          event.preventDefault();
+      }
+    }
+    customElements.define(MineSweeper.is, MineSweeper);
+
+    </script>
+</dom-module>
