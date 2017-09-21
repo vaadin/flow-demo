@@ -17,6 +17,7 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
+import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.event.ActivationState;
 import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.router.event.BeforeNavigationListener;
@@ -59,6 +60,11 @@ public class SimpleMenuBar extends MainMenuBar
     public void addMenuElement(Class<? extends Component> navigationTarget,
             String name) {
         Anchor link = createLink(navigationTarget, name);
+        menu.add(link);
+    }
+
+    public <T> void addMenuElement(Class<? extends HasUrlParameter<T>> navigationTarget, T parameter, String name) {
+        Anchor link = createLink(navigationTarget, parameter, name);
         menu.add(link);
     }
 

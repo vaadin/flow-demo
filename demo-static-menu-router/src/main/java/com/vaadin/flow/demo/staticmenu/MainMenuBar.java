@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.vaadin.router.HasUrlParameter;
 import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
 import com.vaadin.router.Router;
@@ -59,6 +60,18 @@ public abstract class MainMenuBar extends Div {
         link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
         targetPaths.put(link.getHref(), navigationTarget);
+
+        return link;
+    }
+
+    protected <T> Anchor createLink(Class<? extends HasUrlParameter<T>> navigationTarget, T parameter, String name) {
+        String url = ((Router) UI.getCurrent().getRouter().get())
+                .getUrl(navigationTarget, parameter);
+        Anchor link = new Anchor(url, name);
+        link.getElement().setAttribute("router-link", "true");
+        targets.put((Class<? extends Component>) navigationTarget, link);
+        targetPaths.put(link.getHref(),
+                (Class<? extends Component>) navigationTarget);
 
         return link;
     }

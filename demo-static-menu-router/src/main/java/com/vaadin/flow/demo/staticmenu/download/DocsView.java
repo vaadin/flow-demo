@@ -15,8 +15,13 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.router.Route;
 import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.router.HasUrlParameter;
+import com.vaadin.router.OptionalParameter;
+import com.vaadin.router.Route;
+import com.vaadin.router.event.BeforeNavigationEvent;
+import com.vaadin.ui.html.Div;
+import com.vaadin.ui.html.Label;
 
 /**
  * The Docs view.
@@ -24,5 +29,20 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
  * @author Vaadin Ltd
  */
 @Route(value = "docs", layout = DownloadMenuView.class, absolute = true)
-public class DocsView extends DummyView {
+public class DocsView extends DummyView implements HasUrlParameter<String> {
+    Div div = new Div();
+
+    public DocsView() {
+        add(div);
+    }
+
+    @Override
+    public void setParameter(BeforeNavigationEvent event,
+            @OptionalParameter String parameter) {
+        if (parameter != null) {
+            div.setText("Viewing " + parameter);
+        } else {
+            div.setText("");
+        }
+    }
 }
