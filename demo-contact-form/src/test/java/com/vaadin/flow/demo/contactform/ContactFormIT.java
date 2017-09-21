@@ -90,7 +90,7 @@ public class ContactFormIT extends AbstractChromeTest {
 
     private WebElement findBirthDayInput() {
         return (WebElement) getCommandExecutor().executeScript(
-                "return arguments[0].shadowRoot.querySelector(\"input\")",
+                "return arguments[0].shadowRoot.querySelector(\"vaadin-text-field\").shadowRoot.querySelector(\"input\")",
                 findElement(By.id("birth-date")));
     }
 
