@@ -23,19 +23,19 @@ import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.data.BindingValidationStatus.Status;
 import com.vaadin.data.Validator;
 import com.vaadin.flow.router.View;
-import com.vaadin.generated.paper.dialog.GeneratedPaperDialog;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.common.HasStyle;
 import com.vaadin.ui.common.HasValue;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.Tag;
 import com.vaadin.ui.html.H2;
 import com.vaadin.ui.html.Label;
 import com.vaadin.ui.layout.HorizontalLayout;
 import com.vaadin.ui.layout.VerticalLayout;
+import com.vaadin.ui.paper.dialog.GeneratedPaperDialog;
 
 /**
  * Contact editor form.
