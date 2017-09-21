@@ -80,7 +80,7 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertEquals("", findFirstNameInput().getAttribute("value"));
         Assert.assertEquals("", findLastNameInput().getAttribute("value"));
         Assert.assertEquals("",
-                getInShadowRoot(findElement(By.id("phone")), By.id("input"))
+                getInShadowRoot(findElement(By.id("phone")), By.tagName("input"))
                         .getAttribute("value"));
         Assert.assertEquals("", findEmailInput().getAttribute("value"));
         Assert.assertEquals("", findBirthDayInput().getAttribute("value"));
@@ -89,20 +89,20 @@ public class ContactFormIT extends AbstractChromeTest {
 
     private WebElement findBirthDayInput() {
         return getInShadowRoot(findElement(By.id("birth-date")),
-                By.id("input"));
+                By.tagName("input"));
     }
 
     private WebElement findEmailInput() {
-        return getInShadowRoot(findElement(By.id("email")), By.id("input"));
+        return getInShadowRoot(findElement(By.id("email")), By.tagName("input"));
     }
 
     private WebElement findLastNameInput() {
-        return getInShadowRoot(findElement(By.id("last-name")), By.id("input"));
+        return getInShadowRoot(findElement(By.id("last-name")), By.tagName("input"));
     }
 
     private WebElement findFirstNameInput() {
         return getInShadowRoot(findElement(By.id("first-name")),
-                By.id("input"));
+                By.tagName("input"));
     }
 
     private void click(WebElement element) {
