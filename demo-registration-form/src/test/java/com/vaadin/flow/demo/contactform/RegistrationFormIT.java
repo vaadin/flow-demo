@@ -44,8 +44,11 @@ public class RegistrationFormIT extends AbstractChromeTest {
         // discard the dialog
         WebElement fullName = findElement(By.id("full-name"));
         new Actions(getDriver()).moveToElement(fullName).click().build()
-        .perform();
-        WebElement fullNameInput = getInShadowRoot(fullName, By.id("input"));
+                .perform();
+        WebElement fullNameInput = (WebElement) getCommandExecutor()
+                .executeScript(
+                        "return arguments[0].shadowRoot.querySelector(\"input\")",
+                        fullName);
         fullNameInput.sendKeys("foo");
 
         // fill full name -> status should be OK
@@ -64,8 +67,9 @@ public class RegistrationFormIT extends AbstractChromeTest {
 
         // fill phoneOrEmal with possible but incorrect phone number
         WebElement phoneOrEmail = findElement(By.id("phone-or-email"));
-        WebElement phoneOrEmailInput = getInShadowRoot(phoneOrEmail,
-                By.id("input"));
+        WebElement phoneOrEmailInput = (WebElement) getCommandExecutor()
+                .executeScript(
+                        "return arguments[0].shadowRoot.querySelector(\"input\")",phoneOrEmail);
         phoneOrEmailInput.sendKeys("+1");
 
         WebElement phoneOrEmailStatus = findElement(
@@ -96,8 +100,9 @@ public class RegistrationFormIT extends AbstractChromeTest {
 
         // fill passwd with bad passwords
         WebElement pwd = findElement(By.id("pwd"));
-        WebElement pwdInput = getInShadowRoot(pwd,
-                By.id("input"));
+        WebElement pwdInput = (WebElement) getCommandExecutor()
+                .executeScript(
+                        "return arguments[0].shadowRoot.querySelector(\"input\")",pwd);
         pwdInput.sendKeys("bar");
 
         WebElement pwdStatus = findElement(By.id("pwd-status"));
@@ -110,8 +115,9 @@ public class RegistrationFormIT extends AbstractChromeTest {
 
         // fill passwd confirmation with bad value
         WebElement pwdConfirm = findElement(By.id("confirm-pwd"));
-        WebElement pwdConfirmInput = getInShadowRoot(pwdConfirm,
-                By.id("input"));
+        WebElement pwdConfirmInput = (WebElement) getCommandExecutor()
+                .executeScript(
+                        "return arguments[0].shadowRoot.querySelector(\"input\")",pwdConfirm);
         pwdConfirmInput.sendKeys("bar");
 
         WebElement pwdConfirmStatus = findElement(By.id("confirm-pwd-status"));

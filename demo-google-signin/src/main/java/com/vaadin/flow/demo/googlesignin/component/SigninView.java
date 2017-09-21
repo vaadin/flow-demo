@@ -20,7 +20,7 @@ import com.vaadin.flow.model.TemplateModel;
 import com.vaadin.ui.common.AttachEvent;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.html.Div;
 import com.vaadin.ui.html.H2;
 import com.vaadin.ui.polymertemplate.Id;

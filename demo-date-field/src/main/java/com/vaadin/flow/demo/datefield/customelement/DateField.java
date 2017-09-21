@@ -23,7 +23,7 @@ import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.event.ComponentEvent;
 import com.vaadin.ui.event.ComponentEventListener;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * Custom element date-field for selecting dates.

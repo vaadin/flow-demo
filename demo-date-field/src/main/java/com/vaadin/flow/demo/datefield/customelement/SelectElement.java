@@ -20,7 +20,7 @@ import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.event.ChangeNotifier;
 import com.vaadin.ui.event.Synchronize;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * Native select element for selecting items.

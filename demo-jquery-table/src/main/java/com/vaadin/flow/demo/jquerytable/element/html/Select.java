@@ -20,7 +20,7 @@ import java.util.Optional;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.event.ChangeNotifier;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * Component representing a <code>&lt;select&gt;</code> element.
