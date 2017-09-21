@@ -17,14 +17,15 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
+import com.vaadin.flow.demo.staticmenu.community.blog.BlogList;
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.ui.html.Anchor;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.router.event.AfterNavigationEvent;
 import com.vaadin.router.event.AfterNavigationListener;
+import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
 
 /**
  * Main menu bar containing top level navigation items.
@@ -56,6 +57,7 @@ public class MainMenu extends MainMenuBar implements AfterNavigationListener {
         ul.add(createLink(FrameworkView.class, "Framework"));
         ul.add(createLink(ElementsView.class, "Elements"));
         ul.add(createLink(DownloadView.class, "Download"));
+        ul.add(createLink(BlogList.class, "Blogs"));
     }
 
     @Override
