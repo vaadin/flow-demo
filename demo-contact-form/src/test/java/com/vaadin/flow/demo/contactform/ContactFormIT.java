@@ -80,29 +80,36 @@ public class ContactFormIT extends AbstractChromeTest {
         Assert.assertEquals("", findFirstNameInput().getAttribute("value"));
         Assert.assertEquals("", findLastNameInput().getAttribute("value"));
         Assert.assertEquals("",
-                getInShadowRoot(findElement(By.id("phone")), By.id("input"))
-                        .getAttribute("value"));
+                ((WebElement) getCommandExecutor().executeScript(
+                        "return arguments[0].shadowRoot.querySelector(\"input\")",
+                        findElement(By.id("phone")))).getAttribute("value"));
         Assert.assertEquals("", findEmailInput().getAttribute("value"));
         Assert.assertEquals("", findBirthDayInput().getAttribute("value"));
         Assert.assertFalse(checkBox.isSelected());
     }
 
     private WebElement findBirthDayInput() {
-        return getInShadowRoot(findElement(By.id("birth-date")),
-                By.id("input"));
+        return (WebElement) getCommandExecutor().executeScript(
+                "return arguments[0].shadowRoot.querySelector(\"vaadin-text-field\").shadowRoot.querySelector(\"input\")",
+                findElement(By.id("birth-date")));
     }
 
     private WebElement findEmailInput() {
-        return getInShadowRoot(findElement(By.id("email")), By.id("input"));
+        return (WebElement) getCommandExecutor().executeScript(
+                "return arguments[0].shadowRoot.querySelector(\"input\")",
+                findElement(By.id("email")));
     }
 
     private WebElement findLastNameInput() {
-        return getInShadowRoot(findElement(By.id("last-name")), By.id("input"));
+        return (WebElement) getCommandExecutor().executeScript(
+                "return arguments[0].shadowRoot.querySelector(\"input\")",
+                findElement(By.id("last-name")));
     }
 
     private WebElement findFirstNameInput() {
-        return getInShadowRoot(findElement(By.id("first-name")),
-                By.id("input"));
+        return (WebElement) getCommandExecutor().executeScript(
+                "return arguments[0].shadowRoot.querySelector(\"input\")",
+                findElement(By.id("first-name")));
     }
 
     private void click(WebElement element) {

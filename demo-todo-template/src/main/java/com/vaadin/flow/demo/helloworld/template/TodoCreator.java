@@ -24,7 +24,7 @@ import java.util.Random;
 import com.vaadin.flow.model.TemplateModel;
 import com.vaadin.ui.common.ClientDelegate;
 import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
 /**

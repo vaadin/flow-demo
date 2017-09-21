@@ -19,7 +19,7 @@ import com.vaadin.ui.common.HasText;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.common.PropertyDescriptor;
 import com.vaadin.ui.common.PropertyDescriptors;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * Component representing a <code>&lt;option&gt;</code> element.

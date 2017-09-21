@@ -20,7 +20,7 @@ import java.util.List;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
 import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.flow.util.JsonUtils;
 
