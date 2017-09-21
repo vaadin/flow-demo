@@ -17,7 +17,7 @@ package com.vaadin.flow.demo.googlesignin.component;
 
 import com.vaadin.flow.demo.googlesignin.model.ProfileInfo;
 import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
 /**

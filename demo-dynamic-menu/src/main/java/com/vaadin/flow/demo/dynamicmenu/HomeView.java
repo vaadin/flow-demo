@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.dynamicmenu;
 import com.vaadin.flow.router.View;
 import com.vaadin.router.Title;
 import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * The static home page.

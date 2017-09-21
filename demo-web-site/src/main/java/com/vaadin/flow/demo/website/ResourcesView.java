@@ -27,7 +27,7 @@ import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.common.PropertyDescriptor;
 import com.vaadin.ui.common.PropertyDescriptors;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.html.Div;
 
 /**

@@ -20,7 +20,7 @@ import com.vaadin.flow.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.flow.demo.minesweeper.component.data.Point;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.common.HasComponents;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * The Minesweeper main UI component.

@@ -23,7 +23,7 @@ import com.vaadin.flow.router.View;
 import com.vaadin.router.Title;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.event.Tag;
+import com.vaadin.ui.Tag;
 
 /**
  * Displays a list of contacts.
