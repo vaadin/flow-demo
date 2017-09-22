@@ -20,10 +20,8 @@ import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.router.NotFoundException;
 import com.vaadin.router.Route;
-import com.vaadin.router.Router;
+import com.vaadin.router.RouterLink;
 import com.vaadin.router.Title;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
 
 /**
@@ -39,21 +37,16 @@ public class BlogList extends Div {
      * Constructor populating blog listing.
      */
     public BlogList() {
-        BlogsService.getInstance().getItems()
-                .forEach(this::addRecord);
+        BlogsService.getInstance().getItems().forEach(this::addRecord);
     }
 
     private void addRecord(BlogRecord record) {
-        String url = null;
         try {
-            url = ((Router) UI.getCurrent().getRouter().get())
-                    .getUrl(BlogPost.class, record.getId());
+            RouterLink link = new RouterLink(record.getTitle(), BlogPost.class,
+                    record.getId());
+            add(new Div(link));
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
-        Anchor link = new Anchor(url, record.getTitle());
-        link.getElement().setAttribute("router-link", "true");
-
-        add(new Div(link));
     }
 }

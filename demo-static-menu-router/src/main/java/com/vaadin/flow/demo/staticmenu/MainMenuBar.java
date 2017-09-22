@@ -21,11 +21,8 @@ import java.util.Optional;
 
 import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.NotFoundException;
-import com.vaadin.router.Router;
-import com.vaadin.shared.ApplicationConstants;
+import com.vaadin.router.RouterLink;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
 
 /**
@@ -36,9 +33,9 @@ import com.vaadin.ui.html.Div;
  */
 public abstract class MainMenuBar extends Div {
 
-    private Map<Class<? extends Component>, Anchor> targets = new HashMap<>();
+    private Map<Class<? extends Component>, RouterLink> targets = new HashMap<>();
     private Map<String, Class<? extends Component>> targetPaths = new HashMap<>();
-    private Anchor selected;
+    private RouterLink selected;
 
     /**
      * Build main menu bar.
@@ -54,41 +51,33 @@ public abstract class MainMenuBar extends Div {
      */
     public abstract void init();
 
-    protected Anchor createLink(Class<? extends Component> navigationTarget,
+    protected RouterLink createLink(Class<? extends Component> navigationTarget,
             String name) {
-        String url = null;
         try {
-            url = ((Router) UI.getCurrent().getRouter().get())
-                    .getUrl(navigationTarget);
+            RouterLink link = new RouterLink(name, navigationTarget);
+            link.getElement().setAttribute("router-link", "true");
+            targets.put(navigationTarget, link);
+            targetPaths.put(link.getHref(), navigationTarget);
+
+            return link;
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
-        Anchor link = new Anchor(url, name);
-        link.getElement().setAttribute("router-link", "true");
-        targets.put(navigationTarget, link);
-        targetPaths.put(link.getHref(), navigationTarget);
-
-        return link;
     }
 
-    protected <T> Anchor createLink(
+    protected <T> RouterLink createLink(
             Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
             String name) {
-        String url = null;
         try {
-            url = ((Router) UI.getCurrent().getRouter().get())
-                    .getUrl(navigationTarget, parameter);
+            RouterLink link = new RouterLink(name, navigationTarget, parameter);
+            targets.put((Class<? extends Component>) navigationTarget, link);
+            targetPaths.put(link.getHref(),
+                    (Class<? extends Component>) navigationTarget);
+
+            return link;
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
-        Anchor link = new Anchor(url, name);
-        link.getElement().setAttribute(
-                ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "true");
-        targets.put((Class<? extends Component>) navigationTarget, link);
-        targetPaths.put(link.getHref(),
-                (Class<? extends Component>) navigationTarget);
-
-        return link;
     }
 
     /**
@@ -118,7 +107,7 @@ public abstract class MainMenuBar extends Div {
      *            navigation target
      */
     protected void activateMenuTarget(Class<?> navigationTarget) {
-        Anchor activatedLink = targets.get(navigationTarget);
+        RouterLink activatedLink = targets.get(navigationTarget);
         activatedLink.addClassName("selected");
         selected = activatedLink;
     }
