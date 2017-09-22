@@ -63,7 +63,21 @@ public class SimpleMenuBar extends MainMenuBar
         menu.add(link);
     }
 
-    public <T> void addMenuElement(Class<? extends HasUrlParameter<T>> navigationTarget, T parameter, String name) {
+    /**
+     * Add a menu element for a navigation target with a parameter.
+     * 
+     * @param navigationTarget
+     *            navigation target
+     * @param parameter
+     *            parameter
+     * @param name
+     *            link name
+     * @param <T>
+     *            parameter type
+     */
+    public <T> void addMenuElement(
+            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
+            String name) {
         Anchor link = createLink(navigationTarget, parameter, name);
         menu.add(link);
     }

@@ -21,7 +21,6 @@ import com.vaadin.router.OptionalParameter;
 import com.vaadin.router.Route;
 import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.Label;
 
 /**
  * The Docs view.
@@ -32,6 +31,9 @@ import com.vaadin.ui.html.Label;
 public class DocsView extends DummyView implements HasUrlParameter<String> {
     Div div = new Div();
 
+    /**
+     * Constructor
+     */
     public DocsView() {
         add(div);
     }

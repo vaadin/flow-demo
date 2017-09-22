@@ -35,9 +35,12 @@ import com.vaadin.ui.html.Div;
 @Title("Blog Post")
 public class BlogList extends Div {
 
+    /**
+     * Constructor populating blog listing.
+     */
     public BlogList() {
         BlogsService.getInstance().getItems()
-                .forEach(blogRecord -> addRecord(blogRecord));
+                .forEach(this::addRecord);
     }
 
     private void addRecord(BlogRecord record) {
