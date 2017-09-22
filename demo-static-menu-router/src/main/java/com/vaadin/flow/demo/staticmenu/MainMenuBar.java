@@ -20,11 +20,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.vaadin.router.HasUrlParameter;
-import com.vaadin.ui.html.Anchor;
-import com.vaadin.ui.html.Div;
 import com.vaadin.router.Router;
+import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.html.Anchor;
+import com.vaadin.ui.html.Div;
 
 /**
  * Menu view handler. Updates menu item highlights before navigation in the
@@ -64,11 +65,14 @@ public abstract class MainMenuBar extends Div {
         return link;
     }
 
-    protected <T> Anchor createLink(Class<? extends HasUrlParameter<T>> navigationTarget, T parameter, String name) {
+    protected <T> Anchor createLink(
+            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
+            String name) {
         String url = ((Router) UI.getCurrent().getRouter().get())
                 .getUrl(navigationTarget, parameter);
         Anchor link = new Anchor(url, name);
-        link.getElement().setAttribute("router-link", "true");
+        link.getElement().setAttribute(
+                ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "true");
         targets.put((Class<? extends Component>) navigationTarget, link);
         targetPaths.put(link.getHref(),
                 (Class<? extends Component>) navigationTarget);
