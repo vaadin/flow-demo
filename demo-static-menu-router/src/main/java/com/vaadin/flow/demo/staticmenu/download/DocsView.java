@@ -32,7 +32,7 @@ public class DocsView extends DummyView implements HasUrlParameter<String> {
     Div div = new Div();
 
     /**
-     * Constructor
+     * Constructor for the docs view.
      */
     public DocsView() {
         add(div);
