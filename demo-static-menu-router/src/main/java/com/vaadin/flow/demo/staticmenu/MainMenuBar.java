@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.vaadin.router.HasUrlParameter;
+import com.vaadin.router.NotFoundException;
 import com.vaadin.router.Router;
 import com.vaadin.shared.ApplicationConstants;
 import com.vaadin.ui.Component;
@@ -55,8 +56,13 @@ public abstract class MainMenuBar extends Div {
 
     protected Anchor createLink(Class<? extends Component> navigationTarget,
             String name) {
-        String url = ((Router) UI.getCurrent().getRouter().get())
-                .getUrl(navigationTarget);
+        String url = null;
+        try {
+            url = ((Router) UI.getCurrent().getRouter().get())
+                    .getUrl(navigationTarget);
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Anchor link = new Anchor(url, name);
         link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
@@ -68,8 +74,13 @@ public abstract class MainMenuBar extends Div {
     protected <T> Anchor createLink(
             Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
             String name) {
-        String url = ((Router) UI.getCurrent().getRouter().get())
-                .getUrl(navigationTarget, parameter);
+        String url = null;
+        try {
+            url = ((Router) UI.getCurrent().getRouter().get())
+                    .getUrl(navigationTarget, parameter);
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Anchor link = new Anchor(url, name);
         link.getElement().setAttribute(
                 ApplicationConstants.ROUTER_LINK_ATTRIBUTE, "true");
