@@ -15,8 +15,9 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.external.jsoup.nodes.Document;
-import com.vaadin.external.jsoup.nodes.Element;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.ServiceInitEvent;
