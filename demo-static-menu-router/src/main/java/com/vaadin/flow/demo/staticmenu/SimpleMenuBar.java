@@ -22,7 +22,6 @@ import com.vaadin.router.event.ActivationState;
 import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.router.event.BeforeNavigationListener;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
 
 /**
@@ -59,8 +58,7 @@ public class SimpleMenuBar extends MainMenuBar
      */
     public void addMenuElement(Class<? extends Component> navigationTarget,
             String name) {
-        Anchor link = createLink(navigationTarget, name);
-        menu.add(link);
+        menu.add(createLink(navigationTarget, name));
     }
 
     /**
@@ -78,8 +76,7 @@ public class SimpleMenuBar extends MainMenuBar
     public <T> void addMenuElement(
             Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
             String name) {
-        Anchor link = createLink(navigationTarget, parameter, name);
-        menu.add(link);
+        menu.add(createLink(navigationTarget, parameter, name));
     }
 
     @Override

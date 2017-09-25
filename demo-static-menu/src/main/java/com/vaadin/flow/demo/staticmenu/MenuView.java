@@ -24,7 +24,7 @@ import com.vaadin.ui.html.Div;
 import com.vaadin.ui.html.Label;
 import com.vaadin.flow.router.HasChildView;
 import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.router.RouterLink;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.common.HasStyle;

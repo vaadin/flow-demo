@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.ui.html.Div;
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.router.RouterLink;
 
 /**
  * The blog record component.

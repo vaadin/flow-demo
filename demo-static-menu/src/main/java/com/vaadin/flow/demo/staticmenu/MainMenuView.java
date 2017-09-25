@@ -24,7 +24,7 @@ import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.ui.html.Div;
 import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.router.RouterLink;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.Component;
 
