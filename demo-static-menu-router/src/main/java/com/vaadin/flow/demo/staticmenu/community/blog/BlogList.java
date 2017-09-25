@@ -18,7 +18,6 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.router.NotFoundException;
 import com.vaadin.router.Route;
 import com.vaadin.router.RouterLink;
 import com.vaadin.router.Title;
@@ -41,12 +40,8 @@ public class BlogList extends Div {
     }
 
     private void addRecord(BlogRecord record) {
-        try {
-            RouterLink link = new RouterLink(record.getTitle(), BlogPost.class,
-                    record.getId());
-            add(new Div(link));
-        } catch (NotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        RouterLink link = new RouterLink(record.getTitle(), BlogPost.class,
+                record.getId());
+        add(new Div(link));
     }
 }

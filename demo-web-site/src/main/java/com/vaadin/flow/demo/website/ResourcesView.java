@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.router.RouterLink;
 import com.vaadin.server.VaadinServletService;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.common.HtmlComponent;

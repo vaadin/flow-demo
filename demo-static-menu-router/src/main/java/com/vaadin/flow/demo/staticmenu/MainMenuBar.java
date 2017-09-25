@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.NotFoundException;
 import com.vaadin.router.RouterLink;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.html.Div;
@@ -53,31 +52,23 @@ public abstract class MainMenuBar extends Div {
 
     protected RouterLink createLink(Class<? extends Component> navigationTarget,
             String name) {
-        try {
-            RouterLink link = new RouterLink(name, navigationTarget);
-            link.getElement().setAttribute("router-link", "true");
-            targets.put(navigationTarget, link);
-            targetPaths.put(link.getHref(), navigationTarget);
+        RouterLink link = new RouterLink(name, navigationTarget);
+        link.getElement().setAttribute("router-link", "true");
+        targets.put(navigationTarget, link);
+        targetPaths.put(link.getHref(), navigationTarget);
 
-            return link;
-        } catch (NotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return link;
     }
 
     protected <T> RouterLink createLink(
             Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
             String name) {
-        try {
-            RouterLink link = new RouterLink(name, navigationTarget, parameter);
-            targets.put((Class<? extends Component>) navigationTarget, link);
-            targetPaths.put(link.getHref(),
-                    (Class<? extends Component>) navigationTarget);
+        RouterLink link = new RouterLink(name, navigationTarget, parameter);
+        targets.put((Class<? extends Component>) navigationTarget, link);
+        targetPaths.put(link.getHref(),
+                (Class<? extends Component>) navigationTarget);
 
-            return link;
-        } catch (NotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return link;
     }
 
     /**

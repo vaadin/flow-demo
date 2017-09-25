@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.router.RouterLink;
 import com.vaadin.flow.router.View;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.Tag;
