@@ -33,7 +33,7 @@ import com.vaadin.ui.html.Div;
  * component.
  */
 @Title("Hello World with components")
-@Route(value = "component", layout = MainView.class)
+@Route(value = "component", layout = MainLayout.class)
 public class HelloWorldComponent extends Composite<Div> {
     /**
      * Creates the hello world Components API based component.
@@ -80,7 +80,7 @@ public class HelloWorldComponent extends Composite<Div> {
     @Tag("paper-input")
     @HtmlImport("frontend://bower_components/paper-input/paper-input.html")
     public static class PaperInput extends Component {
-        /*
+        /**
          * Automatically send the current value of the "value" property to the
          * server whenever a value-changed event is fired by the paper-input
          * element.
@@ -90,7 +90,7 @@ public class HelloWorldComponent extends Composite<Div> {
             return getElement().getProperty("value", "");
         }
 
-        /*
+        /**
          * Adds a listener that is automatically hooked up with a DOM event
          * based on annotations on the event class defined below.
          */
@@ -106,6 +106,16 @@ public class HelloWorldComponent extends Composite<Div> {
      */
     @DomEvent("value-changed")
     public static class ValueChangeEvent extends ComponentEvent<PaperInput> {
+        /**
+         * Creates a new event using the given source and indicator whether the
+         * event originated from the client side or the server side.
+         * 
+         * @param source
+         *            the source component
+         * @param fromClient
+         *            <code>true</code> if the event originated from the client
+         *            side, <code>false</code> otherwise
+         */
         public ValueChangeEvent(PaperInput source, boolean fromClient) {
             super(source, fromClient);
         }

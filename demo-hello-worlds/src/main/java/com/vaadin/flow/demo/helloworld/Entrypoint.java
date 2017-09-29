@@ -19,10 +19,16 @@ import com.vaadin.router.Route;
 import com.vaadin.router.Title;
 import com.vaadin.ui.html.Div;
 
+/**
+ * The navigation target to show when opening the application to root.
+ */
 @Title("Hello worlds")
-@Route(value = "", layout = MainView.class)
+@Route(value = "", layout = MainLayout.class)
 public class Entrypoint extends Div {
 
+    /**
+     * Navigation target constructor.
+     */
     public Entrypoint() {
         setText("Select version from the list above.");
     }

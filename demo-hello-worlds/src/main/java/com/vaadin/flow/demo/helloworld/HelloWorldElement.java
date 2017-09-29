@@ -26,9 +26,14 @@ import com.vaadin.ui.UI;
  * Hello World view based on elements.
  */
 @Title("Hello World with elements")
-@Route(value = "element", layout = MainView.class)
+@Route(value = "element", layout = MainLayout.class)
 public class HelloWorldElement extends Component {
 
+    public static final String VALUE_PROPERTY = "value";
+
+    /**
+     * Element demo constructor.
+     */
     public HelloWorldElement() {
         // Set the root of the view to be a div element
         super(ElementFactory.createDiv());
@@ -48,10 +53,10 @@ public class HelloWorldElement extends Component {
          * server whenever a value-changed event is fired by the paper-input
          * element.
          */
-        input.synchronizeProperty("value", "value-changed");
+        input.synchronizeProperty(VALUE_PROPERTY, "value-changed");
 
         // Listen for value change events
-        input.addPropertyChangeListener("value",
+        input.addPropertyChangeListener(VALUE_PROPERTY,
                 event -> updateGreeting(input, greeting));
 
         // Set up DOM id values used for integration tests
@@ -66,7 +71,7 @@ public class HelloWorldElement extends Component {
     }
 
     private void updateGreeting(Element input, Element greeting) {
-        String name = input.getProperty("value", "");
+        String name = input.getProperty(VALUE_PROPERTY, "");
 
         // Update the element based on the name
         if (name.isEmpty()) {

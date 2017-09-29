@@ -31,9 +31,12 @@ import com.vaadin.ui.polymertemplate.PolymerTemplate;
 @Tag("hello-world")
 @HtmlImport("frontend://src/HelloWorld.html")
 @Title("Hello World with a template")
-@Route(value = "template", layout = MainView.class)
+@Route(value = "template", layout = MainLayout.class)
 public class HelloWorldTemplate extends PolymerTemplate<HelloWorldModel> {
 
+    /**
+     * Template constructor.
+     */
     public HelloWorldTemplate() {
         // Set the initial greeting value
         updateGreeting();
@@ -63,12 +66,12 @@ public class HelloWorldTemplate extends PolymerTemplate<HelloWorldModel> {
      * server and the client.
      */
     public interface HelloWorldModel extends TemplateModel {
-        /*
+        /**
          * The name shown in the input is updated from the client.
          */
         String getName();
 
-        /*
+        /**
          * The greeting is updated from Java code on the server.
          */
         void setGreeting(String greeting);

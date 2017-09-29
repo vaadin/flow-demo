@@ -38,12 +38,17 @@ import com.vaadin.ui.html.H2;
  * variants.
  */
 @StyleSheet("context://styles.css")
-public class MainView extends Composite<Div>
+public class MainLayout extends Composite<Div>
         implements RouterLayout, AfterNavigationListener {
+
+    private Map<String, RouterLink> targetPaths = new HashMap<>();
 
     private Div container;
 
-    public MainView() {
+    /**
+     * Main layout constructor
+     */
+    public MainLayout() {
         // Guiding texts
         H1 heading = new H1("3 ways to say Hello");
         Text intro = new Text(
@@ -99,8 +104,6 @@ public class MainView extends Composite<Div>
             container.add((Component) child);
         }
     }
-
-    private Map<String, RouterLink> targetPaths = new HashMap<>();
 
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
