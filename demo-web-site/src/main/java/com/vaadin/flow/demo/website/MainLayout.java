@@ -30,7 +30,7 @@ import com.vaadin.ui.common.StyleSheet;
  * @since
  * @author Vaadin Ltd
  */
-@StyleSheet("css/site.css")
+@StyleSheet("context://css/site.css")
 public final class MainLayout extends AngularTemplate implements View {
 
     public static class MenuItem {
