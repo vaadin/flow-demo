@@ -46,7 +46,7 @@ public class MainLayout extends Composite<Div>
     private Div container;
 
     /**
-     * Main layout constructor
+     * Main layout constructor.
      */
     public MainLayout() {
         // Guiding texts

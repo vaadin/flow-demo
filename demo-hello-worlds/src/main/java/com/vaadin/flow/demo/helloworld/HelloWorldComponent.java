@@ -93,6 +93,10 @@ public class HelloWorldComponent extends Composite<Div> {
         /**
          * Adds a listener that is automatically hooked up with a DOM event
          * based on annotations on the event class defined below.
+         * 
+         * @param listener
+         *            value change listener to add
+         * @return registration to remove listener with
          */
         public Registration addValueChangeListener(
                 ComponentEventListener<ValueChangeEvent> listener) {

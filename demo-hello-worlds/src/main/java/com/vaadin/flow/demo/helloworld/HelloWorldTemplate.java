@@ -68,11 +68,16 @@ public class HelloWorldTemplate extends PolymerTemplate<HelloWorldModel> {
     public interface HelloWorldModel extends TemplateModel {
         /**
          * The name shown in the input is updated from the client.
+         * 
+         * @return current name in model
          */
         String getName();
 
         /**
          * The greeting is updated from Java code on the server.
+         * 
+         * @param greeting
+         *            greeting to set to the model
          */
         void setGreeting(String greeting);
     }
