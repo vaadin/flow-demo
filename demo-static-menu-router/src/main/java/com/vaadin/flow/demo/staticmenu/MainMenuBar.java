@@ -53,7 +53,6 @@ public abstract class MainMenuBar extends Div {
     protected RouterLink createLink(Class<? extends Component> navigationTarget,
             String name) {
         RouterLink link = new RouterLink(name, navigationTarget);
-        link.getElement().setAttribute("router-link", "true");
         targets.put(navigationTarget, link);
         targetPaths.put(link.getHref(), navigationTarget);
 

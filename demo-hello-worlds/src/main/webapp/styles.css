@@ -1,0 +1,47 @@
+.main-view {
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+/*.main-view a[router-link] {*/
+    /*display: block;*/
+    /*margin-top: 10px;*/
+/*}*/
+
+.container {
+    margin-top: 20px;
+    border-top: 1px solid black;
+}
+
+.container>h2 {
+    margin-bottom: 0;
+}
+
+.container paper-input {
+    width: 200px;
+}
+
+.menu {
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: auto;
+    height: 90px;
+}
+
+.topnav {
+    padding: 14px 0 10px 5%;
+    background: #00b4f0;
+}
+
+.topnav > a {
+    padding-right: 10px;
+    color: #ccf0fc;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.topnav .selected {
+    color: white;
+}

@@ -16,6 +16,7 @@
         <module>demo-minesweeper-polymer</module>
         <module>demo-hello-world</module>
         <module>demo-hello-world-template</module>
+        <module>demo-hello-worlds</module>
         <module>demo-model-converters</module>
         <module>demo-web-site</module>
         <module>demo-static-menu</module>
