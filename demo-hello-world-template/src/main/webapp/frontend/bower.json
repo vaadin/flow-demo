@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "polymer": "~2.0.2",
-    "paper-input": "~2.0.1"
+    "paper-input": "~2.0.1",
+    "vaadin-combo-box": "vaadin/vaadin-combo-box#3.0.0-alpha5"
   }
 }

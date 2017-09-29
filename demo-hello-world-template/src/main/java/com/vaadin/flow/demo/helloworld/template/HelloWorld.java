@@ -15,10 +15,15 @@
  */
 package com.vaadin.flow.demo.helloworld.template;
 
+import com.vaadin.data.Binder;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.model.TemplateModel;
 import com.vaadin.flow.router.View;
-import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.combobox.ComboBox;
+import com.vaadin.ui.common.AttachEvent;
+import com.vaadin.ui.common.HtmlImport;
+import com.vaadin.ui.polymertemplate.Id;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
 /**
@@ -26,46 +31,102 @@ import com.vaadin.ui.polymertemplate.PolymerTemplate;
  */
 @Tag("hello-world")
 @HtmlImport("frontend://components/HelloWorld.html")
-public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel>
-        implements View {
-    private static final String EMPTY_NAME_GREETING = "Please enter your name";
+public class HelloWorld extends PolymerTemplate<HelloWorld.HelloWorldModel> implements View {
+	private static final String EMPTY_NAME_GREETING = "Please enter your name";
+	/**
+	 * Creates the hello world template.
+	 */
 
-    /**
-     * Creates the hello world template.
-     */
-    public HelloWorld() {
-        setId("template");
-        getModel().setGreeting(EMPTY_NAME_GREETING);
+	@Id("combo")
+	private ComboBox<String> combobox;
 
-        getElement().addPropertyChangeListener("userInput",
-                event -> sayHello(event.getValue().toString()));
-    }
+	@Id("combo2")
+	private ComboBox<String> combobox2;
 
-    /**
-     * Model for the template.
-     */
-    public interface HelloWorldModel extends TemplateModel {
-        /**
-         * Gets user input from corresponding template page.
-         *
-         * @return user input string
-         */
-        String getUserInput();
+	@Id("inputId")
+	private Element input;
 
-        /**
-         * Sets greeting that is displayed in corresponding template page.
-         *
-         * @param greeting
-         *            greeting string
-         */
-        void setGreeting(String greeting);
-    }
+	public class MyBean {
+		private String value;
 
-    private void sayHello(String nameString) {
-        if (nameString == null || nameString.isEmpty()) {
-            getModel().setGreeting(EMPTY_NAME_GREETING);
-        } else {
-            getModel().setGreeting(String.format("Hello %s!", nameString));
-        }
-    }
+		public MyBean() {
+
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
+
+	}
+
+	private Binder<MyBean> binder = new Binder<>(MyBean.class);
+
+	public HelloWorld() {
+		setId("template");
+		getModel().setGreeting(EMPTY_NAME_GREETING);
+
+		getElement().addPropertyChangeListener("userInput", event -> sayHello(event.getValue().toString()));
+
+		MyBean m = new MyBean();
+		m.setValue("first combo");
+
+		combobox.setItems("first combo", "hello value", "attach value");
+		//
+		binder.forField(combobox).bind("value");
+		//
+		binder.readBean(m);
+
+		combobox2.setItems("second combo", "hello2 value", "attach2 value", "3");
+		combobox2.setValue("second combo");
+	}
+
+	@Override
+	protected void onAttach(AttachEvent attachEvent) {
+		super.onAttach(attachEvent);
+
+
+		MyBean m = new MyBean();
+		m.setValue("attach value");
+		binder.readBean(m);
+		combobox2.setValue("attach2 value");
+
+
+	}
+
+	/**
+	 * Model for the template.
+	 */
+	public interface HelloWorldModel extends TemplateModel {
+		/**
+		 * Gets user input from corresponding template page.
+		 *
+		 * @return user input string
+		 */
+		String getUserInput();
+
+		/**
+		 * Sets greeting that is displayed in corresponding template page.
+		 *
+		 * @param greeting greeting string
+		 */
+		void setGreeting(String greeting);
+	}
+
+	private void sayHello(String nameString) {
+		if (nameString == null || nameString.isEmpty()) {
+			getModel().setGreeting(EMPTY_NAME_GREETING);
+		} else {
+			getModel().setGreeting(String.format("Hello %s!", nameString));
+		}
+
+		MyBean m = new MyBean();
+		m.setValue("hello value");
+		binder.readBean(m);
+		combobox2.setValue("hello2 value");
+
+	}
 }
