@@ -15,10 +15,11 @@
  */
 package com.vaadin.flow.demo.staticmenu.elements;
 
-import com.vaadin.router.ParentLayout;
-import com.vaadin.router.RoutePrefix;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
+import com.vaadin.flow.demo.staticmenu.download.DocsView;
+import com.vaadin.router.ParentLayout;
+import com.vaadin.router.RoutePrefix;
 import com.vaadin.router.RouterLayout;
 
 /**
@@ -35,6 +36,9 @@ public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {
      */
     public ElementsMenuView() {
         addMenuElement(ElementDemoView.class, "Demos");
+        addMenuElement(DocsView.class,
+                "-/part/elements/elements-getting-started.html",
+                "Getting Started");
     }
 
 }
