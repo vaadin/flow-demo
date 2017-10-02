@@ -37,7 +37,7 @@ import com.vaadin.ui.html.H2;
  * The main view contains a menu and a container for either of the hello world
  * variants.
  */
-@StyleSheet("context://styles.css")
+@StyleSheet("frontend://src/styles.css")
 public class MainLayout extends Composite<Div>
         implements RouterLayout, AfterNavigationListener {
 
