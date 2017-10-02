@@ -34,7 +34,7 @@ import com.vaadin.ui.Component;
  * @author Vaadin
  * @since
  */
-@StyleSheet("css/site.css")
+@StyleSheet("context://css/site.css")
 public class MainMenuView extends SimpleMenuView {
 
     private HtmlContainer ul;
