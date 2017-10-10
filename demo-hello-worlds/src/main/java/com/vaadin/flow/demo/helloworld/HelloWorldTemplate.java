@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.helloworld;
 import com.vaadin.flow.demo.helloworld.HelloWorldTemplate.HelloWorldModel;
 import com.vaadin.flow.model.TemplateModel;
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
@@ -30,7 +30,7 @@ import com.vaadin.ui.polymertemplate.PolymerTemplate;
  */
 @Tag("hello-world")
 @HtmlImport("frontend://src/HelloWorld.html")
-@Title("Hello World with a template")
+@PageTitle("Hello World with a template")
 @Route(value = "template", layout = MainLayout.class)
 public class HelloWorldTemplate extends PolymerTemplate<HelloWorldModel> {
 

@@ -16,7 +16,7 @@
 package com.vaadin.flow.demo.helloworld;
 
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
@@ -32,7 +32,7 @@ import com.vaadin.ui.html.Div;
  * Hello World view based on components. This is a composite based on a div
  * component.
  */
-@Title("Hello World with components")
+@PageTitle("Hello World with components")
 @Route(value = "component", layout = MainLayout.class)
 public class HelloWorldComponent extends Composite<Div> {
     /**

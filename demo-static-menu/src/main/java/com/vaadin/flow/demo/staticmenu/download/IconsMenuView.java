@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuView;
 
 /**
@@ -24,7 +24,7 @@ import com.vaadin.flow.demo.staticmenu.SimpleMenuView;
  * @since
  * @author Vaadin Ltd
  */
-@Title("Vaadin Icons")
+@PageTitle("Vaadin Icons")
 public class IconsMenuView extends SimpleMenuView {
 
     /**

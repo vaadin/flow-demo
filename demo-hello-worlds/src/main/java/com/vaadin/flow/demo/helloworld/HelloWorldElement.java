@@ -18,14 +18,14 @@ package com.vaadin.flow.demo.helloworld;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
 /**
  * Hello World view based on elements.
  */
-@Title("Hello World with elements")
+@PageTitle("Hello World with elements")
 @Route(value = "element", layout = MainLayout.class)
 public class HelloWorldElement extends Component {
 

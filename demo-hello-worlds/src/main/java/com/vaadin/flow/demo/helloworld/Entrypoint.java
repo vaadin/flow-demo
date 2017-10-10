@@ -16,13 +16,13 @@
 package com.vaadin.flow.demo.helloworld;
 
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.html.Div;
 
 /**
  * The navigation target to show when opening the application to root.
  */
-@Title("Hello worlds")
+@PageTitle("Hello worlds")
 @Route(value = "", layout = MainLayout.class)
 public class Entrypoint extends Div {
 

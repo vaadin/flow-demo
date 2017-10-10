@@ -16,16 +16,16 @@
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.vaadin.flow.demo.staticmenu.HomeView;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
+import com.vaadin.router.HasDynamicTitle;
 import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
 import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.html.Div;
 
@@ -35,8 +35,10 @@ import com.vaadin.ui.html.Div;
  * @author Vaadin Ltd
  */
 @Route(value = "blog", layout = MainLayout.class)
-@Title("Blog Post")
-public class BlogPost extends Div implements HasUrlParameter<Long> {
+public class BlogPost extends Div
+        implements HasUrlParameter<Long>, HasDynamicTitle {
+
+    private String blogTitle = "";
 
     @Override
     public void setParameter(BeforeNavigationEvent event, Long parameter) {
@@ -48,24 +50,27 @@ public class BlogPost extends Div implements HasUrlParameter<Long> {
             return;
         }
 
-        BlogRecord record = BlogsService.getInstance().getRecord(parameter)
-                .orElse(null);
+        Optional<BlogRecord> record = BlogsService.getInstance().getRecord(parameter);
 
-        if (record == null) {
+        if (!record.isPresent()) {
             // FIXME reroute to correct error view
             event.rerouteTo(HomeView.class);
-            return;
         } else {
-            HtmlContainer title = new HtmlContainer("h1");
-            title.setText(record.getTitle());
-            title.setClassName("blog-item-title");
-
-            Div text = new Div();
-            text.setText(record.getText());
-            text.setClassName("blog-content");
-
-            add(title, text);
+            blogTitle = record.get().getTitle();
+            displayRecord(record.get());
         }
+    }
+
+    private void displayRecord(BlogRecord record) {
+        HtmlContainer title = new HtmlContainer("h1");
+        title.setText(record.getTitle());
+        title.setClassName("blog-item-title");
+
+        Div text = new Div();
+        text.setText(record.getText());
+        text.setClassName("blog-content");
+
+        add(title, text);
     }
 
     @Override
@@ -80,5 +85,10 @@ public class BlogPost extends Div implements HasUrlParameter<Long> {
             // just return null
         }
         return toReturn;
+    }
+
+    @Override
+    public String getPageTitle() {
+        return blogTitle;
     }
 }

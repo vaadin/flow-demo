@@ -16,14 +16,14 @@
 package com.vaadin.flow.demo.staticmenu;
 
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 
 /**
  * The static home page.
  *
  * @author Vaadin Ltd
  */
-@Title("Home")
+@PageTitle("Home")
 @Route(value="", layout = MainLayout.class)
 public class HomeView extends DummyView {
     /**

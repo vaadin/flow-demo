@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.flow.demo.staticmenu.DummyView;
 import com.vaadin.ui.html.Div;
 import com.vaadin.flow.router.LocationChangeEvent;
@@ -26,7 +26,7 @@ import com.vaadin.flow.router.LocationChangeEvent;
  * @author Vaadin
  * @since
  */
-@Title("Documentation")
+@PageTitle("Documentation")
 public class DocsSubView extends DummyView {
 
     @Override

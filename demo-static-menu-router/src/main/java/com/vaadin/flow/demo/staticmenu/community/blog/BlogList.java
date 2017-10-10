@@ -20,7 +20,7 @@ import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.router.Route;
 import com.vaadin.router.RouterLink;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.html.Div;
 
 /**
@@ -29,7 +29,7 @@ import com.vaadin.ui.html.Div;
  * @author Vaadin Ltd
  */
 @Route(value = "blog", layout = MainLayout.class)
-@Title("Blog Post")
+@PageTitle("Blog Post")
 public class BlogList extends Div {
 
     /**
