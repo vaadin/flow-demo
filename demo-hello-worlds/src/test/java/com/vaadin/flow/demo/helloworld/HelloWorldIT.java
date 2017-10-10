@@ -30,11 +30,11 @@ public class HelloWorldIT extends AbstractChromeTest {
 
         // Template based view
         waitForElementPresent(By.id("template-link"));
-        WebElement link = driver.findElement(By.id("template-link"));
+        WebElement link = findElement(By.id("template-link"));
         link.click();
 
         waitForElementPresent(By.id("template"));
-        WebElement template = driver.findElement(By.id("template"));
+        WebElement template = findElement(By.id("template"));
 
         WebElement greeting = getInShadowRoot(template,
                 By.id("greeting"));
@@ -46,11 +46,11 @@ public class HelloWorldIT extends AbstractChromeTest {
         assertGreeting(greeting);
 
         // Components API based view
-        WebElement components = driver.findElement(By.id("components-link"));
+        WebElement components = findElement(By.id("components-link"));
         assertHelloWorld(components, "componentsGreeting");
 
         // Elements API based view
-        WebElement elements = driver.findElement(By.id("elements-link"));
+        WebElement elements = findElement(By.id("elements-link"));
         assertHelloWorld(elements, "elementsGreeting");
     }
 
@@ -58,18 +58,17 @@ public class HelloWorldIT extends AbstractChromeTest {
         link.click();
 
         waitForElementPresent(By.id(greetingId));
-        WebElement greeting = driver.findElement(By.id(greetingId));
+        WebElement greeting = findElement(By.id(greetingId));
 
         assertInitialGreeting(greeting);
 
-        driver.findElement(By.id("inputId")).sendKeys("John Doe");
+        findElement(By.id("inputId")).sendKeys("John Doe");
 
         assertGreeting(greeting);
     }
 
     private void assertGreeting(WebElement greeting) {
-        Assert.assertEquals("Incorrect greeting after input", "Hello John Doe!",
-                greeting.getText());
+        waitUntil(aDriver -> "Hello John Doe!".equals(greeting.getText()));
     }
 
     private void assertInitialGreeting(WebElement greeting) {
