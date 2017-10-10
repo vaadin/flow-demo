@@ -26,7 +26,7 @@ public class HelloWorldIT extends AbstractChromeTest {
 
     @Test
     public void checkBasicFunctionality() {
-        driver.get("http://localhost:8080");
+        open();
 
         // Template based view
         waitForElementPresent(By.id("template-link"));
