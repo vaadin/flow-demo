@@ -16,7 +16,7 @@
 package com.vaadin.flow.demo.dynamicmenu;
 
 import com.vaadin.flow.router.View;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.Tag;
 
@@ -26,7 +26,7 @@ import com.vaadin.ui.Tag;
  * @since
  * @author Vaadin Ltd
  */
-@Title("Home")
+@PageTitle("Home")
 @Tag("p")
 public class HomeView extends HtmlContainer implements View {
     /**

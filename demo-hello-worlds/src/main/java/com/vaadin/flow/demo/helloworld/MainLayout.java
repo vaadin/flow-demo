@@ -20,7 +20,7 @@ import java.util.Map;
 
 import com.vaadin.router.RouterLayout;
 import com.vaadin.router.RouterLink;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.router.event.AfterNavigationEvent;
 import com.vaadin.router.event.AfterNavigationListener;
 import com.vaadin.ui.Component;
@@ -100,7 +100,7 @@ public class MainLayout extends Composite<Div>
 
         if (child != null) {
             container.add(new H2(
-                    child.getClass().getAnnotation(Title.class).value()));
+                    child.getClass().getAnnotation(PageTitle.class).value()));
             container.add((Component) child);
         }
     }

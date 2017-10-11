@@ -16,7 +16,7 @@
 package com.vaadin.flow.demo.staticmenu.download;
 
 import com.vaadin.router.Route;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.flow.demo.staticmenu.DummyView;
 
 /**
@@ -24,7 +24,7 @@ import com.vaadin.flow.demo.staticmenu.DummyView;
  *
  * @author Vaadin Ltd
  */
-@Title("Vaadin Icons")
+@PageTitle("Vaadin Icons")
 @Route(value="about", layout = IconsMenuView.class)
 public class IconsAboutView extends DummyView {
 }

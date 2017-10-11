@@ -29,7 +29,7 @@ import com.vaadin.flow.demo.jquerytable.persistence.Project;
 import com.vaadin.flow.demo.jquerytable.persistence.ProjectVersion;
 import com.vaadin.flow.demo.jquerytable.persistence.Report;
 import com.vaadin.flow.router.View;
-import com.vaadin.router.Title;
+import com.vaadin.router.PageTitle;
 import com.vaadin.ui.common.HtmlComponent;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.common.StyleSheet;
@@ -40,7 +40,7 @@ import com.vaadin.ui.html.Span;
 /**
  * The one and only view in the jQuery demo application.
  */
-@Title("Reports overview")
+@PageTitle("Reports overview")
 @StyleSheet("frontend://css/site.css")
 public class ReportsOverview extends Div implements View {
 
