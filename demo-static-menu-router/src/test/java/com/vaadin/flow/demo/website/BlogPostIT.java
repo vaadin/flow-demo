@@ -26,8 +26,8 @@ public class BlogPostIT extends AbstractComplexStaticMenuTest {
     @Test
     public void invalid_blog_post_url() {
         openRouteUrl("blog/asdf");
-        Assert.assertFalse("No blog content should be present",
-                this.isElementPresent(By.className("blog-content")));
+        Assert.assertFalse("Error view content was not present",
+                this.isElementPresent(By.id("error-content")));
         Assert.assertTrue(
                 "Top navigation, i.e. the MainLayout is still present",
                 isElementPresent(By.className("topnav")));
