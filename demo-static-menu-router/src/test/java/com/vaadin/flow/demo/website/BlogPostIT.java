@@ -25,7 +25,7 @@ public class BlogPostIT extends AbstractComplexStaticMenuTest {
 
     @Test
     public void invalid_blog_post_url() {
-        openRouteUrl("blog/asdf");
+        openRouteUrl("blog/99");
         Assert.assertFalse("Error view content was not present",
                 this.isElementPresent(By.id("error-content")));
         Assert.assertTrue(
