@@ -190,6 +190,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <trimStackTrace>false</trimStackTrace>
                     <systemPropertyVariables>
                         <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                     </systemPropertyVariables>
