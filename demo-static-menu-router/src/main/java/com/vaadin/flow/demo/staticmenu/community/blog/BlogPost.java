@@ -18,7 +18,6 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 import java.util.List;
 import java.util.Optional;
 
-import com.vaadin.flow.demo.staticmenu.HomeView;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
@@ -44,17 +43,14 @@ public class BlogPost extends Div
     public void setParameter(BeforeNavigationEvent event, Long parameter) {
         removeAll();
 
-        if (parameter == null) {
-            // FIXME reroute to correct error view
-            event.rerouteTo(HomeView.class);
-            return;
-        }
-
-        Optional<BlogRecord> record = BlogsService.getInstance().getRecord(parameter);
+        Optional<BlogRecord> record = BlogsService.getInstance()
+                .getRecord(parameter);
 
         if (!record.isPresent()) {
-            // FIXME reroute to correct error view
-            event.rerouteTo(HomeView.class);
+            event.rerouteToError(IllegalArgumentException.class,
+                    "No blog found for given id. Please check the location "
+                            + event.getLocation().getPath()
+                            + " and try again.");
         } else {
             blogTitle = record.get().getTitle();
             displayRecord(record.get());
