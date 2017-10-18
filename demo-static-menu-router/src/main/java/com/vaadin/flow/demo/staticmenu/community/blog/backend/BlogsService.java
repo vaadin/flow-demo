@@ -56,11 +56,8 @@ public final class BlogsService {
 
     public void saveItem(BlogRecord record) {
         record.setDate(LocalDateTime.now());
-
-        synchronized (records) {
-            record.setId(records.size() + 1);
-            records.add(record);
-        }
+        record.setId(records.size() + 1);
+        records.add(record);
     }
 
     /**
