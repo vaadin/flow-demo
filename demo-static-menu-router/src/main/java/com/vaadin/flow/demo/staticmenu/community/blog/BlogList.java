@@ -18,9 +18,11 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
+import com.vaadin.router.PageTitle;
 import com.vaadin.router.Route;
 import com.vaadin.router.RouterLink;
-import com.vaadin.router.PageTitle;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.button.Button;
 import com.vaadin.ui.html.Div;
 
 /**
@@ -37,6 +39,11 @@ public class BlogList extends Div {
      */
     public BlogList() {
         BlogsService.getInstance().getItems().forEach(this::addRecord);
+
+        // TODO: Update after #2702 implemented
+        UI ui = UI.getCurrent();
+        add(new Button("Add Blog Post", buttonClickEvent -> ui
+                .navigateTo(ui.getRouter().get().getUrl(BlogCreator.class))));
     }
 
     private void addRecord(BlogRecord record) {
