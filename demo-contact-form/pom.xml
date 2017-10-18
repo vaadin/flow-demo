@@ -11,6 +11,13 @@
     <artifactId>demo-contact-form</artifactId>
     <packaging>war</packaging>
 
+    <repositories>
+        <repository>
+            <id>webjars</id>
+            <url>https://dl.bintray.com/webjars/maven</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -19,6 +26,67 @@
                 <version>10.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-polymerelements-paper-styles</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-PolymerElements-paper-styles</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>paper-styles</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>iron-behaviors</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-polymerelements-iron-behaviors</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-PolymerelEments-iron-behaviors</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>paper-dialog-behavior</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-PolymerElements-paper-dialog-behavior</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-polymerelements-paper-dialog-behavior</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>paper-behaviors</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-PolymerElements-paper-behaviors</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>github-com-polymerelements-paper-behaviors</artifactId>
+                <version>2.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -51,6 +119,7 @@
             <artifactId>commons-beanutils</artifactId>
             <version>${commons.beanutils.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>iron-flex-layout</artifactId>

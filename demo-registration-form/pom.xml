@@ -11,6 +11,13 @@
     <artifactId>demo-registration-form</artifactId>
     <packaging>war</packaging>
 
+    <repositories>
+        <repository>
+            <id>webjars</id>
+            <url>https://dl.bintray.com/webjars/maven</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
