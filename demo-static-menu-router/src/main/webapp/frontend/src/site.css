@@ -1,7 +1,7 @@
 body {
     font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
-        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
-        "STXihei", sans-serif;
+    "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+    "STXihei", sans-serif;
 }
 
 .logo {
@@ -51,7 +51,7 @@ body {
     color: #a09f91;
 }
 
-.topnav>a {
+.topnav > a {
     margin-right: 20px;
     text-decoration: none;
     color: #a09f91;
@@ -69,8 +69,8 @@ body {
 
 h1 {
     font-family: "HelveticaW01-RoundedBd", "Helvetica Neue", "Helvetica",
-        "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
-        "STXihei", sans-serif;
+    "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun",
+    "STXihei", sans-serif;
 }
 
 .content {
@@ -103,19 +103,20 @@ h1 {
     color: white;
 }
 
-
 .subsubmenu {
     margin: 24px 24px;
     padding: 10px 0 10px 0;
     background: #00b4f0;
     display: inline-block;
 }
+
 .subsubmenu > a {
     padding: 10px;
     text-decoration: none;
     font-size: 15px;
     font-weight: bold;
 }
+
 .subsubmenu .selected {
     color: white;
 }
@@ -124,11 +125,11 @@ a.blog-item-title, .read-more {
     color: #00b4f0;
 }
 
-.blog-item-title{
+.blog-item-title {
     display: block;
 }
 
-.blog-list{
+.blog-list {
     float: right;
     background-color: white;
 }
@@ -139,7 +140,7 @@ a.blog-item-title, .read-more {
     border-bottom: 1px solid;
 }
 
-.read-more{
+.read-more {
     display: block;
     margin-top: 10px;
 }
@@ -150,6 +151,71 @@ div.blog-item-title {
     border-bottom: 1px solid;
 }
 
-.bog-content{
+.bog-content {
     margin-top: 5px;
+}
+
+paper-dialog {
+    -webkit-tap-highlight-color: transparent;
+    min-width: 320px;
+    max-width: 550px;
+    margin: 8px 16px;
+    border-radius: 5px;
+
+    display: block;
+    padding: 15px;
+
+    box-shadow: 0 0 0 1px hsla(214, 27%, 26%, 0.06),
+        0 1px 6px 0 hsla(214, 27%, 26%, 0.31),
+        0 24px 56px -6px hsla(214, 27%, 26%, 0.41);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+paper-dialog .buttons {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    margin-top: 16px;
+    border-top: 1px solid black;
+}
+
+paper-dialog .buttons [theme~="danger"] {
+    margin-left: auto;
+}
+
+paper-dialog h2,
+paper-dialog .has-padding {
+    padding: 0 16px;
+}
+
+paper-dialog.confirm-dialog h2 {
+    text-align: center;
+    font-weight: 500;
+    color: black;
+    margin-top: 16px;
+}
+
+paper-dialog.confirm-dialog .text div {
+    margin-bottom: 0.6em;
+    max-width: 40em;
+}
+
+paper-dialog.confirm-dialog .text div:first-child {
+    font-weight: 600;
+    color: black;
+}
+
+paper-dialog.confirm-dialog .buttons {
+    padding: 8px;
+    justify-content: flex-end;
+}
+paper-dialog.confirm-dialog .buttons vaadin-button {
+    margin-right: 5px;
+}
+
+html {
+    --iron-overlay-backdrop-background-color: hsla(214, 27%, 26%, 0.31);
+    --iron-overlay-backdrop-opacity: 1;
 }
