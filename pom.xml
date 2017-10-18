@@ -64,6 +64,7 @@
         <frontend.working.directory>${project.basedir}/src/main/webapp/frontend</frontend.working.directory>
         <jetty.extra.resource.base>${project.basedir}/src/main/webapp/</jetty.extra.resource.base>
         <npm.build.goal>run devMode</npm.build.goal>
+        <vaadin.testbench.version>5.0.0</vaadin.testbench.version>
     </properties>
 
     <repositories>
@@ -106,7 +107,12 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-testbench</artifactId>
-                <version>5.0.0</version>
+                <version>${vaadin.testbench.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-testbench-core</artifactId>
+                <version>${vaadin.testbench.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.flow.demo</groupId>

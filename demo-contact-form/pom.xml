@@ -55,7 +55,7 @@
             </dependency>
             <dependency>
                 <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-PolymerelEments-iron-behaviors</artifactId>
+                <artifactId>github-com-PolymerElements-iron-behaviors</artifactId>
                 <version>2.0.0</version>
             </dependency>
             <dependency>
