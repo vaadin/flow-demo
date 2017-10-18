@@ -24,6 +24,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven.failsafe.plugin.version}</version>
                 <configuration>
+                    <trimStackTrace>false</trimStackTrace>
                     <systemPropertyVariables>
                         <projectBaseDirectory>${project.basedir}/..</projectBaseDirectory>
                     </systemPropertyVariables>
