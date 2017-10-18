@@ -89,6 +89,11 @@
             <id>binary-downloader-repo</id>
             <url>https://oss.sonatype.org</url>
         </repository>
+
+        <repository>
+            <id>webjars</id>
+            <url>https://dl.bintray.com/webjars/maven</url>
+        </repository>
     </repositories>
     <dependencyManagement>
         <dependencies>
