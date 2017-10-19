@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -10,6 +11,25 @@
     <name>Web site with complex menu using Route annotation</name>
     <artifactId>demo-static-menu-router</artifactId>
     <packaging>war</packaging>
+
+    <repositories>
+        <repository>
+            <id>webjars</id>
+            <url>https://dl.bintray.com/webjars/maven</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-webjars-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -31,7 +51,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-components</artifactId>
-            <version>1.0.0.alpha5</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -39,49 +58,41 @@
             <version>${commons.beanutils.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>paper-dialog</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>github-com-polymerelements-paper-dialog-behavior</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>github-com-polymerelements-paper-styles</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>github-com-polymerelements-font-roboto</artifactId>
+            <version>1.0.3</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend.maven.plugin.version}</version>
-                <configuration>
-                    <nodeVersion>${node.version}</nodeVersion>
-                    <npmVersion>${npm.version}</npmVersion>
-                    <workingDirectory>${frontend.working.directory}</workingDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install-node-and-npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                            <goal>npm</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>npm run</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>${npm.build.goal}</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
                     <webAppConfig>
-                        <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
-                        <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                        <containerIncludeJarPattern>^$
+                        </containerIncludeJarPattern>
                         <resourceBases>
-                            <resourceBase>${jetty.extra.resource.base}</resourceBase>
+                            <resourceBase>${jetty.extra.resource.base}
+                            </resourceBase>
                         </resourceBases>
                     </webAppConfig>
                 </configuration>
@@ -99,8 +110,8 @@
             </activation>
 
             <properties>
-                <npm.build.goal>run prodMode</npm.build.goal>
-                <jetty.extra.resource.base>${frontend.working.directory}/build</jetty.extra.resource.base>
+                <jetty.extra.resource.base>${frontend.working.directory}/build
+                </jetty.extra.resource.base>
             </properties>
 
             <dependencies>
@@ -114,16 +125,50 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend.maven.plugin.version}</version>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                            <workingDirectory>${frontend.working.directory}
+                            </workingDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>install-node-and-npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                    <goal>npm</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>npm run</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run prodMode</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven.war.plugin.version}</version>
                         <configuration>
                             <webResources>
                                 <resource>
-                                    <directory>${frontend.working.directory}/build</directory>
+                                    <directory>
+                                        ${frontend.working.directory}/build
+                                    </directory>
                                 </resource>
                             </webResources>
-                            <warSourceExcludes>**/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/</warSourceExcludes>
+                            <warSourceExcludes>
+                                **/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/
+                            </warSourceExcludes>
                         </configuration>
                     </plugin>
                 </plugins>

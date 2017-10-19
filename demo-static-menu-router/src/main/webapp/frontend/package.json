@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "",
   "dependencies": {
-    "bower": "^1.8.0",
-    "polymer-cli": "~1.5.2"
+    "bower": "1.8.0",
+    "polymer-cli": "1.5.7"
   },
   "scripts": {
-    "prodMode": "bower install && polymer build",
-    "devMode": "bower install"
+    "prodMode": "bower install && polymer build"
   },
   "author": "",
   "license": "Apache-2.0"
