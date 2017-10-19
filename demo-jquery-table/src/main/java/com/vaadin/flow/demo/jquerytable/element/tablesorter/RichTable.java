@@ -28,12 +28,12 @@ import com.vaadin.flow.dom.DomEventListener;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.function.SerializableFunction;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.common.AttachEvent;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HasStyle;
 import com.vaadin.ui.common.JavaScript;
 import com.vaadin.ui.common.StyleSheet;
+import com.vaadin.ui.event.AttachEvent;
 import com.vaadin.ui.event.ClickNotifier;
-import com.vaadin.ui.Tag;
 
 /**
  * Table component based on the jQuery Tablesorter plugin, available at
