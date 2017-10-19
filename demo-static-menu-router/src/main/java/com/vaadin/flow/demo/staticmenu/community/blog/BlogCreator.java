@@ -16,7 +16,6 @@
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.BinderValidationStatus;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
@@ -89,11 +88,11 @@ public class BlogCreator extends FormLayout
         binder.bind(title, BlogRecord::getTitle, BlogRecord::setTitle);
         binder.bind(content, BlogRecord::getText, BlogRecord::setText);
 
-        save.addClickListener(this::save);
-        reset.addClickListener(this::reset);
+        save.addClickListener(event -> save());
+        reset.addClickListener(event -> reset());
     }
 
-    private void save(Button.ClickEvent<Button> event) {
+    private void save() {
         if (binder.writeBeanIfValid(record)) {
             BlogsService.getInstance().saveItem(record);
             // TODO: Update after #2702 implemented
@@ -104,7 +103,7 @@ public class BlogCreator extends FormLayout
         }
     }
 
-    private void reset(Button.ClickEvent<Button> event) {
+    private void reset() {
         // clear fields via setting <code>null</code>
         binder.readBean(null);
         title.setValue("");
