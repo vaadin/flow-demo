@@ -24,7 +24,7 @@ import com.vaadin.router.RouterLayout;
  *
  * @author Vaadin
  */
-@StyleSheet("context://css/site.css")
+@StyleSheet("frontend://src/site.css")
 public class MainLayout extends Div implements RouterLayout {
 
     private MainMenuBar menu = new MainMenu();
