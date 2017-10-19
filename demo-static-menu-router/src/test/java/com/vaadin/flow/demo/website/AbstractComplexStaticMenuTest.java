@@ -113,5 +113,6 @@ public abstract class AbstractComplexStaticMenuTest extends AbstractChromeTest {
 
     protected void openRouteUrl(String route) {
         getDriver().get(getRootURL() + getTestPath() + route);
+        waitForElementPresent(By.tagName("body"));
     }
 }
