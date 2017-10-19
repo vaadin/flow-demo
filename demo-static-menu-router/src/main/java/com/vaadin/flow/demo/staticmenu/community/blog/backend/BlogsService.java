@@ -54,9 +54,15 @@ public final class BlogsService {
         return records;
     }
 
+    /**
+     * Store a new blog record.
+     * 
+     * @param record
+     *            record to store
+     */
     public void saveItem(BlogRecord record) {
         record.setDate(LocalDateTime.now());
-        record.setId(records.size() + 1);
+        record.setId(records.size() + 1l);
         records.add(record);
     }
 

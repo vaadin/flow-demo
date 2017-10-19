@@ -50,6 +50,10 @@ public class BlogCreator extends FormLayout
      * Default constructor.
      */
     public BlogCreator() {
+        init();
+    }
+
+    private void init() {
         setResponsiveSteps(new ResponsiveStep("350px", 1));
         addFormItem(title, "Title");
         addFormItem(content, "Blog content");
@@ -96,7 +100,7 @@ public class BlogCreator extends FormLayout
             UI ui = UI.getCurrent();
             ui.navigateTo(ui.getRouter().get().getUrl(BlogList.class));
         } else {
-            BinderValidationStatus<BlogRecord> validate = binder.validate();
+            binder.validate();
         }
     }
 

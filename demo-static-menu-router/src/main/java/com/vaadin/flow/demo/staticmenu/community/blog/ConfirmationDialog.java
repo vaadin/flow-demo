@@ -41,6 +41,10 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
      * Default constructor.
      */
     public ConfirmationDialog() {
+        init();
+    }
+
+    private void init() {
         getContent().setModal(true);
 
         getElement().getClassList().add("confirm-dialog");
@@ -91,7 +95,7 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
     }
 
     /**
-     * Close dialog
+     * Close dialog.
      */
     public void close() {
         getContent().close();

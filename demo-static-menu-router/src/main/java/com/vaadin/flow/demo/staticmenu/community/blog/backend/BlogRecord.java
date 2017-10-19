@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu.community.blog.backend;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -23,7 +24,7 @@ import java.time.LocalDateTime;
  * @author Vaadin Ltd
  *
  */
-public class BlogRecord {
+public class BlogRecord implements Serializable {
 
     private String text;
 
