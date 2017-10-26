@@ -18,11 +18,11 @@ package com.vaadin.flow.demo.helloworld;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.vaadin.router.PageTitle;
 import com.vaadin.router.RouterLayout;
 import com.vaadin.router.RouterLink;
-import com.vaadin.router.PageTitle;
 import com.vaadin.router.event.AfterNavigationEvent;
-import com.vaadin.router.event.AfterNavigationListener;
+import com.vaadin.router.event.AfterNavigationObserver;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
 import com.vaadin.ui.Text;
@@ -39,7 +39,7 @@ import com.vaadin.ui.html.H2;
  */
 @StyleSheet("frontend://src/styles.css")
 public class MainLayout extends Composite<Div>
-        implements RouterLayout, AfterNavigationListener {
+        implements RouterLayout, AfterNavigationObserver {
 
     private Map<String, RouterLink> targetPaths = new HashMap<>();
 

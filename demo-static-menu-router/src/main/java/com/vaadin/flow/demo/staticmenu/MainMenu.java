@@ -22,7 +22,7 @@ import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.router.event.AfterNavigationEvent;
-import com.vaadin.router.event.AfterNavigationListener;
+import com.vaadin.router.event.AfterNavigationObserver;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
@@ -32,7 +32,7 @@ import com.vaadin.ui.html.Div;
  *
  * @author Vaadin
  */
-public class MainMenu extends MainMenuBar implements AfterNavigationListener {
+public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
 
     @Override
     public void init() {

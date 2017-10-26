@@ -20,7 +20,7 @@ import java.util.Optional;
 import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.event.ActivationState;
 import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.router.event.BeforeNavigationListener;
+import com.vaadin.router.event.BeforeNavigationObserver;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.html.Div;
 
@@ -30,7 +30,7 @@ import com.vaadin.ui.html.Div;
  * @author Vaadin
  */
 public class SimpleMenuBar extends MainMenuBar
-        implements BeforeNavigationListener {
+        implements BeforeNavigationObserver {
 
     private Div menu;
 
