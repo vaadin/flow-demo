@@ -22,7 +22,7 @@ import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.router.Route;
 import com.vaadin.router.event.ActivationState;
 import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.router.event.BeforeNavigationListener;
+import com.vaadin.router.event.BeforeNavigationObserver;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.formlayout.FormLayout;
@@ -34,7 +34,7 @@ import com.vaadin.ui.textfield.TextField;
  */
 @Route(value = "blog/new", layout = MainLayout.class)
 public class BlogCreator extends FormLayout
-        implements BeforeNavigationListener {
+        implements BeforeNavigationObserver {
 
     private final TextField title = new TextField();
     private final TextField content = new TextField();
