@@ -15,17 +15,21 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.View;
+import com.vaadin.router.HasDynamicTitle;
+import com.vaadin.router.HasUrlParameter;
+import com.vaadin.router.Location;
+import com.vaadin.router.Route;
+import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.common.HtmlContainer;
 
 /**
  * A view which shows products in a given category.
@@ -34,13 +38,16 @@ import com.vaadin.ui.Tag;
  * @author Vaadin Ltd
  */
 @Tag("p")
-public final class CategoryView extends HtmlContainer implements View {
+@Route(value = "category", layout = MainLayout.class)
+public final class CategoryView extends HtmlContainer
+        implements HasDynamicTitle, HasUrlParameter<Integer> {
 
     private Optional<Category> currentCategory;
 
     @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        int catId = getCategoryId(locationChangeEvent);
+    public void setParameter(BeforeNavigationEvent event, Integer parameter) {
+
+        int catId = parameter == null ? -1 : parameter;
         currentCategory = DataService.get().getCategoryById(catId);
 
         if (!currentCategory.isPresent()) {
@@ -65,30 +72,20 @@ public final class CategoryView extends HtmlContainer implements View {
     /**
      * Gets the category id based on a location change event.
      *
-     * @param locationChangeEvent
-     *            a location change event used for finding the URL and
-     *            parameters
+     * @param location
+     *            new navigation location
      * @return the category id or -1 if the URL does not refer to a category
      *         view
      */
-    public static int getCategoryId(LocationChangeEvent locationChangeEvent) {
-        if (!"category"
-                .equals(locationChangeEvent.getLocation().getFirstSegment())) {
+    public static int getCategoryId(Location location) {
+        if (!"category".equals(location.getFirstSegment())) {
             return -1;
         }
         try {
-            return Integer.parseInt(locationChangeEvent.getPathParameter("id"));
+            List<String> segments = location.getSegments();
+            return Integer.parseInt(segments.get(segments.size() - 1));
         } catch (NumberFormatException e) {
             return -1;
-        }
-    }
-
-    @Override
-    public String getTitle(LocationChangeEvent locationChangeEvent) {
-        if (!currentCategory.isPresent()) {
-            return "Unknown category";
-        } else {
-            return "Category: " + currentCategory.get().getName();
         }
     }
 
@@ -98,4 +95,12 @@ public final class CategoryView extends HtmlContainer implements View {
         return item;
     }
 
+    @Override
+    public String getPageTitle() {
+        if (!currentCategory.isPresent()) {
+            return "Unknown category";
+        } else {
+            return "Category: " + currentCategory.get().getName();
+        }
+    }
 }

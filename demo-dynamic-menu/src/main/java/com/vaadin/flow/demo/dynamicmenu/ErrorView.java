@@ -15,24 +15,29 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.View;
-import com.vaadin.ui.html.Div;
+import com.vaadin.router.ErrorParameter;
+import com.vaadin.router.NotFoundException;
+import com.vaadin.router.RouteNotFoundError;
+import com.vaadin.router.event.BeforeNavigationEvent;
 
 /**
  * An error view showing a message with the wrong location to the user.
  */
-public class ErrorView extends Div implements View {
+public class ErrorView extends RouteNotFoundError {
 
     @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        getStyle().set("textAlign", "center");
+    public int setErrorParameter(BeforeNavigationEvent event,
+            ErrorParameter<NotFoundException> parameter) {
+        getElement().getStyle().set("textAlign", "center");
         getElement().appendChild(
                 ElementFactory.createHeading1("404 - Page not found"),
                 ElementFactory.createSpan("Please check the location "),
-                ElementFactory.createEmphasis(
-                        locationChangeEvent.getLocation().getPath()),
+                ElementFactory.createEmphasis(event.getLocation().getPath()),
                 ElementFactory.createSpan(" and try again."));
+
+        return HttpServletResponse.SC_NOT_FOUND;
     }
 }

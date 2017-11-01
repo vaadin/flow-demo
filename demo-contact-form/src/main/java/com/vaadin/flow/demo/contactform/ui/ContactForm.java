@@ -26,15 +26,15 @@ import com.vaadin.data.BinderValidationStatus;
 import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.function.SerializablePredicate;
+import com.vaadin.router.Route;
 import com.vaadin.ui.Composite;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.checkbox.Checkbox;
 import com.vaadin.ui.common.StyleSheet;
 import com.vaadin.ui.datepicker.DatePicker;
 import com.vaadin.ui.formlayout.FormLayout;
 import com.vaadin.ui.html.Label;
-import com.vaadin.flow.router.View;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.layout.HorizontalLayout;
 import com.vaadin.ui.textfield.TextField;
 
@@ -44,8 +44,9 @@ import com.vaadin.ui.textfield.TextField;
  * @author Vaadin Ltd
  *
  */
+@Route("")
 @StyleSheet("frontend://src/style.css")
-public class ContactForm extends Composite<FormLayout> implements View {
+public class ContactForm extends Composite<FormLayout> {
 
     private final TextField firstName = new TextField("First name");
     private final TextField lastName = new TextField("Last name");
@@ -136,9 +137,8 @@ public class ContactForm extends Composite<FormLayout> implements View {
             infoLabel.setText("Saved bean values :" + contactBeingEdited);
         } else {
             BinderValidationStatus<Contact> validate = binder.validate();
-            infoLabel.setText(
-                    "There are errors :" + getValidationErrors(
-                            validate.getFieldValidationStatuses()));
+            infoLabel.setText("There are errors :" + getValidationErrors(
+                    validate.getFieldValidationStatuses()));
         }
     }
 
@@ -146,8 +146,7 @@ public class ContactForm extends Composite<FormLayout> implements View {
             List<BindingValidationStatus<?>> statuses) {
         return statuses.stream().filter(BindingValidationStatus::isError)
                 .map(BindingValidationStatus::getMessage).map(Optional::get)
-                .distinct()
-                .collect(Collectors.joining(", "));
+                .distinct().collect(Collectors.joining(", "));
     }
 
     private void reset(Button.ClickEvent<Button> event) {

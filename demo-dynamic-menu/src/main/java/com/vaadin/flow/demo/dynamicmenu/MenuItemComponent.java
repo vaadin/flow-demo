@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
+import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.RouterLink;
-import com.vaadin.flow.router.View;
-import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.common.HtmlContainer;
 
 /**
  * A menu item component.
@@ -41,10 +41,10 @@ public class MenuItemComponent extends HtmlContainer {
      * @param name
      *            category name
      */
-    public MenuItemComponent(Class<? extends View> viewClass, int id,
+    public MenuItemComponent(
+            Class<? extends HasUrlParameter<Integer>> viewClass, int id,
             String name) {
-        RouterLink categoryLink = new RouterLink(name, viewClass,
-                Integer.toString(id));
+        RouterLink categoryLink = new RouterLink(name, viewClass, id);
         add(categoryLink);
     }
 

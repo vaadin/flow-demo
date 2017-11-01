@@ -23,6 +23,8 @@ import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
 import com.vaadin.flow.router.LocationChangeEvent;
+import com.vaadin.router.event.BeforeEnterObserver;
+import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.html.Div;
 
@@ -32,7 +34,7 @@ import com.vaadin.ui.html.Div;
  * @author Vaadin
  * @since
  */
-public final class Menu extends Div {
+public final class Menu extends Div implements BeforeEnterObserver {
 
     private Map<Integer, CategoryMenuItem> categories = new HashMap<>();
 
@@ -55,12 +57,13 @@ public final class Menu extends Div {
      * Called when the location changes so the menu can be updated based on the
      * currently shown view.
      *
-     * @param locationChangeEvent
-     *            the location change event
+     * @param event
+     *            before navigation change event
      */
-    public void update(LocationChangeEvent locationChangeEvent) {
-        int categoryId = CategoryView.getCategoryId(locationChangeEvent);
-        int productId = ProductView.getProductId(locationChangeEvent);
+    @Override
+    public void beforeEnter(BeforeNavigationEvent event) {
+        int categoryId = CategoryView.getCategoryId(event.getLocation());
+        int productId = ProductView.getProductId(event.getLocation());
         if (categoryId == -1 && productId != -1) {
             Optional<Product> p = DataService.get().getProductById(productId);
             if (p.isPresent()) {
@@ -97,5 +100,4 @@ public final class Menu extends Div {
 
         return Optional.ofNullable(categories.get(category.get().getId()));
     }
-
 }

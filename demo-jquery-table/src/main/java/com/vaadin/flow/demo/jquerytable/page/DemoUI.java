@@ -17,8 +17,6 @@ package com.vaadin.flow.demo.jquerytable.page;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.flow.router.RouterConfiguration;
-import com.vaadin.flow.router.RouterConfigurator;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinServletConfiguration;
 import com.vaadin.ui.UI;
@@ -32,17 +30,8 @@ public class DemoUI extends UI {
      * The main servlet for the application.
      */
     @WebServlet(urlPatterns = "/*", name = "Servlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = DemoUI.class, routerConfigurator = DemoRouterConfigurator.class, productionMode = false)
+    @VaadinServletConfiguration(ui = DemoUI.class, usingNewRouting = true, productionMode = false)
     public static class Servlet extends VaadinServlet {
     }
 
-    /**
-     * The router configurator defines the how to map URLs to views.
-     */
-    public static class DemoRouterConfigurator implements RouterConfigurator {
-        @Override
-        public void configure(RouterConfiguration configuration) {
-            configuration.setRoute("", ReportsOverview.class);
-        }
-    }
 }

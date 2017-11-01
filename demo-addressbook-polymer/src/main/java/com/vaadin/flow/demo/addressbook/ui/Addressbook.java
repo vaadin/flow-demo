@@ -19,11 +19,11 @@ import java.util.Optional;
 
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
-import com.vaadin.flow.router.View;
 import com.vaadin.router.PageTitle;
+import com.vaadin.router.Route;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.Tag;
 
 /**
  * Displays a list of contacts.
@@ -31,7 +31,8 @@ import com.vaadin.ui.Tag;
 @PageTitle("Addressbook")
 @Tag("div")
 @StyleSheet("context://css/site.css")
-public class Addressbook extends HtmlContainer implements View {
+@Route("")
+public class Addressbook extends HtmlContainer {
     private final ContactForm contactForm = new ContactForm(this::updateForm);
     private final ContactsTable contactsTable = new ContactsTable(
             this::tableRowClick);
