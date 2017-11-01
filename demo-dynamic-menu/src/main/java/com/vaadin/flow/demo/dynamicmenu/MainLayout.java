@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.dynamicmenu;
 
 import com.vaadin.router.RouterLayout;
+import com.vaadin.ui.common.HasElement;
 import com.vaadin.ui.common.StyleSheet;
 import com.vaadin.ui.html.Div;
 
@@ -40,5 +41,10 @@ public final class MainLayout extends Div implements RouterLayout {
         menu = new Menu();
         add(menu, contentHolder);
         contentHolder.setClassName("content");
+    }
+
+    @Override
+    public void setRouterLayoutContent(HasElement content) {
+        contentHolder.getElement().appendChild(content.getElement());
     }
 }
