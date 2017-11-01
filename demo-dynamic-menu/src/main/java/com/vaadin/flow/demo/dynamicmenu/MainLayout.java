@@ -15,12 +15,7 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.View;
 import com.vaadin.router.RouterLayout;
-import com.vaadin.router.event.BeforeEnterObserver;
-import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.common.StyleSheet;
 import com.vaadin.ui.html.Div;
 
