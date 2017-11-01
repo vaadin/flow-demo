@@ -17,7 +17,6 @@
         <module>demo-hello-worlds</module>
         <module>demo-model-converters</module>
         <module>demo-web-site</module>
-        <module>demo-static-menu</module>
         <module>demo-static-menu-router</module>
         <module>demo-dynamic-menu</module>
         <module>demo-utils</module>
