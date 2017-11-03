@@ -16,9 +16,9 @@
 package com.vaadin.flow.demo.helloworld.template;
 
 import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.flow.router.View;
-import com.vaadin.ui.common.HtmlImport;
+import com.vaadin.router.Route;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.polymertemplate.Id;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
@@ -27,7 +27,8 @@ import com.vaadin.ui.polymertemplate.PolymerTemplate;
  */
 @Tag("todo-template")
 @HtmlImport("frontend://components/TodoTemplate.html")
-public class TodoList extends PolymerTemplate<TemplateModel> implements View {
+@Route("")
+public class TodoList extends PolymerTemplate<TemplateModel> {
 
     @Id("creator")
     private TodoCreator creator;

@@ -22,7 +22,7 @@ import com.vaadin.data.Binder.Binding;
 import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.data.BindingValidationStatus.Status;
 import com.vaadin.data.Validator;
-import com.vaadin.flow.router.View;
+import com.vaadin.router.Route;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Composite;
 import com.vaadin.ui.Tag;
@@ -44,8 +44,8 @@ import com.vaadin.ui.paper.dialog.GeneratedPaperDialog;
  *
  */
 @StyleSheet("frontend://src/style.css")
-public class RegistrationForm extends Composite<VerticalLayout>
-implements View {
+@Route("")
+public class RegistrationForm extends Composite<VerticalLayout> {
 
     private static final String ERROR = "error";
 

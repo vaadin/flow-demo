@@ -15,10 +15,8 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.router.HasChildView;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.View;
+import com.vaadin.router.RouterLayout;
+import com.vaadin.ui.common.HasElement;
 import com.vaadin.ui.common.StyleSheet;
 import com.vaadin.ui.html.Div;
 
@@ -29,7 +27,7 @@ import com.vaadin.ui.html.Div;
  * @author Vaadin Ltd
  */
 @StyleSheet("css/site.css")
-public final class MainLayout extends Div implements HasChildView {
+public final class MainLayout extends Div implements RouterLayout {
 
     private final Div contentHolder = new Div();
     private final Menu menu;
@@ -46,14 +44,7 @@ public final class MainLayout extends Div implements HasChildView {
     }
 
     @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        menu.update(locationChangeEvent);
-    }
-
-    @Override
-    public void setChildView(View content) {
-        contentHolder.removeAll();
-        Element contentElement = content.getElement();
-        contentElement.getComponent().ifPresent(contentHolder::add);
+    public void setRouterLayoutContent(HasElement content) {
+        contentHolder.getElement().appendChild(content.getElement());
     }
 }

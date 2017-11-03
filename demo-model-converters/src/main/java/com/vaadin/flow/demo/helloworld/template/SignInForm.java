@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 import com.vaadin.flow.demo.helloworld.template.SignInForm.SignInModel;
 import com.vaadin.flow.model.Convert;
 import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.flow.router.View;
+import com.vaadin.router.Route;
 import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.Tag;
 import com.vaadin.ui.polymertemplate.EventHandler;
@@ -37,7 +37,8 @@ import com.vaadin.ui.polymertemplate.PolymerTemplate;
  */
 @Tag("sign-in-form")
 @HtmlImport("frontend://components/SignInForm.html")
-public class SignInForm extends PolymerTemplate<SignInModel> implements View {
+@Route("")
+public class SignInForm extends PolymerTemplate<SignInModel> {
 
     /**
      * The template model.

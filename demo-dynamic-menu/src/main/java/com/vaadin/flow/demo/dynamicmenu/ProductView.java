@@ -16,15 +16,19 @@
 package com.vaadin.flow.demo.dynamicmenu;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Optional;
 
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.flow.router.View;
-import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.router.HasDynamicTitle;
+import com.vaadin.router.HasUrlParameter;
+import com.vaadin.router.Location;
+import com.vaadin.router.Route;
+import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.common.HtmlContainer;
 
 /**
  * A view which shows a product.
@@ -33,13 +37,15 @@ import com.vaadin.ui.Tag;
  * @author Vaadin Ltd
  */
 @Tag("p")
-public class ProductView extends HtmlContainer implements View {
+@Route(value = "product", layout = MainLayout.class)
+public class ProductView extends HtmlContainer
+        implements HasDynamicTitle, HasUrlParameter<Integer> {
 
     private Optional<Product> currentProduct;
 
     @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        int productId = getProductId(locationChangeEvent);
+    public void setParameter(BeforeNavigationEvent event, Integer parameter) {
+        int productId = parameter == null ? -1 : parameter;
         currentProduct = DataService.get().getProductById(productId);
         if (!currentProduct.isPresent()) {
             setText("Product does not exist or has been removed");
@@ -63,30 +69,29 @@ public class ProductView extends HtmlContainer implements View {
     /**
      * Gets the product id based on the URL.
      *
-     * @param locationChangeEvent
+     * @param location
      *            a location change event used for finding the URL and
      *            parameters
      * @return the product id or -1 if the URL does not refer to a product view
      */
-    public static int getProductId(LocationChangeEvent locationChangeEvent) {
-        if (!"product"
-                .equals(locationChangeEvent.getLocation().getFirstSegment())) {
+    public static int getProductId(Location location) {
+        if (!"product".equals(location.getFirstSegment())) {
             return -1;
         }
         try {
-            return Integer.parseInt(locationChangeEvent.getPathParameter("id"));
+            List<String> segments = location.getSegments();
+            return Integer.parseInt(segments.get(segments.size() - 1));
         } catch (NumberFormatException e) {
             return -1;
         }
     }
 
     @Override
-    public String getTitle(LocationChangeEvent locationChangeEvent) {
+    public String getPageTitle() {
         if (!currentProduct.isPresent()) {
-            return "Unknown product";
+            return "Unknown category";
         } else {
             return "Product: " + currentProduct.get().getProductName();
         }
     }
-
 }

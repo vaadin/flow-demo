@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.flow.router.View;
 import com.vaadin.router.PageTitle;
-import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.router.Route;
 import com.vaadin.ui.Tag;
+import com.vaadin.ui.common.HtmlContainer;
 
 /**
  * The static home page.
@@ -28,7 +28,8 @@ import com.vaadin.ui.Tag;
  */
 @PageTitle("Home")
 @Tag("p")
-public class HomeView extends HtmlContainer implements View {
+@Route(value = "", layout = MainLayout.class)
+public class HomeView extends HtmlContainer {
     /**
      * Creates a new home view.
      */
