@@ -22,7 +22,6 @@ import java.util.Optional;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.router.event.BeforeEnterObserver;
 import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.ui.common.HtmlContainer;
