@@ -16,12 +16,14 @@
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
 import com.vaadin.router.ContinueNavigationAction;
+import com.vaadin.server.startup.I18NRegistry;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Composite;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.html.Div;
 import com.vaadin.ui.html.H2;
+import com.vaadin.ui.i18n.I18NProvider;
 import com.vaadin.ui.layout.HorizontalLayout;
 import com.vaadin.ui.paper.dialog.GeneratedPaperDialog;
 
@@ -33,8 +35,8 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
 
     private final H2 titleField = new H2();
     private final Div messageLabel = new Div();
-    private final Button confirmButton = new Button("Ok");
-    private final Button cancelButton = new Button("Cancel");
+    private final Button confirmButton = new Button();
+    private final Button cancelButton = new Button();
     private Registration registrationForConfirm;
 
     /**
@@ -46,6 +48,10 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
 
     private void init() {
         getContent().setModal(true);
+        I18NProvider provider = I18NRegistry.getInstance().getProvider();
+
+        confirmButton.setText(provider.getTranslation("common.ok"));
+        cancelButton.setText(provider.getTranslation("common.cancel"));
 
         getElement().getClassList().add("confirm-dialog");
         confirmButton.getElement().setAttribute("dialog-confirm", true);

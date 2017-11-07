@@ -17,6 +17,7 @@
     "vaadin-text-field": "1.1.0",
     "vaadin-button": "1.0.4",
     "vaadin-form-layout": "1.0.3",
-    "paper-dialog": "2.0.0"
+    "paper-dialog": "2.0.0",
+    "vaadin-ordered-layout": "1.0.0-alpha1"
   }
 }

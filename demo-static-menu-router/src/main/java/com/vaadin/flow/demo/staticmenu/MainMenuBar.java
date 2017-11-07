@@ -23,6 +23,8 @@ import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.RouterLink;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.html.Div;
+import com.vaadin.ui.i18n.LocaleChangeEvent;
+import com.vaadin.ui.i18n.LocaleChangeObserver;
 
 /**
  * Menu view handler. Updates menu item highlights before navigation in the
@@ -30,10 +32,11 @@ import com.vaadin.ui.html.Div;
  *
  * @author Vaadin
  */
-public abstract class MainMenuBar extends Div {
+public abstract class MainMenuBar extends Div implements LocaleChangeObserver {
 
     private Map<Class<? extends Component>, RouterLink> targets = new HashMap<>();
     private Map<String, Class<? extends Component>> targetPaths = new HashMap<>();
+    private Map<String, RouterLink> translation = new HashMap<>();
     private RouterLink selected;
 
     /**
@@ -50,24 +53,36 @@ public abstract class MainMenuBar extends Div {
      */
     public abstract void init();
 
-    protected RouterLink createLink(Class<? extends Component> navigationTarget,
-            String name) {
+    protected RouterLink createLink(
+            Class<? extends Component> navigationTarget) {
+        String name = getProvider().getTranslation(navigationTarget.getName());
+
         RouterLink link = new RouterLink(name, navigationTarget);
         targets.put(navigationTarget, link);
         targetPaths.put(link.getHref(), navigationTarget);
+        translation.put(navigationTarget.getName(), link);
 
         return link;
     }
 
     protected <T> RouterLink createLink(
-            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter,
-            String name) {
+            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter) {
+        String translationKey = navigationTarget.getName() + "." + parameter;
+        String name = getProvider().getTranslation(translationKey);
+
         RouterLink link = new RouterLink(name, navigationTarget, parameter);
         targets.put((Class<? extends Component>) navigationTarget, link);
         targetPaths.put(link.getHref(),
                 (Class<? extends Component>) navigationTarget);
+        translation.put(translationKey, link);
 
         return link;
+    }
+
+    @Override
+    public void localeChange(LocaleChangeEvent event) {
+        translation.entrySet().forEach(entry -> entry.getValue()
+                .setText(getProvider().getTranslation(entry.getKey())));
     }
 
     /**

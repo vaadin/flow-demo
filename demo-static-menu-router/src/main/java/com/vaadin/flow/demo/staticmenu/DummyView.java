@@ -15,7 +15,11 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
+import com.vaadin.server.startup.I18NRegistry;
 import com.vaadin.ui.html.Div;
+import com.vaadin.ui.i18n.I18NProvider;
+import com.vaadin.ui.i18n.LocaleChangeEvent;
+import com.vaadin.ui.i18n.LocaleChangeObserver;
 
 /**
  * An abstract view which automatically contains a text, which tells the name of
@@ -23,16 +27,19 @@ import com.vaadin.ui.html.Div;
  *
  * @author Vaadin
  */
-public abstract class DummyView extends Div {
+public abstract class DummyView extends Div implements LocaleChangeObserver {
 
     /**
      * Creates the view.
      */
     public DummyView() {
         setClassName("content");
-
-        setText("This is the " + Util.getNavigationTargetName(getClass())
-                + " view");
     }
 
+    @Override
+    public void localeChange(LocaleChangeEvent event) {
+        I18NProvider provider = I18NRegistry.getInstance().getProvider();
+        setText(provider.getTranslation("dummy.view",
+                Util.getNavigationTargetName(getClass())));
+    }
 }
