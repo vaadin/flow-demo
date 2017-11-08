@@ -37,7 +37,7 @@
     <template is="dom-repeat" items="[[cells]]">
         <div class="row">
              <template is="dom-repeat" items="[[item]]">
-                <div on-click="handleClick" class$="[[_cellClass(item)]]" on-contextmenu="handleRightClick">[[item.text]]</div>
+                <div on-click="handleClick" class$="[[_cellClass(item.marked, item.revealed, item.mine)]]" on-contextmenu="handleRightClick">[[item.text]]</div>
              </template>
         </div>
     </template>
@@ -49,15 +49,17 @@
 	  static get is() { return 'mine-sweeper'; }
 
 	  handleRightClick (event) {
+          event.model.set("item.marked", !event.model.item.marked);
           event.preventDefault();
       }
-      _cellClass(item) {
+
+      _cellClass(marked, revealed, mine) {
           var classNames = "cell";
-          if (item.marked) {
+          if (marked) {
               classNames += " marked";
           }
-          if (item.revealed) {
-              if (item.mine) {
+          if (revealed) {
+              if (mine) {
                   classNames += " mine";
               } else {
                   classNames += " empty";

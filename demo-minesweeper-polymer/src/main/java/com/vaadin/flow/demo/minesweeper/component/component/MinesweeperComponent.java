@@ -119,8 +119,6 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
             @EventData("event.model.index") int col) {
         Cell cell = getModelCell(row, col);
         if (cell.isMarked()) {
-            // Unmark cell on click
-            cell.setMarked(false);
             return;
         }
         if (mineFieldData.isMine(row, col)) {
@@ -132,14 +130,6 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
                 success();
             }
         }
-    }
-
-    @EventHandler
-    private void handleRightClick(
-            @EventData("event.model.parentModel.index") int row,
-            @EventData("event.model.index") int col) {
-        Cell cell = getModelCell(row, col);
-        cell.setMarked(!cell.isMarked());
     }
 
     private void initModel() {
