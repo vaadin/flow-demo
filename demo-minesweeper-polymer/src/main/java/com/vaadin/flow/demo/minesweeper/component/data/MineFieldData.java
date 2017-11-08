@@ -31,10 +31,6 @@ public class MineFieldData implements Serializable {
     private final Set<Point> mines;
     private final int rows;
     private final int cols;
-    private final int numberOfMines;
-    private final Map<Point, Boolean> revealed = new HashMap<>();
-    private final Map<Point, String> texts = new HashMap<>();
-    private final Map<Point, Boolean> marked = new HashMap<>();
 
     /**
      * Initializes the mine field and randomly places mines.
@@ -57,18 +53,15 @@ public class MineFieldData implements Serializable {
         Random random = new Random(seed);
         this.rows = rows;
         this.cols = cols;
-        int minesCount = 0;
 
         mines = new HashSet<>();
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < cols; column++) {
                 if (random.nextDouble() > (1 - mineDensity)) {
                     mines.add(new Point(row, column));
-                    minesCount++;
                 }
             }
         }
-        numberOfMines = minesCount;
     }
 
     /**
@@ -172,94 +165,7 @@ public class MineFieldData implements Serializable {
      * @return the number of mines in the mine field
      */
     public int getNumberOfMines() {
-        return numberOfMines;
+        return mines.size();
     }
 
-    /**
-     * Gets whether the cell is revealed.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     * @return whether the cell is revealed
-     */
-    public boolean isRevealed(int row, int col) {
-        return revealed.getOrDefault(new Point(row, col), Boolean.FALSE);
-    }
-
-    /**
-     * Sets the cell revealed.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     */
-    public void setRevealed(int row, int col) {
-        revealed.put(new Point(row, col), Boolean.TRUE);
-    }
-
-    /**
-     * Gets whether the cell is marked.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     * @return whether the cell is revealed
-     */
-    public boolean isMarked(int row, int col) {
-        return marked.getOrDefault(new Point(row, col), Boolean.FALSE);
-    }
-
-    /**
-     * Sets the cell marked.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     */
-    public void setMarked(int row, int col) {
-        marked.put(new Point(row, col), Boolean.TRUE);
-    }
-
-    /**
-     * Removes cell marking.
-     *
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     */
-    public void removeMarked(int row, int col) {
-        marked.put(new Point(row, col), Boolean.FALSE);
-    }
-    /**
-     * Sets the text for the cell.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     * @param text
-     *            the text to set for the cell
-     */
-    public void setText(int row, int col, String text) {
-        texts.put(new Point(row, col), text);
-    }
-
-    /**
-     * Gets the text for the cell.
-     * 
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     * @return the text for the cell
-     */
-    public String getText(int row, int col) {
-        return texts.get(new Point(row, col));
-    }
 }
