@@ -37,7 +37,7 @@
     <template is="dom-repeat" items="[[cells]]">
         <div class="row">
              <template is="dom-repeat" items="[[item]]">
-                <div on-click="handleClick" class$="cell [[item.style]]" on-contextmenu="handleRightClick">[[item.text]]</div>
+                <div on-click="handleClick" class$="[[_cellClass(item)]]" on-contextmenu="handleRightClick">[[item.text]]</div>
              </template>
         </div>
     </template>
@@ -51,6 +51,21 @@
 	  handleRightClick (event) {
           event.preventDefault();
       }
+      _cellClass(item) {
+          var classNames = "cell";
+          if (item.marked) {
+              classNames += " marked";
+          }
+          if (item.revealed) {
+              if (item.mine) {
+                  classNames += " mine";
+              } else {
+                  classNames += " empty";
+              }
+          }
+          return classNames;
+      }
+
     }
     customElements.define(MineSweeper.is, MineSweeper);
 
