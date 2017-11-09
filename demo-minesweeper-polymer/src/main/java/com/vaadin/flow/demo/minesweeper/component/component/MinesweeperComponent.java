@@ -15,17 +15,16 @@
  */
 package com.vaadin.flow.demo.minesweeper.component.component;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent.MinesweeperModel;
 import com.vaadin.flow.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.flow.demo.minesweeper.component.data.Point;
 import com.vaadin.flow.model.TemplateModel;
+import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HtmlImport;
 import com.vaadin.ui.event.EventData;
-import com.vaadin.ui.Tag;
 import com.vaadin.ui.polymertemplate.EventHandler;
 import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
@@ -40,42 +39,52 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
 
     public static class Cell {
 
-        private int row;
-
-        private int col;
-
-        private String style;
-
         private String text;
+        private boolean marked;
+        private boolean revealed;
+        private boolean mine;
 
-        public Cell(int row, int col, String style, String text) {
-            this.row = row;
-            this.col = col;
-            this.style = style;
-            this.text = text;
-        }
-
-        public int getRow() {
-            return row;
-        }
-
-        public int getCol() {
-            return col;
-        }
-
-        public String getStyle() {
-            return style;
+        public Cell() {
+            // No-arg constructor for the model
         }
 
         public String getText() {
             return text;
         }
 
+        public boolean isMarked() {
+            return marked;
+        }
+
+        public void setMarked(boolean marked) {
+            this.marked = marked;
+        }
+
+        public boolean isRevealed() {
+            return revealed;
+        }
+
+        public void setRevealed(boolean revealed) {
+            this.revealed = revealed;
+        }
+
+        public boolean isMine() {
+            return mine;
+        }
+
+        public void setMine(boolean mine) {
+            this.mine = mine;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
     }
 
     public interface MinesweeperModel extends TemplateModel {
+        void setCells(List<List<Cell>> cells);
 
-        public void setCells(List<List<Cell>> cells);
+        List<List<Cell>> getCells();
     }
 
     /**
@@ -93,67 +102,18 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
     public MinesweeperComponent(long seed, double mineDensity, int rows,
             int cols) {
         mineFieldData = new MineFieldData(rows, cols, seed, mineDensity);
-        init();
+        initModel();
         setId("template");
     }
 
-    /**
-     * Initializes the component hierarchy.
-     */
-    private void init() {
-        setModel();
-    }
-
     @EventHandler
-    private void handleClick(@EventData("event.model.item.row") int row,
-            @EventData("event.model.item.col") int col) {
-        clickCell(row, col);
-    }
-
-    @EventHandler
-    private void handleRightClick(@EventData("event.model.item.row") int row,
-            @EventData("event.model.item.col") int col) {
-        if (mineFieldData.isMarked(row, col)) {
-            mineFieldData.removeMarked(row, col);
-        } else {
-            mineFieldData.setMarked(row, col);
-        }
-        setModel();
-    }
-
-    private void setModel() {
-        List<List<Cell>> cells = IntStream.range(0, mineFieldData.getRows())
-                .mapToObj(row -> IntStream.range(0, mineFieldData.getCols())
-                        .mapToObj(col -> new Cell(row, col,
-                                computeStyle(row, col),
-                                mineFieldData.getText(row, col)))
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
-
-        getModel().setCells(cells);
-    }
-
-    private String computeStyle(int row, int col) {
-        StringBuilder builder = new StringBuilder();
-        if (mineFieldData.isRevealed(row, col)) {
-            if (mineFieldData.isMine(row, col)) {
-                builder.append("mine");
-            } else {
-                builder.append("empty");
-            }
-            builder.append(' ');
-        }
-        if (mineFieldData.isMarked(row, col)) {
-            builder.append("marked");
-        }
-
-        return builder.toString();
-    }
-
-    private void clickCell(int row, int col) {
-        if (mineFieldData.isMarked(row, col)) {
+    private void handleClick(
+            @EventData("event.model.parentModel.index") int row,
+            @EventData("event.model.index") int col) {
+        Cell cell = getModelCell(row, col);
+        if (cell.isMarked()) {
             // Unmark cell on click
-            mineFieldData.removeMarked(row, col);
+            cell.setMarked(false);
             return;
         }
         if (mineFieldData.isMine(row, col)) {
@@ -165,7 +125,31 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
                 success();
             }
         }
-        setModel();
+    }
+
+    @EventHandler
+    private void handleRightClick(
+            @EventData("event.model.parentModel.index") int row,
+            @EventData("event.model.index") int col) {
+        Cell cell = getModelCell(row, col);
+        cell.setMarked(!cell.isMarked());
+    }
+
+    private void initModel() {
+        List<List<Cell>> cells = new ArrayList<>();
+        for (int row = 0; row < mineFieldData.getRows(); row++) {
+            List<Cell> rowCells = new ArrayList<>();
+            for (int col = 0; col < mineFieldData.getCols(); col++) {
+                rowCells.add(new Cell());
+            }
+            cells.add(rowCells);
+        }
+
+        getModel().setCells(cells);
+    }
+
+    private Cell getModelCell(int row, int col) {
+        return getModel().getCells().get(row).get(col);
     }
 
     /**
@@ -192,17 +176,18 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
      *            the column of the cell to reveal
      */
     public void reveal(int row, int col) {
-        if (mineFieldData.isRevealed(row, col)) {
+        Cell cell = getModelCell(row, col);
+        if (cell.isRevealed()) {
             // Already revealed
             return;
         }
 
         boolean mine = mineFieldData.isMine(row, col);
-        mineFieldData.setRevealed(row, col);
+        cell.setRevealed(true);
         if (!mine) {
             int count = mineFieldData.getNearbyCount(row, col);
             if (count > 0) {
-                mineFieldData.setText(row, col, Integer.toString(count));
+                cell.setText(Integer.toString(count));
             } else {
                 // Autoreveal
                 for (Point p : mineFieldData.getNearbyPoints(row, col)) {
@@ -220,7 +205,7 @@ public class MinesweeperComponent extends PolymerTemplate<MinesweeperModel> {
     private boolean isAllRevealed() {
         for (int row = 0; row < mineFieldData.getRows(); row++) {
             for (int col = 0; col < mineFieldData.getCols(); col++) {
-                if (!mineFieldData.isRevealed(row, col)
+                if (!getModelCell(row, col).isRevealed()
                         && !mineFieldData.isMine(row, col)) {
                     return false;
                 }
