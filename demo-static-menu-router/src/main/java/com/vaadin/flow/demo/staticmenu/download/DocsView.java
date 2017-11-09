@@ -20,7 +20,7 @@ import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.Route;
 import com.vaadin.router.WildcardParameter;
 import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.server.startup.I18NRegistry;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.html.Div;
 import com.vaadin.ui.i18n.I18NProvider;
 
@@ -44,7 +44,8 @@ public class DocsView extends DummyView implements HasUrlParameter<String> {
     public void setParameter(BeforeNavigationEvent event,
             @WildcardParameter String parameter) {
         if (!parameter.isEmpty()) {
-            I18NProvider provider = I18NRegistry.getInstance().getProvider();
+            I18NProvider provider = VaadinService.getCurrent().getInstantiator()
+                    .getI18NProvider();
             div.setText(
                     provider.getTranslation("docs.viewing.page", parameter));
         } else {

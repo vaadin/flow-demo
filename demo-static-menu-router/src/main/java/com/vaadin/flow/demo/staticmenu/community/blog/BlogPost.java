@@ -25,9 +25,10 @@ import com.vaadin.router.HasDynamicTitle;
 import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.Route;
 import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.server.startup.I18NRegistry;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.html.Div;
+import com.vaadin.ui.i18n.I18NProvider;
 
 /**
  * The blog post view.
@@ -48,9 +49,10 @@ public class BlogPost extends Div
                 .getRecord(parameter);
 
         if (!record.isPresent()) {
+            I18NProvider i18NProvider = VaadinService.getCurrent()
+                    .getInstantiator().getI18NProvider();
             event.rerouteToError(IllegalArgumentException.class,
-                    I18NRegistry.getInstance().getProvider().getTranslation(
-                            "blog.post.not.found",
+                    i18NProvider.getTranslation("blog.post.not.found",
                             event.getLocation().getPath()));
         } else {
             blogTitle = record.get().getTitle();

@@ -16,7 +16,7 @@
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
 import com.vaadin.router.ContinueNavigationAction;
-import com.vaadin.server.startup.I18NRegistry;
+import com.vaadin.server.VaadinService;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Composite;
 import com.vaadin.ui.button.Button;
@@ -48,7 +48,8 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
 
     private void init() {
         getContent().setModal(true);
-        I18NProvider provider = I18NRegistry.getInstance().getProvider();
+        I18NProvider provider = VaadinService.getCurrent().getInstantiator()
+                .getI18NProvider();
 
         confirmButton.setText(provider.getTranslation("common.ok"));
         cancelButton.setText(provider.getTranslation("common.cancel"));
