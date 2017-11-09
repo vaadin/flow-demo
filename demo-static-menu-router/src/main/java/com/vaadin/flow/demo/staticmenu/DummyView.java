@@ -15,9 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.server.VaadinService;
 import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.I18NProvider;
 import com.vaadin.ui.i18n.LocaleChangeEvent;
 import com.vaadin.ui.i18n.LocaleChangeObserver;
 
@@ -38,9 +36,7 @@ public abstract class DummyView extends Div implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        I18NProvider provider = VaadinService.getCurrent().getInstantiator()
-                .getI18NProvider();
-        setText(provider.getTranslation("dummy.view",
+        setText(getProvider().getTranslation("dummy.view",
                 Util.getNavigationTargetName(getClass())));
     }
 }
