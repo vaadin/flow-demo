@@ -36,7 +36,7 @@ public abstract class DummyView extends Div implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        setText(getProvider().getTranslation("dummy.view",
+        setText(getI18NProvider().getTranslation("dummy.view",
                 Util.getNavigationTargetName(getClass())));
     }
 }

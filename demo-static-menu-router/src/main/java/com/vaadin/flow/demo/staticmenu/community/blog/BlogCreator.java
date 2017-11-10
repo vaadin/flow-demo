@@ -27,6 +27,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.formlayout.FormLayout;
 import com.vaadin.ui.html.Label;
+import com.vaadin.ui.i18n.I18NProvider;
 import com.vaadin.ui.i18n.LocaleChangeEvent;
 import com.vaadin.ui.i18n.LocaleChangeObserver;
 import com.vaadin.ui.layout.HorizontalLayout;
@@ -73,12 +74,13 @@ public class BlogCreator extends FormLayout
     }
 
     private void buildForm() {
-        titleLabel.setText(getProvider().getTranslation("new.blog.post.title"));
+        I18NProvider provider = getI18NProvider();
+        titleLabel.setText(provider.getTranslation("new.blog.post.title"));
         contentLabel
-                .setText(getProvider().getTranslation("new.blog.post.content"));
+                .setText(provider.getTranslation("new.blog.post.content"));
 
-        save.setText(getProvider().getTranslation("common.save"));
-        reset.setText(getProvider().getTranslation("common.reset"));
+        save.setText(provider.getTranslation("common.save"));
+        reset.setText(provider.getTranslation("common.reset"));
     }
 
     @Override
@@ -88,8 +90,9 @@ public class BlogCreator extends FormLayout
             ConfirmationDialog dialog = new ConfirmationDialog();
             getUI().ifPresent(ui -> ui.add(dialog));
 
-            dialog.open(getProvider().getTranslation("dialog.title"),
-                    getProvider().getTranslation("dialog.question"),
+            I18NProvider provider = getI18NProvider();
+            dialog.open(provider.getTranslation("dialog.title"),
+                    provider.getTranslation("dialog.question"),
                     event.postpone());
         }
     }
