@@ -36,7 +36,7 @@ import com.vaadin.ui.i18n.LocaleChangeObserver;
 @PageTitle("Blog Post")
 public class BlogList extends Div implements LocaleChangeObserver {
 
-    private Button add_blog_post;
+    private Button addBlogPost;
 
     /**
      * Constructor populating blog listing.
@@ -46,10 +46,10 @@ public class BlogList extends Div implements LocaleChangeObserver {
 
         // TODO: Update after #2702 implemented
         UI ui = UI.getCurrent();
-        add_blog_post = new Button("Add Blog Post",
+        addBlogPost = new Button("Add Blog Post",
                 buttonClickEvent -> ui.navigateTo(
                         ui.getRouter().get().getUrl(BlogCreator.class)));
-        add(add_blog_post);
+        add(addBlogPost);
     }
 
     private void addRecord(BlogRecord record) {
@@ -60,6 +60,6 @@ public class BlogList extends Div implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        add_blog_post.setText(getProvider().getTranslation("new.blog.post"));
+        addBlogPost.setText(getProvider().getTranslation("new.blog.post"));
     }
 }
