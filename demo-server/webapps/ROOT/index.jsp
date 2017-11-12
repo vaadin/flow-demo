@@ -34,7 +34,7 @@ Map<String, List<String>> stableVersions = new HashMap<>();
 Map<String, List<String>> snapshotVersions = new HashMap<>();
 
 // Java 1.7
-File[] files = new File("/home/dev/tomcat/webapps/").listFiles();
+File[] files = new File("webapps").listFiles();
 if (files != null) {
     for (File f : files) {
         if (f.isDirectory()) {
