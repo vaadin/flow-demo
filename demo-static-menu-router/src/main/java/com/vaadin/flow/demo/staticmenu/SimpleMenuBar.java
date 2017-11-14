@@ -23,7 +23,6 @@ import com.vaadin.router.event.BeforeNavigationEvent;
 import com.vaadin.router.event.BeforeNavigationObserver;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
 
 /**
  * A menu which adds all items to a single div.

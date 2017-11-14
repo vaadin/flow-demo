@@ -22,6 +22,9 @@ import com.vaadin.server.Constants;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinServletConfiguration;
 
+/**
+ * Servlet class for defining the I18N provider class as a web init parameter.
+ */
 @WebServlet(urlPatterns = "/*", name = "static-menu", asyncSupported = true, initParams = {
         @WebInitParam(name = Constants.I18N_PROVIDER, value = "com.vaadin.flow.demo.staticmenu.Lang") })
 @VaadinServletConfiguration(usingNewRouting = true, productionMode = false)

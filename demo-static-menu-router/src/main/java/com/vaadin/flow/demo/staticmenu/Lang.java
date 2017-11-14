@@ -34,13 +34,16 @@ import com.google.common.cache.LoadingCache;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.i18n.I18NProvider;
 
+/**
+ * Class implementing the I18NProvider for translation support.
+ */
 public class Lang implements I18NProvider {
 
     public static final Locale LOCALE_FI = new Locale("fi", "FI");
     public static final Locale LOCALE_EN = new Locale("en", "GB");
     public static final Locale LOCALE_JA = new Locale("ja");
 
-    List<Locale> locales = Collections
+    List<Locale> providedLocales = Collections
             .unmodifiableList(Arrays.asList(LOCALE_FI, LOCALE_EN));
 
     public static final String BUNDLE_PREFIX = "i18n.translations";
@@ -50,14 +53,14 @@ public class Lang implements I18NProvider {
             .build(new CacheLoader<Locale, ResourceBundle>() {
 
                 @Override
-                public ResourceBundle load(final Locale key) throws Exception {
-                    return initializeBundle(key);
+                public ResourceBundle load(final Locale locale) throws Exception {
+                    return readProperties(locale);
                 }
             });
 
     @Override
     public List<Locale> getProvidedLocales() {
-        return locales;
+        return providedLocales;
     }
 
     @Override
@@ -97,10 +100,6 @@ public class Lang implements I18NProvider {
             value = MessageFormat.format(value, params);
         }
         return value;
-    }
-
-    private static ResourceBundle initializeBundle(final Locale locale) {
-        return readProperties(locale);
     }
 
     protected static ResourceBundle readProperties(final Locale locale) {

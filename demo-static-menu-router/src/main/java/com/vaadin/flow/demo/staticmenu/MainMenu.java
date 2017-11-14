@@ -90,9 +90,8 @@ public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
         Button english = new Button("EN", event -> setLocale(Lang.LOCALE_EN));
         Button finnish = new Button("FI", event -> setLocale(Lang.LOCALE_FI));
         Button japanese = new Button("JA", event -> setLocale(Lang.LOCALE_JA));
-        HorizontalLayout locales = new HorizontalLayout(english, finnish,
-                japanese);
-        return locales;
+
+        return new HorizontalLayout(english, finnish, japanese);
     }
 
     private void setLocale(Locale locale) {
