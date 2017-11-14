@@ -35,10 +35,9 @@ public class ElementsMenuView extends SimpleMenuBar implements RouterLayout {
      * Creates the view.
      */
     public ElementsMenuView() {
-        addMenuElement(ElementDemoView.class, "Demos");
+        addMenuElement(ElementDemoView.class);
         addMenuElement(DocsView.class,
-                "-/part/elements/elements-getting-started.html",
-                "Getting Started");
+                "-/part/elements/elements-getting-started.html");
     }
 
 }

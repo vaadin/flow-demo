@@ -15,28 +15,18 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
-import com.vaadin.ui.i18n.LocaleChangeObserver;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+
+import com.vaadin.server.Constants;
+import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletConfiguration;
 
 /**
- * An abstract view which automatically contains a text, which tells the name of
- * the view.
- *
- * @author Vaadin
+ * Servlet class for defining the I18N provider class as a web init parameter.
  */
-public abstract class DummyView extends Div implements LocaleChangeObserver {
-
-    /**
-     * Creates the view.
-     */
-    public DummyView() {
-        setClassName("content");
-    }
-
-    @Override
-    public void localeChange(LocaleChangeEvent event) {
-        setText(getI18NProvider().getTranslation("dummy.view",
-                Util.getNavigationTargetName(getClass())));
-    }
+@WebServlet(urlPatterns = "/*", name = "static-menu", asyncSupported = true, initParams = {
+        @WebInitParam(name = Constants.I18N_PROVIDER, value = "com.vaadin.flow.demo.staticmenu.Lang") })
+@VaadinServletConfiguration(usingNewRouting = true, productionMode = false)
+public class ApplicationServlet extends VaadinServlet {
 }

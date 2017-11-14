@@ -48,9 +48,8 @@ public class BlogPost extends Div
 
         if (!record.isPresent()) {
             event.rerouteToError(IllegalArgumentException.class,
-                    "No blog found for given id. Please check the location "
-                            + event.getLocation().getPath()
-                            + " and try again.");
+                    getI18NProvider().getTranslation("blog.post.not.found",
+                            event.getLocation().getPath()));
         } else {
             blogTitle = record.get().getTitle();
             displayRecord(record.get());

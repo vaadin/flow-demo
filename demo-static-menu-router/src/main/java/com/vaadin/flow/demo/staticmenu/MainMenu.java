@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import com.vaadin.flow.demo.staticmenu.community.blog.BlogList;
@@ -23,9 +24,13 @@ import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
 import com.vaadin.router.event.AfterNavigationEvent;
 import com.vaadin.router.event.AfterNavigationObserver;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.button.Button;
 import com.vaadin.ui.common.HtmlContainer;
 import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
+import com.vaadin.ui.layout.HorizontalLayout;
 
 /**
  * Main menu bar containing top level navigation items.
@@ -54,10 +59,12 @@ public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
         ul.setClassName("topnav");
         add(ul);
 
-        ul.add(createLink(FrameworkView.class, "Framework"));
-        ul.add(createLink(ElementsView.class, "Elements"));
-        ul.add(createLink(DownloadView.class, "Download"));
-        ul.add(createLink(BlogList.class, "Blogs"));
+        ul.add(createLink(FrameworkView.class));
+        ul.add(createLink(ElementsView.class));
+        ul.add(createLink(DownloadView.class));
+        ul.add(createLink(BlogList.class));
+
+        ul.add(getLocales());
     }
 
     @Override
@@ -77,5 +84,17 @@ public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
                 path.append("/");
             }
         }
+    }
+
+    private Component getLocales() {
+        Button english = new Button("EN", event -> setLocale(Lang.LOCALE_EN));
+        Button finnish = new Button("FI", event -> setLocale(Lang.LOCALE_FI));
+        Button japanese = new Button("JA", event -> setLocale(Lang.LOCALE_JA));
+
+        return new HorizontalLayout(english, finnish, japanese);
+    }
+
+    private void setLocale(Locale locale) {
+        UI.getCurrent().setLocale(locale);
     }
 }

@@ -50,7 +50,7 @@ public class HomePageIT extends AbstractComplexStaticMenuTest {
 
         getSubMenuItem("Vaadin Icons").click();
 
-        Assert.assertTrue("SubSubMenu item 'Icons' is missing", getSubSubMenuItem("Icons").isDisplayed());
+        Assert.assertTrue("SubSubMenu item 'Icons' is missing", getSubSubMenuItem("Vaadin Icons").isDisplayed());
         Assert.assertTrue("SubSubMenu item 'About' is missing", getSubSubMenuItem("About").isDisplayed());
     }
 }

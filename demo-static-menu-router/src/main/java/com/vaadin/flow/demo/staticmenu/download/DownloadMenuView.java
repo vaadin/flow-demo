@@ -34,7 +34,7 @@ public class DownloadMenuView extends SimpleMenuBar implements RouterLayout {
      * Creates the view.
      */
     public DownloadMenuView() {
-        addMenuElement(DocsView.class, "Docs");
-        addMenuElement(IconsView.class, "Vaadin Icons");
+        addMenuElement(DocsView.class);
+        addMenuElement(IconsView.class);
     }
 }

@@ -26,6 +26,10 @@ import com.vaadin.router.event.BeforeNavigationObserver;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.formlayout.FormLayout;
+import com.vaadin.ui.html.Label;
+import com.vaadin.ui.i18n.I18NProvider;
+import com.vaadin.ui.i18n.LocaleChangeEvent;
+import com.vaadin.ui.i18n.LocaleChangeObserver;
 import com.vaadin.ui.layout.HorizontalLayout;
 import com.vaadin.ui.textfield.TextField;
 
@@ -34,13 +38,15 @@ import com.vaadin.ui.textfield.TextField;
  */
 @Route(value = "blog/new", layout = MainLayout.class)
 public class BlogCreator extends FormLayout
-        implements BeforeNavigationObserver {
+        implements BeforeNavigationObserver, LocaleChangeObserver {
 
     private final TextField title = new TextField();
     private final TextField content = new TextField();
+    private final Label titleLabel = new Label();
+    private final Label contentLabel = new Label();
 
-    private final Button save = new Button("Save");
-    private final Button reset = new Button("Reset");
+    private final Button save = new Button();
+    private final Button reset = new Button();
 
     private final Binder<BlogRecord> binder = new Binder<>();
     private final BlogRecord record = new BlogRecord();
@@ -54,8 +60,8 @@ public class BlogCreator extends FormLayout
 
     private void init() {
         setResponsiveSteps(new ResponsiveStep("350px", 1));
-        addFormItem(title, "Title");
-        addFormItem(content, "Blog content");
+        addFormItem(title, titleLabel);
+        addFormItem(content, contentLabel);
         content.setWidth("calc(99.999% - 2em)");
 
         HorizontalLayout layout = new HorizontalLayout();
@@ -67,6 +73,16 @@ public class BlogCreator extends FormLayout
         configureComponents();
     }
 
+    private void buildForm() {
+        I18NProvider provider = getI18NProvider();
+        titleLabel.setText(provider.getTranslation("new.blog.post.title"));
+        contentLabel
+                .setText(provider.getTranslation("new.blog.post.content"));
+
+        save.setText(provider.getTranslation("common.save"));
+        reset.setText(provider.getTranslation("common.reset"));
+    }
+
     @Override
     public void beforeNavigation(BeforeNavigationEvent event) {
         if (ActivationState.DEACTIVATING.equals(event.getActivationState())
@@ -74,8 +90,9 @@ public class BlogCreator extends FormLayout
             ConfirmationDialog dialog = new ConfirmationDialog();
             getUI().ifPresent(ui -> ui.add(dialog));
 
-            dialog.open("Unsaved changes",
-                    "Are you certain you want to continue navigation?",
+            I18NProvider provider = getI18NProvider();
+            dialog.open(provider.getTranslation("dialog.title"),
+                    provider.getTranslation("dialog.question"),
                     event.postpone());
         }
     }
@@ -108,5 +125,10 @@ public class BlogCreator extends FormLayout
         binder.readBean(null);
         title.setValue("");
         content.setValue("");
+    }
+
+    @Override
+    public void localeChange(LocaleChangeEvent event) {
+        buildForm();
     }
 }

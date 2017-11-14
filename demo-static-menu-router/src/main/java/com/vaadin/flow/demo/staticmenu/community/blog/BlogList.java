@@ -24,6 +24,8 @@ import com.vaadin.router.RouterLink;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.button.Button;
 import com.vaadin.ui.html.Div;
+import com.vaadin.ui.i18n.LocaleChangeEvent;
+import com.vaadin.ui.i18n.LocaleChangeObserver;
 
 /**
  * The blog post view.
@@ -32,7 +34,9 @@ import com.vaadin.ui.html.Div;
  */
 @Route(value = "blog", layout = MainLayout.class)
 @PageTitle("Blog Post")
-public class BlogList extends Div {
+public class BlogList extends Div implements LocaleChangeObserver {
+
+    private Button addBlogPost;
 
     /**
      * Constructor populating blog listing.
@@ -42,13 +46,20 @@ public class BlogList extends Div {
 
         // TODO: Update after #2702 implemented
         UI ui = UI.getCurrent();
-        add(new Button("Add Blog Post", buttonClickEvent -> ui
-                .navigateTo(ui.getRouter().get().getUrl(BlogCreator.class))));
+        addBlogPost = new Button("Add Blog Post",
+                buttonClickEvent -> ui.navigateTo(
+                        ui.getRouter().get().getUrl(BlogCreator.class)));
+        add(addBlogPost);
     }
 
     private void addRecord(BlogRecord record) {
         RouterLink link = new RouterLink(record.getTitle(), BlogPost.class,
                 record.getId());
         add(new Div(link));
+    }
+
+    @Override
+    public void localeChange(LocaleChangeEvent event) {
+        addBlogPost.setText(getI18NProvider().getTranslation("new.blog.post"));
     }
 }
