@@ -26,7 +26,7 @@
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
                     <systemPropertyVariables>
-                        <projectBaseDirectory>${project.basedir}/..</projectBaseDirectory>
+                        <projectBaseDirectory>${project.rootdir}</projectBaseDirectory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
