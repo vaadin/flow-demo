@@ -1,4 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
 
 <dom-module id="contacts-form">
     <template>
@@ -22,13 +22,13 @@
         </div>
     </template>
 
-	  <script>
-	  class ContactForm extends Polymer.Element {
-	      static get is() { return 'contacts-form'; }
+    <script>
+        class ContactForm extends Polymer.Element {
+            static get is() {
+                return 'contacts-form';
+            }
 
-	  }
-
-	  customElements.define(ContactForm.is, ContactForm);
-
-	  </script>
+        }
+        customElements.define(ContactForm.is, ContactForm);
+    </script>
 </dom-module>

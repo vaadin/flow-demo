@@ -11,6 +11,15 @@
     <artifactId>demo-jquery-table</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <!-- Not the newest version because of https://www.polymer-project.org/2.0/docs/tools/node-support -->
+        <node.version>v7.10.1</node.version>
+        <npm.version>5.3.0</npm.version>
+
+        <frontend.working.directory>${project.basedir}/src/main/webapp/frontend</frontend.working.directory>
+        <npm.build.goal>run devMode</npm.build.goal>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -42,8 +51,31 @@
         </dependency>
     </dependencies>
 
+    <!-- This project is intended to use standalone plugins to demonstrate the way bower can be integrated with Flow -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven.clean.plugin.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${frontend.working.directory}/bower_components</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/build</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${frontend.working.directory}/node_modules</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -72,21 +104,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-                <configuration>
-                    <webAppConfig>
-                        <webInfIncludeJarPattern>.*/flow-.*.jar$|.*/test-resources-.*.jar$</webInfIncludeJarPattern>
-                        <containerIncludeJarPattern>^$</containerIncludeJarPattern>
-                        <resourceBases>
-                            <resourceBase>${jetty.extra.resource.base}</resourceBase>
-                        </resourceBases>
-                    </webAppConfig>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -101,7 +118,6 @@
 
             <properties>
                 <npm.build.goal>run prodMode</npm.build.goal>
-                <jetty.extra.resource.base>${frontend.working.directory}/build</jetty.extra.resource.base>
             </properties>
 
             <dependencies>
@@ -131,6 +147,19 @@
                                 </manifestEntries>
                             </archive>
                             <warSourceExcludes>${war.source.excludes}</warSourceExcludes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty.version}</version>
+                        <configuration>
+                            <webAppConfig>
+                                <resourceBases>
+                                    <resourceBase>${frontend.working.directory}/build</resourceBase>
+                                </resourceBases>
+                            </webAppConfig>
                         </configuration>
                     </plugin>
                 </plugins>
