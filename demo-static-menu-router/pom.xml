@@ -173,7 +173,7 @@
                                 </resource>
                             </webResources>
                             <warSourceExcludes>
-                                **/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/
+                                ${war.source.excludes}
                             </warSourceExcludes>
                         </configuration>
                     </plugin>

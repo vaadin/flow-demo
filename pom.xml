@@ -64,6 +64,8 @@
         <jetty.extra.resource.base>${project.basedir}/src/main/webapp/</jetty.extra.resource.base>
         <npm.build.goal>run devMode</npm.build.goal>
         <vaadin.testbench.version>5.0.0</vaadin.testbench.version>
+        <war.source.excludes>**/node_modules/,**/node/,**/build/,**/etc/
+        </war.source.excludes>
     </properties>
 
     <repositories>
@@ -213,7 +215,7 @@
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
-                    <warSourceExcludes>**/node_modules/,**/node/,**/build/,**/etc/</warSourceExcludes>
+                    <warSourceExcludes>${war.source.excludes}</warSourceExcludes>
                 </configuration>
             </plugin>
 

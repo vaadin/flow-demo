@@ -138,7 +138,13 @@
                                     <directory>${frontend.working.directory}/build</directory>
                                 </resource>
                             </webResources>
-                            <warSourceExcludes>**/frontend/bower_components/,**/node_modules/,**/node/,**/build/,**/etc/</warSourceExcludes>
+                            <archive>
+                                <manifestEntries>
+                                    <Implementation-Title>${project.name}</Implementation-Title>
+                                    <Implementation-Version>${project.version}</Implementation-Version>
+                                </manifestEntries>
+                            </archive>
+                            <warSourceExcludes>${war.source.excludes}</warSourceExcludes>
                         </configuration>
                     </plugin>
                 </plugins>
