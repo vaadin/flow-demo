@@ -35,8 +35,8 @@ import org.junit.Test;
  */
 public class WarSizesIT {
     private static final String PROJECT_BASE_DIRECTORY_PROPERTY_NAME = "projectBaseDirectory";
-    // 20 MB
-    private static final long MAX_ALLOWED_WAR_SIZE_BYTES = 20 * 1024 * 1024;
+    // 35 MB
+    private static final long MAX_ALLOWED_WAR_SIZE_BYTES = 35 * 1024 * 1024;
 
     @Test
     public void checkWarSizes() throws Exception {
