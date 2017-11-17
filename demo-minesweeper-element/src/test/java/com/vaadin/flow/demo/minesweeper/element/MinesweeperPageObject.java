@@ -8,6 +8,18 @@ import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
 public abstract class MinesweeperPageObject extends AbstractChromeTest {
 
+    @Override
+    protected void open() {
+        super.open();
+        waitForElementPresent(By.tagName("table"));
+    }
+
+    @Override
+    protected void open(String... parameters) {
+        super.open(parameters);
+        waitForElementPresent(By.tagName("table"));
+    }
+
     protected void waitForBoomNotification() {
         waitForNotification("BOOM! Reload to try again");
     }
