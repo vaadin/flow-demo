@@ -29,7 +29,7 @@ import com.vaadin.ui.common.StyleSheet;
  * UI which demonstrates how you can use the Flow {@link Component} API
  * to create a Minesweeper game.
  */
-@StyleSheet("minesweeper.css")
+@StyleSheet("frontend://minesweeper.css")
 public class MinesweeperUI extends UI {
 
     /**
