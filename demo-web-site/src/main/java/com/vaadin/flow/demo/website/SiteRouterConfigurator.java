@@ -40,7 +40,7 @@ public class SiteRouterConfigurator implements RouterConfigurator {
      * The main servlet for the application.
      */
     @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(routerConfigurator = SiteRouterConfigurator.class, productionMode = false)
+    @VaadinServletConfiguration(routerConfigurator = SiteRouterConfigurator.class, productionMode = false, usingNewRouting = false)
     public static class DemoSiteServlet extends VaadinServlet {
     }
 
