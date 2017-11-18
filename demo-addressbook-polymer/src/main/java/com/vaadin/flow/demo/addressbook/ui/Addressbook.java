@@ -30,7 +30,7 @@ import com.vaadin.ui.common.StyleSheet;
  */
 @PageTitle("Addressbook")
 @Tag("div")
-@StyleSheet("context://css/site.css")
+@StyleSheet("frontend://css/site.css")
 @Route("")
 public class Addressbook extends HtmlContainer {
     private final ContactForm contactForm = new ContactForm(this::updateForm);

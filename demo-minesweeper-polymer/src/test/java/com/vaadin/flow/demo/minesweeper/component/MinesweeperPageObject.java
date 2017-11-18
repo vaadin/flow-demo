@@ -10,6 +10,18 @@ abstract class MinesweeperPageObject extends AbstractChromeTest {
     private final MineFieldData seed1MineFieldData = new MineFieldData(10, 10,
             1, 0.2);
 
+    @Override
+    protected void open() {
+        super.open();
+        waitForElementPresent(By.id("template"));
+    }
+
+    @Override
+    protected void open(String... parameters) {
+        super.open(parameters);
+        waitForElementPresent(By.id("template"));
+    }
+
     boolean isMineSeed1(int row, int col) {
         return seed1MineFieldData.isMine(row, col);
     }
