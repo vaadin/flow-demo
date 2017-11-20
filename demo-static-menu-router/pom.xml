@@ -77,22 +77,6 @@
         </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-text-field</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-button</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-form-layout</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-ordered-layout</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
             <artifactId>paper-dialog</artifactId>
             <version>2.0.0</version>
         </dependency>
