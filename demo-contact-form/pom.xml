@@ -17,7 +17,7 @@
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </repository>
     </repositories>
-    
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -48,26 +48,6 @@
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>polymer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-text-field</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-button</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-checkbox</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-form-layout</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>vaadin-date-picker</artifactId>
         </dependency>
 
         <!-- Components -->
@@ -101,7 +81,6 @@
             <artifactId>vaadin-text-field-flow</artifactId>
             <version>1.0.0.alpha1</version>
         </dependency>
-
     </dependencies>
 
     <profiles>
