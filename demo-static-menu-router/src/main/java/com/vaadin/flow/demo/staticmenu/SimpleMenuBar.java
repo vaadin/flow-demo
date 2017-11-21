@@ -68,8 +68,8 @@ public class SimpleMenuBar extends MainMenuBar
      * @param <T>
      *            parameter type
      */
-    public <T> void addMenuElement(
-            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter) {
+    public <T, C extends Component & HasUrlParameter<T>> void addMenuElement(
+            Class<? extends C> navigationTarget, T parameter) {
         menu.add(createLink(navigationTarget, parameter));
     }
 

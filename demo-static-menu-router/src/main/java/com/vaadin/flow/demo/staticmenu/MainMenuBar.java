@@ -65,8 +65,8 @@ public abstract class MainMenuBar extends Div implements LocaleChangeObserver {
         return link;
     }
 
-    protected <T> RouterLink createLink(
-            Class<? extends HasUrlParameter<T>> navigationTarget, T parameter) {
+    protected <T, C extends Component & HasUrlParameter<T>> RouterLink createLink(
+            Class<? extends C> navigationTarget, T parameter) {
         String translationKey = navigationTarget.getName() + "." + parameter;
         String name = getI18NProvider().getTranslation(translationKey);
 
