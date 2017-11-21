@@ -17,6 +17,7 @@ package com.vaadin.flow.demo.dynamicmenu;
 
 import com.vaadin.router.HasUrlParameter;
 import com.vaadin.router.RouterLink;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Tag;
 import com.vaadin.ui.common.HtmlContainer;
 
@@ -41,8 +42,8 @@ public class MenuItemComponent extends HtmlContainer {
      * @param name
      *            category name
      */
-    public MenuItemComponent(
-            Class<? extends HasUrlParameter<Integer>> viewClass, int id,
+    public <V extends Component & HasUrlParameter<Integer>> MenuItemComponent(
+            Class<? extends V> viewClass, int id,
             String name) {
         RouterLink categoryLink = new RouterLink(name, viewClass, id);
         add(categoryLink);
