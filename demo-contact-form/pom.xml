@@ -28,12 +28,13 @@
             <artifactId>flow</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-components</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-data</artifactId>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin.flow.demo</groupId>

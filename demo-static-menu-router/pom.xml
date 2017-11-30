@@ -49,16 +49,17 @@
             <artifactId>flow</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-data</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-utils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-components</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -101,6 +102,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-text-field-flow</artifactId>
             <version>1.0.0.alpha1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-generated-components</artifactId>
+            <version>${flow.version}</version>
         </dependency>
     </dependencies>
 
