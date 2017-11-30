@@ -107,7 +107,6 @@
                                 </goals>
                                 <configuration>
                                     <transpileOutputDirectory>${transpilation.output}</transpileOutputDirectory>
-                                    <transpileWorkingDirectory>${project.rootdir}/target</transpileWorkingDirectory>
                                 </configuration>
                             </execution>
                         </executions>
