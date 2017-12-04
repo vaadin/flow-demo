@@ -48,7 +48,7 @@
         <!-- Libraries -->
         <flow.version>${project.version}</flow.version>
         <commons.beanutils.version>1.9.3</commons.beanutils.version>
-        <vaadin.testbench.version>5.0.0</vaadin.testbench.version>
+        <vaadin.testbench.version>5.1.0</vaadin.testbench.version>
 
         <!-- Plugins -->
         <jetty.version>9.3.7.v20160115</jetty.version>

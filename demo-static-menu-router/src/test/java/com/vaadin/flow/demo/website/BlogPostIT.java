@@ -32,7 +32,7 @@ public class BlogPostIT extends AbstractComplexStaticMenuTest {
         waitForElementPresent(By.id("error-content"));
         Assert.assertTrue("Error view content is not present",
                 isElementPresent(By.id("error-content")));
-        Assert.assertTrue(
+        Assert.assertFalse(
                 "Top navigation, i.e. the MainLayout is still present",
                 isElementPresent(By.className("topnav")));
     }
