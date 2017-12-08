@@ -62,6 +62,7 @@
 
         <war.source.excludes>**/node_modules/,**/node/,**/build/,**/etc/
         </war.source.excludes>
+        <rootOutputDir>${project.build.directory}</rootOutputDir>
     </properties>
 
     <repositories>
@@ -169,22 +170,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven.clean.plugin.version}</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${project.rootdir}/driver</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>${project.rootdir}/driver_zips</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -383,6 +368,24 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+                        <version>1.3.0</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>wget</goal>
+                                </goals>
+                                <configuration>
+                                    <url>https://raw.githubusercontent.com/vaadin/flow/master/drivers.xml</url>
+                                    <outputFileName>drivers.xml</outputFileName>
+                                    <outputDirectory>${rootOutputDir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>com.lazerycode.selenium</groupId>
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                         <version>${driver.binary.downloader.maven.plugin.version}</version>
@@ -390,9 +393,9 @@
                             <!-- root directory that downloaded driver binaries
                                 will be stored in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
-                            <rootStandaloneServerDirectory>${project.rootdir}/driver</rootStandaloneServerDirectory>
-                            <downloadedZipFileDirectory>${project.rootdir}/driver_zips</downloadedZipFileDirectory>
-                            <customRepositoryMap>${project.rootdir}/drivers.xml</customRepositoryMap>
+                            <rootStandaloneServerDirectory>${rootOutputDir}/driver</rootStandaloneServerDirectory>
+                            <downloadedZipFileDirectory>${rootOutputDir}/driver_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>${rootOutputDir}/drivers.xml</customRepositoryMap>
                         </configuration>
                         <executions>
                             <execution>
