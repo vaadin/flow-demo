@@ -1,9 +1,7 @@
 .project
 .settings
 .classpath
-target
-driver
-driver_zips
+target/
 
 */.project
 */.settings
