@@ -19,16 +19,16 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.router.HasDynamicTitle;
-import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.Location;
-import com.vaadin.router.Route;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.HasDynamicTitle;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.Location;
+import com.vaadin.flow.router.Route;
 
 /**
  * A view which shows a product.

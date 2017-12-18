@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.googlesignin.component;
 
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.googlesignin.model.ProfileInfo;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
 
 /**
  * Component that shows the profile information of the logged user, such as

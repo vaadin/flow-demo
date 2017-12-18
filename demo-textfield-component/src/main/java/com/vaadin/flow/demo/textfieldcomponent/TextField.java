@@ -15,15 +15,15 @@
  */
 package com.vaadin.flow.demo.textfieldcomponent;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.PropertyDescriptor;
+import com.vaadin.flow.component.PropertyDescriptors;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.shared.Registration;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.common.PropertyDescriptor;
-import com.vaadin.ui.common.PropertyDescriptors;
-import com.vaadin.ui.event.ComponentEvent;
-import com.vaadin.ui.event.ComponentEventListener;
-import com.vaadin.ui.Tag;
+import com.vaadin.flow.shared.Registration;
 
 /**
  * A component which consist of a label and an input field.

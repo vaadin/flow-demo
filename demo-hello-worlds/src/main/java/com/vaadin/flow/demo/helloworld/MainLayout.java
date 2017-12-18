@@ -18,20 +18,20 @@ package com.vaadin.flow.demo.helloworld;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.vaadin.router.PageTitle;
-import com.vaadin.router.RouterLayout;
-import com.vaadin.router.RouterLink;
-import com.vaadin.router.event.AfterNavigationEvent;
-import com.vaadin.router.event.AfterNavigationObserver;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Composite;
-import com.vaadin.ui.Text;
-import com.vaadin.ui.common.HasElement;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.H1;
-import com.vaadin.ui.html.H2;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * The main view contains a menu and a container for either of the hello world

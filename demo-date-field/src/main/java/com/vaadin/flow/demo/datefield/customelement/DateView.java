@@ -18,8 +18,8 @@ package com.vaadin.flow.demo.datefield.customelement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.vaadin.router.Route;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.Route;
 
 /**
  * View containing text field and a div with text that is updated when selection

@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.router.Route;
-import com.vaadin.router.PageTitle;
 import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * The Icons view.

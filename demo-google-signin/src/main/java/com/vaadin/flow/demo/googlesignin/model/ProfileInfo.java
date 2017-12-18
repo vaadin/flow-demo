@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.googlesignin.model;
 
-import com.vaadin.flow.model.TemplateModel;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
  * Model interface for the user profile properties.

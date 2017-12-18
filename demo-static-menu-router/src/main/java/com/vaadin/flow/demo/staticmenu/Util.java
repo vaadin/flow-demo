@@ -17,10 +17,10 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
-import com.vaadin.router.PageTitle;
-import com.vaadin.server.VaadinService;
-import com.vaadin.ui.Component;
-import com.vaadin.util.AnnotationReader;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.internal.AnnotationReader;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.server.VaadinService;
 
 /**
  * Generic helpers for the demo.

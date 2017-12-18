@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.textfieldcomposite;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletConfiguration;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.server.VaadinRequest;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinServletConfiguration;
 
 /**
  * UI which demonstrates how a text field component can be used.

@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
-import com.vaadin.data.ValidationResult;
-import com.vaadin.data.ValueContext;
-import com.vaadin.data.validator.StringLengthValidator;
+import com.vaadin.flow.data.binder.ValidationResult;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.validator.StringLengthValidator;
 
 /**
  * Custom password validator class.

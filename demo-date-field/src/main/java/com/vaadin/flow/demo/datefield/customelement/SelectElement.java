@@ -15,12 +15,12 @@
  */
 package com.vaadin.flow.demo.datefield.customelement;
 
+import com.vaadin.flow.component.ChangeNotifier;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Synchronize;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.event.ChangeNotifier;
-import com.vaadin.ui.event.Synchronize;
-import com.vaadin.ui.Tag;
 
 /**
  * Native select element for selecting items.

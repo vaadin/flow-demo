@@ -15,14 +15,14 @@
  */
 package com.vaadin.flow.demo.addressbook.ui;
 
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.EventHandler;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
 import com.vaadin.flow.demo.addressbook.ui.ContactForm.ContactModel;
-import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.polymertemplate.EventHandler;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
  * Contact editor form.

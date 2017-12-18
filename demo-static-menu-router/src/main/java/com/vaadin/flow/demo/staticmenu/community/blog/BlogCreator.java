@@ -15,23 +15,23 @@
  */
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
-import com.vaadin.data.Binder;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.router.Route;
-import com.vaadin.router.event.ActivationState;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.router.event.BeforeNavigationObserver;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.formlayout.FormLayout;
-import com.vaadin.ui.html.Label;
-import com.vaadin.ui.i18n.I18NProvider;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
-import com.vaadin.ui.i18n.LocaleChangeObserver;
-import com.vaadin.ui.layout.HorizontalLayout;
-import com.vaadin.ui.textfield.TextField;
+import com.vaadin.flow.i18n.I18NProvider;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
+import com.vaadin.flow.router.ActivationState;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeNavigationObserver;
+import com.vaadin.flow.router.Route;
 
 /**
  * Create a new blog post.

@@ -16,11 +16,11 @@
 package com.vaadin.flow.demo.staticmenu.framework;
 
 import com.vaadin.flow.demo.staticmenu.download.DocsView;
-import com.vaadin.router.ParentLayout;
-import com.vaadin.router.RoutePrefix;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
-import com.vaadin.router.RouterLayout;
+import com.vaadin.flow.router.ParentLayout;
+import com.vaadin.flow.router.RoutePrefix;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
  * The Framework menu.

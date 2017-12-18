@@ -17,9 +17,9 @@ package com.vaadin.flow.demo.jquerytable.page;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletConfiguration;
-import com.vaadin.ui.UI;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinServletConfiguration;
 
 /**
  * The main UI for the application.

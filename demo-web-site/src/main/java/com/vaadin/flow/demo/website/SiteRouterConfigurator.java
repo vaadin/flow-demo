@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.website;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.flow.router.DefaultErrorView;
-import com.vaadin.flow.router.RouterConfiguration;
-import com.vaadin.flow.router.RouterConfigurator;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletConfiguration;
+import com.vaadin.flow.router.legacy.DefaultErrorView;
+import com.vaadin.flow.router.legacy.RouterConfiguration;
+import com.vaadin.flow.router.legacy.RouterConfigurator;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinServletConfiguration;
 
 /**
  * Initializes the site by configuring the router to use different views for

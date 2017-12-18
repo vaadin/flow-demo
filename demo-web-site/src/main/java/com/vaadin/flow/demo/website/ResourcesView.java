@@ -18,17 +18,17 @@ package com.vaadin.flow.demo.website;
 import java.io.InputStream;
 import java.util.Optional;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.PropertyDescriptor;
+import com.vaadin.flow.component.PropertyDescriptors;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.router.RouterLink;
-import com.vaadin.server.VaadinServletService;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.common.PropertyDescriptor;
-import com.vaadin.ui.common.PropertyDescriptors;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.router.legacy.LocationChangeEvent;
+import com.vaadin.flow.server.VaadinServletService;
 
 /**
  * A view that shows different resources based on the URL.

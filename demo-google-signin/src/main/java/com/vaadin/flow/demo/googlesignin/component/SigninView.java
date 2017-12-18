@@ -15,16 +15,16 @@
  */
 package com.vaadin.flow.demo.googlesignin.component;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.googlesignin.component.SigninView.SigninModel;
-import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.event.AttachEvent;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.H2;
-import com.vaadin.ui.polymertemplate.Id;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 import elemental.json.JsonObject;
 

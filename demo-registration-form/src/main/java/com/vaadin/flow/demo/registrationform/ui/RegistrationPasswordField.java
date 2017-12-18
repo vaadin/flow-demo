@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
-import com.vaadin.ui.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.PasswordField;
 
 /**
  * Password field component extension.
@@ -24,7 +24,7 @@ import com.vaadin.ui.textfield.PasswordField;
  *
  */
 public class RegistrationPasswordField extends PasswordField
-implements AbstractTextField<PasswordField> {
+        implements AbstractTextField<PasswordField> {
 
     private Object data;
 

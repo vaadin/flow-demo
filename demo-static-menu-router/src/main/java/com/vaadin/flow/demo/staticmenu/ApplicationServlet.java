@@ -18,9 +18,9 @@ package com.vaadin.flow.demo.staticmenu;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 
-import com.vaadin.server.Constants;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletConfiguration;
+import com.vaadin.flow.server.Constants;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinServletConfiguration;
 
 /**
  * Servlet class for defining the I18N provider class as a web init parameter.

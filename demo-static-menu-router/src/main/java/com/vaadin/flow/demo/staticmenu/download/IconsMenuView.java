@@ -15,11 +15,11 @@
  */
 package com.vaadin.flow.demo.staticmenu.download;
 
-import com.vaadin.router.ParentLayout;
-import com.vaadin.router.RoutePrefix;
-import com.vaadin.router.PageTitle;
 import com.vaadin.flow.demo.staticmenu.SimpleMenuBar;
-import com.vaadin.router.RouterLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.ParentLayout;
+import com.vaadin.flow.router.RoutePrefix;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
  * The Icons menu.

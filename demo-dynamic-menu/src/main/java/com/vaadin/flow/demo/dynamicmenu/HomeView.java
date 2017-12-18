@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.router.PageTitle;
-import com.vaadin.router.Route;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * The static home page.

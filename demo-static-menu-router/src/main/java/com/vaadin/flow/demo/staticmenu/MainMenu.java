@@ -18,19 +18,19 @@ package com.vaadin.flow.demo.staticmenu;
 import java.util.Locale;
 import java.util.Optional;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.BlogList;
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
 import com.vaadin.flow.demo.staticmenu.elements.ElementsView;
 import com.vaadin.flow.demo.staticmenu.framework.FrameworkView;
-import com.vaadin.router.event.AfterNavigationEvent;
-import com.vaadin.router.event.AfterNavigationObserver;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.html.Anchor;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.layout.HorizontalLayout;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 
 /**
  * Main menu bar containing top level navigation items.

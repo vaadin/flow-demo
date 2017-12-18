@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.Div;
-import com.vaadin.router.RouterLayout;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
  * Application main layout containing everything.

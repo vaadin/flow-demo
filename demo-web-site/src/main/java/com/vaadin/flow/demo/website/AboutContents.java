@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.ui.AngularTemplate;
+import com.vaadin.flow.template.angular.AngularTemplate;
 
 /**
  * The actual contents of the about page. Loaded from a template file.

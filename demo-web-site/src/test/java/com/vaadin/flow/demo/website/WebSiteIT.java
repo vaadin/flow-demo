@@ -18,6 +18,7 @@ package com.vaadin.flow.demo.website;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,13 +47,15 @@ public class WebSiteIT extends AbstractChromeTest {
         assertMenuItemSelected("Parameter view");
         assertPageTitle(TITLE);
 
-        Assert.assertEquals("Id parameter: 1", getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 1",
+                getFirstContentChild().getText());
 
         getMenuItem("Resource view").click();
         assertMenuItemSelected("Resource view");
         assertPageTitle(TITLE);
 
-        Assert.assertEquals("Select the resource to display" + "", getFirstContentChild().getText());
+        Assert.assertEquals("Select the resource to display" + "",
+                getFirstContentChild().getText());
 
         getMenuItem("Home").click();
         assertMenuItemSelected(null);
@@ -71,7 +74,8 @@ public class WebSiteIT extends AbstractChromeTest {
     }
 
     private void assertMenuItemSelected(String menuItem) {
-        List<WebElement> activeItems = findElements(By.cssSelector(".menu-item.active"));
+        List<WebElement> activeItems = findElements(
+                By.cssSelector(".menu-item.active"));
         if (menuItem == null) {
             Assert.assertEquals(0, activeItems.size());
         } else {
@@ -94,14 +98,17 @@ public class WebSiteIT extends AbstractChromeTest {
         open();
         getMenuItem("Parameter view").click();
         assertLocation("param/1");
-        Assert.assertEquals("Id parameter: 1", getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 1",
+                getFirstContentChild().getText());
 
         getContent().findElement(By.xpath("./a")).click();
         assertLocation("param/2");
-        Assert.assertEquals("Id parameter: 2", getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 2",
+                getFirstContentChild().getText());
 
         getDriver().get(getRootURL() + "/param/3");
-        Assert.assertEquals("Id parameter: 3", getFirstContentChild().getText());
+        Assert.assertEquals("Id parameter: 3",
+                getFirstContentChild().getText());
     }
 
     @Test
@@ -109,10 +116,12 @@ public class WebSiteIT extends AbstractChromeTest {
         open();
         getMenuItem("Resource view").click();
 
-        WebElement selectedResource = getContent().findElement(By.xpath("./*[4]"));
+        WebElement selectedResource = getContent()
+                .findElement(By.xpath("./*[4]"));
         Assert.assertEquals("No resource selected", selectedResource.getText());
 
-        getContent().findElement(By.xpath("//a[text()='css/site.css']")).click();
+        getContent().findElement(By.xpath("//a[text()='css/site.css']"))
+                .click();
         assertLocation("resource/css/site.css");
 
         WebElement iframe = getDriver().findElement(By.xpath("//iframe"));
@@ -131,7 +140,9 @@ public class WebSiteIT extends AbstractChromeTest {
         List<WebElement> metas = findElements(By.tagName("meta"));
         metas.stream().forEach(meta -> assertMeta(meta, map));
 
-        Assert.assertTrue(map.isEmpty());
+        Assert.assertTrue("Unexpected meta tags left: "
+                + map.keySet().stream().collect(Collectors.joining(",")),
+                map.isEmpty());
     }
 
     private void assertLocation(String expectedLocation) {
@@ -158,7 +169,8 @@ public class WebSiteIT extends AbstractChromeTest {
         }
         List<WebElement> menuLinks = findElements(By.cssSelector(".menu a"));
 
-        return menuLinks.stream().filter(link -> text.equals(link.getText())).findFirst().get();
+        return menuLinks.stream().filter(link -> text.equals(link.getText()))
+                .findFirst().get();
     }
 
 }

@@ -17,13 +17,13 @@ package com.vaadin.flow.demo.addressbook.ui;
 
 import java.util.Optional;
 
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
-import com.vaadin.router.PageTitle;
-import com.vaadin.router.Route;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.common.StyleSheet;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * Displays a list of contacts.

@@ -20,23 +20,22 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.vaadin.data.Binder;
-import com.vaadin.data.Binder.Binding;
-import com.vaadin.data.BinderValidationStatus;
-import com.vaadin.data.BindingValidationStatus;
-import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.function.SerializablePredicate;
-import com.vaadin.router.Route;
-import com.vaadin.ui.Composite;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.checkbox.Checkbox;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.datepicker.DatePicker;
-import com.vaadin.ui.formlayout.FormLayout;
-import com.vaadin.ui.html.Label;
-import com.vaadin.ui.layout.HorizontalLayout;
-import com.vaadin.ui.textfield.TextField;
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BinderValidationStatus;
+import com.vaadin.flow.data.binder.BindingValidationStatus;
+import com.vaadin.flow.data.validator.EmailValidator;
+import com.vaadin.flow.function.SerializablePredicate;
+import com.vaadin.flow.router.Route;
 
 /**
  * Contact editor form.
@@ -105,13 +104,13 @@ public class ContactForm extends Composite<FormLayout> {
                 .getValue().trim().isEmpty()
                 || !email.getValue().trim().isEmpty();
 
-        Binding<Contact, String> emailBinding = binder.forField(email)
+        Binder.Binding<Contact, String> emailBinding = binder.forField(email)
                 .withValidator(phoneOrEmailPredicate,
                         "Both phone and email cannot be empty")
                 .withValidator(new EmailValidator("Incorrect email address"))
                 .bind(Contact::getEmail, Contact::setEmail);
 
-        Binding<Contact, String> phoneBinding = binder.forField(phone)
+        Binder.Binding<Contact, String> phoneBinding = binder.forField(phone)
                 .withValidator(phoneOrEmailPredicate,
                         "Both phone and email cannot be empty")
                 .bind(Contact::getPhone, Contact::setPhone);
