@@ -31,8 +31,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import com.vaadin.ui.UI;
-import com.vaadin.ui.i18n.I18NProvider;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.i18n.I18NProvider;
 
 /**
  * Class implementing the I18NProvider for translation support.

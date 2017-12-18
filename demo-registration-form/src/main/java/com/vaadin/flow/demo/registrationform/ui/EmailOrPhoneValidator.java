@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
-import com.vaadin.data.ValidationResult;
-import com.vaadin.data.ValueContext;
-import com.vaadin.data.validator.AbstractValidator;
-import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.flow.data.binder.ValidationResult;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.validator.AbstractValidator;
+import com.vaadin.flow.data.validator.EmailValidator;
 
 class EmailOrPhoneValidator extends AbstractValidator<String> {
 

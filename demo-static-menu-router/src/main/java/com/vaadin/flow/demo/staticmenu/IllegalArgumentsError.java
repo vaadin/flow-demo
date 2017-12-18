@@ -17,12 +17,12 @@ package com.vaadin.flow.demo.staticmenu;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.vaadin.router.ErrorParameter;
-import com.vaadin.router.HasErrorParameter;
-import com.vaadin.router.ParentLayout;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.Label;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.ErrorParameter;
+import com.vaadin.flow.router.HasErrorParameter;
+import com.vaadin.flow.router.ParentLayout;
 
 /**
  * Error view for showing illegal argument information.

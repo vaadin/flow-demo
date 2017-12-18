@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.minesweeper.component.component;
 
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Tag;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Tag;
 
 /**
  * A component which represents a row in the minesweeper grid.

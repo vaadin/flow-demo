@@ -17,12 +17,12 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Optional;
 
-import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.event.ActivationState;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.router.event.BeforeNavigationObserver;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.ActivationState;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeNavigationObserver;
+import com.vaadin.flow.router.HasUrlParameter;
 
 /**
  * A menu which adds all items to a single div.

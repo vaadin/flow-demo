@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.html.Div;
 
 /**
  * The static about view.

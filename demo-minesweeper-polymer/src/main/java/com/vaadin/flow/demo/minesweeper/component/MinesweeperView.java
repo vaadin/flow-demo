@@ -18,12 +18,12 @@ package com.vaadin.flow.demo.minesweeper.component;
 import java.util.List;
 import java.util.Optional;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
-import com.vaadin.router.Route;
-import com.vaadin.router.event.BeforeEnterObserver;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.Route;
 
 /**
  * UI which demonstrates how you can use the Flow {@link Component} API to

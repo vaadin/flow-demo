@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.staticmenu.elements;
 
-import com.vaadin.router.Route;
 import com.vaadin.flow.demo.staticmenu.DummyView;
+import com.vaadin.flow.router.Route;
 
 /**
  * The Elements view.

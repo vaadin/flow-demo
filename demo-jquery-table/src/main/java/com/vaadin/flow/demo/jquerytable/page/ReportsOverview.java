@@ -20,6 +20,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.demo.jquerytable.element.html.Option;
 import com.vaadin.flow.demo.jquerytable.element.html.Select;
 import com.vaadin.flow.demo.jquerytable.element.tablesorter.RichTable;
@@ -28,14 +34,8 @@ import com.vaadin.flow.demo.jquerytable.persistence.IssuesRepository;
 import com.vaadin.flow.demo.jquerytable.persistence.Project;
 import com.vaadin.flow.demo.jquerytable.persistence.ProjectVersion;
 import com.vaadin.flow.demo.jquerytable.persistence.Report;
-import com.vaadin.router.PageTitle;
-import com.vaadin.router.Route;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.Label;
-import com.vaadin.ui.html.Span;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * The one and only view in the jQuery demo application.

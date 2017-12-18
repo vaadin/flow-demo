@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.helloworld;
 
-import com.vaadin.router.Route;
-import com.vaadin.router.PageTitle;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * The navigation target to show when opening the application to root.

@@ -18,10 +18,10 @@ package com.vaadin.flow.demo.dynamicmenu;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.router.ErrorParameter;
-import com.vaadin.router.NotFoundException;
-import com.vaadin.router.RouteNotFoundError;
-import com.vaadin.router.event.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.ErrorParameter;
+import com.vaadin.flow.router.NotFoundException;
+import com.vaadin.flow.router.RouteNotFoundError;
 
 /**
  * An error view showing a message with the wrong location to the user.

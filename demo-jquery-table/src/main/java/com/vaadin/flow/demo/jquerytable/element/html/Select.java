@@ -17,10 +17,10 @@ package com.vaadin.flow.demo.jquerytable.element.html;
 
 import java.util.Optional;
 
+import com.vaadin.flow.component.ChangeNotifier;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.dom.Element;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.event.ChangeNotifier;
-import com.vaadin.ui.Tag;
 
 /**
  * Component representing a <code>&lt;select&gt;</code> element.

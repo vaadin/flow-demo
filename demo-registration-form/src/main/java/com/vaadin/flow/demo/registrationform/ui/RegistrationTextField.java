@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.registrationform.ui;
 
-import com.vaadin.ui.textfield.TextField;
+import com.vaadin.flow.component.textfield.TextField;
 
 /**
  * Text field component extension.
@@ -24,7 +24,7 @@ import com.vaadin.ui.textfield.TextField;
  *
  */
 public class RegistrationTextField extends TextField
-implements AbstractTextField<TextField> {
+        implements AbstractTextField<TextField> {
 
     private Object data;
 

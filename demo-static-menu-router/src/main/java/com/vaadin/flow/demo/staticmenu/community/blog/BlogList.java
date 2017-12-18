@@ -15,17 +15,17 @@
  */
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.router.PageTitle;
-import com.vaadin.router.Route;
-import com.vaadin.router.RouterLink;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
-import com.vaadin.ui.i18n.LocaleChangeObserver;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * The blog post view.
@@ -46,9 +46,8 @@ public class BlogList extends Div implements LocaleChangeObserver {
 
         // TODO: Update after #2702 implemented
         UI ui = UI.getCurrent();
-        addBlogPost = new Button("Add Blog Post",
-                buttonClickEvent -> ui.navigateTo(
-                        ui.getRouter().get().getUrl(BlogCreator.class)));
+        addBlogPost = new Button("Add Blog Post", buttonClickEvent -> ui
+                .navigateTo(ui.getRouter().get().getUrl(BlogCreator.class)));
         add(addBlogPost);
     }
 

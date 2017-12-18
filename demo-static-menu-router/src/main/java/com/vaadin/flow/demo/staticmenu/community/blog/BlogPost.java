@@ -18,15 +18,15 @@ package com.vaadin.flow.demo.staticmenu.community.blog;
 import java.util.List;
 import java.util.Optional;
 
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.router.HasDynamicTitle;
-import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.Route;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.HasDynamicTitle;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.Route;
 
 /**
  * The blog post view.

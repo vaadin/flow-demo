@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.router.Route;
-import com.vaadin.router.PageTitle;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * The static home page.

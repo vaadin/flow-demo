@@ -15,11 +15,11 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.RouterLink;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlContainer;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * A menu item component.

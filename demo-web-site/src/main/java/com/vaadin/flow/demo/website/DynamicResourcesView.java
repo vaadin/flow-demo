@@ -19,11 +19,11 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Input;
+import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.dom.Element;
-import com.vaadin.server.StreamResource;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.Input;
-import com.vaadin.ui.html.NativeButton;
+import com.vaadin.flow.server.StreamResource;
 
 /**
  * A view that uses generated resources.

@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.ui.common.ClientDelegate;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.component.ClientDelegate;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
  * Creator layout for creating todo items.

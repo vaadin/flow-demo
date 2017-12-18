@@ -15,13 +15,13 @@
  */
 package com.vaadin.flow.demo.helloworld;
 
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.helloworld.HelloWorldTemplate.HelloWorldModel;
-import com.vaadin.flow.model.TemplateModel;
-import com.vaadin.router.Route;
-import com.vaadin.router.PageTitle;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
  * Hello World view based on templates. The composition of elements is done

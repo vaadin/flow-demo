@@ -17,25 +17,23 @@ package com.vaadin.flow.demo.registrationform.ui;
 
 import java.util.Objects;
 
-import com.vaadin.data.Binder;
-import com.vaadin.data.Binder.Binding;
-import com.vaadin.data.BindingValidationStatus;
-import com.vaadin.data.BindingValidationStatus.Status;
-import com.vaadin.data.Validator;
-import com.vaadin.router.Route;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Composite;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.common.HasStyle;
-import com.vaadin.ui.common.HasValue;
-import com.vaadin.ui.common.HtmlComponent;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.H2;
-import com.vaadin.ui.html.Label;
-import com.vaadin.ui.layout.HorizontalLayout;
-import com.vaadin.ui.layout.VerticalLayout;
-import com.vaadin.ui.paper.dialog.GeneratedPaperDialog;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.HasValue;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.paper.dialog.GeneratedPaperDialog;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BindingValidationStatus;
+import com.vaadin.flow.data.binder.Validator;
+import com.vaadin.flow.router.Route;
 
 /**
  * Contact editor form.
@@ -55,8 +53,8 @@ public class RegistrationForm extends Composite<VerticalLayout> {
 
     private final Binder<Person> binder = new Binder<>();
 
-    private Binding<Person, String> passwordBinding;
-    private Binding<Person, String> confirmPasswordBinding;
+    private Binder.Binding<Person, String> passwordBinding;
+    private Binder.Binding<Person, String> confirmPasswordBinding;
 
     private boolean showConfirmPasswordStatus;
 
@@ -71,20 +69,20 @@ public class RegistrationForm extends Composite<VerticalLayout> {
         addToLayout(fullNameField, "Full name");
 
         binder.forField(fullNameField).asRequired("Full name may not be empty")
-        .withValidationStatusHandler(
-                status -> commonStatusChangeHandler(status,
-                        fullNameField))
-        .bind(Person::getFullName, Person::setFullName);
+                .withValidationStatusHandler(
+                        status -> commonStatusChangeHandler(status,
+                                fullNameField))
+                .bind(Person::getFullName, Person::setFullName);
 
         RegistrationTextField phoneOrEmailField = new RegistrationTextField();
         phoneOrEmailField.setId("phone-or-email");
         addToLayout(phoneOrEmailField, "Phone or Email");
         binder.forField(phoneOrEmailField)
-        .withValidator(new EmailOrPhoneValidator())
-        .withValidationStatusHandler(
-                status -> commonStatusChangeHandler(status,
-                        phoneOrEmailField))
-        .bind(Person::getEmailOrPhone, Person::setEmailOrPhone);
+                .withValidator(new EmailOrPhoneValidator())
+                .withValidationStatusHandler(
+                        status -> commonStatusChangeHandler(status,
+                                phoneOrEmailField))
+                .bind(Person::getEmailOrPhone, Person::setEmailOrPhone);
 
         RegistrationPasswordField passwordField = new RegistrationPasswordField();
         passwordField.setId("pwd");
@@ -145,7 +143,8 @@ public class RegistrationForm extends Composite<VerticalLayout> {
     private void commonStatusChangeHandler(BindingValidationStatus<?> event,
             AbstractTextField<?> field) {
         Label statusLabel = (Label) field.getData();
-        setVisible(statusLabel, !event.getStatus().equals(Status.UNRESOLVED));
+        setVisible(statusLabel, !event.getStatus()
+                .equals(BindingValidationStatus.Status.UNRESOLVED));
         switch (event.getStatus()) {
         case OK:
             statusLabel.setText("");
@@ -200,8 +199,7 @@ public class RegistrationForm extends Composite<VerticalLayout> {
     }
 
     private void showNotification(String title, String message, boolean error) {
-        GeneratedPaperDialog dialog = createDialog(title,
-                message, error);
+        GeneratedPaperDialog dialog = createDialog(title, message, error);
 
         dialog.setEntryAnimation("scale-up-animation");
         dialog.setExitAnimation("scale-down-animation");

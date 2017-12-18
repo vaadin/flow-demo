@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.staticmenu;
 
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
-import com.vaadin.ui.i18n.LocaleChangeObserver;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
 
 /**
  * An abstract view which automatically contains a text, which tells the name of

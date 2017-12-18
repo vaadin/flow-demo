@@ -15,10 +15,10 @@
  */
 package com.vaadin.flow.demo.dynamicmenu;
 
-import com.vaadin.router.RouterLayout;
-import com.vaadin.ui.common.HasElement;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.RouterLayout;
 
 /**
  * Layout showing the main menu above a sub view.

@@ -19,13 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.router.event.BeforeEnterObserver;
-import com.vaadin.router.event.BeforeNavigationEvent;
-import com.vaadin.ui.common.HtmlContainer;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.BeforeNavigationEvent;
 
 /**
  * Menu displaying categories as groups and products as items in the groups.

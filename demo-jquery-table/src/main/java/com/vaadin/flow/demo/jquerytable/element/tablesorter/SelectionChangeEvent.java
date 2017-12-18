@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.demo.jquerytable.element.tablesorter;
 
-import com.vaadin.ui.event.ComponentEvent;
+import com.vaadin.flow.component.ComponentEvent;
 
 /**
  * Event for selection changes in {@link RichTable}s.

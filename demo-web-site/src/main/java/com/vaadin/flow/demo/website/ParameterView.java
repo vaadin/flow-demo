@@ -15,9 +15,9 @@
  */
 package com.vaadin.flow.demo.website;
 
-import com.vaadin.flow.router.LocationChangeEvent;
-import com.vaadin.router.RouterLink;
-import com.vaadin.ui.html.Div;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.router.legacy.LocationChangeEvent;
 
 /**
  * A dynamic view that shows different content based on a parameter in the URL.

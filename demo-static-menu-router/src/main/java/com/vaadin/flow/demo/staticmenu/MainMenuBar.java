@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.vaadin.router.HasUrlParameter;
-import com.vaadin.router.RouterLink;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.i18n.LocaleChangeEvent;
-import com.vaadin.ui.i18n.LocaleChangeObserver;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * Menu view handler. Updates menu item highlights before navigation in the

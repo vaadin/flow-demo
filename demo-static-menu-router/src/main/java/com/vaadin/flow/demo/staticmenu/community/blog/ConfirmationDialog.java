@@ -15,16 +15,16 @@
  */
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
-import com.vaadin.router.ContinueNavigationAction;
-import com.vaadin.shared.Registration;
-import com.vaadin.ui.Composite;
-import com.vaadin.ui.button.Button;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.H2;
-import com.vaadin.ui.i18n.I18NProvider;
-import com.vaadin.ui.layout.HorizontalLayout;
-import com.vaadin.ui.paper.dialog.GeneratedPaperDialog;
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.paper.dialog.GeneratedPaperDialog;
+import com.vaadin.flow.i18n.I18NProvider;
+import com.vaadin.flow.router.internal.ContinueNavigationAction;
+import com.vaadin.flow.shared.Registration;
 
 /**
  * Simple confirmation dialog.

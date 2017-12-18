@@ -15,12 +15,12 @@
  */
 package com.vaadin.flow.demo.minesweeper.component.component;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.demo.minesweeper.component.component.Cell.CellClickEvent;
 import com.vaadin.flow.demo.minesweeper.component.data.MineFieldData;
 import com.vaadin.flow.demo.minesweeper.component.data.Point;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.common.HasComponents;
-import com.vaadin.ui.Tag;
 
 /**
  * The Minesweeper main UI component.
