@@ -30,6 +30,18 @@
             <artifactId>demo-utils</artifactId>
         </dependency>
 
+        <!-- for upload -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-generated-components</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>paper-dialog</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -67,6 +79,16 @@
             <artifactId>vaadin-ordered-layout-flow</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-upload-flow</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-text-field-flow</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -95,6 +117,18 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-ordered-layout-flow</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <classifier>demo</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-upload-flow</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <classifier>demo</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-text-field-flow</artifactId>
             <version>1.0-SNAPSHOT</version>
             <classifier>demo</classifier>
         </dependency>
