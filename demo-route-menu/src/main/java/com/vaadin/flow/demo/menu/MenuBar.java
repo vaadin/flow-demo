@@ -40,62 +40,73 @@ public class MenuBar extends UnorderedList {
         Map<Class<? extends RouterLayout>, List<RouteData>> routes = UI
                 .getCurrent().getRouter().get().getRoutesByParent();
         List<Class<? extends RouterLayout>> parentLayouts = routes.keySet()
-                .stream().collect(Collectors.toList());
+                .stream().filter(parent -> !parent.equals(UI.class))
+                .collect(Collectors.toList());
 
-        // We handle the external dependencies differently.
-        parentLayouts.remove(UI.class);
-
-        Collections.sort(parentLayouts, (o1, o2) -> {
-            if (o1.equals(UI.class)) {
-                return 1;
-            } else if (o2.equals(UI.class)) {
-                return -1;
-            }
-            return o1.getSimpleName().compareToIgnoreCase(o2.getSimpleName());
-        });
-        parentLayouts.forEach(key -> {
-            ListItem listItem = new ListItem();
-            UnorderedList subList = new UnorderedList();
-            routes.get(key).forEach(route -> {
-                RouterLink routerLink = new RouterLink(getRouteName(route),
-                        route.getNavigationTarget());
-                // ApplicationLayout children should be as root targets.
-                if (key.equals(ApplicationLayout.class)) {
-                    ListItem menuItem = new ListItem(routerLink);
-                    add(menuItem);
-                } else {
-                    subList.add(new ListItem(routerLink));
-                }
-            });
-            if (subList.getChildren().count() != 0) {
-                String title = key.getSimpleName();
-                if (key.isAnnotationPresent(PageTitle.class)) {
-                    title = key.getAnnotation(PageTitle.class).value();
-                }
-                Anchor anchor = new Anchor("#", title);
-                listItem.add(anchor);
-                listItem.add(subList);
-                add(listItem);
-            }
-        });
+        Collections.sort(parentLayouts, (o1, o2) -> o1.getSimpleName()
+                .compareToIgnoreCase(o2.getSimpleName()));
+        for (Class<? extends RouterLayout> key : parentLayouts) {
+            populateMenuItem(routes.get(key), key);
+        }
 
         // Handle external routes that do not contain our ApplicationLayout
         if (routes.containsKey(UI.class)) {
-            ListItem listItem = new ListItem();
-            UnorderedList subList = new UnorderedList();
-            routes.get(UI.class).forEach(route -> {
-                external.add(route.getNavigationTarget());
-
-                String routeName = getRouteName(route);
-                RouterLink routerLink = new RouterLink(
-                        routeName.substring(0, routeName.indexOf("View")),
-                        route.getNavigationTarget());
-                subList.add(new ListItem(routerLink));
-            });
-            listItem.add(new Anchor("#", "External Demos"));
-            listItem.add(subList);
-            add(listItem);
+            populateExternalRoutes(routes);
         }
+    }
+
+    private void populateMenuItem(List<RouteData> routes,
+            Class<? extends RouterLayout> key) {
+        UnorderedList subList = new UnorderedList();
+
+        for (RouteData route : routes) {
+            RouterLink routerLink = new RouterLink(getRouteName(route),
+                    route.getNavigationTarget());
+
+            // ApplicationLayout children should be as root targets.
+            if (key.equals(ApplicationLayout.class)) {
+                ListItem menuItem = new ListItem(routerLink);
+                add(menuItem);
+            } else {
+                subList.add(new ListItem(routerLink));
+            }
+        }
+
+        if (subList.getChildren().count() != 0) {
+            String title = key.getSimpleName();
+            if (key.isAnnotationPresent(PageTitle.class)) {
+                title = key.getAnnotation(PageTitle.class).value();
+            }
+            Anchor anchor = new Anchor("#", title);
+
+            // Create menu item
+            addMenuItem(subList, anchor);
+        }
+    }
+
+    private void addMenuItem(UnorderedList subList, Anchor anchor) {
+        ListItem listItem = new ListItem();
+        listItem.add(anchor);
+        listItem.add(subList);
+        add(listItem);
+    }
+
+    private void populateExternalRoutes(
+            Map<Class<? extends RouterLayout>, List<RouteData>> routes) {
+        UnorderedList subList = new UnorderedList();
+        for (RouteData route : routes.get(UI.class)) {
+            // Book keeping for external routes.
+            external.add(route.getNavigationTarget());
+
+            String routeName = getRouteName(route);
+            RouterLink routerLink = new RouterLink(
+                    routeName.substring(0, routeName.indexOf("View")),
+                    route.getNavigationTarget());
+            subList.add(new ListItem(routerLink));
+        }
+
+        Anchor anchor = new Anchor("#", "External Demos");
+        addMenuItem(subList, anchor);
     }
 
     private String getRouteName(RouteData route) {
