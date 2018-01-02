@@ -21,6 +21,9 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
+/**
+ * Simple css component inside a Polymer element.
+ */
 @Route(value = "fan-out", layout = SubView.class)
 @Tag("fan-out")
 @HtmlImport("frontend://template/fanOut.html")

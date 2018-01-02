@@ -21,10 +21,21 @@ import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.ui.LoadMode;
 
+/**
+ * Simple canvas ray trace component.
+ * Script from http://ncase.me/sight-and-light/
+ */
 @Route(value = "ray-trace", layout = SubView.class)
 public class RayTrace extends Div {
 
+    /**
+     * Constructor.
+     */
     public RayTrace() {
+        init();
+    }
+
+    private void init() {
         Element baseCanvas = new Element("canvas");
         baseCanvas.setAttribute("id", "canvas");
         baseCanvas.setAttribute("width", "640");

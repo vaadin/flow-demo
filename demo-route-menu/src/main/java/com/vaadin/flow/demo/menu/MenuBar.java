@@ -31,11 +31,21 @@ import com.vaadin.flow.router.RouteData;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 
+/**
+ * Menu that is dynamically populated from registered routes.
+ */
 public class MenuBar extends UnorderedList {
 
     private List<Class<?>> external = new ArrayList<>();
 
+    /**
+     * Constructor that collects the routes and builds the menu.
+     */
     public MenuBar() {
+        init();
+    }
+
+    private void init() {
         setId("menu");
         Map<Class<? extends RouterLayout>, List<RouteData>> routes = UI
                 .getCurrent().getRouter().get().getRoutesByParent();
@@ -115,7 +125,6 @@ public class MenuBar extends UnorderedList {
         if (navigationTarget.isAnnotationPresent(PageTitle.class)) {
             return navigationTarget.getAnnotation(PageTitle.class).value();
         }
-        // TODO: something else for getting the title?
         return navigationTarget.getSimpleName();
     }
 

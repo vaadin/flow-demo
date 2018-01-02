@@ -20,10 +20,20 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.demo.menu.ApplicationLayout;
 import com.vaadin.flow.router.Route;
 
+/**
+ * Default navigation route target of the application.
+ */
 @Route(value = "", layout = ApplicationLayout.class)
 public class Home extends Div {
 
+    /**
+     * Constructor.
+     */
     public Home() {
+        init();
+    }
+
+    private void init() {
         add(new Label("This is the home target for this demo"));
     }
 }

@@ -21,6 +21,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.RouterLayout;
 
+/**
+ * A middle layout used as a menu element collecting all items using it as a
+ * layout.
+ */
 @PageTitle("Fancy demos")
 @ParentLayout(ApplicationLayout.class)
 public class SubView extends Div implements RouterLayout {

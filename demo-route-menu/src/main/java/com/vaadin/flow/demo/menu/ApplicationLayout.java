@@ -30,6 +30,9 @@ import com.vaadin.flow.router.BeforeNavigationEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.RouterLayout;
 
+/**
+ * Main view layout for the application containing the dynamically built menu.
+ */
 @StyleSheet("frontend://styles/styles.css")
 @BodySize(height = "100vh", width = "100%")
 public class ApplicationLayout extends Div
@@ -37,7 +40,14 @@ public class ApplicationLayout extends Div
 
     private final MenuBar menuBar = new MenuBar();
 
+    /**
+     * Constructor.
+     */
     public ApplicationLayout() {
+        init();
+    }
+
+    private void init() {
         getElement().getStyle().set("height", "100%");
         add(menuBar);
     }
@@ -48,17 +58,17 @@ public class ApplicationLayout extends Div
             Component routeTarget = getRouteTarget(
                     (Class<? extends Component>) event.getNavigationTarget());
 
-            getUI().get().getInternals()
+            UI.getCurrent().getInternals()
                     .showRouteTarget(event.getLocation(), routeTarget,
                             Arrays.asList(this));
-            ((HasUrlParameter<?>)routeTarget).setParameter(event, null);
+            ((HasUrlParameter<?>) routeTarget).setParameter(event, null);
             event.postpone();
         }
     }
 
     protected <T extends HasElement> T getRouteTarget(
             Class<T> routeTargetType) {
-        UI ui = getUI().get();
+        UI ui = UI.getCurrent();
         Optional<HasElement> currentInstance = ui.getInternals()
                 .getActiveRouterTargetsChain().stream()
                 .filter(component -> component.getClass()
