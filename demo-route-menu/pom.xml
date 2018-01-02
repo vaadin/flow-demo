@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>flow-demo-project</artifactId>
         <groupId>com.vaadin.flow.demo</groupId>
+        <artifactId>flow-demo-project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <name>Web site with menu built from registered routes</name>
@@ -21,13 +21,17 @@
             <groupId>com.vaadin</groupId>
             <artifactId>flow</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.vaadin.flow.demo</groupId>
-            <artifactId>demo-test-util</artifactId>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.flow.demo</groupId>
-            <artifactId>demo-utils</artifactId>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-test-util</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- for upload -->
@@ -144,4 +148,74 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>productionMode</id>
+            <activation>
+                <property>
+                    <name>vaadin.productionMode</name>
+                </property>
+            </activation>
+
+            <properties>
+                <transpilation.output>${project.build.directory}/build</transpilation.output>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>flow-server-production-mode</artifactId>
+                    <version>${flow.version}</version>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>flow-maven-plugin</artifactId>
+                        <version>${flow.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>copy-production-files</goal>
+                                    <goal>transpile-production-files</goal>
+                                </goals>
+                                <configuration>
+                                    <transpileOutputDirectory>${transpilation.output}</transpileOutputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>${maven.war.plugin.version}</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${transpilation.output}</directory>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty.version}</version>
+                        <configuration>
+                            <webAppConfig>
+                                <containerIncludeJarPattern>^$</containerIncludeJarPattern>
+                                <resourceBases>
+                                    <resourceBase>${transpilation.output}</resourceBase>
+                                </resourceBases>
+                            </webAppConfig>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
