@@ -109,10 +109,12 @@ public class MenuBar extends UnorderedList {
             external.add(route.getNavigationTarget());
 
             String routeName = getRouteName(route);
-            RouterLink routerLink = new RouterLink(
-                    routeName.substring(0, routeName.indexOf("View")),
-                    route.getNavigationTarget());
-            subList.add(new ListItem(routerLink));
+            if (routeName.contains("View")) {
+                RouterLink routerLink = new RouterLink(
+                        routeName.substring(0, routeName.indexOf("View")),
+                        route.getNavigationTarget());
+                subList.add(new ListItem(routerLink));
+            }
         }
 
         Anchor anchor = new Anchor("#", "External Demos");

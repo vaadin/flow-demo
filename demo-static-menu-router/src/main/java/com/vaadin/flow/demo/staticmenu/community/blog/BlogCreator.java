@@ -28,9 +28,8 @@ import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
 import com.vaadin.flow.i18n.I18NProvider;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
-import com.vaadin.flow.router.ActivationState;
-import com.vaadin.flow.router.BeforeNavigationEvent;
-import com.vaadin.flow.router.BeforeNavigationObserver;
+import com.vaadin.flow.router.BeforeLeaveEvent;
+import com.vaadin.flow.router.BeforeLeaveObserver;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -38,7 +37,7 @@ import com.vaadin.flow.router.Route;
  */
 @Route(value = "blog/new", layout = MainLayout.class)
 public class BlogCreator extends FormLayout
-        implements BeforeNavigationObserver, LocaleChangeObserver {
+        implements BeforeLeaveObserver, LocaleChangeObserver {
 
     private final TextField title = new TextField();
     private final TextField content = new TextField();
@@ -76,17 +75,15 @@ public class BlogCreator extends FormLayout
     private void buildForm() {
         I18NProvider provider = getI18NProvider();
         titleLabel.setText(provider.getTranslation("new.blog.post.title"));
-        contentLabel
-                .setText(provider.getTranslation("new.blog.post.content"));
+        contentLabel.setText(provider.getTranslation("new.blog.post.content"));
 
         save.setText(provider.getTranslation("common.save"));
         reset.setText(provider.getTranslation("common.reset"));
     }
 
     @Override
-    public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.DEACTIVATING.equals(event.getActivationState())
-                && notValid()) {
+    public void beforeLeave(BeforeLeaveEvent event) {
+        if (notValid()) {
             ConfirmationDialog dialog = new ConfirmationDialog();
             getUI().ifPresent(ui -> ui.add(dialog));
 

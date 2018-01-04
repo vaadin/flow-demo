@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.dynamicmenu;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.ErrorParameter;
 import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.RouteNotFoundError;
@@ -29,7 +29,7 @@ import com.vaadin.flow.router.RouteNotFoundError;
 public class ErrorView extends RouteNotFoundError {
 
     @Override
-    public int setErrorParameter(BeforeNavigationEvent event,
+    public int setErrorParameter(BeforeEnterEvent event,
             ErrorParameter<NotFoundException> parameter) {
         getElement().getStyle().set("textAlign", "center");
         getElement().appendChild(
