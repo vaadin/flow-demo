@@ -21,8 +21,8 @@ import java.util.Optional;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
+import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.BeforeNavigationEvent;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -32,7 +32,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "")
 public class MinesweeperView extends Div implements BeforeEnterObserver {
 
-    private static int getParam(BeforeNavigationEvent event, String name,
+    private static int getParam(BeforeEnterEvent event, String name,
             int defaultValue) {
         List<String> param = event.getLocation().getQueryParameters()
                 .getParameters().get(name);
@@ -41,7 +41,7 @@ public class MinesweeperView extends Div implements BeforeEnterObserver {
     }
 
     @Override
-    public void beforeEnter(BeforeNavigationEvent event) {
+    public void beforeEnter(BeforeEnterEvent event) {
         long seed = getParam(event, "seed", (int) System.currentTimeMillis());
         double mineDensity = getParam(event, "mineDensity", 20) / 100.0;
         int rows = getParam(event, "rows", 10);

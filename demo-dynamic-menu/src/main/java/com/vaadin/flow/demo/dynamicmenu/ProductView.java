@@ -24,7 +24,7 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
 import com.vaadin.flow.dom.ElementFactory;
-import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Location;
@@ -33,8 +33,8 @@ import com.vaadin.flow.router.Route;
 /**
  * A view which shows a product.
  *
- * @since
  * @author Vaadin Ltd
+ * @since
  */
 @Tag("p")
 @Route(value = "product", layout = MainLayout.class)
@@ -44,7 +44,7 @@ public class ProductView extends HtmlContainer
     private Optional<Product> currentProduct;
 
     @Override
-    public void setParameter(BeforeNavigationEvent event, Integer parameter) {
+    public void setParameter(BeforeEvent event, Integer parameter) {
         int productId = parameter == null ? -1 : parameter;
         currentProduct = DataService.get().getProductById(productId);
         if (!currentProduct.isPresent()) {
@@ -58,9 +58,9 @@ public class ProductView extends HtmlContainer
                 .createStrong("Information about product " + product.getId()));
         getElement().appendChild(
                 ElementFactory.createDiv("Title: " + product.getProductName()));
-        getElement()
-                .appendChild(ElementFactory.createDiv("Price: " + DecimalFormat
-                        .getCurrencyInstance().format(product.getPrice())));
+        getElement().appendChild(ElementFactory.createDiv(
+                "Price: " + DecimalFormat.getCurrencyInstance()
+                        .format(product.getPrice())));
         getElement().appendChild(ElementFactory
                 .createDiv("Stock count: " + product.getStockCount()));
 
@@ -70,8 +70,8 @@ public class ProductView extends HtmlContainer
      * Gets the product id based on the URL.
      *
      * @param location
-     *            a location change event used for finding the URL and
-     *            parameters
+     *         a location change event used for finding the URL and
+     *         parameters
      * @return the product id or -1 if the URL does not refer to a product view
      */
     public static int getProductId(Location location) {

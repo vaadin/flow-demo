@@ -25,8 +25,8 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.page.BodySize;
 import com.vaadin.flow.di.Instantiator;
+import com.vaadin.flow.router.BeforeLeaveEvent;
 import com.vaadin.flow.router.BeforeLeaveObserver;
-import com.vaadin.flow.router.BeforeNavigationEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.RouterLayout;
 
@@ -53,7 +53,7 @@ public class ApplicationLayout extends Div
     }
 
     @Override
-    public void beforeLeave(BeforeNavigationEvent event) {
+    public void beforeLeave(BeforeLeaveEvent event) {
         if (menuBar.isExternal(event.getNavigationTarget())) {
             Component routeTarget = getRouteTarget(
                     (Class<? extends Component>) event.getNavigationTarget());

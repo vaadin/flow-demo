@@ -19,9 +19,8 @@ import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.router.ActivationState;
-import com.vaadin.flow.router.BeforeNavigationEvent;
-import com.vaadin.flow.router.BeforeNavigationObserver;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.HasUrlParameter;
 
 /**
@@ -29,8 +28,7 @@ import com.vaadin.flow.router.HasUrlParameter;
  *
  * @author Vaadin
  */
-public class SimpleMenuBar extends MainMenuBar
-        implements BeforeNavigationObserver {
+public class SimpleMenuBar extends MainMenuBar implements BeforeEnterObserver {
 
     private Div menu;
 
@@ -52,7 +50,7 @@ public class SimpleMenuBar extends MainMenuBar
      * Add a new menu element to this simple menu.
      *
      * @param navigationTarget
-     *            menu element navigation target
+     *         menu element navigation target
      */
     public void addMenuElement(Class<? extends Component> navigationTarget) {
         menu.add(createLink(navigationTarget));
@@ -62,11 +60,11 @@ public class SimpleMenuBar extends MainMenuBar
      * Add a menu element for a navigation target with a parameter.
      *
      * @param navigationTarget
-     *            navigation target
+     *         navigation target
      * @param parameter
-     *            parameter
+     *         parameter
      * @param <T>
-     *            parameter type
+     *         parameter type
      */
     public <T, C extends Component & HasUrlParameter<T>> void addMenuElement(
             Class<? extends C> navigationTarget, T parameter) {
@@ -74,10 +72,7 @@ public class SimpleMenuBar extends MainMenuBar
     }
 
     @Override
-    public void beforeNavigation(BeforeNavigationEvent event) {
-        if (ActivationState.DEACTIVATING.equals(event.getActivationState())) {
-            return;
-        }
+    public void beforeEnter(BeforeEnterEvent event) {
         clearSelection();
         if (targetExists(event.getNavigationTarget())) {
             activateMenuTarget(event.getNavigationTarget());

@@ -25,7 +25,7 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Location;
@@ -34,8 +34,8 @@ import com.vaadin.flow.router.Route;
 /**
  * A view which shows products in a given category.
  *
- * @since
  * @author Vaadin Ltd
+ * @since
  */
 @Tag("p")
 @Route(value = "category", layout = MainLayout.class)
@@ -45,7 +45,7 @@ public final class CategoryView extends HtmlContainer
     private Optional<Category> currentCategory;
 
     @Override
-    public void setParameter(BeforeNavigationEvent event, Integer parameter) {
+    public void setParameter(BeforeEvent event, Integer parameter) {
 
         int catId = parameter == null ? -1 : parameter;
         currentCategory = DataService.get().getCategoryById(catId);
@@ -73,9 +73,9 @@ public final class CategoryView extends HtmlContainer
      * Gets the category id based on a location change event.
      *
      * @param location
-     *            new navigation location
+     *         new navigation location
      * @return the category id or -1 if the URL does not refer to a category
-     *         view
+     * view
      */
     public static int getCategoryId(Location location) {
         if (!"category".equals(location.getFirstSegment())) {

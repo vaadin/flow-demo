@@ -23,7 +23,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -40,7 +40,7 @@ public class BlogPost extends Div
     private String blogTitle = "";
 
     @Override
-    public void setParameter(BeforeNavigationEvent event, Long parameter) {
+    public void setParameter(BeforeEvent event, Long parameter) {
         removeAll();
 
         Optional<BlogRecord> record = BlogsService.getInstance()

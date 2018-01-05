@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.router.BeforeNavigationEvent;
+import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.ErrorParameter;
 import com.vaadin.flow.router.HasErrorParameter;
 import com.vaadin.flow.router.ParentLayout;
@@ -39,7 +39,7 @@ public class IllegalArgumentsError extends Div
     }
 
     @Override
-    public int setErrorParameter(BeforeNavigationEvent event,
+    public int setErrorParameter(BeforeEnterEvent event,
             ErrorParameter<IllegalArgumentException> parameter) {
         Label message = new Label(parameter.getCustomMessage());
         add(message);
