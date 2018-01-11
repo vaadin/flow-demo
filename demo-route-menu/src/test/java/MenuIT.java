@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.testutil.ChromeBrowserTest;
-import com.vaadin.testbench.By;
+import org.openqa.selenium.By;
 
 public class MenuIT extends ChromeBrowserTest {
 
