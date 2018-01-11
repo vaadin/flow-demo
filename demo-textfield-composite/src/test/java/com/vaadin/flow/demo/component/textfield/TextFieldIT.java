@@ -21,7 +21,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
-import com.vaadin.testbench.By;
+import org.openqa.selenium.By;
 
 public class TextFieldIT extends AbstractChromeTest {
 

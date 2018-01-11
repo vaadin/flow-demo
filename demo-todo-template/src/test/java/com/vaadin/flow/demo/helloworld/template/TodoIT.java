@@ -17,10 +17,10 @@ package com.vaadin.flow.demo.helloworld.template;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
-import com.vaadin.testbench.By;
 
 public class TodoIT extends AbstractChromeTest {
 

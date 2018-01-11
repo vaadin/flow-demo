@@ -18,7 +18,7 @@ package com.vaadin.flow.demo.website;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.vaadin.testbench.By;
+import org.openqa.selenium.By;
 
 public class HomePageIT extends AbstractComplexStaticMenuTest {
 
