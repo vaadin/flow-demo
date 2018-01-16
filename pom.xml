@@ -59,7 +59,7 @@
         <maven.failsafe.plugin.version>2.20</maven.failsafe.plugin.version>
         <driver.binary.downloader.maven.plugin.version>1.0.14</driver.binary.downloader.maven.plugin.version>
         <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
-        <flow.plugin.version>0.0.7</flow.plugin.version>
+        <flow.plugin.version>${flow.version}</flow.plugin.version>
         <guava.version>22.0</guava.version>
 
         <war.source.excludes>**/node_modules/,**/node/,**/build/,**/etc/
@@ -97,6 +97,13 @@
         <pluginRepository>
             <id>flow-internal-release</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
 
