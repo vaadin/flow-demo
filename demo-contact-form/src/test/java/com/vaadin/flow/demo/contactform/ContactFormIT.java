@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.contactform;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
-import org.openqa.selenium.By;
 
 public class ContactFormIT extends AbstractChromeTest {
     @Test
@@ -45,9 +45,7 @@ public class ContactFormIT extends AbstractChromeTest {
         findBirthDayInput().sendKeys(Keys.ENTER);
 
         WebElement doNotCall = findElement(By.id("do-not-call"));
-        WebElement checkBox = getInShadowRoot(doNotCall,
-                By.id("nativeCheckbox"));
-        click(checkBox);
+        click(doNotCall);
 
         click(save);
 
@@ -85,7 +83,7 @@ public class ContactFormIT extends AbstractChromeTest {
                         findElement(By.id("phone")))).getAttribute("value"));
         Assert.assertEquals("", findEmailInput().getAttribute("value"));
         Assert.assertEquals("", findBirthDayInput().getAttribute("value"));
-        Assert.assertFalse(checkBox.isSelected());
+        Assert.assertFalse(doNotCall.isSelected());
     }
 
     private WebElement findBirthDayInput() {
