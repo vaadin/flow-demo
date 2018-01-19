@@ -94,7 +94,7 @@ public class MainLayout extends Composite<Div>
     }
 
     @Override
-    public void setRouterLayoutContent(HasElement child) {
+    public void showRouterLayoutContent(HasElement child) {
         // Update what we show whenever the sub view changes
         container.removeAll();
 

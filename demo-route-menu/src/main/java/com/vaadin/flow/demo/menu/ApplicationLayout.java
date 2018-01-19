@@ -28,6 +28,7 @@ import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.router.BeforeLeaveEvent;
 import com.vaadin.flow.router.BeforeLeaveObserver;
 import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 
 /**
@@ -58,9 +59,9 @@ public class ApplicationLayout extends Div
             Component routeTarget = getRouteTarget(
                     (Class<? extends Component>) event.getNavigationTarget());
 
-            UI.getCurrent().getInternals()
-                    .showRouteTarget(event.getLocation(), routeTarget,
-                            Arrays.asList(this));
+            UI.getCurrent().getInternals().showRouteTarget(event.getLocation(),
+                    routeTarget.getClass().getAnnotation(Route.class).value(),
+                    routeTarget, Arrays.asList(this));
             ((HasUrlParameter<?>) routeTarget).setParameter(event, null);
             event.postpone();
         }
