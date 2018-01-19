@@ -44,7 +44,7 @@ public final class MainLayout extends Div implements RouterLayout {
     }
 
     @Override
-    public void setRouterLayoutContent(HasElement content) {
+    public void showRouterLayoutContent(HasElement content) {
         contentHolder.getElement().appendChild(content.getElement());
     }
 }
