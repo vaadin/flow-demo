@@ -14,10 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-testbench</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
             <artifactId>flow-test-util</artifactId>
             <version>${project.version}</version>
         </dependency>
