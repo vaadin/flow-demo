@@ -49,7 +49,6 @@
         <!-- Libraries -->
         <flow.version>${project.version}</flow.version>
         <commons.beanutils.version>1.9.3</commons.beanutils.version>
-        <vaadin.testbench.version>6.0.0.alpha6</vaadin.testbench.version>
         <slf4j.version>1.7.25</slf4j.version>
 
         <!-- Plugins -->
@@ -127,16 +126,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow</artifactId>
                 <version>${flow.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-testbench</artifactId>
-                <version>${vaadin.testbench.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-testbench-core</artifactId>
-                <version>${vaadin.testbench.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vaadin.flow.demo</groupId>
