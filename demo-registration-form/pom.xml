@@ -129,7 +129,7 @@
                             <execution>
                                 <goals>
                                     <goal>copy-production-files</goal>
-                                    <goal>transpile-production-files</goal>
+                                    <goal>package-for-production</goal>
                                 </goals>
                                 <configuration>
                                     <transpileOutputDirectory>${transpilation.output}</transpileOutputDirectory>
