@@ -33,6 +33,7 @@ import com.vaadin.flow.component.paper.dialog.GeneratedPaperDialog;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BindingValidationStatus;
 import com.vaadin.flow.data.binder.Validator;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -66,6 +67,7 @@ public class RegistrationForm extends Composite<VerticalLayout> {
     public RegistrationForm() {
         RegistrationTextField fullNameField = new RegistrationTextField();
         fullNameField.setId("full-name");
+        fullNameField.setValueChangeMode(ValueChangeMode.EAGER);
         addToLayout(fullNameField, "Full name");
 
         binder.forField(fullNameField).asRequired("Full name may not be empty")
@@ -76,6 +78,7 @@ public class RegistrationForm extends Composite<VerticalLayout> {
 
         RegistrationTextField phoneOrEmailField = new RegistrationTextField();
         phoneOrEmailField.setId("phone-or-email");
+        phoneOrEmailField.setValueChangeMode(ValueChangeMode.EAGER);
         addToLayout(phoneOrEmailField, "Phone or Email");
         binder.forField(phoneOrEmailField)
                 .withValidator(new EmailOrPhoneValidator())
@@ -86,6 +89,7 @@ public class RegistrationForm extends Composite<VerticalLayout> {
 
         RegistrationPasswordField passwordField = new RegistrationPasswordField();
         passwordField.setId("pwd");
+        passwordField.setValueChangeMode(ValueChangeMode.EAGER);
         addToLayout(passwordField, "Password");
         passwordBinding = binder.forField(passwordField)
                 .withValidator(new PasswordValidator())
@@ -98,6 +102,7 @@ public class RegistrationForm extends Composite<VerticalLayout> {
 
         RegistrationPasswordField confirmPasswordField = new RegistrationPasswordField();
         confirmPasswordField.setId("confirm-pwd");
+        confirmPasswordField.setValueChangeMode(ValueChangeMode.EAGER);
         addToLayout(confirmPasswordField, "Password again");
 
         confirmPasswordBinding = binder.forField(confirmPasswordField)
