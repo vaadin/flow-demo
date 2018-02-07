@@ -14,33 +14,33 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-polymerelements-paper-material</artifactId>
-                <version>1.0.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-polymerelements-paper-styles</artifactId>
-                <version>1.1.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-polymerelements-paper-ripple</artifactId>
-                <version>2.0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-polymerelements-font-roboto</artifactId>
-                <version>1.0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-googlewebcomponents-google-apis</artifactId>
+                <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                <artifactId>paper-material</artifactId>
                 <version>2.0.0</version>
             </dependency>
             <dependency>
-                <groupId>org.webjars.bower</groupId>
-                <artifactId>github-com-polymerelements-iron-jsonp-library</artifactId>
+                <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                <artifactId>paper-styles</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                <artifactId>paper-ripple</artifactId>
+                <version>1.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                <artifactId>font-roboto</artifactId>
+                <version>1.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.googlewebcomponents</groupId>
+                <artifactId>google-apis</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                <artifactId>iron-jsonp-library</artifactId>
                 <version>2.0.0</version>
             </dependency>
         </dependencies>
@@ -65,12 +65,12 @@
             <artifactId>polymer</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.webjars.bower</groupId>
+            <groupId>org.webjars.bowergithub.googlewebcomponents</groupId>
             <artifactId>google-signin</artifactId>
             <version>2.0.0</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars.bower</groupId>
+            <groupId>org.webjars.bowergithub.googlewebcomponents</groupId>
             <artifactId>google-apis</artifactId>
             <version>2.0.0</version>
         </dependency>

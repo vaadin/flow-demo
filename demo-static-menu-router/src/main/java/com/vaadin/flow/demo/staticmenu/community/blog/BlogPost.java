@@ -68,7 +68,7 @@ public class BlogPost extends Div
         add(title, text);
     }
 
-    @Override
+   // @Override
     public Long deserializeUrlParameters(List<String> urlParameters) {
         if (urlParameters.isEmpty()) {
             return null;
