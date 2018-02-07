@@ -7,7 +7,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
@@ -82,7 +84,7 @@ public class ReportsOverviewIT extends AbstractChromeTest {
         // clicking on the header to make the jquery sort the by the column
         WebElement firstHeader = table
                 .findElement(By.cssSelector("thead th:first-child"));
-        firstHeader.click();
+        firstHeader.sendKeys(Keys.ENTER);
 
         rows = table.findElements(By.cssSelector("tbody tr"));
         List<Integer> idsAfterJQuerySort = new ArrayList<>(rows.size());
@@ -92,6 +94,8 @@ public class ReportsOverviewIT extends AbstractChromeTest {
         }
         // sort the first list and compare it with the list sorted by jquery
         Collections.sort(idsBeforeJQuerySort);
+        System.out.println(idsBeforeJQuerySort);
+        System.out.println(idsAfterJQuerySort);
         Assert.assertTrue(idsBeforeJQuerySort.equals(idsAfterJQuerySort));
     }
 }
