@@ -47,6 +47,6 @@ public class TextFieldIT extends AbstractChromeTest {
         input.sendKeys(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE,
                 Keys.BACK_SPACE, Keys.BACK_SPACE);
         input.sendKeys(string);
-        findElement(By.xpath("//body")).click();
+        blur();
     }
 }
