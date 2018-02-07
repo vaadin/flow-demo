@@ -94,8 +94,6 @@ public class ReportsOverviewIT extends AbstractChromeTest {
         }
         // sort the first list and compare it with the list sorted by jquery
         Collections.sort(idsBeforeJQuerySort);
-        System.out.println(idsBeforeJQuerySort);
-        System.out.println(idsAfterJQuerySort);
         Assert.assertTrue(idsBeforeJQuerySort.equals(idsAfterJQuerySort));
     }
 }
