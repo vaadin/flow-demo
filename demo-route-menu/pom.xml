@@ -29,7 +29,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- for upload -->
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>paper-dialog</artifactId>
