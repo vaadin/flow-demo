@@ -61,6 +61,7 @@ public class ContactFormIT extends AbstractChromeTest {
         // Make email address incorrect
         findEmailInput().clear();
         findEmailInput().sendKeys("abc");
+        blur();
         click(save);
 
         waitUntil(driver -> info.getText().startsWith("There are errors"));

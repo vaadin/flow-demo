@@ -37,6 +37,11 @@
             <version>${flow.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-lumo-theme</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-utils</artifactId>
         </dependency>
@@ -47,7 +52,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.webjars.bower</groupId>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
             <artifactId>polymer</artifactId>
         </dependency>
 

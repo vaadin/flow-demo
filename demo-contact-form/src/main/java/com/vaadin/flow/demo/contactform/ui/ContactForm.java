@@ -36,6 +36,8 @@ import com.vaadin.flow.data.binder.BindingValidationStatus;
 import com.vaadin.flow.data.validator.EmailValidator;
 import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 /**
  * Contact editor form.
@@ -44,6 +46,7 @@ import com.vaadin.flow.router.Route;
  *
  */
 @Route("")
+@Theme(Lumo.class)
 @StyleSheet("frontend://src/style.css")
 public class ContactForm extends Composite<FormLayout> {
 

@@ -68,7 +68,17 @@ public class BlogPost extends Div
         add(title, text);
     }
 
-    @Override
+    /**
+     * Method used to deserialize the list of url segments to an instance of the
+     * parameter type. This method can be overridden to support more complex
+     * objects as an url parameter. By default this method attempts to cast the
+     * first parameter segment to the parameter type and if the parameter list
+     * is empty returns null.
+     *
+     * @param urlParameters
+     *            the list of url parameters to deserialize
+     * @return the deserialized url parameter, can be {@code null}
+     */
     public Long deserializeUrlParameters(List<String> urlParameters) {
         if (urlParameters.isEmpty()) {
             return null;

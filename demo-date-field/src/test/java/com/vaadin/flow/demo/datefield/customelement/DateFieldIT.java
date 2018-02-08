@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class DateFieldIT extends AbstractChromeTest {
 
@@ -33,9 +34,10 @@ public class DateFieldIT extends AbstractChromeTest {
         // Finds the first select element which is the day
         WebElement selectElement = getInShadowRoot(dateField,
                 By.cssSelector("select"));
-        Select select = new Select(selectElement);
-
-        select.selectByIndex(3);
+        selectElement.sendKeys(Keys.TAB);
+        selectElement.sendKeys(Keys.ENTER);
+        selectElement.sendKeys(Keys.ARROW_DOWN,Keys.ARROW_DOWN,Keys.ARROW_DOWN);
+        selectElement.sendKeys(Keys.ENTER);
 
         WebElement value = findElement(By.id("value"));
 
