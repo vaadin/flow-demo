@@ -16,10 +16,10 @@
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.testutil.ChromeBrowserTest;
-import org.openqa.selenium.By;
 
 public class MenuIT extends ChromeBrowserTest {
 
@@ -66,8 +66,8 @@ public class MenuIT extends ChromeBrowserTest {
                 isElementPresent(By.linkText("ComboBox")));
         Assert.assertTrue("Missing expected external demo DatePicker",
                 isElementPresent(By.linkText("DatePicker")));
-        Assert.assertTrue("Missing expected external demo HorizontalLayout",
-                isElementPresent(By.linkText("HorizontalLayout")));
+        Assert.assertTrue("Missing expected external demo OrderedLayout",
+                isElementPresent(By.linkText("OrderedLayout")));
         Assert.assertTrue("Missing expected external demo PasswordField",
                 isElementPresent(By.linkText("PasswordField")));
         Assert.assertTrue("Missing expected external demo TextArea",
@@ -76,8 +76,5 @@ public class MenuIT extends ChromeBrowserTest {
                 isElementPresent(By.linkText("TextField")));
         Assert.assertTrue("Missing expected external demo Upload",
                 isElementPresent(By.linkText("Upload")));
-        Assert.assertTrue("Missing expected external demo VerticalLayout",
-                isElementPresent(By.linkText("VerticalLayout")));
-
     }
 }
