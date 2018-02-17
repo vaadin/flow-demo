@@ -17,12 +17,11 @@ package com.vaadin.flow.demo.datefield.customelement;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
+import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
 public class DateFieldIT extends AbstractChromeTest {
 
