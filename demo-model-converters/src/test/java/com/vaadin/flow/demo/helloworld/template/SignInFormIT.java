@@ -19,10 +19,11 @@ import java.time.LocalDate;
 import java.time.Period;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
-import org.openqa.selenium.By;
 
 public class SignInFormIT extends AbstractChromeTest {
 
@@ -47,11 +48,13 @@ public class SignInFormIT extends AbstractChromeTest {
     }
 
     private void setText(String inputId, String text) {
-        WebElement template = findElement(By.id("template"));
-
-        WebElement input = getInShadowRoot(template, By.id(inputId));
-        WebElement nativeInput = getInShadowRoot(input, By.id("nativeInput"));
-        nativeInput.clear();
-        nativeInput.sendKeys(text);
+        WebElement input = getInShadowRoot(findElement(By.id("template")), By.id(inputId));
+        String value = input.getAttribute("value");
+        if (value != null) {
+            for (int i = 0; i < value.length(); i++) {
+                input.sendKeys(Keys.BACK_SPACE);
+            }
+        }
+        input.sendKeys(text);
     }
 }
