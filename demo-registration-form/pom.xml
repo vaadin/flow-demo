@@ -40,14 +40,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
         </dependency>
@@ -68,11 +60,12 @@
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>iron-flex-layout</artifactId>
+            <version>2.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>paper-dialog</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.1</version>
         </dependency>
 
         <!-- components -->

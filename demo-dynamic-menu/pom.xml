@@ -13,14 +13,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
         </dependency>
