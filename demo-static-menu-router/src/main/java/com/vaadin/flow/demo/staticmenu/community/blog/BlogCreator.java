@@ -111,7 +111,7 @@ public class BlogCreator extends FormLayout
             BlogsService.getInstance().saveItem(record);
             // TODO: Update after #2702 implemented
             UI ui = UI.getCurrent();
-            ui.navigateTo(ui.getRouter().get().getUrl(BlogList.class));
+            ui.navigate(ui.getRouter().get().getUrl(BlogList.class));
         } else {
             binder.validate();
         }

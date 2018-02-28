@@ -47,7 +47,7 @@ public class BlogList extends Div implements LocaleChangeObserver {
         // TODO: Update after #2702 implemented
         UI ui = UI.getCurrent();
         addBlogPost = new Button("Add Blog Post", buttonClickEvent -> ui
-                .navigateTo(ui.getRouter().get().getUrl(BlogCreator.class)));
+                .navigate(ui.getRouter().get().getUrl(BlogCreator.class)));
         add(addBlogPost);
     }
 
