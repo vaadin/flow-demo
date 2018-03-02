@@ -18,6 +18,8 @@ package com.vaadin.flow.demo.dynamicmenu;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.RouterLayout;
 
 /**
@@ -27,7 +29,8 @@ import com.vaadin.flow.router.RouterLayout;
  * @author Vaadin Ltd
  */
 @StyleSheet("css/site.css")
-public final class MainLayout extends Div implements RouterLayout {
+public final class MainLayout extends Div
+        implements RouterLayout, BeforeEnterObserver {
 
     private final Div contentHolder = new Div();
     private final Menu menu;
@@ -46,5 +49,19 @@ public final class MainLayout extends Div implements RouterLayout {
     @Override
     public void showRouterLayoutContent(HasElement content) {
         contentHolder.getElement().appendChild(content.getElement());
+    }
+
+    /**
+     * Called when the location changes so the menu can be updated based on the
+     * currently shown view.
+     *
+     * @param event
+     *            before navigation change event
+     */
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        int categoryId = CategoryView.getCategoryId(event.getLocation());
+        int productId = ProductView.getProductId(event.getLocation());
+        menu.updateSelection(categoryId, productId);
     }
 }
