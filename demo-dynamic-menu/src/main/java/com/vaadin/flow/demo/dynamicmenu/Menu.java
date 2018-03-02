@@ -24,8 +24,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.dynamicmenu.backend.DataService;
 import com.vaadin.flow.demo.dynamicmenu.data.Category;
 import com.vaadin.flow.demo.dynamicmenu.data.Product;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
 
 /**
  * Menu displaying categories as groups and products as items in the groups.
@@ -33,7 +31,7 @@ import com.vaadin.flow.router.BeforeEnterObserver;
  * @author Vaadin
  * @since
  */
-public final class Menu extends Div implements BeforeEnterObserver {
+public final class Menu extends Div {
 
     private Map<Integer, CategoryMenuItem> categories = new HashMap<>();
 
@@ -53,16 +51,15 @@ public final class Menu extends Div implements BeforeEnterObserver {
     }
 
     /**
-     * Called when the location changes so the menu can be updated based on the
-     * currently shown view.
+     * Updates menu selection with the given {@code categoryId} and
+     * {@code productId}.
      *
-     * @param event
-     *         before navigation change event
+     * @param categoryId
+     *            the category id
+     * @param productId
+     *            the product id
      */
-    @Override
-    public void beforeEnter(BeforeEnterEvent event) {
-        int categoryId = CategoryView.getCategoryId(event.getLocation());
-        int productId = ProductView.getProductId(event.getLocation());
+    public void updateSelection(int categoryId, int productId) {
         if (categoryId == -1 && productId != -1) {
             Optional<Product> p = DataService.get().getProductById(productId);
             if (p.isPresent()) {
