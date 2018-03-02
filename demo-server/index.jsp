@@ -30,8 +30,6 @@
 <%@page import="java.util.Map" %>
 <%@page import="java.util.jar.Manifest" %>
 <%
-String flowComponentsDemoName = "demo-flow-components";
-
 Map<String, List<String>> stableVersions = new HashMap<>();
 Map<String, List<String>> snapshotVersions = new HashMap<>();
 
@@ -42,10 +40,6 @@ if (files != null) {
         if (f.isDirectory()) {
             String nameAndVersion = f.getName();
             if (nameAndVersion.startsWith("demo-")) {
-                if (nameAndVersion.startsWith(flowComponentsDemoName)) {
-                    continue;
-                }
-
                 File manifest = new File(f, "META-INF/MANIFEST.MF");
                 if (manifest.isFile()) {
                     Manifest mf = new Manifest(new FileInputStream(manifest));
@@ -88,7 +82,7 @@ if (files != null) {
 
 out.println("<b>Flow documentation</b>");
 out.println("<ul>");
-out.println("<li><a href='https://github.com/vaadin/flow/blob/master/flow-documentation/Overview.asciidoc'>Current documentation</a></li>");
+out.println("<li><a href='https://github.com/vaadin/flow-and-components-documentation/blob/master/Overview.asciidoc'>Current documentation</a></li>");
 out.println("</ul>");
 
 List<String> sortedStableVersions = new ArrayList<>(stableVersions.keySet());
@@ -121,11 +115,6 @@ if (!sortedSnapshotVersions.isEmpty()) {
   out.println("</ul>");
 }
 
-
-out.println("<b>Flow components demo</b>");
-out.println("<ul>");
-out.println("<li><a href='components'>Flow components demo</a> (<a href='https://github.com/vaadin/flow/tree/master/flow-components-parent/demo-flow-components'>sources</a>)</li>");
-out.println("</ul>");
 %>
 </body>
 </html>
