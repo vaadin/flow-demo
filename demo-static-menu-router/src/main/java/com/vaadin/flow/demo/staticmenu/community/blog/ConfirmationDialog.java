@@ -99,7 +99,7 @@ class ConfirmationDialog extends Dialog {
      * Close dialog.
      */
     public void close() {
-        super.close();
+        close();
         getElement().removeFromParent();
     }
 }
