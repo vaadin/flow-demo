@@ -15,9 +15,8 @@
  */
 package com.vaadin.flow.demo.staticmenu.community.blog;
 
-import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -28,8 +27,7 @@ import com.vaadin.flow.shared.Registration;
 /**
  * Simple confirmation dialog.
  */
-@HtmlImport("frontend://bower_components/paper-dialog/paper-dialog.html")
-class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
+class ConfirmationDialog extends Dialog {
 
     private final H2 titleField = new H2();
     private final Div messageLabel = new Div();
@@ -45,7 +43,6 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
     }
 
     private void init() {
-        getContent().setModal(true);
         I18NProvider provider = getI18NProvider();
 
         confirmButton.setText(provider.getTranslation("common.ok"));
@@ -66,7 +63,7 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
         registrationForConfirm = confirmButton.addClickListener(e -> close());
         cancelButton.addClickListener(e -> close());
 
-        getContent().add(titleField, labels, buttonBar);
+        add(titleField, labels, buttonBar);
     }
 
     /**
@@ -95,14 +92,14 @@ class ConfirmationDialog extends Composite<GeneratedPaperDialog> {
         registrationForConfirm = confirmButton
                 .addClickListener(e -> postpone.proceed());
 
-        getContent().open();
+        open();
     }
 
     /**
      * Close dialog.
      */
     public void close() {
-        getContent().close();
+        super.close();
         getElement().removeFromParent();
     }
 }
