@@ -98,8 +98,9 @@ class ConfirmationDialog extends Dialog {
     /**
      * Close dialog.
      */
+    @Override
     public void close() {
-        close();
+        super.close();
         getElement().removeFromParent();
     }
 }
