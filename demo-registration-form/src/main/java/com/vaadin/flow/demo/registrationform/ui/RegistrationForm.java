@@ -25,6 +25,7 @@ import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -34,6 +35,8 @@ import com.vaadin.flow.data.binder.BindingValidationStatus;
 import com.vaadin.flow.data.binder.Validator;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 /**
  * Contact editor form.
@@ -43,6 +46,7 @@ import com.vaadin.flow.router.Route;
  */
 @StyleSheet("frontend://src/style.css")
 @Route("")
+@Theme(Lumo.class)
 public class RegistrationForm extends Composite<VerticalLayout> {
 
     private static final String ERROR = "error";
@@ -203,18 +207,15 @@ public class RegistrationForm extends Composite<VerticalLayout> {
     }
 
     private void showNotification(String title, String message, boolean error) {
-        GeneratedPaperDialog dialog = createDialog(title, message, error);
+        Dialog dialog = createDialog(title, message, error);
 
-        dialog.setEntryAnimation("scale-up-animation");
-        dialog.setExitAnimation("scale-down-animation");
-        dialog.setWithBackdrop(true);
         getUI().get().add(dialog);
         dialog.open();
     }
 
-    private GeneratedPaperDialog<?> createDialog(String title, String text,
+    private Dialog createDialog(String title, String text,
             boolean error) {
-        GeneratedPaperDialog dialog = new GeneratedPaperDialog();
+        Dialog dialog = new Dialog();
         dialog.setId("notification");
         dialog.add(new H2(title));
         HtmlComponent paragraph = new HtmlComponent(Tag.P);

@@ -37,9 +37,9 @@ public class RegistrationFormIT extends AbstractChromeTest {
         signUp.click();
 
         Assert.assertTrue(isElementPresent(By.id("notification")));
-        Assert.assertNotNull(
-                findElement(By.id("notification"))
-                .findElement(By.className("error")));
+        Assert.assertNotNull(findElement(By.id("notification")));
+
+        Assert.assertNotNull(getContent().findElement(By.className("error")));
 
         // discard the dialog
         WebElement fullName = findElement(By.id("full-name"));
@@ -131,10 +131,18 @@ public class RegistrationFormIT extends AbstractChromeTest {
         signUp.click();
 
         Assert.assertTrue(isElementPresent(By.id("notification")));
-        Optional<WebElement> message = findElements(By.tagName("p")).stream()
+        Optional<WebElement> message = getContent()
+                        .findElements(By.tagName("p"))
+                .stream()
                 .filter(paragraph -> paragraph.getText().equals(
                         "Full name 'foo', email or phone 'foo@example.com'"))
                 .findAny();
         Assert.assertTrue(message.isPresent());
+    }
+
+    private WebElement getContent() {
+        return getInShadowRoot(
+                findElement(By.tagName("vaadin-dialog-overlay")),
+                By.id("content"));
     }
 }
