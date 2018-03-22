@@ -127,6 +127,15 @@
                 <groupId>com.vaadin.flow.demo</groupId>
                 <artifactId>demo-test-util</artifactId>
                 <version>${project.version}</version>
+
+                <!-- Remove this when testbench removes saucelabs or fixes the
+                dependency to not bring in google-collections -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.collections</groupId>
+                        <artifactId>google-collections</artifactId>
+                    </exclusion>
+                </exclusions>
                 <scope>test</scope>
             </dependency>
 
