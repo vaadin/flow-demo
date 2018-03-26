@@ -17,7 +17,7 @@ package com.vaadin.flow.demo.helloworld.template;
 
 import java.util.Optional;
 
-import com.vaadin.flow.templatemodel.ModelConverter;
+import com.vaadin.flow.templatemodel.ModelEncoder;
 
 /**
  * Converts {@link Long} to {@link String} to use the value on the client side.
@@ -25,16 +25,16 @@ import com.vaadin.flow.templatemodel.ModelConverter;
  * @author Vaadin Ltd
  *
  */
-public class LongToStringConverter implements ModelConverter<Long, String> {
+public class LongToStringConverter implements ModelEncoder<Long, String> {
 
     @Override
-    public String toPresentation(Long modelValue) {
+    public String encode(Long modelValue) {
         return Optional.ofNullable(modelValue).map(Object::toString)
                 .orElse(null);
     }
 
     @Override
-    public Long toModel(String presentationValue) {
+    public Long decode(String presentationValue) {
         return Optional.ofNullable(presentationValue).map(Long::parseLong)
                 .orElse(null);
 
