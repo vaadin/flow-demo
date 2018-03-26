@@ -17,13 +17,14 @@ package com.vaadin.flow.demo.staticmenu;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HtmlContainer;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.BlogList;
 import com.vaadin.flow.demo.staticmenu.download.DownloadView;
@@ -55,16 +56,20 @@ public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
     }
 
     private void initLinkContainer() {
-        HtmlContainer ul = new HtmlContainer("ul");
-        ul.setClassName("topnav");
-        add(ul);
+        HorizontalLayout layout = new HorizontalLayout();
+        layout.setClassName("topnav");
+        add(layout);
 
-        ul.add(createLink(FrameworkView.class));
-        ul.add(createLink(ElementsView.class));
-        ul.add(createLink(DownloadView.class));
-        ul.add(createLink(BlogList.class));
+        layout.add(createLink(FrameworkView.class));
+        layout.add(createLink(ElementsView.class));
+        layout.add(createLink(DownloadView.class));
+        layout.add(createLink(BlogList.class));
 
-        ul.add(getLocales());
+        layout.add(getLocales());
+
+        layout.setVerticalComponentAlignment(FlexComponent.Alignment.CENTER,
+                layout.getChildren().collect(Collectors.toList())
+                        .toArray(new Component[] {}));
     }
 
     @Override
@@ -86,12 +91,12 @@ public class MainMenu extends MainMenuBar implements AfterNavigationObserver {
         }
     }
 
-    private Component getLocales() {
+    private Component[] getLocales() {
         Button english = new Button("EN", event -> setLocale(Lang.LOCALE_EN));
         Button finnish = new Button("FI", event -> setLocale(Lang.LOCALE_FI));
         Button japanese = new Button("JA", event -> setLocale(Lang.LOCALE_JA));
 
-        return new HorizontalLayout(english, finnish, japanese);
+        return new Component[] { english, finnish, japanese };
     }
 
     private void setLocale(Locale locale) {
