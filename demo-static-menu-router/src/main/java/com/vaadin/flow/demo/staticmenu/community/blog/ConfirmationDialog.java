@@ -89,18 +89,11 @@ class ConfirmationDialog extends Dialog {
         if (registrationForConfirm != null) {
             registrationForConfirm.remove();
         }
-        registrationForConfirm = confirmButton
-                .addClickListener(e -> postpone.proceed());
+        registrationForConfirm = confirmButton.addClickListener(e -> {
+            postpone.proceed();
+            close();
+        });
 
         open();
-    }
-
-    /**
-     * Close dialog.
-     */
-    @Override
-    public void close() {
-        super.close();
-        getElement().removeFromParent();
     }
 }
