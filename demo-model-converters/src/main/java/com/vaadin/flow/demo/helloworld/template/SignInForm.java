@@ -29,7 +29,7 @@ import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.helloworld.template.SignInForm.SignInModel;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.Convert;
+import com.vaadin.flow.templatemodel.Encode;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
@@ -70,7 +70,7 @@ public class SignInForm extends PolymerTemplate<SignInModel> {
          * @param ssd
          *            the social security number of a registrant
          */
-        @Convert(LongToStringConverter.class)
+        @Encode(LongToStringConverter.class)
         void setSsd(Long ssd);
 
         /**
@@ -90,7 +90,7 @@ public class SignInForm extends PolymerTemplate<SignInModel> {
          * @param date
          *            the date of birth
          */
-        @Convert(DateToDateBeanConverter.class)
+        @Encode(DateToDateBeanConverter.class)
         void setBirthDate(Date date);
 
         /**
