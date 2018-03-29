@@ -25,6 +25,7 @@ import com.vaadin.flow.component.PropertyDescriptor;
 import com.vaadin.flow.component.PropertyDescriptors;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.legacy.LocationChangeEvent;
@@ -68,7 +69,6 @@ public final class ResourcesView extends SimpleView {
 
         HtmlContainer links = new HtmlContainer("ul");
         links.add(createLink("", "<none>"));
-        links.add(createLink("css/site.css"));
         links.add(createLink("images/vaadin-logo-small.png"));
 
         HtmlContainer header = new HtmlContainer("p");
@@ -78,6 +78,13 @@ public final class ResourcesView extends SimpleView {
 
         content.getElement().appendChild(
                 ElementFactory.createSpan("Select the resource to display"));
+
+        // fake iframe makes possible to add the iframe instance to the content
+        // this workaround which needs to be removed
+        Element fakeIframe = new Element("iframe");
+        fakeIframe.getStyle().set("display", "none");
+        content.getElement().appendChild(fakeIframe);
+
         content.add(links, header, iframe);
 
         add(content);

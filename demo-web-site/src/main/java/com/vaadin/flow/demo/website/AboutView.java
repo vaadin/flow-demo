@@ -30,9 +30,7 @@ public final class AboutView extends SimpleView {
     public AboutView() {
         add(getMappingInfo(SiteRouterConfigurator.MAPPING_ABOUT));
         Div div = new Div();
-        // Must wrap the template component since it doesn't yet support adding
-        // class names
-        div.add(new AboutContents());
+        div.setText("This is the about page");
         div.setClassName("content");
         add(div);
     }
