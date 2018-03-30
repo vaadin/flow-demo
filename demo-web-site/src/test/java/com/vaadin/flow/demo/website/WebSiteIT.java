@@ -24,6 +24,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
@@ -74,7 +75,8 @@ public class WebSiteIT extends AbstractChromeTest {
     }
 
     private void assertMenuItemSelected(String menuItem) {
-        List<WebElement> activeItems = findElements(
+        WebElement template = findElement(By.tagName("main-layout"));
+        List<WebElement> activeItems = findInShadowRoot(template,
                 By.cssSelector(".menu-item.active"));
         if (menuItem == null) {
             Assert.assertEquals(0, activeItems.size());
@@ -101,7 +103,9 @@ public class WebSiteIT extends AbstractChromeTest {
         Assert.assertEquals("Id parameter: 1",
                 getFirstContentChild().getText());
 
-        getContent().findElement(By.xpath("./a")).click();
+        WebElement anchor = getContent().findElement(By.xpath("./a"));
+        new Actions(getDriver()).moveToElement(anchor).click().build()
+                .perform();
         assertLocation("param/2");
         Assert.assertEquals("Id parameter: 2",
                 getFirstContentChild().getText());
@@ -120,12 +124,16 @@ public class WebSiteIT extends AbstractChromeTest {
                 .findElement(By.xpath("./*[4]"));
         Assert.assertEquals("No resource selected", selectedResource.getText());
 
-        getContent().findElement(By.xpath("//a[text()='css/site.css']"))
+        getContent()
+                .findElement(
+                        By.xpath("//a[text()='images/vaadin-logo-small.png']"))
                 .click();
-        assertLocation("resource/css/site.css");
+        assertLocation("resource/images/vaadin-logo-small.png");
 
-        WebElement iframe = getDriver().findElement(By.xpath("//iframe"));
-        assertLocation("css/site.css", iframe.getAttribute("src"));
+        List<WebElement> iframes = findElements(By.xpath("//iframe"));
+        WebElement iframe = iframes.get(iframes.size() - 1);
+        assertLocation("images/vaadin-logo-small.png",
+                iframe.getAttribute("src"));
     }
 
     @Test
@@ -164,10 +172,12 @@ public class WebSiteIT extends AbstractChromeTest {
     }
 
     public WebElement getMenuItem(String text) {
+        WebElement template = findElement(By.tagName("main-layout"));
         if (text.equals("Home")) {
-            return findElement(By.cssSelector(".logo"));
+            return getInShadowRoot(template, By.cssSelector(".logo"));
         }
-        List<WebElement> menuLinks = findElements(By.cssSelector(".menu a"));
+        List<WebElement> menuLinks = findInShadowRoot(template,
+                By.cssSelector(".menu a"));
 
         return menuLinks.stream().filter(link -> text.equals(link.getText()))
                 .findFirst().get();

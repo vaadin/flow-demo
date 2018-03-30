@@ -18,11 +18,16 @@ package com.vaadin.flow.demo.website;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.demo.website.MainLayout.MainLayoutModel;
+import com.vaadin.flow.router.legacy.HasChildView;
 import com.vaadin.flow.router.legacy.LocationChangeEvent;
 import com.vaadin.flow.router.legacy.View;
-import com.vaadin.flow.template.angular.AngularTemplate;
-import com.vaadin.flow.template.angular.model.TemplateModel;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
  * Layout showing the main menu above a sub view.
@@ -30,8 +35,10 @@ import com.vaadin.flow.template.angular.model.TemplateModel;
  * @since
  * @author Vaadin Ltd
  */
-@StyleSheet("context://css/site.css")
-public final class MainLayout extends AngularTemplate implements View {
+@HtmlImport("frontend://src/MainLayout.html")
+@Tag("main-layout")
+public final class MainLayout extends PolymerTemplate<MainLayoutModel>
+        implements HasChildView, HasComponents {
 
     public static class MenuItem {
         private String href;
@@ -79,7 +86,7 @@ public final class MainLayout extends AngularTemplate implements View {
 
     @Override
     protected MainLayoutModel getModel() {
-        return (MainLayoutModel) super.getModel();
+        return super.getModel();
     }
 
     private void createMenu() {
@@ -111,5 +118,11 @@ public final class MainLayout extends AngularTemplate implements View {
     private void updateActive(MenuItem item, String firstSegment) {
         String itemPathFirstSegment = item.getHref().split("/")[0];
         item.setActive(itemPathFirstSegment.equals(firstSegment));
+    }
+
+    @Override
+    public void setChildView(View childView) {
+        removeAll();
+        add((Component) childView);
     }
 }

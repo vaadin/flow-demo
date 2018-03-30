@@ -1,0 +1,76 @@
+<!--
+  ~ Copyright 2000-2017 Vaadin Ltd.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  ~ use this file except in compliance with the License. You may obtain a copy of
+  ~ the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing permissions and limitations under
+  ~ the License.
+  -->
+<!-- Using an absolute URL is a bad practice, but the nesting depth here makes it incovenient traverse up with ../.. -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/frontend/bower_components/polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="main-layout">
+    <template>
+        <style>
+            .logo {
+                display: inline-block;
+                width: 65px;
+                height: 16px;
+                background: url(../../images/vaadin-logo-small.png);
+                background-size: cover;
+                vertical-align: middle;
+            }
+            
+            .menu {
+                padding-top: 1em;
+                padding-bottom: 1em;
+                border-bottom: 1px solid black;
+                margin-bottom: 1em;
+                margin-left: 1em;
+            }
+            .menu-item {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            .main > *:last-child {
+                margin-left: 1em;
+            }
+            .active {
+               font-weight: bold;
+               text-decoration: none;
+               color: black;
+            }
+        </style>
+        <div class="main">
+          <div class="menu">
+            <a class="menu-item" href="" router-link><div class="logo"></div></a>
+            <template is="dom-repeat" items="[[items]]">
+                <a class$="[[_getMenuItemClass(item.active)]]" router-link href$="[[item.href]]">[[item.caption]]</a>
+            </template>
+          </div>
+          <slot></slot>
+        </div>
+    </template>
+    <script>
+        class MainLayout extends Polymer.Element {
+            static get is() { return 'main-layout' }
+            
+            _getMenuItemClass(active){
+                if ( active ){
+                    return "menu-item active";
+                }
+                return "menu-item";
+            }
+
+        }
+        customElements.define(MainLayout.is, MainLayout);
+    </script>
+</dom-module>
