@@ -24,9 +24,8 @@
             <groupId>org.webjars.bowergithub.polymer</groupId>
             <artifactId>polymer</artifactId>
         </dependency>
-        
     </dependencies>
-    
+
     <profiles>
         <profile>
             <id>productionMode</id>
