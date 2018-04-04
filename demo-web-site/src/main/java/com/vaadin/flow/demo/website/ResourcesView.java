@@ -68,7 +68,7 @@ public final class ResourcesView extends SimpleView {
 
         HtmlContainer links = new HtmlContainer("ul");
         links.add(createLink("", "<none>"));
-        links.add(createLink("images/vaadin-logo-small.png"));
+        links.add(createLink("frontend/images/vaadin-logo-small.png"));
 
         HtmlContainer header = new HtmlContainer("p");
         HtmlContainer strong = new HtmlContainer("strong");
