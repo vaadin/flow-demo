@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -127,8 +128,8 @@ public class WebSiteIT extends AbstractChromeTest {
         getContent().findElement(By.id("logo")).click();
 
         WebElement iframe = findElement(By.xpath("//iframe"));
-        Assert.assertTrue(iframe.getAttribute("src")
-                .contains("images/vaadin-logo-small.png"));
+        Assert.assertThat(iframe.getAttribute("src"),
+                CoreMatchers.containsString("images/vaadin-logo-small.png"));
     }
 
     @Test

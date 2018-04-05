@@ -70,7 +70,7 @@ public final class ResourcesView extends SimpleView {
         HtmlContainer links = new HtmlContainer("ul");
         links.add(createLink("", "<none>", "none"));
         links.add(createLink(VaadinServlet.getCurrent()
-                .resolveResource("frontend://images/vaadin-logo-"),
+                .resolveResource("frontend://images/vaadin-logo-small.png"),
                 "logo"));
 
         HtmlContainer header = new HtmlContainer("p");
