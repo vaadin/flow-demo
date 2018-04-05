@@ -126,13 +126,13 @@ public class WebSiteIT extends AbstractChromeTest {
 
         getContent()
                 .findElement(
-                        By.xpath("//a[text()='images/vaadin-logo-small.png']"))
+                        By.xpath(
+                                "//a[text()='frontend/images/vaadin-logo-small.png']"))
                 .click();
-        assertLocation("resource/images/vaadin-logo-small.png");
+        assertLocation("resource/frontend/images/vaadin-logo-small.png");
 
-        List<WebElement> iframes = findElements(By.xpath("//iframe"));
-        WebElement iframe = iframes.get(iframes.size() - 1);
-        assertLocation("images/vaadin-logo-small.png",
+        WebElement iframe = findElement(By.xpath("//iframe"));
+        assertLocation("frontend/images/vaadin-logo-small.png",
                 iframe.getAttribute("src"));
     }
 
