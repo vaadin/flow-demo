@@ -17,11 +17,11 @@ package com.vaadin.flow.demo.component.textfield;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
-import org.openqa.selenium.By;
 
 public class TextFieldIT extends AbstractChromeTest {
 
@@ -31,11 +31,11 @@ public class TextFieldIT extends AbstractChromeTest {
         WebElement input = findElement(By.xpath("//input"));
         changeInput(input, "14");
 
-        WebElement div = findElement(By.xpath("//body/div[2]"));
+        WebElement div = findElement(By.xpath("//body/div[3]"));
         Assert.assertEquals("Oh my, 14 is so young!", div.getText());
 
         changeInput(input, "44");
-        div = findElement(By.xpath("//body/div[3]"));
+        div = findElement(By.xpath("//body/div[4]"));
         Assert.assertEquals("Gosh, 44 is so old!", div.getText());
 
     }
