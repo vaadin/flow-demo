@@ -124,16 +124,11 @@ public class WebSiteIT extends AbstractChromeTest {
                 .findElement(By.xpath("./*[4]"));
         Assert.assertEquals("No resource selected", selectedResource.getText());
 
-        getContent()
-                .findElement(
-                        By.xpath(
-                                "//a[text()='frontend/images/vaadin-logo-small.png']"))
-                .click();
-        assertLocation("resource/frontend/images/vaadin-logo-small.png");
+        getContent().findElement(By.id("logo")).click();
 
         WebElement iframe = findElement(By.xpath("//iframe"));
-        assertLocation("frontend/images/vaadin-logo-small.png",
-                iframe.getAttribute("src"));
+        Assert.assertTrue(iframe.getAttribute("src")
+                .contains("images/vaadin-logo-small.png"));
     }
 
     @Test

@@ -28,6 +28,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.legacy.LocationChangeEvent;
+import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinServletService;
 
 /**
@@ -67,8 +68,10 @@ public final class ResourcesView extends SimpleView {
         content.setClassName("content");
 
         HtmlContainer links = new HtmlContainer("ul");
-        links.add(createLink("", "<none>"));
-        links.add(createLink("frontend/images/vaadin-logo-small.png"));
+        links.add(createLink("", "<none>", "none"));
+        links.add(createLink(VaadinServlet.getCurrent()
+                .resolveResource("frontend://images/vaadin-logo-"),
+                "logo"));
 
         HtmlContainer header = new HtmlContainer("p");
         HtmlContainer strong = new HtmlContainer("strong");
@@ -83,13 +86,15 @@ public final class ResourcesView extends SimpleView {
         add(content);
     }
 
-    private static Component createLink(String resource) {
-        return createLink(resource, resource);
+    private static Component createLink(String resource, String id) {
+        return createLink(resource, resource, id);
     }
 
-    private static Component createLink(String resource, String caption) {
+    private static Component createLink(String resource, String caption,
+            String id) {
         RouterLink link = new RouterLink(caption, ResourcesView.class,
                 resource);
+        link.setId(id);
         HtmlContainer li = new HtmlContainer("li");
         li.add(link);
         return li;
