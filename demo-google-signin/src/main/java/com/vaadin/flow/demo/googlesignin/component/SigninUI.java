@@ -15,30 +15,17 @@
  */
 package com.vaadin.flow.demo.googlesignin.component;
 
-import javax.servlet.annotation.WebServlet;
-
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.server.VaadinRequest;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.VaadinServletConfiguration;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.Route;
 
 /**
  * The main UI of the application. Configures the servlet and adds a
  * {@link SigninView} to the main page.
  */
-public class SigninUI extends UI {
+@Route("")
+public class SigninUI extends Div {
 
-    /**
-     * The main servlet for the application.
-     */
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = SigninUI.class, productionMode = false)
-    public static class Servlet extends VaadinServlet {
-
-    }
-
-    @Override
-    protected void init(VaadinRequest request) {
+    public SigninUI() {
         add(new SigninView());
     }
 

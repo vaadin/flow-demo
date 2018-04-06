@@ -15,29 +15,16 @@
  */
 package com.vaadin.flow.demo.textfieldcomponent;
 
-import javax.servlet.annotation.WebServlet;
-
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.server.VaadinRequest;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.VaadinServletConfiguration;
+import com.vaadin.flow.router.Route;
 
 /**
  * UI which demonstrates how a text field component can be used.
  */
-public class TextFieldUI extends UI {
+@Route("")
+public class TextFieldUI extends Div {
 
-    /**
-     * The main servlet for the application.
-     */
-    @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = TextFieldUI.class, productionMode = false)
-    public static class Servlet extends VaadinServlet {
-    }
-
-    @Override
-    protected void init(VaadinRequest request) {
+    public TextFieldUI() {
         TextField tf = new TextField("Enter your age");
         tf.addChangeListener(event -> {
             int age;
@@ -49,6 +36,7 @@ public class TextFieldUI extends UI {
 
             Div message = new Div();
             message.setText(getAgeMessage(age));
+            message.setId("message");
             add(message);
         });
         add(tf);

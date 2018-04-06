@@ -15,34 +15,24 @@
  */
 package com.vaadin.flow.demo.minesweeper.component;
 
-import javax.servlet.annotation.WebServlet;
-
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.minesweeper.component.component.MinesweeperComponent;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinRequest;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.VaadinServletConfiguration;
+import com.vaadin.flow.server.VaadinService;
 
 /**
  * UI which demonstrates how you can use the Flow {@link Component} API
  * to create a Minesweeper game.
  */
+@Route("")
 @StyleSheet("frontend://minesweeper.css")
-public class MinesweeperUI extends UI {
+public class MinesweeperUI extends Div {
+    public MinesweeperUI() {
+        VaadinRequest request = VaadinService.getCurrentRequest();
 
-    /**
-     * The main servlet for the application.
-     */
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MinesweeperUI.class, productionMode = false)
-    public static class Servlet extends VaadinServlet {
-
-    }
-
-    @Override
-    protected void init(VaadinRequest request) {
         long seed = getParam(request, "seed", (int) System.currentTimeMillis());
         double mineDensity = getParam(request, "mineDensity", 20) / 100.0;
         int rows = getParam(request, "rows", 10);
