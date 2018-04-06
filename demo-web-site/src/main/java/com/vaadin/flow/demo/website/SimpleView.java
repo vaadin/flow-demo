@@ -17,8 +17,7 @@ package com.vaadin.flow.demo.website;
 
 import com.vaadin.flow.component.HtmlContainer;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.router.legacy.LocationChangeEvent;
-import com.vaadin.flow.router.legacy.View;
+import com.vaadin.flow.router.HasDynamicTitle;
 
 /**
  * Abstract view class using the same element all the time.
@@ -26,7 +25,7 @@ import com.vaadin.flow.router.legacy.View;
  * @since
  * @author Vaadin Ltd
  */
-public abstract class SimpleView extends Div implements View {
+public abstract class SimpleView extends Div implements HasDynamicTitle {
 
     protected final Div getMappingInfo(String mappingInfo) {
         Div mapping = new Div();
@@ -41,9 +40,8 @@ public abstract class SimpleView extends Div implements View {
     }
 
     @Override
-    public String getTitle(LocationChangeEvent locationChangeEvent) {
+    public String getPageTitle() {
         // Title used for all views
         return "Flow Web Site Demo";
     }
-
 }

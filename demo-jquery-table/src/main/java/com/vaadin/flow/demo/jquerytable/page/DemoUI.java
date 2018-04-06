@@ -30,7 +30,7 @@ public class DemoUI extends UI {
      * The main servlet for the application.
      */
     @WebServlet(urlPatterns = "/*", name = "Servlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = DemoUI.class, usingNewRouting = true, productionMode = false)
+    @VaadinServletConfiguration(ui = DemoUI.class, productionMode = false)
     public static class Servlet extends VaadinServlet {
     }
 

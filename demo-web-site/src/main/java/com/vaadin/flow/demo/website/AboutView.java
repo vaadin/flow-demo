@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.website;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.Route;
 
 /**
  * The static about view.
@@ -23,12 +24,12 @@ import com.vaadin.flow.component.html.Div;
  * @since
  * @author Vaadin Ltd
  */
+@Route(value = "about", layout = MainLayout.class)
 public final class AboutView extends SimpleView {
     /**
      * Creates as new view.
      */
     public AboutView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_ABOUT));
         Div div = new Div();
         div.setText("This is the about page");
         div.setClassName("content");

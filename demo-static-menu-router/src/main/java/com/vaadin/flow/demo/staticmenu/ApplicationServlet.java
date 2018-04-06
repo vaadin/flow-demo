@@ -27,6 +27,6 @@ import com.vaadin.flow.server.VaadinServletConfiguration;
  */
 @WebServlet(urlPatterns = "/*", name = "static-menu", asyncSupported = true, initParams = {
         @WebInitParam(name = Constants.I18N_PROVIDER, value = "com.vaadin.flow.demo.staticmenu.Lang") })
-@VaadinServletConfiguration(usingNewRouting = true, productionMode = false)
+@VaadinServletConfiguration(productionMode = false)
 public class ApplicationServlet extends VaadinServlet {
 }

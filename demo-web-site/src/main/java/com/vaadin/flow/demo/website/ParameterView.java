@@ -16,8 +16,11 @@
 package com.vaadin.flow.demo.website;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.legacy.LocationChangeEvent;
+import com.vaadin.flow.server.VaadinService;
 
 /**
  * A dynamic view that shows different content based on a parameter in the URL.
@@ -25,7 +28,9 @@ import com.vaadin.flow.router.legacy.LocationChangeEvent;
  * @since
  * @author Vaadin Ltd
  */
-public final class ParameterView extends SimpleView {
+@Route(value = "param", layout = MainLayout.class)
+public final class ParameterView extends SimpleView
+        implements HasUrlParameter<Integer> {
 
     private Div idElement;
     private RouterLink linkToNext;
@@ -34,30 +39,22 @@ public final class ParameterView extends SimpleView {
      * Creates a new dynamic view.
      */
     public ParameterView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_PARAM));
         Div content = new Div();
         content.setClassName("content");
 
         idElement = new Div();
         linkToNext = new RouterLink("Open the same view with another parameter",
-                ParameterView.class, Integer.toString(1));
+                ParameterView.class, 1);
 
         content.add(idElement, linkToNext);
         add(content);
     }
 
     @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        String stringId = locationChangeEvent.getPathParameter("id");
-        int id;
-        try {
-            id = Integer.parseInt(stringId);
-            idElement.setText("Id parameter: " + id);
-            linkToNext.setRoute(ParameterView.class, Integer.toString(id + 1));
-        } catch (NumberFormatException e) {
-            idElement.setText("Id parameter: " + "Invalid, must be an integer");
-            linkToNext.setRoute(ParameterView.class, Integer.toString(1));
-        }
+    public void setParameter(BeforeEvent event, Integer parameter) {
+        idElement.setText("Id parameter: " + parameter);
+        linkToNext.setRoute(VaadinService.getCurrent().getRouter(),
+                ParameterView.class, parameter + 1);
     }
 
 }

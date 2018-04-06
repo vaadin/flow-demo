@@ -18,15 +18,14 @@ package com.vaadin.flow.demo.website;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.website.MainLayout.MainLayoutModel;
-import com.vaadin.flow.router.legacy.HasChildView;
-import com.vaadin.flow.router.legacy.LocationChangeEvent;
-import com.vaadin.flow.router.legacy.View;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 /**
@@ -38,7 +37,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 @HtmlImport("frontend://src/MainLayout.html")
 @Tag("main-layout")
 public final class MainLayout extends PolymerTemplate<MainLayoutModel>
-        implements HasChildView, HasComponents {
+        implements RouterLayout, AfterNavigationObserver, HasComponents {
 
     public static class MenuItem {
         private String href;
@@ -104,25 +103,19 @@ public final class MainLayout extends PolymerTemplate<MainLayoutModel>
         return itemsList;
     }
 
-    @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        // The first segment uniquely identifies the views in this app so we do
-        // not need to check anything else
-        String navigatedToFirstSegment = locationChangeEvent.getLocation()
-                .getFirstSegment();
-
-        getModel().getItems().stream()
-                .forEach(item -> updateActive(item, navigatedToFirstSegment));
-    }
-
     private void updateActive(MenuItem item, String firstSegment) {
         String itemPathFirstSegment = item.getHref().split("/")[0];
         item.setActive(itemPathFirstSegment.equals(firstSegment));
     }
 
     @Override
-    public void setChildView(View childView) {
-        removeAll();
-        add((Component) childView);
+    public void afterNavigation(AfterNavigationEvent event) {
+        // The first segment uniquely identifies the views in this app so we do
+        // not need to check anything else
+        String navigatedToFirstSegment = event.getLocation().getFirstSegment();
+
+        getModel().getItems().stream()
+                .forEach(item -> updateActive(item, navigatedToFirstSegment));
+        
     }
 }

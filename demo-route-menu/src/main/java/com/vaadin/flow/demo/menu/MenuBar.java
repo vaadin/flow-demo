@@ -48,7 +48,7 @@ public class MenuBar extends UnorderedList {
     private void init() {
         setId("menu");
         Map<Class<? extends RouterLayout>, List<RouteData>> routes = UI
-                .getCurrent().getRouter().get().getRoutesByParent();
+                .getCurrent().getRouter().getRoutesByParent();
         List<Class<? extends RouterLayout>> parentLayouts = routes.keySet()
                 .stream().filter(parent -> !parent.equals(UI.class))
                 .collect(Collectors.toList());
