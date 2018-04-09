@@ -30,6 +30,9 @@ import com.vaadin.flow.server.VaadinService;
 @StyleSheet("frontend://minesweeper.css")
 public class MinesweeperUI extends Div {
 
+    /**
+     * Create Minesweeper UI class
+     */
     public MinesweeperUI() {
         long seed;
         double mineDensity;

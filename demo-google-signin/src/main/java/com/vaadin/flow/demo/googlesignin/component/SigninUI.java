@@ -25,6 +25,9 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class SigninUI extends Div {
 
+    /**
+     * Create UI for Sign-in View
+     */
     public SigninUI() {
         add(new SigninView());
     }

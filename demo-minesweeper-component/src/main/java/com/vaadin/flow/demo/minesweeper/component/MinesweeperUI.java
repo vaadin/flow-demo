@@ -30,6 +30,9 @@ import com.vaadin.flow.server.VaadinService;
 @Route("")
 @StyleSheet("frontend://minesweeper.css")
 public class MinesweeperUI extends Div {
+    /**
+     * Create Minesweeper UI
+     */
     public MinesweeperUI() {
         VaadinRequest request = VaadinService.getCurrentRequest();
 

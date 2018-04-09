@@ -24,6 +24,9 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class TextFieldUI extends Div {
 
+    /**
+     * Create UI for demonstrates a text field
+     */
     public TextFieldUI() {
         TextField tf = new TextField("Enter your age");
         tf.addChangeListener(event -> {
