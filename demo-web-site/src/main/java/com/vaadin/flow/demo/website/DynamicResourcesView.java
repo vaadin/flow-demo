@@ -23,6 +23,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
 /**
@@ -31,6 +32,7 @@ import com.vaadin.flow.server.StreamResource;
  * @since
  * @author Vaadin Ltd
  */
+@Route(value = "dynresource", layout = MainLayout.class)
 public final class DynamicResourcesView extends SimpleView {
 
     private Input name;
@@ -40,8 +42,7 @@ public final class DynamicResourcesView extends SimpleView {
      * Creates a new view.
      */
     public DynamicResourcesView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_DYN_RESOURCE));
-
+        add(super.getMappingInfo("dynresource"));
         initContent();
     }
 

@@ -13,42 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.textfieldcomposite;
+package com.vaadin.flow.demo.textfieldcomponent;
 
-import javax.servlet.annotation.WebServlet;
-
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.server.VaadinRequest;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.VaadinServletConfiguration;
+import com.vaadin.flow.router.Route;
 
 /**
- * UI which demonstrates how a text field component can be used.
+ * View which demonstrates how a text field component can be used.
  */
-public class TextFieldUI extends UI {
+@Route("")
+public class TextFieldView extends Div {
 
     /**
-     * The main servlet for the application.
+     * Create view for demonstrating a text field.
      */
-    @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = TextFieldUI.class, productionMode = false)
-    public static class Servlet extends VaadinServlet {
-    }
-
-    @Override
-    protected void init(VaadinRequest request) {
+    public TextFieldView() {
         TextField tf = new TextField("Enter your age");
         tf.addChangeListener(event -> {
             int age;
             try {
-                age = Integer.parseInt(tf.getValue());
+                age = Integer.parseInt(event.getNewValue());
             } catch (NumberFormatException e) {
                 age = -1;
             }
 
             Div message = new Div();
             message.setText(getAgeMessage(age));
+            message.setId("message");
             add(message);
         });
         add(tf);

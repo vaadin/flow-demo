@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.demo.component.textfield;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -30,13 +32,12 @@ public class TextFieldIT extends AbstractChromeTest {
         open();
         WebElement input = findElement(By.xpath("//input"));
         changeInput(input, "14");
-
-        WebElement div = findElement(By.xpath("//body/div[3]"));
-        Assert.assertEquals("Oh my, 14 is so young!", div.getText());
-
         changeInput(input, "44");
-        div = findElement(By.xpath("//body/div[4]"));
-        Assert.assertEquals("Gosh, 44 is so old!", div.getText());
+
+        List<WebElement> divs = findElements(By.id("message"));
+        Assert.assertEquals("Oh my, 14 is so young!", divs.get(0).getText());
+
+        Assert.assertEquals("Gosh, 44 is so old!", divs.get(1).getText());
 
     }
 

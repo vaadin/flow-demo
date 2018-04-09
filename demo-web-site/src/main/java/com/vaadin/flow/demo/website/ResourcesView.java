@@ -26,8 +26,11 @@ import com.vaadin.flow.component.PropertyDescriptors;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ElementFactory;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.legacy.LocationChangeEvent;
+import com.vaadin.flow.router.WildcardParameter;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinServletService;
 
@@ -37,7 +40,9 @@ import com.vaadin.flow.server.VaadinServletService;
  * @since
  * @author Vaadin Ltd
  */
-public final class ResourcesView extends SimpleView {
+@Route(value = "resource", layout = MainLayout.class)
+public final class ResourcesView extends SimpleView
+        implements HasUrlParameter<String> {
 
     private Div content;
     private IFrame iframe;
@@ -61,8 +66,7 @@ public final class ResourcesView extends SimpleView {
      * Creates a new view.
      */
     public ResourcesView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_RESOURCE));
-
+        add(super.getMappingInfo("resource/*"));
         iframe = new IFrame();
         content = new Div();
         content.setClassName("content");
@@ -100,25 +104,25 @@ public final class ResourcesView extends SimpleView {
         return li;
     }
 
-    @Override
-    public void onLocationChange(LocationChangeEvent locationChangeEvent) {
-        String resourcePath = locationChangeEvent.getPathWildcard();
-        if ("".equals(resourcePath)) {
-            content.getElement().setChild(3,
-                    ElementFactory.createDiv("No resource selected"));
-        } else if (resourceExists("/" + resourcePath)) {
-            iframe.setSrc(resourcePath);
-            content.getElement().setChild(3, iframe.getElement());
-        } else {
-            content.getElement().setChild(3, ElementFactory
-                    .createDiv("Resource " + resourcePath + " not available"));
-        }
-    }
-
     private static boolean resourceExists(String resourcePath) {
         InputStream stream = VaadinServletService.getCurrentServletRequest()
                 .getServletContext().getResourceAsStream(resourcePath);
         return stream != null;
+    }
+
+    @Override
+    public void setParameter(BeforeEvent event,
+            @WildcardParameter String parameter) {
+        if ("".equals(parameter)) {
+            content.getElement().setChild(3,
+                    ElementFactory.createDiv("No resource selected"));
+        } else if (resourceExists("/" + parameter)) {
+            iframe.setSrc(parameter);
+            content.getElement().setChild(3, iframe.getElement());
+        } else {
+            content.getElement().setChild(3, ElementFactory
+                    .createDiv("Resource " + parameter + " not available"));
+        }
     }
 
 }

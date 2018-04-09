@@ -16,6 +16,7 @@
 package com.vaadin.flow.demo.website;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.Route;
 
 /**
  * The static home page.
@@ -23,15 +24,18 @@ import com.vaadin.flow.component.html.Div;
  * @since
  * @author Vaadin Ltd
  */
+@Route(value = "", layout = MainLayout.class)
 public final class HomeView extends SimpleView {
     /**
      * Creates a new home view.
      */
     public HomeView() {
-        add(getMappingInfo(SiteRouterConfigurator.MAPPING_HOME));
+        add(super.getMappingInfo(""));
         Div div = new Div();
         div.setText("This is the home page");
         div.setClassName("content");
         add(div);
     }
+
+
 }
