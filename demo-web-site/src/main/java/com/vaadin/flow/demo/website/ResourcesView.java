@@ -66,6 +66,7 @@ public final class ResourcesView extends SimpleView
      * Creates a new view.
      */
     public ResourcesView() {
+        add(super.getMappingInfo("resource/*"));
         iframe = new IFrame();
         content = new Div();
         content.setClassName("content");

@@ -116,6 +116,5 @@ public final class MainLayout extends PolymerTemplate<MainLayoutModel>
 
         getModel().getItems().stream()
                 .forEach(item -> updateActive(item, navigatedToFirstSegment));
-        
     }
 }

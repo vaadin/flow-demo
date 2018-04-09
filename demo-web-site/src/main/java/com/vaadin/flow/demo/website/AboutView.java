@@ -30,6 +30,7 @@ public final class AboutView extends SimpleView {
      * Creates as new view.
      */
     public AboutView() {
+        add(super.getMappingInfo("about"));
         Div div = new Div();
         div.setText("This is the about page");
         div.setClassName("content");

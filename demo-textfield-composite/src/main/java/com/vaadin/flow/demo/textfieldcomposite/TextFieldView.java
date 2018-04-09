@@ -13,26 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.flow.demo.textfieldcomponent;
+package com.vaadin.flow.demo.textfieldcomposite;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 
 /**
- * UI which demonstrates how a text field component can be used.
+ * View which demonstrates how a text field component can be used.
  */
 @Route("")
-public class TextFieldUI extends Div {
+public class TextFieldView extends Div {
 
     /**
-     * Create UI for demonstrating a text field
+     * Create view for demonstrates a text field.
      */
-    public TextFieldUI() {
+    public TextFieldView() {
         TextField tf = new TextField("Enter your age");
         tf.addChangeListener(event -> {
             int age;
             try {
-                age = Integer.parseInt(event.getNewValue());
+                age = Integer.parseInt(tf.getValue());
             } catch (NumberFormatException e) {
                 age = -1;
             }

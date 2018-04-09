@@ -23,17 +23,17 @@ import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinService;
 
 /**
- * UI which demonstrates how you can use the Flow {@link Element} API to
+ * View which demonstrates how you can use the Flow {@link Element} API to
  * create a Minesweeper game.
  */
 @Route("")
 @StyleSheet("frontend://minesweeper.css")
-public class MinesweeperUI extends Div {
+public class MinesweeperView extends Div {
 
     /**
-     * Create Minesweeper UI class
+     * Create Minesweeper view.
      */
-    public MinesweeperUI() {
+    public MinesweeperView() {
         long seed;
         double mineDensity;
         int rows, cols;

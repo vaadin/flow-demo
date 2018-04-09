@@ -24,6 +24,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.demo.googlesignin.component.SigninView.SigninModel;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 import elemental.json.JsonObject;
@@ -35,6 +36,7 @@ import elemental.json.JsonObject;
  */
 @Tag("signin-page")
 @HtmlImport("frontend://components/signin.html")
+@Route("")
 public class SigninView extends PolymerTemplate<SigninModel> {
 
     @Id("login-info")

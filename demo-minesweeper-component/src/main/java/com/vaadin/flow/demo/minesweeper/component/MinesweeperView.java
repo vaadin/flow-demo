@@ -24,16 +24,16 @@ import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinService;
 
 /**
- * UI which demonstrates how you can use the Flow {@link Component} API
- * to create a Minesweeper game.
+ * View which demonstrates how you can use the Flow {@link Component} API to
+ * create a Minesweeper game.
  */
 @Route("")
 @StyleSheet("frontend://minesweeper.css")
-public class MinesweeperUI extends Div {
+public class MinesweeperView extends Div {
     /**
-     * Create Minesweeper UI
+     * Create Minesweeper view.
      */
-    public MinesweeperUI() {
+    public MinesweeperView() {
         VaadinRequest request = VaadinService.getCurrentRequest();
 
         long seed = getParam(request, "seed", (int) System.currentTimeMillis());

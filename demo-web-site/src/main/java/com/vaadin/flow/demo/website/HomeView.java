@@ -30,9 +30,12 @@ public final class HomeView extends SimpleView {
      * Creates a new home view.
      */
     public HomeView() {
+        add(super.getMappingInfo(""));
         Div div = new Div();
         div.setText("This is the home page");
         div.setClassName("content");
         add(div);
     }
+
+
 }

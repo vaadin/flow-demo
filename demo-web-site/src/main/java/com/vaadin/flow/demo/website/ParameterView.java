@@ -39,6 +39,7 @@ public final class ParameterView extends SimpleView
      * Creates a new dynamic view.
      */
     public ParameterView() {
+        add(super.getMappingInfo("param/{id}"));
         Div content = new Div();
         content.setClassName("content");
 

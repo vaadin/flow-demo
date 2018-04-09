@@ -42,6 +42,7 @@ public final class DynamicResourcesView extends SimpleView {
      * Creates a new view.
      */
     public DynamicResourcesView() {
+        add(super.getMappingInfo("dynresource"));
         initContent();
     }
 
