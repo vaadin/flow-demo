@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -134,7 +135,7 @@ public class ContactForm extends Composite<FormLayout> {
         reset.addClickListener(this::reset);
     }
 
-    private void save(Button.ClickEvent<Button> event) {
+    private void save(ClickEvent<Button> event) {
         if (binder.writeBeanIfValid(contactBeingEdited)) {
             infoLabel.setText("Saved bean values :" + contactBeingEdited);
         } else {
@@ -151,7 +152,7 @@ public class ContactForm extends Composite<FormLayout> {
                 .distinct().collect(Collectors.joining(", "));
     }
 
-    private void reset(Button.ClickEvent<Button> event) {
+    private void reset(ClickEvent<Button> event) {
         // clear fields via setting <code>null</code>
         binder.readBean(null);
         infoLabel.setText("");
