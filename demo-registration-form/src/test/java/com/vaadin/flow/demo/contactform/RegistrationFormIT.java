@@ -15,8 +15,6 @@
  */
 package com.vaadin.flow.demo.contactform;
 
-import java.util.Optional;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -39,7 +37,8 @@ public class RegistrationFormIT extends AbstractChromeTest {
         Assert.assertTrue(isElementPresent(By.id("notification")));
         Assert.assertNotNull(findElement(By.id("notification")));
 
-        Assert.assertNotNull(getContent().findElement(By.className("error")));
+        Assert.assertTrue(findElement(By.tagName("vaadin-dialog-overlay"))
+                .getText().contains("Registration could not be saved, please check all fields"));
 
         // discard the dialog
         WebElement fullName = findElement(By.id("full-name"));
@@ -69,7 +68,7 @@ public class RegistrationFormIT extends AbstractChromeTest {
         WebElement phoneOrEmail = findElement(By.id("phone-or-email"));
         WebElement phoneOrEmailInput = (WebElement) getCommandExecutor()
                 .executeScript(
-                        "return arguments[0].shadowRoot.querySelector(\"input\")",phoneOrEmail);
+                        "return arguments[0].shadowRoot.querySelector(\"input\")", phoneOrEmail);
         phoneOrEmailInput.sendKeys("+1");
 
         WebElement phoneOrEmailStatus = findElement(
@@ -79,7 +78,7 @@ public class RegistrationFormIT extends AbstractChromeTest {
         Assert.assertEquals(
                 "The string '+1' is not a valid phone number. "
                         + "Phone should start with a plus sign and contain at least 10 digits",
-                        phoneOrEmailStatus.getText());
+                phoneOrEmailStatus.getText());
 
         // fill phoneOrEmal with possible but incorrect email address
         phoneOrEmailInput.clear();
@@ -102,7 +101,7 @@ public class RegistrationFormIT extends AbstractChromeTest {
         WebElement pwd = findElement(By.id("pwd"));
         WebElement pwdInput = (WebElement) getCommandExecutor()
                 .executeScript(
-                        "return arguments[0].shadowRoot.querySelector(\"input\")",pwd);
+                        "return arguments[0].shadowRoot.querySelector(\"input\")", pwd);
         pwdInput.sendKeys("bar");
 
         WebElement pwdStatus = findElement(By.id("pwd-status"));
@@ -117,7 +116,7 @@ public class RegistrationFormIT extends AbstractChromeTest {
         WebElement pwdConfirm = findElement(By.id("confirm-pwd"));
         WebElement pwdConfirmInput = (WebElement) getCommandExecutor()
                 .executeScript(
-                        "return arguments[0].shadowRoot.querySelector(\"input\")",pwdConfirm);
+                        "return arguments[0].shadowRoot.querySelector(\"input\")", pwdConfirm);
         pwdConfirmInput.sendKeys("bar");
 
         WebElement pwdConfirmStatus = findElement(By.id("confirm-pwd-status"));
@@ -131,18 +130,7 @@ public class RegistrationFormIT extends AbstractChromeTest {
         signUp.click();
 
         Assert.assertTrue(isElementPresent(By.id("notification")));
-        Optional<WebElement> message = getContent()
-                        .findElements(By.tagName("p"))
-                .stream()
-                .filter(paragraph -> paragraph.getText().equals(
-                        "Full name 'foo', email or phone 'foo@example.com'"))
-                .findAny();
-        Assert.assertTrue(message.isPresent());
-    }
-
-    private WebElement getContent() {
-        return getInShadowRoot(
-                findElement(By.tagName("vaadin-dialog-overlay")),
-                By.id("content"));
+        Assert.assertTrue(findElement(By.tagName("vaadin-dialog-overlay")).getText()
+                .contains("Full name 'foo', email or phone 'foo@example.com'"));
     }
 }
