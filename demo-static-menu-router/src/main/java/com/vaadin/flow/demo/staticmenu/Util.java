@@ -18,6 +18,7 @@ package com.vaadin.flow.demo.staticmenu;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.internal.AnnotationReader;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.server.VaadinService;
@@ -46,6 +47,7 @@ public interface Util {
                 .getAnnotationFor(navigationTarget, PageTitle.class)
                 .map(PageTitle::value);
         return title.orElse(VaadinService.getCurrent().getInstantiator()
-                .getI18NProvider().getTranslation(navigationTarget.getName()));
+                .getI18NProvider().getTranslation(navigationTarget.getName(),
+                        UI.getCurrent().getLocale()));
     }
 }

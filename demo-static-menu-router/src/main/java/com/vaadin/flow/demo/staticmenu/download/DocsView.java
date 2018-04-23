@@ -17,7 +17,6 @@ package com.vaadin.flow.demo.staticmenu.download;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.staticmenu.DummyView;
-import com.vaadin.flow.i18n.I18NProvider;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -43,9 +42,7 @@ public class DocsView extends DummyView implements HasUrlParameter<String> {
     public void setParameter(BeforeEvent event,
             @WildcardParameter String parameter) {
         if (!parameter.isEmpty()) {
-            I18NProvider provider = getI18NProvider();
-            div.setText(
-                    provider.getTranslation("docs.viewing.page", parameter));
+            div.setText(getTranslation("docs.viewing.page", parameter));
         } else {
             div.setText("");
         }

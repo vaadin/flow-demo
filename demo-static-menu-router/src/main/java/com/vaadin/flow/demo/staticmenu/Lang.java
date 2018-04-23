@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.i18n.I18NProvider;
 
@@ -53,7 +52,8 @@ public class Lang implements I18NProvider {
             .build(new CacheLoader<Locale, ResourceBundle>() {
 
                 @Override
-                public ResourceBundle load(final Locale locale) throws Exception {
+                public ResourceBundle load(final Locale locale)
+                        throws Exception {
                     return readProperties(locale);
                 }
             });
@@ -61,16 +61,6 @@ public class Lang implements I18NProvider {
     @Override
     public List<Locale> getProvidedLocales() {
         return providedLocales;
-    }
-
-    @Override
-    public String getTranslation(String key, Object... params) {
-        if (key == null) {
-            Logger.getLogger(Lang.class.getName()).log(Level.WARNING,
-                    "Got lang request for key with null value!");
-            return "";
-        }
-        return getTranslation(key, getLocale(), params);
     }
 
     @Override

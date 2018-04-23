@@ -20,7 +20,6 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.i18n.I18NProvider;
 import com.vaadin.flow.router.BeforeLeaveEvent.ContinueNavigationAction;
 import com.vaadin.flow.shared.Registration;
 
@@ -43,10 +42,8 @@ class ConfirmationDialog extends Dialog {
     }
 
     private void init() {
-        I18NProvider provider = getI18NProvider();
-
-        confirmButton.setText(provider.getTranslation("common.ok"));
-        cancelButton.setText(provider.getTranslation("common.cancel"));
+        confirmButton.setText(getTranslation("common.ok"));
+        cancelButton.setText(getTranslation("common.cancel"));
 
         getElement().getClassList().add("confirm-dialog");
         confirmButton.getElement().setAttribute("dialog-confirm", true);

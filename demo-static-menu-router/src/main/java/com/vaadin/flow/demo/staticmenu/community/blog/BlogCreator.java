@@ -25,7 +25,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.demo.staticmenu.MainLayout;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogRecord;
 import com.vaadin.flow.demo.staticmenu.community.blog.backend.BlogsService;
-import com.vaadin.flow.i18n.I18NProvider;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.BeforeLeaveEvent;
@@ -73,12 +72,11 @@ public class BlogCreator extends FormLayout
     }
 
     private void buildForm() {
-        I18NProvider provider = getI18NProvider();
-        titleLabel.setText(provider.getTranslation("new.blog.post.title"));
-        contentLabel.setText(provider.getTranslation("new.blog.post.content"));
+        titleLabel.setText(getTranslation("new.blog.post.title"));
+        contentLabel.setText(getTranslation("new.blog.post.content"));
 
-        save.setText(provider.getTranslation("common.save"));
-        reset.setText(provider.getTranslation("common.reset"));
+        save.setText(getTranslation("common.save"));
+        reset.setText(getTranslation("common.reset"));
     }
 
     @Override
@@ -87,10 +85,8 @@ public class BlogCreator extends FormLayout
             ConfirmationDialog dialog = new ConfirmationDialog();
             getUI().ifPresent(ui -> ui.add(dialog));
 
-            I18NProvider provider = getI18NProvider();
-            dialog.open(provider.getTranslation("dialog.title"),
-                    provider.getTranslation("dialog.question"),
-                    event.postpone());
+            dialog.open(getTranslation("dialog.title"),
+                    getTranslation("dialog.question"), event.postpone());
         }
     }
 
