@@ -59,6 +59,6 @@ public class BlogList extends Div implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        addBlogPost.setText(getI18NProvider().getTranslation("new.blog.post"));
+        addBlogPost.setText(getTranslation("new.blog.post"));
     }
 }

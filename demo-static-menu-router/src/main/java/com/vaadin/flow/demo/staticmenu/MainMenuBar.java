@@ -55,7 +55,7 @@ public abstract class MainMenuBar extends Div implements LocaleChangeObserver {
 
     protected RouterLink createLink(
             Class<? extends Component> navigationTarget) {
-        String name = getI18NProvider().getTranslation(navigationTarget.getName());
+        String name = getTranslation(navigationTarget.getName());
 
         RouterLink link = new RouterLink(name, navigationTarget);
         targets.put(navigationTarget, link);
@@ -68,7 +68,7 @@ public abstract class MainMenuBar extends Div implements LocaleChangeObserver {
     protected <T, C extends Component & HasUrlParameter<T>> RouterLink createLink(
             Class<? extends C> navigationTarget, T parameter) {
         String translationKey = navigationTarget.getName() + "." + parameter;
-        String name = getI18NProvider().getTranslation(translationKey);
+        String name = getTranslation(translationKey);
 
         RouterLink link = new RouterLink(name, navigationTarget, parameter);
         targets.put(navigationTarget, link);
@@ -81,7 +81,7 @@ public abstract class MainMenuBar extends Div implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent event) {
         translation.entrySet().forEach(entry -> entry.getValue()
-                .setText(getI18NProvider().getTranslation(entry.getKey())));
+                .setText(getTranslation(entry.getKey())));
     }
 
     /**
