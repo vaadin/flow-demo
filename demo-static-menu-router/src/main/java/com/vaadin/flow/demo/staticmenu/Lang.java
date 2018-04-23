@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.i18n.I18NProvider;
 
 /**
@@ -102,19 +101,5 @@ public class Lang implements I18NProvider {
                     "Missing resource", e);
         }
         return null;
-    }
-
-    private Locale getLocale() {
-        UI currentUi = UI.getCurrent();
-        Locale locale = currentUi == null ? null : currentUi.getLocale();
-        if (locale == null) {
-            List<Locale> locales = getProvidedLocales();
-            if (locales != null && !locales.isEmpty()) {
-                locale = locales.get(0);
-            } else {
-                locale = Locale.getDefault();
-            }
-        }
-        return locale;
     }
 }
