@@ -31,8 +31,9 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.WildcardParameter;
-import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServletService;
+import com.vaadin.flow.server.startup.FakeBrowser;
 
 /**
  * A view that shows different resources based on the URL.
@@ -73,8 +74,8 @@ public final class ResourcesView extends SimpleView
 
         HtmlContainer links = new HtmlContainer("ul");
         links.add(createLink("", "<none>", "none"));
-        links.add(createLink(VaadinServlet.getCurrent()
-                .resolveResource("frontend://images/vaadin-logo-small.png"),
+        links.add(createLink(VaadinService.getCurrent()
+                .resolveResource("frontend://images/vaadin-logo-small.png", FakeBrowser.getEs6()),
                 "logo"));
 
         HtmlContainer header = new HtmlContainer("p");
