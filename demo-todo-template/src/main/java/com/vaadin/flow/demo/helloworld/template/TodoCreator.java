@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.vaadin.flow.component.ClientDelegate;
+import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
@@ -47,7 +47,7 @@ public class TodoCreator extends PolymerTemplate<TemplateModel> {
         callbacks.add(callback);
     }
 
-    @ClientDelegate
+    @ClientCallable
     private void createTodo(String task, String user) {
         Todo todo = new Todo();
         todo.setTask(task);
