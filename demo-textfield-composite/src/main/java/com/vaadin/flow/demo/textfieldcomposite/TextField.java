@@ -15,9 +15,8 @@
  */
 package com.vaadin.flow.demo.textfieldcomposite;
 
-import com.vaadin.flow.component.ChangeEvent;
-import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.Label;
@@ -125,8 +124,8 @@ public class TextField extends Composite<Div> {
      * @return a handle which can be used to remove the listener
      */
     public Registration addChangeListener(
-            ComponentEventListener<ChangeEvent> changeListener) {
-        return input.addChangeListener(changeListener);
+            HasValue.ValueChangeListener<HasValue.ValueChangeEvent<String>> changeListener) {
+        return input.addValueChangeListener(changeListener);
     }
 
 }

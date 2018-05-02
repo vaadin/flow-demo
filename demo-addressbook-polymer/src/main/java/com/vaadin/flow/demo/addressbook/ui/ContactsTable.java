@@ -22,6 +22,7 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.demo.addressbook.backend.Contact;
 import com.vaadin.flow.demo.addressbook.backend.ContactService;
+import com.vaadin.flow.dom.DomListenerRegistration;
 import com.vaadin.flow.internal.JsonUtils;
 
 import elemental.json.JsonArray;
@@ -41,8 +42,10 @@ class ContactsTable extends HtmlComponent {
 
         updateTableContents();
 
-        getElement().addEventListener("row-selection-updated",
-                e -> processEventData(e.getEventData()), "event.detail");
+
+        DomListenerRegistration registration = getElement().addEventListener("row-selection-updated",
+                e -> processEventData(e.getEventData()));
+        registration.addEventData( "event.detail");
     }
 
     void updateTableContents() {
