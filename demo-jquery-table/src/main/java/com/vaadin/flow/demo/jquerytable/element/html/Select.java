@@ -17,8 +17,7 @@ package com.vaadin.flow.demo.jquerytable.element.html;
 
 import java.util.Optional;
 
-import com.vaadin.flow.component.ChangeNotifier;
-import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.AbstractSinglePropertyField;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.dom.Element;
 
@@ -28,14 +27,16 @@ import com.vaadin.flow.dom.Element;
  * @see Option
  */
 @Tag(Tag.SELECT)
-public class Select extends HtmlComponent implements ChangeNotifier {
+public class Select extends AbstractSinglePropertyField<Select, String> {
+
+    public static final String VALUE_PROPERTY = "value";
 
     /**
      * Creates an empty select.
      */
     public Select() {
-        getElement().addSynchronizedPropertyEvent("change");
-        getElement().addSynchronizedProperty("value");
+        super(VALUE_PROPERTY, "", false);
+        getElement().synchronizeProperty(VALUE_PROPERTY, "change");
     }
 
     /**
@@ -57,7 +58,7 @@ public class Select extends HtmlComponent implements ChangeNotifier {
      */
     public Optional<String> getSelectedValue() {
         Element el = getElement();
-        String selectedValue = el.getProperty("value");
+        String selectedValue = el.getProperty(VALUE_PROPERTY);
         return Optional.ofNullable(selectedValue);
     }
 

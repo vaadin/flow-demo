@@ -15,9 +15,7 @@
  */
 package com.vaadin.flow.demo.datefield.customelement;
 
-import com.vaadin.flow.component.ChangeNotifier;
-import com.vaadin.flow.component.HtmlComponent;
-import com.vaadin.flow.component.Synchronize;
+import com.vaadin.flow.component.AbstractSinglePropertyField;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.dom.ElementFactory;
@@ -26,7 +24,10 @@ import com.vaadin.flow.dom.ElementFactory;
  * Native select element for selecting items.
  */
 @Tag("select")
-public class SelectElement extends HtmlComponent implements ChangeNotifier {
+public class SelectElement
+        extends AbstractSinglePropertyField<SelectElement, String> {
+
+    public static final String VALUE_PROPERTY = "value";
 
     /**
      * Init select element with the selections given.
@@ -35,6 +36,7 @@ public class SelectElement extends HtmlComponent implements ChangeNotifier {
      *            select options to populate select with
      */
     public SelectElement(String... options) {
+        super(VALUE_PROPERTY, "", false);
         if (options.length == 0) {
             throw new IllegalArgumentException(
                     "Select should be given at least one option");
@@ -46,25 +48,6 @@ public class SelectElement extends HtmlComponent implements ChangeNotifier {
         }
         setValue(options[0]);
         getElement().getChild(0).setProperty("selected", true);
-    }
-
-    /**
-     * Get the current selection.
-     * 
-     * @return currently selected value
-     */
-    @Synchronize("change")
-    public String getValue() {
-        return getElement().getProperty("value");
-    }
-
-    /**
-     * Set selected value for Select.
-     * 
-     * @param value
-     *            value to set selected
-     */
-    public void setValue(String value) {
-        getElement().setProperty("value", value);
+        getElement().synchronizeProperty(VALUE_PROPERTY, "change");
     }
 }

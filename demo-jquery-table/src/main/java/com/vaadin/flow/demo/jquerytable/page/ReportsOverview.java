@@ -66,7 +66,7 @@ public class ReportsOverview extends Div {
         allVersions.setText("All versions");
         allVersions.setValue(ALL_VERSIONS_KEY);
 
-        projectName.addChangeListener(evt -> {
+        projectName.addValueChangeListener(evt -> {
             Project selectedProject = getSelectedProject();
             numberOfReports.setText(
                     String.valueOf(repository.countReports(selectedProject)));
@@ -78,7 +78,7 @@ public class ReportsOverview extends Div {
                     getSelectedProjectVersion()));
         });
 
-        projectVersion.addChangeListener(evt -> {
+        projectVersion.addValueChangeListener(evt -> {
             table.setData(repository.findReports(getSelectedProject(),
                     getSelectedProjectVersion()));
         });

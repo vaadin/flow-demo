@@ -65,9 +65,9 @@ public class DateField extends Component {
                 .mapToObj(Integer::toString).toArray(String[]::new));
 
         // "Fire" value change to callback listeners
-        day.addChangeListener(event -> valueChange());
-        month.addChangeListener(event -> valueChange());
-        year.addChangeListener(event -> valueChange());
+        day.addValueChangeListener(event -> valueChange());
+        month.addValueChangeListener(event -> valueChange());
+        year.addValueChangeListener(event -> valueChange());
 
         // Add selectors to shadow tree
         shadowRoot.appendChild(day.getElement());
