@@ -29,13 +29,14 @@ import com.vaadin.flow.dom.Element;
 @Tag(Tag.SELECT)
 public class Select extends AbstractSinglePropertyField<Select, String> {
 
+    public static final String VALUE_PROPERTY = "value";
+
     /**
      * Creates an empty select.
      */
     public Select() {
-        super("value", "", false);
-        getElement().addSynchronizedPropertyEvent("change");
-        getElement().addSynchronizedProperty("value");
+        super(VALUE_PROPERTY, "", false);
+        getElement().synchronizeProperty(VALUE_PROPERTY, "change");
     }
 
     /**
@@ -57,7 +58,7 @@ public class Select extends AbstractSinglePropertyField<Select, String> {
      */
     public Optional<String> getSelectedValue() {
         Element el = getElement();
-        String selectedValue = el.getProperty("value");
+        String selectedValue = el.getProperty(VALUE_PROPERTY);
         return Optional.ofNullable(selectedValue);
     }
 
