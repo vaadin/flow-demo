@@ -220,7 +220,7 @@ public class RichTable<T extends Serializable> extends Component
     }
 
     /**
-     * Add listener to the selection change event
+     * Add listener to the selection change event.
      * 
      * @param listener
      *            the listener to add
