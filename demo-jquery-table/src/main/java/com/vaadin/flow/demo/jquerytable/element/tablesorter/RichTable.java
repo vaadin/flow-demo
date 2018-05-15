@@ -219,6 +219,12 @@ public class RichTable<T extends Serializable> extends Component
         return Optional.ofNullable(selectedObject);
     }
 
+    /**
+     * Add listener to the selection change event
+     * 
+     * @param listener
+     *            the listener to add
+     */
     public void addSelectionChangeListener(
             ComponentEventListener<SelectionChangeEvent> listener) {
         addListener(SelectionChangeEvent.class, listener);
