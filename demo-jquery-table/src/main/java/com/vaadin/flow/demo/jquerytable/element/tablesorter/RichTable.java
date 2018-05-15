@@ -26,6 +26,7 @@ import java.util.Optional;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JavaScript;
@@ -216,6 +217,17 @@ public class RichTable<T extends Serializable> extends Component
      */
     public Optional<T> getSelectedObject() {
         return Optional.ofNullable(selectedObject);
+    }
+
+    /**
+     * Add listener to the selection change event.
+     * 
+     * @param listener
+     *            the listener to add
+     */
+    public void addSelectionChangeListener(
+            ComponentEventListener<SelectionChangeEvent> listener) {
+        addListener(SelectionChangeEvent.class, listener);
     }
 
     /*
