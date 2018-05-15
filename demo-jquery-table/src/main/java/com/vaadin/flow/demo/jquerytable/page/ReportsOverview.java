@@ -29,7 +29,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.demo.jquerytable.element.html.Option;
 import com.vaadin.flow.demo.jquerytable.element.html.Select;
 import com.vaadin.flow.demo.jquerytable.element.tablesorter.RichTable;
-import com.vaadin.flow.demo.jquerytable.element.tablesorter.SelectionChangeEvent;
 import com.vaadin.flow.demo.jquerytable.persistence.IssuesRepository;
 import com.vaadin.flow.demo.jquerytable.persistence.Project;
 import com.vaadin.flow.demo.jquerytable.persistence.ProjectVersion;
@@ -197,7 +196,7 @@ public class ReportsOverview extends Div {
 
         // SelectionChangeEvent listener that shows a message on screen when
         // something is selected
-        table.addListener(SelectionChangeEvent.class, evt -> {
+        table.addSelectionChangeListener(evt -> {
             Optional<Report> selectedObject = table.getSelectedObject();
             if (selectedObject.isPresent()) {
                 selectedReport.setClassName("selected-report");
