@@ -31,7 +31,7 @@ public class SelectElement
 
     /**
      * Init select element with the selections given.
-     * 
+     *
      * @param options
      *            select options to populate select with
      */
@@ -47,7 +47,8 @@ public class SelectElement
             getElement().appendChild(option);
         }
         setValue(options[0]);
-        getElement().getChild(0).setProperty("selected", true);
+        getElement().setProperty("selectedIndex", 0);
         getElement().synchronizeProperty(VALUE_PROPERTY, "change");
     }
+
 }

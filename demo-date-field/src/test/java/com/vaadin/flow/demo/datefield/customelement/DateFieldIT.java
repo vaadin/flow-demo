@@ -35,7 +35,8 @@ public class DateFieldIT extends AbstractChromeTest {
                 By.cssSelector("select"));
         selectElement.sendKeys(Keys.TAB);
         selectElement.sendKeys(Keys.ENTER);
-        selectElement.sendKeys(Keys.ARROW_DOWN,Keys.ARROW_DOWN,Keys.ARROW_DOWN);
+        selectElement.sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN,
+                Keys.ARROW_DOWN);
         selectElement.sendKeys(Keys.ENTER);
 
         WebElement value = findElement(By.id("value"));
