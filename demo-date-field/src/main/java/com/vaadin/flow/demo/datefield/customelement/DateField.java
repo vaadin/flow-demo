@@ -27,7 +27,7 @@ import com.vaadin.flow.shared.Registration;
 
 /**
  * Custom element date-field for selecting dates.
- * 
+ *
  */
 @Tag("date-field")
 public class DateField extends Component {
@@ -40,7 +40,7 @@ public class DateField extends Component {
      * Construct a date field component {@code <date-field></date-field>}.
      * <p>
      * The actual dom will be:
-     * 
+     *
      * <pre>
      * {@code
      * <date-field>
@@ -77,7 +77,7 @@ public class DateField extends Component {
 
     /**
      * Get current date selection.
-     * 
+     *
      * @return date for current selections
      */
     public LocalDate getValue() {
@@ -92,7 +92,7 @@ public class DateField extends Component {
 
     /**
      * Add a value change listener for date field.
-     * 
+     *
      * @param valueChangeListener
      *            value change listener
      * @return registration handle for removing listener
