@@ -108,6 +108,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow</artifactId>
+                <type>pom</type>
                 <version>${flow.version}</version>
             </dependency>
             <dependency>
@@ -153,6 +154,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
