@@ -74,9 +74,9 @@ public final class ResourcesView extends SimpleView
 
         HtmlContainer links = new HtmlContainer("ul");
         links.add(createLink("", "<none>", "none"));
-        links.add(createLink(VaadinService.getCurrent()
-                .resolveResource("frontend://images/vaadin-logo-small.png", FakeBrowser.getEs6()),
-                "logo"));
+        links.add(createLink(VaadinService.getCurrent().resolveResource(
+                "frontend://images/vaadin-logo-small.png",
+                FakeBrowser.getEs6()), "logo"));
 
         HtmlContainer header = new HtmlContainer("p");
         HtmlContainer strong = new HtmlContainer("strong");
@@ -117,7 +117,7 @@ public final class ResourcesView extends SimpleView
         if ("".equals(parameter)) {
             content.getElement().setChild(3,
                     ElementFactory.createDiv("No resource selected"));
-        } else if (resourceExists("/" + parameter)) {
+        } else if (resourceExists(parameter)) {
             iframe.setSrc(parameter);
             content.getElement().setChild(3, iframe.getElement());
         } else {

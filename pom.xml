@@ -51,7 +51,7 @@
         <commons.beanutils.version>1.9.3</commons.beanutils.version>
 
         <!-- Plugins -->
-        <jetty.version>9.3.7.v20160115</jetty.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
         <frontend.maven.plugin.version>1.4</frontend.maven.plugin.version>
         <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
         <maven.failsafe.plugin.version>2.20</maven.failsafe.plugin.version>
@@ -108,6 +108,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow</artifactId>
+                <type>pom</type>
                 <version>${flow.version}</version>
             </dependency>
             <dependency>
@@ -153,6 +154,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
