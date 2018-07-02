@@ -4,7 +4,7 @@
   "description": "This file exists only to define the Bower version",
   "main": "",
   "devDependencies": {
-    "bower": "^1.8.0",
+    "bower": "^1.8.4",
     "polymer-cli": "~1.5.2"
   },
   "scripts": {
