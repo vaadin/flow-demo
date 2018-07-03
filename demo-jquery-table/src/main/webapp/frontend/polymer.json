@@ -4,7 +4,8 @@
     "bower_components/jquery/dist/jquery.min.js",
     "bower_components/tablesorter/dist/js/jquery.tablesorter.min.js",
     "bower_components/tablesorter/dist/js/jquery.tablesorter.widgets.min.js",
-    "bower_components/tablesorter/dist/js/widgets/widget-grouping.min.js"
+    "bower_components/tablesorter/dist/js/widgets/widget-grouping.min.js",
+    "vaadin-flow-bundle-manifest.json"
   ],
   "builds": [{
     "name": "frontend-es5",
