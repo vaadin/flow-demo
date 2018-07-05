@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin.flow.demo</groupId>
         <artifactId>flow-demo-project</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <name>Google signin using Polymer</name>
     <artifactId>demo-google-signin</artifactId>
