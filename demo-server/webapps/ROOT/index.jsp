@@ -24,6 +24,7 @@
 <%@page import="java.io.File" %>
 <%@page import="java.io.FileInputStream" %>
 <%@page import="java.util.ArrayList" %>
+<%@page import="java.util.Arrays" %>
 <%@page import="java.util.Collections" %>
 <%@page import="java.util.HashMap" %>
 <%@page import="java.util.List" %>
@@ -34,45 +35,47 @@ Map<String, List<String>> stableVersions = new HashMap<>();
 Map<String, List<String>> snapshotVersions = new HashMap<>();
 
 // Java 1.7
-File[] files = new File("webapps").listFiles();
-if (files != null) {
-    for (File f : files) {
-        if (f.isDirectory()) {
-            String nameAndVersion = f.getName();
-            if (nameAndVersion.startsWith("demo-")) {
-                File manifest = new File(f, "META-INF/MANIFEST.MF");
-                if (manifest.isFile()) {
-                    Manifest mf = new Manifest(new FileInputStream(manifest));
-                    String title = mf.getMainAttributes().getValue("Implementation-Title");
-                    if (title != null) {
-                        String version = mf.getMainAttributes().getValue("Implementation-Version");
-                        if (version == null) {
-                            int versionStarts = nameAndVersion.lastIndexOf("-");
-                            if (nameAndVersion.endsWith("-SNAPSHOT")) {
-                                versionStarts = nameAndVersion.lastIndexOf("-", versionStarts - 1);
+for (String applicationLocation: Arrays.asList("tomcat/webapps", "webapps")) {
+    File[] files = new File(applicationLocation).listFiles();
+    if (files != null) {
+        for (File f : files) {
+            if (f.isDirectory()) {
+                String nameAndVersion = f.getName();
+                if (nameAndVersion.startsWith("demo-")) {
+                    File manifest = new File(f, "META-INF/MANIFEST.MF");
+                    if (manifest.isFile()) {
+                        Manifest mf = new Manifest(new FileInputStream(manifest));
+                        String title = mf.getMainAttributes().getValue("Implementation-Title");
+                        if (title != null) {
+                            String version = mf.getMainAttributes().getValue("Implementation-Version");
+                            if (version == null) {
+                                int versionStarts = nameAndVersion.lastIndexOf("-");
+                                if (nameAndVersion.endsWith("-SNAPSHOT")) {
+                                    versionStarts = nameAndVersion.lastIndexOf("-", versionStarts - 1);
+                                }
+                                version = nameAndVersion.substring(versionStarts + 1);
                             }
-                            version = nameAndVersion.substring(versionStarts + 1);
-                        }
-                        String name = nameAndVersion.substring(0, nameAndVersion.indexOf(version) - 1);
-                        List<String> names;
-                        String sourceLink;
+                            String name = nameAndVersion.substring(0, nameAndVersion.indexOf(version) - 1);
+                            List<String> names;
+                            String sourceLink;
 
-                        if (version.endsWith("-SNAPSHOT")) {
-                            names = snapshotVersions.get(version);
-                            if (names == null) {
-                                names = new ArrayList<>();
-                                snapshotVersions.put(version, names);
+                            if (version.endsWith("-SNAPSHOT")) {
+                                names = snapshotVersions.get(version);
+                                if (names == null) {
+                                    names = new ArrayList<>();
+                                    snapshotVersions.put(version, names);
+                                }
+                                sourceLink = "https://github.com/vaadin/flow-demo/tree/master/" + name;
+                            } else {
+                                names = stableVersions.get(version);
+                                if (names == null) {
+                                    names = new ArrayList<>();
+                                    stableVersions.put(version, names);
+                                }
+                                sourceLink = "https://github.com/vaadin/flow-demo/tree/" + version + "/" + name;
                             }
-                            sourceLink = "https://github.com/vaadin/flow-demo/tree/master/" + name;
-                        } else {
-                            names = stableVersions.get(version);
-                            if (names == null) {
-                                names = new ArrayList<>();
-                                stableVersions.put(version, names);
-                            }
-                            sourceLink = "https://github.com/vaadin/flow-demo/tree/" + version + "/" + name;
+                            names.add("<li><a href='" + nameAndVersion + "'>" + title + "</a> (<a href='" + sourceLink + "'>sources</a>)</li>");
                         }
-                        names.add("<li><a href='" + nameAndVersion + "'>" + title + "</a> (<a href='" + sourceLink + "'>sources</a>)</li>");
                     }
                 }
             }
