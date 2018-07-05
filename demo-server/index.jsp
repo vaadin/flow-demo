@@ -82,7 +82,7 @@ if (files != null) {
 
 out.println("<b>Flow documentation</b>");
 out.println("<ul>");
-out.println("<li><a href='https://github.com/vaadin/flow-and-components-documentation/blob/master/Overview.asciidoc'>Current documentation</a></li>");
+out.println("<li><a href='https://github.com/vaadin/flow-and-components-documentation/blob/master/documentation/Overview.asciidoc'>Current documentation</a></li>");
 out.println("</ul>");
 
 List<String> sortedStableVersions = new ArrayList<>(stableVersions.keySet());
