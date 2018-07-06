@@ -1,0 +1,25 @@
+*
+!demo-server/
+
+# https://github.com/moby/moby/issues/30018
+# Docker does not understand globs in negations as nice as it should be
+# so instead of !*/target/*.war we get these:
+!demo-route-menu/target/*.war
+!demo-dynamic-menu/target/*.war
+!demo-minesweeper-element/target/*.war
+!demo-static-menu/target/*.war
+!demo-todo-template/target/*.war
+!demo-google-signin/target/*.war
+!demo-minesweeper-polymer/target/*.war
+!demo-static-menu-router/target/*.war
+!demo-addressbook-polymer/target/*.war
+!demo-hello-worlds/target/*.war
+!demo-model-converters/target/*.war
+!demo-contact-form/target/*.war
+!demo-jquery-table/target/*.war
+!demo-registration-form/target/*.war
+!demo-textfield-component/target/*.war
+!demo-web-site/target/*.war
+!demo-date-field/target/*.war
+!demo-minesweeper-component/target/*.war
+!demo-textfield-composite/target/*.war
