@@ -121,6 +121,8 @@
                                 </goals>
                                 <configuration>
                                     <transpileOutputDirectory>${transpilation.output}</transpileOutputDirectory>
+                                    <!-- Verify that Flow is able to build and start an app in the production mode without bundling -->
+                                    <bundle>false</bundle>
                                 </configuration>
                             </execution>
                         </executions>
