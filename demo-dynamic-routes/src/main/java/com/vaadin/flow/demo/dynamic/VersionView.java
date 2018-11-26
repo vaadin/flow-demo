@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.demo.dynamic;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 
@@ -26,7 +28,8 @@ public class VersionView extends Div {
 
     public VersionView() {
         Span text = new Span("Version view");
+        Button back = new Button("Return", event -> UI.getCurrent().navigate(""));
 
-        add(text);
+        add(text, back);
     }
 }

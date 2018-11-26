@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.demo;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -26,6 +28,7 @@ import com.vaadin.flow.demo.dynamic.AdminView;
 import com.vaadin.flow.demo.dynamic.UserView;
 import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.startup.RouteRegistry;
 
@@ -55,31 +58,38 @@ public class Login extends Div {
         }
 
         // super secure
-        if("admin".equals(login.getValue())) {
-            // A single Registry should be available that should handle all scopes. Single entrypoint from the UI.
-            RouteRegistry sessionRegistry = RouteRegistry.get(VaadinSession.getCurrent());
+        if (!"admin".equals(login.getValue()) && !"user"
+                .equals(login.getValue())) {
+            setMessage("Faulty username or password!");
+            return;
+        }
+
+        // Change session id a security measure
+        ((HttpServletRequest) VaadinRequest.getCurrent()).changeSessionId();
+
+        // A single Registry should be available that should handle all scopes. Single entrypoint from the UI.
+        SessionRouteRegistry sessionRegistry = RouteRegistry
+                .getSessionRegistry();
+
+        if ("admin".equals(login.getValue())) {
             // Set route should override global route, but throw if session contains same route.
             sessionRegistry.setRoute(AdminView.class);
             UI.getCurrent().navigate("");
         } else if ("user".equals(login.getValue())) {
-            RouteRegistry sessionRegistry = RouteRegistry.get(VaadinSession.getCurrent());
             // Set route should override global route, but throw if session contains same route.
             sessionRegistry.setRoute(UserView.class);
             // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
             // as the current path may have changed to be something else.
             UI.getCurrent().navigate("");
-        } else {
-            setMessage("Faulty username or password!");
-            return;
         }
 
-        RouteRegistry sessionRegistry = RouteRegistry.get(VaadinSession.getCurrent());
         // Add the version view to the route for path "version" with the MainLayout as its parent.
         // Note that the parent routes shouldn't be as a list as we can collect parents using
         // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
         // depends on how dynamic do we want to support. We should anyway be able to request
         // registry for the parts that we need for navigation.
-        sessionRegistry.addRoute("version", VersionView.class, MainLayout.class);
+        sessionRegistry
+                .setRoute("version", VersionView.class, MainLayout.class);
 
     }
 
@@ -92,13 +102,10 @@ public class Login extends Div {
         message.setVisible(false);
     }
 
-
     public static void logout() {
-        RouteRegistry sessionRegistry = RouteRegistry.get(VaadinSession.getCurrent());
-        // clear any session routes.
-        sessionRegistry.clear();
-        // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
-        // as the current path may have changed to be something else.
-        UI.getCurrent().navigate("");
+        UI.getCurrent().getPage().reload();
+        // close session to clear all registered routes.
+        // also available as sessionRegistry.clear()
+        VaadinSession.getCurrent().close();
     }
 }
