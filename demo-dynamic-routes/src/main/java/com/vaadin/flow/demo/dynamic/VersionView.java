@@ -19,11 +19,14 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.demo.MainLayout;
+import com.vaadin.flow.router.ParentLayout;
 
 /**
  * Dynamic view that is setup manually.
  * No @Route help or other automation.
  */
+@ParentLayout(MainLayout.class)
 public class VersionView extends Div {
 
     public VersionView() {

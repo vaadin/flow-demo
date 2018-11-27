@@ -88,8 +88,9 @@ public class Login extends Div {
         // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
         // depends on how dynamic do we want to support. We should anyway be able to request
         // registry for the parts that we need for navigation.
-        sessionRegistry
-                .setRoute("version", VersionView.class, MainLayout.class);
+        sessionRegistry.setRoute("version", VersionView.class);
+//        sessionRegistry
+//                .setRoute("version", VersionView.class, MainLayout.class);
 
     }
 
