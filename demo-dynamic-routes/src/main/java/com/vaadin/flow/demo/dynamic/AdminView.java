@@ -15,11 +15,13 @@
  */
 package com.vaadin.flow.demo.dynamic;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.MainLayout;
+import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
@@ -36,7 +38,7 @@ public class AdminView extends Div {
 
     public AdminView() {
         Span text = new Span("This is the view for a logged in admin.");
-        RouterLink version = new RouterLink("Version", VersionView.class);
+        Button version = new Button("Version", event -> UI.getCurrent().navigate("version"));
         Button logout = new Button("Logout", e -> Login.logout());
 
         add(text, version, logout);

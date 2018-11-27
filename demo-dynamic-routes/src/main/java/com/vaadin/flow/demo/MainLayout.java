@@ -16,8 +16,12 @@
 package com.vaadin.flow.demo;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLayout;
 
 public class MainLayout extends Div implements RouterLayout {
 
+    public MainLayout() {
+        add(new Span("this is the main menu"));
+    }
 }

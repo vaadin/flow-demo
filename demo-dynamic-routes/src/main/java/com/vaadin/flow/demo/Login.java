@@ -28,9 +28,10 @@ import com.vaadin.flow.demo.dynamic.AdminView;
 import com.vaadin.flow.demo.dynamic.UserView;
 import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.internal.SessionRouteRegistry;
+import com.vaadin.flow.server.InvalidRouteConfigurationException;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.startup.RouteRegistry;
 
 @Route("")
 public class Login extends Div {
@@ -68,29 +69,36 @@ public class Login extends Div {
         ((HttpServletRequest) VaadinRequest.getCurrent()).changeSessionId();
 
         // A single Registry should be available that should handle all scopes. Single entrypoint from the UI.
-        SessionRouteRegistry sessionRegistry = RouteRegistry
+        SessionRouteRegistry sessionRegistry = SessionRouteRegistry
                 .getSessionRegistry();
 
-        if ("admin".equals(login.getValue())) {
-            // Set route should override global route, but throw if session contains same route.
-            sessionRegistry.setRoute(AdminView.class);
-            UI.getCurrent().navigate("");
-        } else if ("user".equals(login.getValue())) {
-            // Set route should override global route, but throw if session contains same route.
-            sessionRegistry.setRoute(UserView.class);
-            // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
-            // as the current path may have changed to be something else.
-            UI.getCurrent().navigate("");
-        }
+        try {
+            if ("admin".equals(login.getValue())) {
+                // Set route should override global route, but throw if session contains same route.
+                sessionRegistry.setRoute(AdminView.class);
 
-        // Add the version view to the route for path "version" with the MainLayout as its parent.
-        // Note that the parent routes shouldn't be as a list as we can collect parents using
-        // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
-        // depends on how dynamic do we want to support. We should anyway be able to request
-        // registry for the parts that we need for navigation.
-        sessionRegistry.setRoute("version", VersionView.class);
-//        sessionRegistry
-//                .setRoute("version", VersionView.class, MainLayout.class);
+                // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
+                // as the current path may have changed to be something else.
+                UI.getCurrent().navigate("");
+            } else if ("user".equals(login.getValue())) {
+                // Set route should override global route, but throw if session contains same route.
+                sessionRegistry.setRoute(UserView.class);
+
+                // we could also reload as we may have been redirected to the login view.
+                UI.getCurrent().getPage().reload();
+            }
+
+            // Add the version view to the route for path "version" with the MainLayout as its parent.
+            // Note that the parent routes shouldn't be as a list as we can collect parents using
+            // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
+            // depends on how dynamic do we want to support. We should anyway be able to request
+            // registry for the parts that we need for navigation.
+            sessionRegistry.setRoute("version", VersionView.class);
+        } catch (InvalidRouteConfigurationException e) {
+            e.printStackTrace();
+        }
+        //        sessionRegistry
+        //                .setRoute("version", VersionView.class, MainLayout.class);
 
     }
 
