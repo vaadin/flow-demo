@@ -26,10 +26,9 @@ import com.vaadin.flow.router.RouterLink;
 /**
  * Admin view that can be dynamically registered.
  *
- * The @DynamicRoute annotation removes this class from the initial registration
+ * The {@code DynamicRoute} annotation removes this class from the initial registration
  * and lets us register it later with the default functionality expected of a
- *
- * @Route
+ * {@code Route}
  */
 @Route(value = "", layout = MainLayout.class)
 @DynamicRoute
