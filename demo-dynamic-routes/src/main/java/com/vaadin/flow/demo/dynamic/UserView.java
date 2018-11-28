@@ -17,30 +17,33 @@ package com.vaadin.flow.demo.dynamic;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.MainLayout;
 import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
 
 /**
  * User view that can be dynamically registered.
  *
- * The {@code DynamicRoute} annotation removes this class from the initial registration
+ * The {@code DynamicRoute} annotation removes this class from the initial
+ * registration
  * and lets us register it later with the default functionality expected of a
  * {@code Route}
  */
 @Route(value = "", layout = MainLayout.class)
 @DynamicRoute
-public class UserView extends Div {
+public class UserView extends VerticalLayout {
 
     public UserView() {
         Span text = new Span("This is the view for a logged in user.");
-        Button version = new Button("Version", event -> UI.getCurrent().navigate("version"));
+        Button version = new Button("Version",
+                event -> UI.getCurrent().navigate("version"));
+        Button time = new Button("Time",
+                event -> UI.getCurrent().navigate("time"));
         Button logout = new Button("Logout", e -> Login.logout());
 
-        add(text, version, logout);
+        add(text, version, time, logout);
     }
 }

@@ -15,23 +15,21 @@
  */
 package com.vaadin.flow.demo.dynamic;
 
+import java.time.LocalDateTime;
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.demo.MainLayout;
-import com.vaadin.flow.router.ParentLayout;
 
 /**
- * Dynamic view that is partly setup manually.
- * No {@link com.vaadin.flow.router.Route} help, but layout chain is done using
- * {@link ParentLayout}
+ * Dynamic view that is setup manually.
+ * No @Route help or other automation.
  */
-@ParentLayout(MainLayout.class)
-public class VersionView extends VerticalLayout {
+public class TimeView extends VerticalLayout {
 
-    public VersionView() {
-        Span text = new Span("Version view");
+    public TimeView() {
+        Span text = new Span("Time view " + LocalDateTime.now().toString());
         Button back = new Button("Return",
                 event -> UI.getCurrent().navigate(""));
 

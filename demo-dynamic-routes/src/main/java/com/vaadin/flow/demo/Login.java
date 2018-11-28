@@ -16,31 +16,34 @@
 package com.vaadin.flow.demo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.demo.dynamic.AdminView;
+import com.vaadin.flow.demo.dynamic.TimeView;
 import com.vaadin.flow.demo.dynamic.UserView;
 import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.internal.SessionRouteRegistry;
+import com.vaadin.flow.router.SessionRouteRegistry;
 import com.vaadin.flow.server.InvalidRouteConfigurationException;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinSession;
 
 @Route("")
-public class Login extends Div {
+public class Login extends VerticalLayout {
 
     Span message;
     TextField login;
     PasswordField password;
 
     public Login() {
+
         message = new Span();
         message.setVisible(false);
 
@@ -49,7 +52,12 @@ public class Login extends Div {
 
         Button submit = new Button("Submit", this::handeLogin);
 
-        add(message, login, password, submit);
+        VerticalLayout usage = new VerticalLayout();
+        usage.add(new Span("Login with user [admin|user] with any password."));
+        usage.add(new Span("- admin will always navigate to root url"));
+        usage.add(new Span("- user will reload and navigate to set url"));
+
+        add(message, login, password, submit, usage);
     }
 
     private void handeLogin(ClickEvent<Button> buttonClickEvent) {
@@ -94,6 +102,10 @@ public class Login extends Div {
             // depends on how dynamic do we want to support. We should anyway be able to request
             // registry for the parts that we need for navigation.
             sessionRegistry.setRoute("version", VersionView.class);
+
+            // Add a view using manually populated parent chain
+            sessionRegistry.setRoute("time", TimeView.class,
+                    Arrays.asList(LooseCenterLayout.class, MainLayout.class));
         } catch (InvalidRouteConfigurationException e) {
             e.printStackTrace();
         }
