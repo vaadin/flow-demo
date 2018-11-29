@@ -33,7 +33,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.SessionRouteRegistry;
 import com.vaadin.flow.server.InvalidRouteConfigurationException;
 import com.vaadin.flow.server.VaadinRequest;
+import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.startup.GlobalRouteRegistry;
 
 @Route("")
 public class Login extends VerticalLayout {
@@ -57,7 +59,18 @@ public class Login extends VerticalLayout {
         usage.add(new Span("- admin will always navigate to root url"));
         usage.add(new Span("- user will reload and navigate to set url"));
 
-        add(message, login, password, submit, usage);
+        Button global = new Button("Add global view", event -> {
+            GlobalRouteRegistry
+                    .getInstance(VaadinServlet.getCurrent().getServletContext())
+                    .setRoute(GlobalView.class);
+            event.getSource().setVisible(false);
+        });
+
+        global.setVisible(!GlobalRouteRegistry
+                .getInstance(VaadinServlet.getCurrent().getServletContext())
+                .hasRouteTo("global"));
+
+        add(message, login, password, submit, usage, global);
     }
 
     private void handeLogin(ClickEvent<Button> buttonClickEvent) {
