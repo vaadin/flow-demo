@@ -15,16 +15,32 @@
  */
 package com.vaadin.flow.demo;
 
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.startup.GlobalRouteRegistry;
 
 @Route("global")
 @DynamicRoute
-public class GlobalView extends Div {
+public class GlobalView extends VerticalLayout {
 
     public GlobalView() {
-        add(new Span("This is a late registration view in the servlet scope."));
+        Button remove = new Button("Remove from global and reload", event -> {
+            GlobalRouteRegistry
+                    .getInstance(VaadinServlet.getCurrent().getServletContext())
+                    .removeRoute("global");
+            UI.getCurrent().getPage().reload();
+        });
+
+        RouterLink tologin = new RouterLink("To login", Login.class);
+
+        add(new Span(
+                        "This is a view registered from the admin view to the global servlet scope."),
+                remove, tologin);
     }
 }

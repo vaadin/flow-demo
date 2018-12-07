@@ -30,8 +30,11 @@ import com.vaadin.flow.demo.dynamic.TimeView;
 import com.vaadin.flow.demo.dynamic.UserView;
 import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.SessionRouteRegistry;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.router.internal.RouteUtil;
 import com.vaadin.flow.server.InvalidRouteConfigurationException;
+import com.vaadin.flow.server.RouteRegistry;
+import com.vaadin.flow.server.SessionRouteRegistry;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
@@ -59,18 +62,14 @@ public class Login extends VerticalLayout {
         usage.add(new Span("- admin will always navigate to root url"));
         usage.add(new Span("- user will reload and navigate to set url"));
 
-        Button global = new Button("Add global view", event -> {
-            GlobalRouteRegistry
-                    .getInstance(VaadinServlet.getCurrent().getServletContext())
-                    .setRoute(GlobalView.class);
-            event.getSource().setVisible(false);
-        });
+        add(message, login, password, submit, usage);
 
-        global.setVisible(!GlobalRouteRegistry
+        if(GlobalRouteRegistry
                 .getInstance(VaadinServlet.getCurrent().getServletContext())
-                .hasRouteTo("global"));
+                .getNavigationTarget("global").isPresent()) {
+            add(new RouterLink("global", GlobalView.class));
+        }
 
-        add(message, login, password, submit, usage, global);
     }
 
     private void handeLogin(ClickEvent<Button> buttonClickEvent) {
@@ -90,41 +89,38 @@ public class Login extends VerticalLayout {
         ((HttpServletRequest) VaadinRequest.getCurrent()).changeSessionId();
 
         // A single Registry should be available that should handle all scopes. Single entrypoint from the UI.
-        SessionRouteRegistry sessionRegistry = SessionRouteRegistry
-                .getSessionRegistry();
+        RouteRegistry sessionRegistry = SessionRouteRegistry
+                .getSessionRegistry(VaadinSession.getCurrent());
 
         try {
+            // Add the version view to the route for path "version" with the MainLayout as its parent.
+            // Note that the parent routes shouldn't be as a list as we can collect parents using
+            // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
+            // depends on how dynamic do we want to support. We should anyway be able to request
+            // registry for the parts that we need for navigation.
+            RouteUtil.setRoute("version", VersionView.class, sessionRegistry);
+
+            // Add a view using manually populated parent chain
+            sessionRegistry.setRoute("time", TimeView.class,
+                    Arrays.asList(LooseCenterLayout.class, MainLayout.class));
+
             if ("admin".equals(login.getValue())) {
                 // Set route should override global route, but throw if session contains same route.
-                sessionRegistry.setRoute(AdminView.class);
+                RouteUtil.setAnnotatedRoute(AdminView.class, sessionRegistry);
 
                 // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
                 // as the current path may have changed to be something else.
                 UI.getCurrent().navigate("");
             } else if ("user".equals(login.getValue())) {
                 // Set route should override global route, but throw if session contains same route.
-                sessionRegistry.setRoute(UserView.class);
+                RouteUtil.setAnnotatedRoute(UserView.class, sessionRegistry);
 
                 // we could also reload as we may have been redirected to the login view.
                 UI.getCurrent().getPage().reload();
             }
-
-            // Add the version view to the route for path "version" with the MainLayout as its parent.
-            // Note that the parent routes shouldn't be as a list as we can collect parents using
-            // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
-            // depends on how dynamic do we want to support. We should anyway be able to request
-            // registry for the parts that we need for navigation.
-            sessionRegistry.setRoute("version", VersionView.class);
-
-            // Add a view using manually populated parent chain
-            sessionRegistry.setRoute("time", TimeView.class,
-                    Arrays.asList(LooseCenterLayout.class, MainLayout.class));
         } catch (InvalidRouteConfigurationException e) {
             e.printStackTrace();
         }
-        //        sessionRegistry
-        //                .setRoute("version", VersionView.class, MainLayout.class);
-
     }
 
     private void setMessage(String messageText) {
@@ -137,9 +133,9 @@ public class Login extends VerticalLayout {
     }
 
     public static void logout() {
-        UI.getCurrent().getPage().reload();
         // close session to clear all registered routes.
         // also available as sessionRegistry.clear()
         VaadinSession.getCurrent().close();
+        UI.getCurrent().getPage().reload();
     }
 }

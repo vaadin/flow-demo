@@ -19,8 +19,10 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.MainLayout;
 import com.vaadin.flow.router.ParentLayout;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * Dynamic view that is partly setup manually.
@@ -32,9 +34,9 @@ public class VersionView extends VerticalLayout {
 
     public VersionView() {
         Span text = new Span("Version view");
-        Button back = new Button("Return",
-                event -> UI.getCurrent().navigate(""));
-
+//        Button back = new Button("Return",
+//                event -> UI.getCurrent().navigate(""));
+RouterLink back = new RouterLink("return", Login.class);
         add(text, back);
     }
 }

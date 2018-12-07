@@ -15,7 +15,6 @@
  */
 package com.vaadin.flow.demo.dynamic;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -23,6 +22,9 @@ import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.MainLayout;
 import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.SessionRouteRegistry;
+import com.vaadin.flow.server.VaadinSession;
 
 /**
  * User view that can be dynamically registered.
@@ -38,12 +40,19 @@ public class UserView extends VerticalLayout {
 
     public UserView() {
         Span text = new Span("This is the view for a logged in user.");
-        Button version = new Button("Version",
-                event -> UI.getCurrent().navigate("version"));
-        Button time = new Button("Time",
-                event -> UI.getCurrent().navigate("time"));
+
+        add(text);
+
+        if (SessionRouteRegistry.getSessionRegistry(VaadinSession.getCurrent())
+                .getTargetUrl(VersionView.class).isPresent()) {
+            add(new RouterLink("Version", VersionView.class));
+        }
+        if (SessionRouteRegistry.getSessionRegistry(VaadinSession.getCurrent())
+                .getTargetUrl(TimeView.class).isPresent()) {
+            add(new RouterLink("Time", TimeView.class));
+        }
         Button logout = new Button("Logout", e -> Login.logout());
 
-        add(text, version, time, logout);
+        add(logout);
     }
 }
