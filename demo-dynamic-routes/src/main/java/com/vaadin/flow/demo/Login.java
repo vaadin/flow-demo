@@ -32,7 +32,6 @@ import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.internal.RouteUtil;
-import com.vaadin.flow.server.InvalidRouteConfigurationException;
 import com.vaadin.flow.server.RouteRegistry;
 import com.vaadin.flow.server.SessionRouteRegistry;
 import com.vaadin.flow.server.VaadinRequest;
@@ -64,7 +63,7 @@ public class Login extends VerticalLayout {
 
         add(message, login, password, submit, usage);
 
-        if(GlobalRouteRegistry
+        if (GlobalRouteRegistry
                 .getInstance(VaadinServlet.getCurrent().getServletContext())
                 .getNavigationTarget("global").isPresent()) {
             add(new RouterLink("global", GlobalView.class));
@@ -92,35 +91,27 @@ public class Login extends VerticalLayout {
         RouteRegistry sessionRegistry = SessionRouteRegistry
                 .getSessionRegistry(VaadinSession.getCurrent());
 
-        try {
-            // Add the version view to the route for path "version" with the MainLayout as its parent.
-            // Note that the parent routes shouldn't be as a list as we can collect parents using
-            // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
-            // depends on how dynamic do we want to support. We should anyway be able to request
-            // registry for the parts that we need for navigation.
-            RouteUtil.setRoute("version", VersionView.class, sessionRegistry);
-
-            // Add a view using manually populated parent chain
-            sessionRegistry.setRoute("time", TimeView.class,
-                    Arrays.asList(LooseCenterLayout.class, MainLayout.class));
-
-            if ("admin".equals(login.getValue())) {
-                // Set route should override global route, but throw if session contains same route.
-                RouteUtil.setAnnotatedRoute(AdminView.class, sessionRegistry);
-
-                // navigating to where we are should work as setRoute should clear the lastNavigated flag for the UI
-                // as the current path may have changed to be something else.
-                UI.getCurrent().navigate("");
-            } else if ("user".equals(login.getValue())) {
-                // Set route should override global route, but throw if session contains same route.
-                RouteUtil.setAnnotatedRoute(UserView.class, sessionRegistry);
-
-                // we could also reload as we may have been redirected to the login view.
-                UI.getCurrent().getPage().reload();
-            }
-        } catch (InvalidRouteConfigurationException e) {
-            e.printStackTrace();
+        if ("admin".equals(login.getValue())) {
+            // Set route should override global route, but throw if session contains same route.
+            RouteUtil.setAnnotatedRoute(AdminView.class, sessionRegistry);
+        } else if ("user".equals(login.getValue())) {
+            // Set route should override global route, but throw if session contains same route.
+            RouteUtil.setAnnotatedRoute(UserView.class, sessionRegistry);
         }
+
+        // Add the version view to the route for path "version" with the MainLayout as its parent.
+        // Note that the parent routes shouldn't be as a list as we can collect parents using
+        // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
+        // depends on how dynamic do we want to support. We should anyway be able to request
+        // registry for the parts that we need for navigation.
+        RouteUtil.setRoute("version", VersionView.class, sessionRegistry);
+
+        // Add a view using manually populated parent chain
+        sessionRegistry.setRoute("time", TimeView.class,
+                Arrays.asList(LooseCenterLayout.class, MainLayout.class));
+
+        // Reload to target url that was navigated to as it may now be registered.
+        UI.getCurrent().getPage().reload();
     }
 
     private void setMessage(String messageText) {
