@@ -38,6 +38,9 @@ import com.vaadin.flow.server.VaadinSession;
 @DynamicRoute
 public class UserView extends VerticalLayout {
 
+    /**
+     * Constructor.
+     */
     public UserView() {
         Span text = new Span("This is the view for a logged in user.");
 

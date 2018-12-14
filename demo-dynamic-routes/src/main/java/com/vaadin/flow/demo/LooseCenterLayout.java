@@ -19,8 +19,16 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLayout;
 
+/**
+ * This is a layout that is used to demonstrate that any {@link RouterLayout}
+ * can be used as a parent layout at any position without having any
+ * annotations.
+ */
 public class LooseCenterLayout extends Div implements RouterLayout {
 
+    /**
+     * Constructor.
+     */
     public LooseCenterLayout() {
         add(new Span("Un-linked center layout"));
     }

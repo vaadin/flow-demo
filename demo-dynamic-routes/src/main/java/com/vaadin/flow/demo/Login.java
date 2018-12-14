@@ -39,6 +39,11 @@ import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
+/**
+ * Login view creates a simple login. With the correct values new routes will be
+ * set to the session registry and the sessionId is changed as a security
+ * measure.
+ */
 @Route("")
 public class Login extends VerticalLayout {
 
@@ -46,6 +51,9 @@ public class Login extends VerticalLayout {
     private TextField login;
     private PasswordField password;
 
+    /**
+     * Contsructor.
+     */
     public Login() {
 
         message = new Span();
@@ -123,6 +131,12 @@ public class Login extends VerticalLayout {
         message.setVisible(false);
     }
 
+    /**
+     * Logout logged in user by closing the session and reloading the page.
+     * <p>
+     * Reload will lead to navigation to LoginView (except if on a application
+     * scope target).
+     */
     public static void logout() {
         // close session to clear all registered routes.
         // also available as sessionRegistry.clear()

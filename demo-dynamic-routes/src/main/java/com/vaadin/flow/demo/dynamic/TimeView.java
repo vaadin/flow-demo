@@ -30,13 +30,17 @@ import com.vaadin.flow.server.VaadinSession;
  */
 public class TimeView extends VerticalLayout {
 
+    /**
+     * Constructor.
+     */
     public TimeView() {
         Span text = new Span("Time view " + LocalDateTime.now().toString());
         Button back = new Button("Return",
                 event -> UI.getCurrent().navigate(""));
 
         Button remove = new Button("Remove time view",
-                event -> SessionRouteRegistry.getSessionRegistry(VaadinSession.getCurrent())
+                event -> SessionRouteRegistry
+                        .getSessionRegistry(VaadinSession.getCurrent())
                         .removeRoute(TimeView.class));
         Button reload = new Button("Reload page",
                 event -> UI.getCurrent().getPage().reload());

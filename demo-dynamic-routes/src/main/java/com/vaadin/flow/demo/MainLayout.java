@@ -19,8 +19,14 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLayout;
 
+/**
+ * This is the MainLayout to use with routes registerd at login.
+ */
 public class MainLayout extends Div implements RouterLayout {
 
+    /**
+     * Constructor.
+     */
     public MainLayout() {
         add(new Span("this is the main menu"));
     }

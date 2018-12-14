@@ -25,10 +25,17 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
+/**
+ * This is a global route that is in the demo registerable to the global
+ * application scope from the AdminView.
+ */
 @Route("global")
 @DynamicRoute
 public class GlobalView extends VerticalLayout {
 
+    /**
+     * GlobalView Constructor.
+     */
     public GlobalView() {
         Button remove = new Button("Remove from global and reload", event -> {
             ApplicationRouteRegistry
