@@ -36,7 +36,7 @@ import com.vaadin.flow.server.RouteRegistry;
 import com.vaadin.flow.server.SessionRouteRegistry;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.startup.GlobalRouteRegistry;
+import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
 /**
  * Admin view that can be dynamically registered.
@@ -56,7 +56,7 @@ public class AdminView extends VerticalLayout {
         Span text = new Span("This is the view for a logged in admin.");
         add(text);
 
-        RouteRegistry globalRegistry = GlobalRouteRegistry
+        RouteRegistry globalRegistry = ApplicationRouteRegistry
                 .getInstance(VaadinServlet.getCurrent().getServletContext());
 
         VerticalLayout global = new VerticalLayout();

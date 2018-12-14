@@ -37,14 +37,14 @@ import com.vaadin.flow.server.SessionRouteRegistry;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.startup.GlobalRouteRegistry;
+import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
 @Route("")
 public class Login extends VerticalLayout {
 
-    Span message;
-    TextField login;
-    PasswordField password;
+    private Span message;
+    private TextField login;
+    private PasswordField password;
 
     public Login() {
 
@@ -63,7 +63,7 @@ public class Login extends VerticalLayout {
 
         add(message, login, password, submit, usage);
 
-        if (GlobalRouteRegistry
+        if (ApplicationRouteRegistry
                 .getInstance(VaadinServlet.getCurrent().getServletContext())
                 .getNavigationTarget("global").isPresent()) {
             add(new RouterLink("global", GlobalView.class));
