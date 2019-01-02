@@ -36,12 +36,15 @@ public class TimeView extends VerticalLayout {
         Span text = new Span("Time view " + LocalDateTime.now().toString());
         Button back = new Button("Return",
                 event -> UI.getCurrent().navigate(""));
+        back.setId("time-return");
 
         Button remove = new Button("Remove time view",
                 event -> RouteConfiguration.forSessionScope()
                         .removeRoute(TimeView.class));
+        remove.setId("time-remove");
         Button reload = new Button("Reload page",
                 event -> UI.getCurrent().getPage().reload());
+        reload.setId("time-reload");
 
         add(text, back, remove, reload);
     }

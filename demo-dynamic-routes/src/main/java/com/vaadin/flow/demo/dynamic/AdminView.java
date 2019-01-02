@@ -74,13 +74,15 @@ public class AdminView extends VerticalLayout {
 
         if (SessionRouteRegistry.getSessionRegistry(VaadinSession.getCurrent())
                 .getTargetUrl(VersionView.class).isPresent()) {
-            sessionRoutes.put(VersionView.class,
-                    new RouterLink("Version", VersionView.class));
+            RouterLink version = new RouterLink("Version", VersionView.class);
+            version.setId("version-link");
+            sessionRoutes.put(VersionView.class, version);
         }
         if (SessionRouteRegistry.getSessionRegistry(VaadinSession.getCurrent())
                 .getTargetUrl(TimeView.class).isPresent()) {
-            sessionRoutes.put(TimeView.class,
-                    new RouterLink("Time", TimeView.class));
+            RouterLink time = new RouterLink("Time", TimeView.class);
+            time.setId("time-link");
+            sessionRoutes.put(TimeView.class, time);
         }
 
         for (RouterLink link : sessionRoutes.values()) {
@@ -88,6 +90,7 @@ public class AdminView extends VerticalLayout {
         }
 
         Button logout = new Button("Logout", e -> Login.logout());
+        logout.setId("logout");
 
         add(logout);
     }
@@ -123,6 +126,7 @@ public class AdminView extends VerticalLayout {
         RouteConfiguration.forSessionScope().setRoute(path, route, parents);
 
         RouterLink link = new RouterLink(path, route);
+        link.setId(path + "-link");
         sessionRoutes.put(route, link);
         addComponentAtIndex(getComponentCount() - 1, link);
     }
@@ -135,6 +139,7 @@ public class AdminView extends VerticalLayout {
     private Component createRegistrationHandler(String text, boolean registered,
             Runnable register, Runnable unregister) {
         Checkbox status = new Checkbox(text);
+        status.setId(text + "-checkbox");
         status.setValue(registered);
         status.addValueChangeListener(event -> {
             if (event.getValue() && !event.getOldValue()) {

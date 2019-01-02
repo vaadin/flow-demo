@@ -40,8 +40,10 @@ public class GlobalView extends VerticalLayout {
             RouteConfiguration.forApplicationScope().removeRoute("global");
             UI.getCurrent().getPage().reload();
         });
+        remove.setId("remove-global");
 
         RouterLink tologin = new RouterLink("To login", Login.class);
+        tologin.setId("to-root-link");
 
         add(new Span(
                         "This is a view registered from the admin view to the global servlet scope."),

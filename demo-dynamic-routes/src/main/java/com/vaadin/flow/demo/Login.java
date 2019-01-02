@@ -57,9 +57,12 @@ public class Login extends VerticalLayout {
         message.setVisible(false);
 
         login = new TextField("Login");
+        login.setId("login-field");
         password = new PasswordField("Password");
+        password.setId("password-field");
 
         Button submit = new Button("Submit", this::handeLogin);
+        submit.setId("submit");
 
         VerticalLayout usage = new VerticalLayout();
         usage.add(new Span("Login with user [admin|user] with any password."));
@@ -71,7 +74,9 @@ public class Login extends VerticalLayout {
         if (ApplicationRouteRegistry
                 .getInstance(VaadinServlet.getCurrent().getServletContext())
                 .getNavigationTarget("global").isPresent()) {
-            add(new RouterLink("global", GlobalView.class));
+            RouterLink global = new RouterLink("global", GlobalView.class);
+            global.setId("global-link");
+            add(global);
         }
 
     }

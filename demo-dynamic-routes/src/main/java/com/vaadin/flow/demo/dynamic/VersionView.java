@@ -36,6 +36,7 @@ public class VersionView extends VerticalLayout {
     public VersionView() {
         Span text = new Span("Version view");
         RouterLink back = new RouterLink("return", Login.class);
+        back.setId("version-return");
         add(text, back);
     }
 }
