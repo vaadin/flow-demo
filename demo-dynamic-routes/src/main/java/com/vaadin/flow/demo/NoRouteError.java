@@ -35,7 +35,7 @@ public class NoRouteError extends RouteNotFoundError {
     @Override
     public int setErrorParameter(BeforeEnterEvent event,
             ErrorParameter<NotFoundException> parameter) {
-        event.rerouteTo(Login.class);
+        event.rerouteTo("");
         return HttpServletResponse.SC_NO_CONTENT;
     }
 }

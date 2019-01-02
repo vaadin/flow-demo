@@ -15,7 +15,6 @@
  */
 package com.vaadin.flow.demo.dynamic;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +29,11 @@ import com.vaadin.flow.demo.LooseCenterLayout;
 import com.vaadin.flow.demo.MainLayout;
 import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.internal.RouteUtil;
-import com.vaadin.flow.server.RouteRegistry;
 import com.vaadin.flow.server.SessionRouteRegistry;
-import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
 /**
  * Admin view that can be dynamically registered.
@@ -64,20 +61,14 @@ public class AdminView extends VerticalLayout {
         Span text = new Span("This is the view for a logged in admin.");
         add(text);
 
-        RouteRegistry globalRegistry = ApplicationRouteRegistry
-                .getInstance(VaadinServlet.getCurrent().getServletContext());
-
         VerticalLayout global = new VerticalLayout();
         global.add(new Span("Application registration routes"));
-        populateGlobalSelects(globalRegistry, global);
-
-        RouteRegistry sessionRegistry = SessionRouteRegistry
-                .getSessionRegistry(VaadinSession.getCurrent());
+        populateGlobalSelects(global);
 
         VerticalLayout session = new VerticalLayout();
         session.add(new Span("Session registration routes"));
 
-        populateSessionSelects(sessionRegistry, session);
+        populateSessionSelects(session);
 
         add(global, session);
 
@@ -101,52 +92,50 @@ public class AdminView extends VerticalLayout {
         add(logout);
     }
 
-    private void populateGlobalSelects(RouteRegistry globalRegistry,
-            VerticalLayout global) {
-        global.add(createRegistrationHandler("Global", GlobalView.class,
-                globalRegistry, () -> RouteUtil
-                        .setAnnotatedRoute(GlobalView.class, globalRegistry),
-                () -> globalRegistry.removeRoute(GlobalView.class)));
+    private void populateGlobalSelects(VerticalLayout global) {
+        global.add(createRegistrationHandler("Global",
+                RouteConfiguration.forApplicationScope()
+                        .isRouteRegistered(GlobalView.class),
+                () -> RouteConfiguration.forApplicationScope()
+                        .setAnnotatedRoute(GlobalView.class),
+                () -> RouteConfiguration.forApplicationScope()
+                        .removeRoute(GlobalView.class)));
     }
 
-    private void populateSessionSelects(RouteRegistry sessionRegistry,
-            VerticalLayout session) {
-        session.add(createRegistrationHandler("Version", VersionView.class,
-                sessionRegistry, () -> {
-                    RouteUtil.setRoute("version", VersionView.class,
-                            sessionRegistry);
-                    RouterLink version = new RouterLink("Version",
-                            VersionView.class);
-                    sessionRoutes.put(VersionView.class, version);
-                    addComponentAtIndex(getComponentCount() - 1, version);
-                }, () -> {
-                    removeRoute(sessionRegistry, VersionView.class);
-                }));
-        session.add(createRegistrationHandler("Time", TimeView.class,
-                sessionRegistry, () -> {
-                    sessionRegistry.setRoute("time", TimeView.class,
-                            Arrays.asList(LooseCenterLayout.class,
-                                    MainLayout.class));
+    private void populateSessionSelects(VerticalLayout session) {
+        session.add(createRegistrationHandler("Version",
+                RouteConfiguration.forSessionScope()
+                        .isRouteRegistered(VersionView.class),
+                () -> addToSessionScope("version", VersionView.class),
+                () -> removeFromSession(VersionView.class)));
 
-                    RouterLink time = new RouterLink("Time", TimeView.class);
-                    sessionRoutes.put(TimeView.class, time);
-                    addComponentAtIndex(getComponentCount() - 1, time);
-                }, () -> {
-                    removeRoute(sessionRegistry, TimeView.class);
-                }));
+        session.add(createRegistrationHandler("Time",
+                RouteConfiguration.forSessionScope()
+                        .isRouteRegistered(TimeView.class),
+                () -> addToSessionScope("time", TimeView.class,
+                        LooseCenterLayout.class, MainLayout.class),
+                () -> removeFromSession(TimeView.class)));
     }
 
-    private void removeRoute(RouteRegistry registry,
-            Class<? extends Component> target) {
-        registry.removeRoute(target);
+    private void addToSessionScope(String path,
+            Class<? extends Component> route,
+            Class<? extends RouterLayout>... parents) {
+        RouteConfiguration.forSessionScope().setRoute(path, route, parents);
+
+        RouterLink link = new RouterLink(path, route);
+        sessionRoutes.put(route, link);
+        addComponentAtIndex(getComponentCount() - 1, link);
+    }
+
+    private void removeFromSession(Class<? extends Component> target) {
+        RouteConfiguration.forSessionScope().removeRoute(target);
         remove(sessionRoutes.remove(target));
     }
 
-    private Component createRegistrationHandler(String text,
-            Class<? extends Component> viewClass, RouteRegistry registry,
+    private Component createRegistrationHandler(String text, boolean registered,
             Runnable register, Runnable unregister) {
         Checkbox status = new Checkbox(text);
-        status.setValue(registry.getTargetUrl(viewClass).isPresent());
+        status.setValue(registered);
         status.addValueChangeListener(event -> {
             if (event.getValue() && !event.getOldValue()) {
                 register.run();

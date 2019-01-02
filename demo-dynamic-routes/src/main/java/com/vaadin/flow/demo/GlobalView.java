@@ -21,9 +21,8 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
 /**
  * This is a global route that is in the demo registerable to the global
@@ -38,9 +37,7 @@ public class GlobalView extends VerticalLayout {
      */
     public GlobalView() {
         Button remove = new Button("Remove from global and reload", event -> {
-            ApplicationRouteRegistry
-                    .getInstance(VaadinServlet.getCurrent().getServletContext())
-                    .removeRoute("global");
+            RouteConfiguration.forApplicationScope().removeRoute("global");
             UI.getCurrent().getPage().reload();
         });
 

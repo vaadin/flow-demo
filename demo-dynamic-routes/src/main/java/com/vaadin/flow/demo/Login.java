@@ -30,10 +30,8 @@ import com.vaadin.flow.demo.dynamic.TimeView;
 import com.vaadin.flow.demo.dynamic.UserView;
 import com.vaadin.flow.demo.dynamic.VersionView;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.internal.RouteUtil;
-import com.vaadin.flow.server.RouteRegistry;
-import com.vaadin.flow.server.SessionRouteRegistry;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
@@ -55,7 +53,6 @@ public class Login extends VerticalLayout {
      * Contsructor.
      */
     public Login() {
-
         message = new Span();
         message.setVisible(false);
 
@@ -95,16 +92,13 @@ public class Login extends VerticalLayout {
         // Change session id a security measure
         ((HttpServletRequest) VaadinRequest.getCurrent()).changeSessionId();
 
-        // A single Registry should be available that should handle all scopes. Single entrypoint from the UI.
-        RouteRegistry sessionRegistry = SessionRouteRegistry
-                .getSessionRegistry(VaadinSession.getCurrent());
+        RouteConfiguration session = RouteConfiguration.forSessionScope();
 
+        // Set route should override global route, but throw if session contains same route.
         if ("admin".equals(login.getValue())) {
-            // Set route should override global route, but throw if session contains same route.
-            RouteUtil.setAnnotatedRoute(AdminView.class, sessionRegistry);
+            session.setAnnotatedRoute(AdminView.class);
         } else if ("user".equals(login.getValue())) {
-            // Set route should override global route, but throw if session contains same route.
-            RouteUtil.setAnnotatedRoute(UserView.class, sessionRegistry);
+            session.setAnnotatedRoute(UserView.class);
         }
 
         // Add the version view to the route for path "version" with the MainLayout as its parent.
@@ -112,11 +106,11 @@ public class Login extends VerticalLayout {
         // RouterUtil.getParentLayoutsForNonRouteTarget(MainLayout.class), though this
         // depends on how dynamic do we want to support. We should anyway be able to request
         // registry for the parts that we need for navigation.
-        RouteUtil.setRoute("version", VersionView.class, sessionRegistry);
+        session.setParentAnnotatedRoute("version", VersionView.class);
 
         // Add a view using manually populated parent chain
-        sessionRegistry.setRoute("time", TimeView.class,
-                Arrays.asList(LooseCenterLayout.class, MainLayout.class));
+        session.setRoute("time", TimeView.class,
+                LooseCenterLayout.class, MainLayout.class);
 
         // Reload to target url that was navigated to as it may now be registered.
         UI.getCurrent().getPage().reload();

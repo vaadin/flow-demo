@@ -21,8 +21,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.server.SessionRouteRegistry;
-import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.router.RouteConfiguration;
 
 /**
  * Dynamic view that is setup manually.
@@ -39,8 +38,7 @@ public class TimeView extends VerticalLayout {
                 event -> UI.getCurrent().navigate(""));
 
         Button remove = new Button("Remove time view",
-                event -> SessionRouteRegistry
-                        .getSessionRegistry(VaadinSession.getCurrent())
+                event -> RouteConfiguration.forSessionScope()
                         .removeRoute(TimeView.class));
         Button reload = new Button("Reload page",
                 event -> UI.getCurrent().getPage().reload());
