@@ -16,7 +16,6 @@
 package com.vaadin.flow.demo;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.UI;
@@ -33,9 +32,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinRequest;
-import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 
 /**
  * Login view creates a simple login. With the correct values new routes will be
@@ -71,9 +68,8 @@ public class Login extends VerticalLayout {
 
         add(message, login, password, submit, usage);
 
-        if (ApplicationRouteRegistry
-                .getInstance(VaadinServlet.getCurrent().getServletContext())
-                .getNavigationTarget("global").isPresent()) {
+        if (RouteConfiguration.forApplicationScope()
+                .isRouteRegistered(GlobalView.class)) {
             RouterLink global = new RouterLink("global", GlobalView.class);
             global.setId("global-link");
             add(global);
@@ -114,8 +110,8 @@ public class Login extends VerticalLayout {
         session.setParentAnnotatedRoute("version", VersionView.class);
 
         // Add a view using manually populated parent chain
-        session.setRoute("time", TimeView.class,
-                LooseCenterLayout.class, MainLayout.class);
+        session.setRoute("time", TimeView.class, LooseCenterLayout.class,
+                MainLayout.class);
 
         // Reload to target url that was navigated to as it may now be registered.
         UI.getCurrent().getPage().reload();
