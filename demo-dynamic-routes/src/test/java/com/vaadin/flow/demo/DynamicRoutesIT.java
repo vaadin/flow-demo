@@ -22,12 +22,12 @@ import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.demo.testutil.AbstractChromeTest;
 
-public class DynamicRoutesTest extends AbstractChromeTest {
+public class DynamicRoutesIT extends AbstractChromeTest {
 
     @Test
     public void loginRegistersSessionRoutes_GlobalCanBeAdded() {
         // opening global with no global registered should redirect to login view.
-        openUrl("global");
+        getDriver().get(getTestURL()+"global");
 
         WebElement login = findElement(By.id("login-field"));
         WebElement pwd = findElement(By.id("password-field"));
@@ -51,17 +51,17 @@ public class DynamicRoutesTest extends AbstractChromeTest {
         findElement(By.id("global-checkbox")).click();
 
         // Now global should be available
-        openUrl("global");
+        getDriver().get(getTestURL()+"global");
 
         Assert.assertFalse("Global view should have been available",
                 findElements(By.id("remove-global")).isEmpty());
 
         // as we are still in the session version and view should be available
-        openUrl("version");
+        getDriver().get(getTestURL()+"version");
         Assert.assertFalse("Version view should have been available",
                 findElements(By.id("version-return")).isEmpty());
 
-        openUrl("time");
+        getDriver().get(getTestURL()+"time");
         Assert.assertFalse("Time view should have been available",
                 findElements(By.id("time-return")).isEmpty());
 
@@ -75,13 +75,13 @@ public class DynamicRoutesTest extends AbstractChromeTest {
 
         // now that the session was killed we should not get to time or version views
 
-        openUrl("version");
+        getDriver().get(getTestURL()+"version");
         Assert.assertTrue("Version view shouldn't be available",
                 findElements(By.id("version-return")).isEmpty());
         Assert.assertFalse("Login view should have been displayed",
                 findElements(By.id("global-link")).isEmpty());
 
-        openUrl("time");
+        getDriver().get(getTestURL()+"time");
         Assert.assertTrue("Time view shouldn't be available",
                 findElements(By.id("time-return")).isEmpty());
         Assert.assertFalse("Login view should have been displayed",
