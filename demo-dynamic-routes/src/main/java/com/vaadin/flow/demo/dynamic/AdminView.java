@@ -139,7 +139,7 @@ public class AdminView extends VerticalLayout {
     private Component createRegistrationHandler(String text, boolean registered,
             Runnable register, Runnable unregister) {
         Checkbox status = new Checkbox(text);
-        status.setId(text + "-checkbox");
+        status.setId(text.toLowerCase() + "-checkbox");
         status.setValue(registered);
         status.addValueChangeListener(event -> {
             if (event.getValue() && !event.getOldValue()) {
