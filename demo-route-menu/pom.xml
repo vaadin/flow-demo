@@ -70,9 +70,8 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-button-flow</artifactId>
+            <artifactId>vaadin-button-flow-demo</artifactId>
             <version>1.2-SNAPSHOT</version>
-            <classifier>demo</classifier>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
