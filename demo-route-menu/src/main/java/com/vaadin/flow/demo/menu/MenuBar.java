@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.Component;
@@ -50,7 +51,7 @@ public class MenuBar extends UnorderedList {
         Map<Class<? extends RouterLayout>, List<RouteData>> routes = UI
                 .getCurrent().getRouter().getRoutesByParent();
         List<Class<? extends RouterLayout>> parentLayouts = routes.keySet()
-                .stream().filter(parent -> !parent.equals(UI.class))
+                .stream().filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         Collections.sort(parentLayouts, (o1, o2) -> o1.getSimpleName()
@@ -60,8 +61,8 @@ public class MenuBar extends UnorderedList {
         }
 
         // Handle external routes that do not contain our ApplicationLayout
-        if (routes.containsKey(UI.class)) {
-            populateExternalRoutes(routes);
+        if (routes.containsKey(null)) {
+            populateExternalRoutes(routes.get(null));
         }
     }
 
@@ -101,10 +102,9 @@ public class MenuBar extends UnorderedList {
         add(listItem);
     }
 
-    private void populateExternalRoutes(
-            Map<Class<? extends RouterLayout>, List<RouteData>> routes) {
+    private void populateExternalRoutes(List<RouteData> routes) {
         UnorderedList subList = new UnorderedList();
-        for (RouteData route : routes.get(UI.class)) {
+        for (RouteData route : routes) {
             // Book keeping for external routes.
             external.add(route.getNavigationTarget());
 

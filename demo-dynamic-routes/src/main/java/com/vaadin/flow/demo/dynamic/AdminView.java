@@ -27,7 +27,6 @@ import com.vaadin.flow.demo.GlobalView;
 import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.LooseCenterLayout;
 import com.vaadin.flow.demo.MainLayout;
-import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
@@ -48,8 +47,7 @@ import com.vaadin.flow.server.VaadinSession;
  * <p>
  * Note! Session views could also be added to the application scope.
  */
-@Route(value = "", layout = MainLayout.class)
-@DynamicRoute
+@Route(value = "", layout = MainLayout.class, registerAtStartup = false)
 public class AdminView extends VerticalLayout {
 
     private Map<Class, RouterLink> sessionRoutes = new HashMap<>();

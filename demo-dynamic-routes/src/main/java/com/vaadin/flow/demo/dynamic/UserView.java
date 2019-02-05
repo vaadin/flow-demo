@@ -20,7 +20,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.demo.Login;
 import com.vaadin.flow.demo.MainLayout;
-import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
@@ -33,8 +32,7 @@ import com.vaadin.flow.router.RouterLink;
  * and lets us register it later with the default functionality expected of a
  * {@code Route}
  */
-@Route(value = "", layout = MainLayout.class)
-@DynamicRoute
+@Route(value = "", layout = MainLayout.class, registerAtStartup = false)
 public class UserView extends VerticalLayout {
 
     /**

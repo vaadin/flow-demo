@@ -19,7 +19,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.DynamicRoute;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
@@ -28,8 +27,7 @@ import com.vaadin.flow.router.RouterLink;
  * This is a global route that is in the demo registerable to the global
  * application scope from the AdminView.
  */
-@Route("global")
-@DynamicRoute
+@Route(value = "global", registerAtStartup = false)
 public class GlobalView extends VerticalLayout {
 
     /**
