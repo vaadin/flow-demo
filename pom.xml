@@ -32,6 +32,7 @@
         <module>demo-registration-form</module>
         <module>demo-route-menu</module>
         <module>demo-spring-boot</module>
+        <module>demo-dnd</module>
         <!-- have it as the last module-->
         <module>demo-validator</module>
     </modules>
@@ -74,14 +75,19 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
         <repository>
             <id>flow-prerelease</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots><enabled>false</enabled></snapshots>
         </repository>
         <repository>
             <id>binary-downloader-repo</id>
             <url>https://oss.sonatype.org</url>
+            <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
 
@@ -89,6 +95,7 @@
         <pluginRepository>
             <id>flow-internal-release</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>vaadin-snapshots</id>
@@ -96,6 +103,9 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </pluginRepository>
     </pluginRepositories>
 
