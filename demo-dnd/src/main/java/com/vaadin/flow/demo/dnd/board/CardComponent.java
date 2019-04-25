@@ -14,6 +14,7 @@
 
 package com.vaadin.flow.demo.dnd.board;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dnd.DragSource;
 import com.vaadin.flow.component.dnd.EffectAllowed;
 import com.vaadin.flow.component.html.Div;
@@ -21,7 +22,7 @@ import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.demo.dnd.model.Card;
 
-public class CardComponent extends Div implements DragSource<CardComponent> {
+public class CardComponent extends Button implements DragSource<CardComponent> {
 
     private final Card card;
 
@@ -35,9 +36,9 @@ public class CardComponent extends Div implements DragSource<CardComponent> {
     private void initComponent() {
         addClassName("card");
 
-        add(new H6(card.getName()));
+        getElement().appendChild(new H6(card.getName()).getElement());
         if (card.getDetails()!=null) {
-            add(new Span(card.getDetails()));
+            getElement().appendChild(new Span(card.getDetails()).getElement());
         }
     }
 
