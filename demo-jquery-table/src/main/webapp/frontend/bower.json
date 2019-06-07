@@ -14,6 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "tablesorter": "jquery.tablesorter#^2.30.6"
+    "tablesorter": "jquery.tablesorter#^2.31.1"
   }
 }
