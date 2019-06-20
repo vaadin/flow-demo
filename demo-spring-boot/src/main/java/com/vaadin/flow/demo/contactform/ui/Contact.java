@@ -19,6 +19,9 @@ package com.vaadin.flow.demo.contactform.ui;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Bean for storing contact information.
+ */
 public class Contact implements Serializable {
 
     private String firstName = "";
@@ -27,7 +30,6 @@ public class Contact implements Serializable {
     private String email = "";
     private LocalDate birthDate;
     private boolean doNotCall;
-
 
     public boolean isDoNotCall() {
         return doNotCall;
@@ -79,10 +81,9 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "Contact{ firstName=" + firstName
-                + ", lastName=" + lastName + ", phone=" + phone + ", email="
-                + email + ", birthDate=" + birthDate + ",doNotCall=" + doNotCall
-                + '}';
+        return "Contact{ firstName=" + firstName + ", lastName=" + lastName
+                + ", phone=" + phone + ", email=" + email + ", birthDate="
+                + birthDate + ",doNotCall=" + doNotCall + '}';
     }
 
 }
