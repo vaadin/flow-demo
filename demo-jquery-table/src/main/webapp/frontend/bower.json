@@ -15,7 +15,6 @@
   ],
   "dependencies": {
     "tablesorter": "jquery.tablesorter#^2.31.1",
-    "lodash": "lodash#^4.7.15",
-    "lodash.template": "lodash.template#^4.5.0"
+    "lodash": "lodash#^4.7.15"
   }
 }
