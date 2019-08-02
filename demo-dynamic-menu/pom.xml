@@ -20,6 +20,11 @@
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-compatibility-mode</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
     </dependencies>
 
     <profiles>

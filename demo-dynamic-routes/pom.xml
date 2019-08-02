@@ -32,6 +32,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-compatibility-mode</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
 
         <!-- component dependencies -->
         <dependency>
