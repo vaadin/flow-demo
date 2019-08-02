@@ -17,10 +17,5 @@
             <artifactId>flow-test-util</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-server-compatibility-mode</artifactId>
-            <version>${flow.version}</version>
-        </dependency>
     </dependencies>
 </project>
