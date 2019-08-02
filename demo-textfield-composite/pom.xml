@@ -16,5 +16,10 @@
             <groupId>com.vaadin.flow.demo</groupId>
             <artifactId>demo-test-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-compatibility-mode</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
     </dependencies>
 </project>

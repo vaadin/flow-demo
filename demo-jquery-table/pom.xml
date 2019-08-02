@@ -43,6 +43,12 @@
             <artifactId>demo-test-util</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-compatibility-mode</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
     </dependencies>
 
     <!-- This project is intended to use standalone plugins to demonstrate the way bower can be integrated with Flow -->
