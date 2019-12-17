@@ -16,13 +16,18 @@
     opacity: 0.3;
 }
 
-.column.highlighted {
-    background: ivory;
-}
-
+.v-drag-over-target,
 .column.highlighted.v-drag-over-target {
     background-color: lightgreen;
-    user-select: none;
+}
+
+.ios draggable {
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+}
+
+.column.highlighted {
+    background: ivory;
 }
 
 .card {

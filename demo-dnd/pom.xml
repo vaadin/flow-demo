@@ -15,6 +15,7 @@
     <properties>
         <jetty.scanIntervalSeconds>2</jetty.scanIntervalSeconds>
     </properties>
+    <version>2.2-SNAPSHOT</version>
 
     <dependencyManagement>
         <dependencies>
@@ -23,7 +24,7 @@
                 <artifactId>vaadin-bom</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>14.1-SNAPSHOT</version>
+                <version>14.2-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -33,7 +34,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
         </dependency>
-
         <!-- Added to provide logging output as Flow uses -->
         <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
         <dependency>
@@ -54,14 +54,7 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-maven-plugin</artifactId>
-                <version>${project.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <version>2.2-SNAPSHOT</version>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>

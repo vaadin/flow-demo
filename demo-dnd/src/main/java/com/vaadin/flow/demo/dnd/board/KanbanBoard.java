@@ -18,19 +18,20 @@ import java.util.Arrays;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
-import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dnd.DragEndEvent;
 import com.vaadin.flow.component.dnd.DragSource;
 import com.vaadin.flow.component.dnd.DragStartEvent;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropEvent;
 import com.vaadin.flow.component.dnd.DropTarget;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.demo.dnd.MainLayout;
 import com.vaadin.flow.demo.dnd.model.Card;
-import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
@@ -49,6 +50,9 @@ public class KanbanBoard extends FlexLayout {
         getColumn(Card.Status.INBOX).add(new NewCard(this::addNewCard));
 
         addInitialData();
+
+        add(new Text(
+                "iOS: " + UI.getCurrent().getSession().getBrowser().isIOS()));
     }
 
     private void createNewColumn(Card.Status status) {
@@ -111,29 +115,47 @@ public class KanbanBoard extends FlexLayout {
         getColumn(Card.Status.INBOX).add(cardComponent);
         cardComponent.addDragStartListener(this::onDragStart);
         cardComponent.addDragEndListener(this::onDragEnd);
+
+        Div div = new Div();
+        div.setHeight("50px");
+        div.setWidth("50px");
+        div.getStyle().set("background-color", "pink");
+        DropTarget<Div> divDropTarget = DropTarget.create(div);
+        divDropTarget.addDropListener(
+                event -> event.getDragSourceComponent().ifPresent(div::add));
+        divDropTarget.setDropEffect(DropEffect.MOVE);
+
+        cardComponent.add(div);
     }
 
     private void onDragStart(DragStartEvent<CardComponent> dragStartEvent) {
         Card card = (Card) dragStartEvent.getComponent().getDragData();
-        // iterate all columns and mark acceptable drop locations
-        getChildren().forEach(column -> {
-            Card.Status columnStatus = getColumnStatus(column);
-            boolean validTransition = columnStatus
-                    .isValidTransition(card.getStatus());
-            DropTarget<Component> dropTarget = DropTarget.configure(column,
-                    validTransition);
-            column.getElement().getClassList().set(HIGHLIGHTED,
-                    validTransition);
-            if (validTransition) {
-                dropTarget.setDropEffect(DropEffect.MOVE);
-            }
-        });
+        if (card != null) {
+            // iterate all columns and mark acceptable drop locations
+            getChildren().forEach(column -> {
+                if (!(column instanceof Text)) {
+                    Card.Status columnStatus = getColumnStatus(column);
+                    boolean validTransition = columnStatus
+                            .isValidTransition(card.getStatus());
+                    DropTarget<Component> dropTarget = DropTarget
+                            .configure(column, validTransition);
+                    column.getElement().getClassList().set(HIGHLIGHTED,
+                            validTransition);
+                    if (validTransition) {
+                        dropTarget.setDropEffect(DropEffect.MOVE);
+                    }
+                }
+            });
+        }
     }
 
     private void onDragEnd(DragEndEvent<CardComponent> dragEndEvent) {
         getChildren().forEach(column -> {
-            DropTarget.configure(column, false).setDropEffect(DropEffect.NONE);
-            column.getElement().getClassList().set(HIGHLIGHTED, false);
+            if (!(column instanceof Text)) {
+                DropTarget.configure(column, false)
+                        .setDropEffect(DropEffect.NONE);
+                column.getElement().getClassList().set(HIGHLIGHTED, false);
+            }
         });
     }
 
