@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vaadin.flow.demo</groupId>
         <artifactId>flow-demo-project</artifactId>
-        <version>2.1-SNAPSHOT</version>
+        <version>3.2-SNAPSHOT</version>
     </parent>
     <name>Text field component using the Element API</name>
     <artifactId>demo-textfield-component</artifactId>
