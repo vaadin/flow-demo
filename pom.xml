@@ -24,7 +24,6 @@
         <module>demo-textfield-component</module>
         <module>demo-textfield-composite</module>
         <module>demo-addressbook-polymer</module>
-        <module>demo-jquery-table</module>
         <module>demo-date-field</module>
         <module>demo-todo-template</module>
         <module>demo-google-signin</module>
